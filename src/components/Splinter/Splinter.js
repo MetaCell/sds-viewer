@@ -17,11 +17,11 @@ export default class Splinter extends React.Component {
     }
 
     render() {
-        
         axios.get(this.PROXY_URL+this.URL, {responseType: "stream"} )
             .then(response => {
                 const parser = new N3.Parser();
                 parser.parse(response.data);
+                console.log("just a test with Jesus");
                 //response.data.pipe(fs.createWriteStream("todays_picture.png"));
             })
                 .catch(error => {

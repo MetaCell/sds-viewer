@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import { Counter } from './features/counter/Counter';
 import Splinter from './components/Splinter/Splinter';
+import { hot } from 'react-hot-loader'
 import './App.css';
 
 function App() {
@@ -51,7 +52,7 @@ function App() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            React Redux
+            React Redux 2
           </a>
         </span>
       </header>
@@ -59,4 +60,4 @@ function App() {
   );
 }
 
-export default App;
+export default hot(module)(App);
