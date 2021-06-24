@@ -7,36 +7,36 @@ const localTurtleJSONFile = __dirname + "/resources/dataset:29df9b97-a20b-469c-b
 test('Test Downloading External Turtle File', async () => {
   // Test downloading json file to match local file
   //TODO : Replace undefined with call to method
-  expect(fs.readFileSync(localTurtleFile)).toEqual(undefined);
+  expect(undefined).toEqual(fs.readFileSync(localTurtleFile));
 });
 
 test('Test Downloading External JSON File', async () => {
   // Test downloading json file to match local file
   //TODO : Replace undefined with call to method 
-  expect(fs.readFileSync(localTurtleJSONFile)).toEqual(undefined);
+  expect(undefined).toEqual(fs.readFileSync(localTurtleJSONFile));
 });
 
 test('Test Parsing Turtle File', async () => {
   //TODO : Replace undefined with call to method
-  expect(parseTurtleFileData()).toEqual(undefined);
+  expect(undefined).toEqual(parseTurtleFileData());
 });
 
 test('Test Parsing path-metadata JSON File', async () => {
   //TODO : Replace undefined with call to method
-  expect(parseJSONData).toEqual(undefined);
+  expect(undefined).toEqual(parseJSONData);
 });
 
 test('Test Creating Graph Nodes', async () => {
   //TODO : Replace undefined with call to method
-  expect(createGraphNodes()).toEqual(createGraphNodes());
+  expect(undefined).toEqual(createGraphNodes());
 });
 
 test('Test Creating Graph Relationships', async () => {
   //TODO : Replace undefined with call to method
-  expect(createGraphRelationships).toEqual(undefined);
+  expect(undefined).toEqual(createGraphRelationships);
 });
 
 test('Test Creating Graph Data', async () => {
   //TODO : Replace undefined with call to method
-  expect(createGraphData).toEqual(undefined);
+  expect(undefined).toEqual(createGraphData);
 });
