@@ -14,12 +14,23 @@ class Splinter {
         } else {
             return JSON.parse(this.jsonFile);
         }
-        
     }
 
     setTurtle() {
         const parser = new N3.Parser();
         return parser.parse(this.turtleFile);
+    }
+
+    processTurtle() {
+        console.log("to be implemented, transform the quads in our internal model for the force-graph component");
+    }
+
+    processJSON() {
+        console.log("to be implemented, transform the json data in our internal model for the force-graph component");
+    }
+
+    mergeData() {
+        console.log("to be implemented, merge data between json and turtle to create the graph (not sure is required)");
     }
 
     create_graph() {
