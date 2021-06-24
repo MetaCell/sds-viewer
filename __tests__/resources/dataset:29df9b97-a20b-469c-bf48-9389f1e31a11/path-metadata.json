@@ -1,0 +1,466 @@
+{
+  "type": "path-metadata",
+  "data": [
+    {
+      "type": "path",
+      "dataset_id": "dataset:29df9b97-a20b-469c-bf48-9389f1e31a11",
+      "dataset_relative_path": "",
+      "basename": "Generic pig colon scaffold",
+      "mimetype": "inode/directory",
+      "remote_id": "dataset:29df9b97-a20b-469c-bf48-9389f1e31a11",
+      "timestamp_updated": "2021-02-09T01:16:10,569000Z",
+      "uri_api": "https://api.blackfynn.io/datasets/N:dataset:29df9b97-a20b-469c-bf48-9389f1e31a11",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:29df9b97-a20b-469c-bf48-9389f1e31a11",
+      "parent_id": "dataset:29df9b97-a20b-469c-bf48-9389f1e31a11",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:29df9b97-a20b-469c-bf48-9389f1e31a11",
+      "dataset_relative_path": "primary",
+      "basename": "primary",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:3babfecd-e910-4e63-9e43-936384e128fa",
+      "timestamp_updated": "2020-11-27T01:30:03,543437Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:3babfecd-e910-4e63-9e43-936384e128fa",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:29df9b97-a20b-469c-bf48-9389f1e31a11/files/N:collection:3babfecd-e910-4e63-9e43-936384e128fa",
+      "parent_id": "dataset:29df9b97-a20b-469c-bf48-9389f1e31a11",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:29df9b97-a20b-469c-bf48-9389f1e31a11",
+      "dataset_relative_path": "derivative",
+      "basename": "derivative",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:b0f96514-e20f-41ac-a530-07bfebd35833",
+      "timestamp_updated": "2020-11-27T01:30:03,060875Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:b0f96514-e20f-41ac-a530-07bfebd35833",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:29df9b97-a20b-469c-bf48-9389f1e31a11/files/N:collection:b0f96514-e20f-41ac-a530-07bfebd35833",
+      "parent_id": "dataset:29df9b97-a20b-469c-bf48-9389f1e31a11",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:29df9b97-a20b-469c-bf48-9389f1e31a11",
+      "dataset_relative_path": "derivative/Scaffold",
+      "basename": "Scaffold",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:f2251463-2fb3-4c03-868a-1359238a6f2e",
+      "timestamp_updated": "2020-11-27T01:30:05,254326Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:f2251463-2fb3-4c03-868a-1359238a6f2e",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:29df9b97-a20b-469c-bf48-9389f1e31a11/files/N:collection:f2251463-2fb3-4c03-868a-1359238a6f2e",
+      "parent_id": "collection:b0f96514-e20f-41ac-a530-07bfebd35833",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:29df9b97-a20b-469c-bf48-9389f1e31a11",
+      "dataset_relative_path": "docs",
+      "basename": "docs",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:84c786ca-5d22-41d9-b35b-7efad9b6a7d4",
+      "timestamp_updated": "2020-12-16T02:51:11,323185Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:84c786ca-5d22-41d9-b35b-7efad9b6a7d4",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:29df9b97-a20b-469c-bf48-9389f1e31a11/files/N:collection:84c786ca-5d22-41d9-b35b-7efad9b6a7d4",
+      "parent_id": "dataset:29df9b97-a20b-469c-bf48-9389f1e31a11",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:29df9b97-a20b-469c-bf48-9389f1e31a11",
+      "dataset_relative_path": "primary/pigColonScaffold.cmgui",
+      "basename": "pigColonScaffold.cmgui",
+      "remote_id": "package:8afd609c-a260-448d-ac17-b402245536c2/files/1209457",
+      "timestamp_updated": "2020-12-22T14:01:10,818858Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:8afd609c-a260-448d-ac17-b402245536c2/files/1209457",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:29df9b97-a20b-469c-bf48-9389f1e31a11/files/00000000-0000-0000-0000-000000000000/N:package:8afd609c-a260-448d-ac17-b402245536c2",
+      "size_bytes": 1572,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "96afe5bc89bf77cd538162018bf66b81c0fa91708ee05ec291ee07e35a920455"
+        }
+      ],
+      "parent_id": "collection:3babfecd-e910-4e63-9e43-936384e128fa",
+      "status": "unknown"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:29df9b97-a20b-469c-bf48-9389f1e31a11",
+      "dataset_relative_path": "primary/pigColon.exf",
+      "basename": "pigColon.exf",
+      "remote_id": "package:9ea2a343-a8e6-4500-8838-5e170ab3f17b/files/1209467",
+      "timestamp_updated": "2020-12-22T14:01:12,995782Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:9ea2a343-a8e6-4500-8838-5e170ab3f17b/files/1209467",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:29df9b97-a20b-469c-bf48-9389f1e31a11/files/00000000-0000-0000-0000-000000000000/N:package:9ea2a343-a8e6-4500-8838-5e170ab3f17b",
+      "size_bytes": 45843195,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "1d72d83ada606abf95f11edaf4b48fc6d8a943629a9142b8cf1697b027248c8c"
+        }
+      ],
+      "parent_id": "collection:3babfecd-e910-4e63-9e43-936384e128fa",
+      "status": "unknown"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:29df9b97-a20b-469c-bf48-9389f1e31a11",
+      "dataset_relative_path": "derivative/pigColon.vtk",
+      "basename": "pigColon.vtk",
+      "remote_id": "package:41b0015a-7379-45eb-82cc-34cfe6669833/files/1209456",
+      "timestamp_updated": "2020-12-22T14:01:11,098274Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:41b0015a-7379-45eb-82cc-34cfe6669833/files/1209456",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:29df9b97-a20b-469c-bf48-9389f1e31a11/files/00000000-0000-0000-0000-000000000000/N:package:41b0015a-7379-45eb-82cc-34cfe6669833",
+      "size_bytes": 1840672,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "007adc454854baa7b185f69ffca089d26e0ad335a043f797ea31368daaf0235b"
+        }
+      ],
+      "parent_id": "collection:b0f96514-e20f-41ac-a530-07bfebd35833",
+      "status": "unknown"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:29df9b97-a20b-469c-bf48-9389f1e31a11",
+      "dataset_relative_path": "primary/manifest.xlsx",
+      "basename": "manifest.xlsx",
+      "mimetype": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "remote_id": "package:ec1849d2-25de-4300-a99b-b6896f6eedc8/files/1209454",
+      "timestamp_updated": "2020-12-22T14:01:10,408483Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:ec1849d2-25de-4300-a99b-b6896f6eedc8/files/1209454",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:29df9b97-a20b-469c-bf48-9389f1e31a11/files/00000000-0000-0000-0000-000000000000/N:package:ec1849d2-25de-4300-a99b-b6896f6eedc8",
+      "size_bytes": 10954,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "1e4e705cde433f6c3b6c083b76eb47f6aedda6a84df2cd87c0e629af85f56179"
+        }
+      ],
+      "parent_id": "collection:3babfecd-e910-4e63-9e43-936384e128fa",
+      "status": "accepted"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:29df9b97-a20b-469c-bf48-9389f1e31a11",
+      "dataset_relative_path": "primary/pigColon-settings.json",
+      "basename": "pigColon-settings.json",
+      "mimetype": "application/json",
+      "remote_id": "package:e3d94e72-4fe4-48b3-8ecc-66411e2252cc/files/1209455",
+      "timestamp_updated": "2020-12-22T14:01:15,676757Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:e3d94e72-4fe4-48b3-8ecc-66411e2252cc/files/1209455",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:29df9b97-a20b-469c-bf48-9389f1e31a11/files/00000000-0000-0000-0000-000000000000/N:package:e3d94e72-4fe4-48b3-8ecc-66411e2252cc",
+      "size_bytes": 17467,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "276c4466f6c12edaef8573c4122be6cd98031cda4b32f16869fa6c7033647db5"
+        }
+      ],
+      "parent_id": "collection:3babfecd-e910-4e63-9e43-936384e128fa",
+      "status": "accepted"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:29df9b97-a20b-469c-bf48-9389f1e31a11",
+      "dataset_relative_path": "derivative/manifest.xlsx",
+      "basename": "manifest.xlsx",
+      "mimetype": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "remote_id": "package:acd95ae1-25a1-421d-ae2a-313731577b01/files/1223475",
+      "timestamp_updated": "2020-12-22T21:36:11,112318Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:acd95ae1-25a1-421d-ae2a-313731577b01/files/1223475",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:29df9b97-a20b-469c-bf48-9389f1e31a11/files/00000000-0000-0000-0000-000000000000/N:package:acd95ae1-25a1-421d-ae2a-313731577b01",
+      "size_bytes": 11145,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "47872235ca2615300ac46faa90d414af0cf813abb0f4f91748d624d129b77eb6"
+        }
+      ],
+      "parent_id": "collection:b0f96514-e20f-41ac-a530-07bfebd35833",
+      "status": "accepted"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:29df9b97-a20b-469c-bf48-9389f1e31a11",
+      "dataset_relative_path": "derivative/Scaffold/pigColon_5.json",
+      "basename": "pigColon_5.json",
+      "mimetype": "application/json",
+      "remote_id": "package:52ec176c-9f59-47c0-b02e-b49c285f9483/files/1209461",
+      "timestamp_updated": "2020-12-22T14:01:14,683984Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:52ec176c-9f59-47c0-b02e-b49c285f9483/files/1209461",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:29df9b97-a20b-469c-bf48-9389f1e31a11/files/00000000-0000-0000-0000-000000000000/N:package:52ec176c-9f59-47c0-b02e-b49c285f9483",
+      "size_bytes": 1687785,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "cb16564e6f20f3fccc9cf1fa212876174d51b227f8ed01f7179987f681e95de3"
+        }
+      ],
+      "parent_id": "collection:f2251463-2fb3-4c03-868a-1359238a6f2e",
+      "status": "accepted"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:29df9b97-a20b-469c-bf48-9389f1e31a11",
+      "dataset_relative_path": "derivative/Scaffold/pigColon_2.json",
+      "basename": "pigColon_2.json",
+      "mimetype": "application/json",
+      "remote_id": "package:88677a7b-ddc7-48f3-832d-6d955544d5bb/files/1209460",
+      "timestamp_updated": "2020-12-22T14:01:14,115051Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:88677a7b-ddc7-48f3-832d-6d955544d5bb/files/1209460",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:29df9b97-a20b-469c-bf48-9389f1e31a11/files/00000000-0000-0000-0000-000000000000/N:package:88677a7b-ddc7-48f3-832d-6d955544d5bb",
+      "size_bytes": 6243417,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "6419ea8ea90c19afb2f906f2f2ceeed3efc73cef0ac05fe63b1e58f50569fc93"
+        }
+      ],
+      "parent_id": "collection:f2251463-2fb3-4c03-868a-1359238a6f2e",
+      "status": "accepted"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:29df9b97-a20b-469c-bf48-9389f1e31a11",
+      "dataset_relative_path": "derivative/Scaffold/pigColon_3.json",
+      "basename": "pigColon_3.json",
+      "mimetype": "application/json",
+      "remote_id": "package:dfc60268-c585-479e-a3fb-befd350df4a3/files/1209459",
+      "timestamp_updated": "2020-12-22T14:01:13,645351Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:dfc60268-c585-479e-a3fb-befd350df4a3/files/1209459",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:29df9b97-a20b-469c-bf48-9389f1e31a11/files/00000000-0000-0000-0000-000000000000/N:package:dfc60268-c585-479e-a3fb-befd350df4a3",
+      "size_bytes": 564264,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "f49102af56e5de69f26fd72f6dfa18ffe89caffd5d0b68cffc5651d4bb1660e2"
+        }
+      ],
+      "parent_id": "collection:f2251463-2fb3-4c03-868a-1359238a6f2e",
+      "status": "accepted"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:29df9b97-a20b-469c-bf48-9389f1e31a11",
+      "dataset_relative_path": "derivative/Scaffold/pigColon_6.json",
+      "basename": "pigColon_6.json",
+      "mimetype": "application/json",
+      "remote_id": "package:d0450cda-c223-4988-b172-21f42b4ebd1e/files/1209462",
+      "timestamp_updated": "2020-12-22T14:01:14,415537Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:d0450cda-c223-4988-b172-21f42b4ebd1e/files/1209462",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:29df9b97-a20b-469c-bf48-9389f1e31a11/files/00000000-0000-0000-0000-000000000000/N:package:d0450cda-c223-4988-b172-21f42b4ebd1e",
+      "size_bytes": 595787,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "755a94649500535147b403061a85e925697b83c224d1e8f22d5cb1b109628a9b"
+        }
+      ],
+      "parent_id": "collection:f2251463-2fb3-4c03-868a-1359238a6f2e",
+      "status": "accepted"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:29df9b97-a20b-469c-bf48-9389f1e31a11",
+      "dataset_relative_path": "derivative/Scaffold/pigColon_metadata.json",
+      "basename": "pigColon_metadata.json",
+      "mimetype": "application/json",
+      "remote_id": "package:eb2d8704-4b53-473c-9129-aa9d96531ba7/files/1209464",
+      "timestamp_updated": "2020-12-22T14:01:10,659054Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:eb2d8704-4b53-473c-9129-aa9d96531ba7/files/1209464",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:29df9b97-a20b-469c-bf48-9389f1e31a11/files/00000000-0000-0000-0000-000000000000/N:package:eb2d8704-4b53-473c-9129-aa9d96531ba7",
+      "size_bytes": 1100,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "63bafa0cd45f6d4e73634a46fe9b0f0017920fdccd2974bf77d37f64e5095b06"
+        }
+      ],
+      "parent_id": "collection:f2251463-2fb3-4c03-868a-1359238a6f2e",
+      "status": "accepted"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:29df9b97-a20b-469c-bf48-9389f1e31a11",
+      "dataset_relative_path": "derivative/Scaffold/pigColon_view.json",
+      "basename": "pigColon_view.json",
+      "mimetype": "application/json",
+      "remote_id": "package:4d092e41-5b8b-461e-99cf-1ae4a492752a/files/1209465",
+      "timestamp_updated": "2020-12-22T14:01:13,390467Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:4d092e41-5b8b-461e-99cf-1ae4a492752a/files/1209465",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:29df9b97-a20b-469c-bf48-9389f1e31a11/files/00000000-0000-0000-0000-000000000000/N:package:4d092e41-5b8b-461e-99cf-1ae4a492752a",
+      "size_bytes": 166,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "3795150a1e24a8f96e17909f42384e40a6248efb6f0fcaa10956ae74fde7ebc9"
+        }
+      ],
+      "parent_id": "collection:f2251463-2fb3-4c03-868a-1359238a6f2e",
+      "status": "accepted"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:29df9b97-a20b-469c-bf48-9389f1e31a11",
+      "dataset_relative_path": "derivative/Scaffold/thumbnail.png",
+      "basename": "thumbnail.png",
+      "mimetype": "image/png",
+      "remote_id": "package:2a04c3fb-1d24-4f8a-a406-cb380b18b461/files/1209466",
+      "timestamp_updated": "2020-12-22T14:01:15,463628Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:2a04c3fb-1d24-4f8a-a406-cb380b18b461/files/1209466",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:29df9b97-a20b-469c-bf48-9389f1e31a11/files/00000000-0000-0000-0000-000000000000/N:package:2a04c3fb-1d24-4f8a-a406-cb380b18b461",
+      "size_bytes": 358450,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "12fc41161a2813d9d45fdf717b011d3f3892c4413678e72b93dd7ce4b8ffb38e"
+        }
+      ],
+      "parent_id": "collection:f2251463-2fb3-4c03-868a-1359238a6f2e",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:29df9b97-a20b-469c-bf48-9389f1e31a11",
+      "dataset_relative_path": "derivative/Scaffold/pigColon_4.json",
+      "basename": "pigColon_4.json",
+      "mimetype": "application/json",
+      "remote_id": "package:d823a141-31f1-4007-af22-37e77b5e4eae/files/1209463",
+      "timestamp_updated": "2020-12-22T14:01:15,147704Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:d823a141-31f1-4007-af22-37e77b5e4eae/files/1209463",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:29df9b97-a20b-469c-bf48-9389f1e31a11/files/00000000-0000-0000-0000-000000000000/N:package:d823a141-31f1-4007-af22-37e77b5e4eae",
+      "size_bytes": 9160779,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "94a4125fbfe7d167da181faea2460418772de33ad282edd5a1796cbf8e95d946"
+        }
+      ],
+      "parent_id": "collection:f2251463-2fb3-4c03-868a-1359238a6f2e",
+      "status": "accepted"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:29df9b97-a20b-469c-bf48-9389f1e31a11",
+      "dataset_relative_path": "dataset_description.xlsx",
+      "basename": "dataset_description.xlsx",
+      "mimetype": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "remote_id": "package:8bfe324e-b20e-431a-8339-c0dc402c256f/files/1209468",
+      "timestamp_updated": "2020-12-22T14:01:15,916742Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:8bfe324e-b20e-431a-8339-c0dc402c256f/files/1209468",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:29df9b97-a20b-469c-bf48-9389f1e31a11/files/00000000-0000-0000-0000-000000000000/N:package:8bfe324e-b20e-431a-8339-c0dc402c256f",
+      "size_bytes": 23031,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "9e60c8c2125cca0c1ebb3590273dcecb6e076b855476c0c3fd837a95030ea775"
+        }
+      ],
+      "parent_id": "dataset:29df9b97-a20b-469c-bf48-9389f1e31a11",
+      "status": "accepted"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:29df9b97-a20b-469c-bf48-9389f1e31a11",
+      "dataset_relative_path": "docs/pigColon_annotations.csv",
+      "basename": "pigColon_annotations.csv",
+      "mimetype": "text/csv",
+      "remote_id": "package:86db6876-98d8-43d2-ad6e-2627c33f8d02/files/1209491",
+      "timestamp_updated": "2020-12-22T14:01:16,078725Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:86db6876-98d8-43d2-ad6e-2627c33f8d02/files/1209491",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:29df9b97-a20b-469c-bf48-9389f1e31a11/files/00000000-0000-0000-0000-000000000000/N:package:86db6876-98d8-43d2-ad6e-2627c33f8d02",
+      "size_bytes": 161,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "3f5d84e0b8f84f33ed34e05f8d165ad4cee51c59d1af4c0f172bf112693e4a6f"
+        }
+      ],
+      "parent_id": "collection:84c786ca-5d22-41d9-b35b-7efad9b6a7d4",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:29df9b97-a20b-469c-bf48-9389f1e31a11",
+      "dataset_relative_path": "submission.xlsx",
+      "basename": "submission.xlsx",
+      "mimetype": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "remote_id": "package:5717e49e-66e2-43b1-b2d6-11ac13eb6b05/files/1209453",
+      "timestamp_updated": "2020-12-22T14:01:10,229700Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:5717e49e-66e2-43b1-b2d6-11ac13eb6b05/files/1209453",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:29df9b97-a20b-469c-bf48-9389f1e31a11/files/00000000-0000-0000-0000-000000000000/N:package:5717e49e-66e2-43b1-b2d6-11ac13eb6b05",
+      "size_bytes": 13074,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "5870a8ef92555098c06373f3a11d2f96c9c19c84703aa22d25aeab8ac222a0c5"
+        }
+      ],
+      "parent_id": "dataset:29df9b97-a20b-469c-bf48-9389f1e31a11",
+      "status": "accepted"
+    }
+  ],
+  "errors": [
+    {
+      "pipeline_stage": "Path.validate_path_json_metadata",
+      "blame": null,
+      "file_path": "primary/pigColon.exf",
+      "path": [
+        "data",
+        6
+      ],
+      "message": "unknown mimetype pigColon.exf",
+      "type": null
+    },
+    {
+      "pipeline_stage": "Path.validate_path_json_metadata",
+      "blame": null,
+      "file_path": "derivative/pigColon.vtk",
+      "path": [
+        "data",
+        7
+      ],
+      "message": "unknown mimetype pigColon.vtk",
+      "type": null
+    },
+    {
+      "pipeline_stage": "Path.validate_path_json_metadata",
+      "blame": null,
+      "file_path": "primary/pigColonScaffold.cmgui",
+      "path": [
+        "data",
+        5
+      ],
+      "message": "unknown mimetype pigColonScaffold.cmgui",
+      "type": null
+    }
+  ],
+  "prov": {
+    "timestamp_export_start": "2021-04-13T02:10:50,076405Z",
+    "export_system_identifier": "FLGyaqO-i2za4fTU1KNwGg",
+    "export_hostname": "cassava",
+    "sparcur_version": "0.0.1.dev3",
+    "sparcur_commit": "64a0ac8f7d6f7119ddce26a6a463668fae4f9d81"
+  }
+}
