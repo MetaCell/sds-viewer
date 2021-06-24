@@ -17,7 +17,7 @@ class FileHandler {
     get_remote_file(url, callback) {
         // The proxy is required for the issue with CORS to be resolved.
         const PROXY_URL = 'https://cors-anywhere.herokuapp.com/';
-        axios.get(PROXY_URL + url, {crossDomain: true, responseType: "stream"} )
+        axios.get(url, {crossDomain: true, responseType: "stream"} )
             .then(response => {
                 callback(response.data);
             })
