@@ -1,6 +1,8 @@
+const turtleFileParsed = require('./resources/dataset:29df9b97-a20b-469c-bf48-9389f1e31a11/TurtleFileParsed.json');
+
 export const parseTurtleFileData = async () => {
     //TODO : Add mock data expected from N3 parser 
-    return Promise.resolve({ data : {} });
+    return { data : turtleFileParsed()};
 };
 
 export const parseJSONData = async () => {
