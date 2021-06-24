@@ -13,7 +13,7 @@ test('Test Downloading External Turtle File', async () => {
 test('Test Downloading External JSON File', async () => {
   // Test downloading json file to match local file
   //TODO : Replace undefined with call to method 
-  expect(undeffs.readFileSync(localTurtleJSONFile)ined).toEqual(undefined);
+  expect(fs.readFileSync(localTurtleJSONFile)).toEqual(undefined);
 });
 
 test('Test Parsing Turtle File', async () => {
