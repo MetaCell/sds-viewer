@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import { Counter } from './features/counter/Counter';
-import TestComponent from './components/Splinter/TestComponent';
+import TestComponent from './components/TestComponent/TestComponent';
 import { hot } from 'react-hot-loader'
 import './App.css';
 
