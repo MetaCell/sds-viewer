@@ -50,7 +50,7 @@ module.exports = {
         plugins: {
             plugin: reactHotReloadPlugin,
             add: [], /* An array of plugins */
-            remove: [],  /* An array of plugin constructor's names (i.e. "StyleLintPlugin", "ESLintWebpackPlugin" ) */ 
+            remove: [],  /* An array of plugin constructor's names (i.e. "StyleLintPlugin", "ESLintWebpackPlugin" ) */
         },
         configure: { /* Any webpack configuration options: https://webpack.js.org/configuration */ },
         configure: (webpackConfig, { env, paths }) => { return webpackConfig; }

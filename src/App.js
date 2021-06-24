@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import { Counter } from './features/counter/Counter';
-import Splinter from './components/Splinter/Splinter';
+import TestComponent from './components/Splinter/TestComponent';
 import { hot } from 'react-hot-loader'
 import './App.css';
 
@@ -12,7 +12,7 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <Counter />
         <div>
-          <Splinter />
+          <TestComponent />
         </div>
         <p>
           Edit <code>src/App.js</code> and save to reload.
