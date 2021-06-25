@@ -1,0 +1,123 @@
+@prefix : <file:///ERROR/EMPTY/PREFIX/BANNED/> .
+@prefix awards: <http://uri.interlex.org/temp/uris/awards/> .
+@prefix dataset: <https://api.blackfynn.io/datasets/N:dataset:> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix isAbout: <http://purl.obolibrary.org/obo/IAO_0000136> .
+@prefix ORCID: <https://orcid.org/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sparc: <http://uri.interlex.org/tgbugs/uris/readable/sparc/> .
+@prefix TEMP: <http://uri.interlex.org/temp/uris/> .
+@prefix UBERON: <http://purl.obolibrary.org/obo/UBERON_> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://cassava.ucsd.edu/sparc/ontologies/N:dataset:29df9b97-a20b-469c-bf48-9389f1e31a11> a owl:Ontology ;
+    owl:versionIRI <https://cassava.ucsd.edu/sparc/ontologies/N:dataset:29df9b97-a20b-469c-bf48-9389f1e31a11/version/1618274653.458549/N:dataset:29df9b97-a20b-469c-bf48-9389f1e31a11> ;
+    owl:imports <https://raw.githubusercontent.com/SciCrunch/NIF-Ontology/sparc/ttl/sparc-methods.ttl>,
+        <https://raw.githubusercontent.com/SciCrunch/NIF-Ontology/sparc/ttl/sparc-mis-helper.ttl> ;
+    rdfs:label "Generic pig colon scaffold curation export graph" ;
+    rdfs:comment "SPARC single dataset graph for N:dataset:29df9b97-a20b-469c-bf48-9389f1e31a11" ;
+    owl:versionInfo "2021-04-13T00:44:13,458549Z" ;
+    isAbout: dataset:29df9b97-a20b-469c-bf48-9389f1e31a11 ;
+    TEMP:hasUriHuman <https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:29df9b97-a20b-469c-bf48-9389f1e31a11> ;
+    TEMP:TimestampExportStart "2021-04-13T00:28:22,384227Z" .
+
+### Individuals
+
+awards:OT3OD025349 a owl:NamedIndividual,
+        TEMP:FundedResearchProject .
+
+dataset:29df9b97-a20b-469c-bf48-9389f1e31a11 a owl:NamedIndividual,
+        sparc:Dataset ;
+    rdfs:label "Generic pig colon scaffold" ;
+    dc:title "Generic pig colon scaffold" ;
+    dc:description "Annotated colon scaffold for pig available for registration of segmented neural anatomical-functional mapping of enteric neural circuits." ;
+    isAbout: "colon",
+        "distal colon",
+        "pig",
+        "spiral colon",
+        "tenia coli",
+        "transverse colon",
+        UBERON:0001018 ;
+    TEMP:acknowledgements "Million Mulugeta, Muriel Larauche, Yvette Tache" ;
+    TEMP:collectionTitle "Generic pig colon scaffold" ;
+    TEMP:contentsWereUpdatedAtTime "2020-12-22T21:36:11.112318+00:00"^^xsd:dateTime ;
+    TEMP:curationIndex 5 ;
+    TEMP:errorIndex 16 ;
+    TEMP:hasAdditionalFundingInformation "OT3OD025349" ;
+    TEMP:hasAwardNumber awards:OT3OD025349 ;
+    TEMP:hasContactPerson ORCID:0000-0002-6388-2181 ;
+    TEMP:hasDatasetTemplateSchemaVersion "1.2.3" ;
+    TEMP:hasDoi <https://doi.org/10.26275/yztm-kos4> ;
+    TEMP:hasExpectedNumberOfSamples 0 ;
+    TEMP:hasExpectedNumberOfSubjects 0 ;
+    TEMP:hasExperimentalModality "electrophysiology" ;
+    TEMP:hasNumberOfContributors 3 ;
+    TEMP:hasNumberOfDirectories 4 ;
+    TEMP:hasNumberOfFiles 17 ;
+    TEMP:hasResponsiblePrincipalInvestigator ORCID:0000-0001-9665-4145 ;
+    TEMP:hasSizeInBytes 66373019 ;
+    TEMP:hasUriApi dataset:29df9b97-a20b-469c-bf48-9389f1e31a11 ;
+    TEMP:hasUriHuman <https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:29df9b97-a20b-469c-bf48-9389f1e31a11> ;
+    TEMP:milestoneCompletionDate "2020-11-30T00:00:00"^^xsd:dateTime ;
+    TEMP:protocolEmploysTechnique <http://uri.interlex.org/tgbugs/uris/indexes/ontologies/methods/188> ;
+    TEMP:statusOnPlatform "12_PUBLISHED_INVESTIGATOR" ;
+    TEMP:submissionIndex 11 ;
+    TEMP:unclassifiedIndex 0 ;
+    TEMP:wasCreatedAtTime "2020-11-27T01:29:24.859722+00:00"^^xsd:dateTime ;
+    TEMP:wasUpdatedAtTime "2021-02-09T01:16:10.569000+00:00"^^xsd:dateTime .
+
+<https://doi.org/10.26275/yztm-kos4> a owl:NamedIndividual,
+        TEMP:Dataset ;
+    rdfs:label "Generic pig colon scaffold" .
+
+ORCID:0000-0001-9665-4145 a owl:NamedIndividual,
+        sparc:Person ;
+    rdfs:label "Peter Hunter" ;
+    sparc:firstName "Peter" ;
+    sparc:lastName "Hunter" ;
+    sparc:hasORCIDId ORCID:0000-0001-9665-4145 ;
+    TEMP:contributorTo dataset:29df9b97-a20b-469c-bf48-9389f1e31a11 ;
+    TEMP:hasAffiliation "Auckland Bioegineering Institute" .
+
+ORCID:0000-0002-6388-2181 a owl:NamedIndividual,
+        sparc:Person ;
+    rdfs:label "Mabelle Yuling Lin" ;
+    sparc:firstName "Mabelle" ;
+    sparc:lastName "Lin" ;
+    sparc:hasORCIDId ORCID:0000-0002-6388-2181 ;
+    TEMP:contributorTo dataset:29df9b97-a20b-469c-bf48-9389f1e31a11 ;
+    TEMP:hasAffiliation "Auckland Bioegineering Institute" .
+
+ORCID:0000-0003-4336-4640 a owl:NamedIndividual,
+        sparc:Person ;
+    rdfs:label "Gerald Christie" ;
+    sparc:firstName "Richard" ;
+    sparc:lastName "Christie" ;
+    sparc:hasORCIDId ORCID:0000-0003-4336-4640 ;
+    TEMP:contributorTo dataset:29df9b97-a20b-469c-bf48-9389f1e31a11 ;
+    TEMP:hasAffiliation "Auckland Bioegineering Institute" .
+
+[] a owl:NamedIndividual,
+        sparc:DatasetContribution ;
+    sparc:isContactPerson false ;
+    TEMP:aboutContributor ORCID:0000-0001-9665-4145 ;
+    TEMP:aboutDataset dataset:29df9b97-a20b-469c-bf48-9389f1e31a11 ;
+    TEMP:contributorOrderIndex 2 ;
+    TEMP:hasRole TEMP:PrincipalInvestigator .
+
+[] a owl:NamedIndividual,
+        sparc:DatasetContribution ;
+    sparc:isContactPerson false ;
+    TEMP:aboutContributor ORCID:0000-0003-4336-4640 ;
+    TEMP:aboutDataset dataset:29df9b97-a20b-469c-bf48-9389f1e31a11 ;
+    TEMP:contributorOrderIndex 1 .
+
+[] a owl:NamedIndividual,
+        sparc:DatasetContribution ;
+    sparc:isContactPerson true ;
+    TEMP:aboutContributor ORCID:0000-0002-6388-2181 ;
+    TEMP:aboutDataset dataset:29df9b97-a20b-469c-bf48-9389f1e31a11 ;
+    TEMP:contributorOrderIndex 0 .
+
+### Serialized using the ttlser deterministic serializer v1.2.0

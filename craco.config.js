@@ -1,4 +1,6 @@
 const { when, whenDev, whenProd, whenTest, ESLINT_MODES, POSTCSS_MODES } = require("@craco/craco");
+const reactHotReloadPlugin = require('craco-plugin-react-hot-reload');
+
 
 module.exports = {
     reactScriptsVersion: "react-scripts" /* (default value) */,
@@ -46,8 +48,9 @@ module.exports = {
     webpack: {
         alias: {},
         plugins: {
-            add: [], /* An array of plugins */ 
-            remove: [],  /* An array of plugin constructor's names (i.e. "StyleLintPlugin", "ESLintWebpackPlugin" ) */ 
+            plugin: reactHotReloadPlugin,
+            add: [], /* An array of plugins */
+            remove: [],  /* An array of plugin constructor's names (i.e. "StyleLintPlugin", "ESLintWebpackPlugin" ) */
         },
         configure: { /* Any webpack configuration options: https://webpack.js.org/configuration */ },
         configure: (webpackConfig, { env, paths }) => { return webpackConfig; }

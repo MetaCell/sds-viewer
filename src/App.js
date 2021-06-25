@@ -1,6 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 import { Counter } from './features/counter/Counter';
+import TestComponent from './components/TestComponent/TestComponent';
+import { hot } from 'react-hot-loader'
 import './App.css';
 
 function App() {
@@ -9,6 +11,9 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <Counter />
+        <div>
+          <TestComponent />
+        </div>
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
@@ -47,7 +52,7 @@ function App() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            React Redux
+            React Redux 2
           </a>
         </span>
       </header>
@@ -55,4 +60,4 @@ function App() {
   );
 }
 
-export default App;
+export default hot(module)(App);
