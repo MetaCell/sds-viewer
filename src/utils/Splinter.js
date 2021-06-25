@@ -17,8 +17,12 @@ class Splinter {
     }
 
     #setTurtle() {
-        const parser = new N3.Parser();
-        return parser.parse(this.turtleFile);
+        if (this.turtleFile !== null) {
+            const parser = new N3.Parser();
+            return parser.parse(this.turtleFile);
+        }
+
+        return null;
     }
 
     getJson() {
