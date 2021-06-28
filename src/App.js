@@ -6,7 +6,7 @@ import {
   CssBaseline,
 } from '@material-ui/core';
 import theme from './theme';
-import Sidebar from './components/Sidebar';
+import Sidebar from './components/Sidebar/Sidebar';
 import EmptyContainer from './components/EmptyContainer';
 
 const App = () => {
