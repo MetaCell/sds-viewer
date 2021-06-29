@@ -14,7 +14,7 @@ const SidebarFooter = (props) => {
   const { expand, setExpand } = props;
   return (
     <Box className='sidebar-footer'>
-      <Button variant='contained' disableElevation color='primary'>
+      <Button variant='contained' disableElevation color='primary' onClick={() => props.setOpenDialog(true)}>
         <Typography component='label'>
           <img src={Plus} alt='Plus' />
           { IMPORT_TEXT }
