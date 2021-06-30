@@ -2,7 +2,7 @@ const axios = require('axios');
 
 class FileHandler {
 
-    get_local_file(path, callback) {
+    get_local_file(path, callback, progressCallback) {
         if (path === undefined)
             return undefined;
 
@@ -12,10 +12,12 @@ class FileHandler {
             callback(response.target.result)
         };
 
-        reader.onprogress = function(event) {
-            // Progress callback to be used for the loader.
-            console.log(event);
-        }
+        reader.onprogress = function (data) {
+            if (data.lengthComputable) {
+                var progress = parseInt((data.loaded / data.total) * 100, 10);
+                progressCallback(progress);
+            }
+        };
 
         reader.readAsText(path);
     }
@@ -23,13 +25,12 @@ class FileHandler {
     get_remote_file(url, callback) {
         // The proxy is required for the issue with CORS to be resolved.
         const PROXY_URL = 'https://cors-anywhere.herokuapp.com/';
-        axios.get(PROXY_URL+url, {
+        axios.get(PROXY_URL, {
             crossDomain: true,
             responseType: "stream",
             onDownloadProgress: (progressEvent) => {
                 // Progress callback to be used for the loader.
                 console.log("### axios progress event ###");
-                console.log(progressEvent);
             }
         }).then(response => {
             callback(response.data);
