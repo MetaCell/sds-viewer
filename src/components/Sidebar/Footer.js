@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  Box,
-  IconButton,
-  Typography,
-  Button,
-} from '@material-ui/core';
+import { Box, IconButton, Typography, Button } from '@material-ui/core';
 import Help from '../../images/help.svg';
 import Plus from '../../images/plus.svg';
 import ArrowRight from '../../images/arrow-right.svg';
@@ -14,18 +9,18 @@ const SidebarFooter = (props) => {
   const { expand, setExpand } = props;
   return (
     <Box className='sidebar-footer'>
-      <Button variant='contained' disableElevation color='primary' onClick={() => props.setOpenDialog(true)}>
-        <Typography component='label'>
-          <img src={Plus} alt='Plus' />
-          { IMPORT_TEXT }
-        </Typography>
+      <Button
+        variant='contained'
+        disableElevation
+        color='primary'
+        onClick={() => props.setOpenDialog(true)}
+      >
+        <img src={Plus} alt='Plus' />
+        {IMPORT_TEXT}
       </Button>
       <Box className='support'>
         {!expand ? (
-          <IconButton
-            aria-label='toggle'
-            onClick={() => setExpand(!expand)}
-          >
+          <IconButton aria-label='toggle' onClick={() => setExpand(!expand)}>
             <img src={Help} alt='Help' />
           </IconButton>
         ) : (
@@ -41,7 +36,7 @@ const SidebarFooter = (props) => {
         )}
       </Box>
     </Box>
-  )
-}
+  );
+};
 
 export default SidebarFooter;
