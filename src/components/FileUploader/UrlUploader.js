@@ -13,31 +13,31 @@ import UploadSubmit from './UploadSubmit';
 
 const FileHandler = require('../../utils/filesHandler');
 
-const UrlUploader = ({handleClose}) => {
+const UrlUploader = ({ handleClose }) => {
   const [loader, setLoader] = useState(false);
   const [url, setUrl] = useState('');
   const [fileDownloaded, setFileDownloaded] = useState(false);
 
   const onUpload = (url, data) => {
-    setLoader(false)
-    if(data) {
-      setFileDownloaded(true)
+    setLoader(false);
+    if (data) {
+      setFileDownloaded(true);
     }
-  }
+  };
 
   const uploadFile = () => {
     const fileHandler = new FileHandler();
-    const callback = fileData => {
+    const callback = (fileData) => {
       onUpload(url, fileData);
-    }
-    setLoader(true)
+    };
+    setLoader(true);
     fileHandler.get_remote_file(url, callback);
-  }
+  };
 
   const removeUrl = () => {
     setUrl('');
     setFileDownloaded(false);
-  }
+  };
 
   return (
     <>
@@ -63,21 +63,20 @@ const UrlUploader = ({handleClose}) => {
         />
       </FormControl>
 
-      { fileDownloaded ? (
-          <UploadSubmit handleClose={handleClose} />
-        ) : (
-          <Button
-            variant='contained'
-            fullWidth
-            disabled= {url === ''}
-            disableElevation
-            color='primary'
-            onClick={uploadFile}
-          >
-            { loader ? <CircularProgress size={16} color={'secondary'} /> : 'Load' }
-          </Button>
-        )
-      }
+      {fileDownloaded ? (
+        <UploadSubmit handleClose={handleClose} />
+      ) : (
+        <Button
+          variant='contained'
+          fullWidth
+          disabled={url === ''}
+          disableElevation
+          color='primary'
+          onClick={uploadFile}
+        >
+          {loader ? <CircularProgress size={16} color={'primary'} /> : 'Load'}
+        </Button>
+      )}
     </>
   );
 };

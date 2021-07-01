@@ -44,11 +44,19 @@ const theme = createMuiTheme({
   },
 
   overrides: {
+    MuiCircularProgress: {
+      colorPrimary: {
+        color: whiteColor,
+      },
+    },
     MuiLinearProgress: {
       root: {
         borderRadius: '.125rem',
       },
       colorPrimary: {
+        backgroundColor: progressBgPrimary,
+      },
+      colorSecondary: {
         backgroundColor: progressBgPrimary,
       },
       barColorPrimary: {
@@ -62,7 +70,7 @@ const theme = createMuiTheme({
     },
     MuiDropzoneArea: {
       root: {
-        borderWidth: '1..3125rem',
+        borderWidth: '0.09375rem',
         borderColor: dropzoneBorderColor,
         borderRadius: '.5rem',
         height: '8.75rem',
@@ -515,6 +523,9 @@ const theme = createMuiTheme({
             padding: '.5rem',
             marginTop: '.5rem',
             '&.error': {
+              '& .MuiLinearProgress-colorSecondary': {
+                backgroundColor: 'rgb(251, 158, 191)',
+              },
               '& p': {
                 color: errorColor,
               },
