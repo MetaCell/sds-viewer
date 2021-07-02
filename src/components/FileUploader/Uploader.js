@@ -3,6 +3,7 @@ import { DropzoneArea } from 'material-ui-dropzone';
 import UploadIcon from '../../images/upload-icon.svg';
 import UploadSubmit from './UploadSubmit';
 import  { FilesUploading } from './UploadView/FilesUploading';
+import { FILE_UPLOAD_PARAMS } from '../../constants';
 
 const Uploader = ({ handleClose }) => {
   const [files, setFiles] = useState([]);
@@ -44,7 +45,8 @@ const Uploader = ({ handleClose }) => {
         onChange={(e) => handleChange(e)}
         showPreviewsInDropzone={false}
         onDrop={(accFiles) => onDrop(accFiles)}
-        maxFileSize={1024 * 4000000}
+        acceptedFiles={FILE_UPLOAD_PARAMS.acceptedFileExtensions}
+        maxFileSize={FILE_UPLOAD_PARAMS.maxFileSize}
         onDropRejected={(rejFiles) => onDrop(rejFiles, false)}
         showAlerts={false}
         ref={nodeRef}
