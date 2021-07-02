@@ -1,10 +1,10 @@
 import React from "react";
 import { Box, Typography } from "@material-ui/core";
 import Breadcrumbs from "./Details/Views/Breadcrumbs";
-import DATASET from "../../../images/dataset.svg";
-import MATLAB from "../../../images/matlab.svg";
-import NIFTI from "../../../images/nifti.svg";
-import VOLUME from "../../../images/volume.svg";
+import DATASET from "../../images/dataset.svg";
+import MATLAB from "../../images/matlab.svg";
+import NIFTI from "../../images/nifti.svg";
+import VOLUME from "../../images/volume.svg";
 import vars from "../../styles/constant";
 
 const NodeHeader = (props) => {

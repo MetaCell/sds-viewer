@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Breadcrumbs, Link, Typography } from '@material-ui/core';
-import CLOSE from "../../../images/icon-close.svg";
-import DIVIDER from "../../../images/divider.svg";
+import CLOSE from "../../../../images/icon-close.svg";
+import DIVIDER from "../../../../images/divider.svg";
 
 const HeaderBreadcrumbs = (props) => {
   const { links, close } = props;
