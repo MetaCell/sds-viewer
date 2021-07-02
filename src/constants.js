@@ -3,3 +3,4 @@ export const FILE_UPLOAD_PARAMS = {
   acceptedFileExtensions: ['.json', '.ttl'],
   maxFileSize: 5242880
 };
+export const NODES = ["dataset", "nifti", "volume", "matlab"];
