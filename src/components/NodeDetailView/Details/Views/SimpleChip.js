@@ -7,7 +7,7 @@ import {
 const SimpleChip = ({chips}) => {
   return (
     <Box className="chip-overflow scrollbar">
-      { chips?.map((item) => <Chip label={item} /> ) }
+      { chips?.map((item, index) => <Chip key={`${item}_${index}`} label={item} /> ) }
     </Box>
   )
 }

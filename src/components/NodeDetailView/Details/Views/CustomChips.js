@@ -11,8 +11,8 @@ const CustomChips = ({members, heading}) => {
       <Box className="custom-chips scrollbar">
         {
           members ? (
-            members.map((collaborator) => (
-              <Box className="custom-chips_col">
+            members.map((collaborator, index) => (
+              <Box className="custom-chips_col" key={`${collaborator?.name}_${index}`}>
                 { collaborator.img ? <img src={collaborator.img} alt={collaborator?.name} /> : null } 
                 <Box className="wrap">
                   <Typography component="strong">{collaborator?.name}</Typography>

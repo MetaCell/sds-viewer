@@ -13,8 +13,8 @@ const HeaderBreadcrumbs = (props) => {
       >
         {
           links && links.pages ? (
-            links?.pages?.map((page) => (
-              <Link color="inherit" href={page?.href}>
+            links?.pages?.map((page, index) => (
+              <Link color="inherit" href={page?.href} key={`breadcrumb_${page?.title}_${index}`}>
                 {page?.title}
               </Link>
             ))

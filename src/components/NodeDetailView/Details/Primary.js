@@ -77,8 +77,7 @@ const PrimaryDetailView = () => {
   return (
     <>
       <Box className="tab-content">
-        <Typography component="h3">Details</Typography>
-        <SimpleLabelValue label={'Created On'} value={"February 2, 2021"} />
+        <SimpleLabelValue label={'Created On'} value={"February 2, 2021"} heading={'Details'} />
 
         <Box className="tab-content-row">
           <Typography component="label">About</Typography>
@@ -89,8 +88,8 @@ const PrimaryDetailView = () => {
         <Box className="tab-content-row">
           <List component="nav" aria-label="main">
             {
-              DETAILS_LIST?.map((item) => (
-                <ListItemText>
+              DETAILS_LIST?.map((item, index) => (
+                <ListItemText key={`detail_list_${index}`}>
                   <Typography component="label">{item?.title}</Typography>
                   <Typography>{item?.value}</Typography>
                 </ListItemText>
@@ -102,7 +101,7 @@ const PrimaryDetailView = () => {
         <Box className="tab-content-row">
           <Typography component="label">Links</Typography>
           {
-            LINKS?.map((row) => <Links href={row?.href} title={row?.title} />)
+            LINKS?.map((row, index) => <Links key={`detail_links_${index}`} href={row?.href} title={row?.title} />)
           }
         </Box>
       </Box>

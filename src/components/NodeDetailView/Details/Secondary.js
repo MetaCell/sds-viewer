@@ -66,7 +66,7 @@ const SecodaryDetailView = () => {
       <Box className="tab-content">
         <Typography component="h3">Node</Typography>
         {
-          rows?.map((row) => <SimpleLabelValue label={row?.label} value={row?.value} />)
+          rows?.map((row, index) => <SimpleLabelValue key={`node_${index}`}label={row?.label} value={row?.value} />)
         }
 
         <Box className="tab-content-row">
@@ -77,7 +77,7 @@ const SecodaryDetailView = () => {
         <Box className="tab-content-row">
           <Typography component="label">Links</Typography>
           {
-            links?.map((row) => <Links href={row?.href} title={row?.title} />)
+            links?.map((row, index) => <Links key={`links_${index}`} href={row?.href} title={row?.title} />)
           }
         </Box>
       </Box>
@@ -85,14 +85,14 @@ const SecodaryDetailView = () => {
       <Box className="tab-content">
         <Typography component="h3">Sample</Typography>
         {
-          rows?.map((row) => <SimpleLabelValue label={row?.label} value={row?.value} />)
+          rows?.map((row, index) => <SimpleLabelValue key={`sample_${index}`} label={row?.label} value={row?.value} />)
         }
       </Box>
 
       <Box className="tab-content">
         <Typography component="h3">Subject</Typography>
         {
-          rows?.map((row) => <SimpleLabelValue label={row?.label} value={row?.value} />)
+          rows?.map((row, index) => <SimpleLabelValue key={`subject_${index}`} label={row?.label} value={row?.value} />)
         }
       </Box>
     </>
