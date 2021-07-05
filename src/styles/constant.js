@@ -35,6 +35,7 @@ const vars = {
   matlab: '#6FC386',
   nifti: '#7747F6',
   volume: '#3779E1',
+  sideBarLabelColor: 'rgba(46, 58, 89, 0.4)',
 };
 
 export default vars;

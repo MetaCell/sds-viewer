@@ -379,6 +379,13 @@ const theme = createMuiTheme({
         ' body': {
           backgroundColor: secondaryColor,
         },
+        '*::-webkit-scrollbar': {
+          width: '0.25rem',
+        },
+        '*::-webkit-scrollbar-thumb': {
+          background: 'rgba(0,0,0,0.24)',
+          borderRadius: '.25rem',
+        },
         '.main-structure': {
           display: 'flex',
           overflow: 'hidden',
@@ -653,7 +660,7 @@ const theme = createMuiTheme({
             paddingBottom: '5rem',
           },
           '&_footer': {
-            display: 'flex',
+            display: 'none',
             height: '5rem',
             alignItems: 'center',
             justifyContent: 'center',
@@ -666,8 +673,14 @@ const theme = createMuiTheme({
               cursor: 'pointer',
             },
           },
+
+          '&.in': {
+            '& .secondary-sidebar_footer': {
+              display: 'flex',
+            },
+          },
           '&::before': {
-            content: '',
+            content: '""',
             background: whiteColor,
             width: '1.875rem',
             top: 0,
@@ -677,7 +690,7 @@ const theme = createMuiTheme({
             zIndex: -1,
           },
           '&::after': {
-            content: '',
+            content: '""',
             background: whiteColor,
             width: '1.875rem',
             left: '-1.875rem',
