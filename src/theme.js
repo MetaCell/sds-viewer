@@ -30,6 +30,9 @@ const {
   tabsBorderColor,
   dialogBodyBgColor,
   sideBarTextColor,
+  sideBarLabelColor,
+  chipBgColor,
+  progressErrorBg,
 } = vars;
 
 const theme = createMuiTheme({
@@ -44,6 +47,52 @@ const theme = createMuiTheme({
   },
 
   overrides: {
+    MuiBreadcrumbs: {
+      root: {
+        marginTop: '.25rem',
+      },
+      ol: {
+        lineHeight: 1,
+      },
+      separator: {
+        marginLeft: '.25rem',
+        marginRight: '.25rem',
+        color: dropzoneTextColor,
+      },
+      li: {
+        fontSize: '.75rem',
+        lineHeight: '.875rem',
+        letterSpacing: '.00375rem',
+        fontWeight: '500',
+        color: dropzoneTextColor,
+        '& a': {
+          color: primaryColor,
+        },
+        '& p': {
+          fontSize: '.75rem',
+          lineHeight: '.875rem',
+          letterSpacing: '.00375rem',
+          fontWeight: '500',
+          color: dropzoneTextColor,
+        },
+      },
+    },
+    MuiChip: {
+      root: {
+        backgroundColor: chipBgColor,
+        borderRadius: '.3125rem',
+        display: 'inline-flex',
+        alignItems: 'center',
+        height: '1.375rem',
+        marginTop: '.25rem',
+        marginRight: '.375rem',
+        '& .MuiChip-label': {
+          padding: '0 .375rem',
+          fontSize: '.75rem',
+          color: primaryTextColor,
+        },
+      },
+    },
     MuiCircularProgress: {
       colorPrimary: {
         color: whiteColor,
@@ -330,8 +379,16 @@ const theme = createMuiTheme({
         ' body': {
           backgroundColor: secondaryColor,
         },
+        '*::-webkit-scrollbar': {
+          width: '0.25rem',
+        },
+        '*::-webkit-scrollbar-thumb': {
+          background: 'rgba(0,0,0,0.24)',
+          borderRadius: '.25rem',
+        },
         '.main-structure': {
           display: 'flex',
+          overflow: 'hidden',
         },
         '.dialog': {
           '&_body': {
@@ -524,7 +581,7 @@ const theme = createMuiTheme({
             marginTop: '.5rem',
             '&.error': {
               '& .MuiLinearProgress-colorSecondary': {
-                backgroundColor: 'rgb(251, 158, 191)',
+                backgroundColor: progressErrorBg,
               },
               '& p': {
                 color: errorColor,
@@ -582,6 +639,220 @@ const theme = createMuiTheme({
             letterSpacing: '-0.01em',
             marginBottom: '1rem',
             color: dropzoneTextColor,
+          },
+        },
+
+        '.secondary-sidebar': {
+          width: '18.75rem',
+          display: 'flex',
+          flexDirection: 'column',
+          backgroundColor: whiteColor,
+          position: 'relative',
+          transition: 'all ease-in-out .3s',
+          '&:not(.in)': {
+            marginRight: '-18.75rem',
+            transition: 'all ease-in-out .3s',
+          },
+          '&_body': {
+            flexGrow: 1,
+            height: 'calc(100vh - 13rem)',
+            overflow: 'auto',
+            paddingBottom: '5rem',
+          },
+          '&_footer': {
+            display: 'none',
+            height: '5rem',
+            alignItems: 'center',
+            justifyContent: 'center',
+            position: 'fixed',
+            right: '0',
+            bottom: '0',
+            width: '18.75rem',
+            background: `linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, ${whiteColor} 100%)`,
+            '& img': {
+              cursor: 'pointer',
+            },
+          },
+
+          '&.in': {
+            '& .secondary-sidebar_footer': {
+              display: 'flex',
+            },
+          },
+          '&::before': {
+            content: '""',
+            background: whiteColor,
+            width: '1.875rem',
+            top: 0,
+            left: '-1.875rem',
+            height: '1.875rem',
+            position: 'absolute',
+            zIndex: -1,
+          },
+          '&::after': {
+            content: '""',
+            background: whiteColor,
+            width: '1.875rem',
+            left: '-1.875rem',
+            bottom: 0,
+            height: '1.875rem',
+            position: 'absolute',
+            zIndex: -1,
+          },
+          '&_header': {
+            textAlign: 'center',
+            padding: '1.5rem 1.5rem 2.25rem',
+            borderBottom: `.0625rem solid ${tabsBorderColor}`,
+            '& .MuiBreadcrumbs-li a': {
+              color: placeHolderColor,
+            },
+            '& .MuiBreadcrumbs-separator': {
+              margin: '0 .5rem',
+            },
+            '& .wrap': {
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              marginBottom: '2.25rem',
+              '& img': {
+                margin: '0',
+                cursor: 'pointer',
+              },
+            },
+            '& img': {
+              display: 'block',
+              margin: '0 auto',
+            },
+            '& h3': {
+              fontWeight: '600',
+              fontSize: '1.5rem',
+              lineHeight: '1.8125rem',
+              marginBottom: '.25rem',
+              marginTop: '.75rem',
+            },
+            '&> p ': {
+              fontWeight: '500',
+              fontSize: '.75rem',
+              lineHeight: '.875rem',
+              letterSpacing: '-0.01em',
+              color: placeHolderColor,
+            },
+          },
+
+          '& .tab-content': {
+            padding: '1.5rem',
+            '&+ .tab-content': {
+              borderTop: `.0625rem solid ${tabsBorderColor}`,
+            },
+            '& h3': {
+              fontSize: '1.125rem',
+              fontWeight: '500',
+              lineHeight: '1.375rem',
+              letterSpacing: '-0.03em',
+              color: 'primaryTextColor',
+              marginBottom: '1.5625rem',
+            },
+            '& .tab-content-row': {
+              '& .chip-overflow': {
+                whiteSpace: 'nowrap',
+                overflow: 'auto',
+                marginRight: '-1.5rem',
+              },
+              '&> a': {
+                display: 'inline-flex',
+                fontSize: '.75rem',
+                lineHeight: '1rem',
+                marginTop: '.25rem',
+                color: primaryColor,
+
+                '&:not(:last-child)': {
+                  marginRight: '.75rem',
+                },
+
+                '& img': {
+                  marginRight: '.25rem',
+                },
+              },
+              '&+ .tab-content-row': {
+                marginTop: '1.5rem',
+              },
+              '& label': {
+                fontWeight: '600',
+                display: 'block',
+                fontSize: '.75rem',
+                lineHeight: '.875rem',
+                letterSpacing: '-0.01em',
+                color: sideBarLabelColor,
+                '&+ p': {
+                  marginTop: '.25rem',
+                },
+              },
+              '&> p': {
+                fontSize: '.75rem',
+                lineHeight: '1rem',
+                color: primaryTextColor,
+              },
+
+              '& .MuiList-root': {
+                padding: '0',
+                '& .MuiListItemText-root': {
+                  margin: '0',
+                  '&+ .MuiListItemText-root': {
+                    marginTop: '.5rem',
+                  },
+                  // '&:not(:last-child)': {
+                  //   marginTop: '.5rem',
+                  // },
+                  '&>span': {
+                    display: 'flex',
+                    '& label': {
+                      width: '9.5rem',
+                      paddingRight: '.5rem',
+                      '&+ p': {
+                        fontSize: '.75rem',
+                        lineHeight: '1rem',
+                        marginTop: '0',
+                        color: primaryTextColor,
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+        '.custom-chips': {
+          display: 'flex',
+          marginTop: '.25rem',
+          overflow: 'auto',
+          '&_col': {
+            display: ' flex',
+            flexShrink: 0,
+            background: primaryBgColor,
+            borderRadius: '.5rem',
+            padding: '.5rem .75rem 0.5rem 0.5rem',
+            '&:not(:last-child)': {
+              marginRight: '.5rem',
+            },
+            '& img': {
+              flexShrink: 0,
+              marginRight: '.25rem',
+            },
+            '& .wrap': {
+              whiteSpace: 'nowrap',
+              '& strong': {
+                display: 'block',
+                lineHeight: '.875rem',
+                fontSize: '.75rem',
+                color: primaryTextColor,
+              },
+              '& span': {
+                display: 'block',
+                lineHeight: '.875rem',
+                fontSize: '.75rem',
+                color: placeHolderColor,
+              },
+            },
           },
         },
       },

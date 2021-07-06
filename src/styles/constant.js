@@ -30,6 +30,12 @@ const vars = {
   tabsBorderColor: 'rgba(0,0,0,0.1)',
   dialogBodyBgColor: 'rgba(55, 121, 225, 0.05)',
   sideBarTextColor: 'rgba(46, 58, 89, 0.8)',
+  chipBgColor: 'rgba(46, 58, 89, 0.05)',
+  dataset: '#3779E1',
+  matlab: '#6FC386',
+  nifti: '#7747F6',
+  volume: '#3779E1',
+  sideBarLabelColor: 'rgba(46, 58, 89, 0.4)',
 };
 
 export default vars;
