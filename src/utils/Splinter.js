@@ -4,11 +4,11 @@ class Splinter {
     constructor(jsonFile, turtleFile) {
         this.jsonFile = jsonFile;
         this.turtleFile = turtleFile;
-        this.jsonData = this.#setJson();
-        this.turtleData = this.#setTurtle();
+        this.jsonData = this.setJson();
+        this.turtleData = this.setTurtle();
     }
 
-    #setJson() {
+    setJson() {
         if (typeof this.jsonFile === 'object' && this.jsonFile !== null) {
             return this.jsonFile;
         } else {
@@ -16,13 +16,9 @@ class Splinter {
         }
     }
 
-    #setTurtle() {
-        if (this.turtleFile !== null) {
-            const parser = new N3.Parser();
-            return parser.parse(this.turtleFile);
-        }
-
-        return null;
+    setTurtle() {
+        const parser = new N3.Parser();
+        return parser.parse(this.turtleFile);
     }
 
     getJson() {
