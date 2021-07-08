@@ -62,9 +62,12 @@ export default class TestComponent extends React.Component {
 
     render() {
         // var url = "https://cassava.ucsd.edu/sparc/preview/archive/exports/2021-04-12T17%3A28%3A22%2C384227-07%3A00/datasets/N%3Adataset%3A29df9b97-a20b-469c-bf48-9389f1e31a11.ttl"
-        if (this.state.turtleFile !== undefined && this.state.jsonFile !== undefined) {
+        if (this.state.turtleFile !== undefined && this.state.jsonFile !== undefined && this.splinter === undefined) {
             this.splinter = new Splinter(this.state.jsonFile, this.state.turtleFile);
-            this.splinter.create_graph()
+            this.splinter.processDataset();
+            // let _graph = this.splinter.get_graph();
+            // let _nodes = this.splinter.get_nodes();
+            // let _node = this.splinter.get_node("dataset id");
         }
 
         return (
