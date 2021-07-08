@@ -35,6 +35,8 @@ class Splinter {
                 if (prefixes) {
                     console.log(prefixes);
                 }
+
+                resolve(that.turtleData);
             }
 
             let prefixCallback = function (prefix, iri) {
@@ -46,9 +48,10 @@ class Splinter {
                 if (graphModel[prefix] !== undefined) {
                     graphModel[prefix]["key"] = iri;
                 }
+
+                resolve(that.types);
             }
             var quadsArray = parser.parse(that.turtleFile, callbackParse, prefixCallback);
-            resolve(quadsArray);
         });
     }
 
