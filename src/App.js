@@ -1,63 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import TestComponent from './components/TestComponent/TestComponent';
-import { hot } from 'react-hot-loader'
-import './App.css';
+import React, { useState } from 'react';
+import { hot } from 'react-hot-loader';
+import Box from '@material-ui/core/Box';
+import { MuiThemeProvider, CssBaseline } from '@material-ui/core';
+import theme from './theme';
+import Sidebar from './components/Sidebar/Sidebar';
+import NodeDetailView from './components/NodeDetailView/NodeDetailView';
+import EmptyContainer from './components/EmptyContainer';
+import UploadDialog from './components/FileUploader/UploadDialog';
 
-function App() {
+const App = () => {
+  const [openDialog, setOpenDialog] = useState(false);
+  const [openNodeDetail, setOpenNodeDetail] = useState(true);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <div>
-          <TestComponent />
-        </div>
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux 2
-          </a>
-        </span>
-      </header>
-    </div>
+    <MuiThemeProvider theme={theme}>
+      <CssBaseline />
+      <Box className='main-structure'>
+        <Sidebar openDialog={openDialog} setOpenDialog={setOpenDialog} />
+        <Box className={'content' + (openNodeDetail ? ' full-round' : '')}>
+          <EmptyContainer
+            openDialog={openDialog}
+            setOpenDialog={setOpenDialog}
+          />
+        </Box>
+        <NodeDetailView open={openNodeDetail} handleClose={() => setOpenNodeDetail(false)} />
+      </Box>
+
+      <UploadDialog
+        open={openDialog}
+        handleClose={() => setOpenDialog(false)}
+      />
+    </MuiThemeProvider>
   );
-}
+};
 
 export default hot(module)(App);
