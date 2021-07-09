@@ -14,6 +14,7 @@ const pathMetadataJSONFileParsed = require('./resources/dataset:29df9b97-a20b-46
 
 const EXPECTED_EDGES_COUNT = 18;
 const EXPECTED_NODES_COUNT = 541;
+const EXPECTED_TURTLE_QUADS = 97;
 
 beforeEach(() => {
   jest.clearAllMocks();
@@ -74,8 +75,8 @@ describe('Test Splinter File', () => {
 
   it('Process Turtle File', async (done) => {
     try {
-      const turtlePromise = await splinter.extractTurtle();
-      expect(splinter.getTurtle().length).toBe(97)
+      await splinter.extractTurtle();
+      expect(splinter.getTurtle().length).toBe(EXPECTED_TURTLE_QUADS)
       done()
     } catch (e) {
       done.fail(e)
