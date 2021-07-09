@@ -12,9 +12,11 @@ const externalTurtleFileURL = "https://cassava.ucsd.edu/sparc/preview/archive/ex
 const externalTurtleJSONFileURL = "https://cassava.ucsd.edu/sparc/preview/archive/exports/2021-04-12T17%3A28%3A22%2C384227-07%3A00/path-metadata/29df9b97-a20b-469c-bf48-9389f1e31a11/LATEST_RUN/path-metadata.json"
 const pathMetadataJSONFileParsed = require('./resources/dataset:29df9b97-a20b-469c-bf48-9389f1e31a11/path-metadata.json');
 
+const EXPECTED_EDGES_COUNT = 18;
+const EXPECTED_NODES_COUNT = 541;
+
 beforeEach(() => {
   jest.clearAllMocks();
-  jest.setTimeout(30000);
 });
 
 describe('Test File Handler', () => {
@@ -88,20 +90,34 @@ describe('Test Splinter File', () => {
   it('Graph Created Correctly', async () => {
     let graph = splinter.create_graph();
     expect(graph.nodes).not.toMatchObject({});
-    expect(splinter.create_graph).toHaveBeenCalled();
   });
 
   // Test the nodes for the graph
   it('Graph Nodes Extracted Correctly', async () => {
     const nodes = splinter.nodes;
-    expect(nodes).toBe(541);
+    expect(nodes).toBe(EXPECTED_NODES_COUNT);
+
+    // The nodes for the graph must each have these properties
+    nodes.forEach( node => {
+      expect(node).toHaveProperty("id");
+      expect(node).toHaveProperty("type");
+      expect(node).toHaveProperty("proxies");
+      expect(node).toHaveProperty("label");
+      expect(node).toHaveProperty("properties");
+    });
   });
 
   // Test the edges for the graph
   it('Graph Edges Extracted Correctly', async () => {
     const edges = splinter.edges;
-    //Test expected number of edges were created
-    expect(edges.length).toBe(18);
+    //Expected number of edges were created for loaded dataset
+    expect(edges.length).toBe(EXPECTED_EDGES_COUNT);
+
+    // The nodes for the graph must each have these properties
+    edges.forEach( edge => {
+      expect(edge).toHaveProperty("startNode");
+      expect(edge).toHaveProperty("endNode");
+    });
   });
 
   /**
@@ -111,9 +127,14 @@ describe('Test Splinter File', () => {
   it('Graph Root Nodes and Links Structured Correctly', async () => {
     let graph = splinter.graphRoot;
 
-    // The graph root must have "nodes" and "links".
+    /**
+     * The graph root must have "nodes" and "links" as arrays, this is expected by the 
+     * graphing library.
+     **/
     expect(graph).toHaveProperty("nodes");
+    expect(Array.isArray(graph.nodes)).toBe(true);
     expect(graph).toHaveProperty("links");
+    expect(Array.isArray(graph.links)).toBe(true);
 
     // The nodes for the graph must each have these properties
     graph?.nodes?.forEach( node => {
@@ -121,6 +142,7 @@ describe('Test Splinter File', () => {
       expect(node).toHaveProperty("type");
       expect(node).toHaveProperty("label");
       expect(node).toHaveProperty("proxies");
+      expect(node).toHaveProperty("properties");
     });
 
     // The links for the graph mush each have these properties
