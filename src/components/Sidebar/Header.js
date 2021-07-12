@@ -13,7 +13,11 @@ import ToggleLeft from '../../images/toggle-left.svg';
 import Search from '../../images/search.svg';
 
 const SidebarHeader = (props) => {
-  const { expand, setExpand } = props;
+  const { expand, setExpand, setSearchTerm, searchTerm } = props;
+  const handleChange = ( e ) => {
+    setSearchTerm(e.target.value)
+  }
+
   return (
     <Box className='sidebar-header'>
         <img src={Logo} alt='Logo' />
@@ -24,6 +28,7 @@ const SidebarHeader = (props) => {
         {expand && (
           <FormControl variant='filled' fullWidth>
             <FilledInput
+              aria-autocomplete='none'
               disableUnderline={true}
               id='filled-adornment-password'
               placeholder='Search for an instance'
@@ -37,6 +42,8 @@ const SidebarHeader = (props) => {
                   <Button>Search</Button>
                 </InputAdornment>
               }
+              value={searchTerm}
+              onChange={handleChange}
             />
           </FormControl>
         )}
