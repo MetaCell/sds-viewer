@@ -1,13 +1,13 @@
 import React from 'react';
 import {
   Box,
-  Typography,
   IconButton,
 } from '@material-ui/core';
 import Search from '../../images/search.svg';
+import TreeView from './TreeView/TreeView';
 
 const SidebarContent = (props) => {
-  const { expand, setExpand } = props;
+  const { expand, setExpand, instances, searchTerm } = props;
   return (
     <Box className='sidebar-body'>
       {!expand ? (
@@ -18,9 +18,7 @@ const SidebarContent = (props) => {
           <img src={Search} alt='Search' />
         </IconButton>
       ) : (
-        <Typography className='no-instance'>
-          No instances to display yet.
-        </Typography>
+        <TreeView instances={instances} searchTerm={searchTerm} />
       )}
     </Box>
   )
