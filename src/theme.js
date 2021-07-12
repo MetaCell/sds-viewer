@@ -1,5 +1,6 @@
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import vars from './styles/constant';
+import CURVE from './images/curve.svg';
 
 const {
   primaryColor,
@@ -33,6 +34,7 @@ const {
   sideBarLabelColor,
   chipBgColor,
   progressErrorBg,
+  treeBorderColor,
 } = vars;
 
 const theme = createMuiTheme({
@@ -47,6 +49,14 @@ const theme = createMuiTheme({
   },
 
   overrides: {
+    MuiTreeView: {
+      root: {},
+    },
+    MuiTreeItem: {
+      root: {
+        '&[aria-expanded="false"]': {},
+      },
+    },
     MuiBreadcrumbs: {
       root: {
         marginTop: '.25rem',
@@ -379,16 +389,19 @@ const theme = createMuiTheme({
         ' body': {
           backgroundColor: secondaryColor,
         },
-        '*::-webkit-scrollbar': {
-          width: '0.25rem',
-        },
-        '*::-webkit-scrollbar-thumb': {
-          background: 'rgba(0,0,0,0.24)',
-          borderRadius: '.25rem',
-        },
         '.main-structure': {
           display: 'flex',
           overflow: 'hidden',
+        },
+        '.scrollbar': {
+          overflow: 'auto',
+          '&::-webkit-scrollbar': {
+            width: '0.25rem',
+          },
+          '&::-webkit-scrollbar-thumb': {
+            background: 'rgba(0,0,0,0.24)',
+            borderRadius: '.25rem',
+          },
         },
         '.dialog': {
           '&_body': {
@@ -425,6 +438,7 @@ const theme = createMuiTheme({
           overflow: 'hidden',
           backgroundColor: secondaryColor,
           height: '100vh',
+          flexShrink: 0,
           padding: '1rem 0.75rem',
           display: 'flex',
           flexDirection: 'column',
@@ -438,6 +452,11 @@ const theme = createMuiTheme({
                   marginBottom: '1.1875rem',
                   paddingBottom: '1.1875rem',
                   borderBottom: `0.0625rem solid ${lightBorderColor}`,
+                },
+              },
+              '&-body': {
+                '& ul': {
+                  display: 'none',
                 },
               },
               '&-footer': {
@@ -498,8 +517,104 @@ const theme = createMuiTheme({
           },
           '&-body': {
             padding: '1.1875rem 0',
+            overflow: 'auto',
             flexGrow: 1,
             borderBottom: `0.0625rem solid ${lightBorderColor}`,
+            '& ul': {
+              position: 'relative',
+              '&::before': {
+                content: '""',
+                height: 'calc(100% - 1.375rem)',
+                width: '0.0625rem',
+                background: treeBorderColor,
+                position: 'absolute',
+                left: '1.0625rem',
+                top: '0',
+              },
+              '& .MuiTreeItem-root': {
+                position: 'relative',
+                '&::before': {
+                  content: '""',
+                  height: '0.875rem',
+                  width: '1.4375rem',
+                  backgroundImage: `url(${CURVE})`,
+                  position: 'absolute',
+                  top: '0.71875rem',
+                  backgroundRepeat: 'no-repeat',
+                  left: '-0.40625rem',
+                },
+                '&::after': {
+                  content: '""',
+                  height: '0.0625rem',
+                  borderRadius: '3.125rem',
+                  width: '0.5rem',
+                  backgroundColor: treeBorderColor,
+                  position: 'absolute',
+                  left: '0',
+                  top: '1.0625rem',
+                },
+                '&:hover': {
+                  background: 'transparent',
+                },
+                '&:focus > .MuiTreeItem-content': {
+                  backgroundColor: 'transparent',
+                },
+              },
+            },
+            '&> .MuiTreeView-root': {
+              '&::before': {
+                display: 'none',
+              },
+              '&> .MuiTreeItem-root': {
+                '&::before': {
+                  display: 'none',
+                },
+                '&::after': {
+                  display: 'none',
+                },
+                '&:hover': {
+                  background: 'transparent',
+                },
+                '&:focus > .MuiTreeItem-content': {
+                  backgroundColor: 'transparent',
+                },
+                '&[aria-expanded="true"]': {
+                  '&> .MuiTreeItem-content': {
+                    '&> .MuiTreeItem-label': {
+                      '&> div': {
+                        background: `linear-gradient(0deg, ${lightBorderColor}, ${lightBorderColor}), ${secondaryColor}`,
+                        borderColor: primaryColor,
+                        '& span': {
+                          '& img': {
+                            transform: 'rotate(-180deg)',
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
+                '& .MuiTreeItem-content': {
+                  '&:hover': {
+                    background: 'transparent',
+                  },
+                },
+                '&> .MuiTreeItem-content': {
+                  '&> .MuiTreeItem-label': {
+                    '&> div': {
+                      borderRadius: '.5rem',
+                      background: 'transparent',
+                      border: '0.03125rem solid transparent',
+
+                      '& p': {
+                        fontSize: '0.75rem',
+                        lineHeight: '0.9375rem',
+                      },
+                    },
+                  },
+                },
+              },
+            },
+
             '& .no-instance': {
               fontSize: '0.75rem',
               display: 'flex',
@@ -513,7 +628,10 @@ const theme = createMuiTheme({
             },
           },
           '&-footer': {
+            boxShadow: `0 -4.75rem 3.0625rem -2.5625rem ${secondaryColor}`,
+            borderTop: `0.0625rem solid ${lightBorderColor}`,
             paddingTop: '1rem',
+            position: 'relative',
             '& .MuiButton-contained': {
               minHeight: '2.375rem',
               padding: 0,
@@ -645,10 +763,12 @@ const theme = createMuiTheme({
         '.secondary-sidebar': {
           width: '18.75rem',
           display: 'flex',
+          flexShrink: 0,
           flexDirection: 'column',
           backgroundColor: whiteColor,
           position: 'relative',
           transition: 'all ease-in-out .3s',
+
           '&:not(.in)': {
             marginRight: '-18.75rem',
             transition: 'all ease-in-out .3s',
@@ -800,9 +920,6 @@ const theme = createMuiTheme({
                   '&+ .MuiListItemText-root': {
                     marginTop: '.5rem',
                   },
-                  // '&:not(:last-child)': {
-                  //   marginTop: '.5rem',
-                  // },
                   '&>span': {
                     display: 'flex',
                     '& label': {
