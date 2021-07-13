@@ -4,10 +4,10 @@ import {
   IconButton,
 } from '@material-ui/core';
 import Search from '../../images/search.svg';
-import TreeView from './TreeView/TreeView';
+import InstancesTreeView from './TreeView/InstancesTreeView';
 
 const SidebarContent = (props) => {
-  const { expand, setExpand, instances, searchTerm } = props;
+  const { expand, setExpand, searchTerm } = props;
   return (
     <Box className='sidebar-body'>
       {!expand ? (
@@ -18,7 +18,7 @@ const SidebarContent = (props) => {
           <img src={Search} alt='Search' />
         </IconButton>
       ) : (
-        <TreeView instances={instances} searchTerm={searchTerm} />
+        <InstancesTreeView searchTerm={searchTerm} />
       )}
     </Box>
   )
