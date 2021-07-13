@@ -15,14 +15,17 @@ const StyledTreeItem = (props)  => {
           <Typography variant="body2" className="labelText">
             {labelText}
           </Typography>
-          <Typography
-            variant="caption"
-            className="labelCaption"
-            color="inherit"
-          >
-            {labelInfo}
-            <img src={DOWN} alt="down" />
-          </Typography>
+          { labelInfo > 0 ? (
+            <Typography
+              variant="caption"
+              className="labelCaption"
+              color="inherit"
+            >
+              {labelInfo}
+              <img src={DOWN} alt="down" />
+            </Typography>
+            ) : null
+          }
         </div>
       }
       {...other}
@@ -32,7 +35,7 @@ const StyledTreeItem = (props)  => {
 
 StyledTreeItem.propTypes = {
   labelIcon: PropTypes.elementType.isRequired,
-  labelInfo: PropTypes.string,
+  labelInfo: PropTypes.number,
   labelText: PropTypes.string.isRequired,
 };
 

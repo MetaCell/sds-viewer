@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import TreeView from '@material-ui/lab/TreeView';
 import Typography from '@material-ui/core/Typography';
 import DATASET from "../../../images/tree/dataset.svg";
+import FOLDER from "../../../images/tree/folder.svg";
+import FILE from "../../../images/tree/file.svg";
 import StyledTreeItem from './TreeViewItem';
 
 const InstancesTreeView = (props) => {
@@ -13,252 +15,125 @@ const InstancesTreeView = (props) => {
   const products = [
     {
       id: '1_1',
-      text: 'Super Mart of the West',
-      expanded: true,
+      text: 'C1-101 Dataset',
+      parent: true,
       items: [{
         id: '1_1_1',
-        text: 'Check Players',
-        items: [{
-          id: '1_1_1_1',
-          text: 'HD Check Player',
-          price: 220
-        }, {
-          id: '1_1_1_2',
-          text: 'SuperHD Check Player',
-          price: 270
-        }]
-      }, {
+        text: 'NIFTI',
+        items: []
+      },
+      {
         id: '1_1_2',
-        text: 'Televisions',
+        text: 'Volume',
         items: [{
           id: '1_1_2_1',
-          text: 'SuperLCD 42',
+          text: 'NIFTI',
           price: 1200
         }, {
           id: '1_1_2_2',
-          text: 'SuperLED 42',
+          text: 'Matlab',
           price: 1450
-        }, {
-          id: '1_1_2_3',
-          text: 'SuperLED 50',
-          price: 1600
-        }, {
-          id: '1_1_2_4',
-          text: 'SuperLCD 55',
-          price: 1350
-        }, {
-          id: '1_1_2_5',
-          text: 'SuperLCD 70',
-          price: 4000
         }]
-      }, {
+      },
+      {
         id: '1_1_3',
-        text: 'Monitors',
-        items: [{
-          id: '1_1_3_1',
-          text: '19"',
-          items: [{
-            id: '1_1_3_1_1',
-            text: 'DesktopLCD 19',
-            price: 160
-          }]
-        }, {
-          id: '1_1_3_2',
-          text: '21"',
-          items: [{
-            id: '1_1_3_2_1',
-            text: 'DesktopLCD 21',
-            price: 170
-          }, {
-            id: '1_1_3_2_2',
-            text: 'DesktopLED 21',
-            price: 175
-          }]
-        }]
-      }, {
-        id: '1_1_4',
-        text: 'Projectors',
-        items: [{
-          id: '1_1_4_1',
-          text: 'Projector Plus',
-          price: 550
-        }, {
-          id: '1_1_4_2',
-          text: 'Projector PlusHD',
-          price: 750
-        }]
+        text: 'Matlab',
+        items: []
       }]
-
-    }, {
+    },
+    {
       id: '1_2',
-      text: 'Braeburn',
+      text: 'C1-102 Dataset',
+      parent: true,
       items: [{
         id: '1_2_1',
-        text: 'Use Players',
+        text: 'Volume',
         items: [{
           id: '1_2_1_1',
-          text: 'HD Use Player',
+          text: 'NIFTI',
           price: 240
         }, {
           id: '1_2_1_2',
-          text: 'SuperHD Use Player',
+          text: 'Matlab',
           price: 300
         }]
       }, {
         id: '1_2_2',
-        text: 'Televisions',
-        items: [{
-          id: '1_2_2_1',
-          text: 'SuperPlasma 50',
-          price: 1800
-        }, {
-          id: '1_2_2_2',
-          text: 'SuperPlasma 65',
-          price: 3500
-        }]
+        text: 'Matlab',
+        items: []
       }, {
         id: '1_2_3',
-        text: 'Monitors',
-        items: [{
-          id: '1_2_3_1',
-          text: '19"',
-          items: [{
-            id: '1_2_3_1_1',
-            text: 'DesktopLCD 19',
-            price: 170
-          }]
-        }, {
-          id: '1_2_3_2',
-          text: '21"',
-          items: [{
-            id: '1_2_3_2_1',
-            text: 'Check 21',
-            price: 180
-          }, {
-            id: '1_2_3_2_2',
-            text: 'Update 21',
-            price: 190
-          }]
-        }]
+        text: 'NIFTI',
+        items: []
       }]
-
-    }, {
+    },
+    {
       id: '1_3',
-      text: 'E-Mart',
+      text: 'C1-103 Dataset',
+      parent: true,
       items: [{
         id: '1_3_1',
-        text: 'Video Players',
-        items: [{
-          id: '1_3_1_1',
-          text: 'HD Video Player',
-          price: 220
-        }, {
-          id: '1_3_1_2',
-          text: 'SuperHD Video Player',
-          price: 275
-        }]
-      }, {
+        text: 'Matlab',
+        items: []
+      },
+      {
         id: '1_3_3',
-        text: 'Monitors',
+        text: 'NIFTI',
+        items: []
+      },
+      {
+        id: '1_3_2',
+        text: 'Volume',
         items: [{
-          id: '1_3_3_1',
-          text: '19"',
-          items: [{
-            id: '1_3_3_1_1',
-            text: 'DesktopLCD 19',
-            price: 165
-          }]
+          id: '1_3_2_1',
+          text: 'NIFTI',
+          price: 240
         }, {
-          id: '1_3_3_2',
-          text: '21"',
-          items: [{
-            id: '1_3_3_2_1',
-            text: 'DesktopLCD 21',
-            price: 175
-          }]
+          id: '1_3_2_2',
+          text: 'Matlab',
+          price: 300
+        }]
+      },
+      {
+        id: '1_3_4',
+        text: 'Motility',
+        price: 175,
+        items: [{
+          id: '1_3_4_1',
+          text: 'NIFTI',
+          price: 240
+        }, {
+          id: '1_3_4_2',
+          text: 'Matlab',
+          price: 300
         }]
       }]
-    }, {
+    },
+    {
       id: '1_4',
-      text: 'Walters',
+      text: 'C1-104 Dataset',
+      parent: true,
       items: [{
         id: '1_4_1',
-        text: 'Dummy Players',
+        text: 'Volume',
         items: [{
           id: '1_4_1_1',
-          text: 'HD Video Player',
+          text: 'Matlab',
           price: 210
         }, {
           id: '1_4_1_2',
-          text: 'SuperHD Video Player',
+          text: 'NIFTI',
           price: 250
         }]
       }, {
         id: '1_4_2',
-        text: 'Televisions',
-        items: [{
-          id: '1_4_2_1',
-          text: 'SuperLCD 42',
-          price: 1100
-        }, {
-          id: '1_4_2_2',
-          text: 'SuperLED 42',
-          price: 1400
-        }, {
-          id: '1_4_2_3',
-          text: 'SuperLED 50',
-          price: 1500
-        }, {
-          id: '1_4_2_4',
-          text: 'SuperLCD 55',
-          price: 1300
-        }, {
-          id: '1_4_2_5',
-          text: 'SuperLCD 70',
-          price: 4000
-        }, {
-          id: '1_4_2_6',
-          text: 'SuperPlasma 50',
-          price: 1700
-        }]
+        text: 'Matlab',
+        items: []
       }, {
         id: '1_4_3',
-        text: 'Monitors',
-        items: [{
-          id: '1_4_3_1',
-          text: '19"',
-          items: [{
-            id: '1_4_3_1_1',
-            text: 'DesktopLCD 19',
-            price: 160
-          }]
-        }, {
-          id: '1_4_3_2',
-          text: '21"',
-          items: [{
-            id: '1_4_3_2_1',
-            text: 'DesktopLCD 21',
-            price: 170
-          }, {
-            id: '1_4_3_2_2',
-            text: 'DesktopLED 21',
-            price: 180
-          }]
-        }]
-      }, {
-        id: '1_4_4',
-        text: 'Projectors',
-        items: [{
-          id: '1_4_4_1',
-          text: 'Projector Plus',
-          price: 550
-        }, {
-          id: '1_4_4_2',
-          text: 'Projector PlusHD',
-          price: 750
-        }]
+        text: 'NIFTI',
+        items: []
       }]
-
     }
   ];
 
@@ -284,13 +159,11 @@ const InstancesTreeView = (props) => {
   }
 
   const searchTree = (element, matchingTitle) => {
-    const V = [];
+    const lowercaseSearch  = matchingTitle.toLowerCase();
     var res = element.filter(function matchSearch(o) {
-      if (o.text.includes(matchingTitle)) {
-        V.push(o.id)
+      if ((o.text).toLowerCase().includes(matchingTitle)) {
         return true
       }
-
       if (o.items) {
         return (o.items = o.items.filter(matchSearch)).length
       }
@@ -310,15 +183,16 @@ const InstancesTreeView = (props) => {
       if (treeItemData.items && treeItemData.items.length > 0) {
         items = getTreeItemsFromData(treeItemData.items);
       }
+      const itemLength = items?.length;
+      const labelIcon = treeItemData?.parent ? DATASET : itemLength > 0 ? FOLDER : FILE;
       return (
         <StyledTreeItem
           nodeId={treeItemData?.id}
           labelText={treeItemData?.text}
-          labelIcon={DATASET}
-          labelInfo="90"
+          labelIcon={labelIcon}
+          labelInfo={itemLength}
           children={items}
-          key={treeItemData.id}
-          expand="true"
+          key={treeItemData?.id}
         />
       );
     });

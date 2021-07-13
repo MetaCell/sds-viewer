@@ -39,7 +39,7 @@ const SidebarHeader = (props) => {
               }
               endAdornment={
                 <InputAdornment position='end'>
-                  <Button>Search</Button>
+                  <Button onClick={() => setSearchTerm(setSearchTerm)}>Search</Button>
                 </InputAdornment>
               }
               value={searchTerm}
