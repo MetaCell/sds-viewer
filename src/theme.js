@@ -13,6 +13,7 @@ const {
   outlinedButtonHover,
   primaryBgColor,
   inputTextColor,
+  scrollbarBg,
   iconButtonHover,
   primaryTransition,
   fontFamily,
@@ -399,8 +400,15 @@ const theme = createMuiTheme({
             width: '0.25rem',
           },
           '&::-webkit-scrollbar-thumb': {
-            background: 'rgba(0,0,0,0.24)',
+            background: scrollbarBg,
             borderRadius: '.25rem',
+          },
+        },
+        '.noscrollbar': {
+          overflow: 'auto',
+          scrollbarWidth: 'none',
+          '&::-webkit-scrollbar': {
+            display: 'none',
           },
         },
         '.dialog': {
@@ -517,9 +525,61 @@ const theme = createMuiTheme({
           },
           '&-body': {
             padding: '1.1875rem 0',
-            overflow: 'auto',
+            height: 'calc(100% - 14.0625rem)',
             flexGrow: 1,
-            borderBottom: `0.0625rem solid ${lightBorderColor}`,
+
+            '& .labelRoot': {
+              display: 'flex',
+              alignItems: 'center',
+              padding: '0.5625rem 0.6875rem',
+            },
+            '& .labelIcon': {
+              marginRight: '0.625rem',
+            },
+            '& .labelText': {
+              fontWeight: 'normal',
+              flexGrow: 1,
+              fontSize: '0.8125rem',
+              lineHeight: '1rem',
+              color: whiteColor,
+            },
+            '& .MuiTreeItem-group': {
+              paddingLeft: '1.4375rem',
+              margin: 0,
+            },
+            '& .labelCaption': {
+              height: '1rem',
+              backgroundColor: lightBorderColor,
+              padding: '0 0.25rem',
+              display: 'flex',
+              alignItems: 'center',
+              borderRadius: '0.5rem',
+              fontWeight: '600',
+              fontSize: '0.625rem',
+              lineHeight: '0.75rem',
+              minWidth: '2rem',
+              justifyContent: 'center',
+              color: noInstanceColor,
+              letterSpacing: '-0.01em',
+              '& img': {
+                marginLeft: '0.125rem',
+              },
+            },
+            '& .scrollbar': {
+              overflow: 'auto',
+              margin: '0 -0.75rem',
+              padding: '0 0.75rem',
+              height: 'calc(100% - 1rem)',
+            },
+            '& h3': {
+              fontWeight: '600',
+              fontSize: '0.75rem',
+              lineHeight: '0.9375rem',
+              letterSpacing: '-0.01em',
+              marginBottom: '0.75rem',
+              color: whiteColor,
+              padding: '0 0.6875rem',
+            },
             '& ul': {
               position: 'relative',
               '&::before': {
@@ -681,12 +741,6 @@ const theme = createMuiTheme({
           flexDirection: 'column',
           '& h3': {
             marginBottom: '1.5rem',
-          },
-        },
-        '.scrollbar': {
-          scrollbarWidth: 'none',
-          '&::-webkit-scrollbar': {
-            display: 'none',
           },
         },
         '.uploaded-files': {
