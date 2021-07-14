@@ -4,7 +4,7 @@ import { TreeItem } from "@material-ui/lab";
 import { Typography } from "@material-ui/core";
 import DOWN from "../../../images/tree/down.svg";
 
-const StyledTreeItem = (props)  => {
+const StyledTreeItem = (props) => {
   const { labelText, labelIcon: LabelIcon, labelInfo, ...other } = props;
 
   return (
@@ -15,7 +15,7 @@ const StyledTreeItem = (props)  => {
           <Typography variant="body2" className="labelText">
             {labelText}
           </Typography>
-          { labelInfo > 0 ? (
+          {labelInfo > 0 ? (
             <Typography
               variant="caption"
               className="labelCaption"
@@ -24,14 +24,13 @@ const StyledTreeItem = (props)  => {
               {labelInfo}
               <img src={DOWN} alt="down" />
             </Typography>
-            ) : null
-          }
+          ) : null}
         </div>
       }
       {...other}
     />
   );
-}
+};
 
 StyledTreeItem.propTypes = {
   labelIcon: PropTypes.elementType.isRequired,
