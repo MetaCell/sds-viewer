@@ -239,9 +239,9 @@ const InstancesTreeView = (props) => {
   const [items, setItems] = useState(products);
   const [nodes, setNodes] = useState(['1_1']);
 
-  function nestedLoop(obj) {
+  const nestedLoop = (obj) => {
     const res = [];
-    function recurse(obj, current) {
+    const recurse = (obj, current) => {
       for (const key in obj) {
         let value = obj[key];
         if (value !== undefined) {

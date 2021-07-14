@@ -1,4 +1,4 @@
-import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
+import { createTheme } from '@material-ui/core/styles';
 import vars from './styles/constant';
 import CURVE from './images/curve.svg';
 
@@ -38,7 +38,7 @@ const {
   treeBorderColor,
 } = vars;
 
-const theme = createMuiTheme({
+const theme = createTheme({
   typography: {
     fontFamily,
     h3: {
@@ -50,14 +50,6 @@ const theme = createMuiTheme({
   },
 
   overrides: {
-    MuiTreeView: {
-      root: {},
-    },
-    MuiTreeItem: {
-      root: {
-        '&[aria-expanded="false"]': {},
-      },
-    },
     MuiBreadcrumbs: {
       root: {
         marginTop: '.25rem',
@@ -398,6 +390,10 @@ const theme = createMuiTheme({
           overflow: 'auto',
           '&::-webkit-scrollbar': {
             width: '0.25rem',
+
+            '&:horizontal': {
+              height: '0.25rem',
+            },
           },
           '&::-webkit-scrollbar-thumb': {
             background: scrollbarBg,
@@ -524,9 +520,34 @@ const theme = createMuiTheme({
             },
           },
           '&-body': {
-            padding: '1.1875rem 0',
+            padding: '1.1875rem 0.75rem',
             height: 'calc(100% - 14.0625rem)',
+            margin: '0 -0.75rem',
             flexGrow: 1,
+            position: 'relative',
+
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              right: '0.75rem',
+              bottom: '.5rem',
+              width: '.25rem',
+              height: '.25rem',
+              background: secondaryColor,
+              zIndex: '9999',
+            },
+
+            '& .MuiTreeItem-root > .MuiTreeItem-content .MuiTreeItem-label': {
+              borderRadius: '.5rem',
+              background: 'transparent',
+              border: '0.03125rem solid transparent',
+              minWidth: '10rem',
+            },
+
+            '& .MuiTreeItem-root.Mui-selected > .MuiTreeItem-content .MuiTreeItem-label:hover, & .MuiTreeItem-root.Mui-selected:focus > .MuiTreeItem-content .MuiTreeItem-label': {
+              background: `linear-gradient(0deg, ${lightBorderColor}, ${lightBorderColor}), ${secondaryColor}`,
+              borderColor: primaryColor,
+            },
 
             '& .labelRoot': {
               display: 'flex',
@@ -567,8 +588,6 @@ const theme = createMuiTheme({
             },
             '& .scrollbar': {
               overflow: 'auto',
-              margin: '0 -0.75rem',
-              padding: '0 0.75rem',
               height: 'calc(100% - 1rem)',
             },
             '& h3': {
@@ -580,16 +599,34 @@ const theme = createMuiTheme({
               color: whiteColor,
               padding: '0 0.6875rem',
             },
+            '& .MuiTreeView-root': {
+              '& .MuiTreeItem-root': {
+                '& .MuiTreeItem-group': {
+                  '& .MuiCollapse-wrapperInner': {
+                    '& .MuiTreeItem-root': {
+                      '&.Mui-expanded': {
+                        '& .labelCaption': {
+                          '& img': {
+                            transform: 'rotate(-180deg)',
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
             '& ul': {
               position: 'relative',
               '&::before': {
                 content: '""',
-                height: 'calc(100% - 1.375rem)',
+                height: 'calc(100% - .8rem)',
                 width: '0.0625rem',
                 background: treeBorderColor,
                 position: 'absolute',
                 left: '1.0625rem',
-                top: '0',
+                borderRadius: '3.125rem',
+                top: '-0.5625rem',
               },
               '& .MuiTreeItem-root': {
                 position: 'relative',
@@ -625,6 +662,18 @@ const theme = createMuiTheme({
               '&::before': {
                 display: 'none',
               },
+              '& .MuiTreeItem-label': {
+                paddingLeft: '0',
+                '&:hover': {
+                  background: 'transparent',
+                },
+                '&:focus': {
+                  backgroundColor: 'transparent',
+                },
+              },
+              '& .MuiTreeItem-iconContainer': {
+                display: 'none',
+              },
               '&> .MuiTreeItem-root': {
                 '&::before': {
                   display: 'none',
@@ -638,12 +687,10 @@ const theme = createMuiTheme({
                 '&:focus > .MuiTreeItem-content': {
                   backgroundColor: 'transparent',
                 },
-                '&[aria-expanded="true"]': {
+                '&.Mui-expanded': {
                   '&> .MuiTreeItem-content': {
                     '&> .MuiTreeItem-label': {
                       '&> div': {
-                        background: `linear-gradient(0deg, ${lightBorderColor}, ${lightBorderColor}), ${secondaryColor}`,
-                        borderColor: primaryColor,
                         '& span': {
                           '& img': {
                             transform: 'rotate(-180deg)',
@@ -661,10 +708,6 @@ const theme = createMuiTheme({
                 '&> .MuiTreeItem-content': {
                   '&> .MuiTreeItem-label': {
                     '&> div': {
-                      borderRadius: '.5rem',
-                      background: 'transparent',
-                      border: '0.03125rem solid transparent',
-
                       '& p': {
                         fontSize: '0.75rem',
                         lineHeight: '0.9375rem',
