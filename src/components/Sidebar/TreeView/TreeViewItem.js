@@ -1,17 +1,23 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { TreeItem } from "@material-ui/lab";
-import { Typography } from "@material-ui/core";
+import { Typography, Box } from "@material-ui/core";
 import DOWN from "../../../images/tree/down.svg";
 
 const StyledTreeItem = (props) => {
-  const { labelText, labelIcon: LabelIcon, labelInfo, ...other } = props;
+  const {
+    labelText,
+    labelIcon: LabelIcon,
+    labelInfo,
+    iconClass,
+    ...other
+  } = props;
 
   return (
     <TreeItem
       label={
-        <div className="labelRoot">
-          <img src={LabelIcon} alt={LabelIcon} className="labelIcon" />
+        <div className={`labelRoot ${iconClass}`}>
+          <Box className="labelIcon"></Box>
           <Typography variant="body2" className="labelText">
             {labelText}
           </Typography>
@@ -36,6 +42,7 @@ StyledTreeItem.propTypes = {
   labelIcon: PropTypes.elementType.isRequired,
   labelInfo: PropTypes.number,
   labelText: PropTypes.string.isRequired,
+  iconClass: PropTypes.string.isRequired,
 };
 
 export default StyledTreeItem;

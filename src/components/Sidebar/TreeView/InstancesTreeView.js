@@ -213,19 +213,20 @@ const InstancesTreeView = (props) => {
         items = getTreeItemsFromData(treeItemData.items);
       }
       const itemLength = items?.length;
-      const labelIcon = treeItemData?.parent
-        ? DATASET
-        : itemLength > 0
-        ? FOLDER
-        : FILE;
+      const labelProps = treeItemData?.parent ?
+        { labelIcon: DATASET, iconClass: 'dataset' }
+        : itemLength > 0 ? { labelIcon: FOLDER, iconClass: 'folder' }
+        : { labelIcon: FILE, iconClass: 'file' };
+
       return (
         <StyledTreeItem
           nodeId={treeItemData?.id}
           labelText={treeItemData?.text}
-          labelIcon={labelIcon}
+          labelIcon={labelProps?.labelIcon}
           labelInfo={itemLength}
           children={items}
           key={treeItemData?.id}
+          iconClass={labelProps?.iconClass}
         />
       );
     });

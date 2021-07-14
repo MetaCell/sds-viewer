@@ -1,6 +1,13 @@
 import { createTheme } from '@material-ui/core/styles';
 import vars from './styles/constant';
-import CURVE from './images/curve.svg';
+import CURVE from './images/tree/curve.svg';
+import LINE from './images/tree/linewithradius.svg';
+import FILLED_FOLDER from './images/tree/filled-folder.svg';
+import FILLED_FILE from './images/tree/filled-file.svg';
+import FILLED_DATASET from './images/tree/filled-dataset.svg';
+import DATASET from './images/tree/dataset.svg';
+import FOLDER from './images/tree/folder.svg';
+import FILE from './images/tree/file.svg';
 
 const {
   primaryColor,
@@ -544,9 +551,55 @@ const theme = createTheme({
               minWidth: '10rem',
             },
 
+            '& .MuiTreeItem-root.Mui-selected > .MuiTreeItem-content .MuiTreeItem-label': {
+              background: `linear-gradient(0deg, ${lightBorderColor}, ${lightBorderColor}), ${secondaryColor}`,
+              borderColor: primaryColor,
+            },
+
             '& .MuiTreeItem-root.Mui-selected > .MuiTreeItem-content .MuiTreeItem-label:hover, & .MuiTreeItem-root.Mui-selected:focus > .MuiTreeItem-content .MuiTreeItem-label': {
               background: `linear-gradient(0deg, ${lightBorderColor}, ${lightBorderColor}), ${secondaryColor}`,
               borderColor: primaryColor,
+            },
+
+            '& .MuiTreeItem-content': {
+              position: 'relative',
+              zIndex: '1',
+            },
+
+            '& .MuiTreeItem-root': {
+              '&.Mui-selected > .MuiTreeItem-content .dataset .labelIcon': {
+                backgroundImage: `url(${FILLED_DATASET})`,
+              },
+              '&.Mui-selected > .MuiTreeItem-content .file .labelIcon': {
+                backgroundImage: `url(${FILLED_FILE})`,
+              },
+              '&.Mui-selected > .MuiTreeItem-content .folder .labelIcon': {
+                backgroundImage: `url(${FILLED_FOLDER})`,
+              },
+              '& .dataset': {
+                '& .labelIcon': {
+                  width: '0.75rem',
+                  height: '0.8125rem',
+                  fontSize: 0,
+                  backgroundImage: `url(${DATASET})`,
+                },
+              },
+              '& .file': {
+                '& .labelIcon': {
+                  width: '0.6875rem',
+                  height: '0.875rem',
+                  fontSize: 0,
+                  backgroundImage: `url(${FILE})`,
+                },
+              },
+              '& .folder': {
+                '& .labelIcon': {
+                  height: '0.75rem',
+                  width: '0.9375rem',
+                  fontSize: 0,
+                  backgroundImage: `url(${FOLDER})`,
+                },
+              },
             },
 
             '& .labelRoot': {
@@ -620,13 +673,14 @@ const theme = createTheme({
               position: 'relative',
               '&::before': {
                 content: '""',
-                height: 'calc(100% - .8rem)',
+                height: 'calc(100% - 0.85rem)',
                 width: '0.0625rem',
-                background: treeBorderColor,
                 position: 'absolute',
                 left: '1.0625rem',
                 borderRadius: '3.125rem',
                 top: '-0.5625rem',
+                backgroundImage: `url(${LINE})`,
+                backgroundRepeat: 'repeat',
               },
               '& .MuiTreeItem-root': {
                 position: 'relative',
@@ -636,9 +690,9 @@ const theme = createTheme({
                   width: '1.4375rem',
                   backgroundImage: `url(${CURVE})`,
                   position: 'absolute',
-                  top: '0.71875rem',
+                  top: '0.75rem',
                   backgroundRepeat: 'no-repeat',
-                  left: '-0.40625rem',
+                  left: '-0.375rem',
                 },
                 '&::after': {
                   content: '""',
@@ -649,6 +703,7 @@ const theme = createTheme({
                   position: 'absolute',
                   left: '0',
                   top: '1.0625rem',
+                  display: 'none',
                 },
                 '&:hover': {
                   background: 'transparent',
@@ -735,6 +790,7 @@ const theme = createTheme({
             borderTop: `0.0625rem solid ${lightBorderColor}`,
             paddingTop: '1rem',
             position: 'relative',
+            zIndex: '2',
             '& .MuiButton-contained': {
               minHeight: '2.375rem',
               padding: 0,
