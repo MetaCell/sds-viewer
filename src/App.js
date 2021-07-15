@@ -18,6 +18,7 @@ const App = () => {
       <CssBaseline />
       <Box className='main-structure'>
         <Sidebar openDialog={openDialog} setOpenDialog={setOpenDialog} />
+        <GraphViewer/>
         <Box className={'content' + (openNodeDetail ? ' full-round' : '')}>
           <EmptyContainer
             openDialog={openDialog}

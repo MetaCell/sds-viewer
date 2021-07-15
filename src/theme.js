@@ -1125,6 +1125,15 @@ const theme = createTheme({
             },
           },
         },
+        '.graph-view' : {
+          height : "100%"
+        },
+        '.graph-view_controls' : {
+          width : ".75rem",
+          position: 'absolute',
+          bottom: '0',
+          zIndex : "100"
+        }
       },
     },
   },
