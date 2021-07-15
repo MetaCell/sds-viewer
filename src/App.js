@@ -7,6 +7,7 @@ import Sidebar from './components/Sidebar/Sidebar';
 import NodeDetailView from './components/NodeDetailView/NodeDetailView';
 import EmptyContainer from './components/EmptyContainer';
 import UploadDialog from './components/FileUploader/UploadDialog';
+import GraphViewer from './components/GraphViewer/GraphViewer';
 
 const App = () => {
   const [openDialog, setOpenDialog] = useState(false);
