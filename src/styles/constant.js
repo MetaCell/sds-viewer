@@ -27,7 +27,7 @@ const vars = {
   successInputFocusShadow: 'rgba(111, 195, 134, 0.1)',
   placeHolderColor: 'rgba(46, 58, 89, 0.6)',
   dialogShadow: 'rgba(0, 0, 0, 0.1)',
-  tabsBorderColor: 'rgba(0,0,0,0.1)',
+  tabsBorderColor: 'rgba(0, 0, 0, 0.1)',
   dialogBodyBgColor: 'rgba(55, 121, 225, 0.05)',
   sideBarTextColor: 'rgba(46, 58, 89, 0.8)',
   chipBgColor: 'rgba(46, 58, 89, 0.05)',
@@ -36,6 +36,8 @@ const vars = {
   nifti: '#7747F6',
   volume: '#3779E1',
   sideBarLabelColor: 'rgba(46, 58, 89, 0.4)',
+  treeBorderColor: '#4E5261',
+  scrollbarBg: 'rgba(0, 0, 0, 0.24)',
 };
 
 export default vars;
