@@ -12,7 +12,7 @@ const InstancesTreeView = (props) => {
     setNodes(nodeIds);
   };
 
-  const products = [
+  const datasets = [
     {
       id: '1_1',
       text: 'C1-101 Dataset',
@@ -164,7 +164,7 @@ const InstancesTreeView = (props) => {
     },
   ];
 
-  const [items, setItems] = useState(products);
+  const [items, setItems] = useState(datasets);
   const [nodes, setNodes] = useState(['1_1']);
 
   const nestedLoop = (obj) => {
@@ -202,7 +202,7 @@ const InstancesTreeView = (props) => {
 
   useEffect(() => {
     setItems(
-      searchTerm.length >= 3 ? searchTree(products, searchTerm) : products
+      searchTerm.length >= 3 ? searchTree(datasets, searchTerm) : datasets
     );
   }, [searchTerm]);
 
@@ -236,7 +236,7 @@ const InstancesTreeView = (props) => {
 
   return (
     <>
-      {products.length === 0 ? (
+      {datasets.length === 0 ? (
         <Typography className='no-instance'>
           No instances to display yet.
         </Typography>
