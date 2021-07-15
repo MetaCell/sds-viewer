@@ -5,7 +5,7 @@
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.1.2",
-    "@material-ui/core": "^4.11.4",
+    "@material-ui/core": "^4.12.1",
     "@material-ui/icons": "^4.11.2",
     "@metacell/geppetto-meta-client": "^0.0.1",
     "@metacell/geppetto-meta-core": "^0.0.1",
@@ -32,6 +32,7 @@
     "typescript": "^4.2.4"
   },
   "scripts": {
+    "preinstall": "npx npm-force-resolutions",
     "start": "craco start",
     "build": "craco build",
     "test": "jest"
@@ -63,5 +64,8 @@
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^1.7.0",
     "webpack-cli": "^4.7.2"
+  },
+  "resolutions": {
+    "bezier-js": "4.0.3"
   }
 }

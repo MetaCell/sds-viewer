@@ -7,6 +7,7 @@ import Sidebar from './components/Sidebar/Sidebar';
 import NodeDetailView from './components/NodeDetailView/NodeDetailView';
 import EmptyContainer from './components/EmptyContainer';
 import UploadDialog from './components/FileUploader/UploadDialog';
+import MainLayout from './app/mainLayout';
 
 const App = () => {
   const [openDialog, setOpenDialog] = useState(false);
@@ -18,10 +19,11 @@ const App = () => {
       <Box className='main-structure'>
         <Sidebar openDialog={openDialog} setOpenDialog={setOpenDialog} />
         <Box className={'content' + (openNodeDetail ? ' full-round' : '')}>
-          <EmptyContainer
+          {/* <EmptyContainer
             openDialog={openDialog}
             setOpenDialog={setOpenDialog}
-          />
+          /> */}
+          <MainLayout />
         </Box>
         <NodeDetailView open={openNodeDetail} handleClose={() => setOpenNodeDetail(false)} />
       </Box>
