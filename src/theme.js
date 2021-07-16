@@ -1,5 +1,13 @@
 import createTheme from '@material-ui/core/styles/createTheme';
 import vars from './styles/constant';
+import CURVE from './images/tree/curve.svg';
+import LINE from './images/tree/linewithradius.svg';
+import FILLED_FOLDER from './images/tree/filled-folder.svg';
+import FILLED_FILE from './images/tree/filled-file.svg';
+import FILLED_DATASET from './images/tree/filled-dataset.svg';
+import DATASET from './images/tree/dataset.svg';
+import FOLDER from './images/tree/folder.svg';
+import FILE from './images/tree/file.svg';
 
 const {
   primaryColor,
@@ -12,6 +20,7 @@ const {
   outlinedButtonHover,
   primaryBgColor,
   inputTextColor,
+  scrollbarBg,
   iconButtonHover,
   primaryTransition,
   fontFamily,
@@ -33,6 +42,7 @@ const {
   sideBarLabelColor,
   chipBgColor,
   progressErrorBg,
+  treeBorderColor,
 } = vars;
 
 const theme = createTheme({
@@ -379,16 +389,30 @@ const theme = createTheme({
         ' body': {
           backgroundColor: secondaryColor,
         },
-        '*::-webkit-scrollbar': {
-          width: '0.25rem',
-        },
-        '*::-webkit-scrollbar-thumb': {
-          background: 'rgba(0,0,0,0.24)',
-          borderRadius: '.25rem',
-        },
         '.main-structure': {
           display: 'flex',
           overflow: 'hidden',
+        },
+        '.scrollbar': {
+          overflow: 'auto',
+          '&::-webkit-scrollbar': {
+            width: '0.25rem',
+
+            '&:horizontal': {
+              height: '0.25rem',
+            },
+          },
+          '&::-webkit-scrollbar-thumb': {
+            background: scrollbarBg,
+            borderRadius: '.25rem',
+          },
+        },
+        '.noscrollbar': {
+          overflow: 'auto',
+          scrollbarWidth: 'none',
+          '&::-webkit-scrollbar': {
+            display: 'none',
+          },
         },
         '.dialog': {
           '&_body': {
@@ -425,6 +449,7 @@ const theme = createTheme({
           overflow: 'hidden',
           backgroundColor: secondaryColor,
           height: '100vh',
+          flexShrink: 0,
           padding: '1rem 0.75rem',
           display: 'flex',
           flexDirection: 'column',
@@ -438,6 +463,11 @@ const theme = createTheme({
                   marginBottom: '1.1875rem',
                   paddingBottom: '1.1875rem',
                   borderBottom: `0.0625rem solid ${lightBorderColor}`,
+                },
+              },
+              '&-body': {
+                '& ul': {
+                  display: 'none',
                 },
               },
               '&-footer': {
@@ -497,9 +527,252 @@ const theme = createTheme({
             },
           },
           '&-body': {
-            padding: '1.1875rem 0',
+            padding: '1.1875rem 0.75rem',
+            height: 'calc(100% - 14.0625rem)',
+            margin: '0 -0.75rem',
             flexGrow: 1,
-            borderBottom: `0.0625rem solid ${lightBorderColor}`,
+            position: 'relative',
+
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              right: '0.75rem',
+              bottom: '.5rem',
+              width: '.25rem',
+              height: '.25rem',
+              background: secondaryColor,
+              zIndex: '9999',
+            },
+
+            '& .MuiTreeItem-root > .MuiTreeItem-content .MuiTreeItem-label': {
+              borderRadius: '.5rem',
+              background: 'transparent',
+              border: '0.03125rem solid transparent',
+              minWidth: '10rem',
+            },
+
+            '& .MuiTreeItem-root.Mui-selected > .MuiTreeItem-content .MuiTreeItem-label': {
+              background: `linear-gradient(0deg, ${lightBorderColor}, ${lightBorderColor}), ${secondaryColor}`,
+              borderColor: primaryColor,
+            },
+
+            '& .MuiTreeItem-root.Mui-selected > .MuiTreeItem-content .MuiTreeItem-label:hover, & .MuiTreeItem-root.Mui-selected:focus > .MuiTreeItem-content .MuiTreeItem-label': {
+              background: `linear-gradient(0deg, ${lightBorderColor}, ${lightBorderColor}), ${secondaryColor}`,
+              borderColor: primaryColor,
+            },
+
+            '& .MuiTreeItem-content': {
+              position: 'relative',
+              zIndex: '1',
+            },
+
+            '& .MuiTreeItem-root': {
+              '&.Mui-selected > .MuiTreeItem-content .dataset .labelIcon': {
+                backgroundImage: `url(${FILLED_DATASET})`,
+              },
+              '&.Mui-selected > .MuiTreeItem-content .file .labelIcon': {
+                backgroundImage: `url(${FILLED_FILE})`,
+              },
+              '&.Mui-selected > .MuiTreeItem-content .folder .labelIcon': {
+                backgroundImage: `url(${FILLED_FOLDER})`,
+              },
+              '& .dataset': {
+                '& .labelIcon': {
+                  width: '0.75rem',
+                  height: '0.8125rem',
+                  fontSize: 0,
+                  backgroundImage: `url(${DATASET})`,
+                },
+              },
+              '& .file': {
+                '& .labelIcon': {
+                  width: '0.6875rem',
+                  height: '0.875rem',
+                  fontSize: 0,
+                  backgroundImage: `url(${FILE})`,
+                },
+              },
+              '& .folder': {
+                '& .labelIcon': {
+                  height: '0.75rem',
+                  width: '0.9375rem',
+                  fontSize: 0,
+                  backgroundImage: `url(${FOLDER})`,
+                },
+              },
+            },
+
+            '& .labelRoot': {
+              display: 'flex',
+              alignItems: 'center',
+              padding: '0.5625rem 0.6875rem',
+            },
+            '& .labelIcon': {
+              marginRight: '0.625rem',
+            },
+            '& .labelText': {
+              fontWeight: 'normal',
+              flexGrow: 1,
+              fontSize: '0.8125rem',
+              lineHeight: '1rem',
+              color: whiteColor,
+            },
+            '& .MuiTreeItem-group': {
+              paddingLeft: '1.4375rem',
+              margin: 0,
+            },
+            '& .labelCaption': {
+              height: '1rem',
+              backgroundColor: lightBorderColor,
+              padding: '0 0.25rem',
+              display: 'flex',
+              alignItems: 'center',
+              borderRadius: '0.5rem',
+              fontWeight: '600',
+              fontSize: '0.625rem',
+              lineHeight: '0.75rem',
+              minWidth: '2rem',
+              justifyContent: 'center',
+              color: noInstanceColor,
+              letterSpacing: '-0.01em',
+              '& img': {
+                marginLeft: '0.125rem',
+              },
+            },
+            '& .scrollbar': {
+              overflow: 'auto',
+              height: 'calc(100% - 1rem)',
+            },
+            '& h3': {
+              fontWeight: '600',
+              fontSize: '0.75rem',
+              lineHeight: '0.9375rem',
+              letterSpacing: '-0.01em',
+              marginBottom: '0.75rem',
+              color: whiteColor,
+              padding: '0 0.6875rem',
+            },
+            '& .MuiTreeView-root': {
+              '& .MuiTreeItem-root': {
+                '& .MuiTreeItem-group': {
+                  '& .MuiCollapse-wrapperInner': {
+                    '& .MuiTreeItem-root': {
+                      '&.Mui-expanded': {
+                        '& .labelCaption': {
+                          '& img': {
+                            transform: 'rotate(-180deg)',
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+            '& ul': {
+              position: 'relative',
+              '&::before': {
+                content: '""',
+                height: 'calc(100% - 0.85rem)',
+                width: '0.0625rem',
+                position: 'absolute',
+                left: '1.0625rem',
+                borderRadius: '3.125rem',
+                top: '-0.5625rem',
+                backgroundImage: `url(${LINE})`,
+                backgroundRepeat: 'repeat',
+              },
+              '& .MuiTreeItem-root': {
+                position: 'relative',
+                '&::before': {
+                  content: '""',
+                  height: '0.875rem',
+                  width: '1.4375rem',
+                  backgroundImage: `url(${CURVE})`,
+                  position: 'absolute',
+                  top: '0.75rem',
+                  backgroundRepeat: 'no-repeat',
+                  left: '-0.375rem',
+                },
+                '&::after': {
+                  content: '""',
+                  height: '0.0625rem',
+                  borderRadius: '3.125rem',
+                  width: '0.5rem',
+                  backgroundColor: treeBorderColor,
+                  position: 'absolute',
+                  left: '0',
+                  top: '1.0625rem',
+                  display: 'none',
+                },
+                '&:hover': {
+                  background: 'transparent',
+                },
+                '&:focus > .MuiTreeItem-content': {
+                  backgroundColor: 'transparent',
+                },
+              },
+            },
+            '&> .MuiTreeView-root': {
+              '&::before': {
+                display: 'none',
+              },
+              '& .MuiTreeItem-label': {
+                paddingLeft: '0',
+                '&:hover': {
+                  background: 'transparent',
+                },
+                '&:focus': {
+                  backgroundColor: 'transparent',
+                },
+              },
+              '& .MuiTreeItem-iconContainer': {
+                display: 'none',
+              },
+              '&> .MuiTreeItem-root': {
+                '&::before': {
+                  display: 'none',
+                },
+                '&::after': {
+                  display: 'none',
+                },
+                '&:hover': {
+                  background: 'transparent',
+                },
+                '&:focus > .MuiTreeItem-content': {
+                  backgroundColor: 'transparent',
+                },
+                '&.Mui-expanded': {
+                  '&> .MuiTreeItem-content': {
+                    '&> .MuiTreeItem-label': {
+                      '&> div': {
+                        '& span': {
+                          '& img': {
+                            transform: 'rotate(-180deg)',
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
+                '& .MuiTreeItem-content': {
+                  '&:hover': {
+                    background: 'transparent',
+                  },
+                },
+                '&> .MuiTreeItem-content': {
+                  '&> .MuiTreeItem-label': {
+                    '&> div': {
+                      '& p': {
+                        fontSize: '0.75rem',
+                        lineHeight: '0.9375rem',
+                      },
+                    },
+                  },
+                },
+              },
+            },
+
             '& .no-instance': {
               fontSize: '0.75rem',
               display: 'flex',
@@ -513,7 +786,11 @@ const theme = createTheme({
             },
           },
           '&-footer': {
+            boxShadow: `0 -4.75rem 3.0625rem -2.5625rem ${secondaryColor}`,
+            borderTop: `0.0625rem solid ${lightBorderColor}`,
             paddingTop: '1rem',
+            position: 'relative',
+            zIndex: '2',
             '& .MuiButton-contained': {
               minHeight: '2.375rem',
               padding: 0,
@@ -563,12 +840,6 @@ const theme = createTheme({
           flexDirection: 'column',
           '& h3': {
             marginBottom: '1.5rem',
-          },
-        },
-        '.scrollbar': {
-          scrollbarWidth: 'none',
-          '&::-webkit-scrollbar': {
-            display: 'none',
           },
         },
         '.uploaded-files': {
@@ -645,10 +916,12 @@ const theme = createTheme({
         '.secondary-sidebar': {
           width: '18.75rem',
           display: 'flex',
+          flexShrink: 0,
           flexDirection: 'column',
           backgroundColor: whiteColor,
           position: 'relative',
           transition: 'all ease-in-out .3s',
+
           '&:not(.in)': {
             marginRight: '-18.75rem',
             transition: 'all ease-in-out .3s',
@@ -800,9 +1073,6 @@ const theme = createTheme({
                   '&+ .MuiListItemText-root': {
                     marginTop: '.5rem',
                   },
-                  // '&:not(:last-child)': {
-                  //   marginTop: '.5rem',
-                  // },
                   '&>span': {
                     display: 'flex',
                     '& label': {
@@ -855,6 +1125,15 @@ const theme = createTheme({
             },
           },
         },
+        '.graph-view' : {
+          height : "100%"
+        },
+        '.graph-view_controls' : {
+          width : ".75rem",
+          position: 'absolute',
+          bottom: '0',
+          zIndex : "100"
+        }
       },
     },
   },

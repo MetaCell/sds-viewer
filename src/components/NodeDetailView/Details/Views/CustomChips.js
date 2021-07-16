@@ -8,7 +8,7 @@ const CustomChips = ({members, heading}) => {
   return (
     <Box className="tab-content-row">
       <Typography component="label">{heading}</Typography>
-      <Box className="custom-chips scrollbar">
+      <Box className="custom-chips noscrollbar">
         {
           members ? (
             members.map((collaborator, index) => (
