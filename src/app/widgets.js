@@ -3,7 +3,7 @@ import { WidgetStatus } from "@metacell/geppetto-meta-client/common/layout/model
 export const GraphWidget = {
     id: 'graphWidget',
     name: "Dataset Graph",
-    component: "graph",
+    component: "graphComponent",
     panelName: "leftPanel",
     enableClose: true,
     enableRename: true,
@@ -15,7 +15,7 @@ export const GraphWidget = {
 export const EmptyWidget = {
     id: 'emptyWidget',
     name: "Dataset Empty",
-    component: "empty",
+    component: "emptyComponent",
     panelName: "rightPanel",
     enableClose: true,
     enableRename: true,

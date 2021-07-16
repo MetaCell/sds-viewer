@@ -20,19 +20,37 @@ export const layout = {
             barSize: 18,
         },
     ],
-    layout: {
-        type: "tabset",
-        weight: 100,
-        id: "root",
-        children: [
+    "layout": {
+        "type": "tabset",
+        "weight": 100,
+        "id": "root",
+        "children": [
             {
-                type: 'tab',
-                name: 'empty',
-                config: {
-                    id: 'empty',
-                    component: 'emptyComponent',
-                },
+                "type": "row",
+                "weight": 31,
+                "children": [
+                    {
+                        "type": "tabset",
+                        "weight": 100,
+                        "id": "leftPanel",
+                        "enableDeleteWhenEmpty": false,
+                        "children": []
+                    }
+                ]
             },
-        ],
-    },
+            {
+                "type": "row",
+                "weight": 69,
+                "children": [
+                    {
+                        "type": "tabset",
+                        "weight": 100,
+                        "id": "rightPanel",
+                        "enableDeleteWhenEmpty": false,
+                        "children": []
+                    }
+                ]
+            }
+        ]
+    }
 };

@@ -1134,7 +1134,7 @@ const theme = createTheme({
           bottom: '0',
           zIndex : "100"
         }
-      },
+        },
     },
   },
 });

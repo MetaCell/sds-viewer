@@ -4,9 +4,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { getLayoutManagerInstance } from "@metacell/geppetto-meta-client/common/layout/LayoutManager";
 
-import { GraphWidget, EmptyWidget } from './widgets';
-import { activateWidget, addWidget, destroyWidget, maximizeWidget, minimizeWidget, setLayout, updateWidget } from '@metacell/geppetto-meta-client/common/layout/actions';
-
 const useStyles = makeStyles({
     layoutContainer: {
         position: 'relative',

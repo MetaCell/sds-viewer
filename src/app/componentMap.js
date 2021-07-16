@@ -1,4 +1,4 @@
-import GraphViewer from './components/GraphViewer/GraphViewer'
+import GraphViewer from '../components/GraphViewer/GraphViewer'
 import EmptyContainer from '../components/EmptyContainer';
 /**
  * Key of the component is the `component` attribute of the widgetConfiguration.
