@@ -17,7 +17,7 @@ const App = () => {
   return (
     <MuiThemeProvider theme={theme}>
       <CssBaseline />
-      <Box className='main-structure'>
+      <Box display="flex" className='main-structure'>
         <Sidebar openDialog={openDialog} setOpenDialog={setOpenDialog} />
         <Box className={'content' + (openNodeDetail ? ' full-round' : '')}>
           {/* <EmptyContainer

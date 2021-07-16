@@ -5,7 +5,7 @@
     bottom: 0;
     position: absolute;
     overflow: hidden;
-    border-top: 7px solid #252323;
+    /* border-top: 7px solid #252323; */
 }
 .flexlayout__splitter {
     background: #252323;

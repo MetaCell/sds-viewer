@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { getLayoutManagerInstance } from "@metacell/geppetto-meta-client/common/layout/LayoutManager";
-import CircularProgress from '@material-ui/core/CircularProgress';
 import { useStore } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { getLayoutManagerInstance } from "@metacell/geppetto-meta-client/common/layout/LayoutManager";
+
+import { GraphWidget, EmptyWidget } from './widgets';
+import { activateWidget, addWidget, destroyWidget, maximizeWidget, minimizeWidget, setLayout, updateWidget } from '@metacell/geppetto-meta-client/common/layout/actions';
 
 const useStyles = makeStyles({
     layoutContainer: {
         position: 'relative',
         width: '100%',
-        height: '90vh'
+        height: '100%'
     }
 });
 
@@ -19,14 +22,14 @@ const MainLayout = () => {
 
     const classes = useStyles();
     const store = useStore();
-    const [Component, setComponent] = useState(undefined);
+    const [LayoutManager, setComponent] = useState(undefined);
 
     useEffect(() => {
         // Workaround because getLayoutManagerInstance
         // is undefined when calling it in global scope
         // Need to wait until store is ready ...
         // TODO: find better way to retrieve the LayoutManager component!
-        if (Component === undefined) {
+        if (LayoutManager === undefined) {
             const myManager = getLayoutManagerInstance();
             if (myManager) {
                 setComponent(myManager.getComponent());
@@ -36,7 +39,7 @@ const MainLayout = () => {
 
     return (
         <div className={classes.layoutContainer}>
-            {Component === undefined ? <CircularProgress /> : <Component />}
+            {LayoutManager === undefined ? <CircularProgress /> : <LayoutManager />}
         </div>
     );
 }

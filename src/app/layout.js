@@ -6,9 +6,10 @@
 export const layout = {
     global: {
         tabEnableClose: true,
-        tabSetHeaderHeight: 26,
-        tabSetTabStripHeight: 26,
+        tabSetHeaderHeight: 18,
+        tabSetTabStripHeight: 18,
         enableEdgeDock: false,
+        sideBorders: 8,
     },
     borders: [
         {
@@ -16,7 +17,7 @@ export const layout = {
             location: "bottom",
             size: 100,
             children: [],
-            barSize: 35,
+            barSize: 18,
         },
     ],
     layout: {
@@ -25,30 +26,12 @@ export const layout = {
         id: "root",
         children: [
             {
-                type: "row",
-                weight: 31,
-                children: [
-                    {
-                        type: "tabset",
-                        weight: 100,
-                        id: "leftPanel",
-                        enableDeleteWhenEmpty: false,
-                        children: [],
-                    },
-                ],
-            },
-            {
-                type: "row",
-                weight: 69,
-                children: [
-                    {
-                        type: "tabset",
-                        weight: 100,
-                        id: "rightPanel",
-                        enableDeleteWhenEmpty: false,
-                        children: [],
-                    },
-                ],
+                type: 'tab',
+                name: 'empty',
+                config: {
+                    id: 'empty',
+                    component: 'emptyComponent',
+                },
             },
         ],
     },
