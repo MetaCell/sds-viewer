@@ -1,4 +1,4 @@
-import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
+import createTheme from '@material-ui/core/styles/createTheme';
 import vars from './styles/constant';
 
 const {
@@ -35,7 +35,7 @@ const {
   progressErrorBg,
 } = vars;
 
-const theme = createMuiTheme({
+const theme = createTheme({
   typography: {
     fontFamily,
     h3: {

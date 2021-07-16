@@ -8,6 +8,7 @@ import NodeDetailView from './components/NodeDetailView/NodeDetailView';
 import EmptyContainer from './components/EmptyContainer';
 import UploadDialog from './components/FileUploader/UploadDialog';
 import MainLayout from './app/mainLayout';
+import './flexlayout.css';
 
 const App = () => {
   const [openDialog, setOpenDialog] = useState(false);
