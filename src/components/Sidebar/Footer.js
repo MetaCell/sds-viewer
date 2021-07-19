@@ -14,6 +14,7 @@ const SidebarFooter = (props) => {
   const dispatch = useDispatch();
   return (
     <Box className='sidebar-footer'>
+      {/* This button below will be removed once the redux store will be properly implemented */}
       <Button
         variant='contained'
         disableElevation
