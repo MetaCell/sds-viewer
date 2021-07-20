@@ -11,14 +11,25 @@ export const GraphWidget = {
     status: WidgetStatus.ACTIVE,
 };
 
-
-export const EmptyWidget = {
-    id: 'emptyWidget',
-    name: "Dataset Empty",
-    component: "emptyComponent",
+export const GraphWidgetRight = {
+    id: 'graphWidgetRight',
+    name: "Dataset Graph",
+    component: "graphComponent",
     panelName: "rightPanel",
     enableClose: true,
     enableRename: true,
     enableDrag: true,
     status: WidgetStatus.ACTIVE,
 };
+
+
+// export const EmptyWidget = {
+//     id: 'emptyWidget',
+//     name: "Dataset Empty",
+//     component: "emptyComponent",
+//     panelName: "rightPanel",
+//     enableClose: true,
+//     enableRename: true,
+//     enableDrag: true,
+//     status: WidgetStatus.ACTIVE,
+// };
