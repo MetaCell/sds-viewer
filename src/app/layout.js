@@ -27,7 +27,7 @@ export const layout = {
         "children": [
             {
                 "type": "row",
-                "weight": 31,
+                "weight": 80,
                 "children": [
                     {
                         "type": "tabset",
@@ -40,7 +40,7 @@ export const layout = {
             },
             {
                 "type": "row",
-                "weight": 69,
+                "weight": 20,
                 "children": [
                     {
                         "type": "tabset",

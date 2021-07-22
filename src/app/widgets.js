@@ -12,13 +12,13 @@ export const GraphWidget = {
 };
 
 
-export const EmptyWidget = {
-    id: 'emptyWidget',
-    name: "Dataset Empty",
-    component: "emptyComponent",
+export const NodeViewWidget = {
+    id: 'nodeViewWidget',
+    name: "Node View",
+    component: "nodeView",
     panelName: "rightPanel",
     enableClose: true,
-    enableRename: true,
-    enableDrag: true,
+    enableRename: false,
+    enableDrag: false,
     status: WidgetStatus.ACTIVE,
 };
