@@ -2,11 +2,12 @@ import { createStore } from '@metacell/geppetto-meta-client/common';
 import { layout as baseLayout } from '../app/layout';
 import { sdsMiddleware } from './middleware'
 import componentMap from '../app/componentMap';
+import { sdsInitialState } from './initialState';
+import sdsClientReducer from './initialState';
 
-const reducers = {};
-
-const INIT_STATE = {
-};
+const reducers = {
+  "sdsState": sdsClientReducer
+}
 
 /**
  * The createStore function is used to initialize the redux store & configure the layout.
@@ -15,7 +16,7 @@ const INIT_STATE = {
  */
 const store = createStore(
   reducers,
-  INIT_STATE,
+  sdsInitialState,
   [sdsMiddleware],
   { baseLayout, componentMap }
 )

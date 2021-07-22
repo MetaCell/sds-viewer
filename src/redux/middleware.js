@@ -9,8 +9,11 @@ export const sdsMiddleware = store => next => action => {
     switch (action.type) {
         case GeppettoActions.clientActions.MODEL_LOADED:
             break;
-        case Actions.INSTANCE_SELECTED:
-            next(GeppettoActions.waitData('Selection changed', Actions.DISPLAY_NEW_INSTANCE));
+        case Actions.ADD_DATASET:
+            break;
+        case Actions.DELETE_DATASET:
+            break;
+        case Actions.SELECT_INSTANCE:
             break;
         default:
             break;
