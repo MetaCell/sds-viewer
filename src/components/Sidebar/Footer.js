@@ -5,7 +5,7 @@ import Plus from '../../images/plus.svg';
 import ArrowRight from '../../images/arrow-right.svg';
 import { IMPORT_TEXT } from '../../constants';
 
-import { GraphWidget, EmptyWidget } from '../../app/widgets';
+import { GraphWidget, NodeViewWidget } from '../../app/widgets';
 import { activateWidget, addWidget, destroyWidget, maximizeWidget, minimizeWidget, setLayout, updateWidget } from '@metacell/geppetto-meta-client/common/layout/actions';
 import { useDispatch } from 'react-redux';
 
@@ -20,7 +20,7 @@ const SidebarFooter = (props) => {
         disableElevation
         color='primary'
         onClick={() => {
-          dispatch(addWidget(EmptyWidget));
+          dispatch(addWidget(NodeViewWidget));
           dispatch(addWidget(GraphWidget));
         }}
       >
