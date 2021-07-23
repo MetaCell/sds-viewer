@@ -1,11 +1,10 @@
 import React from 'react';
 import { IconButton } from '@material-ui/core';
-import GeppettoGraphVisualization from '@metacell/geppetto-meta-ui/graph-visualization/Graph';
-import { staticGraphData } from './data.js';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import LayersIcon from '@material-ui/icons/Layers';
+import GeppettoGraphVisualization from '@metacell/geppetto-meta-ui/graph-visualization/Graph';
 
 const NODE_FONT = "8px sans-serif";
 const ONE_SECOND = 1000;
@@ -51,7 +50,7 @@ const GraphViewer = (props) => {
       <GeppettoGraphVisualization
         ref={graphRef}
         // Graph data with Nodes and Links to populate
-        data={staticGraphData}
+        data={window.datasets[props.graph_id].graph}
         // Create the Graph as 2 Dimensional
         d2={true}
         nodeRelSize={20}

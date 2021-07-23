@@ -1,27 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { DropzoneArea } from 'material-ui-dropzone';
 import UploadIcon from '../../images/upload-icon.svg';
 import UploadSubmit from './UploadSubmit';
 import  { FilesUploading } from './UploadView/FilesUploading';
 import { FILE_UPLOAD_PARAMS } from '../../constants';
-import { useDispatch } from 'react-redux';
-import { addDataset, deleteDataset, triggerError } from '../../redux/actions';
 
-const Uploader = ({ handleClose }) => {
+const Uploader = ({ handleClose, handleDone }) => {
   const [files, setFiles] = useState([]);
   const [loadedFiles, setLoadedFiles] = useState(0);
 
   const handleChange = (files) => {
   };
 
-  const dispatch = useDispatch();
-
-  const onUpload = (file, url) => {
+  const onUpload = (file, data) => {
     setLoadedFiles((loadedFiles) =>  loadedFiles + 1);
     setFiles((curr) =>
       curr.map((fw) => {
         if (fw.file === file) {
-          return { ...fw, url };
+          return { ...fw, data };
         }
         return fw;
       }),
@@ -42,37 +38,6 @@ const Uploader = ({ handleClose }) => {
   const nodeRef = React.useRef('dialog');
 
   const DropzoneUploadIcon = () => <img src={UploadIcon} alt="upload" />
-
-  // TODO:
-  // The below is just an hack waiting for the design to be clarified, I need an entrypoint for the datasets
-  // that provides both the files and so far I do not want to implement anything that will be replaced later
-
-  const handleDone = () => {
-    if ((files.length === 2) && (files[0].url !== undefined && files[1].url !== undefined)) {
-      const _dataset = {
-        json: undefined,
-        turtle: undefined
-      };
-
-      for (let file of files) {
-        if (file.file.type === "text/turtle") {
-          _dataset.turtle = file.url
-        }
-        if (file.file.type === "application/json") {
-          _dataset.json = file.url
-        }
-      }
-      handleClose();
-      dispatch(addDataset(_dataset));
-    } else {
-      handleClose();
-      dispatch(triggerError("Just a test for the error dialog."))
-    }
-  }
-  
-  if (window.datasets !== undefined && window.datasets.length > 0) {
-    dispatch(deleteDataset(window.datasets[0]));
-  }
 
   return (
     <>
@@ -95,7 +60,7 @@ const Uploader = ({ handleClose }) => {
       ): null }
 
       {loadedFiles === files.length && loadedFiles !== 0 && (
-        <UploadSubmit handleClose={handleDone} />
+        <UploadSubmit handleClose={() => {handleDone(files)}} />
       )}
     </>
   );

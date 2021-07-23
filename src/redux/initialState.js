@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
 import Splinter from '../utils/Splinter';
 import * as Actions from './actions';
 
@@ -22,22 +21,21 @@ export default function sdsClientReducer(state = {}, action) {
             }
             break;
         case Actions.ADD_DATASET:
-            if (action.data !== undefined) {
+            if (action.data !== undefined && !state.datasets.includes(action.data.dataset.id)) {
                 if (window.datasets === undefined) {
                     window.datasets = {};
                 }
-                const _uuid = uuidv4();
-                const splinter = new Splinter(action.data.dataset.json, action.data.dataset.turtle);
-                window.datasets[_uuid] = {
-                    graph: "test",
-                    tree: "test"
-                    // graph: splinter.getGraph(),
-                    // tree: splinter.getTree()
-                }
+                window.datasets[action.data.dataset.id] = {
+                    graph: action.data.dataset.graph,
+                    tree: action.data.dataset.tree,
+                    splinter: action.data.dataset.splinter
+                };
                 return {
                     ...state,
-                    datasets: [...state.datasets, _uuid]
+                    datasets: [...state.datasets, action.data.dataset.id]
                 };
+            } else {
+                return state;
             }
             break;
         case Actions.DELETE_DATASET:

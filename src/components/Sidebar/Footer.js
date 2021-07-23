@@ -1,33 +1,13 @@
-import React from 'react';
-import { Box, IconButton, Typography, Button } from '@material-ui/core';
 import Help from '../../images/help.svg';
 import Plus from '../../images/plus.svg';
-import ArrowRight from '../../images/arrow-right.svg';
 import { IMPORT_TEXT } from '../../constants';
-
-import { GraphWidget, NodeViewWidget } from '../../app/widgets';
-import { activateWidget, addWidget, destroyWidget, maximizeWidget, minimizeWidget, setLayout, updateWidget } from '@metacell/geppetto-meta-client/common/layout/actions';
-import { useDispatch } from 'react-redux';
+import ArrowRight from '../../images/arrow-right.svg';
+import { Box, IconButton, Typography, Button } from '@material-ui/core';
 
 const SidebarFooter = (props) => {
   const { expand, setExpand } = props;
-  const dispatch = useDispatch();
   return (
     <Box className='sidebar-footer'>
-      {/* This button below will be removed once the redux store will be properly implemented */}
-      <Button
-        variant='contained'
-        disableElevation
-        color='primary'
-        onClick={() => {
-          dispatch(addWidget(NodeViewWidget));
-          dispatch(addWidget(GraphWidget));
-        }}
-      >
-        <img src={Plus} alt='Plus' />
-        Add with layout manager
-      </Button>
-      <br />
       <Button
         variant='contained'
         disableElevation

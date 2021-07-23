@@ -1,17 +1,76 @@
 const N3 = require('n3');
 const graphModel = require("./graphModel.json");
+const imgs = ['dataset.svg', 'nifti.svg', 'volume.svg']
 
 class Splinter {
     constructor(jsonFile, turtleFile) {
         this.jsonFile = jsonFile;
         this.turtleFile = turtleFile;
-        this.store = new N3.Store();
-        this.turtleData = [];
-        this.jsonData = {};
         this.types = {};
         this.nodes = {};
         this.edges = [];
+        this.jsonData = {};
+        this.turtleData = [];
+        this.dataset_id = this.processDatasetId();
+        this.store = new N3.Store();
         this.graphRoot = undefined;
+        this.graph = {
+            nodes: [
+                { id: 1 , name : "Dataset", img : imgs[0], level : 1 },
+                { id: 2 , name : " Subject 2", img : imgs[1], level : 2 },
+                { id: 3 , name : "Subject 3", img : imgs[1], level : 2 },
+                { id: 4 , name : "Subject 4", img : imgs[1], level : 3 },
+                { id: 5 , name : "Subject 5", img : imgs[1], level : 3 },
+                { id: 6 , name : "File 1", img : imgs[1], level : 3 },
+                { id: 7 , name : "File 2", img : imgs[1], level : 3 },
+                { id: 8 , name : "File 3", img : imgs[1], level : 4 },
+                { id: 9 , name : "File 4", img : imgs[1], level : 4 }
+            ],
+            links: [
+                { source: 1, target: 2},
+                { source: 1, target: 3},
+                { source: 2, target: 4},
+                { source: 2, target: 5},
+                { source: 4, target: 8},
+                { source: 4, target: 9},
+                { source: 3, target: 6},
+                { source: 3, target: 7}
+            ]
+        };
+        this.tree = {
+            id: this.dataset_id,
+            text: this.dataset_id + ' Dataset',
+            parent: true,
+            items: [
+                {
+                    id: '1_1_1',
+                    text: 'NIFTI',
+                    items: [],
+                },
+                {
+                    id: '1_1_2',
+                    text: 'Volume',
+                    items: [
+                        {
+                            id: '1_1_2_1',
+                            text: 'NIFTI',
+                            price: 1200,
+                        },
+                        {
+                            id: '1_1_2_2',
+                            text: 'Matlab',
+                            price: 1450,
+                        },
+                    ],
+                },
+                {
+                    id: '1_1_3',
+                    text: 'Matlab',
+                    items: [],
+                },
+            ],
+        }
+        this.processDataset();
     }
 
     extractJson() {
@@ -60,9 +119,25 @@ class Splinter {
         return this.turtleData;
     }
 
+    getGraph() {
+        return this.graph;
+    }
+
+    getTree() {
+        return this.tree;
+    }
+
+    getDatasetId() {
+        return this.dataset_id;
+    }
+
     async processTurtle() {
         await this.extractTurtle();
-        console.log(this.turtleData);
+    }
+
+    processDatasetId() {
+        this.processJSON();
+        return this.jsonData.data[0].dataset_id.replace('dataset:', '');
     }
 
     processJSON() {

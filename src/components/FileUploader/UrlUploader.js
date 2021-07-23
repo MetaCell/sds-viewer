@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   FormControl,
   OutlinedInput,
@@ -13,31 +13,78 @@ import UploadSubmit from './UploadSubmit';
 
 const FileHandler = require('../../utils/filesHandler');
 
-const UrlUploader = ({ handleClose }) => {
+const UrlUploader = ({ handleClose, handleDone }) => {
   const [loader, setLoader] = useState(false);
   const [url, setUrl] = useState('');
   const [fileDownloaded, setFileDownloaded] = useState(false);
+  const [files, setFiles] = useState([
+    {
+      id: "ttl",
+      url: undefined,
+      data: undefined,
+      file: {
+        type: "text/turtle"
+      }
+    },
+    {
+      id: "json",
+      url: undefined,
+      data: undefined,
+      file: {
+        type: "application/json"
+      }
+    }
+  ]);
 
   const onUpload = (url, data) => {
-    setLoader(false);
-    if (data) {
-      setFileDownloaded(true);
-    }
+    var fileExt = url.split('.').pop();
+
+    setFiles((curr) =>
+      curr.map((item) => {
+        if (item.id === fileExt && data !== undefined) {
+          return { ...item, url, data };
+        }
+        return item;
+      }),
+    );
   };
+
+  const getJsonURL = url => {
+    var urls = url.split('/');
+    var dataset = urls.pop().replace('N%3Adataset%3A', '').replace('.ttl', '');
+    var base_url = urls.shift();
+    urls.pop();
+    urls.map(item => {
+      base_url = base_url + '/' + item;
+    })
+    var json_url = base_url + '/path-metadata/' + dataset + '/LATEST_RUN/path-metadata.json'
+    return json_url
+  }
 
   const uploadFile = () => {
     const fileHandler = new FileHandler();
-    const callback = (fileData) => {
+    const fileHandler2 = new FileHandler();
+    const callback = (url, fileData) => {
       onUpload(url, fileData);
     };
     setLoader(true);
     fileHandler.get_remote_file(url, callback);
+    fileHandler2.get_remote_file(getJsonURL(url), callback);
   };
 
   const removeUrl = () => {
     setUrl('');
     setFileDownloaded(false);
   };
+
+  useEffect(() => {
+    if (loader && !fileDownloaded) {
+      if (files[0].data !== undefined && files[1].data !== undefined) {
+        setLoader(false);
+        setFileDownloaded(true);
+      }
+    }
+  });
 
   return (
     <>
@@ -64,7 +111,7 @@ const UrlUploader = ({ handleClose }) => {
       </FormControl>
 
       {fileDownloaded ? (
-        <UploadSubmit handleClose={handleClose} />
+        <UploadSubmit handleClose={() => {handleDone(files)}} />
       ) : (
         <Button
           variant='contained'
