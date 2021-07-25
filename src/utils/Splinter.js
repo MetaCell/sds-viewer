@@ -14,6 +14,12 @@ class Splinter {
         this.dataset_id = this.processDatasetId();
         this.store = new N3.Store();
         this.graphRoot = undefined;
+        const imgs = ['dataset.svg', 'nifti.svg', 'volume.svg'].map(src => {
+            const img = new Image();
+            img.src = `./images/${src}`;
+            console.log("Image source ", img.src);
+            return img;
+        });
         this.graph = {
             nodes: [
                 { id: 1 , name : "Dataset", img : imgs[0], level : 1 },

@@ -37,7 +37,6 @@ export default function sdsClientReducer(state = {}, action) {
             } else {
                 return state;
             }
-            break;
         case Actions.DELETE_DATASET:
             if (action.data !== undefined) {
                 delete window[action.data.id];
