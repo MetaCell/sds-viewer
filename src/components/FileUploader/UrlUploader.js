@@ -23,6 +23,7 @@ const UrlUploader = ({ handleClose, handleDone }) => {
       url: undefined,
       data: undefined,
       file: {
+        name: "ttl",
         type: "text/turtle"
       }
     },
@@ -31,6 +32,7 @@ const UrlUploader = ({ handleClose, handleDone }) => {
       url: undefined,
       data: undefined,
       file: {
+        name: "json",
         type: "application/json"
       }
     }

@@ -47,6 +47,12 @@ export const layout = {
                         "weight": 100,
                         "id": "rightPanel",
                         "enableDeleteWhenEmpty": false,
+                        "enableDrop": false,
+                        "enableDrag": false,
+                        "enableDivide": false,
+                        "enableMaximize": false,
+                        "enableTabStrip": false,
+                        "tabStripHeight": "0px",
                         "children": []
                     }
                 ]
