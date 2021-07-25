@@ -22,3 +22,15 @@ export const NodeViewWidget = {
     enableDrag: false,
     status: WidgetStatus.ACTIVE,
 };
+
+
+// export const EmptyWidget = {
+//     id: 'emptyWidget',
+//     name: "Dataset Empty",
+//     component: "emptyComponent",
+//     panelName: "rightPanel",
+//     enableClose: true,
+//     enableRename: true,
+//     enableDrag: true,
+//     status: WidgetStatus.ACTIVE,
+// };

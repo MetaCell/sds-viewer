@@ -826,9 +826,11 @@ const theme = createTheme({
           borderRadius: radius * 2,
           flexGrow: 1,
           borderRight: `.0625rem solid ${tabsBorderColor}`,
+          padding: '1rem',
           '&:not(.full-round)': {
             borderTopRightRadius: 0,
             borderBottomRightRadius: 0,
+            borderRight: 'none',
           },
         },
         '.MuiBox-empty': {
@@ -1125,16 +1127,16 @@ const theme = createTheme({
             },
           },
         },
-        '.graph-view' : {
-          height : "100%"
+        '.graph-view': {
+          height: '100%',
         },
-        '.graph-view_controls' : {
-          width : ".75rem",
+        '.graph-view_controls': {
+          width: '.75rem',
           position: 'absolute',
           bottom: '0',
-          zIndex : "100"
-        }
+          zIndex: '100',
         },
+      },
     },
   },
 });
