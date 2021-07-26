@@ -29,7 +29,6 @@
     "react-hot-loader": "^4.13.0",
     "react-redux": "^7.2.4",
     "react-scripts": "^4.0.3",
-    "three": "0.111.0",
     "ts-jest": "^26.4.4",
     "typescript": "^4.2.4",
     "uuid": "^8.3.2"
@@ -69,6 +68,7 @@
   },
   "resolutions": {
     "bezier-js": "4.0.3",
+    "three": "0.111.0",
     "@metacell/geppetto-meta-core": "0.0.3",
     "@metacell/geppetto-meta-ui": "0.0.3"
   }

@@ -33,7 +33,6 @@ const App = () => {
                 setOpenDialog={setOpenDialog}
               />
           }
-          <MainLayout />
         </Box>
         {/* <NodeDetailView open={openNodeDetail} handleClose={() => setOpenNodeDetail(false)} /> */}
       </Box>

@@ -250,4 +250,4 @@ class Splinter {
     }
 }
 
-module.exports = Splinter
+export default Splinter
