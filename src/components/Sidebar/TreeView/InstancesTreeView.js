@@ -5,6 +5,7 @@ import DATASET from '../../../images/tree/dataset.svg';
 import FOLDER from '../../../images/tree/folder.svg';
 import FILE from '../../../images/tree/file.svg';
 import StyledTreeItem from './TreeViewItem';
+import { useSelector } from 'react-redux'
 
 const InstancesTreeView = (props) => {
   const { searchTerm } = props;
@@ -12,160 +13,15 @@ const InstancesTreeView = (props) => {
     setNodes(nodeIds);
   };
 
-  const datasets = [
-    {
-      id: '1_1',
-      text: 'C1-101 Dataset',
-      parent: true,
-      items: [
-        {
-          id: '1_1_1',
-          text: 'NIFTI',
-          items: [],
-        },
-        {
-          id: '1_1_2',
-          text: 'Volume',
-          items: [
-            {
-              id: '1_1_2_1',
-              text: 'NIFTI',
-              price: 1200,
-            },
-            {
-              id: '1_1_2_2',
-              text: 'Matlab',
-              price: 1450,
-            },
-          ],
-        },
-        {
-          id: '1_1_3',
-          text: 'Matlab',
-          items: [],
-        },
-      ],
-    },
-    {
-      id: '1_2',
-      text: 'C1-102 Dataset',
-      parent: true,
-      items: [
-        {
-          id: '1_2_1',
-          text: 'Volume',
-          items: [
-            {
-              id: '1_2_1_1',
-              text: 'NIFTI',
-              price: 240,
-            },
-            {
-              id: '1_2_1_2',
-              text: 'Matlab',
-              price: 300,
-            },
-          ],
-        },
-        {
-          id: '1_2_2',
-          text: 'Matlab',
-          items: [],
-        },
-        {
-          id: '1_2_3',
-          text: 'NIFTI',
-          items: [],
-        },
-      ],
-    },
-    {
-      id: '1_3',
-      text: 'C1-103 Dataset',
-      parent: true,
-      items: [
-        {
-          id: '1_3_1',
-          text: 'Matlab',
-          items: [],
-        },
-        {
-          id: '1_3_3',
-          text: 'NIFTI',
-          items: [],
-        },
-        {
-          id: '1_3_2',
-          text: 'Volume',
-          items: [
-            {
-              id: '1_3_2_1',
-              text: 'NIFTI',
-              price: 240,
-            },
-            {
-              id: '1_3_2_2',
-              text: 'Matlab',
-              price: 300,
-            },
-          ],
-        },
-        {
-          id: '1_3_4',
-          text: 'Motility',
-          price: 175,
-          items: [
-            {
-              id: '1_3_4_1',
-              text: 'NIFTI',
-              price: 240,
-            },
-            {
-              id: '1_3_4_2',
-              text: 'Matlab',
-              price: 300,
-            },
-          ],
-        },
-      ],
-    },
-    {
-      id: '1_4',
-      text: 'C1-104 Dataset',
-      parent: true,
-      items: [
-        {
-          id: '1_4_1',
-          text: 'Volume',
-          items: [
-            {
-              id: '1_4_1_1',
-              text: 'Matlab',
-              price: 210,
-            },
-            {
-              id: '1_4_1_2',
-              text: 'NIFTI',
-              price: 250,
-            },
-          ],
-        },
-        {
-          id: '1_4_2',
-          text: 'Matlab',
-          items: [],
-        },
-        {
-          id: '1_4_3',
-          text: 'NIFTI',
-          items: [],
-        },
-      ],
-    },
-  ];
+  const ids = useSelector(state => state.sdsState.datasets);
+  // TODO: to change this, I do not want to re-compute at every render the trees
+  // probably to be moved to the redux store
+  var datasets = ids.map(item => {
+    return window.datasets[item].tree
+  });
 
   const [items, setItems] = useState(datasets);
-  const [nodes, setNodes] = useState(['1_1']);
+  const [nodes, setNodes] = useState([]);
 
   const nestedLoop = (obj) => {
     const res = [];
@@ -253,7 +109,7 @@ const InstancesTreeView = (props) => {
             expanded={nodes}
             onNodeToggle={onNodeToggle}
           >
-            {getTreeItemsFromData(items)}
+            {getTreeItemsFromData(datasets)}
           </TreeView>
         </>
       )}

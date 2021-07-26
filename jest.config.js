@@ -1,8 +1,5 @@
 module.exports = {
   rootDir: "__tests__",
-  transform: {
-    "^.+\\.(js|ts)$": "ts-jest"
-  },
   bail : false,
   globals: {
     "ts-jest": {

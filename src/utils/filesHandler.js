@@ -31,7 +31,7 @@ class FileHandler {
                 console.log("### axios progress event ###");
             }
         }).then(response => {
-            callback(response.data);
+            callback(url, response.data);
         }).catch(error => {
             console.log(error);
             callback(undefined);

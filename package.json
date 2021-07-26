@@ -7,10 +7,10 @@
     "@craco/craco": "^6.1.2",
     "@material-ui/core": "^4.12.1",
     "@material-ui/icons": "^4.11.2",
-    "@material-ui/lab": "4.0.0-alpha.60",
-    "@metacell/geppetto-meta-client": "^0.0.1",
-    "@metacell/geppetto-meta-core": "^0.0.1",
-    "@metacell/geppetto-meta-ui": "^0.0.1",
+    "@material-ui/lab": "^4.0.0-alpha.60",
+    "@metacell/geppetto-meta-client": "^0.0.3",
+    "@metacell/geppetto-meta-core": "^0.0.3",
+    "@metacell/geppetto-meta-ui": "^0.0.3",
     "@reduxjs/toolkit": "^1.6.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -30,7 +30,8 @@
     "react-redux": "^7.2.4",
     "react-scripts": "^4.0.3",
     "ts-jest": "^26.4.4",
-    "typescript": "^4.2.4"
+    "typescript": "^4.2.4",
+    "uuid": "^8.3.2"
   },
   "scripts": {
     "start": "craco start",
@@ -64,5 +65,11 @@
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^1.7.0",
     "webpack-cli": "^4.7.2"
+  },
+  "resolutions": {
+    "bezier-js": "4.0.3",
+    "three": "0.111.0",
+    "@metacell/geppetto-meta-core": "0.0.3",
+    "@metacell/geppetto-meta-ui": "0.0.3"
   }
 }

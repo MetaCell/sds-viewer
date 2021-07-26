@@ -1,0 +1,2705 @@
+{
+  "type": "path-metadata",
+  "data": [
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "",
+      "basename": "Effects of nodose ganglion blockade on gastric motility during cervical vagus nerve stimulation measured with magnetic resonance imaging in rats",
+      "mimetype": "inode/directory",
+      "remote_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "timestamp_updated": "2021-02-17T20:24:07,551000Z",
+      "uri_api": "https://api.blackfynn.io/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "parent_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary",
+      "basename": "primary",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:8c6184d3-955e-4f51-8666-963e9f55da18",
+      "timestamp_updated": "2020-02-18T01:10:17,460584Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:8c6184d3-955e-4f51-8666-963e9f55da18",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:8c6184d3-955e-4f51-8666-963e9f55da18",
+      "parent_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C2_101",
+      "basename": "C2_101",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:c75342e3-fcae-44e2-a53f-d667f7d8726a",
+      "timestamp_updated": "2020-02-18T01:01:53,083421Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:c75342e3-fcae-44e2-a53f-d667f7d8726a",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:c75342e3-fcae-44e2-a53f-d667f7d8726a",
+      "parent_id": "collection:8c6184d3-955e-4f51-8666-963e9f55da18",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C2_101/motility",
+      "basename": "motility",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:7a3cded7-7402-46b2-b56f-377c92879bf0",
+      "timestamp_updated": "2020-02-18T01:01:53,083421Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:7a3cded7-7402-46b2-b56f-377c92879bf0",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:7a3cded7-7402-46b2-b56f-377c92879bf0",
+      "parent_id": "collection:c75342e3-fcae-44e2-a53f-d667f7d8726a",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C2_103",
+      "basename": "C2_103",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:d10464f4-e3fe-4495-85f8-7cad7dd83e47",
+      "timestamp_updated": "2020-02-18T01:01:33,807535Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:d10464f4-e3fe-4495-85f8-7cad7dd83e47",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:d10464f4-e3fe-4495-85f8-7cad7dd83e47",
+      "parent_id": "collection:8c6184d3-955e-4f51-8666-963e9f55da18",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C2_103/motility",
+      "basename": "motility",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:5787a8ec-4383-452c-935a-8fbbc93a0af8",
+      "timestamp_updated": "2020-02-18T01:01:33,807535Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:5787a8ec-4383-452c-935a-8fbbc93a0af8",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:5787a8ec-4383-452c-935a-8fbbc93a0af8",
+      "parent_id": "collection:d10464f4-e3fe-4495-85f8-7cad7dd83e47",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C2_102",
+      "basename": "C2_102",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:b2083f2e-b114-4287-82ea-ab55dd94c00c",
+      "timestamp_updated": "2020-02-18T01:01:44,993628Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:b2083f2e-b114-4287-82ea-ab55dd94c00c",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:b2083f2e-b114-4287-82ea-ab55dd94c00c",
+      "parent_id": "collection:8c6184d3-955e-4f51-8666-963e9f55da18",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C2_102/motility",
+      "basename": "motility",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:28d26bb3-585e-4740-89b1-a7b58352afe9",
+      "timestamp_updated": "2020-02-18T01:01:44,993628Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:28d26bb3-585e-4740-89b1-a7b58352afe9",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:28d26bb3-585e-4740-89b1-a7b58352afe9",
+      "parent_id": "collection:b2083f2e-b114-4287-82ea-ab55dd94c00c",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C2_104",
+      "basename": "C2_104",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:740581e2-ca85-48ca-82a5-db0fdcff0255",
+      "timestamp_updated": "2020-02-18T01:01:26,599298Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:740581e2-ca85-48ca-82a5-db0fdcff0255",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:740581e2-ca85-48ca-82a5-db0fdcff0255",
+      "parent_id": "collection:8c6184d3-955e-4f51-8666-963e9f55da18",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C2_104/motility",
+      "basename": "motility",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:c96fcf13-f9c7-4ac8-b05e-1abbb6667f29",
+      "timestamp_updated": "2020-02-18T01:01:26,599298Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:c96fcf13-f9c7-4ac8-b05e-1abbb6667f29",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:c96fcf13-f9c7-4ac8-b05e-1abbb6667f29",
+      "parent_id": "collection:740581e2-ca85-48ca-82a5-db0fdcff0255",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C1_101",
+      "basename": "C1_101",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:15d92b78-afd8-4ac0-94b3-46ebf4ed1b5d",
+      "timestamp_updated": "2020-02-18T01:01:20,248659Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:15d92b78-afd8-4ac0-94b3-46ebf4ed1b5d",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:15d92b78-afd8-4ac0-94b3-46ebf4ed1b5d",
+      "parent_id": "collection:8c6184d3-955e-4f51-8666-963e9f55da18",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C1_101/motility",
+      "basename": "motility",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:267d21ec-f753-41f1-b089-60dc7e8dbc4c",
+      "timestamp_updated": "2020-02-18T01:01:20,248659Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:267d21ec-f753-41f1-b089-60dc7e8dbc4c",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:267d21ec-f753-41f1-b089-60dc7e8dbc4c",
+      "parent_id": "collection:15d92b78-afd8-4ac0-94b3-46ebf4ed1b5d",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C1_102",
+      "basename": "C1_102",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:8527aaf7-c9c4-4bb5-be6b-ff7fd9cd1578",
+      "timestamp_updated": "2020-02-18T01:00:53,859698Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:8527aaf7-c9c4-4bb5-be6b-ff7fd9cd1578",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:8527aaf7-c9c4-4bb5-be6b-ff7fd9cd1578",
+      "parent_id": "collection:8c6184d3-955e-4f51-8666-963e9f55da18",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C1_102/motility",
+      "basename": "motility",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:7878ca9c-d5f0-4f22-a07d-28ed6afc3446",
+      "timestamp_updated": "2020-02-18T01:00:53,859698Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:7878ca9c-d5f0-4f22-a07d-28ed6afc3446",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:7878ca9c-d5f0-4f22-a07d-28ed6afc3446",
+      "parent_id": "collection:8527aaf7-c9c4-4bb5-be6b-ff7fd9cd1578",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C1_104",
+      "basename": "C1_104",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:2e0c486c-66f0-4d97-beb6-17774c8134f3",
+      "timestamp_updated": "2020-02-18T01:01:40,959296Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:2e0c486c-66f0-4d97-beb6-17774c8134f3",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:2e0c486c-66f0-4d97-beb6-17774c8134f3",
+      "parent_id": "collection:8c6184d3-955e-4f51-8666-963e9f55da18",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C1_104/motility",
+      "basename": "motility",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:b8562433-84f6-46f6-8275-4eba15f20d7d",
+      "timestamp_updated": "2020-02-18T01:01:40,959296Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:b8562433-84f6-46f6-8275-4eba15f20d7d",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:b8562433-84f6-46f6-8275-4eba15f20d7d",
+      "parent_id": "collection:2e0c486c-66f0-4d97-beb6-17774c8134f3",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C1_103",
+      "basename": "C1_103",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:5b1275b7-2b1f-4869-b392-091f9eb4d985",
+      "timestamp_updated": "2020-02-18T01:01:07,003125Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:5b1275b7-2b1f-4869-b392-091f9eb4d985",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:5b1275b7-2b1f-4869-b392-091f9eb4d985",
+      "parent_id": "collection:8c6184d3-955e-4f51-8666-963e9f55da18",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C1_103/motility",
+      "basename": "motility",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:8a046fca-61c8-4b9c-a396-96c818b1bb9e",
+      "timestamp_updated": "2020-02-18T01:01:07,003125Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:8a046fca-61c8-4b9c-a396-96c818b1bb9e",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:8a046fca-61c8-4b9c-a396-96c818b1bb9e",
+      "parent_id": "collection:5b1275b7-2b1f-4869-b392-091f9eb4d985",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "docs",
+      "basename": "docs",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:c46b3f30-b29d-4246-9440-e661b3204236",
+      "timestamp_updated": "2020-02-18T01:10:07,981559Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:c46b3f30-b29d-4246-9440-e661b3204236",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:c46b3f30-b29d-4246-9440-e661b3204236",
+      "parent_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives",
+      "basename": "derivatives",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:b05bc678-ccfa-436e-9ac7-8f4294d2b647",
+      "timestamp_updated": "2020-02-18T01:10:21,719871Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:b05bc678-ccfa-436e-9ac7-8f4294d2b647",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:b05bc678-ccfa-436e-9ac7-8f4294d2b647",
+      "parent_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C2_101",
+      "basename": "C2_101",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:b7aae997-3ac4-45a1-9024-d48e022d15cd",
+      "timestamp_updated": "2020-02-18T01:00:56,475297Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:b7aae997-3ac4-45a1-9024-d48e022d15cd",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:b7aae997-3ac4-45a1-9024-d48e022d15cd",
+      "parent_id": "collection:b05bc678-ccfa-436e-9ac7-8f4294d2b647",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C2_101/motility",
+      "basename": "motility",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:247241f8-9c05-496d-a0f9-8dd9dac49d07",
+      "timestamp_updated": "2020-02-18T01:00:56,475297Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:247241f8-9c05-496d-a0f9-8dd9dac49d07",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:247241f8-9c05-496d-a0f9-8dd9dac49d07",
+      "parent_id": "collection:b7aae997-3ac4-45a1-9024-d48e022d15cd",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C2_101/motility/stimulation_1",
+      "basename": "stimulation_1",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:d26c0b70-aca1-46e4-9e3b-26dfb4eae2b2",
+      "timestamp_updated": "2020-02-18T01:00:56,475297Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:d26c0b70-aca1-46e4-9e3b-26dfb4eae2b2",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:d26c0b70-aca1-46e4-9e3b-26dfb4eae2b2",
+      "parent_id": "collection:247241f8-9c05-496d-a0f9-8dd9dac49d07",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C2_101/motility/prestimulation_1",
+      "basename": "prestimulation_1",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:7557f24c-4992-4320-abe4-212459c254ed",
+      "timestamp_updated": "2020-02-18T01:01:09,756321Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:7557f24c-4992-4320-abe4-212459c254ed",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:7557f24c-4992-4320-abe4-212459c254ed",
+      "parent_id": "collection:247241f8-9c05-496d-a0f9-8dd9dac49d07",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C2_103",
+      "basename": "C2_103",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:34ace7b1-373e-4bbe-9019-3c0ff8497e96",
+      "timestamp_updated": "2020-02-18T01:01:37,375796Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:34ace7b1-373e-4bbe-9019-3c0ff8497e96",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:34ace7b1-373e-4bbe-9019-3c0ff8497e96",
+      "parent_id": "collection:b05bc678-ccfa-436e-9ac7-8f4294d2b647",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C2_103/motility",
+      "basename": "motility",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:428444b7-d885-4410-90e0-eba6aa48d6b1",
+      "timestamp_updated": "2020-02-18T01:01:37,375796Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:428444b7-d885-4410-90e0-eba6aa48d6b1",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:428444b7-d885-4410-90e0-eba6aa48d6b1",
+      "parent_id": "collection:34ace7b1-373e-4bbe-9019-3c0ff8497e96",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C2_103/motility/stimulation_1",
+      "basename": "stimulation_1",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:a14a32d6-86cc-4e24-a2ae-0e7b89c2f1c4",
+      "timestamp_updated": "2020-02-18T01:01:37,375796Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:a14a32d6-86cc-4e24-a2ae-0e7b89c2f1c4",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:a14a32d6-86cc-4e24-a2ae-0e7b89c2f1c4",
+      "parent_id": "collection:428444b7-d885-4410-90e0-eba6aa48d6b1",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C2_103/motility/prestimulation_1",
+      "basename": "prestimulation_1",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:333e18b6-c0cc-44b5-ac60-8f5a85c103c2",
+      "timestamp_updated": "2020-02-18T01:03:53,078594Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:333e18b6-c0cc-44b5-ac60-8f5a85c103c2",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:333e18b6-c0cc-44b5-ac60-8f5a85c103c2",
+      "parent_id": "collection:428444b7-d885-4410-90e0-eba6aa48d6b1",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C2_102",
+      "basename": "C2_102",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:c9a13a6a-3dcc-48b7-9537-7003d1aee483",
+      "timestamp_updated": "2020-02-18T01:01:00,483446Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:c9a13a6a-3dcc-48b7-9537-7003d1aee483",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:c9a13a6a-3dcc-48b7-9537-7003d1aee483",
+      "parent_id": "collection:b05bc678-ccfa-436e-9ac7-8f4294d2b647",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C2_102/motility",
+      "basename": "motility",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:b5f24267-5c5a-46d4-acf4-9e5b47344cdb",
+      "timestamp_updated": "2020-02-18T01:01:00,483446Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:b5f24267-5c5a-46d4-acf4-9e5b47344cdb",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:b5f24267-5c5a-46d4-acf4-9e5b47344cdb",
+      "parent_id": "collection:c9a13a6a-3dcc-48b7-9537-7003d1aee483",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C2_102/motility/stimulation_1",
+      "basename": "stimulation_1",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:e47d65ef-63b2-451c-9e05-c7611d72c73e",
+      "timestamp_updated": "2020-02-18T01:03:35,848983Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:e47d65ef-63b2-451c-9e05-c7611d72c73e",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:e47d65ef-63b2-451c-9e05-c7611d72c73e",
+      "parent_id": "collection:b5f24267-5c5a-46d4-acf4-9e5b47344cdb",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C2_102/motility/prestimulation_1",
+      "basename": "prestimulation_1",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:b03202d1-e77c-4309-8dce-2bd40bcc2b22",
+      "timestamp_updated": "2020-02-18T01:01:00,483446Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:b03202d1-e77c-4309-8dce-2bd40bcc2b22",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:b03202d1-e77c-4309-8dce-2bd40bcc2b22",
+      "parent_id": "collection:b5f24267-5c5a-46d4-acf4-9e5b47344cdb",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C2_104",
+      "basename": "C2_104",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:eb7a220c-9a10-43c4-921c-d16445b3020e",
+      "timestamp_updated": "2020-02-18T01:01:34,433346Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:eb7a220c-9a10-43c4-921c-d16445b3020e",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:eb7a220c-9a10-43c4-921c-d16445b3020e",
+      "parent_id": "collection:b05bc678-ccfa-436e-9ac7-8f4294d2b647",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C2_104/motility",
+      "basename": "motility",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:e50ff39a-2d3b-4446-ba23-3f5443d48d2f",
+      "timestamp_updated": "2020-02-18T01:01:34,433346Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:e50ff39a-2d3b-4446-ba23-3f5443d48d2f",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:e50ff39a-2d3b-4446-ba23-3f5443d48d2f",
+      "parent_id": "collection:eb7a220c-9a10-43c4-921c-d16445b3020e",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C2_104/motility/stimulation_1",
+      "basename": "stimulation_1",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:78676bbc-2a40-4629-9201-9eddc3609768",
+      "timestamp_updated": "2020-02-18T01:01:56,362153Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:78676bbc-2a40-4629-9201-9eddc3609768",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:78676bbc-2a40-4629-9201-9eddc3609768",
+      "parent_id": "collection:e50ff39a-2d3b-4446-ba23-3f5443d48d2f",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C2_104/motility/prestimulation_1",
+      "basename": "prestimulation_1",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:ed7fe161-8329-46b6-84f8-b172e57c6a61",
+      "timestamp_updated": "2020-02-18T01:01:34,433346Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:ed7fe161-8329-46b6-84f8-b172e57c6a61",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:ed7fe161-8329-46b6-84f8-b172e57c6a61",
+      "parent_id": "collection:e50ff39a-2d3b-4446-ba23-3f5443d48d2f",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C1_101",
+      "basename": "C1_101",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:12402674-be43-4312-aa62-61a980a60404",
+      "timestamp_updated": "2020-02-18T01:02:25,637468Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:12402674-be43-4312-aa62-61a980a60404",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:12402674-be43-4312-aa62-61a980a60404",
+      "parent_id": "collection:b05bc678-ccfa-436e-9ac7-8f4294d2b647",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C1_101/motility",
+      "basename": "motility",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:64c75549-25ef-4d7c-8f26-da700fbdb27a",
+      "timestamp_updated": "2020-02-18T01:02:25,637468Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:64c75549-25ef-4d7c-8f26-da700fbdb27a",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:64c75549-25ef-4d7c-8f26-da700fbdb27a",
+      "parent_id": "collection:12402674-be43-4312-aa62-61a980a60404",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C1_101/motility/stimulation_1",
+      "basename": "stimulation_1",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:3486cae5-6dbe-48c0-be78-7e4ee8aa19f3",
+      "timestamp_updated": "2020-02-18T01:03:07,964626Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:3486cae5-6dbe-48c0-be78-7e4ee8aa19f3",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:3486cae5-6dbe-48c0-be78-7e4ee8aa19f3",
+      "parent_id": "collection:64c75549-25ef-4d7c-8f26-da700fbdb27a",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C1_101/motility/prestimulation_1",
+      "basename": "prestimulation_1",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:1757feae-53cd-4203-b1bd-c216f7b54142",
+      "timestamp_updated": "2020-02-18T01:02:25,637468Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:1757feae-53cd-4203-b1bd-c216f7b54142",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:1757feae-53cd-4203-b1bd-c216f7b54142",
+      "parent_id": "collection:64c75549-25ef-4d7c-8f26-da700fbdb27a",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C1_102",
+      "basename": "C1_102",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:0b065f6b-84fe-49fd-b085-903fc65e9eb8",
+      "timestamp_updated": "2020-02-18T01:00:55,427219Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:0b065f6b-84fe-49fd-b085-903fc65e9eb8",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:0b065f6b-84fe-49fd-b085-903fc65e9eb8",
+      "parent_id": "collection:b05bc678-ccfa-436e-9ac7-8f4294d2b647",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C1_102/motility",
+      "basename": "motility",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:57dbb219-a4d6-41cb-a926-a113842c5d1c",
+      "timestamp_updated": "2020-02-18T01:00:55,427219Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:57dbb219-a4d6-41cb-a926-a113842c5d1c",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:57dbb219-a4d6-41cb-a926-a113842c5d1c",
+      "parent_id": "collection:0b065f6b-84fe-49fd-b085-903fc65e9eb8",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C1_102/motility/stimulation_1",
+      "basename": "stimulation_1",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:1de839db-ac19-4de6-9f0a-f5bfb1be6efc",
+      "timestamp_updated": "2020-02-18T01:01:10,727161Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:1de839db-ac19-4de6-9f0a-f5bfb1be6efc",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:1de839db-ac19-4de6-9f0a-f5bfb1be6efc",
+      "parent_id": "collection:57dbb219-a4d6-41cb-a926-a113842c5d1c",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C1_102/motility/prestimulation_1",
+      "basename": "prestimulation_1",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:276c87c4-cb68-4aef-8f02-18ae296df1b4",
+      "timestamp_updated": "2020-02-18T01:00:55,427219Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:276c87c4-cb68-4aef-8f02-18ae296df1b4",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:276c87c4-cb68-4aef-8f02-18ae296df1b4",
+      "parent_id": "collection:57dbb219-a4d6-41cb-a926-a113842c5d1c",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C1_104",
+      "basename": "C1_104",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:c2772a6b-da94-44a5-904b-58405a202847",
+      "timestamp_updated": "2020-02-18T01:01:06,287034Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:c2772a6b-da94-44a5-904b-58405a202847",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:c2772a6b-da94-44a5-904b-58405a202847",
+      "parent_id": "collection:b05bc678-ccfa-436e-9ac7-8f4294d2b647",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C1_104/motility",
+      "basename": "motility",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:52539762-6593-4e92-b545-f436e2129327",
+      "timestamp_updated": "2020-02-18T01:01:06,287034Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:52539762-6593-4e92-b545-f436e2129327",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:52539762-6593-4e92-b545-f436e2129327",
+      "parent_id": "collection:c2772a6b-da94-44a5-904b-58405a202847",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C1_104/motility/stimulation_1",
+      "basename": "stimulation_1",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:65d81478-d410-4460-9d3b-227e7576e67d",
+      "timestamp_updated": "2020-02-18T01:01:22,209514Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:65d81478-d410-4460-9d3b-227e7576e67d",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:65d81478-d410-4460-9d3b-227e7576e67d",
+      "parent_id": "collection:52539762-6593-4e92-b545-f436e2129327",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C1_104/motility/prestimulation_1",
+      "basename": "prestimulation_1",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:df1b7d3e-a950-455b-8c08-22eaaa40c85a",
+      "timestamp_updated": "2020-02-18T01:01:06,287034Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:df1b7d3e-a950-455b-8c08-22eaaa40c85a",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:df1b7d3e-a950-455b-8c08-22eaaa40c85a",
+      "parent_id": "collection:52539762-6593-4e92-b545-f436e2129327",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C1_103",
+      "basename": "C1_103",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:73fa9a9f-a325-4ee5-8f1d-a6e90288f64f",
+      "timestamp_updated": "2020-02-18T01:01:01,374598Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:73fa9a9f-a325-4ee5-8f1d-a6e90288f64f",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:73fa9a9f-a325-4ee5-8f1d-a6e90288f64f",
+      "parent_id": "collection:b05bc678-ccfa-436e-9ac7-8f4294d2b647",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C1_103/motility",
+      "basename": "motility",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:de57b86c-4ff3-4941-9180-94c63bac0ef4",
+      "timestamp_updated": "2020-02-18T01:01:01,374598Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:de57b86c-4ff3-4941-9180-94c63bac0ef4",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:de57b86c-4ff3-4941-9180-94c63bac0ef4",
+      "parent_id": "collection:73fa9a9f-a325-4ee5-8f1d-a6e90288f64f",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C1_103/motility/stimulation_1",
+      "basename": "stimulation_1",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:426c1b5c-420c-4589-ab24-d090be98c176",
+      "timestamp_updated": "2020-02-18T01:01:05,491351Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:426c1b5c-420c-4589-ab24-d090be98c176",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:426c1b5c-420c-4589-ab24-d090be98c176",
+      "parent_id": "collection:de57b86c-4ff3-4941-9180-94c63bac0ef4",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C1_103/motility/prestimulation_1",
+      "basename": "prestimulation_1",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:6a2c7f5e-6dfd-4798-bac0-9296f8c37349",
+      "timestamp_updated": "2020-02-18T01:01:01,374598Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:6a2c7f5e-6dfd-4798-bac0-9296f8c37349",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/N:collection:6a2c7f5e-6dfd-4798-bac0-9296f8c37349",
+      "parent_id": "collection:de57b86c-4ff3-4941-9180-94c63bac0ef4",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "README",
+      "basename": "README",
+      "remote_id": "package:13d192f0-a6fc-4193-9f0c-e3d96482de45/files/1050749",
+      "timestamp_updated": "2021-02-02T03:25:16,315199Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:13d192f0-a6fc-4193-9f0c-e3d96482de45/files/1050749",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:13d192f0-a6fc-4193-9f0c-e3d96482de45",
+      "size_bytes": 844,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "41e82af6887ca27f4f45f43d88bbeb7358ae22bce92b682015aa910354db5f2b"
+        }
+      ],
+      "parent_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "status": "unknown"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "docs/README",
+      "basename": "README",
+      "remote_id": "package:8d0e6a66-31cc-403e-bcad-d0c087547659/files/1050834",
+      "timestamp_updated": "2021-02-02T03:25:33,885648Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:8d0e6a66-31cc-403e-bcad-d0c087547659/files/1050834",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:8d0e6a66-31cc-403e-bcad-d0c087547659",
+      "size_bytes": 746,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "d81dff277e9985028a9f6de712e1a3b99631c9ae8415cce044bbbe6f8b7ad8b1"
+        }
+      ],
+      "parent_id": "collection:c46b3f30-b29d-4246-9440-e661b3204236",
+      "status": "unknown"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C2_101/motility/MRI_timeinfo_stimulation_1.mat",
+      "basename": "MRI_timeinfo_stimulation_1.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:56a48dd7-220f-4d93-a317-17cd4f7894fa/files/1050826",
+      "timestamp_updated": "2021-02-02T03:25:33,433257Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:56a48dd7-220f-4d93-a317-17cd4f7894fa/files/1050826",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:56a48dd7-220f-4d93-a317-17cd4f7894fa",
+      "size_bytes": 2896,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "43163c909d052230dde2f1ec57f3c0e78a1fd169ab6c3138084649de2aebe70c"
+        }
+      ],
+      "parent_id": "collection:7a3cded7-7402-46b2-b56f-377c92879bf0",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C2_101/motility/stimulation_1.nii.gz",
+      "basename": "stimulation_1.nii.gz",
+      "mimetype": "image/gznii",
+      "remote_id": "package:b32bb65d-5804-4102-aa9c-459d5bce38d4/files/1050782",
+      "timestamp_updated": "2021-02-02T03:25:51,127615Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:b32bb65d-5804-4102-aa9c-459d5bce38d4/files/1050782",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:b32bb65d-5804-4102-aa9c-459d5bce38d4",
+      "size_bytes": 58048278,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "ee8b7e4ff7b901d4eacb0e30f26ee05c0c0c043e1b12f25103cc2d748578c9ea"
+        }
+      ],
+      "parent_id": "collection:7a3cded7-7402-46b2-b56f-377c92879bf0",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C2_101/motility/MRI_timeinfo_prestimulation_1.mat",
+      "basename": "MRI_timeinfo_prestimulation_1.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:2ed1a601-4ed3-4cbc-bd3b-3f757ed59413/files/1050797",
+      "timestamp_updated": "2021-02-02T03:25:39,680970Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:2ed1a601-4ed3-4cbc-bd3b-3f757ed59413/files/1050797",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:2ed1a601-4ed3-4cbc-bd3b-3f757ed59413",
+      "size_bytes": 1099,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "ef9348e677558a9661e3746e192a5967bf6af9e66d1e7f2173fb506863830f70"
+        }
+      ],
+      "parent_id": "collection:7a3cded7-7402-46b2-b56f-377c92879bf0",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C2_101/motility/prestimulation_1.nii.gz",
+      "basename": "prestimulation_1.nii.gz",
+      "mimetype": "image/gznii",
+      "remote_id": "package:516fddd0-ee43-487b-9dff-e3ba00214ac6/files/1050798",
+      "timestamp_updated": "2021-02-02T03:25:52,981799Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:516fddd0-ee43-487b-9dff-e3ba00214ac6/files/1050798",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:516fddd0-ee43-487b-9dff-e3ba00214ac6",
+      "size_bytes": 17428936,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "b6d3f155ec65364191f3c8a9b89b6d5e856abf98ebadd65d69cfcc766277190b"
+        }
+      ],
+      "parent_id": "collection:7a3cded7-7402-46b2-b56f-377c92879bf0",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C2_101/motility/manifest.csv",
+      "basename": "manifest.csv",
+      "mimetype": "text/csv",
+      "remote_id": "package:0774d23e-7af7-4677-934e-bb46a9d0c93c/files/1050793",
+      "timestamp_updated": "2021-02-02T03:25:52,325532Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:0774d23e-7af7-4677-934e-bb46a9d0c93c/files/1050793",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:0774d23e-7af7-4677-934e-bb46a9d0c93c",
+      "size_bytes": 574,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "c5effc8abfba8b242efe24ad355d79a8b5be4f2651da51abe19b2f1aa55b40ee"
+        }
+      ],
+      "parent_id": "collection:7a3cded7-7402-46b2-b56f-377c92879bf0",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C2_103/motility/MRI_timeinfo_stimulation_1.mat",
+      "basename": "MRI_timeinfo_stimulation_1.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:97e23329-8835-4df2-a5c0-daec442cd33d/files/1050769",
+      "timestamp_updated": "2021-02-02T03:25:48,509560Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:97e23329-8835-4df2-a5c0-daec442cd33d/files/1050769",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:97e23329-8835-4df2-a5c0-daec442cd33d",
+      "size_bytes": 3009,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "86f154268f8986e8b5d20a458108ddaf5272b6e9883b0efb4328b7a876bc1f61"
+        }
+      ],
+      "parent_id": "collection:5787a8ec-4383-452c-935a-8fbbc93a0af8",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C2_103/motility/stimulation_1.nii.gz",
+      "basename": "stimulation_1.nii.gz",
+      "mimetype": "image/gznii",
+      "remote_id": "package:3cf943e4-2d85-48e3-8432-ee603bc73976/files/1050799",
+      "timestamp_updated": "2021-02-02T03:25:40,950546Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:3cf943e4-2d85-48e3-8432-ee603bc73976/files/1050799",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:3cf943e4-2d85-48e3-8432-ee603bc73976",
+      "size_bytes": 58383348,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "8d3ff0011ded51e1b1273c8c9757d6b1f621466ed450ad99682dd119ba7de355"
+        }
+      ],
+      "parent_id": "collection:5787a8ec-4383-452c-935a-8fbbc93a0af8",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C2_103/motility/MRI_timeinfo_prestimulation_1.mat",
+      "basename": "MRI_timeinfo_prestimulation_1.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:62d912e7-d110-42f2-96de-691948388554/files/1050772",
+      "timestamp_updated": "2021-02-02T03:25:24,931051Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:62d912e7-d110-42f2-96de-691948388554/files/1050772",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:62d912e7-d110-42f2-96de-691948388554",
+      "size_bytes": 1079,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "adb3900052439c3e1517846717be56ddd032028b6f445a6db8f734c9daae4349"
+        }
+      ],
+      "parent_id": "collection:5787a8ec-4383-452c-935a-8fbbc93a0af8",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C2_103/motility/prestimulation_1.nii.gz",
+      "basename": "prestimulation_1.nii.gz",
+      "mimetype": "image/gznii",
+      "remote_id": "package:a11e9da3-cfb0-4267-8f59-8165d1bd61e9/files/1050837",
+      "timestamp_updated": "2021-02-02T03:26:10,889391Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:a11e9da3-cfb0-4267-8f59-8165d1bd61e9/files/1050837",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:a11e9da3-cfb0-4267-8f59-8165d1bd61e9",
+      "size_bytes": 17566655,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "55a203c424644b7bf53e9099a78fcf4735308da068f02f52df55c69538f83e1c"
+        }
+      ],
+      "parent_id": "collection:5787a8ec-4383-452c-935a-8fbbc93a0af8",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C2_103/motility/manifest.csv",
+      "basename": "manifest.csv",
+      "mimetype": "text/csv",
+      "remote_id": "package:0efcd2ba-db94-4cc2-91a0-b7e7211f61f2/files/1050810",
+      "timestamp_updated": "2021-02-02T03:25:42,399116Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:0efcd2ba-db94-4cc2-91a0-b7e7211f61f2/files/1050810",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:0efcd2ba-db94-4cc2-91a0-b7e7211f61f2",
+      "size_bytes": 574,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "3e3f29d2eae7629a555e7fb1052d1b3d17fbe8f2c0492ab268171c6a5e583356"
+        }
+      ],
+      "parent_id": "collection:5787a8ec-4383-452c-935a-8fbbc93a0af8",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C2_102/motility/MRI_timeinfo_stimulation_1.mat",
+      "basename": "MRI_timeinfo_stimulation_1.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:c3461736-cb6e-4f5e-b92e-6e76475ce601/files/1050841",
+      "timestamp_updated": "2021-02-02T03:26:08,378573Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:c3461736-cb6e-4f5e-b92e-6e76475ce601/files/1050841",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:c3461736-cb6e-4f5e-b92e-6e76475ce601",
+      "size_bytes": 2968,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "eea563da25191d30dc05d9f7e969a6e159e2ba2d58613d9814023856e10d03fd"
+        }
+      ],
+      "parent_id": "collection:28d26bb3-585e-4740-89b1-a7b58352afe9",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C2_102/motility/stimulation_1.nii.gz",
+      "basename": "stimulation_1.nii.gz",
+      "mimetype": "image/gznii",
+      "remote_id": "package:6c9302f7-e628-4413-b1fd-2cc775759460/files/1050796",
+      "timestamp_updated": "2021-02-02T03:25:27,862303Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:6c9302f7-e628-4413-b1fd-2cc775759460/files/1050796",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:6c9302f7-e628-4413-b1fd-2cc775759460",
+      "size_bytes": 59925669,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "b45c4879841e885a7a1fc2b26a49ce19952304643bbed782515c92a6ac744b75"
+        }
+      ],
+      "parent_id": "collection:28d26bb3-585e-4740-89b1-a7b58352afe9",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C2_102/motility/MRI_timeinfo_prestimulation_1.mat",
+      "basename": "MRI_timeinfo_prestimulation_1.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:822bf15f-29f2-48c4-8bd0-b98ded478e90/files/1050776",
+      "timestamp_updated": "2021-02-02T03:25:49,866710Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:822bf15f-29f2-48c4-8bd0-b98ded478e90/files/1050776",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:822bf15f-29f2-48c4-8bd0-b98ded478e90",
+      "size_bytes": 1055,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "de7875cde4d5930aab377100fc8383903eeabb0ece61c2e1c1e769a87d5bc6f2"
+        }
+      ],
+      "parent_id": "collection:28d26bb3-585e-4740-89b1-a7b58352afe9",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C2_102/motility/prestimulation_1.nii.gz",
+      "basename": "prestimulation_1.nii.gz",
+      "mimetype": "image/gznii",
+      "remote_id": "package:819811ed-9b47-4882-8015-eff44a5e4a99/files/1050804",
+      "timestamp_updated": "2021-02-02T03:25:53,640350Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:819811ed-9b47-4882-8015-eff44a5e4a99/files/1050804",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:819811ed-9b47-4882-8015-eff44a5e4a99",
+      "size_bytes": 18001083,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "2723a7404d856b106b56d1758a47e08d050f4c9d021350562456186657125d2f"
+        }
+      ],
+      "parent_id": "collection:28d26bb3-585e-4740-89b1-a7b58352afe9",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C2_102/motility/manifest.csv",
+      "basename": "manifest.csv",
+      "mimetype": "text/csv",
+      "remote_id": "package:daf6fafc-1f88-4c2b-9038-a921812aec08/files/1050812",
+      "timestamp_updated": "2021-02-02T03:25:30,118085Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:daf6fafc-1f88-4c2b-9038-a921812aec08/files/1050812",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:daf6fafc-1f88-4c2b-9038-a921812aec08",
+      "size_bytes": 574,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "a4919f5016d98050679f3b4fdd3287425d805ff8cdbcc681925069a8903e5c17"
+        }
+      ],
+      "parent_id": "collection:28d26bb3-585e-4740-89b1-a7b58352afe9",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C2_104/motility/MRI_timeinfo_stimulation_1.mat",
+      "basename": "MRI_timeinfo_stimulation_1.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:7401211b-a349-46b2-aef8-4ab54b2f18a6/files/1050836",
+      "timestamp_updated": "2021-02-02T03:26:10,267932Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:7401211b-a349-46b2-aef8-4ab54b2f18a6/files/1050836",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:7401211b-a349-46b2-aef8-4ab54b2f18a6",
+      "size_bytes": 2899,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "79ad4514490569b38451cbb15bb55480c644a8303845e278aa1f6b3a12740268"
+        }
+      ],
+      "parent_id": "collection:c96fcf13-f9c7-4ac8-b05e-1abbb6667f29",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C2_104/motility/stimulation_1.nii.gz",
+      "basename": "stimulation_1.nii.gz",
+      "mimetype": "image/gznii",
+      "remote_id": "package:8b6d0d5b-f891-4155-8cc1-2627933c3583/files/1050807",
+      "timestamp_updated": "2021-02-02T03:25:55,130411Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:8b6d0d5b-f891-4155-8cc1-2627933c3583/files/1050807",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:8b6d0d5b-f891-4155-8cc1-2627933c3583",
+      "size_bytes": 58920428,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "f5186362d65d1b72f88855042d04fef61413ad154f0a96e89836642c77de52c0"
+        }
+      ],
+      "parent_id": "collection:c96fcf13-f9c7-4ac8-b05e-1abbb6667f29",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C2_104/motility/MRI_timeinfo_prestimulation_1.mat",
+      "basename": "MRI_timeinfo_prestimulation_1.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:9571a238-a6fd-4fb6-8fba-904f120049ff/files/1050789",
+      "timestamp_updated": "2021-02-02T03:25:26,642582Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:9571a238-a6fd-4fb6-8fba-904f120049ff/files/1050789",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:9571a238-a6fd-4fb6-8fba-904f120049ff",
+      "size_bytes": 1113,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "c97b7678123bcb59cc909c9a1ee92199da88bcb29d4fcc5e9c2bb6e42ab8153e"
+        }
+      ],
+      "parent_id": "collection:c96fcf13-f9c7-4ac8-b05e-1abbb6667f29",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C2_104/motility/prestimulation_1.nii.gz",
+      "basename": "prestimulation_1.nii.gz",
+      "mimetype": "image/gznii",
+      "remote_id": "package:94838803-b1b8-4497-ad3c-4d95522b66d1/files/1050815",
+      "timestamp_updated": "2021-02-02T03:25:30,856776Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:94838803-b1b8-4497-ad3c-4d95522b66d1/files/1050815",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:94838803-b1b8-4497-ad3c-4d95522b66d1",
+      "size_bytes": 17570199,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "a703f723370370079432f88dcf2d10c6d50ef127bccc6197e8020d410159b5b5"
+        }
+      ],
+      "parent_id": "collection:c96fcf13-f9c7-4ac8-b05e-1abbb6667f29",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C2_104/motility/manifest.csv",
+      "basename": "manifest.csv",
+      "mimetype": "text/csv",
+      "remote_id": "package:f1f94493-a1a7-4761-a138-9ea456e0f28f/files/1050763",
+      "timestamp_updated": "2021-02-02T03:25:21,999213Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:f1f94493-a1a7-4761-a138-9ea456e0f28f/files/1050763",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:f1f94493-a1a7-4761-a138-9ea456e0f28f",
+      "size_bytes": 574,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "4ce95fddfa717973a7b2e50e03bffd16575c8f2c213a8fd1b6acabf2c2206fb6"
+        }
+      ],
+      "parent_id": "collection:c96fcf13-f9c7-4ac8-b05e-1abbb6667f29",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C1_101/motility/MRI_timeinfo_stimulation_1.mat",
+      "basename": "MRI_timeinfo_stimulation_1.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:6d7e551a-b0cb-4d85-ac8f-543e98f3160b/files/1050824",
+      "timestamp_updated": "2021-02-02T03:26:09,251607Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:6d7e551a-b0cb-4d85-ac8f-543e98f3160b/files/1050824",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:6d7e551a-b0cb-4d85-ac8f-543e98f3160b",
+      "size_bytes": 2946,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "ee7d48dd23a1962478a0fe88ddfa0da42bb7c15adba83a5da24286372ca5411f"
+        }
+      ],
+      "parent_id": "collection:267d21ec-f753-41f1-b089-60dc7e8dbc4c",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C1_101/motility/stimulation_1.nii.gz",
+      "basename": "stimulation_1.nii.gz",
+      "mimetype": "image/gznii",
+      "remote_id": "package:1b86b45c-9c5b-482c-95dd-15c08e61ce6e/files/1050765",
+      "timestamp_updated": "2021-02-02T03:25:23,445680Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:1b86b45c-9c5b-482c-95dd-15c08e61ce6e/files/1050765",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:1b86b45c-9c5b-482c-95dd-15c08e61ce6e",
+      "size_bytes": 59308015,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "2668d3c251af2ee51c6542d1d0e694ca22e75f1d23f076461e9e90c45f565438"
+        }
+      ],
+      "parent_id": "collection:267d21ec-f753-41f1-b089-60dc7e8dbc4c",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C1_101/motility/MRI_timeinfo_prestimulation_1.mat",
+      "basename": "MRI_timeinfo_prestimulation_1.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:778e980f-5b34-48d8-b7ef-d2090c1b4a18/files/1050795",
+      "timestamp_updated": "2021-02-02T03:25:39,405122Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:778e980f-5b34-48d8-b7ef-d2090c1b4a18/files/1050795",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:778e980f-5b34-48d8-b7ef-d2090c1b4a18",
+      "size_bytes": 1103,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "577d4aa99a241c017d4c5be0e1a382f5cabbb419b024b2884f0c799a813b2ca6"
+        }
+      ],
+      "parent_id": "collection:267d21ec-f753-41f1-b089-60dc7e8dbc4c",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C1_101/motility/prestimulation_1.nii.gz",
+      "basename": "prestimulation_1.nii.gz",
+      "mimetype": "image/gznii",
+      "remote_id": "package:c9d1bd02-3017-42ab-8aa1-5b30aa3d0b8a/files/1050811",
+      "timestamp_updated": "2021-02-02T03:26:05,732055Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:c9d1bd02-3017-42ab-8aa1-5b30aa3d0b8a/files/1050811",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:c9d1bd02-3017-42ab-8aa1-5b30aa3d0b8a",
+      "size_bytes": 17791634,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "01f3e925f2a56b672f676cc1d13964403094d5d72db37cdfafddb63f7ac48f54"
+        }
+      ],
+      "parent_id": "collection:267d21ec-f753-41f1-b089-60dc7e8dbc4c",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C1_101/motility/manifest.csv",
+      "basename": "manifest.csv",
+      "mimetype": "text/csv",
+      "remote_id": "package:18132e7a-9953-40aa-9108-8246ff7f6049/files/1050808",
+      "timestamp_updated": "2021-02-02T03:25:41,382955Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:18132e7a-9953-40aa-9108-8246ff7f6049/files/1050808",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:18132e7a-9953-40aa-9108-8246ff7f6049",
+      "size_bytes": 574,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "aaf7fc96621d66c4495be647531e69e7434b85aa330c4db26a79daae952bdfa0"
+        }
+      ],
+      "parent_id": "collection:267d21ec-f753-41f1-b089-60dc7e8dbc4c",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C1_102/motility/MRI_timeinfo_stimulation_1.mat",
+      "basename": "MRI_timeinfo_stimulation_1.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:878143f4-6f19-4350-af54-e3dab35c72c0/files/1050801",
+      "timestamp_updated": "2021-02-02T03:25:28,079512Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:878143f4-6f19-4350-af54-e3dab35c72c0/files/1050801",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:878143f4-6f19-4350-af54-e3dab35c72c0",
+      "size_bytes": 2978,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "bb5b0b6414c15a1454ddbe9775f75628e20224440b4dfbc4f971b514513079d7"
+        }
+      ],
+      "parent_id": "collection:7878ca9c-d5f0-4f22-a07d-28ed6afc3446",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C1_102/motility/stimulation_1.nii.gz",
+      "basename": "stimulation_1.nii.gz",
+      "mimetype": "image/gznii",
+      "remote_id": "package:1c393740-b9d1-4a49-9ee7-707373fdb1d2/files/1050802",
+      "timestamp_updated": "2021-02-02T03:25:29,833468Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:1c393740-b9d1-4a49-9ee7-707373fdb1d2/files/1050802",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:1c393740-b9d1-4a49-9ee7-707373fdb1d2",
+      "size_bytes": 57639283,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "e080ff64d88c07ab92953c4e3487fb6ea9bea1fd10c6b823a6d1f045864a920f"
+        }
+      ],
+      "parent_id": "collection:7878ca9c-d5f0-4f22-a07d-28ed6afc3446",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C1_102/motility/MRI_timeinfo_prestimulation_1.mat",
+      "basename": "MRI_timeinfo_prestimulation_1.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:77961245-863e-4d60-ac81-f8aa05656d0d/files/1050748",
+      "timestamp_updated": "2021-02-02T03:25:15,965753Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:77961245-863e-4d60-ac81-f8aa05656d0d/files/1050748",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:77961245-863e-4d60-ac81-f8aa05656d0d",
+      "size_bytes": 1113,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "438a369e5b97360940d29676c96b7d1da9565df35b8713384d83f8cd1b537cc5"
+        }
+      ],
+      "parent_id": "collection:7878ca9c-d5f0-4f22-a07d-28ed6afc3446",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C1_102/motility/prestimulation_1.nii.gz",
+      "basename": "prestimulation_1.nii.gz",
+      "mimetype": "image/gznii",
+      "remote_id": "package:a413b1af-9c46-4980-869d-c535b8e50534/files/1050777",
+      "timestamp_updated": "2021-02-02T03:25:36,118357Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:a413b1af-9c46-4980-869d-c535b8e50534/files/1050777",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:a413b1af-9c46-4980-869d-c535b8e50534",
+      "size_bytes": 17443221,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "d1825a8d607ff639f2e63f85f060d352e635ae175b2b1337c24cf1c0151ad505"
+        }
+      ],
+      "parent_id": "collection:7878ca9c-d5f0-4f22-a07d-28ed6afc3446",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C1_102/motility/manifest.csv",
+      "basename": "manifest.csv",
+      "mimetype": "text/csv",
+      "remote_id": "package:f9748f31-6495-49b1-906a-5d6be161b558/files/1050819",
+      "timestamp_updated": "2021-02-02T03:25:43,672848Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:f9748f31-6495-49b1-906a-5d6be161b558/files/1050819",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:f9748f31-6495-49b1-906a-5d6be161b558",
+      "size_bytes": 574,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "66b3f8b7e2b2e1859fc312ae87c4d91421280159750551159578a38870cb6ca0"
+        }
+      ],
+      "parent_id": "collection:7878ca9c-d5f0-4f22-a07d-28ed6afc3446",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C1_104/motility/MRI_timeinfo_stimulation_1.mat",
+      "basename": "MRI_timeinfo_stimulation_1.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:81a380ef-1ce0-4134-a811-11268e7e444d/files/1050835",
+      "timestamp_updated": "2021-02-02T03:25:34,050542Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:81a380ef-1ce0-4134-a811-11268e7e444d/files/1050835",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:81a380ef-1ce0-4134-a811-11268e7e444d",
+      "size_bytes": 2845,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "6e72dae674515dd0fc88523b0b39fe22c7193cfb7b61a15ae19868d83f481d69"
+        }
+      ],
+      "parent_id": "collection:b8562433-84f6-46f6-8275-4eba15f20d7d",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C1_104/motility/stimulation_1.nii.gz",
+      "basename": "stimulation_1.nii.gz",
+      "mimetype": "image/gznii",
+      "remote_id": "package:f55492c6-5f18-4878-aec8-090cb16c0ee3/files/1050821",
+      "timestamp_updated": "2021-02-02T03:25:45,788555Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:f55492c6-5f18-4878-aec8-090cb16c0ee3/files/1050821",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:f55492c6-5f18-4878-aec8-090cb16c0ee3",
+      "size_bytes": 58413552,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "0c9d9a76e6e7614dee0466a1973e96be29e88ffa248ceef476e603130d409aa5"
+        }
+      ],
+      "parent_id": "collection:b8562433-84f6-46f6-8275-4eba15f20d7d",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C1_104/motility/MRI_timeinfo_prestimulation_1.mat",
+      "basename": "MRI_timeinfo_prestimulation_1.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:8dabc7ce-e250-4eba-8fd5-fc3a84c3b6d5/files/1050775",
+      "timestamp_updated": "2021-02-02T03:25:25,270309Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:8dabc7ce-e250-4eba-8fd5-fc3a84c3b6d5/files/1050775",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:8dabc7ce-e250-4eba-8fd5-fc3a84c3b6d5",
+      "size_bytes": 1117,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "32469a8ece658634a028c01206d59e998cdce37107de2edd3d00616baae6e271"
+        }
+      ],
+      "parent_id": "collection:b8562433-84f6-46f6-8275-4eba15f20d7d",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C1_104/motility/prestimulation_1.nii.gz",
+      "basename": "prestimulation_1.nii.gz",
+      "mimetype": "image/gznii",
+      "remote_id": "package:02e06335-eca9-4980-9aff-6d2010ebbed3/files/1050814",
+      "timestamp_updated": "2021-02-02T03:25:43,185369Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:02e06335-eca9-4980-9aff-6d2010ebbed3/files/1050814",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:02e06335-eca9-4980-9aff-6d2010ebbed3",
+      "size_bytes": 17615324,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "1f03ab78181676c3b2ae58771bf676684abe690d418683d88c8d094ec8d9b071"
+        }
+      ],
+      "parent_id": "collection:b8562433-84f6-46f6-8275-4eba15f20d7d",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C1_104/motility/manifest.csv",
+      "basename": "manifest.csv",
+      "mimetype": "text/csv",
+      "remote_id": "package:c8a7644f-b949-4f7f-8964-027bff31d92e/files/1050779",
+      "timestamp_updated": "2021-02-02T03:25:36,488755Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:c8a7644f-b949-4f7f-8964-027bff31d92e/files/1050779",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:c8a7644f-b949-4f7f-8964-027bff31d92e",
+      "size_bytes": 574,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "b7d566c7105f1dde368a79423fb474a19311ddee80645adecaae93b90465c96a"
+        }
+      ],
+      "parent_id": "collection:b8562433-84f6-46f6-8275-4eba15f20d7d",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C1_103/motility/MRI_timeinfo_stimulation_1.mat",
+      "basename": "MRI_timeinfo_stimulation_1.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:bfb5ed78-2031-4cae-bc9e-7f1805ea05b1/files/1050783",
+      "timestamp_updated": "2021-02-02T03:25:37,084218Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:bfb5ed78-2031-4cae-bc9e-7f1805ea05b1/files/1050783",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:bfb5ed78-2031-4cae-bc9e-7f1805ea05b1",
+      "size_bytes": 2875,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "fb3453e5778d9e68245d8da5fe00d24d00c0c69e813dbb9480d5ca60883a7a4e"
+        }
+      ],
+      "parent_id": "collection:8a046fca-61c8-4b9c-a396-96c818b1bb9e",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C1_103/motility/stimulation_1.nii.gz",
+      "basename": "stimulation_1.nii.gz",
+      "mimetype": "image/gznii",
+      "remote_id": "package:77166bcf-75cc-47fe-af9c-b0109cde1a6a/files/1050818",
+      "timestamp_updated": "2021-02-02T03:25:32,615800Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:77166bcf-75cc-47fe-af9c-b0109cde1a6a/files/1050818",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:77166bcf-75cc-47fe-af9c-b0109cde1a6a",
+      "size_bytes": 57634774,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "269037614c519657cfecd47cd77dfba0f2ee09d6e1bab0104b1b6da46a2dd35c"
+        }
+      ],
+      "parent_id": "collection:8a046fca-61c8-4b9c-a396-96c818b1bb9e",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C1_103/motility/MRI_timeinfo_prestimulation_1.mat",
+      "basename": "MRI_timeinfo_prestimulation_1.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:4c194f9b-f8ab-45fc-932f-fdffc4ff9313/files/1050755",
+      "timestamp_updated": "2021-02-02T03:25:17,943932Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:4c194f9b-f8ab-45fc-932f-fdffc4ff9313/files/1050755",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:4c194f9b-f8ab-45fc-932f-fdffc4ff9313",
+      "size_bytes": 1090,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "46b657afd0df018472faca566b5e60d9c9e81d9253d452aebda2b77506e6c978"
+        }
+      ],
+      "parent_id": "collection:8a046fca-61c8-4b9c-a396-96c818b1bb9e",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C1_103/motility/prestimulation_1.nii.gz",
+      "basename": "prestimulation_1.nii.gz",
+      "mimetype": "image/gznii",
+      "remote_id": "package:491c8faf-ed09-44d2-bcd9-453dbde08dd3/files/1050767",
+      "timestamp_updated": "2021-02-02T03:25:48,293996Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:491c8faf-ed09-44d2-bcd9-453dbde08dd3/files/1050767",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:491c8faf-ed09-44d2-bcd9-453dbde08dd3",
+      "size_bytes": 17287968,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "9f0008a78b469673936ce5588bf1a8947af4372779d5ef54c499623a44351c31"
+        }
+      ],
+      "parent_id": "collection:8a046fca-61c8-4b9c-a396-96c818b1bb9e",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "primary/C1_103/motility/manifest.csv",
+      "basename": "manifest.csv",
+      "mimetype": "text/csv",
+      "remote_id": "package:1e7cd01c-649c-4acb-a40d-171a78efbafd/files/1050778",
+      "timestamp_updated": "2021-02-02T03:25:36,335626Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:1e7cd01c-649c-4acb-a40d-171a78efbafd/files/1050778",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:1e7cd01c-649c-4acb-a40d-171a78efbafd",
+      "size_bytes": 574,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "156dfdcfc734643588356333679304d4c2c3c672795debda6e69f0df554a6c2d"
+        }
+      ],
+      "parent_id": "collection:8a046fca-61c8-4b9c-a396-96c818b1bb9e",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "dataset_description.xlsx",
+      "basename": "dataset_description.xlsx",
+      "mimetype": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "remote_id": "package:39e18c07-adc0-4b2b-96a2-09b695aa03e5/files/1192993",
+      "timestamp_updated": "2021-02-02T03:25:15,201801Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:39e18c07-adc0-4b2b-96a2-09b695aa03e5/files/1192993",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:39e18c07-adc0-4b2b-96a2-09b695aa03e5",
+      "size_bytes": 24799,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "7cce74450c96723e6a70a5c376bd7c95a2800ec8748b68230b306773d553a9a4"
+        }
+      ],
+      "parent_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "status": "accepted"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "docs/Image.png",
+      "basename": "Image.png",
+      "mimetype": "image/png",
+      "remote_id": "package:9725b059-4e85-42ce-935c-b7f60fc86ab1/files/1050790",
+      "timestamp_updated": "2021-02-02T03:25:51,869018Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:9725b059-4e85-42ce-935c-b7f60fc86ab1/files/1050790",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:9725b059-4e85-42ce-935c-b7f60fc86ab1",
+      "size_bytes": 3876241,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "bee02bae5dc4f345f699a560cbbee94d42f57fea7e190b099c740c611cdeae8b"
+        }
+      ],
+      "parent_id": "collection:c46b3f30-b29d-4246-9440-e661b3204236",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "docs/manifest.csv",
+      "basename": "manifest.csv",
+      "mimetype": "text/csv",
+      "remote_id": "package:1e2b84ed-b650-4a3c-bcbe-e15b37726d45/files/1050792",
+      "timestamp_updated": "2021-02-02T03:25:52,074215Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:1e2b84ed-b650-4a3c-bcbe-e15b37726d45/files/1050792",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:1e2b84ed-b650-4a3c-bcbe-e15b37726d45",
+      "size_bytes": 225,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "f10bd600c91876632682777ccddb30a57beace693c9ca052d57fc9f0e49c34d8"
+        }
+      ],
+      "parent_id": "collection:c46b3f30-b29d-4246-9440-e661b3204236",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C2_101/motility/stimulation_1/img_motility_map.mat",
+      "basename": "img_motility_map.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:78ce8b95-3c52-415d-b2ff-949cbe163e19/files/1050840",
+      "timestamp_updated": "2021-02-02T03:26:11,159045Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:78ce8b95-3c52-415d-b2ff-949cbe163e19/files/1050840",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:78ce8b95-3c52-415d-b2ff-949cbe163e19",
+      "size_bytes": 4620,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "00dfa46563a6734c8ad013765660ef22a4c40a2131b23f3ab6299873abb50121"
+        }
+      ],
+      "parent_id": "collection:d26c0b70-aca1-46e4-9e3b-26dfb4eae2b2",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C2_101/motility/stimulation_1/img_antrum_seg.mat",
+      "basename": "img_antrum_seg.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:d8bb47c5-04a6-4ba7-83e0-4d9fe11bcb57/files/1050833",
+      "timestamp_updated": "2021-02-02T03:26:07,834221Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:d8bb47c5-04a6-4ba7-83e0-4d9fe11bcb57/files/1050833",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:d8bb47c5-04a6-4ba7-83e0-4d9fe11bcb57",
+      "size_bytes": 21788941,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "d60a06feee8cb79408b74943bff9616ece4e39ff205ee76aa73c5fccc7a2c1ed"
+        }
+      ],
+      "parent_id": "collection:d26c0b70-aca1-46e4-9e3b-26dfb4eae2b2",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C2_101/motility/stimulation_1/manifest.csv",
+      "basename": "manifest.csv",
+      "mimetype": "text/csv",
+      "remote_id": "package:db88e0f1-cd4c-4084-82cc-6aa13fa660c6/files/1050751",
+      "timestamp_updated": "2021-02-02T03:25:16,828116Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:db88e0f1-cd4c-4084-82cc-6aa13fa660c6/files/1050751",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:db88e0f1-cd4c-4084-82cc-6aa13fa660c6",
+      "size_bytes": 278,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "bde8039baaeabe3ac267b3c765b5ab4f635333f66adfa90b79954d7fae51b746"
+        }
+      ],
+      "parent_id": "collection:d26c0b70-aca1-46e4-9e3b-26dfb4eae2b2",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C2_101/motility/prestimulation_1/img_motility_map.mat",
+      "basename": "img_motility_map.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:5ad9da1e-3e48-48a4-aedf-5bce569179eb/files/1050830",
+      "timestamp_updated": "2021-02-02T03:26:09,509581Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:5ad9da1e-3e48-48a4-aedf-5bce569179eb/files/1050830",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:5ad9da1e-3e48-48a4-aedf-5bce569179eb",
+      "size_bytes": 1678,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "b075d60bcfedba9bb9b91e7b0c44aba98fa2821aadbd41c2c3b11e6ed8e111fe"
+        }
+      ],
+      "parent_id": "collection:7557f24c-4992-4320-abe4-212459c254ed",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C2_101/motility/prestimulation_1/img_antrum_seg.mat",
+      "basename": "img_antrum_seg.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:e40a5589-f269-4d5a-8b64-1ae3dac886c0/files/1050759",
+      "timestamp_updated": "2021-02-02T03:25:21,411189Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:e40a5589-f269-4d5a-8b64-1ae3dac886c0/files/1050759",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:e40a5589-f269-4d5a-8b64-1ae3dac886c0",
+      "size_bytes": 6562418,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "c1cb37453ecbd5fa42f8d344a724b0fd183634386f7a9d5b43e33c33844b8fd9"
+        }
+      ],
+      "parent_id": "collection:7557f24c-4992-4320-abe4-212459c254ed",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C2_101/motility/prestimulation_1/manifest.csv",
+      "basename": "manifest.csv",
+      "mimetype": "text/csv",
+      "remote_id": "package:ccd9f1a1-d8ea-45ad-8f80-9c0da859351f/files/1050788",
+      "timestamp_updated": "2021-02-02T03:25:26,383733Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:ccd9f1a1-d8ea-45ad-8f80-9c0da859351f/files/1050788",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:ccd9f1a1-d8ea-45ad-8f80-9c0da859351f",
+      "size_bytes": 278,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "fbbdfca9d3febb92dbbe7629857947ebd6d1db2b56f28e1c57f3787a2f7e1731"
+        }
+      ],
+      "parent_id": "collection:7557f24c-4992-4320-abe4-212459c254ed",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C2_103/motility/stimulation_1/img_motility_map.mat",
+      "basename": "img_motility_map.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:ed990da9-c40c-4b78-ae1b-ee38d4581e77/files/1050813",
+      "timestamp_updated": "2021-02-02T03:25:42,641070Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:ed990da9-c40c-4b78-ae1b-ee38d4581e77/files/1050813",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:ed990da9-c40c-4b78-ae1b-ee38d4581e77",
+      "size_bytes": 5416,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "458cec1af7c0a3d22ad5bf70c43c6d17d3e7400b355b6d1f1b033a2f0825720b"
+        }
+      ],
+      "parent_id": "collection:a14a32d6-86cc-4e24-a2ae-0e7b89c2f1c4",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C2_103/motility/stimulation_1/img_antrum_seg.mat",
+      "basename": "img_antrum_seg.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:3eabd5ca-1c94-4530-9bc0-25ed8b69abbc/files/1050820",
+      "timestamp_updated": "2021-02-02T03:25:44,430307Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:3eabd5ca-1c94-4530-9bc0-25ed8b69abbc/files/1050820",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:3eabd5ca-1c94-4530-9bc0-25ed8b69abbc",
+      "size_bytes": 24653389,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "b311d86d847da82bfbe20581dd1196fa8809735d58d644382b45ac06ea84abc6"
+        }
+      ],
+      "parent_id": "collection:a14a32d6-86cc-4e24-a2ae-0e7b89c2f1c4",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C2_103/motility/stimulation_1/manifest.csv",
+      "basename": "manifest.csv",
+      "mimetype": "text/csv",
+      "remote_id": "package:386c40bc-0715-4939-bc9b-1ffd4ceab3bb/files/1050773",
+      "timestamp_updated": "2021-02-02T03:25:35,418665Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:386c40bc-0715-4939-bc9b-1ffd4ceab3bb/files/1050773",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:386c40bc-0715-4939-bc9b-1ffd4ceab3bb",
+      "size_bytes": 278,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "7f3c811879986741c35502a63cf85fe163a99f5eb36c1932941330f9ad19065b"
+        }
+      ],
+      "parent_id": "collection:a14a32d6-86cc-4e24-a2ae-0e7b89c2f1c4",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C2_103/motility/prestimulation_1/img_motility_map.mat",
+      "basename": "img_motility_map.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:5f984375-848b-407e-b237-209de635893e/files/1050822",
+      "timestamp_updated": "2021-02-02T03:25:32,917970Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:5f984375-848b-407e-b237-209de635893e/files/1050822",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:5f984375-848b-407e-b237-209de635893e",
+      "size_bytes": 1988,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "02340b9741dea6d4e027ba0d3567c96013ee8ab8989b9134b14192711021ae1a"
+        }
+      ],
+      "parent_id": "collection:333e18b6-c0cc-44b5-ac60-8f5a85c103c2",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C2_103/motility/prestimulation_1/img_antrum_seg.mat",
+      "basename": "img_antrum_seg.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:605548cc-fa02-4390-987f-cab33ca1a83f/files/1050838",
+      "timestamp_updated": "2021-02-02T03:25:34,439920Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:605548cc-fa02-4390-987f-cab33ca1a83f/files/1050838",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:605548cc-fa02-4390-987f-cab33ca1a83f",
+      "size_bytes": 7492278,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "e9c3ef67fa357e193f802c5d537151c140d1aa47a1b42aa0ad6836d93c015d2d"
+        }
+      ],
+      "parent_id": "collection:333e18b6-c0cc-44b5-ac60-8f5a85c103c2",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C2_103/motility/prestimulation_1/manifest.csv",
+      "basename": "manifest.csv",
+      "mimetype": "text/csv",
+      "remote_id": "package:91fc0b05-0cad-4dd2-bc4f-e619c4ed4fce/files/1050829",
+      "timestamp_updated": "2021-02-02T03:25:33,680209Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:91fc0b05-0cad-4dd2-bc4f-e619c4ed4fce/files/1050829",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:91fc0b05-0cad-4dd2-bc4f-e619c4ed4fce",
+      "size_bytes": 278,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "e1b1adb739836f49a810d64970e138c4ddfda8a0080a55b9b3a4fcc4ab9db4b6"
+        }
+      ],
+      "parent_id": "collection:333e18b6-c0cc-44b5-ac60-8f5a85c103c2",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C2_102/motility/stimulation_1/img_motility_map.mat",
+      "basename": "img_motility_map.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:22cdce7f-65e6-4704-8585-48d4097b42aa/files/1050842",
+      "timestamp_updated": "2021-02-02T03:26:11,417918Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:22cdce7f-65e6-4704-8585-48d4097b42aa/files/1050842",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:22cdce7f-65e6-4704-8585-48d4097b42aa",
+      "size_bytes": 6117,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "4d6b74e6153d045df339b1be24f6725b027a6e55741b37dbd46f8d29c684454e"
+        }
+      ],
+      "parent_id": "collection:e47d65ef-63b2-451c-9e05-c7611d72c73e",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C2_102/motility/stimulation_1/img_antrum_seg.mat",
+      "basename": "img_antrum_seg.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:22b6e92d-0b7c-4d78-9870-b12b0df1c774/files/1050825",
+      "timestamp_updated": "2021-02-02T03:26:06,766017Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:22b6e92d-0b7c-4d78-9870-b12b0df1c774/files/1050825",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:22b6e92d-0b7c-4d78-9870-b12b0df1c774",
+      "size_bytes": 22648356,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "e4048c149550b21ec2efad0bdb1fc3d3eb0ee18bf9e42755e33318cf075dbc0f"
+        }
+      ],
+      "parent_id": "collection:e47d65ef-63b2-451c-9e05-c7611d72c73e",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C2_102/motility/stimulation_1/manifest.csv",
+      "basename": "manifest.csv",
+      "mimetype": "text/csv",
+      "remote_id": "package:285e5c73-1a77-4d8f-9e05-ec01ea3ec26f/files/1050817",
+      "timestamp_updated": "2021-02-02T03:25:31,078830Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:285e5c73-1a77-4d8f-9e05-ec01ea3ec26f/files/1050817",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:285e5c73-1a77-4d8f-9e05-ec01ea3ec26f",
+      "size_bytes": 278,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "f428e4e915fa260e714afabb10deadc6233e3c7843463d270d1476529c4aae74"
+        }
+      ],
+      "parent_id": "collection:e47d65ef-63b2-451c-9e05-c7611d72c73e",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C2_102/motility/prestimulation_1/img_motility_map.mat",
+      "basename": "img_motility_map.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:75b6c19b-38e7-4333-8c23-366a70c02fcb/files/1050828",
+      "timestamp_updated": "2021-02-02T03:26:07,114373Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:75b6c19b-38e7-4333-8c23-366a70c02fcb/files/1050828",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:75b6c19b-38e7-4333-8c23-366a70c02fcb",
+      "size_bytes": 1926,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "b9800959cc67889481acfa6c324568ef5511eb2b9faaafbe270e39a9f9676277"
+        }
+      ],
+      "parent_id": "collection:b03202d1-e77c-4309-8dce-2bd40bcc2b22",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C2_102/motility/prestimulation_1/img_antrum_seg.mat",
+      "basename": "img_antrum_seg.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:a555dca4-1266-47c9-8e97-5b0886c308f2/files/1050753",
+      "timestamp_updated": "2021-02-02T03:25:17,401018Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:a555dca4-1266-47c9-8e97-5b0886c308f2/files/1050753",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:a555dca4-1266-47c9-8e97-5b0886c308f2",
+      "size_bytes": 6898733,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "187a697cd1f0ebfa95f25df148b587b984009279b02f696813cb9637e289aff1"
+        }
+      ],
+      "parent_id": "collection:b03202d1-e77c-4309-8dce-2bd40bcc2b22",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C2_102/motility/prestimulation_1/manifest.csv",
+      "basename": "manifest.csv",
+      "mimetype": "text/csv",
+      "remote_id": "package:57843e60-2ef2-45c2-908a-72c6b76f7b92/files/1050816",
+      "timestamp_updated": "2021-02-02T03:25:43,359159Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:57843e60-2ef2-45c2-908a-72c6b76f7b92/files/1050816",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:57843e60-2ef2-45c2-908a-72c6b76f7b92",
+      "size_bytes": 278,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "0485001898f4b8d9d2955f17dfeecf94587c9ae7d3920151fc38a179372415c7"
+        }
+      ],
+      "parent_id": "collection:b03202d1-e77c-4309-8dce-2bd40bcc2b22",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C2_104/motility/stimulation_1/img_motility_map.mat",
+      "basename": "img_motility_map.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:f42bda3f-9102-4f3e-8065-c53989eb61a1/files/1050805",
+      "timestamp_updated": "2021-02-02T03:25:41,177048Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:f42bda3f-9102-4f3e-8065-c53989eb61a1/files/1050805",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:f42bda3f-9102-4f3e-8065-c53989eb61a1",
+      "size_bytes": 5720,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "a775cf63fa2a5791f4caa1d76df3d8c11e6e0b14c44e6a4ca22b0079116e3309"
+        }
+      ],
+      "parent_id": "collection:78676bbc-2a40-4629-9201-9eddc3609768",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C2_104/motility/stimulation_1/img_antrum_seg.mat",
+      "basename": "img_antrum_seg.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:917bf83a-7f0a-4ff4-a13a-500859d9d1a2/files/1050786",
+      "timestamp_updated": "2021-02-02T03:25:38,250221Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:917bf83a-7f0a-4ff4-a13a-500859d9d1a2/files/1050786",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:917bf83a-7f0a-4ff4-a13a-500859d9d1a2",
+      "size_bytes": 25297494,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "bb49fa1409dfd7ea8a86e9cce5fa1cc43bbf3feecc5438e9d5d46433b086ebe5"
+        }
+      ],
+      "parent_id": "collection:78676bbc-2a40-4629-9201-9eddc3609768",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C2_104/motility/stimulation_1/manifest.csv",
+      "basename": "manifest.csv",
+      "mimetype": "text/csv",
+      "remote_id": "package:48b51652-b4a4-4f8a-96fe-739de524b4e5/files/1050781",
+      "timestamp_updated": "2021-02-02T03:25:36,738584Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:48b51652-b4a4-4f8a-96fe-739de524b4e5/files/1050781",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:48b51652-b4a4-4f8a-96fe-739de524b4e5",
+      "size_bytes": 278,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "4be2fbef0af3a8fc8525fc6e5fa667e9e2bc112afdf1618a67208b7155f9331d"
+        }
+      ],
+      "parent_id": "collection:78676bbc-2a40-4629-9201-9eddc3609768",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C2_104/motility/prestimulation_1/img_motility_map.mat",
+      "basename": "img_motility_map.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:3716d2ea-7c76-4034-931f-e555f914d5a9/files/1050770",
+      "timestamp_updated": "2021-02-02T03:25:24,258853Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:3716d2ea-7c76-4034-931f-e555f914d5a9/files/1050770",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:3716d2ea-7c76-4034-931f-e555f914d5a9",
+      "size_bytes": 1938,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "2dc5daddd352b2e15a2e00be84829cb739b2c8642e8ad005fafd99b349d5844a"
+        }
+      ],
+      "parent_id": "collection:ed7fe161-8329-46b6-84f8-b172e57c6a61",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C2_104/motility/prestimulation_1/img_antrum_seg.mat",
+      "basename": "img_antrum_seg.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:7d39a7d3-77e7-41ad-aec9-faf49ecab4b0/files/1050771",
+      "timestamp_updated": "2021-02-02T03:25:49,019686Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:7d39a7d3-77e7-41ad-aec9-faf49ecab4b0/files/1050771",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:7d39a7d3-77e7-41ad-aec9-faf49ecab4b0",
+      "size_bytes": 7426322,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "8a43db55989c46871191e725805a94900d8897eed307fad0e7f87005f12e90fe"
+        }
+      ],
+      "parent_id": "collection:ed7fe161-8329-46b6-84f8-b172e57c6a61",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C2_104/motility/prestimulation_1/manifest.csv",
+      "basename": "manifest.csv",
+      "mimetype": "text/csv",
+      "remote_id": "package:06bafddd-9cc1-4ace-b556-c3507c0d3ccb/files/1050785",
+      "timestamp_updated": "2021-02-02T03:25:51,372097Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:06bafddd-9cc1-4ace-b556-c3507c0d3ccb/files/1050785",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:06bafddd-9cc1-4ace-b556-c3507c0d3ccb",
+      "size_bytes": 278,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "d106423223ddd60487b16fcaef3fb5f0f5216305d22b174b2313c422e38c5141"
+        }
+      ],
+      "parent_id": "collection:ed7fe161-8329-46b6-84f8-b172e57c6a61",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C1_101/motility/stimulation_1/img_motility_map.mat",
+      "basename": "img_motility_map.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:921c3fe5-a9cb-4b41-a3a4-ad0f21c70cea/files/1050839",
+      "timestamp_updated": "2021-02-02T03:26:08,046913Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:921c3fe5-a9cb-4b41-a3a4-ad0f21c70cea/files/1050839",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:921c3fe5-a9cb-4b41-a3a4-ad0f21c70cea",
+      "size_bytes": 5031,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "299bf0e748e9ac5f18f61a9a2ee2e5d5e2457314381e83f531741689f33315ac"
+        }
+      ],
+      "parent_id": "collection:3486cae5-6dbe-48c0-be78-7e4ee8aa19f3",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C1_101/motility/stimulation_1/img_antrum_seg.mat",
+      "basename": "img_antrum_seg.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:0a492638-c68b-489e-9f39-3e195c1550f6/files/1050809",
+      "timestamp_updated": "2021-02-02T03:25:42,204251Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:0a492638-c68b-489e-9f39-3e195c1550f6/files/1050809",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:0a492638-c68b-489e-9f39-3e195c1550f6",
+      "size_bytes": 25156798,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "3117ab919de783d59b37ecc758befc26792f4f145bfb5ccee40a6d625d5c91f7"
+        }
+      ],
+      "parent_id": "collection:3486cae5-6dbe-48c0-be78-7e4ee8aa19f3",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C1_101/motility/stimulation_1/manifest.csv",
+      "basename": "manifest.csv",
+      "mimetype": "text/csv",
+      "remote_id": "package:6c412855-ca07-4bec-a62c-b045e4b8411b/files/1050827",
+      "timestamp_updated": "2021-02-02T03:26:06,933409Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:6c412855-ca07-4bec-a62c-b045e4b8411b/files/1050827",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:6c412855-ca07-4bec-a62c-b045e4b8411b",
+      "size_bytes": 278,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "49321232a7794e38f1caa81e65089a402fb2f6ecaf890d4f02d443f0f7661319"
+        }
+      ],
+      "parent_id": "collection:3486cae5-6dbe-48c0-be78-7e4ee8aa19f3",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C1_101/motility/prestimulation_1/img_motility_map.mat",
+      "basename": "img_motility_map.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:9ffed4f9-9dd4-42df-aa56-dbb845442f8b/files/1050806",
+      "timestamp_updated": "2021-02-02T03:25:53,809610Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:9ffed4f9-9dd4-42df-aa56-dbb845442f8b/files/1050806",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:9ffed4f9-9dd4-42df-aa56-dbb845442f8b",
+      "size_bytes": 1738,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "420b1c1527d11da3383d717f746c7983f8e6f8e08dfde3b83ad237855eedc94b"
+        }
+      ],
+      "parent_id": "collection:1757feae-53cd-4203-b1bd-c216f7b54142",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C1_101/motility/prestimulation_1/img_antrum_seg.mat",
+      "basename": "img_antrum_seg.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:2f68f6df-0ab2-4612-86e4-8c7120b81a40/files/1050794",
+      "timestamp_updated": "2021-02-02T03:25:39,207227Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:2f68f6df-0ab2-4612-86e4-8c7120b81a40/files/1050794",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:2f68f6df-0ab2-4612-86e4-8c7120b81a40",
+      "size_bytes": 7590212,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "b5e8eae27d677c5ad739fa6be33088c97f187ee2784e9ad558e6dba42971220e"
+        }
+      ],
+      "parent_id": "collection:1757feae-53cd-4203-b1bd-c216f7b54142",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C1_101/motility/prestimulation_1/manifest.csv",
+      "basename": "manifest.csv",
+      "mimetype": "text/csv",
+      "remote_id": "package:6a283001-3945-4666-9d91-65f369b5181d/files/1050823",
+      "timestamp_updated": "2021-02-02T03:25:33,243598Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:6a283001-3945-4666-9d91-65f369b5181d/files/1050823",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:6a283001-3945-4666-9d91-65f369b5181d",
+      "size_bytes": 278,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "94d96223bb6eab7a7c60a88ded133db5642c6b853814fe2d04e92f79c2a99071"
+        }
+      ],
+      "parent_id": "collection:1757feae-53cd-4203-b1bd-c216f7b54142",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C1_102/motility/stimulation_1/img_motility_map.mat",
+      "basename": "img_motility_map.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:93730649-5285-45d9-82ef-a4be63589cc8/files/1050761",
+      "timestamp_updated": "2021-02-02T03:25:21,678444Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:93730649-5285-45d9-82ef-a4be63589cc8/files/1050761",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:93730649-5285-45d9-82ef-a4be63589cc8",
+      "size_bytes": 4365,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "d990b70d12ee4f2fa5ff7a7525e5409310c71951c5433ee6ee0d9f5cca03d1bc"
+        }
+      ],
+      "parent_id": "collection:1de839db-ac19-4de6-9f0a-f5bfb1be6efc",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C1_102/motility/stimulation_1/img_antrum_seg.mat",
+      "basename": "img_antrum_seg.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:442c4bbb-d6e2-4173-a4d0-b0e32f644e87/files/1050843",
+      "timestamp_updated": "2021-02-02T03:26:09,109054Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:442c4bbb-d6e2-4173-a4d0-b0e32f644e87/files/1050843",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:442c4bbb-d6e2-4173-a4d0-b0e32f644e87",
+      "size_bytes": 21315360,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "64697696e5b5e443c423cfadf155b6a2a23358dc273f02da9e3e0e950c82036b"
+        }
+      ],
+      "parent_id": "collection:1de839db-ac19-4de6-9f0a-f5bfb1be6efc",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C1_102/motility/stimulation_1/manifest.csv",
+      "basename": "manifest.csv",
+      "mimetype": "text/csv",
+      "remote_id": "package:a677469d-98a8-4fc9-bb35-b3482a1f3556/files/1050758",
+      "timestamp_updated": "2021-02-02T03:25:18,854781Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:a677469d-98a8-4fc9-bb35-b3482a1f3556/files/1050758",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:a677469d-98a8-4fc9-bb35-b3482a1f3556",
+      "size_bytes": 278,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "82b67018f87c38f9badfbba51857b0f79fa0d8e7dfecbd6cdb11aac6656f4944"
+        }
+      ],
+      "parent_id": "collection:1de839db-ac19-4de6-9f0a-f5bfb1be6efc",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C1_102/motility/prestimulation_1/img_motility_map.mat",
+      "basename": "img_motility_map.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:36b5f5ba-1dcd-4c4c-91c2-f05905db0569/files/1050832",
+      "timestamp_updated": "2021-02-02T03:26:09,878918Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:36b5f5ba-1dcd-4c4c-91c2-f05905db0569/files/1050832",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:36b5f5ba-1dcd-4c4c-91c2-f05905db0569",
+      "size_bytes": 1650,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "7bf2fffafeccab2a911f2b29d38d51d7706b0662deb3ef1089d4f593815b6baa"
+        }
+      ],
+      "parent_id": "collection:276c87c4-cb68-4aef-8f02-18ae296df1b4",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C1_102/motility/prestimulation_1/img_antrum_seg.mat",
+      "basename": "img_antrum_seg.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:75a3cc57-e0f6-4d62-8d51-fa84d4a32fb5/files/1050774",
+      "timestamp_updated": "2021-02-02T03:25:49,535873Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:75a3cc57-e0f6-4d62-8d51-fa84d4a32fb5/files/1050774",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:75a3cc57-e0f6-4d62-8d51-fa84d4a32fb5",
+      "size_bytes": 6650301,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "6c4fc688fa8453cccc180c3679b400c23553f79aa7eb2e804db402e7d9d40b03"
+        }
+      ],
+      "parent_id": "collection:276c87c4-cb68-4aef-8f02-18ae296df1b4",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C1_102/motility/prestimulation_1/manifest.csv",
+      "basename": "manifest.csv",
+      "mimetype": "text/csv",
+      "remote_id": "package:b54c13c0-e7a3-4170-a68b-86b8b4782649/files/1050750",
+      "timestamp_updated": "2021-02-02T03:25:16,521166Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:b54c13c0-e7a3-4170-a68b-86b8b4782649/files/1050750",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:b54c13c0-e7a3-4170-a68b-86b8b4782649",
+      "size_bytes": 278,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "f9f6c22c46a4ece2dd510a196976fda84db75f7c70dfb419a1dc4681e9918d5a"
+        }
+      ],
+      "parent_id": "collection:276c87c4-cb68-4aef-8f02-18ae296df1b4",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C1_104/motility/stimulation_1/img_motility_map.mat",
+      "basename": "img_motility_map.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:f2334730-6ba5-403b-bc24-a42bfc06d016/files/1050780",
+      "timestamp_updated": "2021-02-02T03:25:25,535622Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:f2334730-6ba5-403b-bc24-a42bfc06d016/files/1050780",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:f2334730-6ba5-403b-bc24-a42bfc06d016",
+      "size_bytes": 5404,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "4c9f5795c98c426587003bbf45c01a93e6ad55c00eb18e160a95e5e6b2f1eafa"
+        }
+      ],
+      "parent_id": "collection:65d81478-d410-4460-9d3b-227e7576e67d",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C1_104/motility/stimulation_1/img_antrum_seg.mat",
+      "basename": "img_antrum_seg.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:8ca46681-ee04-4f66-8927-a579f7e17637/files/1050764",
+      "timestamp_updated": "2021-02-02T03:25:35,130997Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:8ca46681-ee04-4f66-8927-a579f7e17637/files/1050764",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:8ca46681-ee04-4f66-8927-a579f7e17637",
+      "size_bytes": 21493925,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "69e8d248512fd80fb5a6b1aa7a2fc14efe4e6a514165c0012ca3368db718d059"
+        }
+      ],
+      "parent_id": "collection:65d81478-d410-4460-9d3b-227e7576e67d",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C1_104/motility/stimulation_1/manifest.csv",
+      "basename": "manifest.csv",
+      "mimetype": "text/csv",
+      "remote_id": "package:7f6144b6-8c5c-4894-a18c-163c34322132/files/1050762",
+      "timestamp_updated": "2021-02-02T03:25:21,847392Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:7f6144b6-8c5c-4894-a18c-163c34322132/files/1050762",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:7f6144b6-8c5c-4894-a18c-163c34322132",
+      "size_bytes": 278,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "de19ed1158d4809de684019e6bb785d03cdb913dc99cb7592cdf66b04eec9643"
+        }
+      ],
+      "parent_id": "collection:65d81478-d410-4460-9d3b-227e7576e67d",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C1_104/motility/prestimulation_1/img_motility_map.mat",
+      "basename": "img_motility_map.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:6c061fe1-58c9-4acc-8abd-03782dcfc538/files/1050754",
+      "timestamp_updated": "2021-02-02T03:25:17,568190Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:6c061fe1-58c9-4acc-8abd-03782dcfc538/files/1050754",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:6c061fe1-58c9-4acc-8abd-03782dcfc538",
+      "size_bytes": 1745,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "9131c4cbf5517eed771e7a1b618416a97e283c25024e7e2939085098ab3140bd"
+        }
+      ],
+      "parent_id": "collection:df1b7d3e-a950-455b-8c08-22eaaa40c85a",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C1_104/motility/prestimulation_1/img_antrum_seg.mat",
+      "basename": "img_antrum_seg.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:7df64726-b18a-4dae-95a1-1f0b9c8d2e53/files/1050768",
+      "timestamp_updated": "2021-02-02T03:25:23,996594Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:7df64726-b18a-4dae-95a1-1f0b9c8d2e53/files/1050768",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:7df64726-b18a-4dae-95a1-1f0b9c8d2e53",
+      "size_bytes": 6618757,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "ed2c0b386cff730016ab2ee415226da6ab35ee39674df7b66887dbc04085093a"
+        }
+      ],
+      "parent_id": "collection:df1b7d3e-a950-455b-8c08-22eaaa40c85a",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C1_104/motility/prestimulation_1/manifest.csv",
+      "basename": "manifest.csv",
+      "mimetype": "text/csv",
+      "remote_id": "package:2857c2ab-d2cd-4c96-8bcf-25a586c76f21/files/1050766",
+      "timestamp_updated": "2021-02-02T03:25:46,101424Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:2857c2ab-d2cd-4c96-8bcf-25a586c76f21/files/1050766",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:2857c2ab-d2cd-4c96-8bcf-25a586c76f21",
+      "size_bytes": 278,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "71000d8a43fbb80a7379036a83615a8b7f05473de46c2a439529818a2900a3ce"
+        }
+      ],
+      "parent_id": "collection:df1b7d3e-a950-455b-8c08-22eaaa40c85a",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C1_103/motility/stimulation_1/img_motility_map.mat",
+      "basename": "img_motility_map.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:5b32ed02-e447-43e0-b3e8-632ac648e8c9/files/1050831",
+      "timestamp_updated": "2021-02-02T03:26:09,704588Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:5b32ed02-e447-43e0-b3e8-632ac648e8c9/files/1050831",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:5b32ed02-e447-43e0-b3e8-632ac648e8c9",
+      "size_bytes": 5588,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "61f8ce76d9ca87f0d6dad88ff944a2bee07e2fedff924e05fea5fa31338a41d7"
+        }
+      ],
+      "parent_id": "collection:426c1b5c-420c-4589-ab24-d090be98c176",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C1_103/motility/stimulation_1/img_antrum_seg.mat",
+      "basename": "img_antrum_seg.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:8a808d9b-259c-4a97-91f8-8501f05cb935/files/1050757",
+      "timestamp_updated": "2021-02-02T03:25:18,683426Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:8a808d9b-259c-4a97-91f8-8501f05cb935/files/1050757",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:8a808d9b-259c-4a97-91f8-8501f05cb935",
+      "size_bytes": 23551680,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "d914ecd539888f70a929abbe15d058364f05838ac8581bb2a86d59765ae82d4d"
+        }
+      ],
+      "parent_id": "collection:426c1b5c-420c-4589-ab24-d090be98c176",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C1_103/motility/stimulation_1/manifest.csv",
+      "basename": "manifest.csv",
+      "mimetype": "text/csv",
+      "remote_id": "package:0844444a-920d-4849-9020-29544e1b0f72/files/1050787",
+      "timestamp_updated": "2021-02-02T03:25:26,137652Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:0844444a-920d-4849-9020-29544e1b0f72/files/1050787",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:0844444a-920d-4849-9020-29544e1b0f72",
+      "size_bytes": 278,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "7e4cdc907754c3ad6f7c4e48759dd15bbf01babfb5bc5b3c14591b409359872d"
+        }
+      ],
+      "parent_id": "collection:426c1b5c-420c-4589-ab24-d090be98c176",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C1_103/motility/prestimulation_1/img_motility_map.mat",
+      "basename": "img_motility_map.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:639fb89c-1ab2-4972-8df1-128d63f574e6/files/1050752",
+      "timestamp_updated": "2021-02-02T03:25:17,034235Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:639fb89c-1ab2-4972-8df1-128d63f574e6/files/1050752",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:639fb89c-1ab2-4972-8df1-128d63f574e6",
+      "size_bytes": 1773,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "968a34212b646fd0b1183832dde9f8aeed9686a6fa797fe0cb37b76b14360153"
+        }
+      ],
+      "parent_id": "collection:6a2c7f5e-6dfd-4798-bac0-9296f8c37349",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C1_103/motility/prestimulation_1/img_antrum_seg.mat",
+      "basename": "img_antrum_seg.mat",
+      "mimetype": "application/x-matlab-data",
+      "remote_id": "package:34296aa3-646a-4382-aaf3-11fbfbe60535/files/1050791",
+      "timestamp_updated": "2021-02-02T03:25:38,733959Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:34296aa3-646a-4382-aaf3-11fbfbe60535/files/1050791",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:34296aa3-646a-4382-aaf3-11fbfbe60535",
+      "size_bytes": 7030842,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "fbd386250b6318dc97bb3e8496860ca1600a9b79d9f5386f1b67cba351aeef30"
+        }
+      ],
+      "parent_id": "collection:6a2c7f5e-6dfd-4798-bac0-9296f8c37349",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "derivatives/C1_103/motility/prestimulation_1/manifest.csv",
+      "basename": "manifest.csv",
+      "mimetype": "text/csv",
+      "remote_id": "package:5c200348-dade-4aaf-9e88-ce9b4ced814c/files/1050784",
+      "timestamp_updated": "2021-02-02T03:25:25,915079Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:5c200348-dade-4aaf-9e88-ce9b4ced814c/files/1050784",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:5c200348-dade-4aaf-9e88-ce9b4ced814c",
+      "size_bytes": 278,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "db66a01fa909a9a1e0f4119b1a8d1ee823108d2a14bbef8b78389992bfb64147"
+        }
+      ],
+      "parent_id": "collection:6a2c7f5e-6dfd-4798-bac0-9296f8c37349",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "submission.xlsx",
+      "basename": "submission.xlsx",
+      "mimetype": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "remote_id": "package:53016ed2-f554-401c-b122-b8ee3cad8f8d/files/1171059",
+      "timestamp_updated": "2021-02-02T03:26:11,607179Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:53016ed2-f554-401c-b122-b8ee3cad8f8d/files/1171059",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:53016ed2-f554-401c-b122-b8ee3cad8f8d",
+      "size_bytes": 10511,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "061eab7b3216493947408613463c55c8444382f7c731319a6068da67bc3a1a55"
+        }
+      ],
+      "parent_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "status": "accepted"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "dataset_relative_path": "subjects.xlsx",
+      "basename": "subjects.xlsx",
+      "mimetype": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "remote_id": "package:9c190a43-2d1e-41c6-b331-90a293a55de1/files/1192994",
+      "timestamp_updated": "2021-02-02T03:25:15,705499Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:9c190a43-2d1e-41c6-b331-90a293a55de1/files/1192994",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/files/00000000-0000-0000-0000-000000000000/N:package:9c190a43-2d1e-41c6-b331-90a293a55de1",
+      "size_bytes": 63643,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "a15cd27661141ae0604a78df2eee28adc636896f2173d4603667c25d25803f57"
+        }
+      ],
+      "parent_id": "dataset:226a0573-f8e5-418c-914f-045551cc2b1f",
+      "status": "accepted"
+    }
+  ],
+  "errors": [
+    {
+      "pipeline_stage": "Path.validate_path_json_metadata",
+      "blame": null,
+      "file_path": "README",
+      "path": [
+        "data",
+        52
+      ],
+      "message": "unknown mimetype README",
+      "type": null
+    },
+    {
+      "pipeline_stage": "Path.validate_path_json_metadata",
+      "blame": null,
+      "file_path": "docs/README",
+      "path": [
+        "data",
+        53
+      ],
+      "message": "unknown mimetype README",
+      "type": null
+    }
+  ],
+  "prov": {
+    "timestamp_export_start": "2021-04-13T02:10:55,036200Z",
+    "export_system_identifier": "FLGyaqO-i2za4fTU1KNwGg",
+    "export_hostname": "cassava",
+    "sparcur_version": "0.0.1.dev3",
+    "sparcur_commit": "64a0ac8f7d6f7119ddce26a6a463668fae4f9d81"
+  }
+}
