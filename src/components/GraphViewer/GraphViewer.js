@@ -13,6 +13,7 @@ const ZOOM_SENSITIVITY = .2;
 
 const GraphViewer = (props) => {
   const graphRef = React.useRef(null);
+  const [graphId, setGraphId] = React.useState(props.graph_id);
 
   const handleNodeClick = (node, event) => {
     graphRef.current.ggv.current.centerAt(node.x , node.y, ONE_SECOND);
@@ -50,9 +51,12 @@ const GraphViewer = (props) => {
       <GeppettoGraphVisualization
         ref={graphRef}
         // Graph data with Nodes and Links to populate
-        data={window.datasets[props.graph_id].graph}
+        data={window.datasets[graphId].graph}
         // Create the Graph as 2 Dimensional
         d2={true}
+        // td = Top Down, creates Graph with root at top
+        dagMode="td"
+        dagLevelDistance={10}
         nodeRelSize={20}
         nodeSize={30}
         // Links properties
@@ -70,17 +74,17 @@ const GraphViewer = (props) => {
           // Create Title in Node
           ctx.fillText(node.name,node.x, node.y - size);
 
-          node.fy = 100 * node.level;
+          //node.fy = 100 * node.level;
         }}
-        // td = Top Down, creates Graph with root at top
-        dagMode="td"
         // Handles error on graph
         onDagError={loopNodeIds => {}}
         // Disable dragging of nodes
         enableNodeDrag={false}
+        nodeCanvasObjectMode={node => 'replace'}
         // Allow camera pan and zoom with mouse
         enableZoomPanInteraction={true}
         enablePointerInteraction={true}
+        // linkCanvasObjectMode={"replace"}
         // React element for controls goes here
         controls = {
           <div className="graph-view_controls">

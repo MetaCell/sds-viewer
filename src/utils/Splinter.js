@@ -1,48 +1,49 @@
 const N3 = require('n3');
 const graphModel = require("./graphModel.json");
-const imgs = ['dataset.svg', 'nifti.svg', 'volume.svg']
+const imgs = ['dataset.svg', 'nifti.svg', 'volume.svg'].map(src => {
+    const img = new Image();
+    img.src = `./images/${src}`;
+    console.log("Image source ", img.src);
+    return img;
+});
+const staticData = {
+    nodes: [
+        { id: "a" , name : "Dataset", img : imgs[0], level : 1 },
+        { id: "b" , name : " Subject 2", img : imgs[1], level : 2 },
+        { id: "c" , name : "Subject 3", img : imgs[1], level : 2 },
+        { id: "d" , name : "Subject 4", img : imgs[1], level : 3 },
+        { id: "e" , name : "Subject 5", img : imgs[1], level : 3 },
+        { id: "f" , name : "File 1", img : imgs[1], level : 3 },
+        { id: "g" , name : "File 2", img : imgs[1], level : 3 },
+        { id: "h" , name : "File 3", img : imgs[1], level : 4 },
+        { id: "i" , name : "File 4", img : imgs[1], level : 4 }
+    ],
+    links: [
+        { source: "a", target: "b"},
+        { source: "a", target: "c"},
+        { source: "b", target: "d"},
+        { source: "b", target: "e"},
+        { source: "d", target: "h"},
+        { source: "d", target: "i"},
+        { source: "c", target: "f"},
+        { source: "c", target: "g"}
+    ]
+};
 
 class Splinter {
     constructor(jsonFile, turtleFile) {
         this.jsonFile = jsonFile;
         this.turtleFile = turtleFile;
         this.types = {};
-        this.nodes = {};
-        this.edges = [];
+        this.nodes = undefined;
+        this.edges = undefined;
         this.jsonData = {};
         this.turtleData = [];
         this.dataset_id = this.processDatasetId();
         this.store = new N3.Store();
         this.graphRoot = undefined;
-        const imgs = ['dataset.svg', 'nifti.svg', 'volume.svg'].map(src => {
-            const img = new Image();
-            img.src = `./images/${src}`;
-            console.log("Image source ", img.src);
-            return img;
-        });
-        this.graph = {
-            nodes: [
-                { id: 1 , name : "Dataset", img : imgs[0], level : 1 },
-                { id: 2 , name : " Subject 2", img : imgs[1], level : 2 },
-                { id: 3 , name : "Subject 3", img : imgs[1], level : 2 },
-                { id: 4 , name : "Subject 4", img : imgs[1], level : 3 },
-                { id: 5 , name : "Subject 5", img : imgs[1], level : 3 },
-                { id: 6 , name : "File 1", img : imgs[1], level : 3 },
-                { id: 7 , name : "File 2", img : imgs[1], level : 3 },
-                { id: 8 , name : "File 3", img : imgs[1], level : 4 },
-                { id: 9 , name : "File 4", img : imgs[1], level : 4 }
-            ],
-            links: [
-                { source: 1, target: 2},
-                { source: 1, target: 3},
-                { source: 2, target: 4},
-                { source: 2, target: 5},
-                { source: 4, target: 8},
-                { source: 4, target: 9},
-                { source: 3, target: 6},
-                { source: 3, target: 7}
-            ]
-        };
+        this.graph = undefined;
+        this.counter = 0;
         this.tree = {
             id: this.dataset_id,
             text: this.dataset_id + ' Dataset',
@@ -76,7 +77,12 @@ class Splinter {
                 },
             ],
         }
-        this.processDataset();
+    }
+
+    initialiseNodesEdges() {
+        this.nodes = {};
+        this.edges = [];
+        // this.tree = {};
     }
 
     extractJson() {
@@ -125,11 +131,45 @@ class Splinter {
         return this.turtleData;
     }
 
-    getGraph() {
-        return this.graph;
+    async getGraph() {
+        //return this.graph;
+        if (this.nodes === undefined || this.edges === undefined) {
+            await this.processDataset();
+        }
+        let _links = this.edges.slice();
+        let _nodes = Object.keys(this.nodes).map(key => {
+            let _edges = _links.map(edge => {
+                if (edge.source === key) {
+                    edge.source = this.counter;
+                }
+                if (edge.target === key) {
+                    edge.target = this.counter;
+                }
+                return edge;
+            });
+            this.nodes[key].name = this.nodes[key].label;
+            this.nodes[key].ref = this.nodes[key].id;
+            this.nodes[key].id = this.counter;
+            this.nodes[key].img = imgs[0];
+            _links = _edges;
+            this.counter++;
+            return this.nodes[key]
+        });
+
+        _links = _links.filter(item => !(isNaN(item.source) || isNaN(item.target)));
+
+        let _graph = {
+            nodes: _nodes,
+            links: _links
+        };
+
+        return _graph;
     }
 
-    getTree() {
+    async getTree() {
+        if (this.tree === undefined) {
+            await this.processDataset();
+        }
         return this.tree;
     }
 
@@ -155,6 +195,7 @@ class Splinter {
     }
 
     async processDataset() {
+        this.initialiseNodesEdges()
         await this.processTurtle();
         this.processJSON();
         this.create_graph();
@@ -223,8 +264,8 @@ class Splinter {
     link_nodes(quad) {
         if (this.nodes[String(quad.object.id)] !== undefined) {
             this.edges.push({
-                startNode: quad.subject.id,
-                endNode: quad.object.id
+                source: quad.subject.id,
+                target: quad.object.id
             })
         } else {
             this.update_node(quad, true);

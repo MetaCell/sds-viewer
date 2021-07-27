@@ -24,7 +24,7 @@ const UploadDialog = (props) => {
   // The below is just an hack waiting for the design to be clarified, I need an entrypoint for the datasets
   // that provides both the files and so far I do not want to implement anything that will be replaced later
 
-  const handleDone = (files) => {
+  const handleDone = async (files) => {
     if ((files.length === 2) && (files[0].data !== undefined && files[1].data !== undefined)) {
       let _json = undefined;
       let _turtle = undefined;
@@ -41,8 +41,8 @@ const UploadDialog = (props) => {
       const splinter = new Splinter(_json, _turtle);
       const _dataset = {
         id: splinter.getDatasetId(),
-        graph: splinter.getGraph(),
-        tree: splinter.getTree(),
+        graph: await splinter.getGraph(),
+        tree: await splinter.getTree(),
         splinter: splinter
       }
 
