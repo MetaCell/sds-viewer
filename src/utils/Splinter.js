@@ -14,9 +14,9 @@ class Splinter {
         this.dataset_id = this.processDatasetId();
         this.store = new N3.Store();
         this.graphRoot = undefined;
-        const imgs = ['database.svg', 'file-2.svg', 'file-2.svg', 'database.svg'].map(src => {
+        const imgs = ['database.svg', 'nft.svg', 'mtl.svg', 'folder.svg'].map(src => {
             const img = new Image();
-            img.src = `./images/${src}`;
+            img.src = `./images/img/${src}`;
             console.log("Image source ", img.src);
             return img;
         });

@@ -62,7 +62,7 @@ const GraphViewer = (props) => {
   };
 
   const paintRing = React.useCallback((node, ctx) => {
-    const size = 20;
+    const size = 10;
     ctx.beginPath();
     ctx.drawImage(node.img, node.x - size, node.y - size , size * 2, size * 2);
 
@@ -74,10 +74,10 @@ const GraphViewer = (props) => {
     if(node === hoverNode){
       ctx.globalAlpha = 0.5;
       ctx.fillStyle = '#CFD4DA';
-      ctx.fillRect(node.x - size, node.y - size , size * 2, size * 2);
+      ctx.fillRect(node.x - 15, node.y - 15 , size * 3, size * 2.8);
       ctx.globalAlpha = 1.0;
       ctx.fillStyle = '#3779E1';
-      ctx.fillRect(node.x - 15, node.y + size + 5, size * 1.5, 12 );
+      ctx.fillRect(node.x - 15, node.y + size + 5, size * 3.5, 12 );
       ctx.fillStyle = "white";
       ctx.fillText(node.name, node.x, node.y + 11 + size);
     } else {
