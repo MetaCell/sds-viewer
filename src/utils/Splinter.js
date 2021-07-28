@@ -16,7 +16,7 @@ class Splinter {
         this.graphRoot = undefined;
         const imgs = ['database.svg', 'nft.svg', 'mtl.svg', 'folder.svg'].map(src => {
             const img = new Image();
-            img.src = `./images/img/${src}`;
+            img.src = `./images/graph/${src}`;
             console.log("Image source ", img.src);
             return img;
         });
