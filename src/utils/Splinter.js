@@ -3,7 +3,6 @@ const graphModel = require("./graphModel.json");
 const imgs = ['dataset.svg', 'nifti.svg', 'volume.svg'].map(src => {
     const img = new Image();
     img.src = `./images/${src}`;
-    console.log("Image source ", img.src);
     return img;
 });
 const staticData = {
@@ -37,12 +36,12 @@ class Splinter {
         this.types = {};
         this.nodes = undefined;
         this.edges = undefined;
+        this.forced_edges = undefined;
+        this.forced_nodes = undefined;
         this.jsonData = {};
         this.turtleData = [];
         this.dataset_id = this.processDatasetId();
         this.store = new N3.Store();
-        this.graphRoot = undefined;
-        this.graph = undefined;
         this.counter = 0;
         this.tree = {
             id: this.dataset_id,
@@ -103,9 +102,6 @@ class Splinter {
                     that.store.addQuad(quad);
                     that.turtleData.push(quad);
                 }
-                if (prefixes) {
-                    console.log(prefixes);
-                }
             }
 
             let prefixCallback = function (prefix, iri) {
@@ -138,25 +134,25 @@ class Splinter {
         }
         let _links = this.edges.slice();
         let _nodes = Object.keys(this.nodes).map(key => {
-            let _edges = _links.map(edge => {
-                if (edge.source === key) {
-                    edge.source = this.counter;
-                }
-                if (edge.target === key) {
-                    edge.target = this.counter;
-                }
-                return edge;
-            });
+            // let _edges = _links.map(edge => {
+            //     if (edge.source === key) {
+            //         edge.source = this.counter;
+            //     }
+            //     if (edge.target === key) {
+            //         edge.target = this.counter;
+            //     }
+            //     return edge;
+            // });
             this.nodes[key].name = this.nodes[key].label;
-            this.nodes[key].ref = this.nodes[key].id;
-            this.nodes[key].id = this.counter;
+            // this.nodes[key].ref = this.nodes[key].id;
+            // this.nodes[key].id = this.counter;
             this.nodes[key].img = imgs[0];
-            _links = _edges;
+            // _links = _edges;
             this.counter++;
             return this.nodes[key]
         });
 
-        _links = _links.filter(item => !(isNaN(item.source) || isNaN(item.target)));
+        // _links = _links.filter(item => !(isNaN(item.source) || isNaN(item.target)));
 
         let _graph = {
             nodes: _nodes,
@@ -199,7 +195,6 @@ class Splinter {
         await this.processTurtle();
         this.processJSON();
         this.create_graph();
-        console.log("let s check the graph!!!!");
     }
 
     get_type(quad) {
@@ -214,7 +209,7 @@ class Splinter {
         if (this.nodes[String(node.id)] === undefined) {
             this.nodes[String(node.id)] = {
                 id: node.id,
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": [],
+                types: [],
                 label: node.value,
                 proxies: [],
                 properties: []
@@ -226,7 +221,7 @@ class Splinter {
         // check if node to update exists in the list of nodes.
         if (this.nodes[String(quad.subject.id)] !== undefined) {
             if (quad.predicate.id === graphModel.type_key) {
-                this.nodes[String(quad.subject.id)][quad.predicate.id].push({
+                this.nodes[String(quad.subject.id)].types.push({
                     predicate: quad.predicate.id,
                     type: quad.object.datatype !== undefined ? quad.object.datatype.id : quad.object.id,
                     value: quad.object.value
@@ -273,12 +268,14 @@ class Splinter {
     }
 
     create_graph() {
+        // build nodes out of the subjects
         for (const node of this.store.getSubjects()) {
             if (!N3.Util.isBlankNode(node)) {
                 this.build_node(node);
             }
         }
 
+        // consume all the other nodes that will contain mainly literals/properties of the subject nodes
         for (const quad of this.turtleData) {
             if (N3.Util.isLiteral(quad.object) || quad.predicate.id === graphModel.type_key) {
                 // The object does not represent a node on his own but rather a property of the existing subject

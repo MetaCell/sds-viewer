@@ -72,15 +72,13 @@ const GraphViewer = (props) => {
           ctx.textAlign = "center";
           ctx.textBaseline = 'middle';
           // Create Title in Node
-          ctx.fillText(node.name,node.x, node.y - size);
-
-          //node.fy = 100 * node.level;
+          const _name = node.name.split(':')
+          ctx.fillText(_name[_name.length - 1],node.x, node.y - size);
         }}
         // Handles error on graph
         onDagError={loopNodeIds => {}}
         // Disable dragging of nodes
         enableNodeDrag={false}
-        nodeCanvasObjectMode={node => 'replace'}
         // Allow camera pan and zoom with mouse
         enableZoomPanInteraction={true}
         enablePointerInteraction={true}

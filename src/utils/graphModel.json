@@ -1,20 +1,35 @@
 {
     "type_key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
-    "http://www.w3.org/2000/01/rdf-schema#comment": "comment",
-    "root": {
-        "key": "http://www.w3.org/2002/07/owl#Ontology",
-        "type": "dataset"
+    "collection": {
+        "type": "dataset",
+        "properties": [{
+            "key": "",
+            "property": "",
+            "label": ""
+        }]
+    },
+    "contributor": {
+        "type": "dataset",
+        "properties": [{
+            "key": "",
+            "property": "",
+            "label": ""
+        }]
     },
     "dataset": {
-        "key": "",
-        "type": "dataset"
+        "type": "subject",
+        "properties": [{
+            "key": "",
+            "property": "",
+            "label": ""
+        }]
     },
     "subject": {
-        "key": "",
-        "type": "subject"
-    },
-    "sample": {
-        "key": "",
-        "type": "sample"
+        "type": "sample",
+        "properties": [{
+            "key": "",
+            "property": "",
+            "label": ""
+        }]
     }
 }
