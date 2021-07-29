@@ -73,7 +73,8 @@ const GraphViewer = (props) => {
           ctx.textBaseline = 'middle';
           // Create Title in Node
           const _name = node.name.split(':')
-          ctx.fillText(_name[_name.length - 1],node.x, node.y - size);
+          //ctx.fillText(_name[_name.length - 1],node.x, node.y - size);
+          ctx.fillText(node.name, node.x, node.y - size);
         }}
         // Handles error on graph
         onDagError={loopNodeIds => {}}

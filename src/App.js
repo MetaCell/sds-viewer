@@ -1,17 +1,15 @@
 import './flexlayout.css';
 import theme from './theme';
-import { hot } from 'react-hot-loader';
 import { useState } from 'react';
+import { hot } from 'react-hot-loader';
 import Box from '@material-ui/core/Box';
 import MainLayout from './app/mainLayout';
+import { useSelector } from 'react-redux';
 import Sidebar from './components/Sidebar/Sidebar';
-import UploadDialog from './components/FileUploader/UploadDialog';
 import EmptyContainer from './components/EmptyContainer';
-import NodeDetailView from './components/NodeDetailView/NodeDetailView';
-import { MuiThemeProvider, CssBaseline } from '@material-ui/core';
-import { useSelector, useDispatch } from 'react-redux';
-import { addDataset, deleteDataset } from './redux/actions';
 import ErrorDialog from './components/ErrorDialog/ErrorDialog';
+import UploadDialog from './components/FileUploader/UploadDialog';
+import { MuiThemeProvider, CssBaseline } from '@material-ui/core';
 
 const App = () => {
   const [openDialog, setOpenDialog] = useState(false);

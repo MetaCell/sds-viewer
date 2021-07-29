@@ -1,3 +1,5 @@
+import NodesFactory from './nodesFactory';
+
 const N3 = require('n3');
 const graphModel = require("./graphModel.json");
 const imgs = ['dataset.svg', 'nifti.svg', 'volume.svg'].map(src => {
@@ -5,6 +7,7 @@ const imgs = ['dataset.svg', 'nifti.svg', 'volume.svg'].map(src => {
     img.src = `./images/${src}`;
     return img;
 });
+
 const staticData = {
     nodes: [
         { id: "a" , name : "Dataset", img : imgs[0], level : 1 },
@@ -42,7 +45,7 @@ class Splinter {
         this.turtleData = [];
         this.dataset_id = this.processDatasetId();
         this.store = new N3.Store();
-        this.counter = 0;
+        // Temporary data
         this.tree = {
             id: this.dataset_id,
             text: this.dataset_id + ' Dataset',
@@ -105,62 +108,39 @@ class Splinter {
             }
 
             let prefixCallback = function (prefix, iri) {
-                that.types[String(iri.id)] = {
+                that.types[String(prefix)] = {
                     "type": prefix,
                     "iri": iri
                 };
-
-                if (graphModel[prefix] !== undefined) {
-                    graphModel[prefix]["key"] = iri;
-                }
             }
             var quadsArray = parser.parse(that.turtleFile, callbackParse, prefixCallback);
             resolve(quadsArray);
         });
     }
 
+
     getJson() {
         return this.jsonData;
     }
+
 
     getTurtle() {
         return this.turtleData;
     }
 
+
     async getGraph() {
-        //return this.graph;
         if (this.nodes === undefined || this.edges === undefined) {
             await this.processDataset();
         }
-        let _links = this.edges.slice();
-        let _nodes = Object.keys(this.nodes).map(key => {
-            // let _edges = _links.map(edge => {
-            //     if (edge.source === key) {
-            //         edge.source = this.counter;
-            //     }
-            //     if (edge.target === key) {
-            //         edge.target = this.counter;
-            //     }
-            //     return edge;
-            // });
-            this.nodes[key].name = this.nodes[key].label;
-            // this.nodes[key].ref = this.nodes[key].id;
-            // this.nodes[key].id = this.counter;
-            this.nodes[key].img = imgs[0];
-            // _links = _edges;
-            this.counter++;
-            return this.nodes[key]
-        });
-
-        // _links = _links.filter(item => !(isNaN(item.source) || isNaN(item.target)));
 
         let _graph = {
-            nodes: _nodes,
-            links: _links
+            nodes: this.forced_nodes,
+            links: this.forced_edges
         };
-
         return _graph;
     }
+
 
     async getTree() {
         if (this.tree === undefined) {
@@ -169,26 +149,32 @@ class Splinter {
         return this.tree;
     }
 
+
     getDatasetId() {
         return this.dataset_id;
     }
 
+
     async processTurtle() {
         await this.extractTurtle();
     }
+
 
     processDatasetId() {
         this.processJSON();
         return this.jsonData.data[0].dataset_id.replace('dataset:', '');
     }
 
+
     processJSON() {
         this.jsonData = this.extractJson()
     }
 
+
     mergeData() {
         console.log("to be implemented, merge data between json and turtle to create the graph (not sure is required)");
     }
+
 
     async processDataset() {
         this.initialiseNodesEdges()
@@ -196,6 +182,7 @@ class Splinter {
         this.processJSON();
         this.create_graph();
     }
+
 
     get_type(quad) {
         if (quad.predicate.id === graphModel.type_key) {
@@ -205,19 +192,28 @@ class Splinter {
         }
     }
 
+
     build_node(node) {
         if (this.nodes[String(node.id)] === undefined) {
             this.nodes[String(node.id)] = {
                 id: node.id,
                 types: [],
-                label: node.value,
+                name: node.value,
                 proxies: [],
                 properties: []
             };
+        } else {
+            console.log("Issue with the build node, this node is already present");
+            console.log(node);
         }
     }
 
+
     update_node(quad, proxy) {
+        // check if the node is blank
+        if (N3.Util.isBlankNode(quad.subject)) {
+            return;
+        }
         // check if node to update exists in the list of nodes.
         if (this.nodes[String(quad.subject.id)] !== undefined) {
             if (quad.predicate.id === graphModel.type_key) {
@@ -225,11 +221,11 @@ class Splinter {
                     predicate: quad.predicate.id,
                     type: quad.object.datatype !== undefined ? quad.object.datatype.id : quad.object.id,
                     value: quad.object.value
-                })
+                });
             } else {
                 this.nodes[String(quad.subject.id)].properties.push({
                     predicate: quad.predicate.id,
-                    type: quad.object.datatype,
+                    type: quad.object.datatype !== undefined ? quad.object.datatype.id : quad.object.id,
                     value: quad.object.value
                 });
                 if (proxy) {
@@ -238,7 +234,7 @@ class Splinter {
             }
         } else {
             // if the node does not exist there should be referenced by a proxy inside another node.
-            var found = false;
+            var found = true;
             for (const key in this.nodes) {
                 if (this.nodes[key].proxies.indexOf(String(quad.subject.id)) !== -1) {
                     this.nodes[key].properties.push({
@@ -247,25 +243,110 @@ class Splinter {
                         value: quad.object.value
                     });
                     this.nodes[key].proxies.push(quad.object.id);
-                    found = true;
+                    found = false;
                 }
             }
             if (found) {
                 console.log("Houston, we have a problem!");
+                console.log(quad);
             }
         }
     }
 
+
     link_nodes(quad) {
-        if (this.nodes[String(quad.object.id)] !== undefined) {
+        // before to create the node check that:
+        // 1. subject and object are nodes in our graph
+        // 2. we are not self referencing the node with a property that we don't need
+        if ((this.nodes[String(quad.object.id)] !== undefined) && (this.nodes[String(quad.subject.id)] !== undefined) && (quad.subject.id !== quad.object.id)) {
             this.edges.push({
                 source: quad.subject.id,
                 target: quad.object.id
             })
         } else {
+            // if the conditions above are not satisfied we push this relationship as a proxy of another node already present
             this.update_node(quad, true);
         }
     }
+
+
+    merge_ontology_dataset() {
+        // As per title, ontology node is required so we merge this with the dataset node
+        let dataset = undefined;
+        let ontology = undefined;
+        let temp_nodes = this.forced_nodes.filter(node => {
+            for (const type of node.types) {
+                if (type.type === graphModel.ontology.key) {
+                    ontology = node;
+                    return false;
+                }
+                if (type.type === this.types.sparc.iri.id + graphModel.dataset.key) {
+                    dataset = node;
+                    return false;
+                }
+            }
+            return true;
+        });
+
+        // merge the 2 nodes together
+        dataset.properties = dataset.properties.concat(ontology.properties)
+        dataset.proxies = dataset.proxies.concat(ontology.proxies)
+        dataset.types = dataset.types.concat(ontology.types)
+        dataset.level = 0;
+        dataset.proxies.push(ontology.id)
+        // push on top of the array
+        temp_nodes.unshift(dataset);
+        // fix links that were pointing to the ontology
+        this.forced_edges = this.edges.map(link => {
+            if (link.source === ontology.id) {
+                link.source = dataset.id
+            }
+            if (link.target === ontology.id) {
+                link.target = dataset.id
+            }
+            return link;
+        })
+        this.forced_nodes = temp_nodes;
+    }
+
+
+    organise_nodes() {
+        // structure the graph per category
+        let dataset = this.forced_nodes[0];
+        let subjects = {
+            id: "all_subjects",
+            name: "Subjects",
+            level: 1,
+            img: () => {
+                const img = new Image();
+                img.src = graphModel.subject.image;
+                return img;
+            }
+        };
+        let protocols = {
+            id: "all_protocols",
+            name: "Protocols",
+            level: 1,
+            img: () => {
+                const img = new Image();
+                img.src = graphModel.protocol.image;
+                return img;
+            }
+        };
+        let contributors = {
+            id: "all_contributors",
+            name: "Contributors",
+            level: 1,
+            img: () => {
+                const img = new Image();
+                img.src = graphModel.contributor.image;
+                return img;
+            }
+        };
+
+        var factory = new NodesFactory();
+    }
+
 
     create_graph() {
         // build nodes out of the subjects
@@ -285,7 +366,16 @@ class Splinter {
                 this.link_nodes(quad);
             }
         }
+
+        this.forced_nodes = Object.keys(this.nodes).map(key => {
+            this.nodes[key].img = imgs[0];
+            return this.nodes[key];
+        });
+
+        this.merge_ontology_dataset();
+        this.organise_nodes();
+        console.log("ho finito con il graph");
     }
 }
 
-export default Splinter
+export default Splinter;
