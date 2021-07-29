@@ -6,7 +6,7 @@ import RefreshIcon from '@material-ui/icons/Refresh';
 import LayersIcon from '@material-ui/icons/Layers';
 import GeppettoGraphVisualization from '@metacell/geppetto-meta-ui/graph-visualization/Graph';
 
-const NODE_FONT = "500 6px Inter";
+const NODE_FONT = '500 6px Inter, sans-serif';
 const ONE_SECOND = 1000;
 const ZOOM_DEFAULT = 1;
 const ZOOM_SENSITIVITY = 0.2;
@@ -15,10 +15,10 @@ const GRAPH_COLORS = {
   hoverRect: '#CFD4DA',
   textHoverRect: '#3779E1',
   textHover: 'white',
-  textColor: '#2E3A59'
-}
+  textColor: '#2E3A59',
+};
 
-const roundRect = (ctx, x, y, width, height, radius, color, alpha)  => {
+const roundRect = (ctx, x, y, width, height, radius, color, alpha) => {
   if (width < 2 * radius) radius = width / 2;
   if (height < 2 * radius) radius = height / 2;
   ctx.globalAlpha = alpha || 1;
@@ -31,7 +31,7 @@ const roundRect = (ctx, x, y, width, height, radius, color, alpha)  => {
   ctx.arcTo(x, y, x + width, y, radius);
   ctx.closePath();
   ctx.fill();
-}
+};
 
 const GraphViewer = (props) => {
   const graphRef = React.useRef(null);
@@ -91,12 +91,15 @@ const GraphViewer = (props) => {
       const size = 10;
       const hoverRectDimensions = [size * 3.2, size * 3.2];
       const hoverRectPosition = [node.x - 14, node.y - 14];
-      const textHoverPosition = [hoverRectPosition[0] - 2, hoverRectPosition[1] + hoverRectDimensions[1] + 2];
+      const textHoverPosition = [
+        hoverRectPosition[0] - 2,
+        hoverRectPosition[1] + hoverRectDimensions[1] + 2,
+      ];
       const hoverRectBorderRadius = 2;
       ctx.beginPath();
       ctx.drawImage(
         node.img,
-        node.x - size,
+        node.x - size - 1,
         node.y - size,
         size * 2.4,
         size * 2.4
@@ -108,12 +111,26 @@ const GraphViewer = (props) => {
       if (nodeName.length > 8) {
         nodeName = nodeName.substr(0, 8).concat('...');
       }
-      const textProps = [nodeName, node.x + 2, textHoverPosition[1] + 4];
+      const textProps = [nodeName, node.x + 2, textHoverPosition[1] + 4.5];
       if (node === hoverNode) {
         // image hover
-        roundRect(ctx, ...hoverRectPosition, ...hoverRectDimensions, hoverRectBorderRadius, GRAPH_COLORS.hoverRec, 0.3);
+        roundRect(
+          ctx,
+          ...hoverRectPosition,
+          ...hoverRectDimensions,
+          hoverRectBorderRadius,
+          GRAPH_COLORS.hoverRec,
+          0.3
+        );
         // text node name hover
-        roundRect(ctx, ...textHoverPosition, hoverRectDimensions[0] + size/2, hoverRectDimensions[0] / 4, hoverRectBorderRadius/2, GRAPH_COLORS.textHoverRect);
+        roundRect(
+          ctx,
+          ...textHoverPosition,
+          hoverRectDimensions[0] + size / 2,
+          hoverRectDimensions[0] / 4,
+          hoverRectBorderRadius / 2,
+          GRAPH_COLORS.textHoverRect
+        );
         // reset canvas fill color
         ctx.fillStyle = GRAPH_COLORS.textHover;
       } else {
