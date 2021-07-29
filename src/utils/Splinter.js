@@ -22,7 +22,7 @@ class Splinter {
         });
         this.graph = {
             nodes: [
-                { id: 1 , name : "Dataset", img : imgs[0], level : 1 },
+                { id: 1 , name : "Dataset 106", img : imgs[0], level : 1 },
                 { id: 2 , name : "Volume", img : imgs[3], level : 2 },
                 { id: 3 , name : "Motility", img : imgs[3], level : 2 },
                 { id: 4 , name : "Volume", img : imgs[3], level : 3 },

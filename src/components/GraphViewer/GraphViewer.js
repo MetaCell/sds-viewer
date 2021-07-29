@@ -6,7 +6,7 @@ import RefreshIcon from '@material-ui/icons/Refresh';
 import LayersIcon from '@material-ui/icons/Layers';
 import GeppettoGraphVisualization from '@metacell/geppetto-meta-ui/graph-visualization/Graph';
 
-const NODE_FONT = "6px sans-serif";
+const NODE_FONT = "500 6px Inter";
 const ONE_SECOND = 1000;
 const ZOOM_DEFAULT = 1;
 const ZOOM_SENSITIVITY = 0.2;
@@ -16,6 +16,21 @@ const GRAPH_COLORS = {
   textHoverRect: '#3779E1',
   textHover: 'white',
   textColor: '#2E3A59'
+}
+
+const roundRect = (ctx, x, y, width, height, radius, color, alpha)  => {
+  if (width < 2 * radius) radius = width / 2;
+  if (height < 2 * radius) radius = height / 2;
+  ctx.globalAlpha = alpha || 1;
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  ctx.moveTo(x + radius, y);
+  ctx.arcTo(x + width, y, x + width, y + height, radius);
+  ctx.arcTo(x + width, y + height, x, y + height, radius);
+  ctx.arcTo(x, y + height, x, y, radius);
+  ctx.arcTo(x, y, x + width, y, radius);
+  ctx.closePath();
+  ctx.fill();
 }
 
 const GraphViewer = (props) => {
@@ -74,6 +89,10 @@ const GraphViewer = (props) => {
   const paintNode = React.useCallback(
     (node, ctx) => {
       const size = 10;
+      const hoverRectDimensions = [size * 3.2, size * 3.2];
+      const hoverRectPosition = [node.x - 14, node.y - 14];
+      const textHoverPosition = [hoverRectPosition[0] - 2, hoverRectPosition[1] + hoverRectDimensions[1] + 2];
+      const hoverRectBorderRadius = 2;
       ctx.beginPath();
       ctx.drawImage(
         node.img,
@@ -82,28 +101,25 @@ const GraphViewer = (props) => {
         size * 2.4,
         size * 2.4
       );
-
       ctx.font = NODE_FONT;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      // Create Title in Node
-      ctx.fillText(node.name, node.x + 2, node.y + 14 + size + 2);
+      let nodeName = node.name;
+      if (nodeName.length > 8) {
+        nodeName = nodeName.substr(0, 8).concat('...');
+      }
+      const textProps = [nodeName, node.x + 2, textHoverPosition[1] + 4];
       if (node === hoverNode) {
-        ctx.globalAlpha = 0.3;
-        ctx.fillStyle = GRAPH_COLORS.hoverRect;
-        ctx.fillRect(node.x - 14, node.y - 14, size * 3.2, size * 3.2);
-        ctx.globalAlpha = 1.0;
-
-        ctx.fillStyle = GRAPH_COLORS.textHoverRect;
-        ctx.fillRect(node.x - 15, node.y + size + 10, size * 3.5, 12);
-
+        // image hover
+        roundRect(ctx, ...hoverRectPosition, ...hoverRectDimensions, hoverRectBorderRadius, GRAPH_COLORS.hoverRec, 0.3);
+        // text node name hover
+        roundRect(ctx, ...textHoverPosition, hoverRectDimensions[0] + size/2, hoverRectDimensions[0] / 4, hoverRectBorderRadius/2, GRAPH_COLORS.textHoverRect);
+        // reset canvas fill color
         ctx.fillStyle = GRAPH_COLORS.textHover;
-        ctx.fillText(node.name, node.x + 2, node.y + 14 + size + 2);
       } else {
         ctx.fillStyle = GRAPH_COLORS.textColor;
-        ctx.fillText(node.name, node.x + 2, node.y + 14 + size + 2);
       }
-
+      ctx.fillText(...textProps);
       node.fy = 100 * node.level;
     },
     [hoverNode]
