@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { IconButton } from '@material-ui/core';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
@@ -63,12 +63,12 @@ const GraphViewer = (props) => {
     graphRef.current.ggv.current.zoomToFit();
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     setTimeout(
       () => graphRef?.current?.ggv?.current?.zoomToFit(),
       ONE_SECOND / 2
     );
-  });
+  }, []);
 
   const [highlightNodes, setHighlightNodes] = useState(new Set());
   const [hoverNode, setHoverNode] = useState(null);
@@ -89,6 +89,7 @@ const GraphViewer = (props) => {
   const paintNode = React.useCallback(
     (node, ctx) => {
       const size = 10;
+      const nodeImageSize = [size * 2.4, size * 2.4];
       const hoverRectDimensions = [size * 3.2, size * 3.2];
       const hoverRectPosition = [node.x - 14, node.y - 14];
       const textHoverPosition = [
@@ -101,8 +102,7 @@ const GraphViewer = (props) => {
         node.img,
         node.x - size - 1,
         node.y - size,
-        size * 2.4,
-        size * 2.4
+        ...nodeImageSize
       );
       ctx.font = NODE_FONT;
       ctx.textAlign = 'center';
