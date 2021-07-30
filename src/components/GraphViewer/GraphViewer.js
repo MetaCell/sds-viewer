@@ -150,12 +150,12 @@ const GraphViewer = (props) => {
         data={window.datasets[props.graph_id].graph}
         // Create the Graph as 2 Dimensional
         d2={true}
-        nodeRelSize={20}
+        nodeRelSize={8}
         nodeSize={30}
         // Links properties
         linkColor={GRAPH_COLORS.link}
         linkWidth={2}
-        linkCurvature={(link) => (link.target.x < link.source.x ? -0.2 : 0.2)}
+        linkCurvature={(link) => (link.target.x < link.source.x ? -0.1 : 0.1)}
         // Allows updating link properties, as color and curvature. Without this, linkCurvature doesn't work.
         linkCanvasObjectMode={'replace'}
         onNodeClick={(node, event) => handleNodeClick(node, event)}
