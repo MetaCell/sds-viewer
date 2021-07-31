@@ -1,74 +1,62 @@
 var NodesFactory = function () {
-    this.createEmployee = function (node) {
+    this.createNode = function (node, type) {
         var typed_node;
 
-        if (node.type === "collection") {
-            typed_node = new Collection(node);
-        } else if (node.type === "contributor") {
-            typed_node = new Contributor(node);
-        } else if (node.type === "dataset") {
-            typed_node = new Dataset(node);
-        } else if (node.type === "protocol") {
-            typed_node = new Protocol(node);
-        } else if (node.type === "sample") {
-            typed_node = new Sample(node);
-        } else if (node.type === "subject") {
-            typed_node = new Subject(node);
-        } else if (node.type === "file") {
-            typed_node = new File(node);
+        if (type === "Collection") {
+            typed_node = new Collection(node, type);
+        } else if (type === "Contributor") {
+            typed_node = new Contributor(node, type);
+        } else if (type === "Dataset") {
+            typed_node = new Dataset(node, type);
+        } else if (type === "Protocol") {
+            typed_node = new Protocol(node, type);
+        } else if (type === "Sample") {
+            typed_node = new Sample(node, type);
+        } else if (type === "Subject") {
+            typed_node = new Subject(node, type);
+        } else if (type === "File") {
+            typed_node = new File(node, type);
+        } else if (type === "Unknown") {
+            typed_node = new File(node, type);
         }
 
         return typed_node;
     }
 }
 
-const Collection = function (node) {
-    let new_node = {
-        type: "collection"
-    };
-    return new_node;
+const Collection = function (node, type) {
+    node.type = type;
+    return node;
 };
 
-const Contributor = function (node) {
-    let new_node = {
-        type: "contributor"
-    };
-    return new_node;
+const Contributor = function (node, type) {
+    node.type = type;
+    return node;
 };
 
-const Dataset = function (node) {
-    let new_node = {
-        type: "dataset"
-    };
-    return new_node;
+const Dataset = function (node, type) {
+    node.type = type;
+    return node;
 };
 
-const Protocol = function (node) {
-    let new_node = {
-        type: "protocol"
-    };
-    return new_node;
+const Protocol = function (node, type) {
+    node.type = type;
+    return node;
 };
 
-const Sample = function (node) {
-    let new_node = {
-        type: "sample"
-    };
-    return new_node;
+const Sample = function (node, type) {
+    node.type = type;
+    return node;
 };
 
-const Subject = function (node) {
-    let new_node = {
-        type: "subject"
-    };
-    return new_node;
+const Subject = function (node, type) {
+    node.type = type;
+    return node;
 };
 
-const File = function (node) {
-    let new_node = {
-        type: "file"
-    };
-    return new_node;
+const File = function (node, type) {
+    node.type = type;
+    return node;
 };
 
 export default NodesFactory;

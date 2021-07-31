@@ -1,7 +1,8 @@
-{
-    "type_key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+export const type_key = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type";
+
+export const graphModel = {
     "ontology": {
-        "type": "ontology",
+        "type": "Ontology",
         "key": "http://www.w3.org/2002/07/owl#Ontology",
         "image": "",
         "properties": [{
@@ -11,7 +12,7 @@
         }]
     },
     "collection": {
-        "type": "collection",
+        "type": "Collection",
         "key": "Collection",
         "image": "./images/volume.svg",
         "properties": [{
@@ -21,7 +22,7 @@
         }]
     },
     "contributor": {
-        "type": "contributor",
+        "type": "Contributor",
         "key": "Contributor",
         "image": "./images/user.svg",
         "properties": [{
@@ -31,7 +32,7 @@
         }]
     },
     "dataset": {
-        "type": "dataset",
+        "type": "Dataset",
         "key": "Dataset",
         "image": "./images/dataset.svg",
         "properties": [{
@@ -41,7 +42,7 @@
         }]
     },
     "subject": {
-        "type": "subject",
+        "type": "Subject",
         "key": "Subject",
         "image": "./images/user.svg",
         "properties": [{
@@ -51,7 +52,7 @@
         }]
     },
     "sample": {
-        "type": "sample",
+        "type": "Sample",
         "key": "Sample",
         "image": "",
         "properties": [{
@@ -61,7 +62,7 @@
         }]
     },
     "protocol": {
-        "type": "protocol",
+        "type": "Protocol",
         "key": "Protocol",
         "image": "",
         "properties": [{
@@ -70,4 +71,4 @@
             "label": ""
         }]
     }
-}
+};

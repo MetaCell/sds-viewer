@@ -1,7 +1,7 @@
 import NodesFactory from './nodesFactory';
+import { graphModel, type_key } from './graphModel';
 
 const N3 = require('n3');
-const graphModel = require("./graphModel.json");
 const imgs = ['dataset.svg', 'nifti.svg', 'volume.svg'].map(src => {
     const img = new Image();
     img.src = `./images/${src}`;
@@ -185,7 +185,7 @@ class Splinter {
 
 
     get_type(quad) {
-        if (quad.predicate.id === graphModel.type_key) {
+        if (quad.predicate.id === type_key) {
             return quad.object.value
         } else {
             return undefined;
@@ -195,6 +195,7 @@ class Splinter {
 
     build_node(node) {
         if (this.nodes[String(node.id)] === undefined) {
+            let type = 
             this.nodes[String(node.id)] = {
                 id: node.id,
                 types: [],
@@ -216,7 +217,7 @@ class Splinter {
         }
         // check if node to update exists in the list of nodes.
         if (this.nodes[String(quad.subject.id)] !== undefined) {
-            if (quad.predicate.id === graphModel.type_key) {
+            if (quad.predicate.id === type_key) {
                 this.nodes[String(quad.subject.id)].types.push({
                     predicate: quad.predicate.id,
                     type: quad.object.datatype !== undefined ? quad.object.datatype.id : quad.object.id,
@@ -272,79 +273,126 @@ class Splinter {
 
     merge_ontology_dataset() {
         // As per title, ontology node is required so we merge this with the dataset node
-        let dataset = undefined;
-        let ontology = undefined;
-        let temp_nodes = this.forced_nodes.filter(node => {
-            for (const type of node.types) {
+        let dataset_node = undefined;
+        let ontology_node = undefined;
+
+        Object.keys(this.nodes).map(key => {
+            this.nodes[key].img = imgs[0];
+            for (const type of this.nodes[key].types) {
                 if (type.type === graphModel.ontology.key) {
-                    ontology = node;
-                    return false;
+                    ontology_node = this.nodes[key];
+                    break;
                 }
                 if (type.type === this.types.sparc.iri.id + graphModel.dataset.key) {
-                    dataset = node;
-                    return false;
+                    dataset_node = this.nodes[key];
+                    break;
                 }
             }
-            return true;
         });
 
         // merge the 2 nodes together
-        dataset.properties = dataset.properties.concat(ontology.properties)
-        dataset.proxies = dataset.proxies.concat(ontology.proxies)
-        dataset.types = dataset.types.concat(ontology.types)
-        dataset.level = 0;
-        dataset.proxies.push(ontology.id)
-        // push on top of the array
-        temp_nodes.unshift(dataset);
+        this.nodes[String(dataset_node.id)].properties = this.nodes[String(dataset_node.id)].properties.concat(ontology_node.properties)
+        this.nodes[String(dataset_node.id)].proxies = this.nodes[String(dataset_node.id)].proxies.concat(ontology_node.proxies)
+        // the below might create a conflict since there might be only a single type 
+        //this.nodes[String(dataset_node.id)].types = this.nodes[String(dataset_node.id)].types.concat(ontology_node.types)
+        this.nodes[String(dataset_node.id)].level = 1;
+        delete this.nodes[String(ontology_node.id)];
         // fix links that were pointing to the ontology
-        this.forced_edges = this.edges.map(link => {
-            if (link.source === ontology.id) {
-                link.source = dataset.id
+        this.edges.map(link => {
+            if (link.source === ontology_node.id) {
+                link.source = dataset_node.id
             }
-            if (link.target === ontology.id) {
-                link.target = dataset.id
+            if (link.target === ontology_node.id) {
+                link.target = dataset_node.id
             }
             return link;
         })
-        this.forced_nodes = temp_nodes;
+        return dataset_node.id;
     }
 
 
-    organise_nodes() {
+    organise_nodes(id) {
         // structure the graph per category
-        let dataset = this.forced_nodes[0];
         let subjects = {
             id: "all_subjects",
             name: "Subjects",
-            level: 1,
+            level: 2,
             img: () => {
                 const img = new Image();
                 img.src = graphModel.subject.image;
                 return img;
             }
         };
+        if (this.nodes[subjects.id] === undefined) {
+            this.nodes[String(subjects.id)] = subjects;
+            this.edges.push({
+                source: id,
+                target: subjects.id
+            })
+        } else {
+            console.error("The subjects node already exists!");
+        }
+
         let protocols = {
             id: "all_protocols",
             name: "Protocols",
-            level: 1,
+            level: 2,
             img: () => {
                 const img = new Image();
                 img.src = graphModel.protocol.image;
                 return img;
             }
         };
+        if (this.nodes[protocols.id] === undefined) {
+            this.nodes[String(protocols.id)] = protocols;
+            this.edges.push({
+                source: id,
+                target: protocols.id
+            })
+        } else {
+            console.error("The subjects node already exists!");
+        }
+
         let contributors = {
             id: "all_contributors",
             name: "Contributors",
-            level: 1,
+            level: 2,
             img: () => {
                 const img = new Image();
                 img.src = graphModel.contributor.image;
                 return img;
             }
         };
+        if (this.nodes[contributors.id] === undefined) {
+            this.nodes[String(contributors.id)] = contributors;
+            this.edges.push({
+                source: id,
+                target: contributors.id
+            })
+        } else {
+            console.error("The subjects node already exists!");
+        }
 
         var factory = new NodesFactory();
+        // cast all the nodes to the correct type
+        this.forced_nodes = Object.keys(this.nodes).map(key => {
+            this.nodes[key].img = imgs[0];
+            for (const type of this.nodes[key].types) {
+                for (const _class in graphModel) {
+                    if (type.type === this.types.sparc.iri.id + graphModel[_class].type) {
+                        this.fix_links(this.nodes[key], type.type);
+                        return factory.createNode(this.nodes[key], type.type);
+                    }
+                }
+            }
+            return factory.createNode(this.nodes[key], "Unknown");
+        });
+        this.forced_edges = this.edges;
+    }
+
+
+    fix_links() {
+
     }
 
 
@@ -358,7 +406,7 @@ class Splinter {
 
         // consume all the other nodes that will contain mainly literals/properties of the subject nodes
         for (const quad of this.turtleData) {
-            if (N3.Util.isLiteral(quad.object) || quad.predicate.id === graphModel.type_key) {
+            if (N3.Util.isLiteral(quad.object) || quad.predicate.id === type_key) {
                 // The object does not represent a node on his own but rather a property of the existing subject
                 this.update_node(quad, false);
             } else {
@@ -372,8 +420,8 @@ class Splinter {
             return this.nodes[key];
         });
 
-        this.merge_ontology_dataset();
-        this.organise_nodes();
+        let dataset_node_id = this.merge_ontology_dataset();
+        this.organise_nodes(dataset_node_id);
         console.log("ho finito con il graph");
     }
 }
