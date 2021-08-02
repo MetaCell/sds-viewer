@@ -609,6 +609,7 @@ const theme = createTheme({
             },
             '& .labelIcon': {
               marginRight: '0.625rem',
+              flexShrink: 0,
             },
             '& .labelText': {
               fontWeight: 'normal',
@@ -766,6 +767,9 @@ const theme = createTheme({
                       '& p': {
                         fontSize: '0.75rem',
                         lineHeight: '0.9375rem',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
                       },
                     },
                   },

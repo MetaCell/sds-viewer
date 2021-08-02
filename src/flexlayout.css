@@ -114,8 +114,6 @@
   background-color: #fff;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  border-color: gray;
-  border: 1px solid;
 }
 .flexlayout__tab_button--selected .flexlayout__tab_button_content {
   color: #2e3a59;
