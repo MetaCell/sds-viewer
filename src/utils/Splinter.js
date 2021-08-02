@@ -1,36 +1,7 @@
 import NodesFactory from './nodesFactory';
-import { graphModel, type_key } from './graphModel';
+import { rdfTypes, type_key, typesModel } from './graphModel';
 
 const N3 = require('n3');
-const imgs = ['dataset.svg', 'nifti.svg', 'volume.svg'].map(src => {
-    const img = new Image();
-    img.src = `./images/${src}`;
-    return img;
-});
-
-const staticData = {
-    nodes: [
-        { id: "a" , name : "Dataset", img : imgs[0], level : 1 },
-        { id: "b" , name : " Subject 2", img : imgs[1], level : 2 },
-        { id: "c" , name : "Subject 3", img : imgs[1], level : 2 },
-        { id: "d" , name : "Subject 4", img : imgs[1], level : 3 },
-        { id: "e" , name : "Subject 5", img : imgs[1], level : 3 },
-        { id: "f" , name : "File 1", img : imgs[1], level : 3 },
-        { id: "g" , name : "File 2", img : imgs[1], level : 3 },
-        { id: "h" , name : "File 3", img : imgs[1], level : 4 },
-        { id: "i" , name : "File 4", img : imgs[1], level : 4 }
-    ],
-    links: [
-        { source: "a", target: "b"},
-        { source: "a", target: "c"},
-        { source: "b", target: "d"},
-        { source: "b", target: "e"},
-        { source: "d", target: "h"},
-        { source: "d", target: "i"},
-        { source: "c", target: "f"},
-        { source: "c", target: "g"}
-    ]
-};
 
 class Splinter {
     constructor(jsonFile, turtleFile) {
@@ -184,20 +155,37 @@ class Splinter {
     }
 
 
-    get_type(quad) {
-        if (quad.predicate.id === type_key) {
-            return quad.object.value
-        } else {
-            return undefined;
+    get_type(node) {
+        let typeFound = {
+            type: typesModel.unknown.type,
+            length: 0
         }
+        for (const type of node.types) {
+            if (type.type === this.types.owl.iri.id + "NamedIndividual") {
+                for (const rdfType in this.types) {
+                    if ((node.id.includes(this.types[rdfType].iri.id)) && (this.types[rdfType].iri.id.length > typeFound.length) && (typesModel.NamedIndividual[String(this.types[rdfType].type)] !== undefined)) {
+                        typeFound.type = typesModel.NamedIndividual[String(this.types[rdfType].type)].type;
+                        typeFound.length = this.types[rdfType].iri.id.length;
+                    }
+                }
+            } else if (type.type === this.types.owl.iri.id + "Ontology") {
+                typeFound.type = typesModel.ontology.type;
+                typeFound.length = typesModel.ontology.length;
+            } else if ((type.type.includes(this.types.sparc.iri.id)) && (typesModel.sparc[type.type.split(this.types.sparc.iri.id).pop()] !== undefined)) {
+                let sparcType = type.type.split(this.types.sparc.iri.id).pop();
+                typeFound.type = typesModel.sparc[sparcType].type;
+                typeFound.length = typesModel.sparc[sparcType].length;
+            }
+        }
+        return typeFound.type;
     }
 
 
     build_node(node) {
         if (this.nodes[String(node.id)] === undefined) {
-            let type = 
             this.nodes[String(node.id)] = {
                 id: node.id,
+                attributes: {},
                 types: [],
                 name: node.value,
                 proxies: [],
@@ -263,7 +251,8 @@ class Splinter {
             this.edges.push({
                 source: quad.subject.id,
                 target: quad.object.id
-            })
+            });
+            this.update_node(quad, false);
         } else {
             // if the conditions above are not satisfied we push this relationship as a proxy of another node already present
             this.update_node(quad, true);
@@ -271,24 +260,24 @@ class Splinter {
     }
 
 
-    merge_ontology_dataset() {
-        // As per title, ontology node is required so we merge this with the dataset node
+    cast_nodes() {
+        // prepare 2 place holders for the dataset and ontology node, the ontology node is not required but
+        // we might need to display some of its properties, so we merge them.
         let dataset_node = undefined;
         let ontology_node = undefined;
 
-        Object.keys(this.nodes).map(key => {
-            this.nodes[key].img = imgs[0];
-            for (const type of this.nodes[key].types) {
-                if (type.type === graphModel.ontology.key) {
-                    ontology_node = this.nodes[key];
-                    break;
-                }
-                if (type.type === this.types.sparc.iri.id + graphModel.dataset.key) {
-                    dataset_node = this.nodes[key];
-                    break;
-                }
+        // cast each node to the right type, also keep trace of the dataset and ontology nodes.
+        var factory = new NodesFactory();
+        for(const key in this.nodes) {
+            this.nodes[key].type = this.get_type(this.nodes[key]);
+            this.nodes[key] = factory.createNode(this.nodes[key]);
+            if (this.nodes[key].type === typesModel.NamedIndividual.dataset.type) {
+                dataset_node = this.nodes[key];
             }
-        });
+            if (this.nodes[key].type === typesModel.ontology.type) {
+                ontology_node = this.nodes[key];
+            }
+        }
 
         // merge the 2 nodes together
         this.nodes[String(dataset_node.id)].properties = this.nodes[String(dataset_node.id)].properties.concat(ontology_node.properties)
@@ -298,7 +287,7 @@ class Splinter {
         this.nodes[String(dataset_node.id)].level = 1;
         delete this.nodes[String(ontology_node.id)];
         // fix links that were pointing to the ontology
-        this.edges.map(link => {
+        let temp_edges = this.edges.map(link => {
             if (link.source === ontology_node.id) {
                 link.source = dataset_node.id
             }
@@ -307,21 +296,22 @@ class Splinter {
             }
             return link;
         })
+        this.edges = temp_edges;
         return dataset_node.id;
     }
 
 
     organise_nodes(id) {
         // structure the graph per category
+        var factory = new NodesFactory();
+        const subject_key = "all_subjects";
+        const protocols_key = "all_protocols";
+        const contributors_key = "all_contributors";
         let subjects = {
-            id: "all_subjects",
+            id: subject_key,
             name: "Subjects",
-            level: 2,
-            img: () => {
-                const img = new Image();
-                img.src = graphModel.subject.image;
-                return img;
-            }
+            type: typesModel.NamedIndividual.subject.type,
+            level: 2
         };
         if (this.nodes[subjects.id] === undefined) {
             this.nodes[String(subjects.id)] = subjects;
@@ -334,14 +324,10 @@ class Splinter {
         }
 
         let protocols = {
-            id: "all_protocols",
+            id: protocols_key,
             name: "Protocols",
-            level: 2,
-            img: () => {
-                const img = new Image();
-                img.src = graphModel.protocol.image;
-                return img;
-            }
+            type: typesModel.sparc.Protocol.type,
+            level: 2
         };
         if (this.nodes[protocols.id] === undefined) {
             this.nodes[String(protocols.id)] = protocols;
@@ -354,14 +340,10 @@ class Splinter {
         }
 
         let contributors = {
-            id: "all_contributors",
+            id: contributors_key,
             name: "Contributors",
-            level: 2,
-            img: () => {
-                const img = new Image();
-                img.src = graphModel.contributor.image;
-                return img;
-            }
+            type: typesModel.NamedIndividual.contributor.type,
+            level: 2
         };
         if (this.nodes[contributors.id] === undefined) {
             this.nodes[String(contributors.id)] = contributors;
@@ -373,26 +355,64 @@ class Splinter {
             console.error("The subjects node already exists!");
         }
 
-        var factory = new NodesFactory();
-        // cast all the nodes to the correct type
-        this.forced_nodes = Object.keys(this.nodes).map(key => {
-            this.nodes[key].img = imgs[0];
-            for (const type of this.nodes[key].types) {
-                for (const _class in graphModel) {
-                    if (type.type === this.types.sparc.iri.id + graphModel[_class].type) {
-                        this.fix_links(this.nodes[key], type.type);
-                        return factory.createNode(this.nodes[key], type.type);
-                    }
-                }
+        this.forced_edges = this.edges.filter(link => {
+            if ((link.target === id)
+            || (link.target === link.source)
+            || (this.nodes[link.source].level === this.nodes[link.target].level)) {
+                return false;
             }
-            return factory.createNode(this.nodes[key], "Unknown");
+            return true;
+        }).map(link => {
+            if (link.source === id && link.target !== subject_key && this.nodes[link.target].type === rdfTypes.Subject.key) {
+                link.source = subject_key;
+                this.nodes[link.target].level = this.nodes[subject_key].level + 1;
+            } else if (link.source === id && link.target !== contributors_key && this.nodes[link.target].type === rdfTypes.Person.key) {
+                link.source = contributors_key;
+                this.nodes[link.target].level = this.nodes[contributors_key].level + 1;
+            } else if (link.source === id && link.target !== protocols_key && this.nodes[link.target].type === rdfTypes.Protocol.key) {
+                link.source = protocols_key;
+                this.nodes[link.target].level = this.nodes[protocols_key].level + 1;
+            }
+            return link;
+        }).filter(link => {
+            if ((link.source === id && (link.target !== contributors_key && link.target !== subject_key && link.target !== protocols_key))) {
+                return false;
+            }
+            return true;
         });
-        this.forced_edges = this.edges;
+
+        // TO FIX: the factory is ran twice for the groups nodes created since the img is not generated for them
+        // either we generate the image when we do the node
+        
+        this.forced_nodes = Object.keys(this.nodes).map(key => {
+            return factory.createNode(this.nodes[key]);
+        });
+        this.fix_links();
     }
 
 
     fix_links() {
-
+        for (const node of this.forced_nodes) {
+            // loop all the samples
+            if (node.type === rdfTypes.Sample.key) {
+                // loop through all the properties to get the subject it has been derived from
+                for (const property of node.properties) {
+                    for (const type_property of rdfTypes.Sample.properties) {
+                        // when found adjust level for the sample node and add relationship
+                        if (property.predicate === (this.types[type_property.type].iri.id + type_property.key)) {
+                            node.attributes[type_property.property] = property.value;
+                            if (this.nodes[property.value] !== undefined) {
+                                node.level = this.nodes[property.value].level + 1;
+                                this.forced_edges.push({
+                                    source: property.value,
+                                    target: node.id
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
 
@@ -405,7 +425,10 @@ class Splinter {
         }
 
         // consume all the other nodes that will contain mainly literals/properties of the subject nodes
-        for (const quad of this.turtleData) {
+        for (const [index, quad] of this.turtleData.entries()) {
+            if (index === 169) {
+                console.log("test");
+            }
             if (N3.Util.isLiteral(quad.object) || quad.predicate.id === type_key) {
                 // The object does not represent a node on his own but rather a property of the existing subject
                 this.update_node(quad, false);
@@ -415,14 +438,8 @@ class Splinter {
             }
         }
 
-        this.forced_nodes = Object.keys(this.nodes).map(key => {
-            this.nodes[key].img = imgs[0];
-            return this.nodes[key];
-        });
-
-        let dataset_node_id = this.merge_ontology_dataset();
+        let dataset_node_id = this.cast_nodes();
         this.organise_nodes(dataset_node_id);
-        console.log("ho finito con il graph");
     }
 }
 
