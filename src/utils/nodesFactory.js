@@ -1,18 +1,18 @@
 import { rdfTypes } from './graphModel';
 
 // decorator
-function processNode(fn) {
-    return function (node) {
+// function processNode(fn) {
+//     return function (node) {
 
-        node.img = () => {
-            const img = new Image();
-            img.src = (rdfTypes[node.type].image !== undefined || rdfTypes[node.type].image !== "") ? rdfTypes[node.type].image : rdfTypes.Dataset.image
-            return img;
-        }
+//         node.img = () => {
+//             const img = new Image();
+//             img.src = (rdfTypes[node.type].image !== undefined || rdfTypes[node.type].image !== "") ? rdfTypes[node.type].image : rdfTypes.Dataset.image
+//             return img;
+//         }
 
-        fn.call(this, node);
-    }
-};
+//         fn.call(this, node);
+//     }
+// };
 
 function createImage(node) {
     // TODO: replace this with the decorator above.
@@ -22,15 +22,6 @@ function createImage(node) {
     }
     img.src = (rdfTypes[String(node.type)].image !== undefined || rdfTypes[String(node.type)].image !== "") ? rdfTypes[String(node.type)].image : rdfTypes.Uknown.image
     return img;
-}
-
-
-function createLevel(node) {
-    // TODO: replace this with the decorator above.
-    if (node.level === undefined || node.level === null) {
-        return 10;
-    }
-    return node.level;
 }
 
 

@@ -30,7 +30,7 @@ export const rdfTypes = {
         }]
     },
     "Dataset": {
-        "image": "./images/dataset.svg",
+        "image": "./images/graph/database.svg",
         "key": "Dataset",
         "properties": [{
             "key": "",
@@ -39,7 +39,7 @@ export const rdfTypes = {
         }]
     },
     "Subject": {
-        "image": "./images/dataset.svg",
+        "image": "./images/graph/folder.svg",
         "key": "Subject",
         "properties": [{
             "key": "",

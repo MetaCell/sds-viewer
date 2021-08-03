@@ -13,7 +13,8 @@ import { MuiThemeProvider, CssBaseline } from '@material-ui/core';
 
 const App = () => {
   const [openDialog, setOpenDialog] = useState(false);
-  const [openNodeDetail, setOpenNodeDetail] = useState(true);
+  // TODO: cleanup the below when working on the node viewer
+  // const [openNodeDetail, setOpenNodeDetail] = useState(true);
 
   const datasets = useSelector(state => state.sdsState.datasets);
   const error_message = useSelector(state => state.sdsState.error_message);
@@ -23,7 +24,7 @@ const App = () => {
       <CssBaseline />
       <Box display="flex" className='main-structure'>
         <Sidebar openDialog={openDialog} setOpenDialog={setOpenDialog} />
-        <Box className={'content' + (openNodeDetail ? ' full-round' : '')}>
+        <Box className={'content full-round'}>
           { datasets.length > 0
             ? <MainLayout />
             : <EmptyContainer
@@ -32,7 +33,10 @@ const App = () => {
               />
           }
         </Box>
-        {/* <NodeDetailView open={openNodeDetail} handleClose={() => setOpenNodeDetail(false)} /> */}
+
+        {/* TODO: cleanup the below when working on the node viewer
+          <NodeDetailView open={openNodeDetail} handleClose={() => setOpenNodeDetail(false)} /> 
+          */}
       </Box>
 
       <UploadDialog

@@ -32,7 +32,7 @@ const MainLayout = () => {
                 setComponent(myManager.getComponent());
             }
         }
-    }, [store])
+    }, [store, LayoutManager])
 
     return (
         <div className={classes.layoutContainer}>

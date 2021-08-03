@@ -6,7 +6,7 @@ import UploadTabPanel from './UploadTabPanel';
 import { Dialog, Box } from '@material-ui/core';
 import UploadDialogHeader from './UploadDialogHeader';
 import { addDataset, triggerError } from '../../redux/actions';
-import { GraphWidget, NodeViewWidget } from '../../app/widgets';
+import { NodeViewWidget } from '../../app/widgets';
 import {  addWidget } from '@metacell/geppetto-meta-client/common/layout/actions';
 import Splinter from '../../utils/Splinter';
 import { WidgetStatus } from "@metacell/geppetto-meta-client/common/layout/model";
