@@ -35,7 +35,6 @@ const roundRect = (ctx, x, y, width, height, radius, color, alpha) => {
 
 const GraphViewer = (props) => {
   const graphRef = React.useRef(null);
-  const [graphId, setGraphId] = React.useState(props.graph_id);
 
   const handleNodeClick = (node, event) => {
     // graphRef.current.ggv.current.centerAt(node.x, node.y, ONE_SECOND);
@@ -148,7 +147,7 @@ const GraphViewer = (props) => {
       <GeppettoGraphVisualization
         ref={graphRef}
         // Graph data with Nodes and Links to populate
-        data={window.datasets[graphId].graph}
+        data={window.datasets[props.graph_id].graph}
         // Create the Graph as 2 Dimensional
         d2={true}
         nodeRelSize={8}
@@ -172,7 +171,6 @@ const GraphViewer = (props) => {
         // Allow camera pan and zoom with mouse
         enableZoomPanInteraction={true}
         enablePointerInteraction={true}
-        // linkCanvasObjectMode={"replace"}
         // React element for controls goes here
         controls={
           <div className='graph-view_controls'>
