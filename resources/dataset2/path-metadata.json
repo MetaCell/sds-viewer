@@ -1,0 +1,3242 @@
+{
+  "type": "path-metadata",
+  "data": [
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "",
+      "basename": "Human Islet Microvasculature Analysis",
+      "mimetype": "inode/directory",
+      "remote_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "timestamp_updated": "2021-03-30T19:52:12,380000Z",
+      "uri_api": "https://api.blackfynn.io/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "parent_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary",
+      "basename": "primary",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:ca32776b-cc7d-4bde-9211-ca6a2c2a71ad",
+      "timestamp_updated": "2020-01-17T01:11:32,798247Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:ca32776b-cc7d-4bde-9211-ca6a2c2a71ad",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:ca32776b-cc7d-4bde-9211-ca6a2c2a71ad",
+      "parent_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6289",
+      "basename": "sub-6289",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:7013fd7a-a34f-4b14-a62c-076c68685e57",
+      "timestamp_updated": "2020-07-22T22:17:51,595766Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:7013fd7a-a34f-4b14-a62c-076c68685e57",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:7013fd7a-a34f-4b14-a62c-076c68685e57",
+      "parent_id": "collection:ca32776b-cc7d-4bde-9211-ca6a2c2a71ad",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6289/sam-20_sub-6289_islet7",
+      "basename": "sam-20_sub-6289_islet7",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:5b40f0b6-b072-431f-b1f2-a7462b714572",
+      "timestamp_updated": "2021-01-28T22:30:32,432461Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:5b40f0b6-b072-431f-b1f2-a7462b714572",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:5b40f0b6-b072-431f-b1f2-a7462b714572",
+      "parent_id": "collection:7013fd7a-a34f-4b14-a62c-076c68685e57",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6289/sam-15_sub-6289_islet2",
+      "basename": "sam-15_sub-6289_islet2",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:1ee81bac-0088-4c49-be03-48ed35915aed",
+      "timestamp_updated": "2021-01-28T22:29:55,167559Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:1ee81bac-0088-4c49-be03-48ed35915aed",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:1ee81bac-0088-4c49-be03-48ed35915aed",
+      "parent_id": "collection:7013fd7a-a34f-4b14-a62c-076c68685e57",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6289/sam-18_sub-6289_islet5",
+      "basename": "sam-18_sub-6289_islet5",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:d308d68f-6a17-499e-bfd6-8c73e4a4b694",
+      "timestamp_updated": "2021-01-28T22:30:17,970461Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:d308d68f-6a17-499e-bfd6-8c73e4a4b694",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:d308d68f-6a17-499e-bfd6-8c73e4a4b694",
+      "parent_id": "collection:7013fd7a-a34f-4b14-a62c-076c68685e57",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6289/sam-14_sub-6289_islet1",
+      "basename": "sam-14_sub-6289_islet1",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:57101425-df48-4b7f-a077-c81eeb652679",
+      "timestamp_updated": "2021-01-28T22:29:48,836435Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:57101425-df48-4b7f-a077-c81eeb652679",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:57101425-df48-4b7f-a077-c81eeb652679",
+      "parent_id": "collection:7013fd7a-a34f-4b14-a62c-076c68685e57",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6289/sam-19_sub-6289_islet6",
+      "basename": "sam-19_sub-6289_islet6",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:d7f21208-059f-4da4-b0d2-7b899d96def1",
+      "timestamp_updated": "2021-01-28T22:30:25,479760Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:d7f21208-059f-4da4-b0d2-7b899d96def1",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:d7f21208-059f-4da4-b0d2-7b899d96def1",
+      "parent_id": "collection:7013fd7a-a34f-4b14-a62c-076c68685e57",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6289/sam-16_sub-6289_islet3",
+      "basename": "sam-16_sub-6289_islet3",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:be7c43f6-f385-4fc8-aa20-8ca301f5c72a",
+      "timestamp_updated": "2021-01-28T22:30:01,063730Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:be7c43f6-f385-4fc8-aa20-8ca301f5c72a",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:be7c43f6-f385-4fc8-aa20-8ca301f5c72a",
+      "parent_id": "collection:7013fd7a-a34f-4b14-a62c-076c68685e57",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6289/sam-17_sub-6289_islet4",
+      "basename": "sam-17_sub-6289_islet4",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:c276454f-3c7b-4bac-a7b9-8bdbde1635c4",
+      "timestamp_updated": "2021-01-28T22:30:11,428762Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:c276454f-3c7b-4bac-a7b9-8bdbde1635c4",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:c276454f-3c7b-4bac-a7b9-8bdbde1635c4",
+      "parent_id": "collection:7013fd7a-a34f-4b14-a62c-076c68685e57",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6232",
+      "basename": "sub-6232",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:edb9e2e1-10f7-4950-abe0-228138cbbacb",
+      "timestamp_updated": "2020-07-22T22:17:51,579791Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:edb9e2e1-10f7-4950-abe0-228138cbbacb",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:edb9e2e1-10f7-4950-abe0-228138cbbacb",
+      "parent_id": "collection:ca32776b-cc7d-4bde-9211-ca6a2c2a71ad",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6232/sam-6_sub-6232_islet6",
+      "basename": "sam-6_sub-6232_islet6",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:c52e3f7f-aa93-4cfe-b1d5-5349824865c9",
+      "timestamp_updated": "2021-01-28T22:25:08,168274Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:c52e3f7f-aa93-4cfe-b1d5-5349824865c9",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:c52e3f7f-aa93-4cfe-b1d5-5349824865c9",
+      "parent_id": "collection:edb9e2e1-10f7-4950-abe0-228138cbbacb",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6232/sam-1_sub-6232_islet1",
+      "basename": "sam-1_sub-6232_islet1",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:8ceb7889-2545-42e1-932e-3886985d8244",
+      "timestamp_updated": "2021-01-28T22:24:31,686387Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:8ceb7889-2545-42e1-932e-3886985d8244",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:8ceb7889-2545-42e1-932e-3886985d8244",
+      "parent_id": "collection:edb9e2e1-10f7-4950-abe0-228138cbbacb",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6232/sam-2_sub-6232_islet2",
+      "basename": "sam-2_sub-6232_islet2",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:e99d5cdf-18c0-4bbd-bdb3-753d5f6e41bc",
+      "timestamp_updated": "2021-01-28T22:24:40,089330Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:e99d5cdf-18c0-4bbd-bdb3-753d5f6e41bc",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:e99d5cdf-18c0-4bbd-bdb3-753d5f6e41bc",
+      "parent_id": "collection:edb9e2e1-10f7-4950-abe0-228138cbbacb",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6232/sam-5_sub-6232_islet5",
+      "basename": "sam-5_sub-6232_islet5",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:67f88015-634f-4c15-87f7-a2081b456429",
+      "timestamp_updated": "2021-01-28T22:25:00,840012Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:67f88015-634f-4c15-87f7-a2081b456429",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:67f88015-634f-4c15-87f7-a2081b456429",
+      "parent_id": "collection:edb9e2e1-10f7-4950-abe0-228138cbbacb",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6232/sam-7_sub-6232_islet7",
+      "basename": "sam-7_sub-6232_islet7",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:7810ae3a-0a3a-4cb8-95c0-aa6d7e207c75",
+      "timestamp_updated": "2021-01-28T22:25:13,912510Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:7810ae3a-0a3a-4cb8-95c0-aa6d7e207c75",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:7810ae3a-0a3a-4cb8-95c0-aa6d7e207c75",
+      "parent_id": "collection:edb9e2e1-10f7-4950-abe0-228138cbbacb",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6232/sam-4_sub-6232_islet4",
+      "basename": "sam-4_sub-6232_islet4",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:e49e1708-530c-4af9-87e9-d2e53b7ed7fb",
+      "timestamp_updated": "2021-01-28T22:24:54,017203Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:e49e1708-530c-4af9-87e9-d2e53b7ed7fb",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:e49e1708-530c-4af9-87e9-d2e53b7ed7fb",
+      "parent_id": "collection:edb9e2e1-10f7-4950-abe0-228138cbbacb",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6232/sam-3_sub-6232_islet3",
+      "basename": "sam-3_sub-6232_islet3",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:81461b67-e3de-48ce-a615-943a7afe34ed",
+      "timestamp_updated": "2021-01-28T22:24:46,771878Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:81461b67-e3de-48ce-a615-943a7afe34ed",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:81461b67-e3de-48ce-a615-943a7afe34ed",
+      "parent_id": "collection:edb9e2e1-10f7-4950-abe0-228138cbbacb",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6238",
+      "basename": "sub-6238",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:1c9a3cba-e4c3-4cb8-a3ec-50cd2f11a93a",
+      "timestamp_updated": "2020-07-22T22:17:51,586489Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:1c9a3cba-e4c3-4cb8-a3ec-50cd2f11a93a",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:1c9a3cba-e4c3-4cb8-a3ec-50cd2f11a93a",
+      "parent_id": "collection:ca32776b-cc7d-4bde-9211-ca6a2c2a71ad",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6238/sam-9_sub-6238_islet2",
+      "basename": "sam-9_sub-6238_islet2",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:5e319796-b80a-47e8-a0e6-9ec0ff2c68dc",
+      "timestamp_updated": "2021-01-28T22:28:12,444396Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:5e319796-b80a-47e8-a0e6-9ec0ff2c68dc",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:5e319796-b80a-47e8-a0e6-9ec0ff2c68dc",
+      "parent_id": "collection:1c9a3cba-e4c3-4cb8-a3ec-50cd2f11a93a",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6238/sam-13_sub-6238_islet6",
+      "basename": "sam-13_sub-6238_islet6",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:e40da93c-e174-4ecd-87ab-7293db2f5ebf",
+      "timestamp_updated": "2021-01-28T22:28:00,518457Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:e40da93c-e174-4ecd-87ab-7293db2f5ebf",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:e40da93c-e174-4ecd-87ab-7293db2f5ebf",
+      "parent_id": "collection:1c9a3cba-e4c3-4cb8-a3ec-50cd2f11a93a",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6238/sam-11_sub-6238_islet4",
+      "basename": "sam-11_sub-6238_islet4",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:02576cb0-9ea6-49b5-9d4c-06ad034f7e21",
+      "timestamp_updated": "2021-01-28T22:27:46,227455Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:02576cb0-9ea6-49b5-9d4c-06ad034f7e21",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:02576cb0-9ea6-49b5-9d4c-06ad034f7e21",
+      "parent_id": "collection:1c9a3cba-e4c3-4cb8-a3ec-50cd2f11a93a",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6238/sam-10_sub-6238_islet3",
+      "basename": "sam-10_sub-6238_islet3",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:26621740-bff6-45b8-a02a-106654b1296d",
+      "timestamp_updated": "2021-01-28T22:27:40,095518Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:26621740-bff6-45b8-a02a-106654b1296d",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:26621740-bff6-45b8-a02a-106654b1296d",
+      "parent_id": "collection:1c9a3cba-e4c3-4cb8-a3ec-50cd2f11a93a",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6238/sam-8_sub-6238_islet1",
+      "basename": "sam-8_sub-6238_islet1",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:178f15aa-f18c-47fd-890d-1f47f3155a46",
+      "timestamp_updated": "2021-01-28T22:28:06,576832Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:178f15aa-f18c-47fd-890d-1f47f3155a46",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:178f15aa-f18c-47fd-890d-1f47f3155a46",
+      "parent_id": "collection:1c9a3cba-e4c3-4cb8-a3ec-50cd2f11a93a",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6238/sam-12_sub-6238_islet5",
+      "basename": "sam-12_sub-6238_islet5",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:d4566fe0-a973-41fc-8937-762eadbdc5a6",
+      "timestamp_updated": "2021-01-28T22:27:52,926617Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:d4566fe0-a973-41fc-8937-762eadbdc5a6",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:d4566fe0-a973-41fc-8937-762eadbdc5a6",
+      "parent_id": "collection:1c9a3cba-e4c3-4cb8-a3ec-50cd2f11a93a",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6368",
+      "basename": "sub-6368",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:77213aa9-de8f-4b36-ba87-224f0a3f305c",
+      "timestamp_updated": "2020-07-22T22:17:51,590734Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:77213aa9-de8f-4b36-ba87-224f0a3f305c",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:77213aa9-de8f-4b36-ba87-224f0a3f305c",
+      "parent_id": "collection:ca32776b-cc7d-4bde-9211-ca6a2c2a71ad",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6368/sam-22_sub-6368_islet2",
+      "basename": "sam-22_sub-6368_islet2",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:665c38cc-01dc-4457-b607-d91d89728ca5",
+      "timestamp_updated": "2021-01-28T22:31:54,028574Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:665c38cc-01dc-4457-b607-d91d89728ca5",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:665c38cc-01dc-4457-b607-d91d89728ca5",
+      "parent_id": "collection:77213aa9-de8f-4b36-ba87-224f0a3f305c",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6368/sam-23_sub-6368_islet3",
+      "basename": "sam-23_sub-6368_islet3",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:d73d25f1-bd4e-405a-9f17-05fd7b57f7e5",
+      "timestamp_updated": "2021-01-28T22:31:59,476829Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:d73d25f1-bd4e-405a-9f17-05fd7b57f7e5",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:d73d25f1-bd4e-405a-9f17-05fd7b57f7e5",
+      "parent_id": "collection:77213aa9-de8f-4b36-ba87-224f0a3f305c",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6368/sam-21_sub-6368_islet1",
+      "basename": "sam-21_sub-6368_islet1",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:d18d164f-18ff-4dcf-8c11-25ebe94fe2b5",
+      "timestamp_updated": "2021-01-28T22:31:48,094523Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:d18d164f-18ff-4dcf-8c11-25ebe94fe2b5",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:d18d164f-18ff-4dcf-8c11-25ebe94fe2b5",
+      "parent_id": "collection:77213aa9-de8f-4b36-ba87-224f0a3f305c",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6368/sam-24_sub-6368_islet4",
+      "basename": "sam-24_sub-6368_islet4",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:0779c3ea-f3a2-4886-b79f-16ff3c430fb1",
+      "timestamp_updated": "2021-01-28T22:32:05,041407Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:0779c3ea-f3a2-4886-b79f-16ff3c430fb1",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:0779c3ea-f3a2-4886-b79f-16ff3c430fb1",
+      "parent_id": "collection:77213aa9-de8f-4b36-ba87-224f0a3f305c",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6384",
+      "basename": "sub-6384",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:98822928-1fba-4007-b69d-014506bd02d2",
+      "timestamp_updated": "2020-07-22T22:17:51,584089Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:98822928-1fba-4007-b69d-014506bd02d2",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:98822928-1fba-4007-b69d-014506bd02d2",
+      "parent_id": "collection:ca32776b-cc7d-4bde-9211-ca6a2c2a71ad",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6384/sam-27_sub-6384_islet2",
+      "basename": "sam-27_sub-6384_islet2",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:bd061d56-11d0-46b1-9063-7cf039cee2df",
+      "timestamp_updated": "2021-01-28T22:33:11,249361Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:bd061d56-11d0-46b1-9063-7cf039cee2df",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:bd061d56-11d0-46b1-9063-7cf039cee2df",
+      "parent_id": "collection:98822928-1fba-4007-b69d-014506bd02d2",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6384/sam-33_sub-6384_islet8",
+      "basename": "sam-33_sub-6384_islet8",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:9d540cbf-9c5e-4352-b480-3d75a16c1ea5",
+      "timestamp_updated": "2021-01-28T22:33:50,359082Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:9d540cbf-9c5e-4352-b480-3d75a16c1ea5",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:9d540cbf-9c5e-4352-b480-3d75a16c1ea5",
+      "parent_id": "collection:98822928-1fba-4007-b69d-014506bd02d2",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6384/sam-34_sub-6384_islet9",
+      "basename": "sam-34_sub-6384_islet9",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:3c920690-466d-41fa-9e4e-5ff61dc5c3bf",
+      "timestamp_updated": "2021-01-28T22:33:56,145319Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:3c920690-466d-41fa-9e4e-5ff61dc5c3bf",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:3c920690-466d-41fa-9e4e-5ff61dc5c3bf",
+      "parent_id": "collection:98822928-1fba-4007-b69d-014506bd02d2",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6384/sam-31_sub-6384_islet6",
+      "basename": "sam-31_sub-6384_islet6",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:50669919-9eb5-4166-b0d4-8fc2d58e2a84",
+      "timestamp_updated": "2021-01-28T22:33:39,159343Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:50669919-9eb5-4166-b0d4-8fc2d58e2a84",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:50669919-9eb5-4166-b0d4-8fc2d58e2a84",
+      "parent_id": "collection:98822928-1fba-4007-b69d-014506bd02d2",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6384/sam-26_sub-6384_islet10",
+      "basename": "sam-26_sub-6384_islet10",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:da88316b-326e-47c2-b591-734f4216f63f",
+      "timestamp_updated": "2021-01-28T22:33:05,015810Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:da88316b-326e-47c2-b591-734f4216f63f",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:da88316b-326e-47c2-b591-734f4216f63f",
+      "parent_id": "collection:98822928-1fba-4007-b69d-014506bd02d2",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6384/sam-25_sub-6384_islet1",
+      "basename": "sam-25_sub-6384_islet1",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:3b89040a-2a46-41e3-8fd1-42665e4b0042",
+      "timestamp_updated": "2021-01-28T22:32:59,595708Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:3b89040a-2a46-41e3-8fd1-42665e4b0042",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:3b89040a-2a46-41e3-8fd1-42665e4b0042",
+      "parent_id": "collection:98822928-1fba-4007-b69d-014506bd02d2",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6384/sam-30_sub-6384_islet5",
+      "basename": "sam-30_sub-6384_islet5",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:1e6b668e-81f9-4b66-a52f-853eef52e9d6",
+      "timestamp_updated": "2021-01-28T22:33:31,588882Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:1e6b668e-81f9-4b66-a52f-853eef52e9d6",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:1e6b668e-81f9-4b66-a52f-853eef52e9d6",
+      "parent_id": "collection:98822928-1fba-4007-b69d-014506bd02d2",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6384/sam-32_sub-6384_islet7",
+      "basename": "sam-32_sub-6384_islet7",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:8ead058d-95c1-467f-9da5-e65916e6e9e2",
+      "timestamp_updated": "2021-01-28T22:33:44,632251Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:8ead058d-95c1-467f-9da5-e65916e6e9e2",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:8ead058d-95c1-467f-9da5-e65916e6e9e2",
+      "parent_id": "collection:98822928-1fba-4007-b69d-014506bd02d2",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6384/sam-29_sub-6384_islet4",
+      "basename": "sam-29_sub-6384_islet4",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:3c91d1cd-861e-4c57-93c0-7fabb90ac96a",
+      "timestamp_updated": "2021-01-28T22:33:25,070407Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:3c91d1cd-861e-4c57-93c0-7fabb90ac96a",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:3c91d1cd-861e-4c57-93c0-7fabb90ac96a",
+      "parent_id": "collection:98822928-1fba-4007-b69d-014506bd02d2",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6384/sam-28_sub-6384_islet3",
+      "basename": "sam-28_sub-6384_islet3",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:78e19dc3-231a-418c-88e8-ef02d196dc79",
+      "timestamp_updated": "2021-01-28T22:33:16,758377Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:78e19dc3-231a-418c-88e8-ef02d196dc79",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:78e19dc3-231a-418c-88e8-ef02d196dc79",
+      "parent_id": "collection:98822928-1fba-4007-b69d-014506bd02d2",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative",
+      "basename": "derivative",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:31b8e888-b112-4e78-ad59-4550f4260a2c",
+      "timestamp_updated": "2020-01-17T00:56:23,465109Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:31b8e888-b112-4e78-ad59-4550f4260a2c",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:31b8e888-b112-4e78-ad59-4550f4260a2c",
+      "parent_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6289",
+      "basename": "sub-6289",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:1946c47f-c0cb-4645-bb63-3aaad8085cc1",
+      "timestamp_updated": "2020-01-21T22:58:58,538890Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:1946c47f-c0cb-4645-bb63-3aaad8085cc1",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:1946c47f-c0cb-4645-bb63-3aaad8085cc1",
+      "parent_id": "collection:31b8e888-b112-4e78-ad59-4550f4260a2c",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6289/sam-20_sub-6289_islet7",
+      "basename": "sam-20_sub-6289_islet7",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:93c3ec07-14b1-402c-ad18-ec6a7c8148ba",
+      "timestamp_updated": "2021-01-28T22:38:23,699929Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:93c3ec07-14b1-402c-ad18-ec6a7c8148ba",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:93c3ec07-14b1-402c-ad18-ec6a7c8148ba",
+      "parent_id": "collection:1946c47f-c0cb-4645-bb63-3aaad8085cc1",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6289/sam-15_sub-6289_islet2",
+      "basename": "sam-15_sub-6289_islet2",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:1a0f29ef-4011-46d2-bef0-4ba4552798c2",
+      "timestamp_updated": "2021-01-28T22:37:54,522538Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:1a0f29ef-4011-46d2-bef0-4ba4552798c2",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:1a0f29ef-4011-46d2-bef0-4ba4552798c2",
+      "parent_id": "collection:1946c47f-c0cb-4645-bb63-3aaad8085cc1",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6289/sam-18_sub-6289_islet5",
+      "basename": "sam-18_sub-6289_islet5",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:2eea81d5-9f5f-4ddf-a771-f99a85d4bcb3",
+      "timestamp_updated": "2021-01-28T22:38:12,263668Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:2eea81d5-9f5f-4ddf-a771-f99a85d4bcb3",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:2eea81d5-9f5f-4ddf-a771-f99a85d4bcb3",
+      "parent_id": "collection:1946c47f-c0cb-4645-bb63-3aaad8085cc1",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6289/sam-14_sub-6289_islet1",
+      "basename": "sam-14_sub-6289_islet1",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:4822a511-42df-4d0a-9f53-2f380d43a373",
+      "timestamp_updated": "2021-01-28T22:37:49,232939Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:4822a511-42df-4d0a-9f53-2f380d43a373",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:4822a511-42df-4d0a-9f53-2f380d43a373",
+      "parent_id": "collection:1946c47f-c0cb-4645-bb63-3aaad8085cc1",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6289/sam-19_sub-6289_islet6",
+      "basename": "sam-19_sub-6289_islet6",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:537865f5-74dd-477f-9079-12aa1611a89f",
+      "timestamp_updated": "2021-01-28T22:38:18,192768Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:537865f5-74dd-477f-9079-12aa1611a89f",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:537865f5-74dd-477f-9079-12aa1611a89f",
+      "parent_id": "collection:1946c47f-c0cb-4645-bb63-3aaad8085cc1",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6289/sam-16_sub-6289_islet3",
+      "basename": "sam-16_sub-6289_islet3",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:98880f8b-9c96-4466-b824-246e03b633ce",
+      "timestamp_updated": "2021-01-28T22:38:01,172673Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:98880f8b-9c96-4466-b824-246e03b633ce",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:98880f8b-9c96-4466-b824-246e03b633ce",
+      "parent_id": "collection:1946c47f-c0cb-4645-bb63-3aaad8085cc1",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6289/sam-17_sub-6289_islet4",
+      "basename": "sam-17_sub-6289_islet4",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:dae6c6c6-95a8-42da-aae0-a05633322289",
+      "timestamp_updated": "2021-01-28T22:38:06,482212Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:dae6c6c6-95a8-42da-aae0-a05633322289",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:dae6c6c6-95a8-42da-aae0-a05633322289",
+      "parent_id": "collection:1946c47f-c0cb-4645-bb63-3aaad8085cc1",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6232",
+      "basename": "sub-6232",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:a6636a94-dafe-4680-a6a2-43f821924e9e",
+      "timestamp_updated": "2020-01-21T22:57:37,640247Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:a6636a94-dafe-4680-a6a2-43f821924e9e",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:a6636a94-dafe-4680-a6a2-43f821924e9e",
+      "parent_id": "collection:31b8e888-b112-4e78-ad59-4550f4260a2c",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6232/sam-6_sub-6232_islet6",
+      "basename": "sam-6_sub-6232_islet6",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:e69d7c94-c273-450f-9b98-b2a1a86d54aa",
+      "timestamp_updated": "2021-01-28T22:36:32,276143Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:e69d7c94-c273-450f-9b98-b2a1a86d54aa",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:e69d7c94-c273-450f-9b98-b2a1a86d54aa",
+      "parent_id": "collection:a6636a94-dafe-4680-a6a2-43f821924e9e",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6232/sam-1_sub-6232_islet1",
+      "basename": "sam-1_sub-6232_islet1",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:3220eb3d-22f9-4dce-95ca-9f0f663e387d",
+      "timestamp_updated": "2021-01-28T22:35:57,450697Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:3220eb3d-22f9-4dce-95ca-9f0f663e387d",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:3220eb3d-22f9-4dce-95ca-9f0f663e387d",
+      "parent_id": "collection:a6636a94-dafe-4680-a6a2-43f821924e9e",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6232/sam-2_sub-6232_islet2",
+      "basename": "sam-2_sub-6232_islet2",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:acf4877c-609f-4419-bd12-dee5d238c90e",
+      "timestamp_updated": "2021-01-28T22:36:03,925237Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:acf4877c-609f-4419-bd12-dee5d238c90e",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:acf4877c-609f-4419-bd12-dee5d238c90e",
+      "parent_id": "collection:a6636a94-dafe-4680-a6a2-43f821924e9e",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6232/sam-5_sub-6232_islet5",
+      "basename": "sam-5_sub-6232_islet5",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:4b3d318f-ed8a-459f-b5e0-922250f49624",
+      "timestamp_updated": "2021-01-28T22:36:25,317866Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:4b3d318f-ed8a-459f-b5e0-922250f49624",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:4b3d318f-ed8a-459f-b5e0-922250f49624",
+      "parent_id": "collection:a6636a94-dafe-4680-a6a2-43f821924e9e",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6232/sam-7_sub-6232_islet7",
+      "basename": "sam-7_sub-6232_islet7",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:3f13c25f-5306-476a-97ae-753ec232279a",
+      "timestamp_updated": "2021-01-28T22:36:44,856558Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:3f13c25f-5306-476a-97ae-753ec232279a",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:3f13c25f-5306-476a-97ae-753ec232279a",
+      "parent_id": "collection:a6636a94-dafe-4680-a6a2-43f821924e9e",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6232/sam-4_sub-6232_islet4",
+      "basename": "sam-4_sub-6232_islet4",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:e6fb5007-c68d-4725-ad5b-88226b4df100",
+      "timestamp_updated": "2021-01-28T22:36:18,732325Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:e6fb5007-c68d-4725-ad5b-88226b4df100",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:e6fb5007-c68d-4725-ad5b-88226b4df100",
+      "parent_id": "collection:a6636a94-dafe-4680-a6a2-43f821924e9e",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6232/sam-3_sub-6232_islet3",
+      "basename": "sam-3_sub-6232_islet3",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:7c81d8a2-e1d3-407f-abf7-e665c99920f0",
+      "timestamp_updated": "2021-01-28T22:36:10,777443Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:7c81d8a2-e1d3-407f-abf7-e665c99920f0",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:7c81d8a2-e1d3-407f-abf7-e665c99920f0",
+      "parent_id": "collection:a6636a94-dafe-4680-a6a2-43f821924e9e",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6238",
+      "basename": "sub-6238",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:835c47cd-49b6-4d57-8d79-0b8e64bd3330",
+      "timestamp_updated": "2020-01-21T22:58:16,256488Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:835c47cd-49b6-4d57-8d79-0b8e64bd3330",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:835c47cd-49b6-4d57-8d79-0b8e64bd3330",
+      "parent_id": "collection:31b8e888-b112-4e78-ad59-4550f4260a2c",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6238/sam-9_sub-6238_islet2",
+      "basename": "sam-9_sub-6238_islet2",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:9062eb2f-c9f9-4ce0-8395-5246556c638d",
+      "timestamp_updated": "2021-01-28T22:37:32,261698Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:9062eb2f-c9f9-4ce0-8395-5246556c638d",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:9062eb2f-c9f9-4ce0-8395-5246556c638d",
+      "parent_id": "collection:835c47cd-49b6-4d57-8d79-0b8e64bd3330",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6238/sam-13_sub-6238_islet6",
+      "basename": "sam-13_sub-6238_islet6",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:ae16c606-5077-473d-94d4-5d7496ef45e0",
+      "timestamp_updated": "2021-01-28T22:37:19,372651Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:ae16c606-5077-473d-94d4-5d7496ef45e0",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:ae16c606-5077-473d-94d4-5d7496ef45e0",
+      "parent_id": "collection:835c47cd-49b6-4d57-8d79-0b8e64bd3330",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6238/sam-11_sub-6238_islet4",
+      "basename": "sam-11_sub-6238_islet4",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:d3754b63-4deb-48ee-b3bb-9444b172c9e8",
+      "timestamp_updated": "2021-01-28T22:37:05,686994Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:d3754b63-4deb-48ee-b3bb-9444b172c9e8",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:d3754b63-4deb-48ee-b3bb-9444b172c9e8",
+      "parent_id": "collection:835c47cd-49b6-4d57-8d79-0b8e64bd3330",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6238/sam-10_sub-6238_islet3",
+      "basename": "sam-10_sub-6238_islet3",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:d3ae9570-bc33-4374-ad1c-327ae2aba0cc",
+      "timestamp_updated": "2021-01-28T22:36:59,565402Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:d3ae9570-bc33-4374-ad1c-327ae2aba0cc",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:d3ae9570-bc33-4374-ad1c-327ae2aba0cc",
+      "parent_id": "collection:835c47cd-49b6-4d57-8d79-0b8e64bd3330",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6238/sam-8_sub-6238_islet1",
+      "basename": "sam-8_sub-6238_islet1",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:a5345eec-3fcf-4203-b1ae-25f211577053",
+      "timestamp_updated": "2021-01-28T22:37:26,163234Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:a5345eec-3fcf-4203-b1ae-25f211577053",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:a5345eec-3fcf-4203-b1ae-25f211577053",
+      "parent_id": "collection:835c47cd-49b6-4d57-8d79-0b8e64bd3330",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6238/sam-12_sub-6238_islet5",
+      "basename": "sam-12_sub-6238_islet5",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:61678b49-d40a-4052-9972-0a2fafe62a31",
+      "timestamp_updated": "2021-01-28T22:37:12,871522Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:61678b49-d40a-4052-9972-0a2fafe62a31",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:61678b49-d40a-4052-9972-0a2fafe62a31",
+      "parent_id": "collection:835c47cd-49b6-4d57-8d79-0b8e64bd3330",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6368",
+      "basename": "sub-6368",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:98a9d89e-0e77-4be9-b4a0-caadbd1f2c2d",
+      "timestamp_updated": "2020-01-21T22:59:50,060698Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:98a9d89e-0e77-4be9-b4a0-caadbd1f2c2d",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:98a9d89e-0e77-4be9-b4a0-caadbd1f2c2d",
+      "parent_id": "collection:31b8e888-b112-4e78-ad59-4550f4260a2c",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6368/sam-22_sub-6368_islet2",
+      "basename": "sam-22_sub-6368_islet2",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:12317abc-7a20-494d-9d75-f957fb9fc7fa",
+      "timestamp_updated": "2021-01-28T22:38:56,535052Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:12317abc-7a20-494d-9d75-f957fb9fc7fa",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:12317abc-7a20-494d-9d75-f957fb9fc7fa",
+      "parent_id": "collection:98a9d89e-0e77-4be9-b4a0-caadbd1f2c2d",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6368/sam-23_sub-6368_islet3",
+      "basename": "sam-23_sub-6368_islet3",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:d295a8c7-35a2-4fc5-ac6b-6c5914c78580",
+      "timestamp_updated": "2021-01-28T22:39:03,129245Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:d295a8c7-35a2-4fc5-ac6b-6c5914c78580",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:d295a8c7-35a2-4fc5-ac6b-6c5914c78580",
+      "parent_id": "collection:98a9d89e-0e77-4be9-b4a0-caadbd1f2c2d",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6368/sam-21_sub-6368_islet1",
+      "basename": "sam-21_sub-6368_islet1",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:72f2dbfc-3df6-4d04-83e8-23bb6db0373c",
+      "timestamp_updated": "2021-01-28T22:38:51,087105Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:72f2dbfc-3df6-4d04-83e8-23bb6db0373c",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:72f2dbfc-3df6-4d04-83e8-23bb6db0373c",
+      "parent_id": "collection:98a9d89e-0e77-4be9-b4a0-caadbd1f2c2d",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6368/sam-24_sub-6368_islet4",
+      "basename": "sam-24_sub-6368_islet4",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:d83cce9f-2506-4f86-b057-309bf8b5aba8",
+      "timestamp_updated": "2021-01-28T22:39:08,741807Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:d83cce9f-2506-4f86-b057-309bf8b5aba8",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:d83cce9f-2506-4f86-b057-309bf8b5aba8",
+      "parent_id": "collection:98a9d89e-0e77-4be9-b4a0-caadbd1f2c2d",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6384",
+      "basename": "sub-6384",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:5fe36540-1bd7-4391-8ff0-de520cef39b2",
+      "timestamp_updated": "2020-01-21T23:00:19,564015Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:5fe36540-1bd7-4391-8ff0-de520cef39b2",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:5fe36540-1bd7-4391-8ff0-de520cef39b2",
+      "parent_id": "collection:31b8e888-b112-4e78-ad59-4550f4260a2c",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6384/sam-27_sub-6384_islet2",
+      "basename": "sam-27_sub-6384_islet2",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:a4eacd5e-b058-4ea5-bbc8-d2b49adfac07",
+      "timestamp_updated": "2021-01-28T22:40:08,099537Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:a4eacd5e-b058-4ea5-bbc8-d2b49adfac07",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:a4eacd5e-b058-4ea5-bbc8-d2b49adfac07",
+      "parent_id": "collection:5fe36540-1bd7-4391-8ff0-de520cef39b2",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6384/sam-33_sub-6384_islet8",
+      "basename": "sam-33_sub-6384_islet8",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:d08b5d88-ad54-4be0-a6ad-c6e63bbe65f4",
+      "timestamp_updated": "2021-01-28T22:42:14,669050Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:d08b5d88-ad54-4be0-a6ad-c6e63bbe65f4",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:d08b5d88-ad54-4be0-a6ad-c6e63bbe65f4",
+      "parent_id": "collection:5fe36540-1bd7-4391-8ff0-de520cef39b2",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6384/sam-34_sub-6384_islet9",
+      "basename": "sam-34_sub-6384_islet9",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:4b08ef4a-4f31-497f-bf9a-fb7992a147b0",
+      "timestamp_updated": "2021-01-28T22:42:21,461226Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:4b08ef4a-4f31-497f-bf9a-fb7992a147b0",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:4b08ef4a-4f31-497f-bf9a-fb7992a147b0",
+      "parent_id": "collection:5fe36540-1bd7-4391-8ff0-de520cef39b2",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6384/sam-31_sub-6384_islet6",
+      "basename": "sam-31_sub-6384_islet6",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:b6ef68f8-dd5c-4993-a44c-0e2fa375af90",
+      "timestamp_updated": "2021-01-28T22:40:50,594819Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:b6ef68f8-dd5c-4993-a44c-0e2fa375af90",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:b6ef68f8-dd5c-4993-a44c-0e2fa375af90",
+      "parent_id": "collection:5fe36540-1bd7-4391-8ff0-de520cef39b2",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6384/sam-26_sub-6384_islet10",
+      "basename": "sam-26_sub-6384_islet10",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:9f187db9-af30-47b3-bf96-f2cec84bdebd",
+      "timestamp_updated": "2021-01-28T22:40:01,870224Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:9f187db9-af30-47b3-bf96-f2cec84bdebd",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:9f187db9-af30-47b3-bf96-f2cec84bdebd",
+      "parent_id": "collection:5fe36540-1bd7-4391-8ff0-de520cef39b2",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6384/sam-25_sub-6384_islet1",
+      "basename": "sam-25_sub-6384_islet1",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:1e770e00-c7cc-4af4-b81e-e6ab3e6f3292",
+      "timestamp_updated": "2021-01-28T22:39:46,313502Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:1e770e00-c7cc-4af4-b81e-e6ab3e6f3292",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:1e770e00-c7cc-4af4-b81e-e6ab3e6f3292",
+      "parent_id": "collection:5fe36540-1bd7-4391-8ff0-de520cef39b2",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6384/sam-30_sub-6384_islet5",
+      "basename": "sam-30_sub-6384_islet5",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:35292f3d-8354-4165-9628-f14d54a870af",
+      "timestamp_updated": "2021-01-28T22:40:43,559521Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:35292f3d-8354-4165-9628-f14d54a870af",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:35292f3d-8354-4165-9628-f14d54a870af",
+      "parent_id": "collection:5fe36540-1bd7-4391-8ff0-de520cef39b2",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6384/sam-32_sub-6384_islet7",
+      "basename": "sam-32_sub-6384_islet7",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:bb664458-87af-45a2-bab0-5b03dba8f925",
+      "timestamp_updated": "2021-01-28T22:42:07,962349Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:bb664458-87af-45a2-bab0-5b03dba8f925",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:bb664458-87af-45a2-bab0-5b03dba8f925",
+      "parent_id": "collection:5fe36540-1bd7-4391-8ff0-de520cef39b2",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6384/sam-29_sub-6384_islet4",
+      "basename": "sam-29_sub-6384_islet4",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:8b190216-52d2-41f3-b69a-6a51a0cd096d",
+      "timestamp_updated": "2021-01-28T22:40:25,313442Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:8b190216-52d2-41f3-b69a-6a51a0cd096d",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:8b190216-52d2-41f3-b69a-6a51a0cd096d",
+      "parent_id": "collection:5fe36540-1bd7-4391-8ff0-de520cef39b2",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6384/sam-28_sub-6384_islet3",
+      "basename": "sam-28_sub-6384_islet3",
+      "mimetype": "inode/directory",
+      "remote_id": "collection:c018f24b-2128-41e4-84dd-85753871335b",
+      "timestamp_updated": "2021-01-28T22:40:18,036884Z",
+      "uri_api": "https://api.blackfynn.io/collections/N:collection:c018f24b-2128-41e4-84dd-85753871335b",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/N:collection:c018f24b-2128-41e4-84dd-85753871335b",
+      "parent_id": "collection:5fe36540-1bd7-4391-8ff0-de520cef39b2",
+      "status": "utility"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6289/manifest.xlsx",
+      "basename": "manifest.xlsx",
+      "mimetype": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "remote_id": "package:a667f568-be18-44d3-a8f3-c2169932dbb7/files/1224524",
+      "timestamp_updated": "2021-01-28T22:31:27,608339Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:a667f568-be18-44d3-a8f3-c2169932dbb7/files/1224524",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:a667f568-be18-44d3-a8f3-c2169932dbb7",
+      "size_bytes": 13306,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "7a0fc210f9807a0c1b1f066989cddbde1f8fbba5d13e79df50c4d2b4af2c77d7"
+        }
+      ],
+      "parent_id": "collection:7013fd7a-a34f-4b14-a62c-076c68685e57",
+      "status": "accepted"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6289/sam-20_sub-6289_islet7/sub-6289_20x_MsGcg_RbCol4_SMACy3_islet7.czi",
+      "basename": "sub-6289_20x_MsGcg_RbCol4_SMACy3_islet7.czi",
+      "mimetype": "image/vnd.zeiss.czi",
+      "remote_id": "package:788d0656-f1a0-44ca-a805-41d56109d89e/files/248137",
+      "timestamp_updated": "2021-02-01T13:37:27,139712Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:788d0656-f1a0-44ca-a805-41d56109d89e/files/248137",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:788d0656-f1a0-44ca-a805-41d56109d89e",
+      "size_bytes": 157452288,
+      "parent_id": "collection:5b40f0b6-b072-431f-b1f2-a7462b714572",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6289/sam-15_sub-6289_islet2/sub-6289_20x_MsGcg_RbCol4_SMACy3_islet2.czi",
+      "basename": "sub-6289_20x_MsGcg_RbCol4_SMACy3_islet2.czi",
+      "mimetype": "image/vnd.zeiss.czi",
+      "remote_id": "package:c018e095-33a6-4a96-850d-421a29698bd3/files/248126",
+      "timestamp_updated": "2021-02-01T13:37:02,001885Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:c018e095-33a6-4a96-850d-421a29698bd3/files/248126",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:c018e095-33a6-4a96-850d-421a29698bd3",
+      "size_bytes": 157456448,
+      "parent_id": "collection:1ee81bac-0088-4c49-be03-48ed35915aed",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6289/sam-18_sub-6289_islet5/sub-6289_20x_MsGcg_RbCol4_SMACy3_islet5.czi",
+      "basename": "sub-6289_20x_MsGcg_RbCol4_SMACy3_islet5.czi",
+      "mimetype": "image/vnd.zeiss.czi",
+      "remote_id": "package:356faebc-0842-4b01-8c9b-1f585daf5761/files/248139",
+      "timestamp_updated": "2021-02-01T13:37:38,825596Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:356faebc-0842-4b01-8c9b-1f585daf5761/files/248139",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:356faebc-0842-4b01-8c9b-1f585daf5761",
+      "size_bytes": 333637056,
+      "parent_id": "collection:d308d68f-6a17-499e-bfd6-8c73e4a4b694",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6289/sam-14_sub-6289_islet1/sub-6289_20x_MsGcg_RbCol4_SMACy3_islet1.czi",
+      "basename": "sub-6289_20x_MsGcg_RbCol4_SMACy3_islet1.czi",
+      "mimetype": "image/vnd.zeiss.czi",
+      "remote_id": "package:ca64ca89-ce65-4aad-8295-3f84950afafe/files/248131",
+      "timestamp_updated": "2021-02-01T13:35:12,472674Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:ca64ca89-ce65-4aad-8295-3f84950afafe/files/248131",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:ca64ca89-ce65-4aad-8295-3f84950afafe",
+      "size_bytes": 465792192,
+      "parent_id": "collection:57101425-df48-4b7f-a077-c81eeb652679",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6289/sam-19_sub-6289_islet6/sub-6289_20x_MsGcg_RbCol4_SMACy3_islet6.czi",
+      "basename": "sub-6289_20x_MsGcg_RbCol4_SMACy3_islet6.czi",
+      "mimetype": "image/vnd.zeiss.czi",
+      "remote_id": "package:d1cf4d25-5a17-4490-8a32-bde2fe04b8f0/files/248138",
+      "timestamp_updated": "2021-02-01T13:37:31,129305Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:d1cf4d25-5a17-4490-8a32-bde2fe04b8f0/files/248138",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:d1cf4d25-5a17-4490-8a32-bde2fe04b8f0",
+      "size_bytes": 182632832,
+      "parent_id": "collection:d7f21208-059f-4da4-b0d2-7b899d96def1",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6289/sam-16_sub-6289_islet3/sub-6289_20x_MsGcg_RbCol4_SMACy3_islet3.czi",
+      "basename": "sub-6289_20x_MsGcg_RbCol4_SMACy3_islet3.czi",
+      "mimetype": "image/vnd.zeiss.czi",
+      "remote_id": "package:4786ca69-5076-4862-ade4-02112e85dd79/files/248134",
+      "timestamp_updated": "2021-02-01T13:37:22,755894Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:4786ca69-5076-4862-ade4-02112e85dd79/files/248134",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:4786ca69-5076-4862-ade4-02112e85dd79",
+      "size_bytes": 321054336,
+      "parent_id": "collection:be7c43f6-f385-4fc8-aa20-8ca301f5c72a",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6289/sam-17_sub-6289_islet4/sub-6289_20x_MsGcg_RbCol4_SMACy3_islet4.czi",
+      "basename": "sub-6289_20x_MsGcg_RbCol4_SMACy3_islet4.czi",
+      "mimetype": "image/vnd.zeiss.czi",
+      "remote_id": "package:e8f31a3c-8a4a-4d86-b104-45df9eddbf89/files/248133",
+      "timestamp_updated": "2021-02-01T13:37:16,810042Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:e8f31a3c-8a4a-4d86-b104-45df9eddbf89/files/248133",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:e8f31a3c-8a4a-4d86-b104-45df9eddbf89",
+      "size_bytes": 251850848,
+      "parent_id": "collection:c276454f-3c7b-4bac-a7b9-8bdbde1635c4",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6232/manifest.xlsx",
+      "basename": "manifest.xlsx",
+      "mimetype": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "remote_id": "package:84a29f64-a06a-4a53-9d99-b5961a38948b/files/1224522",
+      "timestamp_updated": "2021-01-28T22:27:17,387672Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:84a29f64-a06a-4a53-9d99-b5961a38948b/files/1224522",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:84a29f64-a06a-4a53-9d99-b5961a38948b",
+      "size_bytes": 14336,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "7ca9c2f3a3a0fb136e536bca3db5ad363093779a67a7c41d65a8f03dd4e838b9"
+        }
+      ],
+      "parent_id": "collection:edb9e2e1-10f7-4950-abe0-228138cbbacb",
+      "status": "accepted"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6232/sam-6_sub-6232_islet6/sub-6232_20x_MsGcg_RbCol4_SMACy3_islet6.czi",
+      "basename": "sub-6232_20x_MsGcg_RbCol4_SMACy3_islet6.czi",
+      "mimetype": "image/vnd.zeiss.czi",
+      "remote_id": "package:c5e614e4-2177-4859-9a72-cf29beb5c708/files/248108",
+      "timestamp_updated": "2021-02-01T13:36:00,759366Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:c5e614e4-2177-4859-9a72-cf29beb5c708/files/248108",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:c5e614e4-2177-4859-9a72-cf29beb5c708",
+      "size_bytes": 541327488,
+      "parent_id": "collection:c52e3f7f-aa93-4cfe-b1d5-5349824865c9",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6232/sam-1_sub-6232_islet1/sub-6232_20x_MsGcg_RbCol4_SMACy3_islet1.czi",
+      "basename": "sub-6232_20x_MsGcg_RbCol4_SMACy3_islet1.czi",
+      "mimetype": "image/vnd.zeiss.czi",
+      "remote_id": "package:e68f617e-baea-4d43-8fc7-5256151acad2/files/248097",
+      "timestamp_updated": "2021-02-01T13:39:11,157565Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:e68f617e-baea-4d43-8fc7-5256151acad2/files/248097",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:e68f617e-baea-4d43-8fc7-5256151acad2",
+      "size_bytes": 459632416,
+      "parent_id": "collection:8ceb7889-2545-42e1-932e-3886985d8244",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6232/sam-2_sub-6232_islet2/sub-6232_20x_MsGcg_RbCol4_SMACy3_islet2.czi",
+      "basename": "sub-6232_20x_MsGcg_RbCol4_SMACy3_islet2.czi",
+      "mimetype": "image/vnd.zeiss.czi",
+      "remote_id": "package:a0446ffb-6347-4396-b0dc-5f9b3ad165b5/files/248103",
+      "timestamp_updated": "2021-02-01T13:35:36,145222Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:a0446ffb-6347-4396-b0dc-5f9b3ad165b5/files/248103",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:a0446ffb-6347-4396-b0dc-5f9b3ad165b5",
+      "size_bytes": 579098624,
+      "parent_id": "collection:e99d5cdf-18c0-4bbd-bdb3-753d5f6e41bc",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6232/sam-5_sub-6232_islet5/sub-6232_20x_MsGcg_RbCol4_SMACy3_islet5.czi",
+      "basename": "sub-6232_20x_MsGcg_RbCol4_SMACy3_islet5.czi",
+      "mimetype": "image/vnd.zeiss.czi",
+      "remote_id": "package:fb287213-e86a-4a2c-b555-07a914533f28/files/248107",
+      "timestamp_updated": "2021-02-01T13:35:44,585335Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:fb287213-e86a-4a2c-b555-07a914533f28/files/248107",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:fb287213-e86a-4a2c-b555-07a914533f28",
+      "size_bytes": 490988256,
+      "parent_id": "collection:67f88015-634f-4c15-87f7-a2081b456429",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6232/sam-7_sub-6232_islet7/sub-6232_20x_MsGcg_RbCol4_SMACy3_islet7.czi",
+      "basename": "sub-6232_20x_MsGcg_RbCol4_SMACy3_islet7.czi",
+      "mimetype": "image/vnd.zeiss.czi",
+      "remote_id": "package:25b5aac5-c036-4043-b7f0-177f638adb0f/files/248117",
+      "timestamp_updated": "2021-02-01T13:36:32,981211Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:25b5aac5-c036-4043-b7f0-177f638adb0f/files/248117",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:25b5aac5-c036-4043-b7f0-177f638adb0f",
+      "size_bytes": 509866560,
+      "parent_id": "collection:7810ae3a-0a3a-4cb8-95c0-aa6d7e207c75",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6232/sam-4_sub-6232_islet4/sub-6232_20x_MsGcg_RbCol4_SMACy3_islet4.czi",
+      "basename": "sub-6232_20x_MsGcg_RbCol4_SMACy3_islet4.czi",
+      "mimetype": "image/vnd.zeiss.czi",
+      "remote_id": "package:78fc1bf1-713b-452f-85f0-2e25e0e7be5e/files/248112",
+      "timestamp_updated": "2021-02-01T13:36:16,031949Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:78fc1bf1-713b-452f-85f0-2e25e0e7be5e/files/248112",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:78fc1bf1-713b-452f-85f0-2e25e0e7be5e",
+      "size_bytes": 824552672,
+      "parent_id": "collection:e49e1708-530c-4af9-87e9-d2e53b7ed7fb",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6232/sam-3_sub-6232_islet3/sub-6232_20x_MsGcg_RbCol4_SMACy3_islet3.czi",
+      "basename": "sub-6232_20x_MsGcg_RbCol4_SMACy3_islet3.czi",
+      "mimetype": "image/vnd.zeiss.czi",
+      "remote_id": "package:62e5b16d-4d31-48bd-b4d6-c05329c53e50/files/248101",
+      "timestamp_updated": "2021-02-01T13:35:25,156184Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:62e5b16d-4d31-48bd-b4d6-c05329c53e50/files/248101",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:62e5b16d-4d31-48bd-b4d6-c05329c53e50",
+      "size_bytes": 497261440,
+      "parent_id": "collection:81461b67-e3de-48ce-a615-943a7afe34ed",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6238/sam-9_sub-6238_islet2/sub-6238_20x_MsGcg_RbCol4_SMACy3_islet2.czi",
+      "basename": "sub-6238_20x_MsGcg_RbCol4_SMACy3_islet2.czi",
+      "mimetype": "image/vnd.zeiss.czi",
+      "remote_id": "package:219f105b-625f-4685-a9a8-ea1b597fd386/files/248121",
+      "timestamp_updated": "2021-02-01T13:39:29,645856Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:219f105b-625f-4685-a9a8-ea1b597fd386/files/248121",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:219f105b-625f-4685-a9a8-ea1b597fd386",
+      "size_bytes": 484736320,
+      "parent_id": "collection:5e319796-b80a-47e8-a0e6-9ec0ff2c68dc",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6238/manifest.xlsx",
+      "basename": "manifest.xlsx",
+      "mimetype": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "remote_id": "package:5023fcba-b803-4094-bbc5-a599f3c3676d/files/1224523",
+      "timestamp_updated": "2021-01-28T22:29:22,953469Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:5023fcba-b803-4094-bbc5-a599f3c3676d/files/1224523",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:5023fcba-b803-4094-bbc5-a599f3c3676d",
+      "size_bytes": 13295,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "1a275ef7468ec4b3539a714e7d49ae902c4de7f14e8c82e34a7cbe1f02bc6da9"
+        }
+      ],
+      "parent_id": "collection:1c9a3cba-e4c3-4cb8-a3ec-50cd2f11a93a",
+      "status": "accepted"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6238/sam-13_sub-6238_islet6/sub-6238_20x_MsGcg_RbCol4_SMACy3_islet6.czi",
+      "basename": "sub-6238_20x_MsGcg_RbCol4_SMACy3_islet6.czi",
+      "mimetype": "image/vnd.zeiss.czi",
+      "remote_id": "package:2fef43c0-32d8-41f6-b8ce-ee6fe6f1f3c3/files/248128",
+      "timestamp_updated": "2021-02-01T13:37:12,136123Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:2fef43c0-32d8-41f6-b8ce-ee6fe6f1f3c3/files/248128",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:2fef43c0-32d8-41f6-b8ce-ee6fe6f1f3c3",
+      "size_bytes": 478405664,
+      "parent_id": "collection:e40da93c-e174-4ecd-87ab-7293db2f5ebf",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6238/sam-11_sub-6238_islet4/sub-6238_20x_MsGcg_RbCol4_SMACy3_islet4.czi",
+      "basename": "sub-6238_20x_MsGcg_RbCol4_SMACy3_islet4.czi",
+      "mimetype": "image/vnd.zeiss.czi",
+      "remote_id": "package:15a602c9-bcfd-4586-94b3-b25ef5a745f2/files/248125",
+      "timestamp_updated": "2021-02-01T13:36:58,098413Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:15a602c9-bcfd-4586-94b3-b25ef5a745f2/files/248125",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:15a602c9-bcfd-4586-94b3-b25ef5a745f2",
+      "size_bytes": 522440640,
+      "parent_id": "collection:02576cb0-9ea6-49b5-9d4c-06ad034f7e21",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6238/sam-10_sub-6238_islet3/sub-6238_20x_MsGcg_RbCol4_SMACy3_islet3.czi",
+      "basename": "sub-6238_20x_MsGcg_RbCol4_SMACy3_islet3.czi",
+      "mimetype": "image/vnd.zeiss.czi",
+      "remote_id": "package:35fb7339-7664-4d61-ab21-0feeac51e608/files/248120",
+      "timestamp_updated": "2021-02-01T13:39:16,299012Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:35fb7339-7664-4d61-ab21-0feeac51e608/files/248120",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:35fb7339-7664-4d61-ab21-0feeac51e608",
+      "size_bytes": 245591104,
+      "parent_id": "collection:26621740-bff6-45b8-a02a-106654b1296d",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6238/sam-8_sub-6238_islet1/sub-6238_20x_MsGcg_RbCol4_SMACy3_islet1.czi",
+      "basename": "sub-6238_20x_MsGcg_RbCol4_SMACy3_islet1.czi",
+      "mimetype": "image/vnd.zeiss.czi",
+      "remote_id": "package:6b7437f1-ff5d-4235-9378-5aa96026b699/files/248116",
+      "timestamp_updated": "2021-02-01T13:36:24,200887Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:6b7437f1-ff5d-4235-9378-5aa96026b699/files/248116",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:6b7437f1-ff5d-4235-9378-5aa96026b699",
+      "size_bytes": 415460000,
+      "parent_id": "collection:178f15aa-f18c-47fd-890d-1f47f3155a46",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6238/sam-12_sub-6238_islet5/sub-6238_20x_MsGcg_RbCol4_SMACy3_islet5.czi",
+      "basename": "sub-6238_20x_MsGcg_RbCol4_SMACy3_islet5.czi",
+      "mimetype": "image/vnd.zeiss.czi",
+      "remote_id": "package:1198ef71-4622-457d-8aac-dc77820a05c5/files/248124",
+      "timestamp_updated": "2021-02-01T13:36:45,048218Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:1198ef71-4622-457d-8aac-dc77820a05c5/files/248124",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:1198ef71-4622-457d-8aac-dc77820a05c5",
+      "size_bytes": 245568096,
+      "parent_id": "collection:d4566fe0-a973-41fc-8937-762eadbdc5a6",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6368/manifest.xlsx",
+      "basename": "manifest.xlsx",
+      "mimetype": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "remote_id": "package:519c726b-c4ad-45d9-b39d-01bc29d40fc8/files/1224525",
+      "timestamp_updated": "2021-01-28T22:32:43,778907Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:519c726b-c4ad-45d9-b39d-01bc29d40fc8/files/1224525",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:519c726b-c4ad-45d9-b39d-01bc29d40fc8",
+      "size_bytes": 13244,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "acde17265dd620aee2c27a659519e37c433f9b082877782a58d6a659d978f3c0"
+        }
+      ],
+      "parent_id": "collection:77213aa9-de8f-4b36-ba87-224f0a3f305c",
+      "status": "accepted"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6368/sam-22_sub-6368_islet2/sub-6368_20x_MsGcg_RbCol4_SMACy3_islet2.czi",
+      "basename": "sub-6368_20x_MsGcg_RbCol4_SMACy3_islet2.czi",
+      "mimetype": "image/vnd.zeiss.czi",
+      "remote_id": "package:9311080c-5c8c-4257-90af-1d32f2b37d68/files/248140",
+      "timestamp_updated": "2021-02-01T13:37:44,740693Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:9311080c-5c8c-4257-90af-1d32f2b37d68/files/248140",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:9311080c-5c8c-4257-90af-1d32f2b37d68",
+      "size_bytes": 251872256,
+      "parent_id": "collection:665c38cc-01dc-4457-b607-d91d89728ca5",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6368/sam-23_sub-6368_islet3/sub-6368_20x_MsGcg_RbCol4_SMACy3_islet3.czi",
+      "basename": "sub-6368_20x_MsGcg_RbCol4_SMACy3_islet3.czi",
+      "mimetype": "image/vnd.zeiss.czi",
+      "remote_id": "package:24a9d1c5-b16a-4b48-ad2c-f5e76b395b50/files/248146",
+      "timestamp_updated": "2021-02-01T13:38:00,772378Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:24a9d1c5-b16a-4b48-ad2c-f5e76b395b50/files/248146",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:24a9d1c5-b16a-4b48-ad2c-f5e76b395b50",
+      "size_bytes": 396609696,
+      "parent_id": "collection:d73d25f1-bd4e-405a-9f17-05fd7b57f7e5",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6368/sam-21_sub-6368_islet1/sub-6368_20x_MsGcg_RbCol4_SMACy3_islet1.czi",
+      "basename": "sub-6368_20x_MsGcg_RbCol4_SMACy3_islet1.czi",
+      "mimetype": "image/vnd.zeiss.czi",
+      "remote_id": "package:0a4e584e-7047-4688-94cf-91d27671bee7/files/248141",
+      "timestamp_updated": "2021-02-01T13:37:51,315768Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:0a4e584e-7047-4688-94cf-91d27671bee7/files/248141",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:0a4e584e-7047-4688-94cf-91d27671bee7",
+      "size_bytes": 302171040,
+      "parent_id": "collection:d18d164f-18ff-4dcf-8c11-25ebe94fe2b5",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6368/sam-24_sub-6368_islet4/sub-6368_20x_MsGcg_RbCol4_SMACy3_islet4.czi",
+      "basename": "sub-6368_20x_MsGcg_RbCol4_SMACy3_islet4.czi",
+      "mimetype": "image/vnd.zeiss.czi",
+      "remote_id": "package:76d49ca5-978f-40c9-83d7-2051ef178263/files/248155",
+      "timestamp_updated": "2021-02-01T13:38:49,052482Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:76d49ca5-978f-40c9-83d7-2051ef178263/files/248155",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:76d49ca5-978f-40c9-83d7-2051ef178263",
+      "size_bytes": 642113504,
+      "parent_id": "collection:0779c3ea-f3a2-4886-b79f-16ff3c430fb1",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6384/sam-27_sub-6384_islet2/sub-6384_20x_MsGcg_RbCol4_SMACy3_islet2.czi",
+      "basename": "sub-6384_20x_MsGcg_RbCol4_SMACy3_islet2.czi",
+      "mimetype": "image/vnd.zeiss.czi",
+      "remote_id": "package:cd6e0038-7443-4150-9c2c-677321c73380/files/248157",
+      "timestamp_updated": "2021-02-01T13:38:54,245047Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:cd6e0038-7443-4150-9c2c-677321c73380/files/248157",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:cd6e0038-7443-4150-9c2c-677321c73380",
+      "size_bytes": 270717184,
+      "parent_id": "collection:bd061d56-11d0-46b1-9063-7cf039cee2df",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6384/manifest.xlsx",
+      "basename": "manifest.xlsx",
+      "mimetype": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "remote_id": "package:ee7b8cb7-0e9a-4d9f-8510-650397185c88/files/1224526",
+      "timestamp_updated": "2021-01-28T22:35:28,915977Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:ee7b8cb7-0e9a-4d9f-8510-650397185c88/files/1224526",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:ee7b8cb7-0e9a-4d9f-8510-650397185c88",
+      "size_bytes": 13423,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "2dcf53991607bbd2d417f7c4a77f1ac96b1a77a0e4e52aa9b2493c05603b2102"
+        }
+      ],
+      "parent_id": "collection:98822928-1fba-4007-b69d-014506bd02d2",
+      "status": "accepted"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6384/sam-33_sub-6384_islet8/sub-6384_20x_MsGcg_RbCol4_SMACy3_islet8.czi",
+      "basename": "sub-6384_20x_MsGcg_RbCol4_SMACy3_islet8.czi",
+      "mimetype": "image/vnd.zeiss.czi",
+      "remote_id": "package:df3e6219-2686-4eee-bda8-ef68dd8c053b/files/248167",
+      "timestamp_updated": "2021-02-01T13:39:01,244472Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:df3e6219-2686-4eee-bda8-ef68dd8c053b/files/248167",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:df3e6219-2686-4eee-bda8-ef68dd8c053b",
+      "size_bytes": 339927136,
+      "parent_id": "collection:9d540cbf-9c5e-4352-b480-3d75a16c1ea5",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6384/sam-34_sub-6384_islet9/sub-6384_20x_MsGcg_RbCol4_SMACy3_islet9.czi",
+      "basename": "sub-6384_20x_MsGcg_RbCol4_SMACy3_islet9.czi",
+      "mimetype": "image/vnd.zeiss.czi",
+      "remote_id": "package:cdf75097-ecf9-44cd-bbaa-12bf1c53299d/files/248169",
+      "timestamp_updated": "2021-02-01T13:35:16,359154Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:cdf75097-ecf9-44cd-bbaa-12bf1c53299d/files/248169",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:cdf75097-ecf9-44cd-bbaa-12bf1c53299d",
+      "size_bytes": 201500384,
+      "parent_id": "collection:3c920690-466d-41fa-9e4e-5ff61dc5c3bf",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6384/sam-31_sub-6384_islet6/sub-6384_20x_MsGcg_RbCol4_SMACy3_islet6.czi",
+      "basename": "sub-6384_20x_MsGcg_RbCol4_SMACy3_islet6.czi",
+      "mimetype": "image/vnd.zeiss.czi",
+      "remote_id": "package:9e9e2739-b0d1-4a27-864d-0d1173eef86c/files/248165",
+      "timestamp_updated": "2021-02-01T13:39:47,962949Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:9e9e2739-b0d1-4a27-864d-0d1173eef86c/files/248165",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:9e9e2739-b0d1-4a27-864d-0d1173eef86c",
+      "size_bytes": 352535648,
+      "parent_id": "collection:50669919-9eb5-4166-b0d4-8fc2d58e2a84",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6384/sam-26_sub-6384_islet10/sub-6384_20x_MsGcg_RbCol4_SMACy3_islet10.czi",
+      "basename": "sub-6384_20x_MsGcg_RbCol4_SMACy3_islet10.czi",
+      "mimetype": "image/vnd.zeiss.czi",
+      "remote_id": "package:efbe2cd9-82fe-4823-b71a-e8cb63741217/files/248151",
+      "timestamp_updated": "2021-02-01T13:38:04,585050Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:efbe2cd9-82fe-4823-b71a-e8cb63741217/files/248151",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:efbe2cd9-82fe-4823-b71a-e8cb63741217",
+      "size_bytes": 232951168,
+      "parent_id": "collection:da88316b-326e-47c2-b591-734f4216f63f",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6384/sam-25_sub-6384_islet1/sub-6384_20x_MsGcg_RbCol4_SMACy3_islet1.czi",
+      "basename": "sub-6384_20x_MsGcg_RbCol4_SMACy3_islet1.czi",
+      "mimetype": "image/vnd.zeiss.czi",
+      "remote_id": "package:dfb7de6d-3af5-429a-8944-8d7cf58cd56c/files/248152",
+      "timestamp_updated": "2021-02-01T13:38:14,754856Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:dfb7de6d-3af5-429a-8944-8d7cf58cd56c/files/248152",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:dfb7de6d-3af5-429a-8944-8d7cf58cd56c",
+      "size_bytes": 472090080,
+      "parent_id": "collection:3b89040a-2a46-41e3-8fd1-42665e4b0042",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6384/sam-30_sub-6384_islet5/sub-6384_20x_MsGcg_RbCol4_SMACy3_islet5.czi",
+      "basename": "sub-6384_20x_MsGcg_RbCol4_SMACy3_islet5.czi",
+      "mimetype": "image/vnd.zeiss.czi",
+      "remote_id": "package:fed3a132-51c4-4d29-839d-fcb6d2a23463/files/248162",
+      "timestamp_updated": "2021-02-01T13:39:41,866155Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:fed3a132-51c4-4d29-839d-fcb6d2a23463/files/248162",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:fed3a132-51c4-4d29-839d-fcb6d2a23463",
+      "size_bytes": 346257440,
+      "parent_id": "collection:1e6b668e-81f9-4b66-a52f-853eef52e9d6",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6384/sam-32_sub-6384_islet7/sub-6384_20x_MsGcg_RbCol4_SMACy3_islet7.czi",
+      "basename": "sub-6384_20x_MsGcg_RbCol4_SMACy3_islet7.czi",
+      "mimetype": "image/vnd.zeiss.czi",
+      "remote_id": "package:7d236ac0-0421-4381-b337-6c0ca4559ab2/files/248166",
+      "timestamp_updated": "2021-02-01T13:39:55,292682Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:7d236ac0-0421-4381-b337-6c0ca4559ab2/files/248166",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:7d236ac0-0421-4381-b337-6c0ca4559ab2",
+      "size_bytes": 365104896,
+      "parent_id": "collection:8ead058d-95c1-467f-9da5-e65916e6e9e2",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6384/sam-29_sub-6384_islet4/sub-6384_20x_MsGcg_RbCol4_SMACy3_islet4.czi",
+      "basename": "sub-6384_20x_MsGcg_RbCol4_SMACy3_islet4.czi",
+      "mimetype": "image/vnd.zeiss.czi",
+      "remote_id": "package:874ca53d-8c46-4d65-b53a-0433af3b8653/files/248161",
+      "timestamp_updated": "2021-02-01T13:39:35,070938Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:874ca53d-8c46-4d65-b53a-0433af3b8653/files/248161",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:874ca53d-8c46-4d65-b53a-0433af3b8653",
+      "size_bytes": 314814560,
+      "parent_id": "collection:3c91d1cd-861e-4c57-93c0-7fabb90ac96a",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "primary/sub-6384/sam-28_sub-6384_islet3/sub-6384_20x_MsGcg_RbCol4_SMACy3_islet3.czi",
+      "basename": "sub-6384_20x_MsGcg_RbCol4_SMACy3_islet3.czi",
+      "mimetype": "image/vnd.zeiss.czi",
+      "remote_id": "package:93026b41-7aa2-4dbe-a557-a1598b6fe1ab/files/248160",
+      "timestamp_updated": "2021-02-01T13:36:40,353333Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:93026b41-7aa2-4dbe-a557-a1598b6fe1ab/files/248160",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:93026b41-7aa2-4dbe-a557-a1598b6fe1ab",
+      "size_bytes": 428005440,
+      "parent_id": "collection:78e19dc3-231a-418c-88e8-ef02d196dc79",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "samples.xlsx",
+      "basename": "samples.xlsx",
+      "mimetype": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "remote_id": "package:5be37a78-4dd5-4e38-bfa8-33bea89cdb00/files/1224521",
+      "timestamp_updated": "2021-01-28T22:26:06,805429Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:5be37a78-4dd5-4e38-bfa8-33bea89cdb00/files/1224521",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:5be37a78-4dd5-4e38-bfa8-33bea89cdb00",
+      "size_bytes": 33692,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "d471fef549561ead95720c39e2f0e826ba9e7727b0da5aff274bcd3b37139e0e"
+        }
+      ],
+      "parent_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "status": "accepted"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6289/sam-20_sub-6289_islet7/sub-6289_20x_MsGcg_RbCol4_SMACy3_islet7.jpx",
+      "basename": "sub-6289_20x_MsGcg_RbCol4_SMACy3_islet7.jpx",
+      "mimetype": "image/jpx",
+      "remote_id": "package:76a2ef08-0442-4388-90f7-cda20313a88a/files/1224168",
+      "timestamp_updated": "2021-01-15T23:03:45,354736Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:76a2ef08-0442-4388-90f7-cda20313a88a/files/1224168",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:76a2ef08-0442-4388-90f7-cda20313a88a",
+      "size_bytes": 8007972,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "fdd8035ea8d282a390753138de226260278a8c0c6453ae6e7fe2eedbf0e210aa"
+        }
+      ],
+      "parent_id": "collection:93c3ec07-14b1-402c-ad18-ec6a7c8148ba",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6289/sam-20_sub-6289_islet7/sub-6289_20x_MsGcg_RbCol4_SMACy3_islet7.tif",
+      "basename": "sub-6289_20x_MsGcg_RbCol4_SMACy3_islet7.tif",
+      "mimetype": "image/tiff",
+      "remote_id": "package:8aa87326-df9f-4982-8d0d-9831d1d6b3f7/files/1224170",
+      "timestamp_updated": "2021-01-15T23:04:09,469025Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:8aa87326-df9f-4982-8d0d-9831d1d6b3f7/files/1224170",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:8aa87326-df9f-4982-8d0d-9831d1d6b3f7",
+      "size_bytes": 157387186,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "9f93a2caa505ca28aeb229ecdd3d9b44723ab38f86ece1ce4ff8dd26830eb316"
+        }
+      ],
+      "parent_id": "collection:93c3ec07-14b1-402c-ad18-ec6a7c8148ba",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6289/sam-15_sub-6289_islet2/sub-6289_20x_MsGcg_RbCol4_SMACy3_islet2.jpx",
+      "basename": "sub-6289_20x_MsGcg_RbCol4_SMACy3_islet2.jpx",
+      "mimetype": "image/jpx",
+      "remote_id": "package:1d7f1987-dca1-44e5-bc67-5700f91f7857/files/1224158",
+      "timestamp_updated": "2021-01-15T23:02:28,585298Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:1d7f1987-dca1-44e5-bc67-5700f91f7857/files/1224158",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:1d7f1987-dca1-44e5-bc67-5700f91f7857",
+      "size_bytes": 8006289,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "0e0d3ee96b92a734d48d5402ad94685127ab33db096f040939d62a27a2530673"
+        }
+      ],
+      "parent_id": "collection:1a0f29ef-4011-46d2-bef0-4ba4552798c2",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6289/sam-15_sub-6289_islet2/sub-6289_20x_MsGcg_RbCol4_SMACy3_islet2.tif",
+      "basename": "sub-6289_20x_MsGcg_RbCol4_SMACy3_islet2.tif",
+      "mimetype": "image/tiff",
+      "remote_id": "package:d2b53d1d-16c6-4336-8e22-08a560a78d56/files/1224161",
+      "timestamp_updated": "2021-01-15T23:02:56,238552Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:d2b53d1d-16c6-4336-8e22-08a560a78d56/files/1224161",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:d2b53d1d-16c6-4336-8e22-08a560a78d56",
+      "size_bytes": 157386736,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "ff411ca8387636a309321c9c5b4d6b4676d493ba3cdc104af95d3c5296e6c756"
+        }
+      ],
+      "parent_id": "collection:1a0f29ef-4011-46d2-bef0-4ba4552798c2",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6289/sam-18_sub-6289_islet5/sub-6289_20x_MsGcg_RbCol4_SMACy3_islet5.jpx",
+      "basename": "sub-6289_20x_MsGcg_RbCol4_SMACy3_islet5.jpx",
+      "mimetype": "image/jpx",
+      "remote_id": "package:969c2f12-2ad9-48fb-aa5e-498043edb9d7/files/1224164",
+      "timestamp_updated": "2021-01-15T23:03:35,411861Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:969c2f12-2ad9-48fb-aa5e-498043edb9d7/files/1224164",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:969c2f12-2ad9-48fb-aa5e-498043edb9d7",
+      "size_bytes": 16827866,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "e81dae9c64010907433bce44880bc8ca038002bff865221f83590e14e86b6860"
+        }
+      ],
+      "parent_id": "collection:2eea81d5-9f5f-4ddf-a771-f99a85d4bcb3",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6289/sam-18_sub-6289_islet5/sub-6289_20x_MsGcg_RbCol4_SMACy3_islet5.tif",
+      "basename": "sub-6289_20x_MsGcg_RbCol4_SMACy3_islet5.tif",
+      "mimetype": "image/tiff",
+      "remote_id": "package:1882aa48-0087-4c7a-86f3-bb2dfb6e88b3/files/1224173",
+      "timestamp_updated": "2021-01-15T23:04:36,457976Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:1882aa48-0087-4c7a-86f3-bb2dfb6e88b3/files/1224173",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:1882aa48-0087-4c7a-86f3-bb2dfb6e88b3",
+      "size_bytes": 333560876,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "76cef4348ee854480e716c9810ddbacb40b9d21e1e5b77f6bc8791dbe1e96193"
+        }
+      ],
+      "parent_id": "collection:2eea81d5-9f5f-4ddf-a771-f99a85d4bcb3",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6289/sam-14_sub-6289_islet1/sub-6289_20x_MsGcg_RbCol4_SMACy3_islet1.jpx",
+      "basename": "sub-6289_20x_MsGcg_RbCol4_SMACy3_islet1.jpx",
+      "mimetype": "image/jpx",
+      "remote_id": "package:d43787fc-525b-46cd-93b1-a029bf327b9b/files/1224171",
+      "timestamp_updated": "2021-01-15T23:04:13,494256Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:d43787fc-525b-46cd-93b1-a029bf327b9b/files/1224171",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:d43787fc-525b-46cd-93b1-a029bf327b9b",
+      "size_bytes": 23442617,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "fd0e14df19fa2479da77d800c07a88a6903f84db014a4e60483c78e76fd12f07"
+        }
+      ],
+      "parent_id": "collection:4822a511-42df-4d0a-9f53-2f380d43a373",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6289/sam-14_sub-6289_islet1/sub-6289_20x_MsGcg_RbCol4_SMACy3_islet1.tif",
+      "basename": "sub-6289_20x_MsGcg_RbCol4_SMACy3_islet1.tif",
+      "mimetype": "image/tiff",
+      "remote_id": "package:551e4f50-ecb7-4b66-9dbf-fdc22fc9287c/files/1224163",
+      "timestamp_updated": "2021-01-15T23:03:32,395854Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:551e4f50-ecb7-4b66-9dbf-fdc22fc9287c/files/1224163",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:551e4f50-ecb7-4b66-9dbf-fdc22fc9287c",
+      "size_bytes": 465688344,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "cf8b8d2434b131a0f32503cc490cc8994a8e3371545a78b59014895a6d7d4285"
+        }
+      ],
+      "parent_id": "collection:4822a511-42df-4d0a-9f53-2f380d43a373",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6289/sam-19_sub-6289_islet6/sub-6289_20x_MsGcg_RbCol4_SMACy3_islet6.jpx",
+      "basename": "sub-6289_20x_MsGcg_RbCol4_SMACy3_islet6.jpx",
+      "mimetype": "image/jpx",
+      "remote_id": "package:e8acce2b-3dcb-454a-af0c-afa37daf0c4c/files/1224166",
+      "timestamp_updated": "2021-01-15T23:03:38,564761Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:e8acce2b-3dcb-454a-af0c-afa37daf0c4c/files/1224166",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:e8acce2b-3dcb-454a-af0c-afa37daf0c4c",
+      "size_bytes": 9268682,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "9a5866ac00dd183d1648f6c86d0be54c7c8911d74f7c7b7261794876063a3b86"
+        }
+      ],
+      "parent_id": "collection:537865f5-74dd-477f-9079-12aa1611a89f",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6289/sam-19_sub-6289_islet6/sub-6289_20x_MsGcg_RbCol4_SMACy3_islet6.tif",
+      "basename": "sub-6289_20x_MsGcg_RbCol4_SMACy3_islet6.tif",
+      "mimetype": "image/tiff",
+      "remote_id": "package:8ce67b48-966d-445f-a6e8-6469e29f198a/files/1224169",
+      "timestamp_updated": "2021-01-15T23:04:09,000557Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:8ce67b48-966d-445f-a6e8-6469e29f198a/files/1224169",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:8ce67b48-966d-445f-a6e8-6469e29f198a",
+      "size_bytes": 182554426,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "4dfca94d8bbc248a5524cbd36f02a14e639bfbb63c7006af9f303df9dbe314e7"
+        }
+      ],
+      "parent_id": "collection:537865f5-74dd-477f-9079-12aa1611a89f",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6289/sam-16_sub-6289_islet3/sub-6289_20x_MsGcg_RbCol4_SMACy3_islet3.tif",
+      "basename": "sub-6289_20x_MsGcg_RbCol4_SMACy3_islet3.tif",
+      "mimetype": "image/tiff",
+      "remote_id": "package:776fb987-c09c-46f4-b143-13a85700cdc6/files/1224165",
+      "timestamp_updated": "2021-01-15T23:03:36,688212Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:776fb987-c09c-46f4-b143-13a85700cdc6/files/1224165",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:776fb987-c09c-46f4-b143-13a85700cdc6",
+      "size_bytes": 320977544,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "a808b93cacdea373a77f9b7a407b8036c2c610260c2de95d5e73fa79f85f21a1"
+        }
+      ],
+      "parent_id": "collection:98880f8b-9c96-4466-b824-246e03b633ce",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6289/sam-16_sub-6289_islet3/sub-6289_20x_MsGcg_RbCol4_SMACy3_islet3.jpx",
+      "basename": "sub-6289_20x_MsGcg_RbCol4_SMACy3_islet3.jpx",
+      "mimetype": "image/jpx",
+      "remote_id": "package:f2915fcb-b19a-45dd-8b91-5491be332f0e/files/1224160",
+      "timestamp_updated": "2021-01-15T23:02:40,871731Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:f2915fcb-b19a-45dd-8b91-5491be332f0e/files/1224160",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:f2915fcb-b19a-45dd-8b91-5491be332f0e",
+      "size_bytes": 16197549,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "c0d3054751126abb033ccacabcf51850d12668513afecb9fc826c043945e17e4"
+        }
+      ],
+      "parent_id": "collection:98880f8b-9c96-4466-b824-246e03b633ce",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6289/sam-17_sub-6289_islet4/sub-6289_20x_MsGcg_RbCol4_SMACy3_islet4.tif",
+      "basename": "sub-6289_20x_MsGcg_RbCol4_SMACy3_islet4.tif",
+      "mimetype": "image/tiff",
+      "remote_id": "package:bfb9f039-3546-4545-acd8-d6ec8eb73168/files/1224167",
+      "timestamp_updated": "2021-01-15T23:03:44,080365Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:bfb9f039-3546-4545-acd8-d6ec8eb73168/files/1224167",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:bfb9f039-3546-4545-acd8-d6ec8eb73168",
+      "size_bytes": 251764962,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "fbdcd31771cbf7d0ee0981a29bcdd9307b97f55024bd760a5ae7136051934905"
+        }
+      ],
+      "parent_id": "collection:dae6c6c6-95a8-42da-aae0-a05633322289",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6289/sam-17_sub-6289_islet4/sub-6289_20x_MsGcg_RbCol4_SMACy3_islet4.jpx",
+      "basename": "sub-6289_20x_MsGcg_RbCol4_SMACy3_islet4.jpx",
+      "mimetype": "image/jpx",
+      "remote_id": "package:cbb15235-b0e5-48ff-83c6-1e5341f0581d/files/1224162",
+      "timestamp_updated": "2021-01-15T23:02:58,485871Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:cbb15235-b0e5-48ff-83c6-1e5341f0581d/files/1224162",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:cbb15235-b0e5-48ff-83c6-1e5341f0581d",
+      "size_bytes": 12732851,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "00f6b0580246cd5f2183b6e71f47905185c20942b7327fa6f149d6de004a9285"
+        }
+      ],
+      "parent_id": "collection:dae6c6c6-95a8-42da-aae0-a05633322289",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/manifest.xlsx",
+      "basename": "manifest.xlsx",
+      "mimetype": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "remote_id": "package:bbf05d8c-3c10-451c-b818-abfbee319ff8/files/1224527",
+      "timestamp_updated": "2021-01-28T22:45:29,223965Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:bbf05d8c-3c10-451c-b818-abfbee319ff8/files/1224527",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:bbf05d8c-3c10-451c-b818-abfbee319ff8",
+      "size_bytes": 17008,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "0700ae17d552f2c8e302d153b0c242fd452e67efaeb4dfa44af4edad8e253f7e"
+        }
+      ],
+      "parent_id": "collection:31b8e888-b112-4e78-ad59-4550f4260a2c",
+      "status": "accepted"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/readme.txt",
+      "basename": "readme.txt",
+      "mimetype": "text/plain",
+      "remote_id": "package:a2f10093-ea16-470e-8328-e816f96f03ea/files/1195931",
+      "timestamp_updated": "2021-02-01T13:39:56,491999Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:a2f10093-ea16-470e-8328-e816f96f03ea/files/1195931",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:a2f10093-ea16-470e-8328-e816f96f03ea",
+      "size_bytes": 564,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "b84558d5651d4abb571cb71c269d45e55c601ae7eea91a28156abb25da993761"
+        }
+      ],
+      "parent_id": "collection:31b8e888-b112-4e78-ad59-4550f4260a2c",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6232/sam-6_sub-6232_islet6/sub-6232_20x_MsGcg_RbCol4_SMACy3_islet6.tif",
+      "basename": "sub-6232_20x_MsGcg_RbCol4_SMACy3_islet6.tif",
+      "mimetype": "image/tiff",
+      "remote_id": "package:55a59e1d-4a58-43a7-9162-d6f24c482f68/files/1224138",
+      "timestamp_updated": "2021-01-15T22:57:47,780101Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:55a59e1d-4a58-43a7-9162-d6f24c482f68/files/1224138",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:55a59e1d-4a58-43a7-9162-d6f24c482f68",
+      "size_bytes": 541192678,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "7d16815bc6f4f88f640ca18f76e646d52eb7cf7ee41c1c1bc39bebb208175c4e"
+        }
+      ],
+      "parent_id": "collection:e69d7c94-c273-450f-9b98-b2a1a86d54aa",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6232/sam-6_sub-6232_islet6/sub-6232_20x_MsGcg_RbCol4_SMACy3_islet6.jpx",
+      "basename": "sub-6232_20x_MsGcg_RbCol4_SMACy3_islet6.jpx",
+      "mimetype": "image/jpx",
+      "remote_id": "package:a47ff723-7886-42d5-860f-bd71ec6e635b/files/1224135",
+      "timestamp_updated": "2021-01-15T22:56:00,697035Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:a47ff723-7886-42d5-860f-bd71ec6e635b/files/1224135",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:a47ff723-7886-42d5-860f-bd71ec6e635b",
+      "size_bytes": 27226177,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "6f0afd423b611f19c4c9a1feb0905d9bf50c481df3601b984805630668f9b3d5"
+        }
+      ],
+      "parent_id": "collection:e69d7c94-c273-450f-9b98-b2a1a86d54aa",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6232/sam-1_sub-6232_islet1/sub-6232_20x_MsGcg_RbCol4_SMACy3_islet1.tif",
+      "basename": "sub-6232_20x_MsGcg_RbCol4_SMACy3_islet1.tif",
+      "mimetype": "image/tiff",
+      "remote_id": "package:c4b53cff-9470-4cf2-91fb-0a3720d6f6da/files/1224144",
+      "timestamp_updated": "2021-01-15T22:59:07,893208Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:c4b53cff-9470-4cf2-91fb-0a3720d6f6da/files/1224144",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:c4b53cff-9470-4cf2-91fb-0a3720d6f6da",
+      "size_bytes": 459398836,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "bd308d3def14c92613b59022e2f361c8b60e5c703bde48582d36715392793498"
+        }
+      ],
+      "parent_id": "collection:3220eb3d-22f9-4dce-95ca-9f0f663e387d",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6232/sam-1_sub-6232_islet1/sub-6232_20x_MsGcg_RbCol4_SMACy3_islet1.jpx",
+      "basename": "sub-6232_20x_MsGcg_RbCol4_SMACy3_islet1.jpx",
+      "mimetype": "image/jpx",
+      "remote_id": "package:b9c947e8-31ef-4e63-b6ae-c18cbe8187d4/files/1224139",
+      "timestamp_updated": "2021-01-15T22:57:51,862271Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:b9c947e8-31ef-4e63-b6ae-c18cbe8187d4/files/1224139",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:b9c947e8-31ef-4e63-b6ae-c18cbe8187d4",
+      "size_bytes": 23129617,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "8cc826aade31d088c0604e3eb1c3d4f7c4594e32403ef5be86cc5a127a53c2ff"
+        }
+      ],
+      "parent_id": "collection:3220eb3d-22f9-4dce-95ca-9f0f663e387d",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6232/sam-2_sub-6232_islet2/sub-6232_20x_MsGcg_RbCol4_SMACy3_islet2.tif",
+      "basename": "sub-6232_20x_MsGcg_RbCol4_SMACy3_islet2.tif",
+      "mimetype": "image/tiff",
+      "remote_id": "package:0ca821ac-d53e-480b-9da2-08a56b6e19d5/files/1224146",
+      "timestamp_updated": "2021-01-15T23:00:11,616395Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:0ca821ac-d53e-480b-9da2-08a56b6e19d5/files/1224146",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:0ca821ac-d53e-480b-9da2-08a56b6e19d5",
+      "size_bytes": 578943848,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "4de16c70b200ec386d8e87adae44deb88058c16498eac90c21098f3e92ce0303"
+        }
+      ],
+      "parent_id": "collection:acf4877c-609f-4419-bd12-dee5d238c90e",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6232/sam-2_sub-6232_islet2/sub-6232_20x_MsGcg_RbCol4_SMACy3_islet2.jpx",
+      "basename": "sub-6232_20x_MsGcg_RbCol4_SMACy3_islet2.jpx",
+      "mimetype": "image/jpx",
+      "remote_id": "package:44661ab9-8bba-4b47-81cb-e1ecf013cb10/files/1224141",
+      "timestamp_updated": "2021-01-15T22:58:32,144309Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:44661ab9-8bba-4b47-81cb-e1ecf013cb10/files/1224141",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:44661ab9-8bba-4b47-81cb-e1ecf013cb10",
+      "size_bytes": 29115426,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "6b3ec314d5775854fbd1d20fa7b3b298a3531870debbcf620484b14659781d60"
+        }
+      ],
+      "parent_id": "collection:acf4877c-609f-4419-bd12-dee5d238c90e",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6232/sam-5_sub-6232_islet5/sub-6232_20x_MsGcg_RbCol4_SMACy3_islet5.tif",
+      "basename": "sub-6232_20x_MsGcg_RbCol4_SMACy3_islet5.tif",
+      "mimetype": "image/tiff",
+      "remote_id": "package:3ec0875a-355f-4028-8821-7f00400dd968/files/1224136",
+      "timestamp_updated": "2021-01-15T22:57:11,893041Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:3ec0875a-355f-4028-8821-7f00400dd968/files/1224136",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:3ec0875a-355f-4028-8821-7f00400dd968",
+      "size_bytes": 490855104,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "81ed7b494b3d8fa468079109fcc9383ecd6491a627b2690826a4b4d5b50f612a"
+        }
+      ],
+      "parent_id": "collection:4b3d318f-ed8a-459f-b5e0-922250f49624",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6232/sam-5_sub-6232_islet5/sub-6232_20x_MsGcg_RbCol4_SMACy3_islet5.jpx",
+      "basename": "sub-6232_20x_MsGcg_RbCol4_SMACy3_islet5.jpx",
+      "mimetype": "image/jpx",
+      "remote_id": "package:15377f81-9fac-4103-add5-3dca2f335e73/files/1224133",
+      "timestamp_updated": "2021-01-15T22:55:54,715614Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:15377f81-9fac-4103-add5-3dca2f335e73/files/1224133",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:15377f81-9fac-4103-add5-3dca2f335e73",
+      "size_bytes": 24705201,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "568e22b70f5d8ec5186c4c60f64b3a5d3ef0755d7160a997fe53afaa8617a825"
+        }
+      ],
+      "parent_id": "collection:4b3d318f-ed8a-459f-b5e0-922250f49624",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6232/sam-7_sub-6232_islet7/sub-6232_20x_MsGcg_RbCol4_SMACy3_islet7.tif",
+      "basename": "sub-6232_20x_MsGcg_RbCol4_SMACy3_islet7.tif",
+      "mimetype": "image/tiff",
+      "remote_id": "package:1845ea1c-ca25-46d9-a74f-edf088176c81/files/1224142",
+      "timestamp_updated": "2021-01-15T22:58:46,563319Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:1845ea1c-ca25-46d9-a74f-edf088176c81/files/1224142",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:1845ea1c-ca25-46d9-a74f-edf088176c81",
+      "size_bytes": 509733614,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "44c7355543a37e0c7ff5a5d4614f769ed9cc3331a919104e40208f52da7b2aee"
+        }
+      ],
+      "parent_id": "collection:3f13c25f-5306-476a-97ae-753ec232279a",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6232/sam-7_sub-6232_islet7/sub-6232_20x_MsGcg_RbCol4_SMACy3_islet7.jpx",
+      "basename": "sub-6232_20x_MsGcg_RbCol4_SMACy3_islet7.jpx",
+      "mimetype": "image/jpx",
+      "remote_id": "package:100acaad-b3dc-408a-a846-0ec5ffaca146/files/1224137",
+      "timestamp_updated": "2021-01-15T22:57:15,423344Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:100acaad-b3dc-408a-a846-0ec5ffaca146/files/1224137",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:100acaad-b3dc-408a-a846-0ec5ffaca146",
+      "size_bytes": 22340805,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "8deae4706ecc6a2747e8118fd137fc06b851c565f70a5c8e6c0aad40c9bed446"
+        }
+      ],
+      "parent_id": "collection:3f13c25f-5306-476a-97ae-753ec232279a",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6232/sam-4_sub-6232_islet4/sub-6232_20x_MsGcg_RbCol4_SMACy3_islet4.tif",
+      "basename": "sub-6232_20x_MsGcg_RbCol4_SMACy3_islet4.tif",
+      "mimetype": "image/tiff",
+      "remote_id": "package:d5e65a9c-5757-44c7-b42b-8864403c0f82/files/1224140",
+      "timestamp_updated": "2021-01-15T22:58:26,888894Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:d5e65a9c-5757-44c7-b42b-8864403c0f82/files/1224140",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:d5e65a9c-5757-44c7-b42b-8864403c0f82",
+      "size_bytes": 824326540,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "fe76ca81155c22e89b4a65d0a0f7e06ce923db60280dfc51d9186f3634fe2866"
+        }
+      ],
+      "parent_id": "collection:e6fb5007-c68d-4725-ad5b-88226b4df100",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6232/sam-4_sub-6232_islet4/sub-6232_20x_MsGcg_RbCol4_SMACy3_islet4.jpx",
+      "basename": "sub-6232_20x_MsGcg_RbCol4_SMACy3_islet4.jpx",
+      "mimetype": "image/jpx",
+      "remote_id": "package:eb7ca4d3-75b0-4a30-be5b-febf06ce1b82/files/1224134",
+      "timestamp_updated": "2021-01-15T22:55:55,765030Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:eb7ca4d3-75b0-4a30-be5b-febf06ce1b82/files/1224134",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:eb7ca4d3-75b0-4a30-be5b-febf06ce1b82",
+      "size_bytes": 41404903,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "e24cd7182303ef4126e10edddaaf593cc44c5baffd4110da763f2c6a2d06be41"
+        }
+      ],
+      "parent_id": "collection:e6fb5007-c68d-4725-ad5b-88226b4df100",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6232/sam-3_sub-6232_islet3/sub-6232_20x_MsGcg_RbCol4_SMACy3_islet3.tif",
+      "basename": "sub-6232_20x_MsGcg_RbCol4_SMACy3_islet3.tif",
+      "mimetype": "image/tiff",
+      "remote_id": "package:e432d6a9-8e3a-4c1a-9d22-a6d7759a384e/files/1224148",
+      "timestamp_updated": "2021-01-15T23:00:29,354936Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:e432d6a9-8e3a-4c1a-9d22-a6d7759a384e/files/1224148",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:e432d6a9-8e3a-4c1a-9d22-a6d7759a384e",
+      "size_bytes": 497149766,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "3c9964e7824add11c0108d8c2955fb0c3f20d42b53662b6463c893ac73242a88"
+        }
+      ],
+      "parent_id": "collection:7c81d8a2-e1d3-407f-abf7-e665c99920f0",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6232/sam-3_sub-6232_islet3/sub-6232_20x_MsGcg_RbCol4_SMACy3_islet3.jpx",
+      "basename": "sub-6232_20x_MsGcg_RbCol4_SMACy3_islet3.jpx",
+      "mimetype": "image/jpx",
+      "remote_id": "package:84de55df-ce33-416d-a053-960697d6382d/files/1224143",
+      "timestamp_updated": "2021-01-15T22:58:51,228330Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:84de55df-ce33-416d-a053-960697d6382d/files/1224143",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:84de55df-ce33-416d-a053-960697d6382d",
+      "size_bytes": 25019479,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "3ce686f833e74bc975e75761c01eecc2b1bf0f3ddd82306d30c3e533ddc72329"
+        }
+      ],
+      "parent_id": "collection:7c81d8a2-e1d3-407f-abf7-e665c99920f0",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6238/sam-9_sub-6238_islet2/sub-6238_20x_MsGcg_RbCol4_SMACy3_islet2.jpx",
+      "basename": "sub-6238_20x_MsGcg_RbCol4_SMACy3_islet2.jpx",
+      "mimetype": "image/jpx",
+      "remote_id": "package:8e34f51e-9140-42bd-a7ba-c4abb0bcd10a/files/1224145",
+      "timestamp_updated": "2021-01-15T22:59:12,268021Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:8e34f51e-9140-42bd-a7ba-c4abb0bcd10a/files/1224145",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:8e34f51e-9140-42bd-a7ba-c4abb0bcd10a",
+      "size_bytes": 24391518,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "8c9dc877b12f70ecd0b5f4757c29e32a42f4d2d48618e538204ebaf485027d66"
+        }
+      ],
+      "parent_id": "collection:9062eb2f-c9f9-4ce0-8395-5246556c638d",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6238/sam-9_sub-6238_islet2/sub-6238_20x_MsGcg_RbCol4_SMACy3_islet2.tif",
+      "basename": "sub-6238_20x_MsGcg_RbCol4_SMACy3_islet2.tif",
+      "mimetype": "image/tiff",
+      "remote_id": "package:00a6bf45-bf72-4d58-8994-d846d78a5ca9/files/1224150",
+      "timestamp_updated": "2021-01-15T23:00:40,673027Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:00a6bf45-bf72-4d58-8994-d846d78a5ca9/files/1224150",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:00a6bf45-bf72-4d58-8994-d846d78a5ca9",
+      "size_bytes": 484565708,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "e26a02fadf29d89795228d6d3a000b5d8be10863bf20dad49f1f902896878d6f"
+        }
+      ],
+      "parent_id": "collection:9062eb2f-c9f9-4ce0-8395-5246556c638d",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6238/sam-13_sub-6238_islet6/sub-6238_20x_MsGcg_RbCol4_SMACy3_islet6.jpx",
+      "basename": "sub-6238_20x_MsGcg_RbCol4_SMACy3_islet6.jpx",
+      "mimetype": "image/jpx",
+      "remote_id": "package:7fad138c-5421-45fc-809f-70065c789ce5/files/1224153",
+      "timestamp_updated": "2021-01-15T23:00:58,977316Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:7fad138c-5421-45fc-809f-70065c789ce5/files/1224153",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:7fad138c-5421-45fc-809f-70065c789ce5",
+      "size_bytes": 24074016,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "1b5838bed6e88292cf93e073db85ef6a0f735e97f9f9fb5802b52234dda90e13"
+        }
+      ],
+      "parent_id": "collection:ae16c606-5077-473d-94d4-5d7496ef45e0",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6238/sam-13_sub-6238_islet6/sub-6238_20x_MsGcg_RbCol4_SMACy3_islet6.tif",
+      "basename": "sub-6238_20x_MsGcg_RbCol4_SMACy3_islet6.tif",
+      "mimetype": "image/tiff",
+      "remote_id": "package:3867501a-e634-4b70-b3d7-7d3738e511f4/files/1224157",
+      "timestamp_updated": "2021-01-15T23:02:27,181908Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:3867501a-e634-4b70-b3d7-7d3738e511f4/files/1224157",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:3867501a-e634-4b70-b3d7-7d3738e511f4",
+      "size_bytes": 478274554,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "7cc0e61c20edf51679cde50a6dbc050f415179ac60ecbbd1b1a1c27717535407"
+        }
+      ],
+      "parent_id": "collection:ae16c606-5077-473d-94d4-5d7496ef45e0",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6238/sam-11_sub-6238_islet4/sub-6238_20x_MsGcg_RbCol4_SMACy3_islet4.jpx",
+      "basename": "sub-6238_20x_MsGcg_RbCol4_SMACy3_islet4.jpx",
+      "mimetype": "image/jpx",
+      "remote_id": "package:c4a92ff8-0bf9-4144-8844-376e3b060ca4/files/1224149",
+      "timestamp_updated": "2021-01-15T23:00:34,436534Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:c4a92ff8-0bf9-4144-8844-376e3b060ca4/files/1224149",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:c4a92ff8-0bf9-4144-8844-376e3b060ca4",
+      "size_bytes": 26278158,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "279e1c7a08c076a8febad0cab10d5799ff33ec1aa8177738feb1546f351e936f"
+        }
+      ],
+      "parent_id": "collection:d3754b63-4deb-48ee-b3bb-9444b172c9e8",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6238/sam-11_sub-6238_islet4/sub-6238_20x_MsGcg_RbCol4_SMACy3_islet4.tif",
+      "basename": "sub-6238_20x_MsGcg_RbCol4_SMACy3_islet4.tif",
+      "mimetype": "image/tiff",
+      "remote_id": "package:6c140808-1267-4651-a045-d9375cc2c9bc/files/1224156",
+      "timestamp_updated": "2021-01-15T23:02:16,021802Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:6c140808-1267-4651-a045-d9375cc2c9bc/files/1224156",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:6c140808-1267-4651-a045-d9375cc2c9bc",
+      "size_bytes": 522316896,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "d2ab578cb17af1d4535b7ce8cba85e5f66311213647645628908b88cd20fe5d8"
+        }
+      ],
+      "parent_id": "collection:d3754b63-4deb-48ee-b3bb-9444b172c9e8",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6238/sam-10_sub-6238_islet3/sub-6238_20x_MsGcg_RbCol4_SMACy3_islet3.jpx",
+      "basename": "sub-6238_20x_MsGcg_RbCol4_SMACy3_islet3.jpx",
+      "mimetype": "image/jpx",
+      "remote_id": "package:f48f8fed-cc05-436c-954f-523bf8d2e374/files/1224147",
+      "timestamp_updated": "2021-01-15T23:00:13,672240Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:f48f8fed-cc05-436c-954f-523bf8d2e374/files/1224147",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:f48f8fed-cc05-436c-954f-523bf8d2e374",
+      "size_bytes": 12419496,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "3b44c88d6267d1ea932ac9325b9e5b9b115965c9f48768e6a91ae1ea9bed37e7"
+        }
+      ],
+      "parent_id": "collection:d3ae9570-bc33-4374-ad1c-327ae2aba0cc",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6238/sam-10_sub-6238_islet3/sub-6238_20x_MsGcg_RbCol4_SMACy3_islet3.tif",
+      "basename": "sub-6238_20x_MsGcg_RbCol4_SMACy3_islet3.tif",
+      "mimetype": "image/tiff",
+      "remote_id": "package:7e6e42ef-68cd-451b-88ce-8889dbe2ac27/files/1224152",
+      "timestamp_updated": "2021-01-15T23:00:54,717385Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:7e6e42ef-68cd-451b-88ce-8889dbe2ac27/files/1224152",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:7e6e42ef-68cd-451b-88ce-8889dbe2ac27",
+      "size_bytes": 245475354,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "3fa37a1a767555041448d98a004869239b1c97b6bf2c6fcb92d0e2035a455788"
+        }
+      ],
+      "parent_id": "collection:d3ae9570-bc33-4374-ad1c-327ae2aba0cc",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6238/sam-8_sub-6238_islet1/sub-6238_20x_MsGcg_RbCol4_SMACy3_islet1.jpx",
+      "basename": "sub-6238_20x_MsGcg_RbCol4_SMACy3_islet1.jpx",
+      "mimetype": "image/jpx",
+      "remote_id": "package:1f088a84-d971-4ec5-860b-c841f32511de/files/1224155",
+      "timestamp_updated": "2021-01-15T23:01:29,249380Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:1f088a84-d971-4ec5-860b-c841f32511de/files/1224155",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:1f088a84-d971-4ec5-860b-c841f32511de",
+      "size_bytes": 20925173,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "788102323d41fbefceeffa74402b0abb9e0b0930b878a42b2125476d7f958ecf"
+        }
+      ],
+      "parent_id": "collection:a5345eec-3fcf-4203-b1ae-25f211577053",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6238/sam-8_sub-6238_islet1/sub-6238_20x_MsGcg_RbCol4_SMACy3_islet1.tif",
+      "basename": "sub-6238_20x_MsGcg_RbCol4_SMACy3_islet1.tif",
+      "mimetype": "image/tiff",
+      "remote_id": "package:635eaf78-8553-4674-8f73-0a4251cce820/files/1224159",
+      "timestamp_updated": "2021-01-15T23:02:37,336490Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:635eaf78-8553-4674-8f73-0a4251cce820/files/1224159",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:635eaf78-8553-4674-8f73-0a4251cce820",
+      "size_bytes": 415356092,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "75b6de17a1cc6c957dd35351a99faf02274f4fe326c0dd1eedf08b034f5355d3"
+        }
+      ],
+      "parent_id": "collection:a5345eec-3fcf-4203-b1ae-25f211577053",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6238/sam-12_sub-6238_islet5/sub-6238_20x_MsGcg_RbCol4_SMACy3_islet5.tif",
+      "basename": "sub-6238_20x_MsGcg_RbCol4_SMACy3_islet5.tif",
+      "mimetype": "image/tiff",
+      "remote_id": "package:5a201d57-e8eb-4404-b016-5bd65eef0c5b/files/1224154",
+      "timestamp_updated": "2021-01-15T23:01:25,686538Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:5a201d57-e8eb-4404-b016-5bd65eef0c5b/files/1224154",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:5a201d57-e8eb-4404-b016-5bd65eef0c5b",
+      "size_bytes": 245473308,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "8317c99753e1406193d08cabe07fc5562c97e01af02b9309211a17e73865f8bf"
+        }
+      ],
+      "parent_id": "collection:61678b49-d40a-4052-9972-0a2fafe62a31",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6238/sam-12_sub-6238_islet5/sub-6238_20x_MsGcg_RbCol4_SMACy3_islet5.jpx",
+      "basename": "sub-6238_20x_MsGcg_RbCol4_SMACy3_islet5.jpx",
+      "mimetype": "image/jpx",
+      "remote_id": "package:400b9c09-a55a-4c16-8734-c2ec3671cced/files/1224151",
+      "timestamp_updated": "2021-01-15T23:00:43,006564Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:400b9c09-a55a-4c16-8734-c2ec3671cced/files/1224151",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:400b9c09-a55a-4c16-8734-c2ec3671cced",
+      "size_bytes": 12419362,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "2b5b2e64b5fa1fa7ca07d5be1dd75f51d95600dd64ff9ba9a362f9c963ff1ab0"
+        }
+      ],
+      "parent_id": "collection:61678b49-d40a-4052-9972-0a2fafe62a31",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6368/sam-22_sub-6368_islet2/sub-6368_20x_MsGcg_RbCol4_SMACy3_islet2.jpx",
+      "basename": "sub-6368_20x_MsGcg_RbCol4_SMACy3_islet2.jpx",
+      "mimetype": "image/jpx",
+      "remote_id": "package:a362d387-5809-423f-bd49-2675e7d47f89/files/1224178",
+      "timestamp_updated": "2021-01-15T23:05:29,554709Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:a362d387-5809-423f-bd49-2675e7d47f89/files/1224178",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:a362d387-5809-423f-bd49-2675e7d47f89",
+      "size_bytes": 12734560,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "f0e3e4e56501b4d54094bd5ad25eda034eb55e2620fb9365286ab13291361c2c"
+        }
+      ],
+      "parent_id": "collection:12317abc-7a20-494d-9d75-f957fb9fc7fa",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6368/sam-22_sub-6368_islet2/sub-6368_20x_MsGcg_RbCol4_SMACy3_islet2.tif",
+      "basename": "sub-6368_20x_MsGcg_RbCol4_SMACy3_islet2.tif",
+      "mimetype": "image/tiff",
+      "remote_id": "package:65be2198-b234-42b0-a406-7013077e2c77/files/1224175",
+      "timestamp_updated": "2021-01-15T23:04:53,214988Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:65be2198-b234-42b0-a406-7013077e2c77/files/1224175",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:65be2198-b234-42b0-a406-7013077e2c77",
+      "size_bytes": 251765006,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "c069624ce578d61be16fc9fa26e7269050d582c639098c8f60318df15150b3fc"
+        }
+      ],
+      "parent_id": "collection:12317abc-7a20-494d-9d75-f957fb9fc7fa",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6368/sam-23_sub-6368_islet3/sub-6368_20x_MsGcg_RbCol4_SMACy3_islet3.jpx",
+      "basename": "sub-6368_20x_MsGcg_RbCol4_SMACy3_islet3.jpx",
+      "mimetype": "image/jpx",
+      "remote_id": "package:e70c4cd6-23cd-47b9-a393-ba62e84c7100/files/1224172",
+      "timestamp_updated": "2021-01-15T23:04:17,743582Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:e70c4cd6-23cd-47b9-a393-ba62e84c7100/files/1224172",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:e70c4cd6-23cd-47b9-a393-ba62e84c7100",
+      "size_bytes": 19978652,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "bf23e10bfe6f9d9c96b5209c8234864ecd423de5d3f56616ea51ecb5aef4e65b"
+        }
+      ],
+      "parent_id": "collection:d295a8c7-35a2-4fc5-ac6b-6c5914c78580",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6368/sam-23_sub-6368_islet3/sub-6368_20x_MsGcg_RbCol4_SMACy3_islet3.tif",
+      "basename": "sub-6368_20x_MsGcg_RbCol4_SMACy3_islet3.tif",
+      "mimetype": "image/tiff",
+      "remote_id": "package:ad5db727-3052-4bab-9073-7b8418e14e74/files/1224177",
+      "timestamp_updated": "2021-01-15T23:05:27,043173Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:ad5db727-3052-4bab-9073-7b8418e14e74/files/1224177",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:ad5db727-3052-4bab-9073-7b8418e14e74",
+      "size_bytes": 396477894,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "28c189f65ac98a29bffe52c0fd3aa3ea77342668f140bee6d2b10608142bd8d9"
+        }
+      ],
+      "parent_id": "collection:d295a8c7-35a2-4fc5-ac6b-6c5914c78580",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6368/sam-21_sub-6368_islet1/sub-6368_20x_MsGcg_RbCol4_SMACy3_islet1.jpx",
+      "basename": "sub-6368_20x_MsGcg_RbCol4_SMACy3_islet1.jpx",
+      "mimetype": "image/jpx",
+      "remote_id": "package:421adf74-c7ca-4b21-a764-c20cca848b41/files/1224176",
+      "timestamp_updated": "2021-01-15T23:04:55,131254Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:421adf74-c7ca-4b21-a764-c20cca848b41/files/1224176",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:421adf74-c7ca-4b21-a764-c20cca848b41",
+      "size_bytes": 15255055,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "43cb5799df41029762425c1498613792eca646b982f58d1af3ba783e2d03a149"
+        }
+      ],
+      "parent_id": "collection:72f2dbfc-3df6-4d04-83e8-23bb6db0373c",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6368/sam-21_sub-6368_islet1/sub-6368_20x_MsGcg_RbCol4_SMACy3_islet1.tif",
+      "basename": "sub-6368_20x_MsGcg_RbCol4_SMACy3_islet1.tif",
+      "mimetype": "image/tiff",
+      "remote_id": "package:bdacbfcb-f60a-4041-bedc-99cadfbafde0/files/1224180",
+      "timestamp_updated": "2021-01-15T23:05:52,501470Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:bdacbfcb-f60a-4041-bedc-99cadfbafde0/files/1224180",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:bdacbfcb-f60a-4041-bedc-99cadfbafde0",
+      "size_bytes": 302099000,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "26f078f5067eb5139849537b6a64ea734f7403307c53f19e6462bc5a91c6c5ec"
+        }
+      ],
+      "parent_id": "collection:72f2dbfc-3df6-4d04-83e8-23bb6db0373c",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6368/sam-24_sub-6368_islet4/sub-6368_20x_MsGcg_RbCol4_SMACy3_islet4.jpx",
+      "basename": "sub-6368_20x_MsGcg_RbCol4_SMACy3_islet4.jpx",
+      "mimetype": "image/jpx",
+      "remote_id": "package:f0680037-688a-47f6-855c-933d516c1486/files/1224174",
+      "timestamp_updated": "2021-01-15T23:04:41,570260Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:f0680037-688a-47f6-855c-933d516c1486/files/1224174",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:f0680037-688a-47f6-855c-933d516c1486",
+      "size_bytes": 32267639,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "607809ff7ef9166c37e644d3712c0396306a07f2575ee743c33eda169f25038f"
+        }
+      ],
+      "parent_id": "collection:d83cce9f-2506-4f86-b057-309bf8b5aba8",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6368/sam-24_sub-6368_islet4/sub-6368_20x_MsGcg_RbCol4_SMACy3_islet4.tif",
+      "basename": "sub-6368_20x_MsGcg_RbCol4_SMACy3_islet4.tif",
+      "mimetype": "image/tiff",
+      "remote_id": "package:98b3560e-7ed7-4d2b-9994-4ef00a467033/files/1224182",
+      "timestamp_updated": "2021-01-15T23:06:30,007583Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:98b3560e-7ed7-4d2b-9994-4ef00a467033/files/1224182",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:98b3560e-7ed7-4d2b-9994-4ef00a467033",
+      "size_bytes": 641862604,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "af0e159337c585c68c9ef837a72c4220c3a3624c5e3937c5a7fca8b7b42fef7b"
+        }
+      ],
+      "parent_id": "collection:d83cce9f-2506-4f86-b057-309bf8b5aba8",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6384/sam-27_sub-6384_islet2/sub-6384_20x_MsGcg_RbCol4_SMACy3_islet2.tif",
+      "basename": "sub-6384_20x_MsGcg_RbCol4_SMACy3_islet2.tif",
+      "mimetype": "image/tiff",
+      "remote_id": "package:095f4822-ea82-493f-a7cc-26524182b7d9/files/1224195",
+      "timestamp_updated": "2021-01-15T23:08:36,862122Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:095f4822-ea82-493f-a7cc-26524182b7d9/files/1224195",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:095f4822-ea82-493f-a7cc-26524182b7d9",
+      "size_bytes": 270642374,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "24bf069c08b18de0c9cbea8732fe3d6a8a118b8cf86c52bace5c43fa1b4bebec"
+        }
+      ],
+      "parent_id": "collection:a4eacd5e-b058-4ea5-bbc8-d2b49adfac07",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6384/sam-27_sub-6384_islet2/sub-6384_20x_MsGcg_RbCol4_SMACy3_islet2.jpx",
+      "basename": "sub-6384_20x_MsGcg_RbCol4_SMACy3_islet2.jpx",
+      "mimetype": "image/jpx",
+      "remote_id": "package:7d2541f3-32ca-402b-9685-aaac8a4c9732/files/1224191",
+      "timestamp_updated": "2021-01-15T23:07:38,590779Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:7d2541f3-32ca-402b-9685-aaac8a4c9732/files/1224191",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:7d2541f3-32ca-402b-9685-aaac8a4c9732",
+      "size_bytes": 13679888,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "42037045659582b08cf39af91b2ef30f67f87e1a271945572883054c824185ab"
+        }
+      ],
+      "parent_id": "collection:a4eacd5e-b058-4ea5-bbc8-d2b49adfac07",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6384/sam-33_sub-6384_islet8/sub-6384_20x_MsGcg_RbCol4_SMACy3_islet8.jpx",
+      "basename": "sub-6384_20x_MsGcg_RbCol4_SMACy3_islet8.jpx",
+      "mimetype": "image/jpx",
+      "remote_id": "package:f0eaaf6f-a051-4b3b-a2ed-c7689cfec9cc/files/1224183",
+      "timestamp_updated": "2021-01-15T23:06:33,261113Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:f0eaaf6f-a051-4b3b-a2ed-c7689cfec9cc/files/1224183",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:f0eaaf6f-a051-4b3b-a2ed-c7689cfec9cc",
+      "size_bytes": 17143937,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "7a2289ba8332e167bde8a313a4deb32d20a2f0e75a496df7f6c28ff0ddd612cf"
+        }
+      ],
+      "parent_id": "collection:d08b5d88-ad54-4be0-a6ad-c6e63bbe65f4",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6384/sam-33_sub-6384_islet8/sub-6384_20x_MsGcg_RbCol4_SMACy3_islet8.tif",
+      "basename": "sub-6384_20x_MsGcg_RbCol4_SMACy3_islet8.tif",
+      "mimetype": "image/tiff",
+      "remote_id": "package:d3318f64-9f3d-4595-af06-2905f7518f09/files/1224190",
+      "timestamp_updated": "2021-01-15T23:07:36,011295Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:d3318f64-9f3d-4595-af06-2905f7518f09/files/1224190",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:d3318f64-9f3d-4595-af06-2905f7518f09",
+      "size_bytes": 339849824,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "4a15cddd9a117ab4ee85cb4b17b8a26c5e3d5ecc6ab33bad96f450a3373a8cd1"
+        }
+      ],
+      "parent_id": "collection:d08b5d88-ad54-4be0-a6ad-c6e63bbe65f4",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6384/sam-34_sub-6384_islet9/sub-6384_20x_MsGcg_RbCol4_SMACy3_islet9.jpx",
+      "basename": "sub-6384_20x_MsGcg_RbCol4_SMACy3_islet9.jpx",
+      "mimetype": "image/jpx",
+      "remote_id": "package:52a6d12c-ffb5-4d12-b735-9350b9ac5c74/files/1224185",
+      "timestamp_updated": "2021-01-15T23:06:36,444399Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:52a6d12c-ffb5-4d12-b735-9350b9ac5c74/files/1224185",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:52a6d12c-ffb5-4d12-b735-9350b9ac5c74",
+      "size_bytes": 10213209,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "32afdfa72623b3d201d3c14faa283eb21031ba80396902cbccaf568bc410c0b7"
+        }
+      ],
+      "parent_id": "collection:4b08ef4a-4f31-497f-bf9a-fb7992a147b0",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6384/sam-34_sub-6384_islet9/sub-6384_20x_MsGcg_RbCol4_SMACy3_islet9.tif",
+      "basename": "sub-6384_20x_MsGcg_RbCol4_SMACy3_islet9.tif",
+      "mimetype": "image/tiff",
+      "remote_id": "package:1dd88c41-f79a-45d6-b8d2-d1f5b002d5db/files/1224188",
+      "timestamp_updated": "2021-01-15T23:07:11,757010Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:1dd88c41-f79a-45d6-b8d2-d1f5b002d5db/files/1224188",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:1dd88c41-f79a-45d6-b8d2-d1f5b002d5db",
+      "size_bytes": 201429778,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "4a3767c3b371c80fa712d8b9157a4d7fb578a01551f4d0390c976145f572a282"
+        }
+      ],
+      "parent_id": "collection:4b08ef4a-4f31-497f-bf9a-fb7992a147b0",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6384/sam-31_sub-6384_islet6/sub-6384_20x_MsGcg_RbCol4_SMACy3_islet6.jpx",
+      "basename": "sub-6384_20x_MsGcg_RbCol4_SMACy3_islet6.jpx",
+      "mimetype": "image/jpx",
+      "remote_id": "package:c1133189-ab19-40c9-9a04-d95dd7a9b3bf/files/1224179",
+      "timestamp_updated": "2021-01-15T23:05:33,789353Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:c1133189-ab19-40c9-9a04-d95dd7a9b3bf/files/1224179",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:c1133189-ab19-40c9-9a04-d95dd7a9b3bf",
+      "size_bytes": 17772804,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "7729e400b1777900ea221540283d82ab04e9d3ccbe1ee967de188f328fecba75"
+        }
+      ],
+      "parent_id": "collection:b6ef68f8-dd5c-4993-a44c-0e2fa375af90",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6384/sam-31_sub-6384_islet6/sub-6384_20x_MsGcg_RbCol4_SMACy3_islet6.tif",
+      "basename": "sub-6384_20x_MsGcg_RbCol4_SMACy3_islet6.tif",
+      "mimetype": "image/tiff",
+      "remote_id": "package:992c0560-dfcc-48d9-a84f-b414a46d77c5/files/1224184",
+      "timestamp_updated": "2021-01-15T23:06:34,668807Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:992c0560-dfcc-48d9-a84f-b414a46d77c5/files/1224184",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:992c0560-dfcc-48d9-a84f-b414a46d77c5",
+      "size_bytes": 352434582,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "6550d18a794d3f0b24cac3900c7999aeae89e962947f21b06efdf852fe80203e"
+        }
+      ],
+      "parent_id": "collection:b6ef68f8-dd5c-4993-a44c-0e2fa375af90",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6384/sam-26_sub-6384_islet10/sub-6384_20x_MsGcg_RbCol4_SMACy3_islet10.jpx",
+      "basename": "sub-6384_20x_MsGcg_RbCol4_SMACy3_islet10.jpx",
+      "mimetype": "image/jpx",
+      "remote_id": "package:88264e61-bb69-4361-8cf5-88bac1883ad6/files/1224187",
+      "timestamp_updated": "2021-01-15T23:07:06,898865Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:88264e61-bb69-4361-8cf5-88bac1883ad6/files/1224187",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:88264e61-bb69-4361-8cf5-88bac1883ad6",
+      "size_bytes": 11788093,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "6799be7ae605d4ca933207681f4ffe921c097bde5d7db9f4f10e46e7f928a2f0"
+        }
+      ],
+      "parent_id": "collection:9f187db9-af30-47b3-bf96-f2cec84bdebd",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6384/sam-26_sub-6384_islet10/sub-6384_20x_MsGcg_RbCol4_SMACy3_islet10.tif",
+      "basename": "sub-6384_20x_MsGcg_RbCol4_SMACy3_islet10.tif",
+      "mimetype": "image/tiff",
+      "remote_id": "package:3abfe0cb-b4b5-4307-9ac3-8ca27977cc07/files/1224192",
+      "timestamp_updated": "2021-01-15T23:07:47,382840Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:3abfe0cb-b4b5-4307-9ac3-8ca27977cc07/files/1224192",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:3abfe0cb-b4b5-4307-9ac3-8ca27977cc07",
+      "size_bytes": 232891594,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "8d26838ef4885150e6190f73bf1c77da17980e6057168943ecf5c5534123eca1"
+        }
+      ],
+      "parent_id": "collection:9f187db9-af30-47b3-bf96-f2cec84bdebd",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6384/sam-25_sub-6384_islet1/sub-6384_20x_MsGcg_RbCol4_SMACy3_islet1.tif",
+      "basename": "sub-6384_20x_MsGcg_RbCol4_SMACy3_islet1.tif",
+      "mimetype": "image/tiff",
+      "remote_id": "package:a979f532-6b94-44fc-9d80-1cd74df26842/files/1224194",
+      "timestamp_updated": "2021-01-15T23:08:35,197537Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:a979f532-6b94-44fc-9d80-1cd74df26842/files/1224194",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:a979f532-6b94-44fc-9d80-1cd74df26842",
+      "size_bytes": 471981586,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "caff77c94670ec462154f5f110767df84b22e9aed4baad6ecf5e1928e5a22e2d"
+        }
+      ],
+      "parent_id": "collection:1e770e00-c7cc-4af4-b81e-e6ab3e6f3292",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6384/sam-25_sub-6384_islet1/sub-6384_20x_MsGcg_RbCol4_SMACy3_islet1.jpx",
+      "basename": "sub-6384_20x_MsGcg_RbCol4_SMACy3_islet1.jpx",
+      "mimetype": "image/jpx",
+      "remote_id": "package:a6b8bd8a-a3ff-45a8-8502-f686cd0449e2/files/1224189",
+      "timestamp_updated": "2021-01-15T23:07:15,799065Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:a6b8bd8a-a3ff-45a8-8502-f686cd0449e2/files/1224189",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:a6b8bd8a-a3ff-45a8-8502-f686cd0449e2",
+      "size_bytes": 23762636,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "58c6bb9ca2b116c12df708f2393000071826a2e74e5cc2c1cf7cb367c14cca7b"
+        }
+      ],
+      "parent_id": "collection:1e770e00-c7cc-4af4-b81e-e6ab3e6f3292",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6384/sam-30_sub-6384_islet5/sub-6384_20x_MsGcg_RbCol4_SMACy3_islet5.tif",
+      "basename": "sub-6384_20x_MsGcg_RbCol4_SMACy3_islet5.tif",
+      "mimetype": "image/tiff",
+      "remote_id": "package:b4a92500-031a-41bc-be1a-334553493afe/files/1224200",
+      "timestamp_updated": "2021-01-15T23:09:32,046335Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:b4a92500-031a-41bc-be1a-334553493afe/files/1224200",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:b4a92500-031a-41bc-be1a-334553493afe",
+      "size_bytes": 346142684,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "8f5fe6a54af16c8f0779fb065bdcd5b3ac0648ada830b64d520d6818a61b239c"
+        }
+      ],
+      "parent_id": "collection:35292f3d-8354-4165-9628-f14d54a870af",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6384/sam-30_sub-6384_islet5/sub-6384_20x_MsGcg_RbCol4_SMACy3_islet5.jpx",
+      "basename": "sub-6384_20x_MsGcg_RbCol4_SMACy3_islet5.jpx",
+      "mimetype": "image/jpx",
+      "remote_id": "package:ab9ded3f-dc05-413a-9942-05a19ced41ae/files/1224197",
+      "timestamp_updated": "2021-01-15T23:08:43,548248Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:ab9ded3f-dc05-413a-9942-05a19ced41ae/files/1224197",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:ab9ded3f-dc05-413a-9942-05a19ced41ae",
+      "size_bytes": 17459170,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "6e19558a68e7abca3bb000990c5c65e304fc5a7f1d4b1c09bf6aef13374ac9df"
+        }
+      ],
+      "parent_id": "collection:35292f3d-8354-4165-9628-f14d54a870af",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6384/sam-32_sub-6384_islet7/sub-6384_20x_MsGcg_RbCol4_SMACy3_islet7.tif",
+      "basename": "sub-6384_20x_MsGcg_RbCol4_SMACy3_islet7.tif",
+      "mimetype": "image/tiff",
+      "remote_id": "package:515fc7ec-f4a8-4908-bb9d-71ee0fb663b4/files/1224186",
+      "timestamp_updated": "2021-01-15T23:07:04,410028Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:515fc7ec-f4a8-4908-bb9d-71ee0fb663b4/files/1224186",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:515fc7ec-f4a8-4908-bb9d-71ee0fb663b4",
+      "size_bytes": 365019828,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "f0836f0d915b7ba287e4a2dc0aca07ba36c95d858475b93914763c55bdebbfa3"
+        }
+      ],
+      "parent_id": "collection:bb664458-87af-45a2-bab0-5b03dba8f925",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6384/sam-32_sub-6384_islet7/sub-6384_20x_MsGcg_RbCol4_SMACy3_islet7.jpx",
+      "basename": "sub-6384_20x_MsGcg_RbCol4_SMACy3_islet7.jpx",
+      "mimetype": "image/jpx",
+      "remote_id": "package:970fe756-bb07-452c-bae2-0705b7689f80/files/1224181",
+      "timestamp_updated": "2021-01-15T23:05:55,844784Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:970fe756-bb07-452c-bae2-0705b7689f80/files/1224181",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:970fe756-bb07-452c-bae2-0705b7689f80",
+      "size_bytes": 18403712,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "68cb18f849c3fc836e71e1d076ab2292b3bd88e883dd37a082d89f41a3787c27"
+        }
+      ],
+      "parent_id": "collection:bb664458-87af-45a2-bab0-5b03dba8f925",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6384/sam-29_sub-6384_islet4/sub-6384_20x_MsGcg_RbCol4_SMACy3_islet4.jpx",
+      "basename": "sub-6384_20x_MsGcg_RbCol4_SMACy3_islet4.jpx",
+      "mimetype": "image/jpx",
+      "remote_id": "package:1f987479-f3bb-4e9d-8f81-9a8f5973fc7d/files/1224196",
+      "timestamp_updated": "2021-01-15T23:08:37,454063Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:1f987479-f3bb-4e9d-8f81-9a8f5973fc7d/files/1224196",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:1f987479-f3bb-4e9d-8f81-9a8f5973fc7d",
+      "size_bytes": 15882917,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "913fc536f6a77cbe4fc074d214b4e86bca304232bc335364afe55a3f2b931126"
+        }
+      ],
+      "parent_id": "collection:8b190216-52d2-41f3-b69a-6a51a0cd096d",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6384/sam-29_sub-6384_islet4/sub-6384_20x_MsGcg_RbCol4_SMACy3_islet4.tif",
+      "basename": "sub-6384_20x_MsGcg_RbCol4_SMACy3_islet4.tif",
+      "mimetype": "image/tiff",
+      "remote_id": "package:52392188-a050-4d56-a721-c4749adc8da8/files/1224199",
+      "timestamp_updated": "2021-01-15T23:09:23,683386Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:52392188-a050-4d56-a721-c4749adc8da8/files/1224199",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:52392188-a050-4d56-a721-c4749adc8da8",
+      "size_bytes": 314685818,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "e0a8d63884207c3180d04d496e09d60df94b951a0aed80a879c5e8cec3911ef4"
+        }
+      ],
+      "parent_id": "collection:8b190216-52d2-41f3-b69a-6a51a0cd096d",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6384/sam-28_sub-6384_islet3/sub-6384_islet3.xlsx",
+      "basename": "sub-6384_islet3.xlsx",
+      "mimetype": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "remote_id": "package:3777a31a-02c8-4b28-ab83-c0672ceab03b/files/1195929",
+      "timestamp_updated": "2021-02-01T13:39:56,332721Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:3777a31a-02c8-4b28-ab83-c0672ceab03b/files/1195929",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:3777a31a-02c8-4b28-ab83-c0672ceab03b",
+      "size_bytes": 73431,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "ac6e0e6bb9906b33afb0d035dad11aa2ceba62b30cd686f6977b217ca70d48d7"
+        }
+      ],
+      "parent_id": "collection:c018f24b-2128-41e4-84dd-85753871335b",
+      "status": "accepted"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6384/sam-28_sub-6384_islet3/sub-6384_20x_MsGcg_RbCol4_SMACy3_islet3.tif",
+      "basename": "sub-6384_20x_MsGcg_RbCol4_SMACy3_islet3.tif",
+      "mimetype": "image/tiff",
+      "remote_id": "package:1e3f3a74-5697-443b-80c8-7ea324b55e3c/files/1224198",
+      "timestamp_updated": "2021-01-15T23:09:02,382367Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:1e3f3a74-5697-443b-80c8-7ea324b55e3c/files/1224198",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:1e3f3a74-5697-443b-80c8-7ea324b55e3c",
+      "size_bytes": 427938990,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "64f66a7fb13d0d03701b735f9dea0f472cd8aaaf2ff6c89e254d644de5e55168"
+        }
+      ],
+      "parent_id": "collection:c018f24b-2128-41e4-84dd-85753871335b",
+      "status": "known"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6384/sam-28_sub-6384_islet3/sub-6384_20x_MsGcg_RbCol4_SMACy3_islet3.xml",
+      "basename": "sub-6384_20x_MsGcg_RbCol4_SMACy3_islet3.xml",
+      "mimetype": "application/xml",
+      "remote_id": "package:c16c59a5-1c60-4074-b200-a8decb6dbd2f/files/1195924",
+      "timestamp_updated": "2021-02-01T13:39:56,077344Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:c16c59a5-1c60-4074-b200-a8decb6dbd2f/files/1195924",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:c16c59a5-1c60-4074-b200-a8decb6dbd2f",
+      "size_bytes": 399496,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "b4bb6e39da5803cf8f9b0c66f57f83522d11bfa5c9784344a1a3f66a74b784dd"
+        }
+      ],
+      "parent_id": "collection:c018f24b-2128-41e4-84dd-85753871335b",
+      "status": "accepted"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "derivative/sub-6384/sam-28_sub-6384_islet3/sub-6384_20x_MsGcg_RbCol4_SMACy3_islet3.jpx",
+      "basename": "sub-6384_20x_MsGcg_RbCol4_SMACy3_islet3.jpx",
+      "mimetype": "image/jpx",
+      "remote_id": "package:8817d6ea-6a1e-4b82-a3ba-6feee32cf18b/files/1224193",
+      "timestamp_updated": "2021-01-15T23:07:52,213896Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:8817d6ea-6a1e-4b82-a3ba-6feee32cf18b/files/1224193",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:8817d6ea-6a1e-4b82-a3ba-6feee32cf18b",
+      "size_bytes": 21555579,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "e22bf359edcd990e8bb2c0ab52f8ec6e59e1babcdb71d51ccd6abdce51f5e980"
+        }
+      ],
+      "parent_id": "collection:c018f24b-2128-41e4-84dd-85753871335b",
+      "status": "preferred"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "dataset_description.xlsx",
+      "basename": "dataset_description.xlsx",
+      "mimetype": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "remote_id": "package:81381978-00af-48c1-aded-c04cd98a33f4/files/1224131",
+      "timestamp_updated": "2021-01-15T22:55:05,503151Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:81381978-00af-48c1-aded-c04cd98a33f4/files/1224131",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:81381978-00af-48c1-aded-c04cd98a33f4",
+      "size_bytes": 25293,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "e1b9ff8ed5557fe8e6b3030519372d868d7c573e4ebb3f5194700eccef16cd3b"
+        }
+      ],
+      "parent_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "status": "accepted"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "submission.xlsx",
+      "basename": "submission.xlsx",
+      "mimetype": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "remote_id": "package:c55c92c5-dda7-4771-84f6-57ea8aec5f2d/files/1183188",
+      "timestamp_updated": "2021-02-01T13:39:55,810048Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:c55c92c5-dda7-4771-84f6-57ea8aec5f2d/files/1183188",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:c55c92c5-dda7-4771-84f6-57ea8aec5f2d",
+      "size_bytes": 9949,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "0c9f3a40c890e51005394427116168069ff8fd9ba4a4cd512a3f63beda3e3737"
+        }
+      ],
+      "parent_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "status": "accepted"
+    },
+    {
+      "type": "path",
+      "dataset_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "dataset_relative_path": "subjects.xlsx",
+      "basename": "subjects.xlsx",
+      "mimetype": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "remote_id": "package:1cc5d4fa-6468-47b9-86c1-435f827d6168/files/1196675",
+      "timestamp_updated": "2021-02-01T13:39:55,568633Z",
+      "uri_api": "https://api.blackfynn.io/packages/N:package:1cc5d4fa-6468-47b9-86c1-435f827d6168/files/1196675",
+      "uri_human": "https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/files/00000000-0000-0000-0000-000000000000/N:package:1cc5d4fa-6468-47b9-86c1-435f827d6168",
+      "size_bytes": 47724,
+      "checksums": [
+        {
+          "type": "checksum",
+          "cypher": "sha256",
+          "hex": "833cfc78a1562e63b9c6a16cceea399a20c139e227d1bd8663bc1c525f88cb8f"
+        }
+      ],
+      "parent_id": "dataset:57466879-2cdd-4af2-8bd6-7d867423c709",
+      "status": "accepted"
+    }
+  ],
+  "prov": {
+    "timestamp_export_start": "2021-04-13T02:11:18,092212Z",
+    "export_system_identifier": "FLGyaqO-i2za4fTU1KNwGg",
+    "export_hostname": "cassava",
+    "sparcur_version": "0.0.1.dev3",
+    "sparcur_commit": "64a0ac8f7d6f7119ddce26a6a463668fae4f9d81"
+  }
+}

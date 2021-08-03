@@ -1,6 +1,5 @@
 import axios from "axios";
 jest.mock('axios');
-
 const FileHandler = require('../src/utils/filesHandler');
 const Splinter = require('../src/utils/Splinter');
 const fileHandler = new FileHandler();
@@ -143,13 +142,11 @@ describe('Test Splinter File', () => {
       expect(node).toHaveProperty("type");
       expect(node).toHaveProperty("label");
       expect(node).toHaveProperty("proxies");
-      expect(node).toHaveProperty("properties");
     });
 
-    // The links for the graph mush each have these properties
     graph?.links?.forEach( link => {
-      expect(link).toHaveProperty("source");
-      expect(link).toHaveProperty("target");
+      expect(link).toHaveProperty("startNode");
+      expect(link).toHaveProperty("endNode");
     });
   });
 });

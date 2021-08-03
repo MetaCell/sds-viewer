@@ -5,19 +5,19 @@ import UploadSubmit from './UploadSubmit';
 import  { FilesUploading } from './UploadView/FilesUploading';
 import { FILE_UPLOAD_PARAMS } from '../../constants';
 
-const Uploader = ({ handleClose }) => {
+const Uploader = ({ handleClose, handleDone }) => {
   const [files, setFiles] = useState([]);
   const [loadedFiles, setLoadedFiles] = useState(0);
 
   const handleChange = (files) => {
   };
 
-  const onUpload = (file, url) => {
+  const onUpload = (file, data) => {
     setLoadedFiles((loadedFiles) =>  loadedFiles + 1);
     setFiles((curr) =>
       curr.map((fw) => {
         if (fw.file === file) {
-          return { ...fw, url };
+          return { ...fw, data };
         }
         return fw;
       }),
@@ -60,7 +60,7 @@ const Uploader = ({ handleClose }) => {
       ): null }
 
       {loadedFiles === files.length && loadedFiles !== 0 && (
-        <UploadSubmit handleClose={handleClose} />
+        <UploadSubmit handleClose={() => {handleDone(files)}} />
       )}
     </>
   );
