@@ -1,7 +1,7 @@
 import axios from "axios";
 jest.mock('axios');
 const FileHandler = require('../src/utils/filesHandler');
-const Splinter = require('../src/utils/Splinter');
+import Splinter from '../src/utils/Splinter';
 const fileHandler = new FileHandler();
 const fs = require("fs");
 
@@ -75,7 +75,8 @@ describe('Test Splinter File', () => {
   it('Process Turtle File', async (done) => {
     try {
       await splinter.extractTurtle();
-      expect(splinter.getTurtle().length).toBe(EXPECTED_TURTLE_QUADS)
+      const turtle = await splinter.getTurtle();
+      expect(turtle.length).toBe(EXPECTED_TURTLE_QUADS)
       done()
     } catch (e) {
       done.fail(e)
@@ -94,7 +95,7 @@ describe('Test Splinter File', () => {
 
   // Test the nodes for the graph
   it('Graph Nodes Extracted Correctly', async () => {
-    const nodes = splinter.nodes;
+    const nodes = await splinter.getGraph();;
     expect(nodes).toBe(EXPECTED_NODES_COUNT);
 
     // The nodes for the graph must each have these properties
