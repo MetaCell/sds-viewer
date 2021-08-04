@@ -2,23 +2,11 @@ import NodesFactory from './nodesFactory';
 import { rdfTypes, type_key, typesModel } from './graphModel';
 
 const N3 = require('n3');
-const graphModel = require("./graphModel.json");
 
 class Splinter {
     constructor(jsonFile, turtleFile) {
         this.jsonFile = jsonFile;
         this.turtleFile = turtleFile;
-<<<<<<< HEAD
-        this.store = new N3.Store();
-        this.turtleData = [];
-        this.jsonData = {};
-        this.types = {};
-        this.nodes = {};
-        this.edges = [];
-        this.graphRoot = undefined;
-    }
-
-=======
         this.types = {};
         this.nodes = undefined;
         this.edges = undefined;
@@ -70,7 +58,6 @@ class Splinter {
         // this.tree = {};
     }
 
->>>>>>> origin/feature/9
     extractJson() {
         if (typeof this.jsonFile === 'object' && this.jsonFile !== null) {
             return this.jsonFile;
@@ -89,28 +76,6 @@ class Splinter {
                     that.store.addQuad(quad);
                     that.turtleData.push(quad);
                 }
-<<<<<<< HEAD
-                if (prefixes) {
-                    console.log(prefixes);
-                }
-
-                resolve(that.turtleData);
-            }
-
-            let prefixCallback = function (prefix, iri) {
-                that.types[String(iri.id)] = {
-                    "type": prefix,
-                    "iri": iri
-                };
-
-                if (graphModel[prefix] !== undefined) {
-                    graphModel[prefix]["key"] = iri;
-                }
-
-                resolve(that.types);
-            }
-            var quadsArray = parser.parse(that.turtleFile, callbackParse, prefixCallback);
-=======
             }
 
             let prefixCallback = function (prefix, iri) {
@@ -121,7 +86,6 @@ class Splinter {
             }
             var quadsArray = parser.parse(that.turtleFile, callbackParse, prefixCallback);
             resolve(quadsArray);
->>>>>>> origin/feature/9
         });
     }
 
@@ -135,11 +99,6 @@ class Splinter {
         return this.turtleData;
     }
 
-<<<<<<< HEAD
-    async processTurtle() {
-        await this.extractTurtle();
-        console.log(this.turtleData);
-=======
 
     async getGraph() {
         if (this.nodes === undefined || this.edges === undefined) {
@@ -164,7 +123,6 @@ class Splinter {
 
     getDatasetId() {
         return this.dataset_id;
->>>>>>> origin/feature/9
     }
 
 
@@ -188,23 +146,6 @@ class Splinter {
         console.log("to be implemented, merge data between json and turtle to create the graph (not sure is required)");
     }
 
-<<<<<<< HEAD
-    async processDataset() {
-        await this.processTurtle();
-        this.processJSON();
-        this.create_graph();
-        console.log("let s check the graph!!!!");
-    }
-
-    get_type(quad) {
-        if (quad.predicate.id === graphModel.type_key) {
-            return quad.object.value
-        } else {
-            return undefined;
-        }
-    }
-
-=======
 
     async processDataset() {
         this.initialiseNodesEdges()
@@ -240,34 +181,10 @@ class Splinter {
     }
 
 
->>>>>>> origin/feature/9
     build_node(node) {
         if (this.nodes[String(node.id)] === undefined) {
             this.nodes[String(node.id)] = {
                 id: node.id,
-<<<<<<< HEAD
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": [],
-                label: node.value,
-                proxies: [],
-                properties: []
-            };
-        }
-    }
-
-    update_node(quad, proxy) {
-        // check if node to update exists in the list of nodes.
-        if (this.nodes[String(quad.subject.id)] !== undefined) {
-            if (quad.predicate.id === graphModel.type_key) {
-                this.nodes[String(quad.subject.id)][quad.predicate.id].push({
-                    predicate: quad.predicate.id,
-                    type: quad.object.datatype !== undefined ? quad.object.datatype.id : quad.object.id,
-                    value: quad.object.value
-                })
-            } else {
-                this.nodes[String(quad.subject.id)].properties.push({
-                    predicate: quad.predicate.id,
-                    type: quad.object.datatype,
-=======
                 attributes: {},
                 types: [],
                 name: node.value,
@@ -298,7 +215,6 @@ class Splinter {
                 this.nodes[String(quad.subject.id)].properties.push({
                     predicate: quad.predicate.id,
                     type: quad.object.datatype !== undefined ? quad.object.datatype.id : quad.object.id,
->>>>>>> origin/feature/9
                     value: quad.object.value
                 });
                 if (proxy) {
@@ -307,11 +223,7 @@ class Splinter {
             }
         } else {
             // if the node does not exist there should be referenced by a proxy inside another node.
-<<<<<<< HEAD
-            var found = false;
-=======
             var found = true;
->>>>>>> origin/feature/9
             for (const key in this.nodes) {
                 if (this.nodes[key].proxies.indexOf(String(quad.subject.id)) !== -1) {
                     this.nodes[key].properties.push({
@@ -320,32 +232,16 @@ class Splinter {
                         value: quad.object.value
                     });
                     this.nodes[key].proxies.push(quad.object.id);
-<<<<<<< HEAD
-                    found = true;
-=======
                     found = false;
->>>>>>> origin/feature/9
                 }
             }
             if (found) {
                 console.log("Houston, we have a problem!");
-<<<<<<< HEAD
-=======
                 console.log(quad);
->>>>>>> origin/feature/9
             }
         }
     }
 
-<<<<<<< HEAD
-    link_nodes(quad) {
-        if (this.nodes[String(quad.object.id)] !== undefined) {
-            this.edges.push({
-                startNode: quad.subject.id,
-                endNode: quad.object.id
-            })
-        } else {
-=======
 
     link_nodes(quad) {
         // before to create the node check that:
@@ -359,14 +255,10 @@ class Splinter {
             this.update_node(quad, false);
         } else {
             // if the conditions above are not satisfied we push this relationship as a proxy of another node already present
->>>>>>> origin/feature/9
             this.update_node(quad, true);
         }
     }
 
-<<<<<<< HEAD
-    create_graph() {
-=======
 
     cast_nodes() {
         // prepare 2 place holders for the dataset and ontology node, the ontology node is not required but
@@ -526,24 +418,18 @@ class Splinter {
 
     create_graph() {
         // build nodes out of the subjects
->>>>>>> origin/feature/9
         for (const node of this.store.getSubjects()) {
             if (!N3.Util.isBlankNode(node)) {
                 this.build_node(node);
             }
         }
 
-<<<<<<< HEAD
-        for (const quad of this.turtleData) {
-            if (N3.Util.isLiteral(quad.object) || quad.predicate.id === graphModel.type_key) {
-=======
         // consume all the other nodes that will contain mainly literals/properties of the subject nodes
         for (const [index, quad] of this.turtleData.entries()) {
             if (index === 169) {
                 console.log("test");
             }
             if (N3.Util.isLiteral(quad.object) || quad.predicate.id === type_key) {
->>>>>>> origin/feature/9
                 // The object does not represent a node on his own but rather a property of the existing subject
                 this.update_node(quad, false);
             } else {
@@ -551,12 +437,9 @@ class Splinter {
                 this.link_nodes(quad);
             }
         }
-<<<<<<< HEAD
-=======
 
         let dataset_node_id = this.cast_nodes();
         this.organise_nodes(dataset_node_id);
->>>>>>> origin/feature/9
     }
 }
 
