@@ -56,8 +56,8 @@ class Splinter {
 
 
     initialiseNodesEdges() {
-        this.nodes = {};
         this.edges = [];
+        this.nodes = new Map();
         this.tree_map = new Map();
         this.tree_parents_map = new Map();
     }
@@ -111,11 +111,10 @@ class Splinter {
             await this.processDataset();
         }
 
-        let _graph = {
+        return {
             nodes: this.forced_nodes,
             links: this.forced_edges
         };
-        return _graph;
     }
 
 
@@ -167,7 +166,7 @@ class Splinter {
             type: typesModel.unknown.type,
             length: 0
         }
-        for (const type of node.types) {
+        for (const type of node?.types) {
             if (type.type === this.types.owl.iri.id + "NamedIndividual") {
                 for (const rdfType in this.types) {
                     if ((node.id.includes(this.types[rdfType].iri.id)) && (this.types[rdfType].iri.id.length > typeFound.length) && (typesModel.NamedIndividual[String(this.types[rdfType].type)] !== undefined)) {
@@ -189,19 +188,34 @@ class Splinter {
 
 
     build_node(node) {
-        if (this.nodes[String(node.id)] === undefined) {
-            this.nodes[String(node.id)] = {
+        const graph_node = this.nodes.get(node.id);
+        if (graph_node) {
+            console.log("Issue with the build node, this node is already present");
+            console.log(node);
+        } else {
+            this.nodes.set(node.id, {
                 id: node.id,
                 attributes: {},
                 types: [],
                 name: node.value,
                 proxies: [],
                 properties: []
-            };
-        } else {
-            console.log("Issue with the build node, this node is already present");
-            console.log(node);
+            })
         }
+
+        // if (this.nodes[String(node.id)] === undefined) {
+        //     this.nodes[String(node.id)] = {
+        //         id: node.id,
+        //         attributes: {},
+        //         types: [],
+        //         name: node.value,
+        //         proxies: [],
+        //         properties: []
+        //     };
+        // } else {
+        //     console.log("Issue with the build node, this node is already present");
+        //     console.log(node);
+        // }
     }
 
 
@@ -210,38 +224,42 @@ class Splinter {
         if (N3.Util.isBlankNode(quad.subject)) {
             return;
         }
+        let graph_node = this.nodes.get(quad.subject.id);
         // check if node to update exists in the list of nodes.
-        if (this.nodes[String(quad.subject.id)]) {
+        if (graph_node) {
             if (quad.predicate.id === type_key) {
-                this.nodes[String(quad.subject.id)].types.push({
+                graph_node.types = [...graph_node.types, {
                     predicate: quad.predicate.id,
                     type: quad.object.datatype ? quad.object.datatype.id : quad.object.id,
                     value: quad.object.value
-                });
+                }];
+                this.nodes.set(quad.subject.id, graph_node);
             } else {
-                this.nodes[String(quad.subject.id)].properties.push({
+                graph_node.properties = [...graph_node.properties, {
                     predicate: quad.predicate.id,
                     type: quad.object.datatype ? quad.object.datatype.id : quad.object.id,
                     value: quad.object.value
-                });
+                }];
                 if (proxy) {
-                    this.nodes[String(quad.subject.id)].proxies.push(quad.object.id);
+                    graph_node.proxies = [...graph_node.proxies, quad.object.id];
                 }
+                this.nodes.set(quad.subject.id, graph_node);
             }
         } else {
             // if the node does not exist there should be referenced by a proxy inside another node.
             var found = true;
-            for (const key in this.nodes) {
-                if (this.nodes[key].proxies.indexOf(String(quad.subject.id)) !== -1) {
-                    this.nodes[key].properties.push({
+            this.nodes.forEach((value, key) => {
+                if (value.proxies.indexOf(String(quad.subject.id)) !== -1) {
+                    value.properties = [...value.properties, {
                         predicate: quad.predicate.id,
                         type: quad.object.datatype,
                         value: quad.object.value
-                    });
-                    this.nodes[key].proxies.push(quad.object.id);
+                    }];
+                    value.proxies = [...value.proxies, quad.object.id];
+                    this.nodes.set(key, value);
                     found = false;
                 }
-            }
+            });
             if (found) {
                 console.log("Houston, we have a problem!");
                 console.log(quad);
@@ -254,7 +272,9 @@ class Splinter {
         // before to create the node check that:
         // 1. subject and object are nodes in our graph
         // 2. we are not self referencing the node with a property that we don't need
-        if ((this.nodes[String(quad.object.id)] !== undefined) && (this.nodes[String(quad.subject.id)] !== undefined) && (quad.subject.id !== quad.object.id)) {
+        const source = this.nodes.get(quad.subject.id);
+        const target = this.nodes.get(quad.object.id);
+        if (source && target && (quad.subject.id !== quad.object.id)) {
             this.edges.push({
                 source: quad.subject.id,
                 target: quad.object.id
@@ -275,24 +295,22 @@ class Splinter {
 
         // cast each node to the right type, also keep trace of the dataset and ontology nodes.
         var factory = new NodesFactory();
-        for(const key in this.nodes) {
-            this.nodes[key].type = this.get_type(this.nodes[key]);
-            this.nodes[key] = factory.createNode(this.nodes[key], this.types);
-            if (this.nodes[key].type === typesModel.NamedIndividual.dataset.type) {
-                dataset_node = this.nodes[key];
+        this.nodes.forEach((value, key) => {
+            value.type = this.get_type(value);
+            this.nodes.set(key, factory.createNode(value, this.types));
+            if (value.type === typesModel.NamedIndividual.dataset.type) {
+                dataset_node = value;
             }
-            if (this.nodes[key].type === typesModel.ontology.type) {
-                ontology_node = this.nodes[key];
+            if (value.type === typesModel.ontology.type) {
+                ontology_node = value;
             }
-        }
-
+        });
         // merge the 2 nodes together
-        this.nodes[String(dataset_node.id)].properties = this.nodes[String(dataset_node.id)].properties.concat(ontology_node.properties)
-        this.nodes[String(dataset_node.id)].proxies = this.nodes[String(dataset_node.id)].proxies.concat(ontology_node.proxies)
-        // the below might create a conflict since there might be only a single type
-        //this.nodes[String(dataset_node.id)].types = this.nodes[String(dataset_node.id)].types.concat(ontology_node.types)
-        this.nodes[String(dataset_node.id)].level = 1;
-        delete this.nodes[String(ontology_node.id)];
+        dataset_node.properties = dataset_node.properties.concat(ontology_node.properties);
+        dataset_node.proxies = dataset_node.proxies.concat(ontology_node.proxies);
+        dataset_node.level = 1;
+        this.nodes.set(dataset_node.id, dataset_node);
+        this.nodes.delete(ontology_node.id);
         // fix links that were pointing to the ontology
         let temp_edges = this.edges.map(link => {
             if (link.source === ontology_node.id) {
@@ -321,8 +339,8 @@ class Splinter {
             properties: [],
             level: 2
         };
-        if (this.nodes[subjects.id] === undefined) {
-            this.nodes[String(subjects.id)] = subjects;
+        if (this.nodes.get(subject_key) === undefined) {
+            this.nodes.set(subject_key, subjects);
             this.edges.push({
                 source: id,
                 target: subjects.id
@@ -338,8 +356,8 @@ class Splinter {
             properties: [],
             level: 2
         };
-        if (this.nodes[protocols.id] === undefined) {
-            this.nodes[String(protocols.id)] = protocols;
+        if (this.nodes.get(protocols_key) ===  undefined) {
+            this.nodes.set(protocols_key, protocols);
             this.edges.push({
                 source: id,
                 target: protocols.id
@@ -355,8 +373,8 @@ class Splinter {
             properties: [],
             level: 2
         };
-        if (this.nodes[contributors.id] === undefined) {
-            this.nodes[String(contributors.id)] = contributors;
+        if (this.nodes.get(contributors_key) === undefined) {
+            this.nodes.set(contributors_key, contributors);
             this.edges.push({
                 source: id,
                 target: contributors.id
@@ -368,20 +386,24 @@ class Splinter {
         this.forced_edges = this.edges.filter(link => {
             if ((link.target === id)
             || (link.target === link.source)
-            || (this.nodes[link.source].level === this.nodes[link.target].level)) {
+            || (this.nodes.get(link.source).level === this.nodes.get(link.target).level)) {
                 return false;
             }
             return true;
         }).map(link => {
-            if (link.source === id && link.target !== subject_key && this.nodes[link.target].type === rdfTypes.Subject.key) {
+            let target_node = this.nodes.get(link.target);
+            if (link.source === id && link.target !== subject_key && target_node.type === rdfTypes.Subject.key) {
                 link.source = subject_key;
-                this.nodes[link.target].level = this.nodes[subject_key].level + 1;
-            } else if (link.source === id && link.target !== contributors_key && this.nodes[link.target].type === rdfTypes.Person.key) {
+                target_node.level = subjects.level + 1;
+                this.nodes.set(target_node.id, target_node);
+            } else if (link.source === id && link.target !== contributors_key && target_node.type === rdfTypes.Person.key) {
                 link.source = contributors_key;
-                this.nodes[link.target].level = this.nodes[contributors_key].level + 1;
-            } else if (link.source === id && link.target !== protocols_key && this.nodes[link.target].type === rdfTypes.Protocol.key) {
+                target_node.level = contributors.level + 1;
+                this.nodes.set(target_node.id, target_node);
+            } else if (link.source === id && link.target !== protocols_key && target_node.type === rdfTypes.Protocol.key) {
                 link.source = protocols_key;
-                this.nodes[link.target].level = this.nodes[protocols_key].level + 1;
+                target_node.level = protocols.level + 1;
+                this.nodes.set(target_node.id, target_node);
             }
             return link;
         }).filter(link => {
@@ -393,28 +415,26 @@ class Splinter {
 
         // TO FIX: the factory is ran twice for the groups nodes created since the img is not generated for them
         // either we generate the image when we do the node
-        
-        this.forced_nodes = Object.keys(this.nodes).map(key => {
+        this.forced_nodes = Array.from(this.nodes).map(([key, value]) => {
+            return factory.createNode(value, this.types);
+        })
 
-            return factory.createNode(this.nodes[key], this.types);
-        });
         this.fix_links();
     }
 
 
     fix_links() {
-        for (const node of this.forced_nodes) {
-            // loop all the samples
+        this.forced_nodes.forEach((node, index, array) => {
             if (node.type === rdfTypes.Sample.key) {
                 if (node.attributes.derivedFrom !== undefined) {
-                    node.level = this.nodes[node.attributes.derivedFrom].level + 1;
+                    array[index].level = this.nodes.get(node.attributes.derivedFrom).level + 1;
                     this.forced_edges.push({
                         source: node.attributes.derivedFrom,
                         target: node.id
                     });
                 }
             }
-        }
+        });
     }
 
 
@@ -428,9 +448,6 @@ class Splinter {
 
         // consume all the other nodes that will contain mainly literals/properties of the subject nodes
         for (const [index, quad] of this.turtleData.entries()) {
-            if (index === 169) {
-                console.log("test");
-            }
             if (N3.Util.isLiteral(quad.object) || quad.predicate.id === type_key) {
                 // The object does not represent a node on his own but rather a property of the existing subject
                 this.update_node(quad, false);
