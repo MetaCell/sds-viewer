@@ -41,21 +41,44 @@ export const rdfTypes = {
     "Subject": {
         "image": "./images/graph/folder.svg",
         "key": "Subject",
-        "properties": [{
-            "key": "",
-            "property": "",
-            "label": ""
-        }]
+        "properties": [
+            {
+                "type": "TEMP",
+                "key": "hasFolderAboutIt",
+                "property": "hasFolderAboutIt",
+                "label": "Folder that contains collection and files about the subject"
+            },
+            {
+                "type": "TEMP",
+                "key": "localId",
+                "property": "identifier",
+                "label": "Unique instance identifier"
+            },
+    ]
     },
     "Sample": {
         "image": "./images/dataset.svg",
         "key": "Sample",
-        "properties": [{
-            "type": "TEMP",
-            "key": "wasDerivedFromSubject",
-            "property": "DerivedFrom",
-            "label": "Derived from the subject"
-        }]
+        "properties": [
+            {
+                "type": "TEMP",
+                "key": "hasFolderAboutIt",
+                "property": "hasFolderAboutIt",
+                "label": "Folder that contains collection and files about the sample"
+            },
+            {
+                "type": "TEMP",
+                "key": "wasDerivedFromSubject",
+                "property": "derivedFrom",
+                "label": "Derived from the subject"
+            },
+            {
+                "type": "TEMP",
+                "key": "localId",
+                "property": "identifier",
+                "label": "Unique instance identifier"
+            }
+        ]
     },
     "Person": {
         "image": "./images/dataset.svg",

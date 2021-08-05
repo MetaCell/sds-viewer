@@ -8,6 +8,8 @@ class Splinter {
         this.jsonFile = jsonFile;
         this.turtleFile = turtleFile;
         this.types = {};
+        this.tree_map = undefined;
+        this.tree_parents_map = undefined;
         this.nodes = undefined;
         this.edges = undefined;
         this.forced_edges = undefined;
@@ -52,11 +54,14 @@ class Splinter {
         }
     }
 
+
     initialiseNodesEdges() {
         this.nodes = {};
         this.edges = [];
-        // this.tree = {};
+        this.tree_map = new Map();
+        this.tree_parents_map = new Map();
     }
+
 
     extractJson() {
         if (typeof this.jsonFile === 'object' && this.jsonFile !== null) {
@@ -65,6 +70,7 @@ class Splinter {
             return JSON.parse(this.jsonFile);
         }
     }
+
 
     extractTurtle() {
         var that = this;
@@ -152,6 +158,7 @@ class Splinter {
         await this.processTurtle();
         this.processJSON();
         this.create_graph();
+        this.create_tree();
     }
 
 
@@ -204,17 +211,17 @@ class Splinter {
             return;
         }
         // check if node to update exists in the list of nodes.
-        if (this.nodes[String(quad.subject.id)] !== undefined) {
+        if (this.nodes[String(quad.subject.id)]) {
             if (quad.predicate.id === type_key) {
                 this.nodes[String(quad.subject.id)].types.push({
                     predicate: quad.predicate.id,
-                    type: quad.object.datatype !== undefined ? quad.object.datatype.id : quad.object.id,
+                    type: quad.object.datatype ? quad.object.datatype.id : quad.object.id,
                     value: quad.object.value
                 });
             } else {
                 this.nodes[String(quad.subject.id)].properties.push({
                     predicate: quad.predicate.id,
-                    type: quad.object.datatype !== undefined ? quad.object.datatype.id : quad.object.id,
+                    type: quad.object.datatype ? quad.object.datatype.id : quad.object.id,
                     value: quad.object.value
                 });
                 if (proxy) {
@@ -270,7 +277,7 @@ class Splinter {
         var factory = new NodesFactory();
         for(const key in this.nodes) {
             this.nodes[key].type = this.get_type(this.nodes[key]);
-            this.nodes[key] = factory.createNode(this.nodes[key]);
+            this.nodes[key] = factory.createNode(this.nodes[key], this.types);
             if (this.nodes[key].type === typesModel.NamedIndividual.dataset.type) {
                 dataset_node = this.nodes[key];
             }
@@ -282,7 +289,7 @@ class Splinter {
         // merge the 2 nodes together
         this.nodes[String(dataset_node.id)].properties = this.nodes[String(dataset_node.id)].properties.concat(ontology_node.properties)
         this.nodes[String(dataset_node.id)].proxies = this.nodes[String(dataset_node.id)].proxies.concat(ontology_node.proxies)
-        // the below might create a conflict since there might be only a single type 
+        // the below might create a conflict since there might be only a single type
         //this.nodes[String(dataset_node.id)].types = this.nodes[String(dataset_node.id)].types.concat(ontology_node.types)
         this.nodes[String(dataset_node.id)].level = 1;
         delete this.nodes[String(ontology_node.id)];
@@ -311,6 +318,7 @@ class Splinter {
             id: subject_key,
             name: "Subjects",
             type: typesModel.NamedIndividual.subject.type,
+            properties: [],
             level: 2
         };
         if (this.nodes[subjects.id] === undefined) {
@@ -327,6 +335,7 @@ class Splinter {
             id: protocols_key,
             name: "Protocols",
             type: typesModel.sparc.Protocol.type,
+            properties: [],
             level: 2
         };
         if (this.nodes[protocols.id] === undefined) {
@@ -343,6 +352,7 @@ class Splinter {
             id: contributors_key,
             name: "Contributors",
             type: typesModel.NamedIndividual.contributor.type,
+            properties: [],
             level: 2
         };
         if (this.nodes[contributors.id] === undefined) {
@@ -385,7 +395,8 @@ class Splinter {
         // either we generate the image when we do the node
         
         this.forced_nodes = Object.keys(this.nodes).map(key => {
-            return factory.createNode(this.nodes[key]);
+
+            return factory.createNode(this.nodes[key], this.types);
         });
         this.fix_links();
     }
@@ -395,21 +406,12 @@ class Splinter {
         for (const node of this.forced_nodes) {
             // loop all the samples
             if (node.type === rdfTypes.Sample.key) {
-                // loop through all the properties to get the subject it has been derived from
-                for (const property of node.properties) {
-                    for (const type_property of rdfTypes.Sample.properties) {
-                        // when found adjust level for the sample node and add relationship
-                        if (property.predicate === (this.types[type_property.type].iri.id + type_property.key)) {
-                            node.attributes[type_property.property] = property.value;
-                            if (this.nodes[property.value] !== undefined) {
-                                node.level = this.nodes[property.value].level + 1;
-                                this.forced_edges.push({
-                                    source: property.value,
-                                    target: node.id
-                                });
-                            }
-                        }
-                    }
+                if (node.attributes.derivedFrom !== undefined) {
+                    node.level = this.nodes[node.attributes.derivedFrom].level + 1;
+                    this.forced_edges.push({
+                        source: node.attributes.derivedFrom,
+                        target: node.id
+                    });
                 }
             }
         }
@@ -440,6 +442,23 @@ class Splinter {
 
         let dataset_node_id = this.cast_nodes();
         this.organise_nodes(dataset_node_id);
+        console.log("test output");
+    }
+
+
+    create_tree() {
+        for (const leaf of this.jsonData.data) {
+            // TODO: the reference to the graph node should be added at this point since once
+            // we push the object inside the map then we would not want to manipulate it again.
+            this.tree_map.set(leaf.uri_api, leaf);
+            let children = this.tree_parents_map.get(leaf.parent_id);
+            if (children) {
+                this.tree_parents_map.set(leaf.parent_id, [...children, leaf]);
+            } else {
+                this.tree_parents_map.set(leaf.parent_id, [leaf]);
+            }
+        }
+        console.log("just a test");
     }
 }
 
