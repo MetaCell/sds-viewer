@@ -52,7 +52,7 @@ const Uploader = ({ handleClose, handleDone }) => {
         ref={nodeRef}
         Icon={DropzoneUploadIcon}
         dropzoneText={'Drag & Drop your files here'}
-        dropzoneClass={files.length > 0 ? 'hide' : ''}
+        filesLimit={FILE_UPLOAD_PARAMS.maxFiles}
       />
 
       {files && files.length ? (
