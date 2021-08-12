@@ -6,6 +6,9 @@ function createImage(node) {
     if (rdfTypes[String(node.type)] === undefined) {
         console.log(node);
     }
+    console.log(node.type);
+    console.log(rdfTypes);
+    console.log(rdfTypes[String(node.type)]?.image);
     img.src = (rdfTypes[String(node.type)]?.image !== "") ? rdfTypes[String(node.type)].image : rdfTypes.Uknown.image
     return img;
 }

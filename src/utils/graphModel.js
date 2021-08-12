@@ -5,38 +5,27 @@ export const rdfTypes = {
     "Ontology": {
         "image": "./images/dataset.svg",
         "key": "Ontology",
-        "properties": [{
-            "key": "",
-            "property": "",
-            "label": ""
-        }]
+        "properties": []
     },
     "Award": {
         "image": "./images/dataset.svg",
         "key": "Award",
-        "properties": [{
-            "key": "",
-            "property": "",
-            "label": ""
-        }]
+        "properties": []
     },
     "Collection": {
         "image": "./images/dataset.svg",
         "key": "Collection",
-        "properties": [{
-            "key": "",
-            "property": "",
-            "label": ""
-        }]
+        "properties": []
     },
     "Dataset": {
         "image": "./images/graph/database.svg",
         "key": "Dataset",
-        "properties": [{
-            "key": "",
-            "property": "",
-            "label": ""
-        }]
+        "properties": []
+    },
+    "File": {
+        "image": "./images/graph/database.svg",
+        "key": "File",
+        "properties": []
     },
     "Subject": {
         "image": "./images/graph/folder.svg",
@@ -83,29 +72,17 @@ export const rdfTypes = {
     "Person": {
         "image": "./images/dataset.svg",
         "key": "Person",
-        "properties": [{
-            "key": "",
-            "property": "",
-            "label": ""
-        }]
+        "properties": []
     },
     "Protocol": {
         "image": "./images/dataset.svg",
         "key": "Protocol",
-        "properties": [{
-            "key": "",
-            "property": "",
-            "label": ""
-        }]
+        "properties": []
     },
     "Unknown": {
-        "image": "./images/dataset.svg",
+        "image": "./images/graph/database.svg",
         "key": "Unknown",
-        "properties": [{
-            "key": "",
-            "property": "",
-            "label": ""
-        }]
+        "properties": []
     }
 };
 

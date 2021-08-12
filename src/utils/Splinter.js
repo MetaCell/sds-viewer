@@ -5,6 +5,7 @@ const N3 = require('n3');
 
 class Splinter {
     constructor(jsonFile, turtleFile) {
+        this.factory = new NodesFactory();
         this.jsonFile = jsonFile;
         this.turtleFile = turtleFile;
         this.types = {};
@@ -12,6 +13,7 @@ class Splinter {
         this.tree_parents_map = undefined;
         this.nodes = undefined;
         this.edges = undefined;
+        this.root_id = undefined;
         this.forced_edges = undefined;
         this.forced_nodes = undefined;
         this.jsonData = {};
@@ -84,7 +86,7 @@ class Splinter {
                 }
             }
 
-            let prefixCallback = function (prefix, iri) {
+            const prefixCallback = function (prefix, iri) {
                 that.types[String(prefix)] = {
                     "type": prefix,
                     "iri": iri
@@ -147,22 +149,19 @@ class Splinter {
     }
 
 
-    mergeData() {
-        console.log("to be implemented, merge data between json and turtle to create the graph (not sure is required)");
-    }
-
-
     async processDataset() {
         this.initialiseNodesEdges()
         await this.processTurtle();
         this.processJSON();
         this.create_graph();
         this.create_tree();
+        this.mergeData();
+        this.generateData()
     }
 
 
     get_type(node) {
-        let typeFound = {
+        const typeFound = {
             type: typesModel.unknown.type,
             length: 0
         }
@@ -190,8 +189,8 @@ class Splinter {
     build_node(node) {
         const graph_node = this.nodes.get(node.id);
         if (graph_node) {
-            console.log("Issue with the build node, this node is already present");
-            console.log(node);
+            console.error("Issue with the build node, this node is already present");
+            console.error(node);
         } else {
             this.nodes.set(node.id, {
                 id: node.id,
@@ -202,20 +201,6 @@ class Splinter {
                 properties: []
             })
         }
-
-        // if (this.nodes[String(node.id)] === undefined) {
-        //     this.nodes[String(node.id)] = {
-        //         id: node.id,
-        //         attributes: {},
-        //         types: [],
-        //         name: node.value,
-        //         proxies: [],
-        //         properties: []
-        //     };
-        // } else {
-        //     console.log("Issue with the build node, this node is already present");
-        //     console.log(node);
-        // }
     }
 
 
@@ -261,8 +246,10 @@ class Splinter {
                 }
             });
             if (found) {
-                console.log("Houston, we have a problem!");
-                console.log(quad);
+                // if we end up here it means we have a node with links to ids or proxy, so we do not know
+                // where this node should go.
+                console.error("Houston, we have a problem!");
+                console.error(quad);
             }
         }
     }
@@ -294,10 +281,9 @@ class Splinter {
         let ontology_node = undefined;
 
         // cast each node to the right type, also keep trace of the dataset and ontology nodes.
-        var factory = new NodesFactory();
         this.nodes.forEach((value, key) => {
             value.type = this.get_type(value);
-            this.nodes.set(key, factory.createNode(value, this.types));
+            this.nodes.set(key, this.factory.createNode(value, this.types));
             if (value.type === typesModel.NamedIndividual.dataset.type) {
                 dataset_node = value;
             }
@@ -305,6 +291,8 @@ class Splinter {
                 ontology_node = value;
             }
         });
+        // save the dataset id used for the uri_api later with the tree
+        this.root_id = dataset_node.id;
         // merge the 2 nodes together
         dataset_node.properties = dataset_node.properties.concat(ontology_node.properties);
         dataset_node.proxies = dataset_node.proxies.concat(ontology_node.proxies);
@@ -328,11 +316,10 @@ class Splinter {
 
     organise_nodes(id) {
         // structure the graph per category
-        var factory = new NodesFactory();
         const subject_key = "all_subjects";
         const protocols_key = "all_protocols";
         const contributors_key = "all_contributors";
-        let subjects = {
+        const subjects = {
             id: subject_key,
             name: "Subjects",
             type: typesModel.NamedIndividual.subject.type,
@@ -349,7 +336,7 @@ class Splinter {
             console.error("The subjects node already exists!");
         }
 
-        let protocols = {
+        const protocols = {
             id: protocols_key,
             name: "Protocols",
             type: typesModel.sparc.Protocol.type,
@@ -366,7 +353,7 @@ class Splinter {
             console.error("The subjects node already exists!");
         }
 
-        let contributors = {
+        const contributors = {
             id: contributors_key,
             name: "Contributors",
             type: typesModel.NamedIndividual.contributor.type,
@@ -412,14 +399,7 @@ class Splinter {
             }
             return true;
         });
-
-        // TO FIX: the factory is ran twice for the groups nodes created since the img is not generated for them
-        // either we generate the image when we do the node
-        this.forced_nodes = Array.from(this.nodes).map(([key, value]) => {
-            return factory.createNode(value, this.types);
-        })
-
-        this.fix_links();
+        // TODO: move this along with the tree generation since they needs kind of together to link the nodes.
     }
 
 
@@ -459,7 +439,6 @@ class Splinter {
 
         let dataset_node_id = this.cast_nodes();
         this.organise_nodes(dataset_node_id);
-        console.log("test output");
     }
 
 
@@ -468,6 +447,10 @@ class Splinter {
             // TODO: the reference to the graph node should be added at this point since once
             // we push the object inside the map then we would not want to manipulate it again.
             this.tree_map.set(leaf.uri_api, leaf);
+            // Fix the fact that the dataset node states that its parent is itself.
+            if (leaf.parent_id === leaf.remote_id) {
+                continue;
+            }
             let children = this.tree_parents_map.get(leaf.parent_id);
             if (children) {
                 this.tree_parents_map.set(leaf.parent_id, [...children, leaf]);
@@ -475,7 +458,89 @@ class Splinter {
                 this.tree_parents_map.set(leaf.parent_id, [leaf]);
             }
         }
-        console.log("just a test");
+    }
+
+
+    mergeData() {
+        this.nodes.forEach((value, key) => {
+            if (value.attributes !== undefined && value.attributes.hasFolderAboutIt !== undefined) {
+                const children = this.tree_parents_map.get(this.tree_map.get(value.attributes.hasFolderAboutIt).remote_id);
+                children.forEach(child => {
+                    const new_node = this.buildNodeFromJson(child, value.level);
+                    this.forced_edges.push({
+                        source: value.id,
+                        target: new_node.id
+                    });
+                    this.nodes.set(new_node.id, new_node);
+                });
+
+            }
+        });
+    }
+
+
+    buildNodeFromJson(item, level) {
+        const new_node = {
+            id: item.uri_api,
+            level: level + 1,
+            attributes: {
+                identifier: item.basename,
+                relativePath: item.dataset_relative_path,
+                size: item.size_bytes,
+                mimetype: item.mimetype,
+                updated: item.timestamp_updated,
+                status: item.status,
+            },
+            types: [],
+            name: item.basename,
+            proxies: [],
+            properties: [],
+            type: item.mimetype === "inode/directory" ? "Collection" : "File",
+        };
+        return this.factory.createNode(new_node, []);
+    }
+
+
+    generateData() {
+        // generate the Graph
+        // TODO: link graph and tree nodes inside this loop below.
+        this.forced_nodes = Array.from(this.nodes).map(([key, value]) => {
+            return this.factory.createNode(value, this.types);
+        })
+
+        this.fix_links();
+
+        var tree_root = this.tree_map.get(this.root_id);
+        var children = this.tree_parents_map.get(tree_root.remote_id);
+        this.tree_parents_map.delete(tree_root.remote_id);
+        this.tree = {
+            id: this.dataset_id,
+            text: this.dataset_id + ' Dataset',
+            parent: true,
+            items: [
+            ]
+        }
+
+        children.forEach(leaf => {
+            this.build_leaf(leaf, this.tree.items);
+        });
+    }
+
+    build_leaf(node, tree) {
+        node.id = node.remote_id;
+        node.text = node.basename;
+        if (node.items === undefined) {
+            node.items = [];
+        }
+        tree.push(node);
+
+        var children = this.tree_parents_map.get(node.remote_id);
+        if (children) {
+            children.forEach(child => {
+                this.build_leaf(child, node.items);
+            });
+        }
+
     }
 }
 
