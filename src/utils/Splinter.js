@@ -473,7 +473,6 @@ class Splinter {
                     });
                     this.nodes.set(new_node.id, new_node);
                 });
-
             }
         });
     }
