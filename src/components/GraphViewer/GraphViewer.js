@@ -145,7 +145,6 @@ const GraphViewer = (props) => {
         ctx.fillStyle = GRAPH_COLORS.textColor;
       }
       ctx.fillText(...textProps);
-      // node.fy = 100 * node.level;
     },
     [hoverNode]
   );
@@ -163,7 +162,6 @@ const GraphViewer = (props) => {
         // Links properties
         linkColor={GRAPH_COLORS.link}
         linkWidth={2}
-        linkCurvature={(link) => (link.target.x < link.source.x ? -0.05 : 0.05)}
         // Allows updating link properties, as color and curvature. Without this, linkCurvature doesn't work.
         linkCanvasObjectMode={'replace'}
         onNodeClick={(node, event) => handleNodeLeftClick(node, event)}
