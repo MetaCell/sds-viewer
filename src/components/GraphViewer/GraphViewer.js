@@ -163,7 +163,8 @@ const GraphViewer = (props) => {
         // Override drawing of canvas objects, draw an image as a node
         nodeCanvasObject={paintNode}
         // td = Top Down, creates Graph with root at top
-        dagMode='td'
+        dagMode='null'
+        dagLevelDistance={600}
         // Handles error on graph
         onDagError={(loopNodeIds) => {}}
         // Disable dragging of nodes

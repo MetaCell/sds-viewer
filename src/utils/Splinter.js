@@ -466,15 +466,26 @@ class Splinter {
             if (value.attributes !== undefined && value.attributes.hasFolderAboutIt !== undefined) {
                 const children = this.tree_parents_map.get(this.tree_map.get(value.attributes.hasFolderAboutIt).remote_id);
                 children.forEach(child => {
-                    const new_node = this.buildNodeFromJson(child, value.level);
-                    this.forced_edges.push({
-                        source: value.id,
-                        target: new_node.id
-                    });
-                    this.nodes.set(new_node.id, new_node);
+                    this.linkToNode(child, value);
                 });
             }
         });
+    }
+
+
+    linkToNode(node, parent) {
+        const new_node = this.buildNodeFromJson(node, parent.level);
+        this.forced_edges.push({
+            source: parent.id,
+            target: new_node.id
+        });
+        this.nodes.set(new_node.id, new_node);
+        var children = this.tree_parents_map.get(node.remote_id);
+        if (children?.length > 0) {
+            children.forEach(child => {
+                this.linkToNode(child, new_node);
+            });
+        }
     }
 
 
