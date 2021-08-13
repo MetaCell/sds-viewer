@@ -283,7 +283,18 @@ class Splinter {
         // cast each node to the right type, also keep trace of the dataset and ontology nodes.
         this.nodes.forEach((value, key) => {
             value.type = this.get_type(value);
-            this.nodes.set(key, this.factory.createNode(value, this.types));
+            const typedNode = this.factory.createNode(value, this.types);
+            if (typedNode.type !== rdfTypes.Unknown.key) {
+                this.nodes.set(key, typedNode);
+            } else {
+                this.nodes.delete(key);
+                this.edges = this.edges.filter(link => {
+                    if (link.source !== key && link.target !== key) {
+                        return true;
+                    }
+                    return false;
+                })
+            }
             if (value.type === typesModel.NamedIndividual.dataset.type) {
                 dataset_node = value;
             }
@@ -371,13 +382,17 @@ class Splinter {
         }
 
         this.forced_edges = this.edges.filter(link => {
-            if ((link.target === id)
-            || (link.target === link.source)
+            if ((link.target === link.source)
             || (this.nodes.get(link.source).level === this.nodes.get(link.target).level)) {
                 return false;
             }
             return true;
         }).map(link => {
+            if (link.target === id) {
+                var temp = link.target;
+                link.target = link.source;
+                link.source = temp;
+            }
             let target_node = this.nodes.get(link.target);
             if (link.source === id && link.target !== subject_key && target_node.type === rdfTypes.Subject.key) {
                 link.source = subject_key;
@@ -394,7 +409,8 @@ class Splinter {
             }
             return link;
         }).filter(link => {
-            if ((link.source === id && (link.target !== contributors_key && link.target !== subject_key && link.target !== protocols_key))) {
+            let target_node = this.nodes.get(link.target);
+            if ((link.source === id && (target_node.type !== rdfTypes.Award.key) && (link.target !== contributors_key && link.target !== subject_key && link.target !== protocols_key))) {
                 return false;
             }
             return true;
