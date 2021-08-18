@@ -37,6 +37,9 @@ const GraphViewer = (props) => {
   const graphRef = React.useRef(null);
 
   const handleNodeLeftClick = (node, event) => {
+    console.log(event);
+    console.log("Node selected");
+    console.log(node);
   };
 
   /**
