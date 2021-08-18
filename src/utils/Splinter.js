@@ -9,6 +9,7 @@ class Splinter {
         this.jsonFile = jsonFile;
         this.turtleFile = turtleFile;
         this.types = {};
+        this.tree = undefined;
         this.tree_map = undefined;
         this.tree_parents_map = undefined;
         this.nodes = undefined;
@@ -16,44 +17,11 @@ class Splinter {
         this.root_id = undefined;
         this.forced_edges = undefined;
         this.forced_nodes = undefined;
+        this.proxies_map = undefined;
         this.jsonData = {};
         this.turtleData = [];
         this.dataset_id = this.processDatasetId();
         this.store = new N3.Store();
-        // Temporary data
-        this.tree = {
-            id: this.dataset_id,
-            text: this.dataset_id + ' Dataset',
-            parent: true,
-            items: [
-                {
-                    id: '1_1_1',
-                    text: 'NIFTI',
-                    items: [],
-                },
-                {
-                    id: '1_1_2',
-                    text: 'Volume',
-                    items: [
-                        {
-                            id: '1_1_2_1',
-                            text: 'NIFTI',
-                            price: 1200,
-                        },
-                        {
-                            id: '1_1_2_2',
-                            text: 'Matlab',
-                            price: 1450,
-                        },
-                    ],
-                },
-                {
-                    id: '1_1_3',
-                    text: 'Matlab',
-                    items: [],
-                },
-            ],
-        }
     }
 
 
@@ -62,6 +30,7 @@ class Splinter {
         this.nodes = new Map();
         this.tree_map = new Map();
         this.tree_parents_map = new Map();
+        this.proxies_map = new Map();
     }
 
 
@@ -198,7 +167,8 @@ class Splinter {
                 types: [],
                 name: node.value,
                 proxies: [],
-                properties: []
+                properties: [],
+                tree_reference: null
             })
         }
     }
@@ -227,6 +197,7 @@ class Splinter {
                 }];
                 if (proxy) {
                     graph_node.proxies = [...graph_node.proxies, quad.object.id];
+                    this.proxies_map.set(quad.object.id, quad.subject.id);
                 }
                 this.nodes.set(quad.subject.id, graph_node);
             }
@@ -241,6 +212,7 @@ class Splinter {
                         value: quad.object.value
                     }];
                     value.proxies = [...value.proxies, quad.object.id];
+                    this.proxies_map.set(quad.object.id, key);
                     this.nodes.set(key, value);
                     found = false;
                 }
@@ -335,7 +307,8 @@ class Splinter {
             name: "Subjects",
             type: typesModel.NamedIndividual.subject.type,
             properties: [],
-            level: 2
+            proxies: [],
+            level: 5
         };
         if (this.nodes.get(subject_key) === undefined) {
             this.nodes.set(subject_key, subjects);
@@ -352,6 +325,7 @@ class Splinter {
             name: "Protocols",
             type: typesModel.sparc.Protocol.type,
             properties: [],
+            proxies: [],
             level: 2
         };
         if (this.nodes.get(protocols_key) ===  undefined) {
@@ -369,6 +343,7 @@ class Splinter {
             name: "Contributors",
             type: typesModel.NamedIndividual.contributor.type,
             properties: [],
+            proxies: [],
             level: 2
         };
         if (this.nodes.get(contributors_key) === undefined) {
@@ -506,6 +481,10 @@ class Splinter {
 
 
     buildNodeFromJson(item, level) {
+        const node_id = this.proxies_map.get(item.uri_api);
+        if (node_id) {
+            return this.nodes.get(node_id);
+        }
         const new_node = {
             id: item.uri_api,
             level: level + 1,
@@ -522,6 +501,7 @@ class Splinter {
             proxies: [],
             properties: [],
             type: item.mimetype === "inode/directory" ? "Collection" : "File",
+            tree_reference: null,
         };
         return this.factory.createNode(new_node, []);
     }
@@ -529,8 +509,24 @@ class Splinter {
 
     generateData() {
         // generate the Graph
-        // TODO: link graph and tree nodes inside this loop below.
         this.forced_nodes = Array.from(this.nodes).map(([key, value]) => {
+            let tree_node = this.tree_map.get(value.id);
+            if (tree_node) {
+                value.tree_reference = tree_node;
+                tree_node.graph_reference = value;
+                this.tree_map.set(value.id, tree_node);
+            } else {
+                value.proxies.every(proxy => {
+                    tree_node = this.tree_map.get(proxy);
+                    if (tree_node) {
+                        value.tree_reference = tree_node;
+                        tree_node.graph_reference = value;
+                        this.tree_map.set(proxy, tree_node);
+                        return false;
+                    }
+                    return true;
+                })
+            }
             return this.factory.createNode(value, this.types);
         })
 
@@ -555,6 +551,7 @@ class Splinter {
     build_leaf(node, tree) {
         node.id = node.remote_id;
         node.text = node.basename;
+        node.graph_reference = null;
         if (node.items === undefined) {
             node.items = [];
         }

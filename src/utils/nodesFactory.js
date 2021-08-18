@@ -26,25 +26,35 @@ var NodesFactory = function () {
     this.createNode = function (node, ttlTypes) {
         var typed_node;
 
-        if (node.type === "Collection") {
-            typed_node = new Collection(node, ttlTypes);
-        } else if (node.type === "Contributor") {
-            typed_node = new Contributor(node, ttlTypes);
-        } else if (node.type === "Dataset") {
-            typed_node = new Dataset(node, ttlTypes);
-        } else if (node.type === "Protocol") {
-            typed_node = new Protocol(node, ttlTypes);
-        } else if (node.type === "Sample") {
-            typed_node = new Sample(node, ttlTypes);
-        } else if (node.type === "Subject") {
-            typed_node = new Subject(node, ttlTypes);
-        } else if (node.type === "File") {
-            typed_node = new File(node, ttlTypes);
-        } else if (node.type === "Person") {
-            typed_node = new Person(node, ttlTypes);
-        } else {
-            typed_node = new Unknown(node, ttlTypes);
+        switch(node.type) {
+            case "Collection":
+                typed_node = new Collection(node, ttlTypes);
+                break;
+            case "Contributor":
+                typed_node = new Contributor(node, ttlTypes);
+                break;
+            case "Dataset":
+                typed_node = new Dataset(node, ttlTypes);
+                break;
+            case "Protocol":
+                typed_node = new Protocol(node, ttlTypes);
+                break;
+            case "Sample":
+                typed_node = new Sample(node, ttlTypes);
+                break;
+            case "Subject":
+                typed_node = new Subject(node, ttlTypes);
+                break;
+            case "File":
+                typed_node = new File(node, ttlTypes);
+                break;
+            case "Person":
+                typed_node = new Person(node, ttlTypes);
+                break;
+            default:
+                typed_node = new Unknown(node, ttlTypes);
         }
+
         return typed_node;
     }
 }
