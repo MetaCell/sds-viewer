@@ -4,19 +4,33 @@ import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import LayersIcon from '@material-ui/icons/Layers';
+import Button from '@material-ui/core/Button';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import GeppettoGraphVisualization from '@metacell/geppetto-meta-ui/graph-visualization/Graph';
+import * as d3 from 'd3-force'
 
 const NODE_FONT = '500 6px Inter, sans-serif';
 const ONE_SECOND = 1000;
 const ZOOM_DEFAULT = 1;
 const ZOOM_SENSITIVITY = 0.2;
 const GRAPH_COLORS = {
-  link: 'rgba(255, 255, 255, 0.2)',
+  link: '#CFD4DA',
+  linkHover : '#3779E1',
   hoverRect: '#CFD4DA',
   textHoverRect: '#3779E1',
   textHover: 'white',
   textColor: '#2E3A59',
 };
+const TOP_DOWN = {
+  label : "Top Down",
+  layout : "td"
+};
+const RADIAL_OUT = {
+  label : "Radial",
+  layout : "radialout"
+};
+const LINK_DISTANCE = 100;
 
 const roundRect = (ctx, x, y, width, height, radius, color, alpha) => {
   if (width < 2 * radius) radius = width / 2;
@@ -35,8 +49,36 @@ const roundRect = (ctx, x, y, width, height, radius, color, alpha) => {
 
 const GraphViewer = (props) => {
   const graphRef = React.useRef(null);
+  const [hoverNode, setHoverNode] = useState(null);
+  const [highlightNodes, setHighlightNodes] = useState(new Set());
+  const [highlightLinks, setHighlightLinks] = useState(new Set());
+  const [selectedLayout, setSelectedLayout] = React.useState("td");
+  const [layoutAnchorEl, setLayoutAnchorEl] = React.useState(null);
+  const open = Boolean(layoutAnchorEl);
 
+  const handleLayoutClick = (event) => {
+    setLayoutAnchorEl(event.currentTarget);
+  };
+
+  const handleLayoutClose = () => {
+    setLayoutAnchorEl(null);
+  };
+
+  const handleLayoutChange = (target) => {
+    handleLayoutClose()
+    setSelectedLayout(target);
+  };
+  
   const handleNodeLeftClick = (node, event) => {
+  };
+
+  const handleLinkColor = link => {
+    let linkColor = GRAPH_COLORS.link;
+    if ( highlightLinks.has(link) ) {
+      linkColor = highlightNodes.has(link.source) || highlightNodes.has(link.target) ? GRAPH_COLORS.linkHover : GRAPH_COLORS.link;
+    }
+
+    return linkColor;
   };
 
   /**
@@ -71,28 +113,60 @@ const GraphViewer = (props) => {
     graphRef.current.ggv.current.zoomToFit();
   };
 
+  const engineStop = () => {
+    graphRef?.current?.ggv?.current?.zoomToFit();
+  }
+
   useEffect(() => {
     setTimeout(
-      () => graphRef?.current?.ggv?.current?.zoomToFit(),
-      ONE_SECOND / 2
+      () => { 
+        graphRef?.current?.ggv?.current?.d3Force('charge').strength(-10 * window.datasets[props.graph_id].graph.nodes.length);
+        graphRef?.current?.ggv?.current?.d3Force('link').distance(link => { 
+          let level = link?.target?.level;
+
+          let distance = LINK_DISTANCE;
+          if ( level ){
+            distance = 1;
+          }
+
+          return distance;
+        });
+        engineStop();
+      },
+      ONE_SECOND
     );
   }, []);
 
-  const [highlightNodes, setHighlightNodes] = useState(new Set());
-  const [hoverNode, setHoverNode] = useState(null);
+  const handleNodeHover = (node) => {
+    highlightNodes.clear();
+    highlightLinks.clear();
+    if (node) {
+      highlightNodes.add(node);
+      node.neighbors.forEach(neighbor => highlightNodes.add(neighbor));
+      node.links.forEach(link => highlightLinks.add(link));
+    }
 
-  const updateHighlight = () => {
+    setHoverNode(node);
+    setHighlightLinks(highlightLinks);
     setHighlightNodes(highlightNodes);
   };
 
-  const handleNodeHover = (node) => {
+  const handleLinkHover = link => {
+    // Reset maps of hover nodes and links
     highlightNodes.clear();
-    if (node) {
-      highlightNodes.add(node);
+    highlightLinks.clear();
+
+    // We found link being hovered
+    if (link) {
+      // Keep track of hovered link, and it's source/target node
+      highlightLinks.add(link);
+      highlightNodes.add(link.source);
+      highlightNodes.add(link.target);
     }
-    setHoverNode(node || null);
-    updateHighlight();
-  };
+
+    setHighlightLinks(highlightLinks);
+    setHighlightNodes(highlightNodes);
+  }
 
   const paintNode = React.useCallback(
     (node, ctx) => {
@@ -106,6 +180,7 @@ const GraphViewer = (props) => {
       ];
       const hoverRectBorderRadius = 2;
       ctx.beginPath();
+
       ctx.drawImage(
         node.img,
         node.x - size - 1,
@@ -145,6 +220,7 @@ const GraphViewer = (props) => {
         ctx.fillStyle = GRAPH_COLORS.textColor;
       }
       ctx.fillText(...textProps);
+      
     },
     [hoverNode]
   );
@@ -157,21 +233,27 @@ const GraphViewer = (props) => {
         data={window.datasets[props.graph_id].graph}
         // Create the Graph as 2 Dimensional
         d2={true}
-        nodeRelSize={8}
-        nodeSize={30}
+        d3VelocityDecay={.1}
+        warmupTicks={1000}
+        cooldownTicks={1}
+        onEngineStop={resetCamera}
         // Links properties
-        linkColor={GRAPH_COLORS.link}
+        linkColor = {handleLinkColor}
         linkWidth={2}
-        // Allows updating link properties, as color and curvature. Without this, linkCurvature doesn't work.
+        onLinkHover={handleLinkHover}
+        click={() => graphRef?.current.ggv.current.zoomToFit()}
         linkCanvasObjectMode={'replace'}
-        onNodeClick={(node, event) => handleNodeLeftClick(node, event)}
-        onNodeRightClick={(node, event) => handleNodeRightClick(node, event)}
-        onNodeHover={handleNodeHover}
+        nodeRelSize={20}
         // Override drawing of canvas objects, draw an image as a node
         nodeCanvasObject={paintNode}
+        nodeCanvasObjectMode={node => 'replace'}
+        onNodeHover={handleNodeHover}
+        // Allows updating link properties, as color and curvature. Without this, linkCurvature doesn't work.
+        onNodeClick={(node, event) => handleNodeLeftClick(node, event)}
+        onNodeRightClick={(node, event) => handleNodeRightClick(node, event)}
         // td = Top Down, creates Graph with root at top
-        dagMode='radialout'
-        dagLevelDistance={200}
+        dagMode={selectedLayout}
+        dagLevelDistance={LINK_DISTANCE}
         // Handles error on graph
         onDagError={(loopNodeIds) => {}}
         // Disable dragging of nodes
@@ -181,18 +263,35 @@ const GraphViewer = (props) => {
         enablePointerInteraction={true}
         // React element for controls goes here
         controls={
-          <div className='graph-view_controls'>
-            <IconButton onClick={(e) => zoomIn()}>
-              <ZoomInIcon />
-            </IconButton>
-            <IconButton onClick={(e) => zoomOut()}>
-              <ZoomOutIcon />
-            </IconButton>
-            <IconButton onClick={(e) => resetCamera()}>
-              <RefreshIcon />
-            </IconButton>
-            <LayersIcon />
-          </div>
+          <>
+            <div className='graph-layout_controls'>
+              <IconButton aria-controls="layout-menu" aria-haspopup="true" onClick={handleLayoutClick}>
+                <RefreshIcon />
+              </IconButton>
+              <Menu
+                id="layout-menu"
+                anchorEl={layoutAnchorEl}
+                keepMounted
+                open={open}
+                onClose={handleLayoutClose}
+              >
+                <MenuItem onClick={() => handleLayoutChange(RADIAL_OUT.layout)}>{RADIAL_OUT.label}</MenuItem>
+                <MenuItem onClick={() => handleLayoutChange(TOP_DOWN.layout)}>{TOP_DOWN.label}</MenuItem>
+              </Menu>
+            </div>
+            <div className='graph-view_controls'>
+              <IconButton onClick={(e) => zoomIn()}>
+                <ZoomInIcon />
+              </IconButton>
+              <IconButton onClick={(e) => zoomOut()}>
+                <ZoomOutIcon />
+              </IconButton>
+              <IconButton onClick={(e) => resetCamera()}>
+                <RefreshIcon />
+              </IconButton>
+              <LayersIcon />
+            </div>
+          </>
         }
       />
     </div>

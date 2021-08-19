@@ -442,6 +442,13 @@
   flex-direction: column;
 }
 
+.layout-view_controls {
+  width: auto !important;
+  display: flex;
+  right: 8px;
+  flex-direction: column;
+}
+
 .graph-view_controls .MuiIconButton-root {
   width: 24px;
   height: 24px;
