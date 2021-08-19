@@ -29,7 +29,7 @@ const RADIAL_OUT = {
   label : "Radial",
   layout : "radialout"
 };
-const LINK_DISTANCE = 100;
+const LINK_DISTANCE = 200;
 
 const roundRect = (ctx, x, y, width, height, radius, color, alpha) => {
   if (width < 2 * radius) radius = width / 2;
