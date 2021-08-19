@@ -3,7 +3,12 @@ import { rdfTypes } from './graphModel';
 function createImage(node) {
     // TODO: replace this with a decorator (maybe).
     const img = new Image();
-    img.src = (rdfTypes[String(node.type)]?.image !== "") ? rdfTypes[String(node.type)].image : rdfTypes.Uknown.image
+    if ( node.type === rdfTypes.File.key ){
+        let extension = node.name.split('.').pop();
+        img.src = "./images/graph/files/" + extension + ".svg";
+    } else {
+        img.src = (rdfTypes[String(node.type)]?.image !== "") ? rdfTypes[String(node.type)].image : rdfTypes.Uknown.image;
+    }
     return img;
 }
 

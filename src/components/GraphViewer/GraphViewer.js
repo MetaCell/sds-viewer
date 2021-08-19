@@ -3,12 +3,11 @@ import { IconButton } from '@material-ui/core';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import RefreshIcon from '@material-ui/icons/Refresh';
+import FormatAlignCenterIcon from '@material-ui/icons/FormatAlignCenter';
 import LayersIcon from '@material-ui/icons/Layers';
-import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import GeppettoGraphVisualization from '@metacell/geppetto-meta-ui/graph-visualization/Graph';
-import * as d3 from 'd3-force'
 
 const NODE_FONT = '500 6px Inter, sans-serif';
 const ONE_SECOND = 1000;
@@ -16,7 +15,7 @@ const ZOOM_DEFAULT = 1;
 const ZOOM_SENSITIVITY = 0.2;
 const GRAPH_COLORS = {
   link: '#CFD4DA',
-  linkHover : '#3779E1',
+  linkHover : 'purple',
   hoverRect: '#CFD4DA',
   textHoverRect: '#3779E1',
   textHover: 'white',
@@ -52,7 +51,7 @@ const GraphViewer = (props) => {
   const [hoverNode, setHoverNode] = useState(null);
   const [highlightNodes, setHighlightNodes] = useState(new Set());
   const [highlightLinks, setHighlightLinks] = useState(new Set());
-  const [selectedLayout, setSelectedLayout] = React.useState("td");
+  const [selectedLayout, setSelectedLayout] = React.useState(RADIAL_OUT.layout);
   const [layoutAnchorEl, setLayoutAnchorEl] = React.useState(null);
   const open = Boolean(layoutAnchorEl);
 
@@ -191,8 +190,8 @@ const GraphViewer = (props) => {
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       let nodeName = node.name;
-      if (nodeName.length > 8) {
-        nodeName = nodeName.substr(0, 8).concat('...');
+      if (nodeName.length > 15) {
+        nodeName = nodeName.substr(0, 15).concat('...');
       }
       const textProps = [nodeName, node.x + 2, textHoverPosition[1] + 4.5];
       if (node === hoverNode) {
@@ -263,35 +262,31 @@ const GraphViewer = (props) => {
         enablePointerInteraction={true}
         // React element for controls goes here
         controls={
-          <>
-            <div className='graph-layout_controls'>
-              <IconButton aria-controls="layout-menu" aria-haspopup="true" onClick={handleLayoutClick}>
-                <RefreshIcon />
-              </IconButton>
-              <Menu
-                id="layout-menu"
-                anchorEl={layoutAnchorEl}
-                keepMounted
-                open={open}
-                onClose={handleLayoutClose}
-              >
-                <MenuItem onClick={() => handleLayoutChange(RADIAL_OUT.layout)}>{RADIAL_OUT.label}</MenuItem>
-                <MenuItem onClick={() => handleLayoutChange(TOP_DOWN.layout)}>{TOP_DOWN.label}</MenuItem>
-              </Menu>
-            </div>
-            <div className='graph-view_controls'>
-              <IconButton onClick={(e) => zoomIn()}>
-                <ZoomInIcon />
-              </IconButton>
-              <IconButton onClick={(e) => zoomOut()}>
-                <ZoomOutIcon />
-              </IconButton>
-              <IconButton onClick={(e) => resetCamera()}>
-                <RefreshIcon />
-              </IconButton>
-              <LayersIcon />
-            </div>
-          </>
+          <div className='graph-view_controls'>
+            <IconButton aria-controls="layout-menu" aria-haspopup="true" onClick={handleLayoutClick}>
+              <FormatAlignCenterIcon />
+            </IconButton>
+            <Menu
+              id="layout-menu"
+              anchorEl={layoutAnchorEl}
+              keepMounted
+              open={open}
+              onClose={handleLayoutClose}
+            >
+              <MenuItem selected={RADIAL_OUT.layout === selectedLayout} onClick={() => handleLayoutChange(RADIAL_OUT.layout)}>{RADIAL_OUT.label}</MenuItem>
+              <MenuItem selected={TOP_DOWN.layout === selectedLayout} onClick={() => handleLayoutChange(TOP_DOWN.layout)}>{TOP_DOWN.label}</MenuItem>
+            </Menu>
+            <IconButton onClick={(e) => zoomIn()}>
+              <ZoomInIcon />
+            </IconButton>
+            <IconButton onClick={(e) => zoomOut()}>
+              <ZoomOutIcon />
+            </IconButton>
+            <IconButton onClick={(e) => resetCamera()}>
+              <RefreshIcon />
+             </IconButton>
+            <LayersIcon />
+          </div>
         }
       />
     </div>
