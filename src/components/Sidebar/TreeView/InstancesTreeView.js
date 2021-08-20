@@ -12,12 +12,13 @@ const InstancesTreeView = (props) => {
   const onNodeToggle = (e, nodeIds) => {
     setNodes(nodeIds);
   };
-
+  
   const ids = useSelector(state => state.sdsState.datasets);
   // TODO: to change this, I do not want to re-compute at every render the trees
   // probably to be moved to the redux store
-  var datasets = ids.map(item => {
-    return window.datasets[item].tree
+  let datasets = ids.map(item => {
+    let deepClone = JSON.parse(JSON.stringify(window.datasets[item].tree));
+    return deepClone;
   });
 
   const [items, setItems] = useState(datasets);
@@ -62,6 +63,17 @@ const InstancesTreeView = (props) => {
     );
   }, [searchTerm]);
 
+  // Initialize state in this hook
+  useEffect(() => {
+    // Populate tree items state with datasets
+    if ( items.length === 0 && datasets.length > 0 ) {
+      setItems(datasets);
+    } else if ( datasets.length > 0 && items.length !== datasets.length  ) {
+      // Update datasets, after adding a new dataset
+      setItems(datasets);
+    }
+  });
+
   const getTreeItemsFromData = (treeItems) => {
     return treeItems.map((treeItemData) => {
       let items = undefined;
@@ -92,7 +104,7 @@ const InstancesTreeView = (props) => {
 
   return (
     <>
-      {datasets.length === 0 ? (
+      {items.length === 0 ? (
         <Typography className='no-instance'>
           No instances to display yet.
         </Typography>
@@ -109,7 +121,7 @@ const InstancesTreeView = (props) => {
             expanded={nodes}
             onNodeToggle={onNodeToggle}
           >
-            {getTreeItemsFromData(datasets)}
+            { getTreeItemsFromData(items) }
           </TreeView>
         </>
       )}
