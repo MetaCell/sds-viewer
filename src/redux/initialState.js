@@ -4,7 +4,10 @@ export const sdsInitialState = {
     "sdsState": {
         datasets: [],
         error_message: null,
-        instance_selected: undefined
+        instance_selected: {
+            graph_node: null,
+            tree_node: null
+        }
     }
 };
 
@@ -15,7 +18,10 @@ export default function sdsClientReducer(state = {}, action) {
             if (action.data !== undefined) {
                 return {
                     ...state,
-                    instance_selected: action.data
+                    instance_selected: {
+                        graph_node: action.data.graph_node,
+                        tree_node: action.data.tree_node
+                    }
                 };
             }
             break;

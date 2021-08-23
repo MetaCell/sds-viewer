@@ -5,6 +5,8 @@ import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import LayersIcon from '@material-ui/icons/Layers';
 import GeppettoGraphVisualization from '@metacell/geppetto-meta-ui/graph-visualization/Graph';
+import { useDispatch } from 'react-redux';
+import { selectInstance } from '../../redux/actions';
 
 const NODE_FONT = '500 6px Inter, sans-serif';
 const ONE_SECOND = 1000;
@@ -34,12 +36,17 @@ const roundRect = (ctx, x, y, width, height, radius, color, alpha) => {
 };
 
 const GraphViewer = (props) => {
+  const dispatch = useDispatch();
   const graphRef = React.useRef(null);
 
   const handleNodeLeftClick = (node, event) => {
     console.log(event);
     console.log("Node selected");
     console.log(node);
+    dispatch(selectInstance({
+      graph_node: node,
+      tree_node: node.tree_reference
+    }))
   };
 
   /**

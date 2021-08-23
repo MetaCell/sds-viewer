@@ -14,6 +14,8 @@ const InstancesTreeView = (props) => {
   };
 
   const ids = useSelector(state => state.sdsState.datasets);
+  const nodeSelected = useSelector(state => state.sdsState.instance_selected.tree_node);
+
   // TODO: to change this, I do not want to re-compute at every render the trees
   // probably to be moved to the redux store
   var datasets = ids.map(item => {
@@ -22,6 +24,10 @@ const InstancesTreeView = (props) => {
 
   const [items, setItems] = useState(datasets);
   const [nodes, setNodes] = useState([]);
+
+  if (nodeSelected && nodeSelected.path[0] !== nodes[0]) {
+    setNodes(nodeSelected.path);
+  }
 
   const nestedLoop = (obj) => {
     const res = [];
