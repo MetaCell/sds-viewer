@@ -50,7 +50,7 @@ const UploadDialog = (props) => {
       dispatch(addDataset(_dataset));
       dispatch(addWidget({
         id: _dataset.id,
-        name: _dataset.id + " Graph",
+        name: _dataset.id.substring(0,10) + "... Graph",
         component: "graphComponent",
         panelName: "leftPanel",
         enableClose: true,

@@ -82,6 +82,22 @@ class Splinter {
             await this.processDataset();
         }
 
+        let self = this;
+        // Assign neighbors, to highlight links
+        this.forced_edges.forEach(link => {
+            const a = self.forced_nodes.find( node => node.id === link.source );
+            const b = self.forced_nodes.find( node => node.id === link.target );
+            !a.neighbors && (a.neighbors = []);
+            !b.neighbors && (b.neighbors = []);
+            a.neighbors.push(b);
+            b.neighbors.push(a);
+      
+            !a.links && (a.links = []);
+            !b.links && (b.links = []);
+            a.links.push(link);
+            b.links.push(link);
+          });
+
         return {
             nodes: this.forced_nodes,
             links: this.forced_edges
@@ -308,7 +324,7 @@ class Splinter {
             type: typesModel.NamedIndividual.subject.type,
             properties: [],
             proxies: [],
-            level: 5
+            level: 3
         };
         if (this.nodes.get(subject_key) === undefined) {
             this.nodes.set(subject_key, subjects);
@@ -381,7 +397,7 @@ class Splinter {
                 link.source = protocols_key;
                 target_node.level = protocols.level + 1;
                 this.nodes.set(target_node.id, target_node);
-            }
+            } 
             return link;
         }).filter(link => {
             let target_node = this.nodes.get(link.target);
@@ -451,13 +467,22 @@ class Splinter {
         }
     }
 
+    /**
+     * Eclude certain nodes
+     * @param {*} node 
+     * @returns 
+     */
+    filterNode = (node) => {
+        return node.basename.includes(".tmp")
+    }
+
 
     mergeData() {
         this.nodes.forEach((value, key) => {
             if (value.attributes !== undefined && value.attributes.hasFolderAboutIt !== undefined) {
                 const children = this.tree_parents_map.get(this.tree_map.get(value.attributes.hasFolderAboutIt).remote_id);
                 children.forEach(child => {
-                    this.linkToNode(child, value);
+                    !this.filterNode(child) && this.linkToNode(child, value);
                 });
             }
         });
@@ -474,7 +499,7 @@ class Splinter {
         var children = this.tree_parents_map.get(node.remote_id);
         if (children?.length > 0) {
             children.forEach(child => {
-                this.linkToNode(child, new_node);
+                !this.filterNode(child) && this.linkToNode(child, new_node);
             });
         }
     }
