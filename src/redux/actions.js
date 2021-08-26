@@ -15,7 +15,10 @@ export const deleteDataset = dataset_id => ({
 
 export const selectInstance = instance => ({
     type: SELECT_INSTANCE,
-    data: { instance: instance },
+    data: {
+        graph_node: instance.graph_node,
+        tree_node: instance.tree_node
+    },
 });
 
 export const triggerError = message => ({

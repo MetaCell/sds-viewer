@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { IconButton } from '@material-ui/core';
-import ZoomOutIcon from '@material-ui/icons/ZoomOut';
-import ZoomInIcon from '@material-ui/icons/ZoomIn';
-import RefreshIcon from '@material-ui/icons/Refresh';
-import FormatAlignCenterIcon from '@material-ui/icons/FormatAlignCenter';
-import LayersIcon from '@material-ui/icons/Layers';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import GeppettoGraphVisualization from '@metacell/geppetto-meta-ui/graph-visualization/Graph';
 import * as d3 from 'd3';
+import Menu from '@material-ui/core/Menu';
+import { IconButton } from '@material-ui/core';
+import MenuItem from '@material-ui/core/MenuItem';
+import React, { useState, useEffect } from 'react';
+import ZoomInIcon from '@material-ui/icons/ZoomIn';
+import LayersIcon from '@material-ui/icons/Layers';
+import ZoomOutIcon from '@material-ui/icons/ZoomOut';
+import RefreshIcon from '@material-ui/icons/Refresh';
+import { selectInstance } from '../../redux/actions';
+import { useSelector, useDispatch } from 'react-redux';
+import FormatAlignCenterIcon from '@material-ui/icons/FormatAlignCenter';
+import GeppettoGraphVisualization from '@metacell/geppetto-meta-ui/graph-visualization/Graph';
 
 const NODE_FONT = '500 6px Inter, sans-serif';
 const ONE_SECOND = 1000;
@@ -49,14 +51,18 @@ const roundRect = (ctx, x, y, width, height, radius, color, alpha) => {
 };
 
 const GraphViewer = (props) => {
+  const dispatch = useDispatch();
   const graphRef = React.useRef(null);
   const [hoverNode, setHoverNode] = useState(null);
+  const [selectedNode, setSelectedNode] = useState(null);
   const [highlightNodes, setHighlightNodes] = useState(new Set());
   const [highlightLinks, setHighlightLinks] = useState(new Set());
   const [selectedLayout, setSelectedLayout] = React.useState(RADIAL_OUT.layout);
   const [layoutAnchorEl, setLayoutAnchorEl] = React.useState(null);
   const [resize, setResize] = useState({ width : "100%" , height : "100%" });
   const open = Boolean(layoutAnchorEl);
+
+  const nodeSelected = useSelector(state => state.sdsState.instance_selected.graph_node);
 
   const handleLayoutClick = (event) => {
     setLayoutAnchorEl(event.currentTarget);
@@ -70,8 +76,12 @@ const GraphViewer = (props) => {
     handleLayoutClose()
     setSelectedLayout(target);
   };
-  
+
   const handleNodeLeftClick = (node, event) => {
+    dispatch(selectInstance({
+      graph_node: node,
+      tree_node: node.tree_reference
+    }));
   };
 
   const handleLinkColor = link => {
@@ -89,10 +99,15 @@ const GraphViewer = (props) => {
    * @param {*} event 
    */
   const handleNodeRightClick = (node, event) => {
-    graphRef.current.ggv.current.centerAt(node.x, node.y, ONE_SECOND);
-    graphRef.current.ggv.current.zoom(2, ONE_SECOND);
+    graphRef?.current?.ggv?.current.centerAt(node.x, node.y, ONE_SECOND);
+    graphRef?.current?.ggv?.current.zoom(2, ONE_SECOND);
   };
 
+
+  /**
+   * Zoom in
+   * @param {*} event 
+   */
   const zoomIn = (event) => {
     let zoom = graphRef.current.ggv.current.zoom();
     let value = ZOOM_DEFAULT;
@@ -102,6 +117,11 @@ const GraphViewer = (props) => {
     graphRef.current.ggv.current.zoom(zoom + value, ONE_SECOND / 10);
   };
 
+
+  /**
+   * Zoom out
+   * @param {*} event
+   */
   const zoomOut = (event) => {
     let zoom = graphRef.current.ggv.current.zoom();
     let value = ZOOM_DEFAULT;
@@ -111,9 +131,23 @@ const GraphViewer = (props) => {
     graphRef.current.ggv.current.zoom(zoom - value, ONE_SECOND / 10);
   };
 
+
+  /**
+   * Reset camera position
+   * @param {*} event
+   */
   const resetCamera = (event) => {
     graphRef.current.ggv.current.zoomToFit();
   };
+
+  // Check State updates triggered by Redux at a global level
+  if (nodeSelected && nodeSelected?.id !== selectedNode?.id) {
+    let node = graphRef.current.props.data.nodes.find( item => item.id === nodeSelected.id);
+    if (node) {
+      setSelectedNode(node);
+    handleNodeRightClick(node, null);
+    }
+  }
 
   useEffect(() => {
     document.addEventListener('nodeResized', (p) => { 
@@ -121,21 +155,15 @@ const GraphViewer = (props) => {
       let h = p.detail.rect.height;
       setResize({ width : w , height : h});
     }, false);
-    graphRef?.current?.ggv?.current?.d3Force('charge').strength(node => { 
-      let strength = -800;
-      if ( selectedLayout === TOP_DOWN.layout ){
-        if ( node.level === 4 ){
-          strength = -40;
-        }
-      }
-      return strength;
-    });
-    let radius = 20;
-    if ( selectedLayout === TOP_DOWN.layout ){
-      radius = 10;
-    }
-    graphRef?.current?.ggv?.current?.d3Force("collide", d3.forceCollide().radius(radius));
     
+    // graphRef?.current?.ggv?.current?.d3Force('center',d3.forceCenter(0, 0));
+    graphRef?.current?.ggv?.current?.d3Force('charge', null);
+    graphRef?.current?.ggv?.current?.d3Force('x', d3.forceX().x(d => d.x));
+    graphRef?.current?.ggv?.current?.d3Force('y', d3.forceY().y(d => d.y));
+    //graphRef?.current?.ggv?.current?.d3Force("collide", d3.forceCollide(1));
+    graphRef?.current?.ggv?.current?.d3Force("collide", d3.forceCollide().radius(15));
+    graphRef?.current?.ggv?.current?.d3Force("manyBody", d3.forceManyBody().strength(-400));
+    // graphRef?.current?.ggv?.current?.d3Force("link", d3.forceLink().id(d => d.id).distance(100));
     setTimeout(
       () => { 
         resetCamera();
@@ -181,7 +209,7 @@ const GraphViewer = (props) => {
       const hoverRectDimensions = [size * 3.2, size * 3.2];
       const hoverRectPosition = [node.x - 14, node.y - 14];
       const textHoverPosition = [
-        hoverRectPosition[0] - 2,
+        hoverRectPosition[0],
         hoverRectPosition[1] + hoverRectDimensions[1] + 2,
       ];
       const hoverRectBorderRadius = 2;
@@ -226,7 +254,6 @@ const GraphViewer = (props) => {
         ctx.fillStyle = GRAPH_COLORS.textColor;
       }
       ctx.fillText(...textProps);
-
     },
     [hoverNode]
   );
@@ -241,10 +268,10 @@ const GraphViewer = (props) => {
         d2={true}
         d3VelocityDecay={0.3}
         warmupTicks={1000}
-        cooldownTicks={1}
-        nodeVal={node => {
-          return 100/(node.level + 1); 
-        }}
+        cooldownTime={Infinity}
+        // nodeVal={node => {
+        //   return 100/(node.level + 1); 
+        // }}
         onEngineStop = {resetCamera}
         // Links properties
         linkColor = {handleLinkColor}
@@ -293,7 +320,7 @@ const GraphViewer = (props) => {
             </IconButton>
             <IconButton onClick={(e) => resetCamera()}>
               <RefreshIcon />
-             </IconButton>
+            </IconButton>
             <LayersIcon />
           </div>
         }
