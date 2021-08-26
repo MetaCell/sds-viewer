@@ -5,28 +5,61 @@ import DATASET from '../../../images/tree/dataset.svg';
 import FOLDER from '../../../images/tree/folder.svg';
 import FILE from '../../../images/tree/file.svg';
 import StyledTreeItem from './TreeViewItem';
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { selectInstance } from '../../../redux/actions';
 
 const InstancesTreeView = (props) => {
+  const dispatch = useDispatch();
+
   const { searchTerm } = props;
-  const onNodeToggle = (e, nodeIds) => {
-    setNodes(nodeIds);
-  };
-  
   const ids = useSelector(state => state.sdsState.datasets);
+  const datasets = useSelector(state => state.sdsState.all_tree);
   const nodeSelected = useSelector(state => state.sdsState.instance_selected.tree_node);
-
-  // TODO: to change this, I do not want to re-compute at every render the trees
-  // probably to be moved to the redux store
-  let datasets = ids.map(item => {
-    let deepClone = JSON.parse(JSON.stringify(window.datasets[item].tree));
-    return deepClone;
-  });
-
-  const [items, setItems] = useState(datasets);
   const [nodes, setNodes] = useState([]);
+  const [items, setItems] = useState(datasets);
 
-  if (nodeSelected && nodeSelected.path[0] !== nodes[0]) {
+  const onNodeSelect = (e, nodeId) => {
+    if (nodes.length === 0) {
+      setNodes([nodeId]);
+    }
+  };
+
+  const onNodeToggle = (e, nodeIds) => {
+    if (nodeIds.length === 0) {
+      return;
+    }
+    // The 2 ifs down are meant to fix the inconsistency with the tree view component
+    // When we navigate from the root deep into the tree we get the full path, when we navigate
+    // backwards we get only the nodes we should navigate back but the way the tree view is designed
+    // does not allow us to understand in which dataset we are unless we use this logic below.
+    const dataset_uri = nodeIds[0].split(":");
+    const dataset_switch = dataset_uri[dataset_uri.length - 1];
+    if (nodeIds.length > 1 && ids.includes(dataset_switch)) {
+      nodeIds = [nodeIds[0]];
+    }
+
+    if ((nodes.length !== nodeIds.length) && (nodes[0] === nodeIds[0])) {
+      var original = [...nodes];
+      var newPath = [...nodeIds];
+      while (original[0] === newPath[0]) {
+        original.shift();
+        newPath.shift();
+      }
+      nodeIds = original;
+    }
+
+    const split_uri = nodeIds[nodeIds.length - 1].split(":");
+    const dataset_id = split_uri[split_uri.length - 1];
+    const tree_map = window.datasets[dataset_id].splinter.tree_map;
+    const node = tree_map.get(nodeIds[0]);
+    dispatch(selectInstance({
+      graph_node: node.graph_reference !== undefined ? node.graph_reference : null,
+      tree_node: node
+    }));
+  };
+
+  // Updated from redux, if the path got changed then we re-render from here.
+  if (nodeSelected && nodeSelected.path !== null && nodeSelected.path[0] !== nodes[0]) {
     setNodes(nodeSelected.path);
   }
 
@@ -94,6 +127,7 @@ const InstancesTreeView = (props) => {
 
       return (
         <StyledTreeItem
+          dataset={treeItemData?.dataset_id}
           nodeId={treeItemData?.id}
           labelText={treeItemData?.text}
           labelIcon={labelProps?.labelIcon}
@@ -126,6 +160,7 @@ const InstancesTreeView = (props) => {
             ref={treeRef}
             expanded={nodes}
             onNodeToggle={onNodeToggle}
+            onNodeSelect={onNodeSelect}
           >
             { getTreeItemsFromData(items) }
           </TreeView>

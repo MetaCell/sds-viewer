@@ -8,7 +8,7 @@ import LayersIcon from '@material-ui/icons/Layers';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import GeppettoGraphVisualization from '@metacell/geppetto-meta-ui/graph-visualization/Graph';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { selectInstance } from '../../redux/actions';
 
 const NODE_FONT = '500 6px Inter, sans-serif';
@@ -52,11 +52,14 @@ const GraphViewer = (props) => {
   const dispatch = useDispatch();
   const graphRef = React.useRef(null);
   const [hoverNode, setHoverNode] = useState(null);
+  const [selectedNode, setSelectedNode] = useState(null);
   const [highlightNodes, setHighlightNodes] = useState(new Set());
   const [highlightLinks, setHighlightLinks] = useState(new Set());
   const [selectedLayout, setSelectedLayout] = React.useState(RADIAL_OUT.layout);
   const [layoutAnchorEl, setLayoutAnchorEl] = React.useState(null);
   const open = Boolean(layoutAnchorEl);
+
+  const nodeSelected = useSelector(state => state.sdsState.instance_selected.graph_node);
 
   const handleLayoutClick = (event) => {
     setLayoutAnchorEl(event.currentTarget);
@@ -70,15 +73,12 @@ const GraphViewer = (props) => {
     handleLayoutClose()
     setSelectedLayout(target);
   };
-  
+
   const handleNodeLeftClick = (node, event) => {
-    console.log(event);
-    console.log("Node selected");
-    console.log(node);
     dispatch(selectInstance({
       graph_node: node,
       tree_node: node.tree_reference
-    }))
+    }));
   };
 
   const handleLinkColor = link => {
@@ -96,10 +96,15 @@ const GraphViewer = (props) => {
    * @param {*} event 
    */
   const handleNodeRightClick = (node, event) => {
-    graphRef.current.ggv.current.centerAt(node.x, node.y, ONE_SECOND);
-    graphRef.current.ggv.current.zoom(2, ONE_SECOND);
+    graphRef?.current?.ggv?.current.centerAt(node.x, node.y, ONE_SECOND);
+    graphRef?.current?.ggv?.current.zoom(2, ONE_SECOND);
   };
 
+
+  /**
+   * Zoom in
+   * @param {*} event 
+   */
   const zoomIn = (event) => {
     let zoom = graphRef.current.ggv.current.zoom();
     let value = ZOOM_DEFAULT;
@@ -109,6 +114,11 @@ const GraphViewer = (props) => {
     graphRef.current.ggv.current.zoom(zoom + value, ONE_SECOND / 10);
   };
 
+
+  /**
+   * Zoom out
+   * @param {*} event
+   */
   const zoomOut = (event) => {
     let zoom = graphRef.current.ggv.current.zoom();
     let value = ZOOM_DEFAULT;
@@ -118,19 +128,37 @@ const GraphViewer = (props) => {
     graphRef.current.ggv.current.zoom(zoom - value, ONE_SECOND / 10);
   };
 
+
+  /**
+   * Reset camera position
+   * @param {*} event
+   */
   const resetCamera = (event) => {
     graphRef.current.ggv.current.zoomToFit();
   };
 
+
+  /**
+   * Stop graph rendering
+   */
   const engineStop = () => {
     graphRef?.current?.ggv?.current?.zoomToFit();
   }
 
+  // Check State updates triggered by Redux at a global level
+  if (nodeSelected && nodeSelected?.id !== selectedNode?.id) {
+    let node = graphRef.current.props.data.nodes.find( item => item.id === nodeSelected.id);
+    if (node) {
+      setSelectedNode(node);
+    handleNodeRightClick(node, null);
+    }
+  }
+
   useEffect(() => {
     setTimeout(
-      () => { 
+      () => {
         graphRef?.current?.ggv?.current?.d3Force('charge').strength(-10 * window.datasets[props.graph_id].graph.nodes.length);
-        graphRef?.current?.ggv?.current?.d3Force('link').distance(link => { 
+        graphRef?.current?.ggv?.current?.d3Force('link').distance(link => {
           let level = link?.target?.level;
 
           let distance = LINK_DISTANCE;
@@ -229,7 +257,6 @@ const GraphViewer = (props) => {
         ctx.fillStyle = GRAPH_COLORS.textColor;
       }
       ctx.fillText(...textProps);
-      
     },
     [hoverNode]
   );
@@ -294,7 +321,7 @@ const GraphViewer = (props) => {
             </IconButton>
             <IconButton onClick={(e) => resetCamera()}>
               <RefreshIcon />
-             </IconButton>
+            </IconButton>
             <LayersIcon />
           </div>
         }

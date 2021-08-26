@@ -3,6 +3,7 @@ import * as Actions from './actions';
 export const sdsInitialState = {
     "sdsState": {
         datasets: [],
+        all_tree: [],
         error_message: null,
         instance_selected: {
             graph_node: null,
@@ -35,9 +36,14 @@ export default function sdsClientReducer(state = {}, action) {
                     tree: action.data.dataset.tree,
                     splinter: action.data.dataset.splinter
                 };
+                const ids = [...state.datasets, action.data.dataset.id]
+                const _trees = ids.map(item => {
+                    return window.datasets[item].tree
+                });
                 return {
                     ...state,
-                    datasets: [...state.datasets, action.data.dataset.id]
+                    all_tree: _trees,
+                    datasets: ids
                 };
             } else {
                 return state;
@@ -45,11 +51,15 @@ export default function sdsClientReducer(state = {}, action) {
         case Actions.DELETE_DATASET:
             if (action.data !== undefined) {
                 delete window[action.data.id];
+                const ids = [...state.datasets.slice(0, index), ...state.datasets.slice(index + 1)]
                 const index = state.datasets.indexOf(action.data.id);
+                const _trees = ids.map(item => {
+                    return window.datasets[item].tree
+                });
                 return {
                     ...state,
-                    datasets: [...state.datasets.slice(0, index),
-                    ...state.datasets.slice(index + 1)]
+                    datasets: ids,
+                    all_tree: _trees,
                 };
             }
             break;

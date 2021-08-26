@@ -6,6 +6,7 @@ import DOWN from "../../../images/tree/down.svg";
 
 const StyledTreeItem = (props) => {
   const {
+    dataset,
     labelText,
     labelIcon: LabelIcon,
     labelInfo,
@@ -15,6 +16,7 @@ const StyledTreeItem = (props) => {
 
   return (
     <TreeItem
+      data={dataset}
       label={
         <div className={`labelRoot ${iconClass}`}>
           <Box className="labelIcon"></Box>
