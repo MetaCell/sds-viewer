@@ -2,6 +2,7 @@ import NodesFactory from './nodesFactory';
 import { rdfTypes, type_key, typesModel } from './graphModel';
 
 const N3 = require('n3');
+const TMP_FILE = ".tmp";
 
 class Splinter {
     constructor(jsonFile, turtleFile) {
@@ -468,12 +469,12 @@ class Splinter {
     }
 
     /**
-     * Eclude certain nodes
+     * Exclude certain nodes
      * @param {*} node 
      * @returns 
      */
     filterNode = (node) => {
-        return node.basename.includes(".tmp")
+        return node.basename.includes(TMP_FILE)
     }
 
 

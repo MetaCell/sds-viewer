@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { IconButton } from '@material-ui/core';
-import ZoomOutIcon from '@material-ui/icons/ZoomOut';
-import ZoomInIcon from '@material-ui/icons/ZoomIn';
-import RefreshIcon from '@material-ui/icons/Refresh';
-import FormatAlignCenterIcon from '@material-ui/icons/FormatAlignCenter';
-import LayersIcon from '@material-ui/icons/Layers';
+import * as d3 from 'd3';
 import Menu from '@material-ui/core/Menu';
+import { IconButton } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
-import GeppettoGraphVisualization from '@metacell/geppetto-meta-ui/graph-visualization/Graph';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import ZoomInIcon from '@material-ui/icons/ZoomIn';
+import LayersIcon from '@material-ui/icons/Layers';
+import ZoomOutIcon from '@material-ui/icons/ZoomOut';
+import RefreshIcon from '@material-ui/icons/Refresh';
 import { selectInstance } from '../../redux/actions';
+import { useSelector, useDispatch } from 'react-redux';
+import FormatAlignCenterIcon from '@material-ui/icons/FormatAlignCenter';
+import GeppettoGraphVisualization from '@metacell/geppetto-meta-ui/graph-visualization/Graph';
 
 const NODE_FONT = '500 6px Inter, sans-serif';
 const ONE_SECOND = 1000;
@@ -156,19 +157,19 @@ const GraphViewer = (props) => {
 
   useEffect(() => {
     setTimeout(
-      () => {
-        graphRef?.current?.ggv?.current?.d3Force('charge').strength(-10 * window.datasets[props.graph_id].graph.nodes.length);
-        graphRef?.current?.ggv?.current?.d3Force('link').distance(link => {
+      () => { 
+        graphRef?.current?.ggv?.current?.d3Force('charge').strength(-20 * window.datasets[props.graph_id].graph.nodes.length);
+        graphRef?.current?.ggv?.current?.d3Force("collide", d3.forceCollide(30));
+        graphRef?.current?.ggv?.current?.d3Force('link').distance(link => { 
           let level = link?.target?.level;
 
           let distance = LINK_DISTANCE;
-          if ( level ){
-            distance = 1;
+          if ( level > 1){
+            distance = 0;
           }
 
           return distance;
         });
-        engineStop();
       },
       ONE_SECOND
     );
@@ -272,12 +273,14 @@ const GraphViewer = (props) => {
         d3VelocityDecay={.1}
         warmupTicks={1000}
         cooldownTicks={1}
+        nodeVal={node => 
+         100 / (node.level + 1)
+        }
         onEngineStop={resetCamera}
         // Links properties
         linkColor = {handleLinkColor}
         linkWidth={2}
         onLinkHover={handleLinkHover}
-        click={() => graphRef?.current.ggv.current.zoomToFit()}
         linkCanvasObjectMode={'replace'}
         nodeRelSize={20}
         // Override drawing of canvas objects, draw an image as a node
