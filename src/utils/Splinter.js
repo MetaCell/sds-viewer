@@ -325,7 +325,7 @@ class Splinter {
             type: typesModel.NamedIndividual.subject.type,
             properties: [],
             proxies: [],
-            level: 3
+            level: 2
         };
         if (this.nodes.get(subject_key) === undefined) {
             this.nodes.set(subject_key, subjects);
@@ -491,7 +491,13 @@ class Splinter {
 
 
     linkToNode(node, parent) {
-        const new_node = this.buildNodeFromJson(node, parent.level);
+        let level = parent.level; 
+        if (parent.type === rdfTypes.Sample.key) {
+         if (parent.attributes.derivedFrom !== undefined) {
+            level = this.nodes.get(parent.attributes.derivedFrom).level + 1;
+         }
+        }
+        const new_node = this.buildNodeFromJson(node, level);
         this.forced_edges.push({
             source: parent.id,
             target: new_node.id

@@ -31,6 +31,7 @@ const RADIAL_OUT = {
   layout : "radialout"
 };
 const LINK_DISTANCE = 200;
+const NODE_REL_SIZE = 10;
 
 const roundRect = (ctx, x, y, width, height, radius, color, alpha) => {
   if (width < 2 * radius) radius = width / 2;
@@ -54,6 +55,7 @@ const GraphViewer = (props) => {
   const [highlightLinks, setHighlightLinks] = useState(new Set());
   const [selectedLayout, setSelectedLayout] = React.useState(RADIAL_OUT.layout);
   const [layoutAnchorEl, setLayoutAnchorEl] = React.useState(null);
+  const [resize, setResize] = useState({ width : "100%" , height : "100%" });
   const open = Boolean(layoutAnchorEl);
 
   const handleLayoutClick = (event) => {
@@ -114,32 +116,40 @@ const GraphViewer = (props) => {
   };
 
   useEffect(() => {
+    document.addEventListener('nodeResized', (p) => { 
+      let w = p.detail.rect.width;
+      let h = p.detail.rect.height;
+      setResize({ width : w , height : h});
+    }, false);
+    graphRef?.current?.ggv?.current?.d3Force('charge').strength(node => { 
+      let strength = -800;
+      if ( selectedLayout === TOP_DOWN.layout ){
+        if ( node.level === 4 ){
+          strength = -40;
+        }
+      }
+      return strength;
+    });
+    let radius = 20;
+    if ( selectedLayout === TOP_DOWN.layout ){
+      radius = 10;
+    }
+    graphRef?.current?.ggv?.current?.d3Force("collide", d3.forceCollide().radius(radius));
+    
     setTimeout(
       () => { 
-        graphRef?.current?.ggv?.current?.d3Force('charge').strength(-20 * window.datasets[props.graph_id].graph.nodes.length);
-        graphRef?.current?.ggv?.current?.d3Force("collide", d3.forceCollide(30));
-        graphRef?.current?.ggv?.current?.d3Force('link').distance(link => { 
-          let level = link?.target?.level;
-
-          let distance = LINK_DISTANCE;
-          if ( level > 1){
-            distance = 0;
-          }
-
-          return distance;
-        });
+        resetCamera();
       },
       ONE_SECOND
     );
   }, []);
-
   const handleNodeHover = (node) => {
     highlightNodes.clear();
     highlightLinks.clear();
     if (node) {
       highlightNodes.add(node);
-      node.neighbors.forEach(neighbor => highlightNodes.add(neighbor));
-      node.links.forEach(link => highlightLinks.add(link));
+      node.neighbors?.forEach(neighbor => highlightNodes.add(neighbor));
+      node.links?.forEach(link => highlightLinks.add(link));
     }
 
     setHoverNode(node);
@@ -216,7 +226,7 @@ const GraphViewer = (props) => {
         ctx.fillStyle = GRAPH_COLORS.textColor;
       }
       ctx.fillText(...textProps);
-      
+
     },
     [hoverNode]
   );
@@ -229,19 +239,19 @@ const GraphViewer = (props) => {
         data={window.datasets[props.graph_id].graph}
         // Create the Graph as 2 Dimensional
         d2={true}
-        d3VelocityDecay={.1}
+        d3VelocityDecay={0.3}
         warmupTicks={1000}
         cooldownTicks={1}
-        nodeVal={node => 
-         100 / (node.level + 1)
-        }
-        onEngineStop={resetCamera}
+        nodeVal={node => {
+          return 100/(node.level + 1); 
+        }}
+        onEngineStop = {resetCamera}
         // Links properties
         linkColor = {handleLinkColor}
         linkWidth={2}
         onLinkHover={handleLinkHover}
         linkCanvasObjectMode={'replace'}
-        nodeRelSize={20}
+        nodeRelSize={NODE_REL_SIZE}
         // Override drawing of canvas objects, draw an image as a node
         nodeCanvasObject={paintNode}
         nodeCanvasObjectMode={node => 'replace'}

@@ -28,6 +28,17 @@ const MainLayout = () => {
         // TODO: find better way to retrieve the LayoutManager component!
         if (LayoutManager === undefined) {
             const myManager = getLayoutManagerInstance();
+
+            myManager.model.visitNodes((node, level) => {
+                node.setEventListener("resize", (node) => {
+                    const event = new CustomEvent('nodeResized', {
+                        detail: node
+                      });
+                    document.dispatchEvent(event);
+
+                });
+            });
+
             if (myManager) {
                 setComponent(myManager.getComponent());
             }
