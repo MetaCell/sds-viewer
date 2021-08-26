@@ -534,6 +534,23 @@ class Splinter {
 
 
     generateData() {
+        // generate the tree
+        var tree_root = this.tree_map.get(this.root_id);
+        var children = this.tree_parents_map.get(tree_root.remote_id);
+        this.tree_parents_map.delete(tree_root.remote_id);
+        this.tree = tree_root;
+        this.tree.id = this.tree.uri_api
+        this.tree.text = this.dataset_id + ' Dataset';
+        this.tree.parent = true;
+        this.tree.items = [];
+        this.tree.path = [ this.tree.id ];
+        this.graph_reference = null;
+        this.tree_map.set(this.tree.uri_api, this.tree);
+
+        children.forEach(leaf => {
+            this.build_leaf(leaf, this.tree);
+        });
+
         // generate the Graph
         this.forced_nodes = Array.from(this.nodes).map(([key, value]) => {
             let tree_node = this.tree_map.get(value.id);
@@ -557,36 +574,23 @@ class Splinter {
         })
 
         this.fix_links();
-
-        var tree_root = this.tree_map.get(this.root_id);
-        var children = this.tree_parents_map.get(tree_root.remote_id);
-        this.tree_parents_map.delete(tree_root.remote_id);
-        this.tree = {
-            id: this.dataset_id,
-            text: this.dataset_id + ' Dataset',
-            parent: true,
-            items: [
-            ]
-        }
-
-        children.forEach(leaf => {
-            this.build_leaf(leaf, this.tree.items);
-        });
     }
 
-    build_leaf(node, tree) {
-        node.id = node.remote_id;
+    build_leaf(node, parent) {
+        node.id = node.uri_api
         node.text = node.basename;
+        node.path = [ node.id, ...parent.path ];
         node.graph_reference = null;
+        this.tree_map.set(node.uri_api, node);
         if (node.items === undefined) {
             node.items = [];
         }
-        tree.push(node);
+        parent.items.push(node);
 
         var children = this.tree_parents_map.get(node.remote_id);
         if (children) {
             children.forEach(child => {
-                this.build_leaf(child, node.items);
+                this.build_leaf(child, node);
             });
         }
 
