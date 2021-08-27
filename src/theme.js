@@ -827,7 +827,6 @@ const theme = createTheme({
         },
         '.content': {
           backgroundColor: primaryBgColor,
-          borderRadius: radius * 2,
           flexGrow: 1,
           borderRight: `.0625rem solid ${tabsBorderColor}`,
           padding: '1rem',

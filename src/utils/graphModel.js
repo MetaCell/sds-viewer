@@ -1,88 +1,88 @@
 export const type_key = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type";
-
+export const label_key = "http://www.w3.org/2000/01/rdf-schema#label";
 
 export const rdfTypes = {
     "Ontology": {
-        "image": "./images/dataset.svg",
+        "image": "./images/graph/database.svg",
         "key": "Ontology",
-        "properties": [{
-            "key": "",
-            "property": "",
-            "label": ""
-        }]
+        "properties": []
     },
     "Award": {
-        "image": "./images/dataset.svg",
+        "image": "./images/graph/files/default_file.svg",
         "key": "Award",
-        "properties": [{
-            "key": "",
-            "property": "",
-            "label": ""
-        }]
+        "properties": []
     },
     "Collection": {
-        "image": "./images/dataset.svg",
+        "image": "./images/graph/folder.svg",
         "key": "Collection",
-        "properties": [{
-            "key": "",
-            "property": "",
-            "label": ""
-        }]
+        "properties": []
     },
     "Dataset": {
-        "image": "./images/graph/database.svg",
+        "image": "./images/graph/dataset.svg",
         "key": "Dataset",
-        "properties": [{
-            "key": "",
-            "property": "",
-            "label": ""
-        }]
+        "properties": []
+    },
+    "File": {
+        "image": "./images/graph/files/default_file.svg",
+        "key": "File",
+        "properties": []
     },
     "Subject": {
         "image": "./images/graph/folder.svg",
         "key": "Subject",
-        "properties": [{
-            "key": "",
-            "property": "",
-            "label": ""
-        }]
+        "properties": [
+            {
+                "type": "TEMP",
+                "key": "hasFolderAboutIt",
+                "property": "hasFolderAboutIt",
+                "label": "Folder that contains collection and files about the subject"
+            },
+            {
+                "type": "TEMP",
+                "key": "localId",
+                "property": "identifier",
+                "label": "Unique instance identifier"
+            },
+    ]
     },
     "Sample": {
-        "image": "./images/dataset.svg",
+        "image": "./images/graph/sample.svg",
         "key": "Sample",
-        "properties": [{
-            "type": "TEMP",
-            "key": "wasDerivedFromSubject",
-            "property": "DerivedFrom",
-            "label": "Derived from the subject"
-        }]
+        "properties": [
+            {
+                "type": "TEMP",
+                "key": "hasFolderAboutIt",
+                "property": "hasFolderAboutIt",
+                "label": "Folder that contains collection and files about the sample"
+            },
+            {
+                "type": "TEMP",
+                "key": "wasDerivedFromSubject",
+                "property": "derivedFrom",
+                "label": "Derived from the subject"
+            },
+            {
+                "type": "TEMP",
+                "key": "localId",
+                "property": "identifier",
+                "label": "Unique instance identifier"
+            }
+        ]
     },
     "Person": {
-        "image": "./images/dataset.svg",
+        "image": "./images/graph/user.svg",
         "key": "Person",
-        "properties": [{
-            "key": "",
-            "property": "",
-            "label": ""
-        }]
+        "properties": []
     },
     "Protocol": {
-        "image": "./images/dataset.svg",
+        "image": "./images/graph/files/default_file.svg",
         "key": "Protocol",
-        "properties": [{
-            "key": "",
-            "property": "",
-            "label": ""
-        }]
+        "properties": []
     },
     "Unknown": {
-        "image": "./images/dataset.svg",
+        "image": "./images/graph/files/default_file.svg",
         "key": "Unknown",
-        "properties": [{
-            "key": "",
-            "property": "",
-            "label": ""
-        }]
+        "properties": []
     }
 };
 
