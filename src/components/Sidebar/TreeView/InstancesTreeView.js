@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import TreeView from '@material-ui/lab/TreeView';
-import Typography from '@material-ui/core/Typography';
 import DATASET from '../../../images/tree/dataset.svg';
 import FOLDER from '../../../images/tree/folder.svg';
 import FILE from '../../../images/tree/file.svg';
@@ -11,9 +10,9 @@ import { selectInstance } from '../../../redux/actions';
 const InstancesTreeView = (props) => {
   const dispatch = useDispatch();
 
-  const { searchTerm } = props;
+  const { searchTerm, dataset_id } = props;
+  const datasets = [window.datasets[dataset_id].tree];
   const ids = useSelector(state => state.sdsState.datasets);
-  const datasets = useSelector(state => state.sdsState.all_tree);
   const nodeSelected = useSelector(state => state.sdsState.instance_selected.tree_node);
   const [nodes, setNodes] = useState([]);
   const [items, setItems] = useState(datasets);
@@ -98,7 +97,7 @@ const InstancesTreeView = (props) => {
 
   useEffect(() => {
     setItems(
-      searchTerm.length >= 3 ? searchTree(datasets, searchTerm) : datasets
+      searchTerm.length >= 3 ? searchTree(searchTerm) : datasets
     );
   }, [searchTerm]);
 
@@ -144,28 +143,19 @@ const InstancesTreeView = (props) => {
 
   return (
     <>
-      {items.length === 0 ? (
-        <Typography className='no-instance'>
-          No instances to display yet.
-        </Typography>
-      ) : (
-        <>
-          <Typography component='h3'>Uploaded Instances</Typography>
-          <TreeView
-            className='scrollbar'
-            defaultExpanded={nodes}
-            defaultCollapseIcon={false}
-            defaultExpandIcon={false}
-            defaultEndIcon={false}
-            ref={treeRef}
-            expanded={nodes}
-            onNodeToggle={onNodeToggle}
-            onNodeSelect={onNodeSelect}
-          >
-            { getTreeItemsFromData(items) }
-          </TreeView>
-        </>
-      )}
+      <TreeView
+        className='scrollbar'
+        defaultExpanded={nodes}
+        defaultCollapseIcon={false}
+        defaultExpandIcon={false}
+        defaultEndIcon={false}
+        ref={treeRef}
+        expanded={nodes}
+        onNodeToggle={onNodeToggle}
+        onNodeSelect={onNodeSelect}
+      >
+        { getTreeItemsFromData(items) }
+      </TreeView>
     </>
   );
 };

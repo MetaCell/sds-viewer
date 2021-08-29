@@ -23,6 +23,8 @@ class Splinter {
         this.turtleData = [];
         this.dataset_id = this.processDatasetId();
         this.store = new N3.Store();
+        this.searchArray = [];
+        this.searchId = [];
     }
 
 
@@ -544,6 +546,7 @@ class Splinter {
         this.tree.parent = true;
         this.tree.items = [];
         this.tree.path = [ this.tree.id ];
+        this.addToSearch(this.tree);
         this.graph_reference = null;
         this.tree_map.set(this.tree.uri_api, this.tree);
 
@@ -582,6 +585,7 @@ class Splinter {
         node.path = [ node.id, ...parent.path ];
         node.graph_reference = null;
         this.tree_map.set(node.uri_api, node);
+        this.addToSearch(node);
         if (node.items === undefined) {
             node.items = [];
         }
@@ -593,7 +597,11 @@ class Splinter {
                 this.build_leaf(child, node);
             });
         }
+    }
 
+    addToSearch(node) {
+        this.searchArray.push(node.text);
+        this.searchId.push(node.id);
     }
 }
 
