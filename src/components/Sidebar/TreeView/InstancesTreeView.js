@@ -11,7 +11,7 @@ const InstancesTreeView = (props) => {
   const dispatch = useDispatch();
 
   const { searchTerm, dataset_id } = props;
-  const datasets = [window.datasets[dataset_id].tree];
+  const datasets = JSON.parse(JSON.stringify([window.datasets[dataset_id].tree]));
   const ids = useSelector(state => state.sdsState.datasets);
   const nodeSelected = useSelector(state => state.sdsState.instance_selected.tree_node);
   const [nodes, setNodes] = useState([]);
@@ -27,28 +27,6 @@ const InstancesTreeView = (props) => {
     if (nodeIds.length === 0) {
       return;
     }
-    // The 2 ifs down are meant to fix the inconsistency with the tree view component
-    // When we navigate from the root deep into the tree we get the full path, when we navigate
-    // backwards we get only the nodes we should navigate back but the way the tree view is designed
-    // does not allow us to understand in which dataset we are unless we use this logic below.
-    const dataset_uri = nodeIds[0].split(":");
-    const dataset_switch = dataset_uri[dataset_uri.length - 1];
-    if (nodeIds.length > 1 && ids.includes(dataset_switch)) {
-      nodeIds = [nodeIds[0]];
-    }
-
-    if ((nodes.length !== nodeIds.length) && (nodes[0] === nodeIds[0])) {
-      var original = [...nodes];
-      var newPath = [...nodeIds];
-      while (original[0] === newPath[0]) {
-        original.shift();
-        newPath.shift();
-      }
-      nodeIds = original;
-    }
-
-    const split_uri = nodeIds[nodeIds.length - 1].split(":");
-    const dataset_id = split_uri[split_uri.length - 1];
     const tree_map = window.datasets[dataset_id].splinter.tree_map;
     const node = tree_map.get(nodeIds[0]);
     dispatch(selectInstance({
@@ -58,7 +36,7 @@ const InstancesTreeView = (props) => {
   };
 
   // Updated from redux, if the path got changed then we re-render from here.
-  if (nodeSelected && nodeSelected.path !== null && nodeSelected.path[0] !== nodes[0]) {
+  if (nodeSelected && nodeSelected.path !== undefined && nodeSelected.path[0] !== nodes[0]) {
     setNodes(nodeSelected.path);
   }
 
@@ -97,7 +75,7 @@ const InstancesTreeView = (props) => {
 
   useEffect(() => {
     setItems(
-      searchTerm.length >= 3 ? searchTree(searchTerm) : datasets
+      searchTerm.length >= 3 ? searchTree([...datasets], searchTerm) : datasets
     );
   }, [searchTerm]);
 

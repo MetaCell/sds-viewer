@@ -32,8 +32,8 @@ class Splinter {
         this.edges = [];
         this.nodes = new Map();
         this.tree_map = new Map();
-        this.tree_parents_map = new Map();
         this.proxies_map = new Map();
+        this.tree_parents_map = new Map();
     }
 
 
@@ -540,8 +540,8 @@ class Splinter {
         var tree_root = this.tree_map.get(this.root_id);
         var children = this.tree_parents_map.get(tree_root.remote_id);
         this.tree_parents_map.delete(tree_root.remote_id);
-        this.tree = tree_root;
-        this.tree.id = this.tree.uri_api
+        this.tree = {};
+        this.tree.id = tree_root.uri_api
         this.tree.text = this.dataset_id + ' Dataset';
         this.tree.parent = true;
         this.tree.items = [];
@@ -580,21 +580,24 @@ class Splinter {
     }
 
     build_leaf(node, parent) {
+        var newChild = {}
         node.id = node.uri_api
         node.text = node.basename;
         node.path = [ node.id, ...parent.path ];
-        node.graph_reference = null;
+        newChild.id = node.uri_api
+        newChild.text = node.basename;
+        newChild.path = [ newChild.id, ...parent.path ];
         this.tree_map.set(node.uri_api, node);
         this.addToSearch(node);
-        if (node.items === undefined) {
-            node.items = [];
+        if (newChild.items === undefined) {
+            newChild.items = [];
         }
-        parent.items.push(node);
+        parent.items.push(newChild);
 
         var children = this.tree_parents_map.get(node.remote_id);
         if (children) {
             children.forEach(child => {
-                this.build_leaf(child, node);
+                this.build_leaf(child, newChild);
             });
         }
     }
