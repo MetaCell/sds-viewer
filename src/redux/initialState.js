@@ -17,11 +17,14 @@ export default function sdsClientReducer(state = {}, action) {
     switch (action.type) {
         case Actions.SELECT_INSTANCE:
             if (action.data !== undefined) {
+                const splinter = window.datasets[action.data.dataset_id].splinter;
+                const graph_node = splinter.nodes.get(action.data.graph_node);
+                const tree_node = splinter.tree_map.get(action.data.tree_node);
                 return {
                     ...state,
                     instance_selected: {
-                        graph_node: action.data.graph_node,
-                        tree_node: action.data.tree_node
+                        graph_node: graph_node,
+                        tree_node: tree_node
                     }
                 };
             }

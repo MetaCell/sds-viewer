@@ -327,7 +327,8 @@ class Splinter {
             type: typesModel.NamedIndividual.subject.type,
             properties: [],
             proxies: [],
-            level: 3
+            level: 3,
+            tree_reference: null
         };
         if (this.nodes.get(subject_key) === undefined) {
             this.nodes.set(subject_key, subjects);
@@ -345,7 +346,8 @@ class Splinter {
             type: typesModel.sparc.Protocol.type,
             properties: [],
             proxies: [],
-            level: 2
+            level: 2,
+            tree_reference: null
         };
         if (this.nodes.get(protocols_key) ===  undefined) {
             this.nodes.set(protocols_key, protocols);
@@ -363,7 +365,8 @@ class Splinter {
             type: typesModel.NamedIndividual.contributor.type,
             properties: [],
             proxies: [],
-            level: 2
+            level: 2,
+            tree_reference: null
         };
         if (this.nodes.get(contributors_key) === undefined) {
             this.nodes.set(contributors_key, contributors);
@@ -540,16 +543,7 @@ class Splinter {
         var tree_root = this.tree_map.get(this.root_id);
         var children = this.tree_parents_map.get(tree_root.remote_id);
         this.tree_parents_map.delete(tree_root.remote_id);
-        this.tree = {};
-        this.tree.id = tree_root.uri_api
-        this.tree.text = this.dataset_id + ' Dataset';
-        this.tree.parent = true;
-        this.tree.items = [];
-        this.tree.path = [ this.tree.id ];
-        this.addToSearch(this.tree);
-        this.graph_reference = null;
-        this.tree_map.set(this.tree.uri_api, this.tree);
-
+        this.tree = this.generateLeaf(tree_root);
         children.forEach(leaf => {
             this.build_leaf(leaf, this.tree);
         });
@@ -559,6 +553,7 @@ class Splinter {
             let tree_node = this.tree_map.get(value.id);
             if (tree_node) {
                 value.tree_reference = tree_node;
+                this.nodes.set(key, value);
                 tree_node.graph_reference = value;
                 this.tree_map.set(value.id, tree_node);
             } else {
@@ -566,6 +561,7 @@ class Splinter {
                     tree_node = this.tree_map.get(proxy);
                     if (tree_node) {
                         value.tree_reference = tree_node;
+                        this.nodes.set(key, value);
                         tree_node.graph_reference = value;
                         this.tree_map.set(proxy, tree_node);
                         return false;
@@ -580,21 +576,11 @@ class Splinter {
     }
 
     build_leaf(node, parent) {
-        var newChild = {}
-        node.id = node.uri_api
-        node.text = node.basename;
-        node.path = [ node.id, ...parent.path ];
-        newChild.id = node.uri_api
-        newChild.text = node.basename;
-        newChild.path = [ newChild.id, ...parent.path ];
-        this.tree_map.set(node.uri_api, node);
-        this.addToSearch(node);
-        if (newChild.items === undefined) {
-            newChild.items = [];
-        }
+        var newChild = this.generateLeaf(node, parent);
         parent.items.push(newChild);
 
         var children = this.tree_parents_map.get(node.remote_id);
+        this.tree_parents_map.delete(node.remote_id);
         if (children) {
             children.forEach(child => {
                 this.build_leaf(child, newChild);
@@ -602,9 +588,24 @@ class Splinter {
         }
     }
 
-    addToSearch(node) {
-        this.searchArray.push(node.text);
-        this.searchId.push(node.id);
+    generateLeaf(node, parent) {
+        node.id = node.uri_api
+        node.parent = true;
+        node.text = parent !== undefined ? node.basename : this.dataset_id;
+        node.path = (parent !== undefined && parent.path !== undefined) ? [node.id, ...parent.path] : [node.id];
+        if (!node.items) {
+            node.items = [];
+        }
+        node.graph_reference = node.uri_api;
+        this.tree_map.set(node.id, node);
+        const newNode = {
+            id: node.uri_api,
+            text: node.text,
+            items: node.items,
+            graph_reference: node.graph_reference,
+            path: node.path
+        }
+        return newNode;
     }
 }
 

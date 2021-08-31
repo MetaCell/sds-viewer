@@ -27,11 +27,23 @@ const InstancesTreeView = (props) => {
     if (nodeIds.length === 0) {
       return;
     }
+
+    if ((nodes.length !== nodeIds.length) && (nodes[0] === nodeIds[0])) {
+      var original = [...nodes];
+      var newPath = [...nodeIds];
+      while (original[0] === newPath[0]) {
+        original.shift();
+        newPath.shift();
+      }
+      nodeIds = original;
+    }
+
     const tree_map = window.datasets[dataset_id].splinter.tree_map;
     const node = tree_map.get(nodeIds[0]);
     dispatch(selectInstance({
-      graph_node: node.graph_reference !== undefined ? node.graph_reference : null,
-      tree_node: node
+      dataset_id: dataset_id,
+      graph_node: node.graph_reference.id,
+      tree_node: node.id
     }));
   };
 
@@ -50,6 +62,8 @@ const InstancesTreeView = (props) => {
             recurse(value, key);
           } else if (key === 'id') {
             res.push(value);
+          } else if (key === 'path') {
+            continue;
           }
         }
       }

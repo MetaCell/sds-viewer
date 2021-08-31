@@ -16,6 +16,7 @@ export const deleteDataset = dataset_id => ({
 export const selectInstance = instance => ({
     type: SELECT_INSTANCE,
     data: {
+        dataset_id: instance.dataset_id,
         graph_node: instance.graph_node,
         tree_node: instance.tree_node
     },

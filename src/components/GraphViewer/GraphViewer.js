@@ -77,8 +77,9 @@ const GraphViewer = (props) => {
 
   const handleNodeLeftClick = (node, event) => {
     dispatch(selectInstance({
-      graph_node: node,
-      tree_node: node.tree_reference
+      dataset_id: props.graph_id,
+      graph_node: node.id,
+      tree_node: node?.tree_reference?.id
     }));
   };
 
