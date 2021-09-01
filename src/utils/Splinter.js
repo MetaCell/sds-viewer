@@ -592,6 +592,7 @@ class Splinter {
         node.id = node.uri_api
         node.parent = true;
         node.text = parent !== undefined ? node.basename : this.dataset_id;
+        node.type = node.mimetype === "inode/directory" ? rdfTypes.Collection.key : rdfTypes.File.key;
         node.path = (parent !== undefined && parent.path !== undefined) ? [node.id, ...parent.path] : [node.id];
         if (!node.items) {
             node.items = [];

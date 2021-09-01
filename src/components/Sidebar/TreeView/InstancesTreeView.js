@@ -18,8 +18,13 @@ const InstancesTreeView = (props) => {
   const [items, setItems] = useState(datasets);
 
   const onNodeSelect = (e, nodeId) => {
-    if (nodes.length === 0) {
-      setNodes([nodeId]);
+    if (nodes.length === 0 || nodes[0] !== nodeId) {
+      const node = window.datasets[dataset_id].splinter.tree_map.get(nodeId);
+      dispatch(selectInstance({
+        dataset_id: dataset_id,
+        graph_node: node.graph_reference.id,
+        tree_node: node.id
+      }));
     }
   };
 
@@ -38,8 +43,7 @@ const InstancesTreeView = (props) => {
       nodeIds = original;
     }
 
-    const tree_map = window.datasets[dataset_id].splinter.tree_map;
-    const node = tree_map.get(nodeIds[0]);
+    const node = window.datasets[dataset_id].splinter.tree_map.get(nodeIds[0]);
     dispatch(selectInstance({
       dataset_id: dataset_id,
       graph_node: node.graph_reference.id,
