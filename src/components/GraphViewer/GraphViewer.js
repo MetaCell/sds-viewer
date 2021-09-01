@@ -26,13 +26,14 @@ const GRAPH_COLORS = {
 };
 const TOP_DOWN = {
   label : "Top Down",
-  layout : "td"
+  layout : "td",
+  linkDistance : 100
 };
 const RADIAL_OUT = {
   label : "Radial",
-  layout : "radialout"
+  layout : "radialout",
+  linkDistance : 50
 };
-const LINK_DISTANCE = 300;
 
 const roundRect = (ctx, x, y, width, height, radius, color, alpha) => {
   if (width < 2 * radius) radius = width / 2;
@@ -56,7 +57,7 @@ const GraphViewer = (props) => {
   const [selectedNode, setSelectedNode] = useState(null);
   const [highlightNodes, setHighlightNodes] = useState(new Set());
   const [highlightLinks, setHighlightLinks] = useState(new Set());
-  const [selectedLayout, setSelectedLayout] = React.useState(RADIAL_OUT.layout);
+  const [selectedLayout, setSelectedLayout] = React.useState(RADIAL_OUT);
   const [layoutAnchorEl, setLayoutAnchorEl] = React.useState(null);
   const [resize, setResize] = useState({ width : "100%" , height : "100%" });
   const open = Boolean(layoutAnchorEl);
@@ -145,7 +146,7 @@ const GraphViewer = (props) => {
     let node = graphRef?.current?.props?.data?.nodes.find( item => item.id === nodeSelected.id);
     if (node) {
       setSelectedNode(node);
-    handleNodeRightClick(node, null);
+      handleNodeRightClick(node, null);
     }
   }
 
@@ -155,18 +156,9 @@ const GraphViewer = (props) => {
       let h = p.detail.rect.height;
       setResize({ width : w , height : h});
     }, false);
-    
-    graphRef?.current?.ggv?.current?.d3Force('x', d3.forceX().x(d => d.x));
-    graphRef?.current?.ggv?.current?.d3Force('y', d3.forceY().y(d => d.y));
-    graphRef?.current?.ggv?.current?.d3Force("manyBody", d3.forceManyBody().strength(-400));
-
-    setTimeout(
-      () => { 
-        resetCamera();
-      },
-      ONE_SECOND
-    );
   }, []);
+
+
   const handleNodeHover = (node) => {
     highlightNodes.clear();
     highlightLinks.clear();
@@ -262,30 +254,30 @@ const GraphViewer = (props) => {
         data={window.datasets[props.graph_id].graph}
         // Create the Graph as 2 Dimensional
         d2={true}
-        d3VelocityDecay={0.3}
         warmupTicks={1000}
-        cooldownTime={Infinity}
-        onEngineStop = {resetCamera}
+        cooldownTicks={10}
+        onEngineStop={resetCamera}
         // Links properties
         linkColor = {handleLinkColor}
         linkWidth={2}
-        forceRadial={20}
         forceLinkStrength={2.75}
-        forceLinkDistance={LINK_DISTANCE}
+        forceLinkDistance={ selectedLayout.linkDistance }
         forceChargeStrength={-10000}
-        collideSize={30}
+        linkDirectionalParticles={1}
+        linkDirectionalParticleWidth={link => highlightLinks.has(link) ? 4 : 0}
         linkCanvasObjectMode={'replace'}
         onLinkHover={handleLinkHover}
         // Override drawing of canvas objects, draw an image as a node
         nodeCanvasObject={paintNode}
         nodeCanvasObjectMode={node => 'replace'}
+        nodeVal={1}
         onNodeHover={handleNodeHover}
         // Allows updating link properties, as color and curvature. Without this, linkCurvature doesn't work.
         onNodeClick={(node, event) => handleNodeLeftClick(node, event)}
         onNodeRightClick={(node, event) => handleNodeRightClick(node, event)}
         // td = Top Down, creates Graph with root at top
-        dagMode={selectedLayout}
-        dagLevelDistance={LINK_DISTANCE}
+        dagMode={selectedLayout.layout}
+        dagLevelDistance={selectedLayout.linkDistance}
         // Handles error on graph
         onDagError={(loopNodeIds) => {}}
         // Disable dragging of nodes
@@ -306,8 +298,8 @@ const GraphViewer = (props) => {
               open={open}
               onClose={handleLayoutClose}
             >
-              <MenuItem selected={RADIAL_OUT.layout === selectedLayout} onClick={() => handleLayoutChange(RADIAL_OUT.layout)}>{RADIAL_OUT.label}</MenuItem>
-              <MenuItem selected={TOP_DOWN.layout === selectedLayout} onClick={() => handleLayoutChange(TOP_DOWN.layout)}>{TOP_DOWN.label}</MenuItem>
+              <MenuItem selected={RADIAL_OUT.layout === selectedLayout.layout} onClick={() => handleLayoutChange(RADIAL_OUT)}>{RADIAL_OUT.label}</MenuItem>
+              <MenuItem selected={TOP_DOWN.layout === selectedLayout.layout} onClick={() => handleLayoutChange(TOP_DOWN)}>{TOP_DOWN.label}</MenuItem>
             </Menu>
             <IconButton onClick={(e) => zoomIn()}>
               <ZoomInIcon />
