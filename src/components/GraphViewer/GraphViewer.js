@@ -32,8 +32,7 @@ const RADIAL_OUT = {
   label : "Radial",
   layout : "radialout"
 };
-const LINK_DISTANCE = 200;
-const NODE_REL_SIZE = 10;
+const LINK_DISTANCE = 300;
 
 const roundRect = (ctx, x, y, width, height, radius, color, alpha) => {
   if (width < 2 * radius) radius = width / 2;
@@ -156,14 +155,10 @@ const GraphViewer = (props) => {
       setResize({ width : w , height : h});
     }, false);
     
-    // graphRef?.current?.ggv?.current?.d3Force('center',d3.forceCenter(0, 0));
-    graphRef?.current?.ggv?.current?.d3Force('charge', null);
     graphRef?.current?.ggv?.current?.d3Force('x', d3.forceX().x(d => d.x));
     graphRef?.current?.ggv?.current?.d3Force('y', d3.forceY().y(d => d.y));
-    //graphRef?.current?.ggv?.current?.d3Force("collide", d3.forceCollide(1));
-    graphRef?.current?.ggv?.current?.d3Force("collide", d3.forceCollide().radius(15));
     graphRef?.current?.ggv?.current?.d3Force("manyBody", d3.forceManyBody().strength(-400));
-    // graphRef?.current?.ggv?.current?.d3Force("link", d3.forceLink().id(d => d.id).distance(100));
+
     setTimeout(
       () => { 
         resetCamera();
@@ -269,16 +264,18 @@ const GraphViewer = (props) => {
         d3VelocityDecay={0.3}
         warmupTicks={1000}
         cooldownTime={Infinity}
-        // nodeVal={node => {
-        //   return 100/(node.level + 1); 
-        // }}
         onEngineStop = {resetCamera}
         // Links properties
         linkColor = {handleLinkColor}
         linkWidth={2}
-        onLinkHover={handleLinkHover}
+        forceRadial={10}
+        forceLinkStrength={2.75}
+        forceLinkDistance={LINK_DISTANCE}
+        forceChargeStrength={-5000}
+        collideSize={10}
+        linkDirectionalParticles={2}
         linkCanvasObjectMode={'replace'}
-        nodeRelSize={NODE_REL_SIZE}
+        onLinkHover={handleLinkHover}
         // Override drawing of canvas objects, draw an image as a node
         nodeCanvasObject={paintNode}
         nodeCanvasObjectMode={node => 'replace'}

@@ -23,6 +23,8 @@ class Splinter {
         this.turtleData = [];
         this.dataset_id = this.processDatasetId();
         this.store = new N3.Store();
+        this.levelsMap = {};
+        this.maxLevel = 0;
     }
 
 
@@ -107,9 +109,11 @@ class Splinter {
                 cleanLinks.push(link);
             }
           });
+        
         return {
             nodes: this.forced_nodes,
-            links: cleanLinks
+            links: cleanLinks,
+            levels : this.levelsMap
         };
     }
 
@@ -429,6 +433,12 @@ class Splinter {
                         target: node.id
                     });
                 }
+            }
+
+            if ( this.levelsMap[node.level] ) {
+                this.levelsMap[node.level] = this.levelsMap[node.level] + 1;
+            } else {
+                this.levelsMap[node.level] = 1;
             }
         });
     }
