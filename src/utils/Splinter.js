@@ -25,6 +25,8 @@ class Splinter {
         this.store = new N3.Store();
         this.searchArray = [];
         this.searchId = [];
+        this.levelsMap = {};
+        this.maxLevel = 0;
     }
 
 
@@ -55,6 +57,8 @@ class Splinter {
                 if (quad) {
                     that.store.addQuad(quad);
                     that.turtleData.push(quad);
+                } else {
+                    resolve(that.turtleData);
                 }
             }
 
@@ -64,8 +68,7 @@ class Splinter {
                     "iri": iri
                 };
             }
-            var quadsArray = parser.parse(that.turtleFile, callbackParse, prefixCallback);
-            resolve(quadsArray);
+            parser.parse(that.turtleFile, callbackParse, prefixCallback);
         });
     }
 
@@ -85,25 +88,34 @@ class Splinter {
             await this.processDataset();
         }
 
+        let cleanLinks = [];
         let self = this;
         // Assign neighbors, to highlight links
         this.forced_edges.forEach(link => {
-            const a = self.forced_nodes.find( node => node.id === link.source );
-            const b = self.forced_nodes.find( node => node.id === link.target );
-            !a.neighbors && (a.neighbors = []);
-            !b.neighbors && (b.neighbors = []);
-            a.neighbors.push(b);
-            b.neighbors.push(a);
-      
-            !a.links && (a.links = []);
-            !b.links && (b.links = []);
-            a.links.push(link);
-            b.links.push(link);
-          });
+            // Search for existing links
+            let existingLing = cleanLinks.find( l => l.source === link.source && l.target === link.target );
+            
+            if ( !existingLing ) {
+                const a = self.forced_nodes.find( node => node.id === link.source );
+                const b = self.forced_nodes.find( node => node.id === link.target );
+                !a.neighbors && (a.neighbors = []);
+                !b.neighbors && (b.neighbors = []);
+                a.neighbors.push(b);
+                b.neighbors.push(a);
+        
+                !a.links && (a.links = []);
+                !b.links && (b.links = []);
+                a.links.push(link);
+                b.links.push(link);
 
+                cleanLinks.push(link);
+            }
+          });
+        
         return {
             nodes: this.forced_nodes,
-            links: this.forced_edges
+            links: cleanLinks,
+            levels : this.levelsMap
         };
     }
 
@@ -427,6 +439,12 @@ class Splinter {
                     });
                 }
             }
+
+            if ( this.levelsMap[node.level] ) {
+                this.levelsMap[node.level] = this.levelsMap[node.level] + 1;
+            } else {
+                this.levelsMap[node.level] = 1;
+            }
         });
     }
 
@@ -496,7 +514,13 @@ class Splinter {
 
 
     linkToNode(node, parent) {
-        const new_node = this.buildNodeFromJson(node, parent.level);
+        let level = parent.level; 
+        if (parent.type === rdfTypes.Sample.key) {
+         if (parent.attributes.derivedFrom !== undefined) {
+            level = this.nodes.get(parent.attributes.derivedFrom).level + 1;
+         }
+        }
+        const new_node = this.buildNodeFromJson(node, level);
         this.forced_edges.push({
             source: parent.id,
             target: new_node.id

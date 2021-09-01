@@ -32,7 +32,7 @@ const RADIAL_OUT = {
   label : "Radial",
   layout : "radialout"
 };
-const LINK_DISTANCE = 200;
+const LINK_DISTANCE = 300;
 
 const roundRect = (ctx, x, y, width, height, radius, color, alpha) => {
   if (width < 2 * radius) radius = width / 2;
@@ -58,6 +58,7 @@ const GraphViewer = (props) => {
   const [highlightLinks, setHighlightLinks] = useState(new Set());
   const [selectedLayout, setSelectedLayout] = React.useState(RADIAL_OUT.layout);
   const [layoutAnchorEl, setLayoutAnchorEl] = React.useState(null);
+  const [resize, setResize] = useState({ width : "100%" , height : "100%" });
   const open = Boolean(layoutAnchorEl);
 
   const nodeSelected = useSelector(state => state.sdsState.instance_selected.graph_node);
@@ -139,14 +140,6 @@ const GraphViewer = (props) => {
     graphRef.current.ggv.current.zoomToFit();
   };
 
-
-  /**
-   * Stop graph rendering
-   */
-  const engineStop = () => {
-    graphRef?.current?.ggv?.current?.zoomToFit();
-  }
-
   // Check State updates triggered by Redux at a global level
   if (nodeSelected && nodeSelected?.id !== selectedNode?.id) {
     let node = graphRef?.current?.props?.data?.nodes.find( item => item.id === nodeSelected.id);
@@ -157,32 +150,30 @@ const GraphViewer = (props) => {
   }
 
   useEffect(() => {
+    document.addEventListener('nodeResized', (p) => { 
+      let w = p.detail.rect.width;
+      let h = p.detail.rect.height;
+      setResize({ width : w , height : h});
+    }, false);
+    
+    graphRef?.current?.ggv?.current?.d3Force('x', d3.forceX().x(d => d.x));
+    graphRef?.current?.ggv?.current?.d3Force('y', d3.forceY().y(d => d.y));
+    graphRef?.current?.ggv?.current?.d3Force("manyBody", d3.forceManyBody().strength(-400));
+
     setTimeout(
       () => { 
-        graphRef?.current?.ggv?.current?.d3Force('charge').strength(-20 * window.datasets[props.graph_id].graph.nodes.length);
-        graphRef?.current?.ggv?.current?.d3Force("collide", d3.forceCollide(30));
-        graphRef?.current?.ggv?.current?.d3Force('link').distance(link => { 
-          let level = link?.target?.level;
-
-          let distance = LINK_DISTANCE;
-          if ( level > 1){
-            distance = 0;
-          }
-
-          return distance;
-        });
+        resetCamera();
       },
       ONE_SECOND
     );
   }, []);
-
   const handleNodeHover = (node) => {
     highlightNodes.clear();
     highlightLinks.clear();
     if (node) {
       highlightNodes.add(node);
-      node.neighbors.forEach(neighbor => highlightNodes.add(neighbor));
-      node.links.forEach(link => highlightLinks.add(link));
+      node.neighbors?.forEach(neighbor => highlightNodes.add(neighbor));
+      node.links?.forEach(link => highlightLinks.add(link));
     }
 
     setHoverNode(node);
@@ -214,7 +205,7 @@ const GraphViewer = (props) => {
       const hoverRectDimensions = [size * 3.2, size * 3.2];
       const hoverRectPosition = [node.x - 14, node.y - 14];
       const textHoverPosition = [
-        hoverRectPosition[0] - 2,
+        hoverRectPosition[0],
         hoverRectPosition[1] + hoverRectDimensions[1] + 2,
       ];
       const hoverRectBorderRadius = 2;
@@ -271,19 +262,20 @@ const GraphViewer = (props) => {
         data={window.datasets[props.graph_id].graph}
         // Create the Graph as 2 Dimensional
         d2={true}
-        d3VelocityDecay={.1}
+        d3VelocityDecay={0.3}
         warmupTicks={1000}
-        cooldownTicks={1}
-        nodeVal={node => 
-         100 / (node.level + 1)
-        }
-        onEngineStop={resetCamera}
+        cooldownTime={Infinity}
+        onEngineStop = {resetCamera}
         // Links properties
         linkColor = {handleLinkColor}
         linkWidth={2}
-        onLinkHover={handleLinkHover}
+        forceRadial={20}
+        forceLinkStrength={2.75}
+        forceLinkDistance={LINK_DISTANCE}
+        forceChargeStrength={-10000}
+        collideSize={30}
         linkCanvasObjectMode={'replace'}
-        nodeRelSize={20}
+        onLinkHover={handleLinkHover}
         // Override drawing of canvas objects, draw an image as a node
         nodeCanvasObject={paintNode}
         nodeCanvasObjectMode={node => 'replace'}

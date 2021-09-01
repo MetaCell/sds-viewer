@@ -919,7 +919,7 @@ const theme = createTheme({
         },
 
         '.secondary-sidebar': {
-          width: '18.75rem',
+          width: '100%',
           display: 'flex',
           flexShrink: 0,
           flexDirection: 'column',
@@ -933,7 +933,7 @@ const theme = createTheme({
           },
           '&_body': {
             flexGrow: 1,
-            height: 'calc(100vh - 13rem)',
+            height: 'calc(100vh - 18rem)',
             overflow: 'auto',
             paddingBottom: '5rem',
           },
