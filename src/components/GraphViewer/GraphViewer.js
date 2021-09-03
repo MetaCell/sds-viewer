@@ -27,12 +27,16 @@ const GRAPH_COLORS = {
 const TOP_DOWN = {
   label : "Top Down",
   layout : "td",
-  linkDistance : 100
+  linkDistance : (graph) => { 
+    return graph.hierarchyVariant;
+  }
 };
 const RADIAL_OUT = {
   label : "Radial",
   layout : "radialout",
-  linkDistance : 50
+  linkDistance : (graph) => { 
+    return graph.radialVariant
+  }
 };
 
 const roundRect = (ctx, x, y, width, height, radius, color, alpha) => {
@@ -158,7 +162,6 @@ const GraphViewer = (props) => {
     }, false);
   }, []);
 
-
   const handleNodeHover = (node) => {
     highlightNodes.clear();
     highlightLinks.clear();
@@ -213,8 +216,8 @@ const GraphViewer = (props) => {
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       let nodeName = node.name;
-      if (nodeName.length > 15) {
-        nodeName = nodeName.substr(0, 15).concat('...');
+      if (nodeName.length > 10) {
+        nodeName = nodeName.substr(0, 10).concat('...');
       }
       const textProps = [nodeName, node.x + 2, textHoverPosition[1] + 4.5];
       if (node === hoverNode) {
@@ -246,6 +249,7 @@ const GraphViewer = (props) => {
     [hoverNode]
   );
 
+  let linkDistance = selectedLayout.linkDistance(window.datasets[props.graph_id].graph);
   return (
     <div className={'graph-view'}>
       <GeppettoGraphVisualization
@@ -255,29 +259,50 @@ const GraphViewer = (props) => {
         // Create the Graph as 2 Dimensional
         d2={true}
         warmupTicks={1000}
-        cooldownTicks={10}
+        cooldownTime={1000}
         onEngineStop={resetCamera}
         // Links properties
         linkColor = {handleLinkColor}
         linkWidth={2}
         forceLinkStrength={2.75}
-        forceLinkDistance={ selectedLayout.linkDistance }
+        forceLinkDistance={ linkDistance }
         forceChargeStrength={-10000}
         linkDirectionalParticles={1}
+        linkCurvature={link => {
+          let curve = 0;
+
+          if ( selectedLayout.layout !== RADIAL_OUT.layout ){
+            if ( link.source.fx > link.target.fx ) {
+              curve = curve * -1;
+            }
+            else if ( link.source.fx === link.target.fx ) {
+              curve = 0;
+            } else {
+              curve = .05;
+            }
+          }
+
+          return curve;
+        }}
         linkDirectionalParticleWidth={link => highlightLinks.has(link) ? 4 : 0}
         linkCanvasObjectMode={'replace'}
         onLinkHover={handleLinkHover}
         // Override drawing of canvas objects, draw an image as a node
         nodeCanvasObject={paintNode}
         nodeCanvasObjectMode={node => 'replace'}
-        nodeVal={1}
+        nodeVal = { node => {
+          if ( selectedLayout.layout !== RADIAL_OUT.layout ){
+            node.fx = node.xPos;
+            node.fy = 100 * node.level;
+          }
+        }}
         onNodeHover={handleNodeHover}
         // Allows updating link properties, as color and curvature. Without this, linkCurvature doesn't work.
         onNodeClick={(node, event) => handleNodeLeftClick(node, event)}
         onNodeRightClick={(node, event) => handleNodeRightClick(node, event)}
         // td = Top Down, creates Graph with root at top
         dagMode={selectedLayout.layout}
-        dagLevelDistance={selectedLayout.linkDistance}
+        dagLevelDistance={linkDistance}
         // Handles error on graph
         onDagError={(loopNodeIds) => {}}
         // Disable dragging of nodes

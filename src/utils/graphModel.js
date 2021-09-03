@@ -46,7 +46,7 @@ export const rdfTypes = {
     ]
     },
     "Sample": {
-        "image": "./images/graph/sample.svg",
+        "image": "./images/graph/folder.svg",
         "key": "Sample",
         "properties": [
             {
