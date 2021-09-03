@@ -114,39 +114,49 @@ class Splinter {
             }
           });
 
-        // 
+        // Calculate level with max amount of nodes
         let maxLevel = Object.keys(this.levelsMap).reduce((a, b) => this.levelsMap[a].length > this.levelsMap[b].length ? a : b);
-        let nodeSpace = 50;
+        // Space between nodes
+        let nodeSpace = 75;
+        // The furthestLeft a node can be
         let furthestLeft = 0 - (Math.ceil(this.levelsMap[maxLevel].length)/2  * nodeSpace );
+        // Max width used in any level
         let totalWidthSpace = nodeSpace * this.levelsMap[maxLevel].length;
         let positionsMap = {}, spaceMap ={};
 
-        let bottomUp = Object.keys(this.levelsMap).reverse();
+        let levelsMapKeys = Object.keys(this.levelsMap);
 
-        Object.keys(this.levelsMap).forEach( level => {
+        levelsMapKeys.forEach( level => {
             spaceMap[level] = totalWidthSpace / (this.levelsMap[level].length + 1);
             positionsMap[level] = furthestLeft + spaceMap[level];
 
-            //parseInt(level) > SUBJECTS_LEVEL + 1 && this.levelsMap[level].sort((a, b) => (a.parent?.id < b.parent?.id ) ? 1 : -1)
+            // this.levelsMap[level].sort((a, b) => (a.type < b.type ) ? 1 : -1)
         });
 
+        // Start assigning the graph from the bottom up
         let neighbors = 0;
-        bottomUp.forEach( level => {
-            if ( parseInt(level) > SUBJECTS_LEVEL - 1 ) {
+        levelsMapKeys.reverse().forEach( level => {
+            if ( parseInt(level) !== SUBJECTS_LEVEL - 1 ) {
                 this.levelsMap[level].forEach ( (n, index) => {
                     neighbors = n?.neighbors?.filter(neighbor => { return neighbor.level > n.level });
                     if ( neighbors.length > 0 ) {
                         n.xPos = neighbors[0].xPos + (neighbors[neighbors.length-1].xPos - neighbors[0].xPos) * .5;
                         positionsMap[n.level] = n.xPos + nodeSpace;
                     } else {
-                        n.xPos = positionsMap[n.level] + spaceMap[n.level];;
+                        n.xPos = positionsMap[n.level];
                         positionsMap[n.level] = positionsMap[n.level] + spaceMap[n.level];
                     }
                 })
             } else {
+                let contributorsSpace = furthestLeft + totalWidthSpace;
                 this.levelsMap[level].forEach ( (n, index) => {
-                    n.xPos = positionsMap[n.level] + spaceMap[n.level];;
-                    positionsMap[n.level] = positionsMap[n.level] + spaceMap[n.level];
+                    if ( n.type === rdfTypes.Protocol.key ){
+                        n.xPos = positionsMap[n.level];
+                        positionsMap[n.level] = positionsMap[n.level] + nodeSpace;
+                    } else {
+                        n.xPos = contributorsSpace;
+                        contributorsSpace = contributorsSpace + nodeSpace;
+                    }
                 })
             }
         });

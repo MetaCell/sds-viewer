@@ -32,7 +32,7 @@ const TOP_DOWN = {
 const RADIAL_OUT = {
   label : "Radial",
   layout : "radialout",
-  linkDistance : 50
+  linkDistance : 100
 };
 
 const roundRect = (ctx, x, y, width, height, radius, color, alpha) => {
@@ -217,8 +217,8 @@ const GraphViewer = (props) => {
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       let nodeName = node.name;
-      if (nodeName.length > 15) {
-        nodeName = nodeName.substr(0, 15).concat('...');
+      if (nodeName.length > 10) {
+        nodeName = nodeName.substr(0, 10).concat('...');
       }
       const textProps = [nodeName, node.x + 2, textHoverPosition[1] + 4.5];
       if (node === hoverNode) {
@@ -259,6 +259,7 @@ const GraphViewer = (props) => {
         // Create the Graph as 2 Dimensional
         d2={true}
         warmupTicks={1000}
+        cooldownTicks={100}
         cooldownTime={Infinity}
         onEngineStop={resetCamera}
         // Links properties
@@ -295,8 +296,6 @@ const GraphViewer = (props) => {
             node.fx = node.xPos;
             node.fy = 100 * node.level;
           }
-
-          return 1;
         }}
         onNodeHover={handleNodeHover}
         // Allows updating link properties, as color and curvature. Without this, linkCurvature doesn't work.
