@@ -4,6 +4,9 @@ import { rdfTypes, type_key, typesModel } from './graphModel';
 const N3 = require('n3');
 const TMP_FILE = ".tmp";
 
+const SUBJECTS_LEVEL = 4;
+const PROTOCOLS_LEVEL = 2, CRONTRIBUTORS_LEVEL = 2;
+
 class Splinter {
     constructor(jsonFile, turtleFile) {
         this.factory = new NodesFactory();
@@ -88,6 +91,7 @@ class Splinter {
 
         let cleanLinks = [];
         let self = this;
+
         // Assign neighbors, to highlight links
         this.forced_edges.forEach(link => {
             // Search for existing links
@@ -109,6 +113,43 @@ class Splinter {
                 cleanLinks.push(link);
             }
           });
+
+        // 
+        let maxLevel = Object.keys(this.levelsMap).reduce((a, b) => this.levelsMap[a].length > this.levelsMap[b].length ? a : b);
+        let nodeSpace = 50;
+        let furthestLeft = 0 - (Math.ceil(this.levelsMap[maxLevel].length)/2  * nodeSpace );
+        let totalWidthSpace = nodeSpace * this.levelsMap[maxLevel].length;
+        let positionsMap = {}, spaceMap ={};
+
+        let bottomUp = Object.keys(this.levelsMap).reverse();
+
+        Object.keys(this.levelsMap).forEach( level => {
+            spaceMap[level] = totalWidthSpace / (this.levelsMap[level].length + 1);
+            positionsMap[level] = furthestLeft + spaceMap[level];
+
+            //parseInt(level) > SUBJECTS_LEVEL + 1 && this.levelsMap[level].sort((a, b) => (a.parent?.id < b.parent?.id ) ? 1 : -1)
+        });
+
+        let neighbors = 0;
+        bottomUp.forEach( level => {
+            if ( parseInt(level) > SUBJECTS_LEVEL - 1 ) {
+                this.levelsMap[level].forEach ( (n, index) => {
+                    neighbors = n?.neighbors?.filter(neighbor => { return neighbor.level > n.level });
+                    if ( neighbors.length > 0 ) {
+                        n.xPos = neighbors[0].xPos + (neighbors[neighbors.length-1].xPos - neighbors[0].xPos) * .5;
+                        positionsMap[n.level] = n.xPos + nodeSpace;
+                    } else {
+                        n.xPos = positionsMap[n.level] + spaceMap[n.level];;
+                        positionsMap[n.level] = positionsMap[n.level] + spaceMap[n.level];
+                    }
+                })
+            } else {
+                this.levelsMap[level].forEach ( (n, index) => {
+                    n.xPos = positionsMap[n.level] + spaceMap[n.level];;
+                    positionsMap[n.level] = positionsMap[n.level] + spaceMap[n.level];
+                })
+            }
+        });
         
         return {
             nodes: this.forced_nodes,
@@ -322,12 +363,13 @@ class Splinter {
             return link;
         })
         this.edges = temp_edges;
-        return dataset_node.id;
+        return dataset_node;
     }
 
 
-    organise_nodes(id) {
+    organise_nodes(parent) {
         // structure the graph per category
+        const id = parent.id;
         const subject_key = "all_subjects";
         const protocols_key = "all_protocols";
         const contributors_key = "all_contributors";
@@ -336,8 +378,9 @@ class Splinter {
             name: "Subjects",
             type: typesModel.NamedIndividual.subject.type,
             properties: [],
+            parent : parent,
             proxies: [],
-            level: 3
+            level: SUBJECTS_LEVEL
         };
         if (this.nodes.get(subject_key) === undefined) {
             this.nodes.set(subject_key, subjects);
@@ -354,8 +397,9 @@ class Splinter {
             name: "Protocols",
             type: typesModel.sparc.Protocol.type,
             properties: [],
+            parent : parent,
             proxies: [],
-            level: 2
+            level: PROTOCOLS_LEVEL
         };
         if (this.nodes.get(protocols_key) ===  undefined) {
             this.nodes.set(protocols_key, protocols);
@@ -372,8 +416,9 @@ class Splinter {
             name: "Contributors",
             type: typesModel.NamedIndividual.contributor.type,
             properties: [],
+            parent : parent,
             proxies: [],
-            level: 2
+            level: CRONTRIBUTORS_LEVEL
         };
         if (this.nodes.get(contributors_key) === undefined) {
             this.nodes.set(contributors_key, contributors);
@@ -401,14 +446,17 @@ class Splinter {
             if (link.source === id && link.target !== subject_key && target_node.type === rdfTypes.Subject.key) {
                 link.source = subject_key;
                 target_node.level = subjects.level + 1;
+                target_node.parent = subjects;
                 this.nodes.set(target_node.id, target_node);
             } else if (link.source === id && link.target !== contributors_key && target_node.type === rdfTypes.Person.key) {
                 link.source = contributors_key;
                 target_node.level = contributors.level + 1;
+                target_node.parent = contributors;
                 this.nodes.set(target_node.id, target_node);
             } else if (link.source === id && link.target !== protocols_key && target_node.type === rdfTypes.Protocol.key) {
                 link.source = protocols_key;
                 target_node.level = protocols.level + 1;
+                target_node.parent = protocols;
                 this.nodes.set(target_node.id, target_node);
             } 
             return link;
@@ -436,9 +484,9 @@ class Splinter {
             }
 
             if ( this.levelsMap[node.level] ) {
-                this.levelsMap[node.level] = this.levelsMap[node.level] + 1;
+                this.levelsMap[node.level] = [...this.levelsMap[node.level], node];
             } else {
-                this.levelsMap[node.level] = 1;
+                this.levelsMap[node.level] = [node];
             }
         });
     }
@@ -463,8 +511,8 @@ class Splinter {
             }
         }
 
-        let dataset_node_id = this.cast_nodes();
-        this.organise_nodes(dataset_node_id);
+        let dataset_node = this.cast_nodes();
+        this.organise_nodes(dataset_node);
     }
 
 
@@ -516,6 +564,7 @@ class Splinter {
          }
         }
         const new_node = this.buildNodeFromJson(node, level);
+        new_node.parent = parent;
         this.forced_edges.push({
             source: parent.id,
             target: new_node.id

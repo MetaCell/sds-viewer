@@ -27,7 +27,7 @@ const GRAPH_COLORS = {
 const TOP_DOWN = {
   label : "Top Down",
   layout : "td",
-  linkDistance : 100
+  linkDistance : 200
 };
 const RADIAL_OUT = {
   label : "Radial",
@@ -57,10 +57,11 @@ const GraphViewer = (props) => {
   const [selectedNode, setSelectedNode] = useState(null);
   const [highlightNodes, setHighlightNodes] = useState(new Set());
   const [highlightLinks, setHighlightLinks] = useState(new Set());
-  const [selectedLayout, setSelectedLayout] = React.useState(RADIAL_OUT);
+  const [selectedLayout, setSelectedLayout] = React.useState(TOP_DOWN);
   const [layoutAnchorEl, setLayoutAnchorEl] = React.useState(null);
   const [resize, setResize] = useState({ width : "100%" , height : "100%" });
   const open = Boolean(layoutAnchorEl);
+  let focused = true;
 
   const nodeSelected = useSelector(state => state.sdsState.instance_selected.graph_node);
 
@@ -138,6 +139,7 @@ const GraphViewer = (props) => {
    */
   const resetCamera = (event) => {
     graphRef.current.ggv.current.zoomToFit();
+    focused = true;
   };
 
   // Check State updates triggered by Redux at a global level
@@ -157,6 +159,9 @@ const GraphViewer = (props) => {
     }, false);
   }, []);
 
+  useEffect(() => {
+    !focused && resetCamera();
+  });
 
   const handleNodeHover = (node) => {
     highlightNodes.clear();
@@ -254,7 +259,7 @@ const GraphViewer = (props) => {
         // Create the Graph as 2 Dimensional
         d2={true}
         warmupTicks={1000}
-        cooldownTicks={10}
+        cooldownTime={Infinity}
         onEngineStop={resetCamera}
         // Links properties
         linkColor = {handleLinkColor}
@@ -263,13 +268,36 @@ const GraphViewer = (props) => {
         forceLinkDistance={ selectedLayout.linkDistance }
         forceChargeStrength={-10000}
         linkDirectionalParticles={1}
+        linkCurvature={link => {
+          let curve = 0;
+
+          if ( selectedLayout.layout !== RADIAL_OUT.layout ){
+            if ( link.source.fx > link.target.fx ) {
+              curve = curve * -1;
+            }
+            else if ( link.source.fx === link.target.fx ) {
+              curve = 0;
+            } else {
+              curve = .05;
+            }
+          }
+
+          return curve;
+        }}
         linkDirectionalParticleWidth={link => highlightLinks.has(link) ? 4 : 0}
         linkCanvasObjectMode={'replace'}
         onLinkHover={handleLinkHover}
         // Override drawing of canvas objects, draw an image as a node
         nodeCanvasObject={paintNode}
         nodeCanvasObjectMode={node => 'replace'}
-        nodeVal={1}
+        nodeVal = { node => {
+          if ( selectedLayout.layout !== RADIAL_OUT.layout ){
+            node.fx = node.xPos;
+            node.fy = 100 * node.level;
+          }
+
+          return 1;
+        }}
         onNodeHover={handleNodeHover}
         // Allows updating link properties, as color and curvature. Without this, linkCurvature doesn't work.
         onNodeClick={(node, event) => handleNodeLeftClick(node, event)}
