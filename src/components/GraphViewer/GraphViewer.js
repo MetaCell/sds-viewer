@@ -27,12 +27,16 @@ const GRAPH_COLORS = {
 const TOP_DOWN = {
   label : "Top Down",
   layout : "td",
-  linkDistance : 200
+  linkDistance : (graph) => { 
+    return graph.hierarchyVariant;
+  }
 };
 const RADIAL_OUT = {
   label : "Radial",
   layout : "radialout",
-  linkDistance : 100
+  linkDistance : (graph) => { 
+    return graph.radialVariant
+  }
 };
 
 const roundRect = (ctx, x, y, width, height, radius, color, alpha) => {
@@ -57,11 +61,10 @@ const GraphViewer = (props) => {
   const [selectedNode, setSelectedNode] = useState(null);
   const [highlightNodes, setHighlightNodes] = useState(new Set());
   const [highlightLinks, setHighlightLinks] = useState(new Set());
-  const [selectedLayout, setSelectedLayout] = React.useState(TOP_DOWN);
+  const [selectedLayout, setSelectedLayout] = React.useState(RADIAL_OUT);
   const [layoutAnchorEl, setLayoutAnchorEl] = React.useState(null);
   const [resize, setResize] = useState({ width : "100%" , height : "100%" });
   const open = Boolean(layoutAnchorEl);
-  let focused = true;
 
   const nodeSelected = useSelector(state => state.sdsState.instance_selected.graph_node);
 
@@ -139,7 +142,6 @@ const GraphViewer = (props) => {
    */
   const resetCamera = (event) => {
     graphRef.current.ggv.current.zoomToFit();
-    focused = true;
   };
 
   // Check State updates triggered by Redux at a global level
@@ -158,10 +160,6 @@ const GraphViewer = (props) => {
       setResize({ width : w , height : h});
     }, false);
   }, []);
-
-  useEffect(() => {
-    !focused && resetCamera();
-  });
 
   const handleNodeHover = (node) => {
     highlightNodes.clear();
@@ -250,6 +248,7 @@ const GraphViewer = (props) => {
     [hoverNode]
   );
 
+  let linkDistance = selectedLayout.linkDistance(window.datasets[props.graph_id].graph);
   return (
     <div className={'graph-view'}>
       <GeppettoGraphVisualization
@@ -259,14 +258,13 @@ const GraphViewer = (props) => {
         // Create the Graph as 2 Dimensional
         d2={true}
         warmupTicks={1000}
-        cooldownTicks={100}
-        cooldownTime={Infinity}
+        cooldownTime={1000}
         onEngineStop={resetCamera}
         // Links properties
         linkColor = {handleLinkColor}
         linkWidth={2}
         forceLinkStrength={2.75}
-        forceLinkDistance={ selectedLayout.linkDistance }
+        forceLinkDistance={ linkDistance }
         forceChargeStrength={-10000}
         linkDirectionalParticles={1}
         linkCurvature={link => {
@@ -303,7 +301,7 @@ const GraphViewer = (props) => {
         onNodeRightClick={(node, event) => handleNodeRightClick(node, event)}
         // td = Top Down, creates Graph with root at top
         dagMode={selectedLayout.layout}
-        dagLevelDistance={selectedLayout.linkDistance}
+        dagLevelDistance={linkDistance}
         // Handles error on graph
         onDagError={(loopNodeIds) => {}}
         // Disable dragging of nodes

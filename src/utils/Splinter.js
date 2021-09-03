@@ -117,20 +117,18 @@ class Splinter {
         // Calculate level with max amount of nodes
         let maxLevel = Object.keys(this.levelsMap).reduce((a, b) => this.levelsMap[a].length > this.levelsMap[b].length ? a : b);
         // Space between nodes
-        let nodeSpace = 75;
+        let nodeSpace = 100;
         // The furthestLeft a node can be
         let furthestLeft = 0 - (Math.ceil(this.levelsMap[maxLevel].length)/2  * nodeSpace );
         // Max width used in any level
         let totalWidthSpace = nodeSpace * this.levelsMap[maxLevel].length;
-        let positionsMap = {}, spaceMap ={};
+        let positionsMap = {};
 
         let levelsMapKeys = Object.keys(this.levelsMap);
 
         levelsMapKeys.forEach( level => {
-            spaceMap[level] = totalWidthSpace / (this.levelsMap[level].length + 1);
-            positionsMap[level] = furthestLeft + spaceMap[level];
-
-            // this.levelsMap[level].sort((a, b) => (a.type < b.type ) ? 1 : -1)
+            positionsMap[level] = furthestLeft + nodeSpace/2;
+            this.levelsMap[level].sort((a, b) =>  a.parent?.id?.localeCompare(b.parent?.id))
         });
 
         // Start assigning the graph from the bottom up
@@ -141,10 +139,10 @@ class Splinter {
                     neighbors = n?.neighbors?.filter(neighbor => { return neighbor.level > n.level });
                     if ( neighbors.length > 0 ) {
                         n.xPos = neighbors[0].xPos + (neighbors[neighbors.length-1].xPos - neighbors[0].xPos) * .5;
-                        positionsMap[n.level] = n.xPos + nodeSpace;
+                        positionsMap[n.level] = n.xPos + nodeSpace/2;
                     } else {
                         n.xPos = positionsMap[n.level];
-                        positionsMap[n.level] = positionsMap[n.level] + spaceMap[n.level];
+                        positionsMap[n.level] = positionsMap[n.level] + nodeSpace;
                     }
                 })
             } else {
@@ -152,10 +150,10 @@ class Splinter {
                 this.levelsMap[level].forEach ( (n, index) => {
                     if ( n.type === rdfTypes.Protocol.key ){
                         n.xPos = positionsMap[n.level];
-                        positionsMap[n.level] = positionsMap[n.level] + nodeSpace;
+                        positionsMap[n.level] = positionsMap[n.level] + nodeSpace/2;
                     } else {
                         n.xPos = contributorsSpace;
-                        contributorsSpace = contributorsSpace + nodeSpace;
+                        contributorsSpace = contributorsSpace + nodeSpace/2;
                     }
                 })
             }
@@ -164,7 +162,8 @@ class Splinter {
         return {
             nodes: this.forced_nodes,
             links: cleanLinks,
-            levels : this.levelsMap
+            radialVariant : this.levelsMap[maxLevel].length * 2,
+            hierarchyVariant : maxLevel * 20
         };
     }
 
@@ -493,10 +492,12 @@ class Splinter {
                 }
             }
 
-            if ( this.levelsMap[node.level] ) {
-                this.levelsMap[node.level] = [...this.levelsMap[node.level], node];
-            } else {
-                this.levelsMap[node.level] = [node];
+            if ( node.level !== undefined ) {
+                if ( this.levelsMap[node.level] ) {
+                    this.levelsMap[node.level] = [...this.levelsMap[node.level], node];
+                } else {
+                    this.levelsMap[node.level] = [node];
+                }
             }
         });
     }
