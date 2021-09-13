@@ -128,7 +128,7 @@ class Splinter {
 
         levelsMapKeys.forEach( level => {
             positionsMap[level] = furthestLeft + nodeSpace/2;
-            this.levelsMap[level].sort((a, b) =>  a.parent?.id?.localeCompare(b.parent?.id))
+            this.levelsMap[level].sort((a, b) => a.attributes?.relativePath?.localeCompare(b.attributes?.relativePath));
         });
 
         // Start assigning the graph from the bottom up
@@ -139,10 +139,10 @@ class Splinter {
                     neighbors = n?.neighbors?.filter(neighbor => { return neighbor.level > n.level });
                     if ( neighbors.length > 0 ) {
                         n.xPos = neighbors[0].xPos + (neighbors[neighbors.length-1].xPos - neighbors[0].xPos) * .5;
-                        positionsMap[n.level] = n.xPos + nodeSpace/2;
+                        positionsMap[n.level] = n.xPos + nodeSpace;
                     } else {
-                        n.xPos = positionsMap[n.level];
-                        positionsMap[n.level] = positionsMap[n.level] + nodeSpace;
+                        n.xPos = positionsMap[n.level] + nodeSpace;
+                        positionsMap[n.level] = n.xPos;
                     }
                 })
             } else {
@@ -162,7 +162,7 @@ class Splinter {
         return {
             nodes: this.forced_nodes,
             links: cleanLinks,
-            radialVariant : this.levelsMap[maxLevel].length * 2,
+            radialVariant : this.levelsMap[maxLevel].length * 3,
             hierarchyVariant : maxLevel * 20
         };
     }

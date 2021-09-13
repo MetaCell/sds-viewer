@@ -1,4 +1,5 @@
 import * as GeppettoActions from '@metacell/geppetto-meta-client/common/actions/actions';
+import * as LayoutActions from '@metacell/geppetto-meta-client/common/layout/actions';
 import * as Actions from '../redux/actions';
 
 /**
@@ -8,6 +9,8 @@ export const sdsMiddleware = store => next => action => {
 
     switch (action.type) {
         case GeppettoActions.clientActions.MODEL_LOADED:
+            break;
+        case LayoutActions.layoutActions.SET_LAYOUT:
             break;
         case Actions.ADD_DATASET:
             break;

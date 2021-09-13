@@ -8,12 +8,14 @@ import LayersIcon from '@material-ui/icons/Layers';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import { selectInstance } from '../../redux/actions';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { useSelector, useDispatch } from 'react-redux';
 import FormatAlignCenterIcon from '@material-ui/icons/FormatAlignCenter';
 import GeppettoGraphVisualization from '@metacell/geppetto-meta-ui/graph-visualization/Graph';
 
 const NODE_FONT = '500 6px Inter, sans-serif';
 const ONE_SECOND = 1000;
+const LOADING_TIME = 3000;
 const ZOOM_DEFAULT = 1;
 const ZOOM_SENSITIVITY = 0.2;
 const GRAPH_COLORS = {
@@ -65,8 +67,10 @@ const GraphViewer = (props) => {
   const [layoutAnchorEl, setLayoutAnchorEl] = React.useState(null);
   const [resize, setResize] = useState({ width : "100%" , height : "100%" });
   const open = Boolean(layoutAnchorEl);
+  const [loading, setLoading] = React.useState(false);
 
   const nodeSelected = useSelector(state => state.sdsState.instance_selected.graph_node);
+  const layout = useSelector(state => state.sdsState.layout);
 
   const handleLayoutClick = (event) => {
     setLayoutAnchorEl(event.currentTarget);
@@ -138,11 +142,15 @@ const GraphViewer = (props) => {
 
   /**
    * Reset camera position
-   * @param {*} event
    */
-  const resetCamera = (event) => {
-    graphRef.current.ggv.current.zoomToFit();
+  const resetCamera = () => {
+    graphRef?.current?.ggv?.current.zoomToFit();
   };
+
+  const onEngineStop = () => {
+    resetCamera();
+    setLoading(false)
+  }
 
   // Check State updates triggered by Redux at a global level
   if (nodeSelected && nodeSelected?.id !== selectedNode?.id) {
@@ -159,7 +167,16 @@ const GraphViewer = (props) => {
       let h = p.detail.rect.height;
       setResize({ width : w , height : h});
     }, false);
+
+    setLoading(true);
+    setTimeout ( () => setLoading(false) , LOADING_TIME);
   }, []);
+
+
+  //Resume animation after component is updated, fixes issue with graphics going crazy.
+  useEffect(() => {
+    graphRef?.current?.ggv?.current.resumeAnimation();
+  },[layout]);
 
   const handleNodeHover = (node) => {
     highlightNodes.clear();
@@ -251,6 +268,18 @@ const GraphViewer = (props) => {
   let linkDistance = selectedLayout.linkDistance(window.datasets[props.graph_id].graph);
   return (
     <div className={'graph-view'}>
+      { loading?
+      <CircularProgress style={{
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        bottom: 0,
+        top: 0,
+        margin: 'auto',
+        color: "#11bffe",
+        size: "55rem"
+      }} />
+      :
       <GeppettoGraphVisualization
         ref={graphRef}
         // Graph data with Nodes and Links to populate
@@ -258,14 +287,16 @@ const GraphViewer = (props) => {
         // Create the Graph as 2 Dimensional
         d2={true}
         warmupTicks={1000}
-        cooldownTime={1000}
-        onEngineStop={resetCamera}
+        cooldownTicks={10}
+        cooldowmTime={LOADING_TIME}
+        onEngineStop={onEngineStop}
         // Links properties
         linkColor = {handleLinkColor}
         linkWidth={2}
         forceLinkStrength={2.75}
         forceLinkDistance={ linkDistance }
         forceChargeStrength={-10000}
+        collideSize={5}
         linkDirectionalParticles={1}
         linkCurvature={link => {
           let curve = 0;
@@ -338,6 +369,7 @@ const GraphViewer = (props) => {
           </div>
         }
       />
+    }
     </div>
   );
 };
