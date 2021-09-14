@@ -175,7 +175,7 @@ const GraphViewer = (props) => {
 
   //Resume animation after component is updated, fixes issue with graphics going crazy.
   useEffect(() => {
-    graphRef?.current?.ggv?.current.resumeAnimation();
+    resetCamera();
   },[layout]);
 
   const handleNodeHover = (node) => {
