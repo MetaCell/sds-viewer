@@ -14,6 +14,8 @@ export const sdsMiddleware = store => next => action => {
                 store.dispatch(Actions.deleteDataset(id))
             }
             break;
+        case LayoutActions.layoutActions.SET_LAYOUT:
+            break;
         case Actions.ADD_DATASET:
             break;
         case Actions.DELETE_DATASET:
