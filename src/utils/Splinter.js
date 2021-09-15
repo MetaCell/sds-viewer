@@ -2,6 +2,7 @@ import NodesFactory from './nodesFactory';
 import { rdfTypes, type_key, typesModel } from './graphModel';
 
 const N3 = require('n3');
+const TMP_FILE = ".tmp";
 
 class Splinter {
     constructor(jsonFile, turtleFile) {
@@ -22,6 +23,8 @@ class Splinter {
         this.turtleData = [];
         this.dataset_id = this.processDatasetId();
         this.store = new N3.Store();
+        this.searchArray = [];
+        this.searchId = [];
     }
 
 
@@ -29,8 +32,8 @@ class Splinter {
         this.edges = [];
         this.nodes = new Map();
         this.tree_map = new Map();
-        this.tree_parents_map = new Map();
         this.proxies_map = new Map();
+        this.tree_parents_map = new Map();
     }
 
 
@@ -81,6 +84,22 @@ class Splinter {
         if (this.nodes === undefined || this.edges === undefined) {
             await this.processDataset();
         }
+
+        let self = this;
+        // Assign neighbors, to highlight links
+        this.forced_edges.forEach(link => {
+            const a = self.forced_nodes.find( node => node.id === link.source );
+            const b = self.forced_nodes.find( node => node.id === link.target );
+            !a.neighbors && (a.neighbors = []);
+            !b.neighbors && (b.neighbors = []);
+            a.neighbors.push(b);
+            b.neighbors.push(a);
+      
+            !a.links && (a.links = []);
+            !b.links && (b.links = []);
+            a.links.push(link);
+            b.links.push(link);
+          });
 
         return {
             nodes: this.forced_nodes,
@@ -308,7 +327,8 @@ class Splinter {
             type: typesModel.NamedIndividual.subject.type,
             properties: [],
             proxies: [],
-            level: 5
+            level: 5,
+            tree_reference: null
         };
         if (this.nodes.get(subject_key) === undefined) {
             this.nodes.set(subject_key, subjects);
@@ -326,7 +346,8 @@ class Splinter {
             type: typesModel.sparc.Protocol.type,
             properties: [],
             proxies: [],
-            level: 2
+            level: 2,
+            tree_reference: null
         };
         if (this.nodes.get(protocols_key) ===  undefined) {
             this.nodes.set(protocols_key, protocols);
@@ -344,7 +365,8 @@ class Splinter {
             type: typesModel.NamedIndividual.contributor.type,
             properties: [],
             proxies: [],
-            level: 2
+            level: 2,
+            tree_reference: null
         };
         if (this.nodes.get(contributors_key) === undefined) {
             this.nodes.set(contributors_key, contributors);
@@ -451,13 +473,22 @@ class Splinter {
         }
     }
 
+    /**
+     * Exclude certain nodes
+     * @param {*} node 
+     * @returns 
+     */
+    filterNode = (node) => {
+        return node.basename.includes(TMP_FILE)
+    }
+
 
     mergeData() {
         this.nodes.forEach((value, key) => {
             if (value.attributes !== undefined && value.attributes.hasFolderAboutIt !== undefined) {
                 const children = this.tree_parents_map.get(this.tree_map.get(value.attributes.hasFolderAboutIt).remote_id);
                 children.forEach(child => {
-                    this.linkToNode(child, value);
+                    !this.filterNode(child) && this.linkToNode(child, value);
                 });
             }
         });
@@ -474,7 +505,7 @@ class Splinter {
         var children = this.tree_parents_map.get(node.remote_id);
         if (children?.length > 0) {
             children.forEach(child => {
-                this.linkToNode(child, new_node);
+                !this.filterNode(child) && this.linkToNode(child, new_node);
             });
         }
     }
@@ -508,11 +539,21 @@ class Splinter {
 
 
     generateData() {
+        // generate the tree
+        var tree_root = this.tree_map.get(this.root_id);
+        var children = this.tree_parents_map.get(tree_root.remote_id);
+        this.tree_parents_map.delete(tree_root.remote_id);
+        this.tree = this.generateLeaf(tree_root);
+        children.forEach(leaf => {
+            this.build_leaf(leaf, this.tree);
+        });
+
         // generate the Graph
         this.forced_nodes = Array.from(this.nodes).map(([key, value]) => {
             let tree_node = this.tree_map.get(value.id);
             if (tree_node) {
                 value.tree_reference = tree_node;
+                this.nodes.set(key, value);
                 tree_node.graph_reference = value;
                 this.tree_map.set(value.id, tree_node);
             } else {
@@ -520,6 +561,7 @@ class Splinter {
                     tree_node = this.tree_map.get(proxy);
                     if (tree_node) {
                         value.tree_reference = tree_node;
+                        this.nodes.set(key, value);
                         tree_node.graph_reference = value;
                         this.tree_map.set(proxy, tree_node);
                         return false;
@@ -531,39 +573,39 @@ class Splinter {
         })
 
         this.fix_links();
-
-        var tree_root = this.tree_map.get(this.root_id);
-        var children = this.tree_parents_map.get(tree_root.remote_id);
-        this.tree_parents_map.delete(tree_root.remote_id);
-        this.tree = {
-            id: this.dataset_id,
-            text: this.dataset_id + ' Dataset',
-            parent: true,
-            items: [
-            ]
-        }
-
-        children.forEach(leaf => {
-            this.build_leaf(leaf, this.tree.items);
-        });
     }
 
-    build_leaf(node, tree) {
-        node.id = node.remote_id;
-        node.text = node.basename;
-        node.graph_reference = null;
-        if (node.items === undefined) {
-            node.items = [];
-        }
-        tree.push(node);
+    build_leaf(node, parent) {
+        var newChild = this.generateLeaf(node, parent);
+        parent.items.push(newChild);
 
         var children = this.tree_parents_map.get(node.remote_id);
+        this.tree_parents_map.delete(node.remote_id);
         if (children) {
             children.forEach(child => {
-                this.build_leaf(child, node.items);
+                this.build_leaf(child, newChild);
             });
         }
+    }
 
+    generateLeaf(node, parent) {
+        node.id = node.uri_api
+        node.parent = true;
+        node.text = parent !== undefined ? node.basename : this.dataset_id;
+        node.path = (parent !== undefined && parent.path !== undefined) ? [node.id, ...parent.path] : [node.id];
+        if (!node.items) {
+            node.items = [];
+        }
+        node.graph_reference = node.uri_api;
+        this.tree_map.set(node.id, node);
+        const newNode = {
+            id: node.uri_api,
+            text: node.text,
+            items: node.items,
+            graph_reference: node.graph_reference,
+            path: node.path
+        }
+        return newNode;
     }
 }
 

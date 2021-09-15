@@ -435,6 +435,10 @@
   right: 0;
 }
 
+.graph-view {
+  overflow: hidden;
+}
+
 .graph-view_controls {
   width: auto !important;
   display: flex;
@@ -457,19 +461,23 @@
 }
 
 .graph-view_controls .MuiIconButton-root:nth-child(1) {
+  margin: 8px 0;
+}
+
+.graph-view_controls .MuiIconButton-root:nth-child(2) {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   border-bottom-width: 0.5px;
   height: 25px;
 }
-.graph-view_controls .MuiIconButton-root:nth-child(2) {
+.graph-view_controls .MuiIconButton-root:nth-child(3) {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   border-top-width: 0.5px;
   height: 25px;
 }
 
-.graph-view_controls .MuiIconButton-root:nth-child(3) {
+.graph-view_controls .MuiIconButton-root:nth-child(4) {
   margin-top: 8px;
 }
 

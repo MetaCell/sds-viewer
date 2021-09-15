@@ -1,9 +1,14 @@
-import { rdfTypes } from './graphModel';
+import { rdfTypes, label_key } from './graphModel';
 
 function createImage(node) {
     // TODO: replace this with a decorator (maybe).
     const img = new Image();
-    img.src = (rdfTypes[String(node.type)]?.image !== "") ? rdfTypes[String(node.type)].image : rdfTypes.Uknown.image
+    if ( node.type === rdfTypes.File.key ){
+        const extension = node.name.split(".").pop();
+        img.src = "./images/graph/files/" + extension + ".svg"
+    } else {
+        img.src = (rdfTypes[String(node.type)]?.image !== "") ? rdfTypes[String(node.type)].image : rdfTypes.Uknown.image
+    }
     return img;
 }
 
@@ -21,6 +26,12 @@ function extractProperties(node, ttlTypes) {
     }
 }
 
+function extractLabel(node) {
+    let match = node.properties?.find( (prop) => prop.predicate === label_key );
+    if ( match ){
+        node.name = match.value;
+    }
+}
 
 var NodesFactory = function () {
     this.createNode = function (node, ttlTypes) {
@@ -68,18 +79,21 @@ const Collection = function (node, ttlTypes) {
 const Contributor = function (node, ttlTypes) {
     node.img = createImage(node);
     extractProperties(node, ttlTypes);
+    extractLabel(node);
     return node;
 };
 
 const Dataset = function (node, ttlTypes) {
     node.img = createImage(node);
     extractProperties(node, ttlTypes);
+    extractLabel(node);
     return node;
 };
 
 const Protocol = function (node, ttlTypes) {
     node.img = createImage(node);
     extractProperties(node, ttlTypes);
+    extractLabel(node);
     return node;
 };
 
@@ -104,6 +118,7 @@ const File = function (node, ttlTypes) {
 const Person = function (node, ttlTypes) {
     node.img = createImage(node);
     extractProperties(node, ttlTypes);
+    extractLabel(node);
     return node;
 };
 

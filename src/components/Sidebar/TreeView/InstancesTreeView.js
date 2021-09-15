@@ -1,27 +1,56 @@
 import React, { useEffect, useState } from 'react';
 import TreeView from '@material-ui/lab/TreeView';
-import Typography from '@material-ui/core/Typography';
 import DATASET from '../../../images/tree/dataset.svg';
 import FOLDER from '../../../images/tree/folder.svg';
 import FILE from '../../../images/tree/file.svg';
 import StyledTreeItem from './TreeViewItem';
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { selectInstance } from '../../../redux/actions';
 
 const InstancesTreeView = (props) => {
-  const { searchTerm } = props;
-  const onNodeToggle = (e, nodeIds) => {
-    setNodes(nodeIds);
+  const dispatch = useDispatch();
+
+  const { searchTerm, dataset_id } = props;
+  const datasets = JSON.parse(JSON.stringify([window.datasets[dataset_id].tree]));
+  const ids = useSelector(state => state.sdsState.datasets);
+  const nodeSelected = useSelector(state => state.sdsState.instance_selected.tree_node);
+  const [nodes, setNodes] = useState([]);
+  const [items, setItems] = useState(datasets);
+
+  const onNodeSelect = (e, nodeId) => {
+    if (nodes.length === 0) {
+      setNodes([nodeId]);
+    }
   };
 
-  const ids = useSelector(state => state.sdsState.datasets);
-  // TODO: to change this, I do not want to re-compute at every render the trees
-  // probably to be moved to the redux store
-  var datasets = ids.map(item => {
-    return window.datasets[item].tree
-  });
+  const onNodeToggle = (e, nodeIds) => {
+    if (nodeIds.length === 0) {
+      return;
+    }
 
-  const [items, setItems] = useState(datasets);
-  const [nodes, setNodes] = useState([]);
+    if ((nodes.length !== nodeIds.length) && (nodes[0] === nodeIds[0])) {
+      var original = [...nodes];
+      var newPath = [...nodeIds];
+      while (original[0] === newPath[0]) {
+        original.shift();
+        newPath.shift();
+      }
+      nodeIds = original;
+    }
+
+    const tree_map = window.datasets[dataset_id].splinter.tree_map;
+    const node = tree_map.get(nodeIds[0]);
+    dispatch(selectInstance({
+      dataset_id: dataset_id,
+      graph_node: node.graph_reference.id,
+      tree_node: node.id
+    }));
+  };
+
+  // Updated from redux, if the path got changed then we re-render from here.
+  if (nodeSelected && nodeSelected.path !== undefined && nodeSelected.path[0] !== nodes[0]) {
+    setNodes(nodeSelected.path);
+  }
 
   const nestedLoop = (obj) => {
     const res = [];
@@ -33,6 +62,8 @@ const InstancesTreeView = (props) => {
             recurse(value, key);
           } else if (key === 'id') {
             res.push(value);
+          } else if (key === 'path') {
+            continue;
           }
         }
       }
@@ -58,9 +89,20 @@ const InstancesTreeView = (props) => {
 
   useEffect(() => {
     setItems(
-      searchTerm.length >= 3 ? searchTree(datasets, searchTerm) : datasets
+      searchTerm.length >= 3 ? searchTree([...datasets], searchTerm) : datasets
     );
   }, [searchTerm]);
+
+  // Initialize state in this hook
+  useEffect(() => {
+    // Populate tree items state with datasets
+    if ( items.length === 0 && datasets.length > 0 ) {
+      setItems(datasets);
+    } else if ( datasets.length > 0 && items.length !== datasets.length  ) {
+      // Update datasets, after adding a new dataset
+      setItems(datasets);
+    }
+  });
 
   const getTreeItemsFromData = (treeItems) => {
     return treeItems.map((treeItemData) => {
@@ -76,6 +118,7 @@ const InstancesTreeView = (props) => {
 
       return (
         <StyledTreeItem
+          dataset={treeItemData?.dataset_id}
           nodeId={treeItemData?.id}
           labelText={treeItemData?.text}
           labelIcon={labelProps?.labelIcon}
@@ -92,27 +135,18 @@ const InstancesTreeView = (props) => {
 
   return (
     <>
-      {datasets.length === 0 ? (
-        <Typography className='no-instance'>
-          No instances to display yet.
-        </Typography>
-      ) : (
-        <>
-          <Typography component='h3'>Uploaded Instances</Typography>
-          <TreeView
-            className='scrollbar'
-            defaultExpanded={nodes}
-            defaultCollapseIcon={false}
-            defaultExpandIcon={false}
-            defaultEndIcon={false}
-            ref={treeRef}
-            expanded={nodes}
-            onNodeToggle={onNodeToggle}
-          >
-            {getTreeItemsFromData(datasets)}
-          </TreeView>
-        </>
-      )}
+      <TreeView
+        defaultExpanded={nodes}
+        defaultCollapseIcon={false}
+        defaultExpandIcon={false}
+        defaultEndIcon={false}
+        ref={treeRef}
+        expanded={nodes}
+        onNodeToggle={onNodeToggle}
+        onNodeSelect={onNodeSelect}
+      >
+        { getTreeItemsFromData(items) }
+      </TreeView>
     </>
   );
 };
