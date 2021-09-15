@@ -17,10 +17,9 @@ const SidebarContent = (props) => {
       return (
         <>
           <Typography component='h3'>Uploaded Instances</Typography>
-          { datasets.map( id => {
-            return <InstancesTreeView searchTerm={searchTerm} dataset_id={id}/>
-            })
-          }
+          <Box className='scrollbar'>
+            { datasets.map((id) => <InstancesTreeView searchTerm={searchTerm} dataset_id={id} />) }
+          </Box>
         </>
       );
     } else {

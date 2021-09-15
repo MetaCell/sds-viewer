@@ -136,7 +136,6 @@ const InstancesTreeView = (props) => {
   return (
     <>
       <TreeView
-        className='scrollbar'
         defaultExpanded={nodes}
         defaultCollapseIcon={false}
         defaultExpandIcon={false}
