@@ -36,9 +36,17 @@ const roundRect = (ctx, x, y, width, height, radius, color, alpha) => {
 const GraphViewer = (props) => {
   const graphRef = React.useRef(null);
 
-  const handleNodeClick = (node, event) => {
-    // graphRef.current.ggv.current.centerAt(node.x, node.y, ONE_SECOND);
-    // graphRef.current.ggv.current.zoom(2, ONE_SECOND);
+  const handleNodeLeftClick = (node, event) => {
+  };
+
+  /**
+   * Zoom to node when doing a right click on it
+   * @param {*} node 
+   * @param {*} event 
+   */
+  const handleNodeRightClick = (node, event) => {
+    graphRef.current.ggv.current.centerAt(node.x, node.y, ONE_SECOND);
+    graphRef.current.ggv.current.zoom(2, ONE_SECOND);
   };
 
   const zoomIn = (event) => {
@@ -137,7 +145,6 @@ const GraphViewer = (props) => {
         ctx.fillStyle = GRAPH_COLORS.textColor;
       }
       ctx.fillText(...textProps);
-      node.fy = 100 * node.level;
     },
     [hoverNode]
   );
@@ -155,15 +162,16 @@ const GraphViewer = (props) => {
         // Links properties
         linkColor={GRAPH_COLORS.link}
         linkWidth={2}
-        linkCurvature={(link) => (link.target.x < link.source.x ? -0.1 : 0.1)}
         // Allows updating link properties, as color and curvature. Without this, linkCurvature doesn't work.
         linkCanvasObjectMode={'replace'}
-        onNodeClick={(node, event) => handleNodeClick(node, event)}
+        onNodeClick={(node, event) => handleNodeLeftClick(node, event)}
+        onNodeRightClick={(node, event) => handleNodeRightClick(node, event)}
         onNodeHover={handleNodeHover}
         // Override drawing of canvas objects, draw an image as a node
         nodeCanvasObject={paintNode}
         // td = Top Down, creates Graph with root at top
-        dagMode='td'
+        dagMode='radialout'
+        dagLevelDistance={200}
         // Handles error on graph
         onDagError={(loopNodeIds) => {}}
         // Disable dragging of nodes

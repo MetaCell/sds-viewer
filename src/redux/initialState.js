@@ -1,4 +1,3 @@
-import Splinter from '../utils/Splinter';
 import * as Actions from './actions';
 
 export const sdsInitialState = {
