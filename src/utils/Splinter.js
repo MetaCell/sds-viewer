@@ -327,7 +327,7 @@ class Splinter {
             type: typesModel.NamedIndividual.subject.type,
             properties: [],
             proxies: [],
-            level: 3,
+            level: 5,
             tree_reference: null
         };
         if (this.nodes.get(subject_key) === undefined) {
@@ -403,7 +403,7 @@ class Splinter {
                 link.source = protocols_key;
                 target_node.level = protocols.level + 1;
                 this.nodes.set(target_node.id, target_node);
-            } 
+            }
             return link;
         }).filter(link => {
             let target_node = this.nodes.get(link.target);

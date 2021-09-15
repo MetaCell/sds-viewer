@@ -281,9 +281,11 @@ const GraphViewer = (props) => {
         // Links properties
         linkColor = {handleLinkColor}
         linkWidth={2}
-        onLinkHover={handleLinkHover}
+        // Allows updating link properties, as color and curvature. Without this, linkCurvature doesn't work.
         linkCanvasObjectMode={'replace'}
-        nodeRelSize={20}
+        onNodeClick={(node, event) => handleNodeLeftClick(node, event)}
+        onNodeRightClick={(node, event) => handleNodeRightClick(node, event)}
+        onNodeHover={handleNodeHover}
         // Override drawing of canvas objects, draw an image as a node
         nodeCanvasObject={paintNode}
         nodeCanvasObjectMode={node => 'replace'}
@@ -292,8 +294,8 @@ const GraphViewer = (props) => {
         onNodeClick={(node, event) => handleNodeLeftClick(node, event)}
         onNodeRightClick={(node, event) => handleNodeRightClick(node, event)}
         // td = Top Down, creates Graph with root at top
-        dagMode={selectedLayout}
-        dagLevelDistance={LINK_DISTANCE}
+        dagMode='radialout'
+        dagLevelDistance={200}
         // Handles error on graph
         onDagError={(loopNodeIds) => {}}
         // Disable dragging of nodes

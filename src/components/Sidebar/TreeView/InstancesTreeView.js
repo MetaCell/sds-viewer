@@ -12,7 +12,6 @@ const InstancesTreeView = (props) => {
 
   const { searchTerm, dataset_id } = props;
   const datasets = JSON.parse(JSON.stringify([window.datasets[dataset_id].tree]));
-  const ids = useSelector(state => state.sdsState.datasets);
   const nodeSelected = useSelector(state => state.sdsState.instance_selected.tree_node);
   const [nodes, setNodes] = useState([]);
   const [items, setItems] = useState(datasets);
@@ -140,7 +139,6 @@ const InstancesTreeView = (props) => {
   return (
     <>
       <TreeView
-        className='scrollbar'
         defaultExpanded={nodes}
         defaultCollapseIcon={false}
         defaultExpandIcon={false}

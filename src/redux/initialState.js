@@ -3,6 +3,7 @@ import * as Actions from './actions';
 export const sdsInitialState = {
     "sdsState": {
         datasets: [],
+        all_tree: [],
         error_message: null,
         instance_selected: {
             dataset_id: null,

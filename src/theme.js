@@ -714,7 +714,7 @@ const theme = createTheme({
                 },
               },
             },
-            '&> .MuiTreeView-root': {
+            '& .scrollbar > .MuiTreeView-root': {
               '&::before': {
                 display: 'none',
               },
