@@ -163,7 +163,7 @@ const GraphViewer = (props) => {
   }
 
   useEffect(() => {
-    document.addEventListener('nodeResized', (p) => { 
+    document.addEventListener('nodeResized', (p) => {
       let w = p.detail.rect.width;
       let h = p.detail.rect.height;
       setResize({ width : w , height : h});
@@ -176,7 +176,7 @@ const GraphViewer = (props) => {
 
   //Resume animation after component is updated, fixes issue with graphics going crazy.
   useEffect(() => {
-    graphRef?.current?.ggv?.current.resumeAnimation();
+    resetCamera();
   },[layout]);
 
   const handleNodeHover = (node) => {

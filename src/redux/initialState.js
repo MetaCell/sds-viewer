@@ -4,6 +4,7 @@ import * as LayoutActions from '@metacell/geppetto-meta-client/common/layout/act
 export const sdsInitialState = {
     "sdsState": {
         datasets: [],
+        all_tree: [],
         error_message: null,
         instance_selected: {
             dataset_id: null,

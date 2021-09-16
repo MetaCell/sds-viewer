@@ -98,7 +98,6 @@ class Splinter {
         this.forced_edges.forEach(link => {
             // Search for existing links
             let existingLing = cleanLinks.find( l => l.source === link.source && l.target === link.target );
-            
             if ( !existingLing ) {
                 const a = self.forced_nodes.find( node => node.id === link.source );
                 const b = self.forced_nodes.find( node => node.id === link.target );
@@ -106,7 +105,7 @@ class Splinter {
                 !b.neighbors && (b.neighbors = []);
                 a.neighbors.push(b);
                 b.neighbors.push(a);
-        
+
                 !a.links && (a.links = []);
                 !b.links && (b.links = []);
                 a.links.push(link);
@@ -114,7 +113,7 @@ class Splinter {
 
                 cleanLinks.push(link);
             }
-          });
+        });
 
         // Calculate level with max amount of nodes
         let maxLevel = Object.keys(this.levelsMap).reduce((a, b) => this.levelsMap[a].length > this.levelsMap[b].length ? a : b);
@@ -160,7 +159,7 @@ class Splinter {
                 })
             }
         });
-        
+
         return {
             nodes: this.forced_nodes,
             links: cleanLinks,
@@ -472,7 +471,7 @@ class Splinter {
                 target_node.level = protocols.level + 1;
                 target_node.parent = protocols;
                 this.nodes.set(target_node.id, target_node);
-            } 
+            }
             return link;
         }).filter(link => {
             let target_node = this.nodes.get(link.target);
