@@ -1,4 +1,5 @@
 import * as Actions from './actions';
+import * as LayoutActions from '@metacell/geppetto-meta-client/common/layout/actions';
 
 export const sdsInitialState = {
     "sdsState": {
@@ -9,7 +10,8 @@ export const sdsInitialState = {
             dataset_id: null,
             graph_node: null,
             tree_node: null
-        }
+        },
+        layout : {}
     }
 };
 
@@ -73,6 +75,8 @@ export default function sdsClientReducer(state = {}, action) {
                 };
             }
             break;
+        case LayoutActions.layoutActions.SET_LAYOUT:
+            return { ...state, layout : action.data.layout};
         default:
             return state;
     }

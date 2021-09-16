@@ -6,6 +6,8 @@ import FILE from '../../../images/tree/file.svg';
 import StyledTreeItem from './TreeViewItem';
 import { useSelector, useDispatch } from 'react-redux'
 import { selectInstance } from '../../../redux/actions';
+import { WidgetStatus } from "@metacell/geppetto-meta-client/common/layout/model";
+import * as layoutActions from "@metacell/geppetto-meta-client/common/layout/actions";
 
 const InstancesTreeView = (props) => {
   const dispatch = useDispatch();
@@ -15,6 +17,7 @@ const InstancesTreeView = (props) => {
   const nodeSelected = useSelector(state => state.sdsState.instance_selected.tree_node);
   const [nodes, setNodes] = useState([]);
   const [items, setItems] = useState(datasets);
+  const widgets = useSelector(state => state.widgets);
 
   const onNodeSelect = (e, nodeId) => {
     if (nodes.length === 0 || nodes[0] !== nodeId) {
@@ -25,6 +28,11 @@ const InstancesTreeView = (props) => {
         tree_node: node.id
       }));
     }
+    if (widgets[dataset_id] !== undefined) {
+      widgets[dataset_id].status = WidgetStatus.ACTIVE;
+      dispatch(layoutActions.updateWidget(widgets[dataset_id]));
+    }
+    
   };
 
   const onNodeToggle = (e, nodeIds) => {

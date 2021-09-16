@@ -1,0 +1,32 @@
+{
+    "localDatasets" : {
+        "Dataset1" : {
+            "name" : "dataset_02786240-2033-4f86-808d-daf345ce3165",
+            "turtleFile" : "/../resources/dataset1/N_dataset_02786240-2033-4f86-808d-daf345ce3165.ttl",
+            "jsonFile" : "/../resources/dataset1/path-metadata.json",
+            "expectedNodes" : 176,
+            "expectedLinks" : 175
+        },
+        "Dataset2" : {
+            "name" : "dataset_57466879-2cdd-4af2-8bd6-7d867423c709",
+            "turtleFile" : "/../resources/dataset2/N_dataset_57466879-2cdd-4af2-8bd6-7d867423c709.ttl",
+            "jsonFile" : "/../resources/dataset2/path-metadata.json",
+            "expectedNodes" : 129,
+            "expectedLinks" : 128
+        },
+        "Dataset3" : {
+            "name" : "dataset_226a0573-f8e5-418c-914f-045551cc2b1f",
+            "turtleFile" : "/../resources/dataset3/N_dataset_226a0573-f8e5-418c-914f-045551cc2b1f.ttl",
+            "jsonFile" : "/../resources/dataset3/path-metadata.json",
+            "expectedNodes" : 19,
+            "expectedLinks" : 18
+        }
+    },
+    "externalDatasets" : {
+        "Dataset1" : {
+            "name" : "dataset_29df9b97-a20b-469c-bf48-9389f1e31a11",
+            "turtleFile" : "https://cassava.ucsd.edu/sparc/preview/archive/exports/2021-04-12T17:28:22,384227-07:00/datasets/N%3Adataset%3A29df9b97-a20b-469c-bf48-9389f1e31a11.ttl",
+            "jsonFile" : "https://cassava.ucsd.edu/sparc/preview/archive/exports/2021-04-12T17%3A28%3A22%2C384227-07%3A00/path-metadata/29df9b97-a20b-469c-bf48-9389f1e31a11/LATEST_RUN/path-metadata.json"
+        }
+    }
+}
