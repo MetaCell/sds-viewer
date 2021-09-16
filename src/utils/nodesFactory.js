@@ -16,7 +16,18 @@ function extractProperties(node, ttlTypes) {
     for (const property of node.properties) {
         for (const type_property of rdfTypes[node.type].properties) {
             if (property.predicate === (ttlTypes[type_property.type]?.iri?.id + type_property.key)) {
-                node.attributes[type_property.property] = property.value;
+                if (node.attributes[type_property.property] !== undefined) {
+                    if (typeof node.attributes[type_property.property] === 'string') {
+                        let temp = node.attributes[type_property.property];
+                        node.attributes[type_property.property] = [];
+                        node.attributes[type_property.property].push(temp);
+                        node.attributes[type_property.property].push(property.value);
+                    } else {
+                        node.attributes[type_property.property].push(property.value);
+                    }
+                } else {
+                    node.attributes[type_property.property] = property.value;
+                }
             }
         }
     }

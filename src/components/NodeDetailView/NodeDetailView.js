@@ -12,17 +12,6 @@ const NodeDetailView = (props) => {
   const factory = new DetailsFactory();
   const nodeDetails = factory.createDetails(nodeSelected);
 
-  const nodeHeading = NODES[0];
-  // available options to render different views - 'matlab', 'nifti', 'volume' just change the NODES index for now
-
-  // return (
-  //   <Box className={"secondary-sidebar" + (props.open ? " in" : "")}>
-  //     <NodeHeader close={props.handleClose} links={headerLinks} heading={nodeHeading} />
-  //     <Details close={props.handleClose} nodeHeading={nodeHeading} />
-  //     <NodeFooter />
-  //   </Box>
-  // );
-
   return (
     <Box className={"secondary-sidebar" + (props.open ? " in" : "")}>
       { nodeDetails.getDetails() }

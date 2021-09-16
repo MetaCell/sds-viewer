@@ -20,7 +20,26 @@ export const rdfTypes = {
     "Dataset": {
         "image": "./images/graph/dataset.svg",
         "key": "Dataset",
-        "properties": []
+        "properties": [
+            {
+                "type": "rdfs",
+                "key": "label",
+                "property": "label",
+                "label": "To be filled"
+            },
+            {
+                "type": "isAbout",
+                "key": "",
+                "property": "isAbout",
+                "label": "To be filled"
+            },
+            {
+                "type": "TEMP",
+                "key": "contentsWereUpdatedAtTime",
+                "property": "latestUpdate",
+                "label": "To be filled"
+            }
+        ]
     },
     "File": {
         "image": "./images/graph/files/default_file.svg",

@@ -392,7 +392,7 @@ class Splinter {
             tree_reference: null
         };
         if (this.nodes.get(subject_key) === undefined) {
-            this.nodes.set(subject_key, subjects);
+            this.nodes.set(subject_key, this.factory.createNode(subjects));
             this.edges.push({
                 source: id,
                 target: subjects.id
@@ -412,7 +412,7 @@ class Splinter {
             tree_reference: null
         };
         if (this.nodes.get(protocols_key) ===  undefined) {
-            this.nodes.set(protocols_key, protocols);
+            this.nodes.set(protocols_key, this.factory.createNode(protocols));
             this.edges.push({
                 source: id,
                 target: protocols.id
@@ -432,7 +432,7 @@ class Splinter {
             tree_reference: null
         };
         if (this.nodes.get(contributors_key) === undefined) {
-            this.nodes.set(contributors_key, contributors);
+            this.nodes.set(contributors_key, this.factory.createNode(contributors));
             this.edges.push({
                 source: id,
                 target: contributors.id
@@ -560,8 +560,8 @@ class Splinter {
     mergeData() {
         this.nodes.forEach((value, key) => {
             if (value.attributes !== undefined && value.attributes.hasFolderAboutIt !== undefined) {
-                const children = this.tree_parents_map.get(this.tree_map.get(value.attributes.hasFolderAboutIt).remote_id);
-                children.forEach(child => {
+                const children = this.tree_parents_map.get(this.tree_map.get(value.attributes.hasFolderAboutIt)?.remote_id);
+                children?.forEach(child => {
                     !this.filterNode(child) && this.linkToNode(child, value);
                 });
             }
@@ -570,11 +570,11 @@ class Splinter {
 
 
     linkToNode(node, parent) {
-        let level = parent.level; 
+        let level = parent.level;
         if (parent.type === rdfTypes.Sample.key) {
-         if (parent.attributes.derivedFrom !== undefined) {
-            level = this.nodes.get(parent.attributes.derivedFrom).level + 1;
-         }
+            if (parent.attributes.derivedFrom !== undefined) {
+                level = this.nodes.get(parent.attributes.derivedFrom).level + 1;
+            }
         }
         const new_node = this.buildNodeFromJson(node, level);
         new_node.parent = parent;
@@ -582,7 +582,7 @@ class Splinter {
             source: parent.id,
             target: new_node.id
         });
-        this.nodes.set(new_node.id, new_node);
+        this.nodes.set(new_node.id, this.factory.createNode(new_node));
         var children = this.tree_parents_map.get(node.remote_id);
         if (children?.length > 0) {
             children.forEach(child => {
@@ -650,7 +650,7 @@ class Splinter {
                     return true;
                 })
             }
-            return this.factory.createNode(value, this.types);
+            return value;
         })
 
         this.fix_links();
