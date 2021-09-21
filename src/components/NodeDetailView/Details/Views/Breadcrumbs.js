@@ -1,13 +1,21 @@
 import React from 'react';
-import { Box, Breadcrumbs, Link, Typography } from '@material-ui/core';
-import CLOSE from "../../../../images/icon-close.svg";
 import DIVIDER from "../../../../images/divider.svg";
+import CLOSE from "../../../../images/icon-close.svg";
+import { useSelector, useDispatch } from 'react-redux'
+import { Box, Breadcrumbs, Link, Typography } from '@material-ui/core';
+import { WidgetStatus } from "@metacell/geppetto-meta-client/common/layout/model";
+import * as layoutActions from "@metacell/geppetto-meta-client/common/layout/actions";
 
 const HeaderBreadcrumbs = (props) => {
   const { links, close } = props;
+  const dispatch = useDispatch();
   const goToLink = id => {
     const divElement = document.getElementById(id + "_details");
     divElement.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  const closeViewer = () => {
+    dispatch(layoutActions.destroyWidget("nodeViewWidget"));
   }
 
   return (
@@ -27,7 +35,7 @@ const HeaderBreadcrumbs = (props) => {
         }
         <Typography onClick={() => {goToLink(links?.current.id)}} color="textPrimary">{links?.current.text}</Typography>
       </Breadcrumbs>
-      { close ? <img src={CLOSE} onClick={props.close} alt="Close" /> : null }
+      {/* <img src={CLOSE} onClick={closeViewer} alt="Close" /> */}
     </Box>
   );
 };

@@ -1,48 +1,33 @@
 import React from "react";
 import { Box, Typography } from "@material-ui/core";
-import Breadcrumbs from "../Details/Views/Breadcrumbs";
-import DATASET from "../../../images/dataset.svg";
-import MATLAB from "../../../images/matlab.svg";
-import NIFTI from "../../../images/nifti.svg";
-import VOLUME from "../../../images/volume.svg";
+import HELP from "../../../images/help.svg";
 import vars from "../../../styles/constant";
 
-const NodeHeader = (props) => {
-  const { heading, links } = props;
-  const headingStyle = {
-    color: vars[heading],
-    textTransform: 'capitalize'
-  }
-  const titleImages = {
-    "dataset": DATASET,
-    "nifti": NIFTI,
-    "volume": VOLUME,
-    "matlab": MATLAB
-  };
+const PersonHeader = (props) => {
+    const { node } = props;
+    const headingStyle = {
+        color: vars["dataset"],
+        textTransform: 'capitalize'
+    }
 
-  const headerLinks = {
-    pages: [
-      {
-        title: '...',
-        href: '/'
-      },
-      {
-        title: 'Volume',
-        href: '/'
-      },
-    ],
-    current: heading
-  };
+    let title = undefined;
+    if (node.graph_node) {
+      title = node.graph_node.name;
+    } else if (node.tree_node) {
+        title = node.tree_node.text;
+    } else {
+        title = "Unknown node";
+    }
 
-  return (
-    <Box className="secondary-sidebar_header">
-      {/* <Breadcrumbs close={props.close} links={headerLinks} /> */}
-      <img src={titleImages[heading]} alt={heading} />
-      <Typography component="h3" style={headingStyle}>
-        {heading}
-      </Typography>
-    </Box>
-  );
+    return (
+        <Box className="secondary-sidebar_header">
+            {/* <Breadcrumbs close={props.close} links={links} /> */}
+            <img src={HELP} alt="Contributor" />
+            <Typography component="h3" style={headingStyle}>
+                {title}
+            </Typography>
+        </Box>
+    );
 };
 
-export default NodeHeader;
+export default PersonHeader;

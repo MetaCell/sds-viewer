@@ -10,17 +10,17 @@ const CollectionDetails = (props) => {
     let title = "";
     let idDetails = "";
     // both tree and graph nodes are present, extract data from both
-    if (node.tree_node && node.graph_node) {
-        title = node.graph_node.name;
-        idDetails = node.graph_node.id + "_details";
+    if (node?.tree_node && node?.graph_node) {
+        title = node.graph_node?.name;
+        idDetails = node.graph_node?.id + "_details";
     // the below is the case where we have data only from the tree/hierarchy
-    } else if (node.tree_node) {
-        title = node.tree_node.basename;
-        idDetails = node.tree_node.id + "_details";
+    } else if (node?.tree_node) {
+        title = node.tree_node?.basename;
+        idDetails = node.tree_node?.id + "_details";
     // the below is the case where we have data only from the graph
     } else {
-        title = node.graph_node.name;
-        idDetails = node.graph_node.id + "_details";
+        title = node.graph_node?.name;
+        idDetails = node.graph_node?.id + "_details";
     }
 
     return (

@@ -16,7 +16,6 @@ const useStyles = makeStyles({
  * The component that renders the FlexLayout component of the LayoutManager.
  */
 const MainLayout = () => {
-
     const classes = useStyles();
     const store = useStore();
     const [LayoutManager, setComponent] = useState(undefined);
@@ -33,7 +32,7 @@ const MainLayout = () => {
                 node.setEventListener("resize", (node) => {
                     const event = new CustomEvent('nodeResized', {
                         detail: node
-                      });
+                    });
                     document.dispatchEvent(event);
 
                 });
