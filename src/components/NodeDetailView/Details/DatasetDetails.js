@@ -77,7 +77,7 @@ const DatasetDetails = (props) => {
     return (
         <Box className="secondary-sidebar_body" id={idDetails}>
             <Box className="tab-content">
-                <SimpleLabelValue label={'Updated On'} value={latestUpdate.toString()} heading={'Details'} />
+                <SimpleLabelValue label={'Updated On'} value={latestUpdate.toString()} heading={'Dataset Details'} />
 
                 <Box className="tab-content-row">
                     <Typography component="label">About</Typography>

@@ -47,7 +47,7 @@ const SubjectDetails = (props) => {
     return (
         <Box className="secondary-sidebar_body" id={idDetails}>
             <Box className="tab-content">
-                <SimpleLabelValue label={'Label'} value={title} heading={'Details'} />
+                <SimpleLabelValue label={'Label'} value={title} heading={'Subject Details'} />
                 { node?.graph_node?.attributes?.age !== undefined
                     ? (<SimpleLabelValue label={'Age'} value={node?.graph_node?.attributes?.age[0]} />)
                     : <> </>

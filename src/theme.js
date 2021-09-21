@@ -933,9 +933,8 @@ const theme = createTheme({
           },
           '&_body': {
             flexGrow: 1,
-            height: 'calc(100vh - 18rem)',
+            height: 'auto',
             overflow: 'auto',
-            paddingBottom: '5rem',
           },
           '&_footer': {
             display: 'none',
@@ -979,7 +978,7 @@ const theme = createTheme({
           },
           '&_header': {
             textAlign: 'center',
-            padding: '1.5rem 1.5rem 2.25rem',
+            padding: '.5rem 1.5rem 0rem',
             borderBottom: `.0625rem solid ${tabsBorderColor}`,
             '& .MuiBreadcrumbs-li a': {
               color: placeHolderColor,

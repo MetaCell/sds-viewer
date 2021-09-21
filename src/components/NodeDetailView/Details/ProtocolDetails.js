@@ -26,7 +26,7 @@ const ProtocolDetails = (props) => {
     return (
         <Box className="secondary-sidebar_body" id={idDetails}>
             <Box className="tab-content">
-                <SimpleLabelValue label={'Label'} value={title} heading={'Details'} />
+                <SimpleLabelValue label={'Label'} value={title} heading={'Protocol Details'} />
                 <SimpleLabelValue label={'Number of steps'} value={node?.graph_node?.attributes?.protocolHasNumberOfSteps[0]} />
             </Box>
         </Box>

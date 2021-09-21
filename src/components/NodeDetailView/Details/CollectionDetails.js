@@ -26,7 +26,7 @@ const CollectionDetails = (props) => {
     return (
         <Box className="secondary-sidebar_body" id={idDetails}>
             <Box className="tab-content">
-                <SimpleLabelValue label={'Label'} value={title} heading={'Details'} />
+                <SimpleLabelValue label={'Label'} value={title} heading={'Collection Details'} />
             </Box>
         </Box>
     );

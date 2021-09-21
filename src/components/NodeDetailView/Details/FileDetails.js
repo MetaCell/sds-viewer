@@ -51,11 +51,11 @@ const FileDetails = (props) => {
     return (
         <Box className="secondary-sidebar_body" id={idDetails}>
             <Box className="tab-content">
-                <SimpleLabelValue label={'Updated On'} value={latestUpdate.toString()} heading={'Details'} />
+                <SimpleLabelValue label={'Updated On'} value={latestUpdate.toString()} heading={'File Details'} />
 
                 <Box className="tab-content-row">
                     <Typography component="label">About</Typography>
-                    <SimpleChip chips={node.graph_node.attributes?.isAbout} />
+                    <SimpleChip chips={node.graph_node?.attributes?.isAbout} />
                 </Box>
                 <SimpleLabelValue label={'Label'} value={title} />
                 { node?.tree_node?.uri_human !== undefined

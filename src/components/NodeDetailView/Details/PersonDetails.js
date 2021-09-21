@@ -26,7 +26,7 @@ const PersonDetails = (props) => {
     return (
         <Box className="secondary-sidebar_body" id={idDetails}>
             <Box className="tab-content">
-                <SimpleLabelValue label={'Name'} value={title.toString()} heading={'Details'} />
+                <SimpleLabelValue label={'Name'} value={title.toString()} heading={'Contributor Details'} />
             </Box>
         </Box>
     );
