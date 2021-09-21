@@ -278,7 +278,7 @@ const Unknown = function (node) {
     nodeDetail.getHeader = () => {
         return (
             <>
-                <NodeHeader close={() => {}} heading={NODES[0]} />
+                <NodeHeader node={node} />
             </>
         )
     };
@@ -286,7 +286,7 @@ const Unknown = function (node) {
     nodeDetail.getDetail = () => {
         return (
             <>
-                <Details close={() => {}} nodeHeading={NODES[0]} />
+                <Details node={node} />
             </>
         )
     };
@@ -294,8 +294,8 @@ const Unknown = function (node) {
     nodeDetail.getAll = () => {
         return (
             <>
-                <NodeHeader close={() => {}} heading={NODES[0]} />
-                <Details close={() => {}} nodeHeading={NODES[0]} />
+                <NodeHeader node={node} />
+                <Details node={node} />
             </>
         )
     }

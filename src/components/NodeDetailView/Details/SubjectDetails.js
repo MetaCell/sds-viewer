@@ -13,11 +13,11 @@ const SubjectDetails = (props) => {
     let idDetails = "";
     // both tree and graph nodes are present, extract data from both
     if (node.tree_node && node.graph_node) {
-        idDetails = node.tree_node.id + "_details";
-        title = node.tree_node.basename;
+        idDetails = node?.tree_node?.id + "_details";
+        title = node?.tree_node?.basename;
     // the below is the case where we have data only from the tree/hierarchy
-    } else if (node.graph_node) {
-        idDetails = node.graph_node.id + "_details";
+    } else if (node?.graph_node) {
+        idDetails = node?.graph_node?.id + "_details";
         title = node.graph_node.name;
     // the below is the case where we have data only from the graph
     } else {
@@ -34,14 +34,14 @@ const SubjectDetails = (props) => {
     let species = [];
     let strains = [];
     let assignedGroups = [];
-    if (node.graph_node.attributes?.hasAssignedGroup !== undefined) {
-        populateAttributeArray(assignedGroups, node.graph_node.attributes?.hasAssignedGroup);
+    if (node.graph_node?.attributes?.hasAssignedGroup !== undefined) {
+        populateAttributeArray(assignedGroups, node.graph_node.attributes.hasAssignedGroup);
     }
-    if (node.graph_node.attributes?.subjectSpecies !== undefined) {
-        populateAttributeArray(species, node.graph_node.attributes?.subjectSpecies);
+    if (node.graph_node?.attributes?.subjectSpecies !== undefined) {
+        populateAttributeArray(species, node.graph_node.attributes.subjectSpecies);
     }
-    if (node.graph_node.attributes?.subjectStrain !== undefined) {
-        populateAttributeArray(strains, node.graph_node.attributes?.subjectStrain);
+    if (node.graph_node?.attributes?.subjectStrain !== undefined) {
+        populateAttributeArray(strains, node.graph_node.attributes.subjectStrain);
     }
 
     return (
@@ -53,15 +53,15 @@ const SubjectDetails = (props) => {
                     : <> </>
                 }
                 { node?.graph_node?.attributes?.hasAgeCategory !== undefined
-                    ? (<SimpleLabelValue label={'Age Category'} value={node?.graph_node?.attributes?.hasAgeCategory[0]} />)
+                    ? (<SimpleLabelValue label={'Age Category'} value={node.graph_node.attributes.hasAgeCategory[0]} />)
                     : <> </>
                 }
                 { node?.graph_node?.attributes?.biologicalSex !== undefined
-                    ? (<SimpleLabelValue label={'Biological Sex'} value={node?.graph_node?.attributes?.biologicalSex[0]} />)
+                    ? (<SimpleLabelValue label={'Biological Sex'} value={node.graph_node.attributes.biologicalSex[0]} />)
                     : <> </>
                 }
 
-                { species > 0
+                { species.length > 0
                     ? ( <Box className="tab-content-row">
                             <Typography component="label">Species</Typography>
                             <SimpleChip chips={species} />
@@ -75,10 +75,10 @@ const SubjectDetails = (props) => {
                         </Box>)
                     : <> </>
                 }
-                { node.graph_node.attributes?.hasAssignedGroup.length > 0
+                { assignedGroups.length > 0
                     ? ( <Box className="tab-content-row">
                             <Typography component="label">Assigned Groups</Typography>
-                            <SimpleChip chips={node.graph_node.attributes?.hasAssignedGroup} />
+                            <SimpleChip chips={assignedGroups} />
                         </Box>)
                     : <> </>
                 }

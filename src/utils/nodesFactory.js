@@ -101,21 +101,24 @@ const Contributor = function (node, ttlTypes) {
 const Award = function (node, ttlTypes) {
     extractProperties(node, ttlTypes);
     node.img = createImage(node);
-    node.name = node.name.split("/").at(-1);
+    var namesArray = node.name.split("/");
+    node.name = namesArray[namesArray.length - 1];
     return node;
 };
 
 const Dataset = function (node, ttlTypes) {
     node.img = createImage(node);
     extractProperties(node, ttlTypes);
-    node.name = node.name.split(":").at(-1);
+    var namesArray = node.name.split(":");
+    node.name = namesArray[namesArray.length - 1];
     return node;
 };
 
 const Protocol = function (node, ttlTypes) {
     node.img = createImage(node);
     extractProperties(node, ttlTypes);
-    node.name = "Protocol " + node.name.split("/").at(-1);
+    var namesArray = node.name.split("/");
+    node.name = "Protocol " + namesArray[namesArray.length - 1];
     return node;
 };
 
@@ -131,7 +134,8 @@ const Subject = function (node, ttlTypes) {
     if (node.attributes?.identifier !== undefined) {
         node.name = node.attributes?.identifier[0];
     } else {
-        node.name = node.name.split("/").at(-1);
+        var namesArray = node.name.split("/");
+        node.name = namesArray[namesArray.length - 1];
     }
     return node;
 };

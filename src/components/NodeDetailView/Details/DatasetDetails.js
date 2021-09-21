@@ -18,21 +18,21 @@ const DatasetDetails = (props) => {
     let title = "";
     let idDetails = "";
     // both tree and graph nodes are present, extract data from both
-    if (node.tree_node && node.graph_node) {
-        idDetails = node.graph_node.id + "_details";
-        title = node.graph_node.attributes?.label[0];
+    if (node?.tree_node && node?.graph_node) {
+        idDetails = node.graph_node?.id + "_details";
+        title = node?.graph_node.attributes?.label[0];
     // the below is the case where we have data only from the tree/hierarchy
-    } else if (node.tree_node) {
-        title = node.tree_node.basename;
-        idDetails = node.tree_node.id + "_details";
+    } else if (node?.tree_node) {
+        title = node?.tree_node?.basename;
+        idDetails = node?.tree_node?.id + "_details";
     // the below is the case where we have data only from the graph
     } else {
-        idDetails = node.graph_node.id + "_details";
-        title = node.graph_node.attributes?.label[0];
+        idDetails = node.graph_node?.id + "_details";
+        title = node.graph_node?.attributes?.label[0];
     }
 
     let latestUpdate = "Not defined."
-    if (node.graph_node.attributes?.latestUpdate !== undefined) {
+    if (node?.graph_node?.attributes?.latestUpdate !== undefined) {
         latestUpdate = new Date(node.graph_node.attributes?.latestUpdate[0])
     }
 
