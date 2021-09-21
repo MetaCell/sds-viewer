@@ -36,7 +36,7 @@ const NodeHeader = (props) => {
 
   return (
     <Box className="secondary-sidebar_header">
-      <Breadcrumbs close={props.close} links={headerLinks} />
+      {/* <Breadcrumbs close={props.close} links={headerLinks} /> */}
       <img src={titleImages[heading]} alt={heading} />
       <Typography component="h3" style={headingStyle}>
         {heading}

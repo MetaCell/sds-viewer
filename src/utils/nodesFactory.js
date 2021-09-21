@@ -108,6 +108,7 @@ const Award = function (node, ttlTypes) {
 const Dataset = function (node, ttlTypes) {
     node.img = createImage(node);
     extractProperties(node, ttlTypes);
+    node.name = node.name.split(":").at(-1);
     return node;
 };
 

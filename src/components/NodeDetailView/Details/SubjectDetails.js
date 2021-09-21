@@ -2,28 +2,26 @@ import React from "react";
 import {
     Box,
     Typography,
-    List,
-    ListItemText,
 } from "@material-ui/core";
-import Links from './Views/Links';
 import SimpleChip from './Views/SimpleChip';
-import USER from "../../../images/user.svg";
-import CustomChips from './Views/CustomChips';
 import SimpleLabelValue from './Views/SimpleLabelValue';
 
 const SubjectDetails = (props) => {
     const { node } = props;
-    const nodes = window.datasets[node.dataset_id].splinter.nodes;
 
     let title = "";
+    let idDetails = "";
     // both tree and graph nodes are present, extract data from both
     if (node.tree_node && node.graph_node) {
+        idDetails = node.tree_node.id + "_details";
         title = node.tree_node.basename;
     // the below is the case where we have data only from the tree/hierarchy
     } else if (node.graph_node) {
+        idDetails = node.graph_node.id + "_details";
         title = node.graph_node.name;
     // the below is the case where we have data only from the graph
     } else {
+        idDetails = node.tree_node.id + "_details";
         title = node.tree_node.basename;
     }
 
@@ -47,7 +45,7 @@ const SubjectDetails = (props) => {
     }
 
     return (
-        <Box className="secondary-sidebar_body">
+        <Box className="secondary-sidebar_body" id={idDetails}>
             <Box className="tab-content">
                 <SimpleLabelValue label={'Label'} value={title} heading={'Details'} />
                 { node?.graph_node?.attributes?.age !== undefined

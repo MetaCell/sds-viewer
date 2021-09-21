@@ -8,19 +8,23 @@ const PersonDetails = (props) => {
     const { node } = props;
 
     let title = "";
+    let idDetails = "";
     // both tree and graph nodes are present, extract data from both
     if (node.tree_node && node.graph_node) {
         title = node.graph_node.name;
+        idDetails = node.graph_node.id + "_details";
     // the below is the case where we have data only from the tree/hierarchy
     } else if (node.tree_node) {
         title = node.tree_node.basename;
+        idDetails = node.tree_node.id + "_details";
     // the below is the case where we have data only from the graph
     } else {
         title = node.graph_node.name;
+        idDetails = node.graph_node.id + "_details";
     }
 
     return (
-        <Box className="secondary-sidebar_body">
+        <Box className="secondary-sidebar_body" id={idDetails}>
             <Box className="tab-content">
                 <SimpleLabelValue label={'Name'} value={title.toString()} heading={'Details'} />
             </Box>

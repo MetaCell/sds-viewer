@@ -16,14 +16,18 @@ const DatasetDetails = (props) => {
     const nodes = window.datasets[node.dataset_id].splinter.nodes;
 
     let title = "";
+    let idDetails = "";
     // both tree and graph nodes are present, extract data from both
     if (node.tree_node && node.graph_node) {
+        idDetails = node.graph_node.id + "_details";
         title = node.graph_node.attributes?.label[0];
     // the below is the case where we have data only from the tree/hierarchy
     } else if (node.tree_node) {
         title = node.tree_node.basename;
+        idDetails = node.tree_node.id + "_details";
     // the below is the case where we have data only from the graph
     } else {
+        idDetails = node.graph_node.id + "_details";
         title = node.graph_node.attributes?.label[0];
     }
 
@@ -71,7 +75,7 @@ const DatasetDetails = (props) => {
     ];
 
     return (
-        <Box className="secondary-sidebar_body">
+        <Box className="secondary-sidebar_body" id={idDetails}>
             <Box className="tab-content">
                 <SimpleLabelValue label={'Updated On'} value={latestUpdate.toString()} heading={'Details'} />
 
