@@ -52,7 +52,7 @@ const theme = createTheme({
       fontWeight: '600',
       fontSize: '1.5rem',
       lineHeight: '1.8125rem',
-      color: primaryTextColor,
+      color: '#2E3A59',
     },
   },
 
@@ -919,7 +919,7 @@ const theme = createTheme({
         },
 
         '.secondary-sidebar': {
-          width: '18.75rem',
+          width: '100%',
           display: 'flex',
           flexShrink: 0,
           flexDirection: 'column',
@@ -1027,7 +1027,7 @@ const theme = createTheme({
               fontWeight: '500',
               lineHeight: '1.375rem',
               letterSpacing: '-0.03em',
-              color: 'primaryTextColor',
+              color: '#2E3A59',
               marginBottom: '1.5625rem',
             },
             '& .tab-content-row': {

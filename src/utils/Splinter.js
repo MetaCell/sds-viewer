@@ -486,9 +486,9 @@ class Splinter {
         this.forced_nodes.forEach((node, index, array) => {
             if (node.type === rdfTypes.Sample.key) {
                 if (node.attributes.derivedFrom !== undefined) {
-                    array[index].level = this.nodes.get(node.attributes.derivedFrom).level + 1;
+                    array[index].level = this.nodes.get(node.attributes.derivedFrom[0]).level + 1;
                     this.forced_edges.push({
-                        source: node.attributes.derivedFrom,
+                        source: node.attributes.derivedFrom[0],
                         target: node.id
                     });
                 }
@@ -560,7 +560,7 @@ class Splinter {
     mergeData() {
         this.nodes.forEach((value, key) => {
             if (value.attributes !== undefined && value.attributes.hasFolderAboutIt !== undefined) {
-                const children = this.tree_parents_map.get(this.tree_map.get(value.attributes.hasFolderAboutIt)?.remote_id);
+                const children = this.tree_parents_map.get(this.tree_map.get(value.attributes.hasFolderAboutIt[0])?.remote_id);
                 children?.forEach(child => {
                     !this.filterNode(child) && this.linkToNode(child, value);
                 });
@@ -573,7 +573,7 @@ class Splinter {
         let level = parent.level;
         if (parent.type === rdfTypes.Sample.key) {
             if (parent.attributes.derivedFrom !== undefined) {
-                level = this.nodes.get(parent.attributes.derivedFrom).level + 1;
+                level = this.nodes.get(parent.attributes.derivedFrom[0]).level + 1;
             }
         }
         const new_node = this.buildNodeFromJson(node, level);

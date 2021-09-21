@@ -5,101 +5,85 @@ import {
     List,
     ListItemText,
 } from "@material-ui/core";
-import USER from "../../../images/user.svg";
 import Links from './Views/Links';
-import SimpleLabelValue from './Views/SimpleLabelValue';
-import CustomChips from './Views/CustomChips';
 import SimpleChip from './Views/SimpleChip';
-import { NODES } from '../../../constants';
-
-const Team = [
-    {
-        name: 'Mrrc Doyle',
-        designation: 'Contact Person',
-        img: USER
-    },
-    {
-        name: 'Michael Anderson',
-        designation: 'Principal Investigator',
-        img: USER
-    },
-    {
-        name: 'Donald Trump',
-        designation: 'Chief Technician',
-        img: USER
-    }
-]
-
-const Collaborators = [
-    {
-        name: 'Mrrc Doyle',
-        designation: 'Contact Person',
-    },
-    {
-        name: 'Michael Anderson',
-        designation: 'Principal Investigator',
-    },
-    {
-        name: 'Donald Trump',
-        designation: 'Chief Technician',
-    }
-]
-
-const LINKS = [
-    {
-        title: 'Protocol',
-        href: '/'
-    },
-    {
-        title: 'Dataset',
-        href: '/'
-    }
-]
-
-const DETAILS_LIST = [
-    {
-        title: 'Error Index',
-        value: 335
-    },
-    {
-        title: 'Template Schema Version',
-        value: '1.2.3'
-    },
-    {
-        title: 'Award Number',
-        value: 'OT2OD023848'
-    }
-
-];
-
-const about = ["Cardiac", "Electrophysiology", "Patch Clamp", "Cardiac", "Electrophysiology", "Patch Clamp"]
-
+import USER from "../../../images/user.svg";
+import CustomChips from './Views/CustomChips';
+import SimpleLabelValue from './Views/SimpleLabelValue';
 
 const DatasetDetails = (props) => {
     const { node } = props;
+    const nodes = window.datasets[node.dataset_id].splinter.nodes;
 
     let title = "";
     // both tree and graph nodes are present, extract data from both
     if (node.tree_node && node.graph_node) {
-        title = node.graph_node.name;
+        title = node.graph_node.attributes?.label[0];
     // the below is the case where we have data only from the tree/hierarchy
     } else if (node.tree_node) {
         title = node.tree_node.basename;
     // the below is the case where we have data only from the graph
     } else {
-        title = node.graph_node.name;
+        title = node.graph_node.attributes?.label[0];
     }
+
+    let latestUpdate = "Not defined."
+    if (node.graph_node.attributes?.latestUpdate !== undefined) {
+        latestUpdate = new Date(node.graph_node.attributes?.latestUpdate[0])
+    }
+
+    let contactPerson = [];
+    if (node.graph_node.attributes?.hasResponsiblePrincipalInvestigator !== undefined) {
+        node.graph_node.attributes?.hasResponsiblePrincipalInvestigator.map(user => {
+            const contributor = nodes.get(user);
+            contactPerson.push({
+                name: contributor.name,
+                designation: 'Principal Investigator',
+                img: USER
+            });
+        });
+    }
+
+    if (node.graph_node.attributes?.hasContactPerson !== undefined) {
+        node.graph_node.attributes?.hasContactPerson.map(user => {
+            const contributor = nodes.get(user);
+            contactPerson.push({
+                name: contributor.name,
+                designation: 'Contributor',
+                img: USER
+            });
+        });
+    }
+
+    const DETAILS_LIST = [
+        {
+            title: 'Error Index',
+            value: node.graph_node.attributes?.errorIndex
+        },
+        {
+            title: 'Template Schema Version',
+            value: node.graph_node.attributes?.hasDatasetTemplateSchemaVersion
+        },
+        {
+            title: 'Experiment Modality',
+            value: node.graph_node.attributes?.hasExperimentalModality
+        }
+    ];
 
     return (
         <Box className="secondary-sidebar_body">
             <Box className="tab-content">
-                <SimpleLabelValue label={'Created On'} value={"February 2, 2021"} heading={'Details'} />
+                <SimpleLabelValue label={'Updated On'} value={latestUpdate.toString()} heading={'Details'} />
 
                 <Box className="tab-content-row">
                     <Typography component="label">About</Typography>
-                    <SimpleChip chips={about} />
+                    <SimpleChip chips={node.graph_node.attributes?.isAbout} />
                 </Box>
                 <SimpleLabelValue label={'Label'} value={title} />
+                { node.graph_node.attributes?.hasUriHuman !== undefined
+                    ? (<SimpleLabelValue label={'Human URI'} value={node.graph_node.attributes?.hasUriHuman[0]} />)
+                    : (<> </>)
+                }
 
                 <Box className="tab-content-row">
                     <List component="nav" aria-label="main">
@@ -115,18 +99,26 @@ const DatasetDetails = (props) => {
                 </Box>
 
                 <Box className="tab-content-row">
-                    <Typography component="label">Links</Typography>
-                    {
-                        LINKS?.map((row, index) => <Links key={`detail_links_${index}`} href={row?.href} title={row?.title} />)
-                    }
+                    <Typography component="label">Protocol Techniques</Typography>
+                    <SimpleChip chips={node.graph_node.attributes?.protocolEmploysTechnique} />
                 </Box>
+
+                { node.graph_node.attributes?.hasUriHuman !== undefined
+                    ? (<Box className="tab-content-row">
+                            <Typography component="label">Links</Typography>
+                            <Links key={`detail_links_dataset`} href={node.graph_node.attributes?.hasUriHuman[0]} title="Dataset" />
+                        </Box>)
+                    : <> </>
+                }
             </Box>
 
-            <Box className="tab-content">
-                <Typography component="h3">Collaborators</Typography>
-                <CustomChips members={Team} heading={'Team'} />
-                <CustomChips members={Collaborators} heading={'Collaborators'} />
-            </Box>
+            { contactPerson.length > 0
+            ? (<Box className="tab-content">
+                    <Typography component="h3">Collaborators</Typography>
+                    <CustomChips members={contactPerson} heading={'Dataset Contacts'} />
+                </Box>)
+            : <> </>
+            }
         </Box>
     );
 };
