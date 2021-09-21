@@ -58,7 +58,23 @@ const Collection = function (node) {
     const nodeDetail = {
         node: node
     };
-    nodeDetail.getDetails = () => {
+    nodeDetail.getHeader = () => {
+        return (
+            <>
+                <CollectionHeader node={node} />
+            </>
+        )
+    };
+
+    nodeDetail.getDetail = () => {
+        return (
+            <>
+                <CollectionDetails node={node} />
+            </>
+        )
+    };
+
+    nodeDetail.getAll = () => {
         return (
             <>
                 <CollectionHeader node={node} />
@@ -73,7 +89,23 @@ const Dataset = function (node) {
     const nodeDetail = {
         node: node
     };
-    nodeDetail.getDetails = () => {
+    nodeDetail.getHeader = () => {
+        return (
+            <>
+                <DatasetHeader node={node} />
+            </>
+        )
+    };
+
+    nodeDetail.getDetail = () => {
+        return (
+            <>
+                <DatasetDetails node={node} />
+            </>
+        )
+    };
+
+    nodeDetail.getAll = () => {
         return (
             <>
                 <DatasetHeader node={node} />
@@ -88,7 +120,23 @@ const Protocol = function (node) {
     const nodeDetail = {
         node: node
     };
-    nodeDetail.getDetails = () => {
+    nodeDetail.getHeader = () => {
+        return (
+            <>
+                <ProtocolHeader node={node} />>
+            </>
+        )
+    };
+
+    nodeDetail.getDetail = () => {
+        return (
+            <>
+                <ProtocolDetails node={node} />
+            </>
+        )
+    };
+
+    nodeDetail.getAll = () => {
         return (
             <>
                 <ProtocolHeader node={node} />
@@ -103,7 +151,23 @@ const Sample = function (node) {
     const nodeDetail = {
         node: node
     };
-    nodeDetail.getDetails = () => {
+    nodeDetail.getHeader = () => {
+        return (
+            <>
+                <CollectionHeader node={node} />
+            </>
+        )
+    };
+
+    nodeDetail.getDetail = () => {
+        return (
+            <>
+                <SampleDetails node={node} />
+            </>
+        )
+    };
+
+    nodeDetail.getAll = () => {
         return (
             <>
                 <CollectionHeader node={node} />
@@ -118,7 +182,23 @@ const Subject = function (node) {
     const nodeDetail = {
         node: node
     };
-    nodeDetail.getDetails = () => {
+    nodeDetail.getHeader = () => {
+        return (
+            <>
+                <CollectionHeader node={node} />
+            </>
+        )
+    };
+
+    nodeDetail.getDetail = () => {
+        return (
+            <>
+                <SubjectDetails node={node} />
+            </>
+        )
+    };
+
+    nodeDetail.getAll = () => {
         return (
             <>
                 <CollectionHeader node={node} />
@@ -133,7 +213,23 @@ const File = function (node) {
     const nodeDetail = {
         node: node
     };
-    nodeDetail.getDetails = () => {
+    nodeDetail.getHeader = () => {
+        return (
+            <>
+                <FileHeader node={node} />
+            </>
+        )
+    };
+
+    nodeDetail.getDetail = () => {
+        return (
+            <>
+                <FileDetails node={node} />
+            </>
+        )
+    };
+
+    nodeDetail.getAll = () => {
         return (
             <>
                 <FileHeader node={node} />
@@ -148,7 +244,23 @@ const Person = function (node) {
     const nodeDetail = {
         node: node
     };
-    nodeDetail.getDetails = () => {
+    nodeDetail.getHeader = () => {
+        return (
+            <>
+                <PersonHeader node={node} />
+            </>
+        )
+    };
+
+    nodeDetail.getDetail = () => {
+        return (
+            <>
+                <PersonDetails node={node} />
+            </>
+        )
+    };
+
+    nodeDetail.getAll = () => {
         return (
             <>
                 <PersonHeader node={node} />
@@ -163,7 +275,23 @@ const Unknown = function (node) {
     const nodeDetail = {
         node: node
     };
-    nodeDetail.getDetails = () => {
+    nodeDetail.getHeader = () => {
+        return (
+            <>
+                <NodeHeader close={() => {}} heading={NODES[0]} />
+            </>
+        )
+    };
+
+    nodeDetail.getDetail = () => {
+        return (
+            <>
+                <Details close={() => {}} nodeHeading={NODES[0]} />
+            </>
+        )
+    };
+
+    nodeDetail.getAll = () => {
         return (
             <>
                 <NodeHeader close={() => {}} heading={NODES[0]} />

@@ -1,4 +1,4 @@
-import { rdfTypes, label_key } from './graphModel';
+import { rdfTypes } from './graphModel';
 
 function createImage(node) {
     // TODO: replace this with a decorator (maybe).
@@ -13,10 +13,19 @@ function createImage(node) {
 }
 
 function extractProperties(node, ttlTypes) {
+    if (ttlTypes === undefined) {
+        return;
+    }
     for (const property of node.properties) {
         for (const type_property of rdfTypes[node.type].properties) {
+            console.log(node.id);
             if (property.predicate === (ttlTypes[type_property.type]?.iri?.id + type_property.key)) {
-                node.attributes[type_property.property] = property.value;
+                if (node.attributes[type_property.property] !== undefined) {
+                    node.attributes[type_property.property].push(property.value);
+                } else {
+                    node.attributes[type_property.property] = [];
+                    node.attributes[type_property.property].push(property.value);
+                }
             }
         }
     }
@@ -26,18 +35,14 @@ function extractProperties(node, ttlTypes) {
     }
 }
 
-function extractLabel(node) {
-    let match = node.properties?.find( (prop) => prop.predicate === label_key );
-    if ( match ){
-        node.name = match.value;
-    }
-}
-
 var NodesFactory = function () {
     this.createNode = function (node, ttlTypes) {
         var typed_node;
 
         switch(node.type) {
+            case "Award":
+                typed_node = new Award(node, ttlTypes);
+                break;
             case "Collection":
                 typed_node = new Collection(node, ttlTypes);
                 break;
@@ -77,23 +82,40 @@ const Collection = function (node, ttlTypes) {
 };
 
 const Contributor = function (node, ttlTypes) {
-    node.img = createImage(node);
     extractProperties(node, ttlTypes);
-    extractLabel(node);
+    node.img = createImage(node);
+    // compile node name based on the props extracted, if these are presents
+    node.name = node.attributes?.firstName !== undefined
+        ? node.attributes?.middleName !== undefined
+            ? node.attributes?.lastName !== undefined
+                ? node.attributes?.firstName + " " + node.attributes?.middleName + " " + node.attributes?.lastName
+                : node.attributes?.firstName + " " + node.attributes?.middleName
+            : node.attributes?.lastName !== undefined
+                ? node.attributes?.firstName + " " + node.attributes?.lastName
+                : node.attributes?.firstName
+        : node.name;
+    return node;
+};
+
+
+const Award = function (node, ttlTypes) {
+    extractProperties(node, ttlTypes);
+    node.img = createImage(node);
+    node.name = node.name.split("/").at(-1);
     return node;
 };
 
 const Dataset = function (node, ttlTypes) {
     node.img = createImage(node);
     extractProperties(node, ttlTypes);
-    extractLabel(node);
+    node.name = node.name.split(":").at(-1);
     return node;
 };
 
 const Protocol = function (node, ttlTypes) {
     node.img = createImage(node);
     extractProperties(node, ttlTypes);
-    extractLabel(node);
+    node.name = "Protocol " + node.name.split("/").at(-1);
     return node;
 };
 
@@ -106,6 +128,11 @@ const Sample = function (node, ttlTypes) {
 const Subject = function (node, ttlTypes) {
     node.img = createImage(node);
     extractProperties(node, ttlTypes);
+    if (node.attributes?.identifier !== undefined) {
+        node.name = node.attributes?.identifier[0];
+    } else {
+        node.name = node.name.split("/").at(-1);
+    }
     return node;
 };
 
@@ -116,9 +143,18 @@ const File = function (node, ttlTypes) {
 };
 
 const Person = function (node, ttlTypes) {
-    node.img = createImage(node);
     extractProperties(node, ttlTypes);
-    extractLabel(node);
+    node.img = createImage(node);
+    // compile node name based on the props extracted, if these are presents
+    node.name = node.attributes?.firstName !== undefined
+        ? node.attributes?.middleName !== undefined
+            ? node.attributes?.lastName !== undefined
+                ? node.attributes?.firstName + " " + node.attributes?.middleName + " " + node.attributes?.lastName
+                : node.attributes?.firstName + " " + node.attributes?.middleName
+            : node.attributes?.lastName !== undefined
+                ? node.attributes?.firstName + " " + node.attributes?.lastName
+                : node.attributes?.firstName
+        : node.name;
     return node;
 };
 
