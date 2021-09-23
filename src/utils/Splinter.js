@@ -1,5 +1,6 @@
 import NodesFactory from './nodesFactory';
 import { rdfTypes, type_key, typesModel } from './graphModel';
+import { subject_key, protocols_key, contributors_key } from '../constants';
 
 const N3 = require('n3');
 const TMP_FILE = ".tmp";
@@ -378,9 +379,6 @@ class Splinter {
     organise_nodes(parent) {
         // structure the graph per category
         const id = parent.id;
-        const subject_key = "all_subjects";
-        const protocols_key = "all_protocols";
-        const contributors_key = "all_contributors";
         const subjects = {
             id: subject_key,
             name: "Subjects",

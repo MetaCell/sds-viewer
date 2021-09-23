@@ -5,6 +5,8 @@ import {
 } from "@material-ui/core";
 import SimpleChip from './Views/SimpleChip';
 import SimpleLabelValue from './Views/SimpleLabelValue';
+import { iterateSimpleValue } from './utils';
+import { detailsLabel } from '../../../constants';
 
 const SubjectDetails = (props) => {
     const { node } = props;
@@ -13,15 +15,15 @@ const SubjectDetails = (props) => {
     let idDetails = "";
     // both tree and graph nodes are present, extract data from both
     if (node.tree_node && node.graph_node) {
-        idDetails = node?.tree_node?.id + "_details";
+        idDetails = node?.tree_node?.id + detailsLabel;
         title = node?.tree_node?.basename;
     // the below is the case where we have data only from the tree/hierarchy
     } else if (node?.graph_node) {
-        idDetails = node?.graph_node?.id + "_details";
+        idDetails = node?.graph_node?.id + detailsLabel;
         title = node.graph_node.name;
     // the below is the case where we have data only from the graph
     } else {
-        idDetails = node.tree_node.id + "_details";
+        idDetails = node.tree_node.id + detailsLabel;
         title = node.tree_node.basename;
     }
 
@@ -47,19 +49,14 @@ const SubjectDetails = (props) => {
     return (
         <Box className="secondary-sidebar_body" id={idDetails}>
             <Box className="tab-content">
-                <SimpleLabelValue label={'Label'} value={title} heading={'Details'} />
-                { node?.graph_node?.attributes?.age !== undefined
-                    ? (<SimpleLabelValue label={'Age'} value={node?.graph_node?.attributes?.age[0]} />)
-                    : <> </>
-                }
-                { node?.graph_node?.attributes?.hasAgeCategory !== undefined
-                    ? (<SimpleLabelValue label={'Age Category'} value={node.graph_node.attributes.hasAgeCategory[0]} />)
-                    : <> </>
-                }
-                { node?.graph_node?.attributes?.biologicalSex !== undefined
-                    ? (<SimpleLabelValue label={'Biological Sex'} value={node.graph_node.attributes.biologicalSex[0]} />)
-                    : <> </>
-                }
+                <SimpleLabelValue label={'Label'} value={title} heading={'Subject Details'} />
+
+                { iterateSimpleValue('Age', node?.graph_node?.attributes?.age) }
+                { iterateSimpleValue('Age Category', node?.graph_node?.attributes?.hasAgeCategory) }
+                { iterateSimpleValue('Biological Sex', node?.graph_node?.attributes?.biologicalSex) }
+                { iterateSimpleValue('Derived information as participant', node?.graph_node?.attributes?.hasDerivedInformationAsParticipant) }
+                { iterateSimpleValue('Participant in performance of', node?.graph_node?.attributes?.participantInPerformanceOf) }
+                { iterateSimpleValue('Specimen identifier', node?.graph_node?.attributes?.specimenHasIdentifier) }
 
                 { species.length > 0
                     ? ( <Box className="tab-content-row">

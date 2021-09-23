@@ -8,6 +8,7 @@ import {
 import Links from './Views/Links';
 import SimpleChip from './Views/SimpleChip';
 import SimpleLabelValue from './Views/SimpleLabelValue';
+import { detailsLabel } from '../../../constants';
 
 const FileDetails = (props) => {
     const { node } = props;
@@ -17,15 +18,15 @@ const FileDetails = (props) => {
     // both tree and graph nodes are present, extract data from both
     if (node?.tree_node && node?.graph_node) {
         title = node.tree_node.basename;
-        idDetails = node.tree_node.id + "_details";
+        idDetails = node.tree_node.id + detailsLabel;
     // the below is the case where we have data only from the tree/hierarchy
     } else if (node.graph_node) {
-        idDetails = node.graph_node.id + "_details";
+        idDetails = node.graph_node.id + detailsLabel;
         title = node.graph_node.attributes?.label[0];
     // the below is the case where we have data only from the graph
     } else {
         title = node.tree_node.basename;
-        idDetails = node.tree_node.id + "_details";
+        idDetails = node.tree_node.id + detailsLabel;
     }
 
     let latestUpdate = "Not defined."
@@ -51,11 +52,11 @@ const FileDetails = (props) => {
     return (
         <Box className="secondary-sidebar_body" id={idDetails}>
             <Box className="tab-content">
-                <SimpleLabelValue label={'Updated On'} value={latestUpdate.toString()} heading={'Details'} />
+                <SimpleLabelValue label={'Updated On'} value={latestUpdate.toString()} heading={'File Details'} />
 
                 <Box className="tab-content-row">
                     <Typography component="label">About</Typography>
-                    <SimpleChip chips={node.graph_node.attributes?.isAbout} />
+                    <SimpleChip chips={node?.graph_node?.attributes?.isAbout} />
                 </Box>
                 <SimpleLabelValue label={'Label'} value={title} />
                 { node?.tree_node?.uri_human !== undefined
@@ -84,10 +85,10 @@ const FileDetails = (props) => {
                     </List>
                 </Box>
 
-                { node.graph_node.attributes?.hasUriHuman !== undefined
+                { node?.graph_node?.attributes?.hasUriHuman !== undefined
                     ? (<Box className="tab-content-row">
                             <Typography component="label">Links</Typography>
-                            <Links key={`detail_links_dataset`} href={node.graph_node.attributes?.hasUriHuman[0]} title="Dataset" />
+                            <Links key={`detail_links_dataset`} href={node?.graph_node?.attributes?.hasUriHuman[0]} title="Dataset" />
                         </Box>)
                     : <> </>
                 }
