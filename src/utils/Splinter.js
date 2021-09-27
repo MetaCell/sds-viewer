@@ -676,16 +676,28 @@ class Splinter {
         if (!node.items) {
             node.items = [];
         }
-        node.graph_reference = node.uri_api;
+        node.graph_reference = this.findReference(node.uri_api);
         this.tree_map.set(node.id, node);
         const newNode = {
             id: node.uri_api,
             text: node.text,
             items: node.items,
-            graph_reference: node.graph_reference,
+            graph_reference: node?.graph_reference?.id,
             path: node.path
         }
         return newNode;
+    }
+
+    findReference(id) {
+        var reference = this.nodes.get(id);
+        if (reference === undefined) {
+            this.nodes.forEach((value, key) => {
+                if (value.proxies.indexOf(String(id)) !== -1) {
+                    reference = value;
+                }
+            });
+        }
+        return reference;
     }
 }
 

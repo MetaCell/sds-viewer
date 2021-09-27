@@ -22,12 +22,11 @@ const NodeDetailView = (props) => {
   if (nodeSelected.tree_node !== undefined && nodeSelected.tree_node !== null) {
     path = [...nodeSelected.tree_node.path]
     path.shift();
-    otherDetails = path.map( singleNode => {
-      const graph_node = window.datasets[nodeSelected.dataset_id].splinter.nodes.get(singleNode);
+    otherDetails = path.reverse().map( singleNode => {
       const tree_node = window.datasets[nodeSelected.dataset_id].splinter.tree_map.get(singleNode);
       const new_node = {
         dataset_id: nodeSelected.dataset_id,
-        graph_node: graph_node,
+        graph_node: tree_node.graph_reference,
         tree_node: tree_node
       }
       // I don't like the check on primary and derivative below since this depends on the data
@@ -61,13 +60,12 @@ const NodeDetailView = (props) => {
       };
     };
 
-    otherDetails = path.map( singleNode => {
+    otherDetails = path.reverse().map( singleNode => {
       const graph_node = window.datasets[nodeSelected.dataset_id].splinter.nodes.get(singleNode);
-      const tree_node = window.datasets[nodeSelected.dataset_id].splinter.tree_map.get(singleNode);
       const new_node = {
         dataset_id: nodeSelected.dataset_id,
         graph_node: graph_node,
-        tree_node: tree_node
+        tree_node: graph_node.tree_reference
       }
       if (new_node.graph_node.id !== subject_key
         && new_node.graph_node.id !== contributors_key
@@ -92,8 +90,8 @@ const NodeDetailView = (props) => {
       <Box className="secondary-sidebar_header">
         <Breadcrumbs close={false} links={links} />
       </Box>
-      { nodeDetails.getAll() }
       { otherDetails }
+      { nodeDetails.getAll() }
       <NodeFooter />
     </Box>
   );
