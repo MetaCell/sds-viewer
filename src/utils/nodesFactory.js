@@ -118,7 +118,7 @@ const Protocol = function (node, ttlTypes) {
     node.img = createImage(node);
     extractProperties(node, ttlTypes);
     var namesArray = node.name.split("/");
-    node.name = "Protocol " + namesArray[namesArray.length - 1];
+    node.name = namesArray[namesArray.length - 1];
     return node;
 };
 

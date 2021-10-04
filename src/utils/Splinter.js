@@ -1,5 +1,6 @@
 import NodesFactory from './nodesFactory';
 import { rdfTypes, type_key, typesModel } from './graphModel';
+import { subject_key, protocols_key, contributors_key } from '../constants';
 
 const N3 = require('n3');
 const TMP_FILE = ".tmp";
@@ -380,9 +381,6 @@ class Splinter {
     organise_nodes(parent) {
         // structure the graph per category
         const id = parent.id;
-        const subject_key = "all_subjects";
-        const protocols_key = "all_protocols";
-        const contributors_key = "all_contributors";
         const subjects = {
             id: subject_key,
             name: "Subjects",
@@ -680,16 +678,28 @@ class Splinter {
         if (!node.items) {
             node.items = [];
         }
-        node.graph_reference = node.uri_api;
+        node.graph_reference = this.findReference(node.uri_api);
         this.tree_map.set(node.id, node);
         const newNode = {
             id: node.uri_api,
             text: node.text,
             items: node.items,
-            graph_reference: node.graph_reference,
+            graph_reference: node?.graph_reference?.id,
             path: node.path
         }
         return newNode;
+    }
+
+    findReference(id) {
+        var reference = this.nodes.get(id);
+        if (reference === undefined) {
+            this.nodes.forEach((value, key) => {
+                if (value.proxies.indexOf(String(id)) !== -1) {
+                    reference = value;
+                }
+            });
+        }
+        return reference;
     }
 }
 

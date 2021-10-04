@@ -138,6 +138,24 @@ export const rdfTypes = {
                 "key": "localId",
                 "property": "identifier",
                 "label": "to be filled"
+            },
+            {
+                "type": "TEMP",
+                "key": "hasDerivedInformationAsParticipant",
+                "property": "hasDerivedInformationAsParticipant",
+                "label": "to be filled"
+            },
+            {
+                "type": "sparc",
+                "key": "specimenHasIdentifier",
+                "property": "specimenHasIdentifier",
+                "label": "to be filled"
+            },
+            {
+                "type": "TEMP",
+                "key": "participantInPerformanceOf",
+                "property": "participantInPerformanceOf",
+                "label": "to be filled"
             }
     ]
     },
@@ -161,6 +179,36 @@ export const rdfTypes = {
                 "type": "TEMP",
                 "key": "localId",
                 "property": "identifier",
+                "label": "Unique instance identifier"
+            },
+            {
+                "type": "TEMP",
+                "key": "hasAssignedGroup",
+                "property": "hasAssignedGroup",
+                "label": "to be filled"
+            },
+            {
+                "type": "TEMP",
+                "key": "hasDerivedInformationAsParticipant",
+                "property": "hasDerivedInformationAsParticipant",
+                "label": "to be filled"
+            },
+            {
+                "type": "TEMP",
+                "key": "hasDigitalArtifactThatIsAboutIt",
+                "property": "hasDigitalArtifactThatIsAboutIt",
+                "label": "Unique instance identifier"
+            },
+            {
+                "type": "TEMP",
+                "key": "participantInPerformanceOf",
+                "property": "participantInPerformanceOf",
+                "label": "Unique instance identifier"
+            },
+            {
+                "type": "TEMPRAW",
+                "key": "wasExtractedFromAnatomicalRegion",
+                "property": "wasExtractedFromAnatomicalRegion",
                 "label": "Unique instance identifier"
             }
         ]

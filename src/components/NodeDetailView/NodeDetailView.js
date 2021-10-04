@@ -4,6 +4,7 @@ import NodeFooter from "./Footers/Footer";
 import DetailsFactory from './factory';
 import { useSelector } from 'react-redux'
 import Breadcrumbs from "./Details/Views/Breadcrumbs";
+import { subject_key, protocols_key, contributors_key } from '../../constants';
 
 const NodeDetailView = (props) => {
   var otherDetails = undefined;
@@ -21,20 +22,28 @@ const NodeDetailView = (props) => {
   if (nodeSelected.tree_node !== undefined && nodeSelected.tree_node !== null) {
     path = [...nodeSelected.tree_node.path]
     path.shift();
-    otherDetails = path.map( singleNode => {
-      const graph_node = window.datasets[nodeSelected.dataset_id].splinter.nodes.get(singleNode);
+    otherDetails = path.reverse().map( singleNode => {
       const tree_node = window.datasets[nodeSelected.dataset_id].splinter.tree_map.get(singleNode);
       const new_node = {
         dataset_id: nodeSelected.dataset_id,
-        graph_node: graph_node,
+        graph_node: tree_node.graph_reference,
         tree_node: tree_node
       }
-      links.pages.unshift({
-        id: singleNode,
-        title: tree_node.text,
-        href: '#'
-      });
-      return factory.createDetails(new_node).getDetail()
+      // I don't like the check on primary and derivative below since this depends on the data
+      // but it's coming as a feature request, so I guess it can stay there.
+      if (new_node.tree_node.id !== subject_key
+        && new_node.tree_node.id !== contributors_key
+        && new_node.tree_node.id !== protocols_key
+        && new_node.tree_node.basename !== 'primary'
+        && new_node.tree_node.basename !== 'derivative') {
+        links.pages.unshift({
+          id: singleNode,
+          title: tree_node.text,
+          href: '#'
+        });
+        return factory.createDetails(new_node).getDetail()
+      }
+      return <> </>;
     });
     links.current = {
       id: nodeSelected.tree_node.id,
@@ -51,20 +60,24 @@ const NodeDetailView = (props) => {
       };
     };
 
-    otherDetails = path.map( singleNode => {
+    otherDetails = path.reverse().map( singleNode => {
       const graph_node = window.datasets[nodeSelected.dataset_id].splinter.nodes.get(singleNode);
-      const tree_node = window.datasets[nodeSelected.dataset_id].splinter.tree_map.get(singleNode);
       const new_node = {
         dataset_id: nodeSelected.dataset_id,
         graph_node: graph_node,
-        tree_node: tree_node
+        tree_node: graph_node.tree_reference
       }
-      links.pages.unshift({
-        id: singleNode,
-        title: graph_node.name,
-        href: '#'
-      });
-      return factory.createDetails(new_node).getDetail()
+      if (new_node.graph_node.id !== subject_key
+        && new_node.graph_node.id !== contributors_key
+        && new_node.graph_node.id !== protocols_key) {
+        links.pages.unshift({
+          id: singleNode,
+          title: graph_node.name,
+          href: '#'
+        });
+        return factory.createDetails(new_node).getDetail()
+      }
+      return <> </>;
     });
     links.current = {
       id: nodeSelected.graph_node.id,
@@ -74,11 +87,11 @@ const NodeDetailView = (props) => {
 
   return (
     <Box className={"secondary-sidebar" + (props.open ? " in" : "")}>
-      <Box className="secondary-sidebar_header">
+      <Box className="secondary-sidebar_breadcrumb">
         <Breadcrumbs close={false} links={links} />
       </Box>
-      { nodeDetails.getAll() }
       { otherDetails }
+      { nodeDetails.getAll() }
       <NodeFooter />
     </Box>
   );

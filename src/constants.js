@@ -5,3 +5,9 @@ export const FILE_UPLOAD_PARAMS = {
   maxFiles: 6,
 };
 export const NODES = ["dataset", "nifti", "volume", "matlab"];
+
+export const detailsLabel = "_details";
+
+export const subject_key = "all_subjects";
+export const protocols_key = "all_protocols";
+export const contributors_key = "all_contributors";
