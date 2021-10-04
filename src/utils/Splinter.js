@@ -8,32 +8,71 @@ const TMP_FILE = ".tmp";
 const SUBJECTS_LEVEL = 4;
 const PROTOCOLS_LEVEL = 2, CRONTRIBUTORS_LEVEL = 2;
 
+
+/*
+ * Brief explanation of the Splinter module:
+ *
+ * This class is meant to take in input the json and turtle files that compose the sds datasets.
+ * All the processing starts from the getGraph or getTree methods which call processDataset that does:
+ *
+ * # initialiseNodesEdges
+ *   Initialise all the global vars, arrays and maps used to create the graph and tree.
+ *
+ * # processTurtle
+ *   Through the library N3 it reads the turtle file to get triples of object-predicate-subject and the types.
+ *
+ * # processJSON
+ *   Nothing fancy, just reading a json file.
+ *
+ * # create_graph
+ *   It gets all the subjects that will be the nodes of our graph, it transform all the object as properties of the subjects,
+ *   it cleans the array from empty nodes and then it calls organise_nodes() that reorganise the data per category based on the
+ *   type of each node that will be casted using a factory and it arrange also the links between nodes accordingly.
+ *   The factory defined in the same folder of this module, look at the code in case interested, it's quite simple.
+ *
+ * # create_tree
+ *   It reads the json and create 2 maps, the tree_map where we keep each node by id.
+ *   The second map, tree_parent_map, it is instead used to create the hierarchy since we store all the nodes by parent id, so
+ *   once we get the tree root we can easily get the tree looking at the children of the root and then recursively we do the same
+ *   until the children do not exists anymore in the tree_parent_map data structure, so that means we reached the end of that branch.
+ *
+ * # mergeData
+ *   It links together the tree and the nodes of the graph, so that when we click on the graph we get the linked node on the tree
+ *   and viceversa clicking on the tree. It also push some more data into the graph (the graph is generate from the turtle file)
+ *   from the json file, since all the files that belongs to subjects and samples are stored in the json but we need to make them
+ *   available also for the graph. This is where this operation is done.
+ *
+ * # generateData
+ *   This is the last step where we take all the data created previously and manipulated to then create first of all the tree from
+ *   the tree_parent_map. Once the tree is ready we then create the nodes for the graph and we fix the links broken at the mergeData
+ *   step since some artificial nodes have been pushed into the nodes array that will be used for the graph.
+ *
+ */
+
+
 class Splinter {
     constructor(jsonFile, turtleFile) {
         this.factory = new NodesFactory();
         this.jsonFile = jsonFile;
         this.turtleFile = turtleFile;
         this.types = {};
+        this.jsonData = {};
+        this.levelsMap = {};
+        this.turtleData = [];
         this.tree = undefined;
-        this.tree_map = undefined;
-        this.tree_parents_map = undefined;
         this.nodes = undefined;
         this.edges = undefined;
         this.root_id = undefined;
+        this.tree_map = undefined;
+        this.proxies_map = undefined;
         this.forced_edges = undefined;
         this.forced_nodes = undefined;
-        this.proxies_map = undefined;
-        this.jsonData = {};
-        this.turtleData = [];
+        this.tree_parents_map = undefined;
         this.dataset_id = this.processDatasetId();
         this.store = new N3.Store();
-        this.searchArray = [];
-        this.searchId = [];
-        this.levelsMap = {};
-        this.maxLevel = 0;
     }
 
-
+    /* Initialise global maps before to start data manipulation */
     initialiseNodesEdges() {
         this.edges = [];
         this.nodes = new Map();
@@ -199,6 +238,7 @@ class Splinter {
     }
 
 
+    /* Entry point for the whole conversion and graph/tree creation */
     async processDataset() {
         this.initialiseNodesEdges()
         await this.processTurtle();
@@ -210,6 +250,7 @@ class Splinter {
     }
 
 
+    /* Creates a map of types that will be used by the graphModel.js in order to extract values from each type */
     get_type(node) {
         const typeFound = {
             type: typesModel.unknown.type,
@@ -249,7 +290,8 @@ class Splinter {
                 name: node.value,
                 proxies: [],
                 properties: [],
-                tree_reference: null
+                tree_reference: null,
+                children_counter: 0
             })
         }
     }
@@ -389,7 +431,8 @@ class Splinter {
             parent : parent,
             proxies: [],
             level: SUBJECTS_LEVEL,
-            tree_reference: null
+            tree_reference: null,
+            children_counter: 0
         };
         if (this.nodes.get(subject_key) === undefined) {
             this.nodes.set(subject_key, this.factory.createNode(subjects));
@@ -409,7 +452,8 @@ class Splinter {
             parent : parent,
             proxies: [],
             level: PROTOCOLS_LEVEL,
-            tree_reference: null
+            tree_reference: null,
+            children_counter: 0
         };
         if (this.nodes.get(protocols_key) ===  undefined) {
             this.nodes.set(protocols_key, this.factory.createNode(protocols));
@@ -429,7 +473,8 @@ class Splinter {
             parent : parent,
             proxies: [],
             level: CRONTRIBUTORS_LEVEL,
-            tree_reference: null
+            tree_reference: null,
+            children_counter: 0
         };
         if (this.nodes.get(contributors_key) === undefined) {
             this.nodes.set(contributors_key, this.factory.createNode(contributors));
@@ -470,6 +515,9 @@ class Splinter {
                 target_node.parent = protocols;
                 this.nodes.set(target_node.id, target_node);
             }
+            let source_node = this.nodes.get(link.source);
+            source_node.children_counter++;
+            this.nodes.set(source_node.id, source_node);
             return link;
         }).filter(link => {
             let target_node = this.nodes.get(link.target);
@@ -478,7 +526,6 @@ class Splinter {
             }
             return true;
         });
-        // TODO: move this along with the tree generation since they needs kind of together to link the nodes.
     }
 
 
@@ -486,7 +533,10 @@ class Splinter {
         this.forced_nodes.forEach((node, index, array) => {
             if (node.type === rdfTypes.Sample.key) {
                 if (node.attributes.derivedFrom !== undefined) {
-                    array[index].level = this.nodes.get(node.attributes.derivedFrom[0]).level + 1;
+                    let source = this.nodes.get(node.attributes.derivedFrom[0]);
+                    source.children_counter++
+                    //this.nodes.set(node.attributes.derivedFrom[0], source);
+                    array[index].level = source.level + 1;
                     this.forced_edges.push({
                         source: node.attributes.derivedFrom[0],
                         target: node.id
@@ -500,6 +550,14 @@ class Splinter {
                 } else {
                     this.levelsMap[node.level] = [node];
                 }
+            }
+        });
+    }
+
+    identify_childless_parents() {
+        this.forced_nodes.forEach((node, index, array) => {
+            if ((node.type === rdfTypes.Sample.key || node.type === rdfTypes.Subject.key) && (node.children_counter === 0)) {
+                node.img.src = "./images/graph/question_mark.svg"
             }
         });
     }
@@ -549,8 +607,8 @@ class Splinter {
 
     /**
      * Exclude certain nodes
-     * @param {*} node 
-     * @returns 
+     * @param {*} node
+     * @returns
      */
     filterNode = (node) => {
         return node.basename.includes(TMP_FILE)
@@ -576,6 +634,7 @@ class Splinter {
                 level = this.nodes.get(parent.attributes.derivedFrom[0]).level + 1;
             }
         }
+        parent.children_counter++;
         const new_node = this.buildNodeFromJson(node, level);
         new_node.parent = parent;
         this.forced_edges.push({
@@ -614,6 +673,7 @@ class Splinter {
             properties: [],
             type: item.mimetype === "inode/directory" ? "Collection" : "File",
             tree_reference: null,
+            children_counter: 0
         };
         return this.factory.createNode(new_node, []);
     }
@@ -654,6 +714,7 @@ class Splinter {
         })
 
         this.fix_links();
+        this.identify_childless_parents();
     }
 
     build_leaf(node, parent) {
