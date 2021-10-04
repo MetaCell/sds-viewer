@@ -87,7 +87,7 @@ const NodeDetailView = (props) => {
 
   return (
     <Box className={"secondary-sidebar" + (props.open ? " in" : "")}>
-      <Box className="secondary-sidebar_header">
+      <Box className="secondary-sidebar_breadcrumb">
         <Breadcrumbs close={false} links={links} />
       </Box>
       { otherDetails }

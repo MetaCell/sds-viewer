@@ -11,15 +11,15 @@ export const layout = {
         enableEdgeDock: false,
         sideBorders: 8,
     },
-    borders: [
-        {
-            type: "border",
-            location: "bottom",
-            size: 100,
-            children: [],
-            barSize: 18,
-        },
-    ],
+    // borders: [
+    //     {
+    //         type: "border",
+    //         location: "bottom",
+    //         size: 100,
+    //         children: [],
+    //         barSize: 18,
+    //     },
+    // ],
     "layout": {
         "type": "tabset",
         "weight": 100,
