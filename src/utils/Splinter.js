@@ -589,10 +589,7 @@ class Splinter {
 
     create_tree() {
         for (const leaf of this.jsonData.data) {
-            // TODO: the reference to the graph node should be added at this point since once
-            // we push the object inside the map then we would not want to manipulate it again.
             this.tree_map.set(leaf.uri_api, leaf);
-            // Fix the fact that the dataset node states that its parent is itself.
             if (leaf.parent_id === leaf.remote_id) {
                 continue;
             }
