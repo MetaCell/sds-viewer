@@ -36,7 +36,7 @@ const NodeDetailView = (props) => {
         && new_node.tree_node.id !== protocols_key
         && new_node.tree_node.basename !== 'primary'
         && new_node.tree_node.basename !== 'derivative') {
-        links.pages.unshift({
+        links.pages.push({
           id: singleNode,
           title: tree_node.text,
           href: '#'
@@ -70,7 +70,7 @@ const NodeDetailView = (props) => {
       if (new_node.graph_node.id !== subject_key
         && new_node.graph_node.id !== contributors_key
         && new_node.graph_node.id !== protocols_key) {
-        links.pages.unshift({
+        links.pages.push({
           id: singleNode,
           title: graph_node.name,
           href: '#'

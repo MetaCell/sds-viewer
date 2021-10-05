@@ -11,6 +11,7 @@ const StyledTreeItem = (props) => {
     labelIcon: LabelIcon,
     labelInfo,
     iconClass,
+    onNodeSelect,
     ...other
   } = props;
 
@@ -20,7 +21,13 @@ const StyledTreeItem = (props) => {
       label={
         <div className={`labelRoot ${iconClass}`}>
           <Box className="labelIcon"></Box>
-          <Typography variant="body2" className="labelText">
+          <Typography
+            onClick={event => {
+              onNodeSelect(event, props.nodeId);
+              event.preventDefault();
+            }}
+            variant="body2" 
+            className="labelText">
             {labelText}
           </Typography>
           {labelInfo > 0 ? (

@@ -12,6 +12,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { useSelector, useDispatch } from 'react-redux';
 import FormatAlignCenterIcon from '@material-ui/icons/FormatAlignCenter';
 import GeppettoGraphVisualization from '@metacell/geppetto-meta-ui/graph-visualization/Graph';
+import { GRAPH_SOURCE } from '../../constants';
 
 const NODE_FONT = '500 6px Inter, sans-serif';
 const ONE_SECOND = 1000;
@@ -89,7 +90,8 @@ const GraphViewer = (props) => {
     dispatch(selectInstance({
       dataset_id: props.graph_id,
       graph_node: node.id,
-      tree_node: node?.tree_reference?.id
+      tree_node: node?.tree_reference?.id,
+      source: GRAPH_SOURCE
     }));
   };
 

@@ -9,7 +9,8 @@ export const sdsInitialState = {
         instance_selected: {
             dataset_id: null,
             graph_node: null,
-            tree_node: null
+            tree_node: null,
+            source: ""
         },
         layout : {}
     }
@@ -28,7 +29,8 @@ export default function sdsClientReducer(state = {}, action) {
                     instance_selected: {
                         dataset_id: action.data.dataset_id,
                         graph_node: graph_node ? graph_node : null,
-                        tree_node: tree_node ? tree_node : null
+                        tree_node: tree_node ? tree_node : null,
+                        source: action.data.source
                     }
                 };
             }

@@ -11,3 +11,6 @@ export const detailsLabel = "_details";
 export const subject_key = "all_subjects";
 export const protocols_key = "all_protocols";
 export const contributors_key = "all_contributors";
+
+export const GRAPH_SOURCE = "GRAPH";
+export const TREE_SOURCE = "TREE";
