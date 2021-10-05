@@ -24,7 +24,7 @@ const InstancesTreeView = (props) => {
       const node = window.datasets[dataset_id].splinter.tree_map.get(nodeId);
       dispatch(selectInstance({
         dataset_id: dataset_id,
-        graph_node: node.graph_reference.id,
+        graph_node: node.graph_reference?.id,
         tree_node: node.id
       }));
     }
@@ -53,7 +53,7 @@ const InstancesTreeView = (props) => {
     const node = window.datasets[dataset_id].splinter.tree_map.get(nodeIds[0]);
     dispatch(selectInstance({
       dataset_id: dataset_id,
-      graph_node: node.graph_reference.id,
+      graph_node: node.graph_reference?.id,
       tree_node: node.id
     }));
   };

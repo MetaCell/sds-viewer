@@ -29,14 +29,14 @@ const GRAPH_COLORS = {
 const TOP_DOWN = {
   label : "Top Down",
   layout : "td",
-  linkDistance : (graph) => { 
+  maxNodesLevel : (graph) => { 
     return graph.hierarchyVariant;
   }
 };
 const RADIAL_OUT = {
   label : "Radial",
-  layout : "radialout",
-  linkDistance : (graph) => { 
+  layout : "null",
+  maxNodesLevel : (graph) => { 
     return graph.radialVariant
   }
 };
@@ -63,7 +63,7 @@ const GraphViewer = (props) => {
   const [selectedNode, setSelectedNode] = useState(null);
   const [highlightNodes, setHighlightNodes] = useState(new Set());
   const [highlightLinks, setHighlightLinks] = useState(new Set());
-  const [selectedLayout, setSelectedLayout] = React.useState(RADIAL_OUT);
+  const [selectedLayout, setSelectedLayout] = React.useState(TOP_DOWN);
   const [layoutAnchorEl, setLayoutAnchorEl] = React.useState(null);
   const [resize, setResize] = useState({ width : "100%" , height : "100%" });
   const open = Boolean(layoutAnchorEl);
@@ -150,7 +150,7 @@ const GraphViewer = (props) => {
 
   const onEngineStop = () => {
     resetCamera();
-    setLoading(false)
+    setLoading(false);
   }
 
   // Check State updates triggered by Redux at a global level
@@ -177,6 +177,9 @@ const GraphViewer = (props) => {
   //Resume animation after component is updated, fixes issue with graphics going crazy.
   useEffect(() => {
     resetCamera();
+    // graphRef?.current?.ggv?.current.d3Force('charge', null);
+    graphRef?.current?.ggv?.current.d3Force('collide', d3.forceCollide(4));
+    graphRef?.current?.ggv?.current.d3Force("manyBody", d3.forceManyBody().strength(-100))
   },[layout]);
 
   const handleNodeHover = (node) => {
@@ -266,7 +269,7 @@ const GraphViewer = (props) => {
     [hoverNode]
   );
 
-  let linkDistance = selectedLayout.linkDistance(window.datasets[props.graph_id].graph);
+  let maxNodesLevel = selectedLayout.maxNodesLevel(window.datasets[props.graph_id].graph);
   return (
     <div className={'graph-view'}>
       { loading?
@@ -288,15 +291,12 @@ const GraphViewer = (props) => {
         // Create the Graph as 2 Dimensional
         d2={true}
         warmupTicks={1000}
-        cooldownTicks={10}
-        cooldowmTime={LOADING_TIME}
+        cooldownTicks={30}
         onEngineStop={onEngineStop}
         // Links properties
         linkColor = {handleLinkColor}
         linkWidth={2}
-        forceLinkStrength={2.75}
-        forceLinkDistance={ linkDistance }
-        forceChargeStrength={-10000}
+        forceChargeStrength={maxNodesLevel * -50}
         collideSize={5}
         linkDirectionalParticles={1}
         linkCurvature={link => {
@@ -308,6 +308,8 @@ const GraphViewer = (props) => {
             }
             else if ( link.source.fx === link.target.fx ) {
               curve = 0;
+            } else if ( link.source.fx >= link.target.fx ) {
+              curve = -.05;
             } else {
               curve = .05;
             }
@@ -333,7 +335,6 @@ const GraphViewer = (props) => {
         onNodeRightClick={(node, event) => handleNodeRightClick(node, event)}
         // td = Top Down, creates Graph with root at top
         dagMode={selectedLayout.layout}
-        dagLevelDistance={linkDistance}
         // Handles error on graph
         onDagError={(loopNodeIds) => {}}
         // Disable dragging of nodes

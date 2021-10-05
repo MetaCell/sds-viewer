@@ -116,14 +116,6 @@ const DatasetDetails = (props) => {
                     : <> </>
                 }
             </Box>
-
-            { contactPerson.length > 0
-            ? (<Box className="tab-content">
-                    <Typography component="h3">Collaborators</Typography>
-                    <CustomChips members={contactPerson} heading={'Dataset Contacts'} />
-                </Box>)
-            : <> </>
-            }
         </Box>
     );
 };
