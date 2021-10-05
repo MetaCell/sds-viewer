@@ -90,8 +90,9 @@ const NodeDetailView = (props) => {
       <Box className="secondary-sidebar_breadcrumb">
         <Breadcrumbs close={false} links={links} />
       </Box>
+      { nodeDetails.getHeader() }
       { otherDetails }
-      { nodeDetails.getAll() }
+      { nodeDetails.getDetail() }
       <NodeFooter />
     </Box>
   );
