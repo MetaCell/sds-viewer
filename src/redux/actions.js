@@ -18,7 +18,8 @@ export const selectInstance = instance => ({
     data: {
         dataset_id: instance.dataset_id,
         graph_node: instance.graph_node,
-        tree_node: instance.tree_node
+        tree_node: instance.tree_node,
+        source: instance.source
     },
 });
 
