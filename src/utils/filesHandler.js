@@ -28,7 +28,6 @@ class FileHandler {
             responseType: "stream",
             onDownloadProgress: (progressEvent) => {
                 // Progress callback to be used for the loader.
-                console.log("### axios progress event ###");
             }
         }).then(response => {
             callback(url, response.data);
