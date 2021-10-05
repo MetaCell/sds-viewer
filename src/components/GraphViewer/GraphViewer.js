@@ -298,7 +298,7 @@ const GraphViewer = (props) => {
         // Links properties
         linkColor = {handleLinkColor}
         linkWidth={2}
-        forceChargeStrength={maxNodesLevel * -50}
+        forceChargeStrength={maxNodesLevel * -20}
         collideSize={5}
         linkDirectionalParticles={1}
         linkCurvature={link => {
