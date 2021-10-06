@@ -6,7 +6,7 @@ import {
 import Search from '../../images/search.svg';
 import Typography from '@material-ui/core/Typography';
 import InstancesTreeView from './TreeView/InstancesTreeView';
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 const SidebarContent = (props) => {
   const { expand, setExpand, searchTerm } = props;
@@ -18,7 +18,7 @@ const SidebarContent = (props) => {
         <>
           <Typography component='h3'>Uploaded Instances</Typography>
           <Box className='scrollbar'>
-            { datasets.map((id) => <InstancesTreeView searchTerm={searchTerm} dataset_id={id} />) }
+            { datasets.map((id, index) => <InstancesTreeView key={"tree_" + index} searchTerm={searchTerm} dataset_id={id} />) }
           </Box>
         </>
       );

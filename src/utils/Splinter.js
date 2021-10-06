@@ -1,8 +1,12 @@
 import NodesFactory from './nodesFactory';
 import { rdfTypes, type_key, typesModel } from './graphModel';
+import { subject_key, protocols_key, contributors_key } from '../constants';
 
 const N3 = require('n3');
 const TMP_FILE = ".tmp";
+
+const SUBJECTS_LEVEL = 4;
+const PROTOCOLS_LEVEL = 2, CRONTRIBUTORS_LEVEL = 2;
 
 class Splinter {
     constructor(jsonFile, turtleFile) {
@@ -23,8 +27,8 @@ class Splinter {
         this.turtleData = [];
         this.dataset_id = this.processDatasetId();
         this.store = new N3.Store();
-        this.searchArray = [];
-        this.searchId = [];
+        this.levelsMap = {};
+        this.maxLevel = 0;
     }
 
 
@@ -55,6 +59,8 @@ class Splinter {
                 if (quad) {
                     that.store.addQuad(quad);
                     that.turtleData.push(quad);
+                } else {
+                    resolve(that.turtleData);
                 }
             }
 
@@ -64,8 +70,7 @@ class Splinter {
                     "iri": iri
                 };
             }
-            var quadsArray = parser.parse(that.turtleFile, callbackParse, prefixCallback);
-            resolve(quadsArray);
+            parser.parse(that.turtleFile, callbackParse, prefixCallback);
         });
     }
 
@@ -85,25 +90,80 @@ class Splinter {
             await this.processDataset();
         }
 
+        let cleanLinks = [];
         let self = this;
+
         // Assign neighbors, to highlight links
         this.forced_edges.forEach(link => {
-            const a = self.forced_nodes.find( node => node.id === link.source );
-            const b = self.forced_nodes.find( node => node.id === link.target );
-            !a.neighbors && (a.neighbors = []);
-            !b.neighbors && (b.neighbors = []);
-            a.neighbors.push(b);
-            b.neighbors.push(a);
-      
-            !a.links && (a.links = []);
-            !b.links && (b.links = []);
-            a.links.push(link);
-            b.links.push(link);
-          });
+            // Search for existing links
+            let existingLing = cleanLinks.find( l => l.source === link.source && l.target === link.target );
+            if ( !existingLing ) {
+                const a = self.forced_nodes.find( node => node.id === link.source );
+                const b = self.forced_nodes.find( node => node.id === link.target );
+                !a.neighbors && (a.neighbors = []);
+                !b.neighbors && (b.neighbors = []);
+                a.neighbors.push(b);
+                b.neighbors.push(a);
+
+                !a.links && (a.links = []);
+                !b.links && (b.links = []);
+                a.links.push(link);
+                b.links.push(link);
+
+                cleanLinks.push(link);
+            }
+        });
+
+        // Calculate level with max amount of nodes
+        let maxLevel = Object.keys(this.levelsMap).reduce((a, b) => this.levelsMap[a].length > this.levelsMap[b].length ? a : b);
+        // Space between nodes
+        let nodeSpace = 100;
+        // The furthestLeft a node can be
+        let furthestLeft = 0 - (Math.ceil(this.levelsMap[maxLevel].length)/2  * nodeSpace );
+        // Max width used in any level
+        let totalWidthSpace = nodeSpace * this.levelsMap[maxLevel].length;
+        let positionsMap = {};
+
+        let levelsMapKeys = Object.keys(this.levelsMap);
+
+        levelsMapKeys.forEach( level => {
+            positionsMap[level] = furthestLeft + nodeSpace/2;
+            this.levelsMap[level].sort((a, b) => a.attributes?.relativePath?.localeCompare(b.attributes?.relativePath));
+        });
+
+        // Start assigning the graph from the bottom up
+        let neighbors = 0;
+        levelsMapKeys.reverse().forEach( level => {
+            if ( parseInt(level) !== SUBJECTS_LEVEL - 1 ) {
+                this.levelsMap[level].forEach ( (n, index) => {
+                    neighbors = n?.neighbors?.filter(neighbor => { return neighbor.level > n.level });
+                    if ( neighbors.length > 0 ) {
+                        n.xPos = neighbors[0].xPos + (neighbors[neighbors.length-1].xPos - neighbors[0].xPos) * .5;
+                        positionsMap[n.level] = n.xPos + nodeSpace;
+                    } else {
+                        n.xPos = positionsMap[n.level] + nodeSpace;
+                        positionsMap[n.level] = n.xPos;
+                    }
+                })
+            } else {
+                let contributorsSpace = furthestLeft + totalWidthSpace;
+                this.levelsMap[level].forEach ( (n, index) => {
+                    if ( n.type === rdfTypes.Protocol.key ){
+                        n.xPos = positionsMap[n.level];
+                        positionsMap[n.level] = positionsMap[n.level] + nodeSpace/2;
+                    } else {
+                        n.xPos = contributorsSpace;
+                        contributorsSpace = contributorsSpace + nodeSpace/2;
+                    }
+                })
+            }
+        });
 
         return {
             nodes: this.forced_nodes,
-            links: this.forced_edges
+            links: cleanLinks,
+            radialVariant : this.levelsMap[maxLevel].length * 3,
+            hierarchyVariant : maxLevel * 20
         };
     }
 
@@ -312,26 +372,25 @@ class Splinter {
             return link;
         })
         this.edges = temp_edges;
-        return dataset_node.id;
+        return dataset_node;
     }
 
 
-    organise_nodes(id) {
+    organise_nodes(parent) {
         // structure the graph per category
-        const subject_key = "all_subjects";
-        const protocols_key = "all_protocols";
-        const contributors_key = "all_contributors";
+        const id = parent.id;
         const subjects = {
             id: subject_key,
             name: "Subjects",
             type: typesModel.NamedIndividual.subject.type,
             properties: [],
+            parent : parent,
             proxies: [],
-            level: 5,
+            level: SUBJECTS_LEVEL,
             tree_reference: null
         };
         if (this.nodes.get(subject_key) === undefined) {
-            this.nodes.set(subject_key, subjects);
+            this.nodes.set(subject_key, this.factory.createNode(subjects));
             this.edges.push({
                 source: id,
                 target: subjects.id
@@ -345,12 +404,13 @@ class Splinter {
             name: "Protocols",
             type: typesModel.sparc.Protocol.type,
             properties: [],
+            parent : parent,
             proxies: [],
-            level: 2,
+            level: PROTOCOLS_LEVEL,
             tree_reference: null
         };
         if (this.nodes.get(protocols_key) ===  undefined) {
-            this.nodes.set(protocols_key, protocols);
+            this.nodes.set(protocols_key, this.factory.createNode(protocols));
             this.edges.push({
                 source: id,
                 target: protocols.id
@@ -364,12 +424,13 @@ class Splinter {
             name: "Contributors",
             type: typesModel.NamedIndividual.contributor.type,
             properties: [],
+            parent : parent,
             proxies: [],
-            level: 2,
+            level: CRONTRIBUTORS_LEVEL,
             tree_reference: null
         };
         if (this.nodes.get(contributors_key) === undefined) {
-            this.nodes.set(contributors_key, contributors);
+            this.nodes.set(contributors_key, this.factory.createNode(contributors));
             this.edges.push({
                 source: id,
                 target: contributors.id
@@ -394,14 +455,17 @@ class Splinter {
             if (link.source === id && link.target !== subject_key && target_node.type === rdfTypes.Subject.key) {
                 link.source = subject_key;
                 target_node.level = subjects.level + 1;
+                target_node.parent = subjects;
                 this.nodes.set(target_node.id, target_node);
             } else if (link.source === id && link.target !== contributors_key && target_node.type === rdfTypes.Person.key) {
                 link.source = contributors_key;
                 target_node.level = contributors.level + 1;
+                target_node.parent = contributors;
                 this.nodes.set(target_node.id, target_node);
             } else if (link.source === id && link.target !== protocols_key && target_node.type === rdfTypes.Protocol.key) {
                 link.source = protocols_key;
                 target_node.level = protocols.level + 1;
+                target_node.parent = protocols;
                 this.nodes.set(target_node.id, target_node);
             }
             return link;
@@ -420,11 +484,19 @@ class Splinter {
         this.forced_nodes.forEach((node, index, array) => {
             if (node.type === rdfTypes.Sample.key) {
                 if (node.attributes.derivedFrom !== undefined) {
-                    array[index].level = this.nodes.get(node.attributes.derivedFrom).level + 1;
+                    array[index].level = this.nodes.get(node.attributes.derivedFrom[0]).level + 1;
                     this.forced_edges.push({
-                        source: node.attributes.derivedFrom,
+                        source: node.attributes.derivedFrom[0],
                         target: node.id
                     });
+                }
+            }
+
+            if ( node.level !== undefined ) {
+                if ( this.levelsMap[node.level] ) {
+                    this.levelsMap[node.level] = [...this.levelsMap[node.level], node];
+                } else {
+                    this.levelsMap[node.level] = [node];
                 }
             }
         });
@@ -450,8 +522,8 @@ class Splinter {
             }
         }
 
-        let dataset_node_id = this.cast_nodes();
-        this.organise_nodes(dataset_node_id);
+        let dataset_node = this.cast_nodes();
+        this.organise_nodes(dataset_node);
     }
 
 
@@ -486,8 +558,8 @@ class Splinter {
     mergeData() {
         this.nodes.forEach((value, key) => {
             if (value.attributes !== undefined && value.attributes.hasFolderAboutIt !== undefined) {
-                const children = this.tree_parents_map.get(this.tree_map.get(value.attributes.hasFolderAboutIt).remote_id);
-                children.forEach(child => {
+                const children = this.tree_parents_map.get(this.tree_map.get(value.attributes.hasFolderAboutIt[0])?.remote_id);
+                children?.forEach(child => {
                     !this.filterNode(child) && this.linkToNode(child, value);
                 });
             }
@@ -496,12 +568,19 @@ class Splinter {
 
 
     linkToNode(node, parent) {
-        const new_node = this.buildNodeFromJson(node, parent.level);
+        let level = parent.level;
+        if (parent.type === rdfTypes.Sample.key) {
+            if (parent.attributes.derivedFrom !== undefined) {
+                level = this.nodes.get(parent.attributes.derivedFrom[0]).level + 1;
+            }
+        }
+        const new_node = this.buildNodeFromJson(node, level);
+        new_node.parent = parent;
         this.forced_edges.push({
             source: parent.id,
             target: new_node.id
         });
-        this.nodes.set(new_node.id, new_node);
+        this.nodes.set(new_node.id, this.factory.createNode(new_node));
         var children = this.tree_parents_map.get(node.remote_id);
         if (children?.length > 0) {
             children.forEach(child => {
@@ -569,7 +648,7 @@ class Splinter {
                     return true;
                 })
             }
-            return this.factory.createNode(value, this.types);
+            return value;
         })
 
         this.fix_links();
@@ -592,20 +671,33 @@ class Splinter {
         node.id = node.uri_api
         node.parent = true;
         node.text = parent !== undefined ? node.basename : this.dataset_id;
+        node.type = node.mimetype === "inode/directory" ? rdfTypes.Collection.key : rdfTypes.File.key;
         node.path = (parent !== undefined && parent.path !== undefined) ? [node.id, ...parent.path] : [node.id];
         if (!node.items) {
             node.items = [];
         }
-        node.graph_reference = node.uri_api;
+        node.graph_reference = this.findReference(node.uri_api);
         this.tree_map.set(node.id, node);
         const newNode = {
             id: node.uri_api,
             text: node.text,
             items: node.items,
-            graph_reference: node.graph_reference,
+            graph_reference: node?.graph_reference?.id,
             path: node.path
         }
         return newNode;
+    }
+
+    findReference(id) {
+        var reference = this.nodes.get(id);
+        if (reference === undefined) {
+            this.nodes.forEach((value, key) => {
+                if (value.proxies.indexOf(String(id)) !== -1) {
+                    reference = value;
+                }
+            });
+        }
+        return reference;
     }
 }
 

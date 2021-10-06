@@ -226,7 +226,7 @@
   outline-width: 0;
   background: transparent;
   font-size: 10px; */
-  background-image: url("./images/maximise.svg");
+  background-image: url("./images/maximise-sds.svg");
   padding: 0;
   margin: 0;
   display: block;
@@ -254,7 +254,7 @@
   outline-width: 0;
   background: transparent;
   font-size: 12px; */
-  background-image: url("./images/maximise.svg");
+  background-image: url("./images/minimise-sds.svg");
   padding: 0;
   margin: 0;
   display: block;
@@ -484,4 +484,17 @@
 .graph-view_controls .MuiIconButton-root .MuiSvgIcon-root {
   width: 12px;
   height: 12px;
+}
+
+.graph-view_progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  z-index : 2000;
+  margin: auto;
+  color: #11bffe !important;
+  width: 10vh !important;
+  height : 10vh !important;
 }

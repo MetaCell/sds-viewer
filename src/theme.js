@@ -422,6 +422,7 @@ const theme = createTheme({
               marginTop: '.75rem',
             },
           },
+
           '&_header': {
             padding: '1rem',
             display: 'flex',
@@ -438,7 +439,7 @@ const theme = createTheme({
               fontSize: '1.5rem',
               lineHeight: '1.8125rem',
               textAlign: 'center',
-              marginBottom: '1rem',
+              // marginBottom: '1rem',
               letterSpacing: '-0.03em',
               color: primaryTextColor,
             },
@@ -604,7 +605,7 @@ const theme = createTheme({
 
             '& .labelRoot': {
               display: 'flex',
-              alignItems: 'center',
+              // alignItems: 'center',
               padding: '0.5625rem 0.6875rem',
             },
             '& .labelIcon': {
@@ -919,7 +920,7 @@ const theme = createTheme({
         },
 
         '.secondary-sidebar': {
-          width: '18.75rem',
+          width: '100%',
           display: 'flex',
           flexShrink: 0,
           flexDirection: 'column',
@@ -931,11 +932,30 @@ const theme = createTheme({
             marginRight: '-18.75rem',
             transition: 'all ease-in-out .3s',
           },
+          '&_breadcrumb': {
+            padding: '1rem',
+            position: 'sticky',
+            top: 0,
+            zIndex: '5',
+            background: whiteColor,
+            '& .MuiBreadcrumbs-li': {
+              lineHeight: '1.5',
+              '& a': {
+                color: placeHolderColor,
+                cursor: 'pointer',
+                lineHeight: 'normal',
+              },
+            },
+            '& .MuiBreadcrumbs-separator': {
+              margin: '0 .5rem',
+            },
+          },
           '&_body': {
             flexGrow: 1,
-            height: 'calc(100vh - 13rem)',
+            maxHeight: 'calc(100vh - 13rem)',
+            height: 'auto',
             overflow: 'auto',
-            paddingBottom: '5rem',
+            paddingBottom: '1rem',
           },
           '&_footer': {
             display: 'none',
@@ -979,19 +999,14 @@ const theme = createTheme({
           },
           '&_header': {
             textAlign: 'center',
-            padding: '1.5rem 1.5rem 2.25rem',
+            // padding: '1.5rem 1.5rem 2.25rem',
+            padding: '0 1rem 1rem',
             borderBottom: `.0625rem solid ${tabsBorderColor}`,
-            '& .MuiBreadcrumbs-li a': {
-              color: placeHolderColor,
-            },
-            '& .MuiBreadcrumbs-separator': {
-              margin: '0 .5rem',
-            },
             '& .wrap': {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              marginBottom: '2.25rem',
+              // marginBottom: '2.25rem',
               '& img': {
                 margin: '0',
                 cursor: 'pointer',
@@ -1018,7 +1033,7 @@ const theme = createTheme({
           },
 
           '& .tab-content': {
-            padding: '1.5rem',
+            padding: '1rem 1rem',
             '&+ .tab-content': {
               borderTop: `.0625rem solid ${tabsBorderColor}`,
             },
@@ -1027,14 +1042,14 @@ const theme = createTheme({
               fontWeight: '500',
               lineHeight: '1.375rem',
               letterSpacing: '-0.03em',
-              color: 'primaryTextColor',
-              marginBottom: '1.5625rem',
+              color: primaryTextColor,
+              marginBottom: '1.3rem',
             },
             '& .tab-content-row': {
               '& .chip-overflow': {
                 whiteSpace: 'nowrap',
                 overflow: 'auto',
-                marginRight: '-1.5rem',
+                marginRight: '-1rem',
               },
               '&> a': {
                 display: 'inline-flex',
@@ -1069,6 +1084,7 @@ const theme = createTheme({
                 fontSize: '.75rem',
                 lineHeight: '1rem',
                 color: primaryTextColor,
+                wordWrap: 'break-word',
               },
 
               '& .MuiList-root': {

@@ -6,7 +6,7 @@ import LINKICON from "../../../../images/link.svg";
 
 const DetailLinks = ({href, title}) => {
   return (
-    <Link href={href}>
+    <Link href={href} target="_blank">
       <img src={LINKICON} alt={title} />
       {title}
     </Link>

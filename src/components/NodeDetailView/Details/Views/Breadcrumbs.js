@@ -1,10 +1,24 @@
 import React from 'react';
-import { Box, Breadcrumbs, Link, Typography } from '@material-ui/core';
-import CLOSE from "../../../../images/icon-close.svg";
 import DIVIDER from "../../../../images/divider.svg";
+import CLOSE from "../../../../images/icon-close.svg";
+import { useSelector, useDispatch } from 'react-redux'
+import { Box, Breadcrumbs, Link, Typography } from '@material-ui/core';
+import { WidgetStatus } from "@metacell/geppetto-meta-client/common/layout/model";
+import * as layoutActions from "@metacell/geppetto-meta-client/common/layout/actions";
+import { detailsLabel } from '../../../../constants';
 
 const HeaderBreadcrumbs = (props) => {
   const { links, close } = props;
+  const dispatch = useDispatch();
+  const goToLink = id => {
+    const divElement = document.getElementById(id + detailsLabel);
+    divElement.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  const closeViewer = () => {
+    dispatch(layoutActions.destroyWidget("nodeViewWidget"));
+  }
+
   return (
     <Box className="wrap">
       <Breadcrumbs
@@ -14,15 +28,15 @@ const HeaderBreadcrumbs = (props) => {
         {
           links && links.pages ? (
             links?.pages?.map((page, index) => (
-              <Link color="inherit" href={page?.href} key={`breadcrumb_${page?.title}_${index}`}>
+              <Link color="inherit" onClick={() => {goToLink(page.id)}} key={`breadcrumb_${page?.title}_${index}`}>
                 {page?.title}
               </Link>
             ))
           ) : null
         }
-        <Typography color="textPrimary">{links?.current}</Typography>
+        <Typography onClick={() => {goToLink(links?.current.id)}} color="textPrimary">{links?.current.text}</Typography>
       </Breadcrumbs>
-      { close ? <img src={CLOSE} onClick={props.close} alt="Close" /> : null }
+      {/* <img src={CLOSE} onClick={closeViewer} alt="Close" /> */}
     </Box>
   );
 };
