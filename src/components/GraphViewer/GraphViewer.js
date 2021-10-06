@@ -178,8 +178,7 @@ const GraphViewer = (props) => {
 
   //Resume animation after component is updated, fixes issue with graphics going crazy.
   useEffect(() => {
-    resetCamera();
-    // graphRef?.current?.ggv?.current.d3Force('charge', null);
+    selectedNode && handleNodeRightClick(selectedNode, null);
     graphRef?.current?.ggv?.current.d3Force('collide', d3.forceCollide(4));
     graphRef?.current?.ggv?.current.d3Force("manyBody", d3.forceManyBody().strength(-100))
   },[layout]);
