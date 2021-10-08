@@ -1,44 +1,32 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+## SDS Viewer Running Instructions
 
-## Available Scripts
+1. Install node.js https://nodejs.org/en/
+2. Open a terminal
+3. Install yarn https://classic.yarnpkg.com/en/docs/install#debian-stable using terminal
+4. Install git https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+5. In terminal, type command `git clone -b feature/demo https://github.com/MetaCell/sds-viewer.git`
+   - Output should be something like this.
+   ![image](https://user-images.githubusercontent.com/4562825/136595047-0255afff-3b52-4cbe-9e2b-575ec4e46a66.png)
 
-In the project directory, you can run:
+6. Then navigate inside the sds-viewer with command `cd sds-viewer`
+7. Then type `yarn install --ignore-engines`
+8. Finally, to run application type `yarn start`
+9. Last step should have opened a new browser tab with 'http://localhost:3000/', it will take a 1 minute before it finishes loading the first time.
+   This should be the browser output.
+   ![image](https://user-images.githubusercontent.com/4562825/136596619-4cfb3ba9-48bb-42c4-b128-331d0bf7e6e8.png)
 
-### `yarn start`
 
-Runs the app in the development mode.`<br />`
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## SDS Viewer User Manual
+Loading an external dataset:
+- Click on 'Import a new dataset'
+- On the window that opens up, select 'From a URL'
+  ![image](https://user-images.githubusercontent.com/4562825/136596835-b09fd493-6b07-470b-9bb2-b5cd10338e27.png)
+- Paste the dataset url onto the textfield. 
+  URL example https://cassava.ucsd.edu/sparc/preview/archive/exports/2021-06-21T103507%2C091927-0700/datasets/N%3Adataset%3A02d6f93c-56cd-471b-bbb9-99f65f47d203.ttl
+  ![image](https://user-images.githubusercontent.com/4562825/136597116-4098f4eb-34ce-4abd-92fa-c6fbf6f2c92e.png)
+- Click 'Load' and then 'Done'
+- Dataset will be loaded
 
-The page will reload if you make edits.`<br />`
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.`<br />`
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.`<br />`
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.`<br />`
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Error Handling
+- In the case of encountering an error, take a screenshot and report it with us please.
+- To go back , click on the 'x' to go back to the previous screen.
