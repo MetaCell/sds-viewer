@@ -34,6 +34,9 @@ Loading an local dataset:
 - Click 'Done'
 - Dataset will be loaded
 
+### Datasets Used
+The datasets we have been testing can be found here https://cassava.ucsd.edu/sparc/preview/archive/exports/2021-06-21T103507%2C091927-0700/
+
 ### Error Handling
 - In the case of encountering an error, take a screenshot and report it with us please.
 - To go back , click on the 'x' to go back to the previous screen.
