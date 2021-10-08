@@ -20,11 +20,18 @@
 Loading an external dataset:
 - Click on 'Import a new dataset'
 - On the window that opens up, select 'From a URL'
-  ![image](https://user-images.githubusercontent.com/4562825/136596835-b09fd493-6b07-470b-9bb2-b5cd10338e27.png)
-- Paste the dataset url onto the textfield. 
+- Paste the dataset url onto the textfield. For this use case, we only need to enter the URL of the turtle file.
   URL example https://cassava.ucsd.edu/sparc/preview/archive/exports/2021-06-21T103507%2C091927-0700/datasets/N%3Adataset%3A02d6f93c-56cd-471b-bbb9-99f65f47d203.ttl
   ![image](https://user-images.githubusercontent.com/4562825/136597116-4098f4eb-34ce-4abd-92fa-c6fbf6f2c92e.png)
 - Click 'Load' and then 'Done'
+- Dataset will be loaded
+
+Loading an local dataset:
+- Click on 'Import a new dataset'
+- On the window that opens up, stay on 'Local System'.
+- Add turtle and json file at the same time. 
+  ![image](https://user-images.githubusercontent.com/4562825/136603905-83145d22-0bff-47b2-ae09-7117acc4c246.png)
+- Click 'Done'
 - Dataset will be loaded
 
 ### Error Handling
