@@ -1,8 +1,26 @@
 ## SDS Viewer Running Instructions
 
 1. Install node.js https://nodejs.org/en/
-2. Open a terminal
-3. Install yarn following these steps https://www.geeksforgeeks.org/how-to-install-yarn-in-macos-ubuntu-windows/ . You will need admin privileges for this step.
+2. Open a terminal.
+   - MAC
+      - On your Mac, do one of the following:
+         - Click the Launchpad icon  in the Dock <img src="https://help.apple.com/assets/5FDD15EE12A93C067904695E/5FDD15F412A93C0679046966/en_US/a1f94c9ca0de21571b88a8bf9aef36b8.png" alt="" height="15" width="15" originalimagename="SharedGlobalArt/AppIconTopic_Launchpad.png"> , type Terminal in the search field, then click Terminal.
+         - In the Finder <img src="https://help.apple.com/assets/5FDD15EE12A93C067904695E/5FDD15F412A93C0679046966/en_US/058e4af8e726290f491044219d2eee73.png" alt="" height="15" width="15" originalimagename="SharedGlobalArt/AppIconTopic_Finder.png">, open the /Applications/Utilities folder, then double-click Terminal.
+   -  WINDOWS
+      - Follow steps in [this link](https://www.howtogeek.com/194041/how-to-open-the-command-prompt-as-administrator-in-windows-8.1/) to open a terminal as administrator in your Windows machine. 
+   - LINUX
+      -  Open a terminal
+3. Install yarn:
+   - MAC 
+      - In the OS X terminal you need to type:
+         `npm install --global yarn`
+         - NOTE: If some error comes you need to give admin privileges to the terminal so that it can access npm already installed on your pc. You do this by entering password when requested.
+      - If previous step fails, you can also install it with brew.  
+         `brew install yarn`
+   - WINDOWS
+      - In a Windows terminal, after 2 previous steps completed, type command:
+         `npm install --global yarn`
+   
 4. Install git https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 5. In terminal, type command `git clone -b feature/demo https://github.com/MetaCell/sds-viewer.git`
    - Output should be something like this.
