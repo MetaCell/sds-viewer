@@ -1,11 +1,8 @@
-import Help from '../../images/help.svg';
 import Plus from '../../images/plus.svg';
 import { IMPORT_TEXT } from '../../constants';
-import ArrowRight from '../../images/arrow-right.svg';
-import { Box, IconButton, Typography, Button } from '@material-ui/core';
+import { Box, Button } from '@material-ui/core';
 
 const SidebarFooter = (props) => {
-  const { expand, setExpand } = props;
   return (
     <Box className='sidebar-footer'>
       <Button

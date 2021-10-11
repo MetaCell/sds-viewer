@@ -8,7 +8,6 @@ import {
 import Links from './Views/Links';
 import SimpleChip from './Views/SimpleChip';
 import USER from "../../../images/user.svg";
-import CustomChips from './Views/CustomChips';
 import SimpleLabelValue from './Views/SimpleLabelValue';
 import { detailsLabel } from '../../../constants';
 

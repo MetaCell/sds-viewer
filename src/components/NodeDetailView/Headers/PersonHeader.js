@@ -1,6 +1,5 @@
 import React from "react";
 import { Box, Typography } from "@material-ui/core";
-import Breadcrumbs from "../Details/Views/Breadcrumbs";
 import PERSON from "../../../images/user.svg";
 import vars from "../../../styles/constant";
 

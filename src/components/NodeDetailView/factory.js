@@ -1,4 +1,3 @@
-import { NODES } from '../../constants';
 import { rdfTypes } from '../../utils/graphModel';
 import NodeHeader from "./Headers/Header";
 import FileHeader from './Headers/FileHeader';

@@ -1,22 +1,13 @@
 import React from 'react';
 import DIVIDER from "../../../../images/divider.svg";
-import CLOSE from "../../../../images/icon-close.svg";
-import { useSelector, useDispatch } from 'react-redux'
 import { Box, Breadcrumbs, Link, Typography } from '@material-ui/core';
-import { WidgetStatus } from "@metacell/geppetto-meta-client/common/layout/model";
-import * as layoutActions from "@metacell/geppetto-meta-client/common/layout/actions";
 import { detailsLabel } from '../../../../constants';
 
 const HeaderBreadcrumbs = (props) => {
-  const { links, close } = props;
-  const dispatch = useDispatch();
+  const { links } = props;
   const goToLink = id => {
     const divElement = document.getElementById(id + detailsLabel);
     divElement.scrollIntoView({ behavior: 'smooth' });
-  }
-
-  const closeViewer = () => {
-    dispatch(layoutActions.destroyWidget("nodeViewWidget"));
   }
 
   return (
