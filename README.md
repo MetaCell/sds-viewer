@@ -2,7 +2,7 @@
 
 1. Install node.js https://nodejs.org/en/
 2. Open a terminal
-3. Install yarn https://classic.yarnpkg.com/en/docs/install#debian-stable using terminal
+3. Install yarn following these steps https://www.geeksforgeeks.org/how-to-install-yarn-in-macos-ubuntu-windows/ . You will need admin privileges for this step.
 4. Install git https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 5. In terminal, type command `git clone -b feature/demo https://github.com/MetaCell/sds-viewer.git`
    - Output should be something like this.
