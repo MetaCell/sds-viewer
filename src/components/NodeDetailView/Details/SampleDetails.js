@@ -3,6 +3,7 @@ import {
     Box,
 } from "@material-ui/core";
 import SimpleLabelValue from './Views/SimpleLabelValue';
+import Links from './Views/Links';
 import { iterateSimpleValue } from './utils';
 import { detailsLabel } from '../../../constants';
 
@@ -26,12 +27,15 @@ const SampleDetails = (props) => {
     }
 
     return (
-        <Box className="secondary-sidebar_body" id={idDetails}>
+        <Box id={idDetails}>
             <Box className="tab-content">
                 <SimpleLabelValue label={'Label'} value={title} heading={'Sample Details'} />
 
                 { iterateSimpleValue('Assigned group', node?.graph_node?.attributes?.hasAssignedGroup) }
-                { iterateSimpleValue('Derived information as participant', node?.graph_node?.attributes?.hasDerivedInformationAsParticipant) }
+                { <Box className="tab-content-row">
+                    <Links href={node?.graph_node?.attributes?.hasDerivedInformationAsParticipant} title="Derived information as participant" />
+                  </Box>
+                }
                 { iterateSimpleValue('Digital artifact', node?.graph_node?.attributes?.hasDigitalArtifactThatIsAboutIt) }
                 { iterateSimpleValue('Participant in performance of', node?.graph_node?.attributes?.participantInPerformanceOf) }
                 { iterateSimpleValue('Derived from subject', node?.graph_node?.attributes?.wasDerivedFromSubject) }

@@ -75,7 +75,7 @@ const DatasetDetails = (props) => {
     ];
 
     return (
-        <Box className="secondary-sidebar_body" id={idDetails}>
+        <Box id={idDetails}>
             <Box className="tab-content">
                 <SimpleLabelValue label={'Updated On'} value={latestUpdate.toString()} heading={'Dataset Details'} />
 
@@ -84,11 +84,6 @@ const DatasetDetails = (props) => {
                     <SimpleChip chips={node.graph_node.attributes?.isAbout} />
                 </Box>
                 <SimpleLabelValue label={'Label'} value={title} />
-                { node.graph_node.attributes?.hasUriHuman !== undefined
-                    ? (<SimpleLabelValue label={'Human URI'} value={node.graph_node.attributes?.hasUriHuman[0]} />)
-                    : (<> </>)
-                }
-
                 <Box className="tab-content-row">
                     <List component="nav" aria-label="main">
                         {
@@ -111,6 +106,7 @@ const DatasetDetails = (props) => {
                     ? (<Box className="tab-content-row">
                             <Typography component="label">Links</Typography>
                             <Links key={`detail_links_dataset`} href={node.graph_node.attributes?.hasUriHuman[0]} title="Dataset" />
+                            <Links key={`human_uri`} href={node.graph_node.attributes?.hasUriHuman[0]} title="Human URI" />
                         </Box>)
                     : <> </>
                 }

@@ -60,7 +60,9 @@ const FileDetails = (props) => {
                 </Box>
                 <SimpleLabelValue label={'Label'} value={title} />
                 { node?.tree_node?.uri_human !== undefined
-                    ? (<SimpleLabelValue label={'Human URI'} value={node?.tree_node?.uri_human} />)
+                    ? (<Box className="tab-content-row">
+                            <Links href={node?.tree_node?.uri_human} title="Human URI" />
+                       </Box>)
                     : (<> </>)
                 }
 
