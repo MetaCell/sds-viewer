@@ -35,8 +35,8 @@
    ![image](https://user-images.githubusercontent.com/4562825/136595047-0255afff-3b52-4cbe-9e2b-575ec4e46a66.png)
 
 6. Then navigate inside the sds-viewer with command `cd sds-viewer`
-7. Then type `yarn install --ignore-engines`
-8. Finally, to run application type `yarn start`
+7. Then type `sudo yarn install --ignore-engines`
+8. Finally, to run application type `sudo yarn start`
 9. Last step should have opened a new browser tab with 'http://localhost:3000/', it will take a 1 minute before it finishes loading the first time.
    This should be the browser output.
    ![image](https://user-images.githubusercontent.com/4562825/136596619-4cfb3ba9-48bb-42c4-b128-331d0bf7e6e8.png)
