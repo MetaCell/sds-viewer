@@ -24,7 +24,7 @@
 4. Install git
    - Mac
       - In a terminal, install git by typing : 
-         `brew install git`   
+         `brew install git`  or `sudo yarn add git` 
    - Windows
       - Download installer from https://git-scm.com/download/win and run it.
    - Linux
