@@ -69,7 +69,7 @@ class Splinter {
         this.forced_nodes = undefined;
         this.tree_parents_map = undefined;
         this.dataset_id = this.processDatasetId();
-        this.store = new N3.Store({ blankNodePrefix: '' });
+        this.store = new N3.Store();
     }
 
     /* Initialise global maps before to start data manipulation */
@@ -94,7 +94,7 @@ class Splinter {
     extractTurtle() {
         var that = this;
         return new Promise(function(resolve, reject) {
-            const parser = new N3.Parser({format: 'text/n3'});
+            const parser = new N3.Parser();
 
             let callbackParse = function (err, quad, prefixes) {
                 if (quad) {
