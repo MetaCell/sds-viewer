@@ -34,7 +34,7 @@
    - Output should be something like this.
    ![image](https://user-images.githubusercontent.com/4562825/136595047-0255afff-3b52-4cbe-9e2b-575ec4e46a66.png)
 
-6. Then navigate inside the sds-viewer with command `cd sds-viewer`
+6. Then navigate to the sds-viewer folder with command `cd sds-viewer`
 7. Then type `sudo yarn install --ignore-engines`
 8. Finally, to run application type `sudo yarn start`
 9. Last step should have opened a new browser tab with 'http://localhost:3000/', it will take a 1 minute before it finishes loading the first time.
