@@ -18,7 +18,6 @@ function extractProperties(node, ttlTypes) {
     }
     for (const property of node.properties) {
         for (const type_property of rdfTypes[node.type].properties) {
-            console.log(node.id);
             if (property.predicate === (ttlTypes[type_property.type]?.iri?.id + type_property.key)) {
                 if (node.attributes[type_property.property] !== undefined) {
                     node.attributes[type_property.property].push(property.value);

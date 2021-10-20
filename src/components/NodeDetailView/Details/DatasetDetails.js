@@ -97,16 +97,11 @@ const DatasetDetails = (props) => {
                     </List>
                 </Box>
 
-                <Box className="tab-content-row">
-                    <Typography component="label">Protocol Techniques</Typography>
-                    <SimpleChip chips={node.graph_node.attributes?.protocolEmploysTechnique} />
-                </Box>
-
                 { node.graph_node.attributes?.hasUriHuman !== undefined
                     ? (<Box className="tab-content-row">
                             <Typography component="label">Links</Typography>
                             <Links key={`detail_links_dataset`} href={node.graph_node.attributes?.hasUriHuman[0]} title="Dataset" />
-                            <Links key={`human_uri`} href={node.graph_node.attributes?.hasUriHuman[0]} title="Human URI" />
+                            <Links key={`detail_protocol_technique`} href={node.graph_node.attributes?.protocolEmploysTechnique} title="Protocol Technique" />
                         </Box>)
                     : <> </>
                 }

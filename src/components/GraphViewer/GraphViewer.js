@@ -67,6 +67,7 @@ const GraphViewer = (props) => {
   const [selectedLayout, setSelectedLayout] = React.useState(TOP_DOWN);
   const [layoutAnchorEl, setLayoutAnchorEl] = React.useState(null);
   const [resize, setResize] = useState({ width : "100%" , height : "100%" });
+  const [cameraPosition, setCameraPosition] = useState({ x : 0 , y : 0 });
   const open = Boolean(layoutAnchorEl);
   const [loading, setLoading] = React.useState(false);
 
@@ -112,6 +113,7 @@ const GraphViewer = (props) => {
   const handleNodeRightClick = (node, event) => {
     graphRef?.current?.ggv?.current.centerAt(node.x, node.y, ONE_SECOND);
     graphRef?.current?.ggv?.current.zoom(2, ONE_SECOND);
+    setCameraPosition({ x :  node.x , y :  node.y });
   };
 
 
@@ -148,6 +150,8 @@ const GraphViewer = (props) => {
    */
   const resetCamera = () => {
     graphRef?.current?.ggv?.current.zoomToFit();
+    let center =  graphRef?.current?.ggv?.current.centerAt();
+    setCameraPosition({ x :  center.x , y :  center.y });
   };
 
   const onEngineStop = () => {
@@ -179,6 +183,7 @@ const GraphViewer = (props) => {
   //Resume animation after component is updated, fixes issue with graphics going crazy.
   useEffect(() => {
     // selectedNode && handleNodeRightClick(selectedNode, null);
+    graphRef?.current?.ggv?.current.centerAt(cameraPosition.x, cameraPosition.y);
     graphRef?.current?.ggv?.current.d3Force('collide', d3.forceCollide(4));
     graphRef?.current?.ggv?.current.d3Force("manyBody", d3.forceManyBody().strength(-100))
   },[layout]);
