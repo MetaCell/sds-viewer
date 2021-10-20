@@ -1,4 +1,3 @@
-import * as d3 from 'd3';
 import Menu from '@material-ui/core/Menu';
 import { IconButton } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -66,7 +65,6 @@ const GraphViewer = (props) => {
   const [highlightLinks, setHighlightLinks] = useState(new Set());
   const [selectedLayout, setSelectedLayout] = React.useState(RADIAL_OUT);
   const [layoutAnchorEl, setLayoutAnchorEl] = React.useState(null);
-  const [resize, setResize] = useState({ width : "100%" , height : "100%" });
   const open = Boolean(layoutAnchorEl);
   const [loading, setLoading] = React.useState(false);
 
@@ -162,15 +160,11 @@ const GraphViewer = (props) => {
       setSelectedNode(node);
       handleNodeRightClick(node, null);
     }
+  } else if ((nodeSelected === null || nodeSelected === undefined) && (selectedNode !== null && selectedNode !== undefined)) {
+    setSelectedNode(null);
   }
 
   useEffect(() => {
-    document.addEventListener('nodeResized', (p) => {
-      let w = p.detail.rect.width;
-      let h = p.detail.rect.height;
-      setResize({ width : w , height : h});
-    }, false);
-
     setLoading(true);
     setTimeout ( () => setLoading(false) , LOADING_TIME);
   }, []);

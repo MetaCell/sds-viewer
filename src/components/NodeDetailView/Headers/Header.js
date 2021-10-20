@@ -21,7 +21,6 @@ const PersonHeader = (props) => {
 
     return (
         <Box className="secondary-sidebar_header">
-            {/* <Breadcrumbs close={props.close} links={links} /> */}
             <img src={HELP} alt="Contributor" />
             <Typography component="h3" style={headingStyle}>
                 {title}
