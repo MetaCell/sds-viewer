@@ -161,7 +161,7 @@ const GraphViewer = (props) => {
 
   // Check State updates triggered by Redux at a global level
   if (nodeSelected && nodeSelected?.id !== selectedNode?.id) {
-    let node = graphRef?.current?.props?.data?.nodes.find( item => item.id === nodeSelected.id);
+    let node = graphRef?.current?.props?.data?.nodes.find( item => item.id === nodeSelected.id && item.parent?.id === nodeSelected.parent?.id );
     if (node) {
       setSelectedNode(node);
       handleNodeRightClick(node, null);
