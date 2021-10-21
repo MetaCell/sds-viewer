@@ -12,7 +12,7 @@ const PersonHeader = (props) => {
 
     let title = undefined;
     if (node.graph_node) {
-      title = node.graph_node.name;
+        title = node.graph_node.name;
     } else if (node.tree_node) {
         title = node.tree_node.text;
     } else {
