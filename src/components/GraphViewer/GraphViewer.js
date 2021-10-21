@@ -1,4 +1,3 @@
-import * as d3 from 'd3';
 import Menu from '@material-ui/core/Menu';
 import { IconButton } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -12,6 +11,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { useSelector, useDispatch } from 'react-redux';
 import FormatAlignCenterIcon from '@material-ui/icons/FormatAlignCenter';
 import GeppettoGraphVisualization from '@metacell/geppetto-meta-ui/graph-visualization/Graph';
+import { GRAPH_SOURCE } from '../../constants';
 
 const NODE_FONT = '500 6px Inter, sans-serif';
 const ONE_SECOND = 1000;
@@ -89,7 +89,8 @@ const GraphViewer = (props) => {
     dispatch(selectInstance({
       dataset_id: props.graph_id,
       graph_node: node.id,
-      tree_node: node?.tree_reference?.id
+      tree_node: node?.tree_reference?.id,
+      source: GRAPH_SOURCE
     }));
   };
 
@@ -160,15 +161,11 @@ const GraphViewer = (props) => {
       setSelectedNode(node);
       handleNodeRightClick(node, null);
     }
+  } else if ((nodeSelected === null || nodeSelected === undefined) && (selectedNode !== null && selectedNode !== undefined)) {
+    setSelectedNode(null);
   }
 
   useEffect(() => {
-    document.addEventListener('nodeResized', (p) => {
-      let w = p.detail.rect.width;
-      let h = p.detail.rect.height;
-      setResize({ width : w , height : h});
-    }, false);
-
     setLoading(true);
     setTimeout ( () => setLoading(false) , LOADING_TIME);
   }, []);

@@ -1,4 +1,3 @@
-import { NODES } from '../../constants';
 import { rdfTypes } from '../../utils/graphModel';
 import NodeHeader from "./Headers/Header";
 import FileHeader from './Headers/FileHeader';
@@ -123,7 +122,7 @@ const Protocol = function (node) {
     nodeDetail.getHeader = () => {
         return (
             <>
-                <ProtocolHeader node={node} />>
+                <ProtocolHeader node={node} />
             </>
         )
     };

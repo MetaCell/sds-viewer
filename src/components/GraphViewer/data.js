@@ -2,7 +2,6 @@ const imgs = ['dataset.svg', 'nifti.svg', 'volume.svg']
 .map(src => {
   const img = new Image();
   img.src = `./images/${src}`;
-  console.log("Image source ", img.src);
   return img;
 });
 

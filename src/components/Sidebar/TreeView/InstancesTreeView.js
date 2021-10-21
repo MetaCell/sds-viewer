@@ -8,31 +8,34 @@ import { useSelector, useDispatch } from 'react-redux'
 import { selectInstance } from '../../../redux/actions';
 import { WidgetStatus } from "@metacell/geppetto-meta-client/common/layout/model";
 import * as layoutActions from "@metacell/geppetto-meta-client/common/layout/actions";
+import { GRAPH_SOURCE, TREE_SOURCE } from '../../../constants';
 
 const InstancesTreeView = (props) => {
   const dispatch = useDispatch();
 
   const { searchTerm, dataset_id } = props;
   const datasets = JSON.parse(JSON.stringify([window.datasets[dataset_id].tree]));
-  const nodeSelected = useSelector(state => state.sdsState.instance_selected.tree_node);
+  const nodeSelected = useSelector(state => state.sdsState.instance_selected);
   const [nodes, setNodes] = useState([]);
   const [items, setItems] = useState(datasets);
   const widgets = useSelector(state => state.widgets);
 
   const onNodeSelect = (e, nodeId) => {
-    if (nodes.length === 0 || nodes[0] !== nodeId) {
-      const node = window.datasets[dataset_id].splinter.tree_map.get(nodeId);
-      dispatch(selectInstance({
-        dataset_id: dataset_id,
-        graph_node: node.graph_reference.id,
-        tree_node: node.id
-      }));
+    const node = window.datasets[dataset_id].splinter.tree_map.get(nodeId);
+    dispatch(selectInstance({
+      dataset_id: dataset_id,
+      graph_node: node?.graph_reference?.id,
+      tree_node: node.id,
+      source: TREE_SOURCE
+    }));
+    if (widgets[dataset_id] !== undefined) {
+      widgets[dataset_id].status = WidgetStatus.ACTIVE;
+      dispatch(layoutActions.updateWidget(widgets[dataset_id]));
     }
     if (widgets[dataset_id] !== undefined) {
       widgets[dataset_id].status = WidgetStatus.ACTIVE;
       dispatch(layoutActions.updateWidget(widgets[dataset_id]));
     }
-    
   };
 
   const onNodeToggle = (e, nodeIds) => {
@@ -51,16 +54,16 @@ const InstancesTreeView = (props) => {
     }
 
     const node = window.datasets[dataset_id].splinter.tree_map.get(nodeIds[0]);
-    dispatch(selectInstance({
-      dataset_id: dataset_id,
-      graph_node: node.graph_reference.id,
-      tree_node: node.id
-    }));
+    if (node && node.path !== undefined && node.path[0] !== nodes[0]) {
+      setNodes(node.path);
+    }
   };
 
-  // Updated from redux, if the path got changed then we re-render from here.
-  if (nodeSelected && nodeSelected.path !== undefined && nodeSelected.path[0] !== nodes[0]) {
-    setNodes(nodeSelected.path);
+  let globalId = nodeSelected.dataset_id.split(':');
+  if (globalId[globalId.length - 1] !== dataset_id && nodes.length > 0) {
+    setNodes([]);
+  } else if (globalId[globalId.length - 1] === dataset_id && nodeSelected.source === GRAPH_SOURCE && nodeSelected.tree_node && nodeSelected.tree_node.path[0] !== nodes[0]) {
+    setNodes(nodeSelected.tree_node.path);
   }
 
   const nestedLoop = (obj) => {
@@ -137,6 +140,7 @@ const InstancesTreeView = (props) => {
           children={items}
           key={treeItemData?.id}
           iconClass={labelProps?.iconClass}
+          onNodeSelect={onNodeSelect}
         />
       );
     });
@@ -154,7 +158,6 @@ const InstancesTreeView = (props) => {
         ref={treeRef}
         expanded={nodes}
         onNodeToggle={onNodeToggle}
-        onNodeSelect={onNodeSelect}
       >
         { getTreeItemsFromData(items) }
       </TreeView>

@@ -1,6 +1,5 @@
 import React from "react";
 import { Box, Typography } from "@material-ui/core";
-import Breadcrumbs from "../Details/Views/Breadcrumbs";
 import VOLUME from "../../../images/volume.svg";
 import vars from "../../../styles/constant";
 
@@ -22,7 +21,6 @@ const ProtocolHeader = (props) => {
 
     return (
         <Box className="secondary-sidebar_header">
-            {/* <Breadcrumbs close={props.close} links={links} /> */}
             <img src={VOLUME} alt="Volume" />
             <Typography component="h3" style={headingStyle}>
                 {title}

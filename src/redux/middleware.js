@@ -1,4 +1,3 @@
-import * as GeppettoActions from '@metacell/geppetto-meta-client/common/actions/actions';
 import * as LayoutActions from '@metacell/geppetto-meta-client/common/layout/actions';
 import * as Actions from '../redux/actions';
 
