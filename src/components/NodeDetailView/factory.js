@@ -122,7 +122,7 @@ const Protocol = function (node) {
     nodeDetail.getHeader = () => {
         return (
             <>
-                <ProtocolHeader node={node} />>
+                <ProtocolHeader node={node} />
             </>
         )
     };

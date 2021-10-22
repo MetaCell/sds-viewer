@@ -45,6 +45,7 @@ const DatasetDetails = (props) => {
                 designation: 'Principal Investigator',
                 img: USER
             });
+            return user;
         });
     }
 
@@ -56,6 +57,7 @@ const DatasetDetails = (props) => {
                 designation: 'Contributor',
                 img: USER
             });
+            return user;
         });
     }
 

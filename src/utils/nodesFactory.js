@@ -1,7 +1,6 @@
 import { rdfTypes } from './graphModel';
 
 function createImage(node) {
-    // TODO: replace this with a decorator (maybe).
     const img = new Image();
     if ( node.type === rdfTypes.File.key ){
         const extension = node.name.split(".").pop();

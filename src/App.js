@@ -13,9 +13,6 @@ import { MuiThemeProvider, CssBaseline } from '@material-ui/core';
 
 const App = () => {
   const [openDialog, setOpenDialog] = useState(false);
-  // TODO: cleanup the below when working on the node viewer
-  // const [openNodeDetail, setOpenNodeDetail] = useState(true);
-
   const datasets = useSelector(state => state.sdsState.datasets);
   const error_message = useSelector(state => state.sdsState.error_message);
 
@@ -33,10 +30,6 @@ const App = () => {
               />
           }
         </Box>
-
-        {/* TODO: cleanup the below when working on the node viewer
-          <NodeDetailView open={openNodeDetail} handleClose={() => setOpenNodeDetail(false)} /> 
-          */}
       </Box>
 
       <UploadDialog

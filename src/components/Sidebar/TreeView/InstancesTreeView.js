@@ -32,6 +32,10 @@ const InstancesTreeView = (props) => {
       widgets[dataset_id].status = WidgetStatus.ACTIVE;
       dispatch(layoutActions.updateWidget(widgets[dataset_id]));
     }
+    if (widgets[dataset_id] !== undefined) {
+      widgets[dataset_id].status = WidgetStatus.ACTIVE;
+      dispatch(layoutActions.updateWidget(widgets[dataset_id]));
+    }
   };
 
   const onNodeToggle = (e, nodeIds) => {
@@ -53,12 +57,6 @@ const InstancesTreeView = (props) => {
     if (node && node.path !== undefined && node.path[0] !== nodes[0]) {
       setNodes(node.path);
     }
-    dispatch(selectInstance({
-      dataset_id: dataset_id,
-      graph_node: node?.graph_reference?.id,
-      tree_node: node.id,
-      source: TREE_SOURCE
-    }));
   };
 
   let globalId = nodeSelected.dataset_id.split(':');

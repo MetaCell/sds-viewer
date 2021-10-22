@@ -24,7 +24,6 @@ const MainLayout = () => {
         // Workaround because getLayoutManagerInstance
         // is undefined when calling it in global scope
         // Need to wait until store is ready ...
-        // TODO: find better way to retrieve the LayoutManager component!
         if (LayoutManager === undefined) {
             const myManager = getLayoutManagerInstance();
 

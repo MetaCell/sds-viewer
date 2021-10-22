@@ -14,23 +14,6 @@ const SidebarFooter = (props) => {
         <img src={Plus} alt='Plus' />
         {IMPORT_TEXT}
       </Button>
-      {/* <Box className='support'>
-        {!expand ? (
-          <IconButton aria-label='toggle' onClick={() => setExpand(!expand)}>
-            <img src={Help} alt='Help' />
-          </IconButton>
-        ) : (
-          <>
-            <Typography>
-              <img src={Help} alt='Help' />
-              Support
-            </Typography>
-            <IconButton>
-              <img src={ArrowRight} alt='Arrow' />
-            </IconButton>
-          </>
-        )}
-      </Box> */}
     </Box>
   );
 };

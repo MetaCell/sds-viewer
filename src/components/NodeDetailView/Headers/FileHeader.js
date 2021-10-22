@@ -21,7 +21,6 @@ const FileHeader = (props) => {
 
     return (
         <Box className="secondary-sidebar_header">
-            {/* <Breadcrumbs close={props.close} links={links} /> */}
             <img src={FILE} alt="File" />
             <Typography component="h3" style={headingStyle}>
                 {title}

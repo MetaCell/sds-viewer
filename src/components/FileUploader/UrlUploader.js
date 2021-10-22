@@ -58,6 +58,7 @@ const UrlUploader = ({ handleClose, handleDone }) => {
     urls.pop();
     urls.map(item => {
       base_url = base_url + '/' + item;
+      return item;
     })
     var json_url = base_url + '/path-metadata/' + dataset + '/LATEST_RUN/path-metadata.json'
     return json_url
@@ -86,7 +87,7 @@ const UrlUploader = ({ handleClose, handleDone }) => {
         setFileDownloaded(true);
       }
     }
-  });
+  }, [loader, fileDownloaded, files] );
 
   return (
     <>
