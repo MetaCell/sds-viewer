@@ -486,6 +486,10 @@
   height: 12px;
 }
 
+.treeViewer {
+  height : auto !important;
+}
+
 .graph-view_progress {
   position: absolute;
   left: 0;

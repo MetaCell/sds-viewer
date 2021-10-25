@@ -161,8 +161,6 @@ class Splinter {
         let nodeSpace = 100;
         // The furthestLeft a node can be
         let furthestLeft = 0 - (Math.ceil(this.levelsMap[maxLevel].length)/2  * nodeSpace );
-        // Max width used in any level
-        let totalWidthSpace = nodeSpace * this.levelsMap[maxLevel].length;
         let positionsMap = {};
 
         let levelsMapKeys = Object.keys(this.levelsMap);
@@ -172,38 +170,29 @@ class Splinter {
             this.levelsMap[level].sort((a, b) => a.attributes?.relativePath?.localeCompare(b.attributes?.relativePath));
         });
 
+        // Sort second and third level nodes
+        this.levelsMap[3]?.sort((a, b) => a.parent?.type?.localeCompare(b.parent?.type));
+        this.levelsMap[2]?.sort((a, b) => b.neighbors.length - a.neighbors.length );
+
         // Start assigning the graph from the bottom up
         let neighbors = 0;
         levelsMapKeys.reverse().forEach( level => {
-            if ( parseInt(level) !== SUBJECTS_LEVEL - 1 ) {
-                this.levelsMap[level].forEach ( (n, index) => {
-                    neighbors = n?.neighbors?.filter(neighbor => { return neighbor.level > n.level });
-                    if ( neighbors.length > 0 ) {
-                        n.xPos = neighbors[0].xPos + (neighbors[neighbors.length-1].xPos - neighbors[0].xPos) * .5;
-                        positionsMap[n.level] = n.xPos + nodeSpace;
-                    } else {
-                        n.xPos = positionsMap[n.level] + nodeSpace;
-                        positionsMap[n.level] = n.xPos;
-                    }
-                })
-            } else {
-                let contributorsSpace = furthestLeft + totalWidthSpace;
-                this.levelsMap[level].forEach ( (n, index) => {
-                    if ( n.type === rdfTypes.Protocol.key ){
-                        n.xPos = positionsMap[n.level];
-                        positionsMap[n.level] = positionsMap[n.level] + nodeSpace/2;
-                    } else {
-                        n.xPos = contributorsSpace;
-                        contributorsSpace = contributorsSpace + nodeSpace/2;
-                    }
-                })
-            }
+            this.levelsMap[level].forEach ( (n, index) => {
+                neighbors = n?.neighbors?.filter(neighbor => { return neighbor.level > n.level });
+                if ( neighbors.length > 0 ) {
+                    n.xPos = neighbors[0].xPos + (neighbors[neighbors.length-1].xPos - neighbors[0].xPos) * .5;
+                    positionsMap[n.level] = n.xPos + nodeSpace;
+                } else {
+                    n.xPos = positionsMap[n.level] + nodeSpace;
+                    positionsMap[n.level] = n.xPos;
+                }
+            })
         });
 
         return {
             nodes: this.forced_nodes,
             links: cleanLinks,
-            radialVariant : this.levelsMap[maxLevel].length * 3,
+            radialVariant : this.levelsMap[maxLevel].length,
             hierarchyVariant : maxLevel * 20
         };
     }

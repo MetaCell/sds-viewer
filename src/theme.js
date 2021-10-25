@@ -921,6 +921,7 @@ const theme = createTheme({
 
         '.secondary-sidebar': {
           width: '100%',
+          minHeight : '95vh',
           display: 'flex',
           flexShrink: 0,
           flexDirection: 'column',
@@ -1055,7 +1056,6 @@ const theme = createTheme({
                 display: 'inline-flex',
                 fontSize: '.75rem',
                 lineHeight: '1rem',
-                marginTop: '.25rem',
                 color: primaryColor,
 
                 '&:not(:last-child)': {
@@ -1067,7 +1067,7 @@ const theme = createTheme({
                 },
               },
               '&+ .tab-content-row': {
-                marginTop: '1.5rem',
+                marginTop: '1rem',
               },
               '& label': {
                 fontWeight: '600',

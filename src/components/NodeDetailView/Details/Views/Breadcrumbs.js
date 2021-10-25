@@ -7,15 +7,10 @@ import { detailsLabel } from '../../../../constants';
 
 const HeaderBreadcrumbs = (props) => {
   const { links } = props;
-  // const dispatch = useDispatch();
   const goToLink = id => {
     const divElement = document.getElementById(id + detailsLabel);
     divElement.scrollIntoView({ behavior: 'smooth' });
   }
-
-  // const closeViewer = () => {
-  //   dispatch(layoutActions.destroyWidget("nodeViewWidget"));
-  // }
 
   return (
     <Box className="wrap">

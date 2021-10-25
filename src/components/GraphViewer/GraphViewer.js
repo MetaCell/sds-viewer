@@ -1,3 +1,4 @@
+import * as d3 from 'd3';
 import Menu from '@material-ui/core/Menu';
 import { IconButton } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -29,14 +30,14 @@ const GRAPH_COLORS = {
 const TOP_DOWN = {
   label : "Top Down",
   layout : "td",
-  linkDistance : (graph) => { 
+  maxNodesLevel : (graph) => { 
     return graph.hierarchyVariant;
   }
 };
 const RADIAL_OUT = {
   label : "Radial",
-  layout : "radialout",
-  linkDistance : (graph) => { 
+  layout : "null",
+  maxNodesLevel : (graph) => { 
     return graph.radialVariant
   }
 };
@@ -63,9 +64,10 @@ const GraphViewer = (props) => {
   const [selectedNode, setSelectedNode] = useState(null);
   const [highlightNodes, setHighlightNodes] = useState(new Set());
   const [highlightLinks, setHighlightLinks] = useState(new Set());
-  const [selectedLayout, setSelectedLayout] = React.useState(RADIAL_OUT);
+  const [selectedLayout, setSelectedLayout] = React.useState(TOP_DOWN);
   const [layoutAnchorEl, setLayoutAnchorEl] = React.useState(null);
   const [resize, setResize] = useState({ width : "100%" , height : "100%" });
+  const [cameraPosition, setCameraPosition] = useState({ x : 0 , y : 0 });
   const open = Boolean(layoutAnchorEl);
   const [loading, setLoading] = React.useState(false);
 
@@ -111,6 +113,7 @@ const GraphViewer = (props) => {
   const handleNodeRightClick = (node, event) => {
     graphRef?.current?.ggv?.current.centerAt(node.x, node.y, ONE_SECOND);
     graphRef?.current?.ggv?.current.zoom(2, ONE_SECOND);
+    setCameraPosition({ x :  node.x , y :  node.y });
   };
 
 
@@ -147,16 +150,18 @@ const GraphViewer = (props) => {
    */
   const resetCamera = () => {
     graphRef?.current?.ggv?.current.zoomToFit();
+    let center =  graphRef?.current?.ggv?.current.centerAt();
+    setCameraPosition({ x :  center.x , y :  center.y });
   };
 
   const onEngineStop = () => {
     resetCamera();
-    setLoading(false)
+    setLoading(false);
   }
 
   // Check State updates triggered by Redux at a global level
   if (nodeSelected && nodeSelected?.id !== selectedNode?.id) {
-    let node = graphRef?.current?.props?.data?.nodes.find( item => item.id === nodeSelected.id);
+    let node = graphRef?.current?.props?.data?.nodes.find( item => item.id === nodeSelected.id && item.parent?.id === nodeSelected.parent?.id );
     if (node) {
       setSelectedNode(node);
       handleNodeRightClick(node, null);
@@ -173,7 +178,10 @@ const GraphViewer = (props) => {
 
   //Resume animation after component is updated, fixes issue with graphics going crazy.
   useEffect(() => {
-    resetCamera();
+    // selectedNode && handleNodeRightClick(selectedNode, null);
+    graphRef?.current?.ggv?.current.centerAt(cameraPosition.x, cameraPosition.y);
+    graphRef?.current?.ggv?.current.d3Force('collide', d3.forceCollide(4));
+    graphRef?.current?.ggv?.current.d3Force("manyBody", d3.forceManyBody().strength(-100))
   },[layout]);
 
   const handleNodeHover = (node) => {
@@ -263,7 +271,7 @@ const GraphViewer = (props) => {
     [hoverNode]
   );
 
-  let linkDistance = selectedLayout.linkDistance(window.datasets[props.graph_id].graph);
+  let maxNodesLevel = selectedLayout.maxNodesLevel(window.datasets[props.graph_id].graph);
   return (
     <div className={'graph-view'}>
       { loading?
@@ -285,15 +293,12 @@ const GraphViewer = (props) => {
         // Create the Graph as 2 Dimensional
         d2={true}
         warmupTicks={1000}
-        cooldownTicks={10}
-        cooldowmTime={LOADING_TIME}
+        cooldownTicks={30}
         onEngineStop={onEngineStop}
         // Links properties
         linkColor = {handleLinkColor}
         linkWidth={2}
-        forceLinkStrength={2.75}
-        forceLinkDistance={ linkDistance }
-        forceChargeStrength={-10000}
+        forceChargeStrength={maxNodesLevel * -20}
         collideSize={5}
         linkDirectionalParticles={1}
         linkCurvature={link => {
@@ -305,6 +310,8 @@ const GraphViewer = (props) => {
             }
             else if ( link.source.fx === link.target.fx ) {
               curve = 0;
+            } else if ( link.source.fx >= link.target.fx ) {
+              curve = -.05;
             } else {
               curve = .05;
             }
@@ -330,7 +337,6 @@ const GraphViewer = (props) => {
         onNodeRightClick={(node, event) => handleNodeRightClick(node, event)}
         // td = Top Down, creates Graph with root at top
         dagMode={selectedLayout.layout}
-        dagLevelDistance={linkDistance}
         // Handles error on graph
         onDagError={(loopNodeIds) => {}}
         // Disable dragging of nodes

@@ -5,6 +5,7 @@ import {
 } from "@material-ui/core";
 import SimpleChip from './Views/SimpleChip';
 import SimpleLabelValue from './Views/SimpleLabelValue';
+import Links from './Views/Links';
 import { iterateSimpleValue } from './utils';
 import { detailsLabel } from '../../../constants';
 
@@ -47,15 +48,21 @@ const SubjectDetails = (props) => {
     }
 
     return (
-        <Box className="secondary-sidebar_body" id={idDetails}>
+        <Box id={idDetails}>
             <Box className="tab-content">
                 <SimpleLabelValue label={'Label'} value={title} heading={'Subject Details'} />
 
                 { iterateSimpleValue('Age', node?.graph_node?.attributes?.age) }
                 { iterateSimpleValue('Age Category', node?.graph_node?.attributes?.hasAgeCategory) }
                 { iterateSimpleValue('Biological Sex', node?.graph_node?.attributes?.biologicalSex) }
-                { iterateSimpleValue('Derived information as participant', node?.graph_node?.attributes?.hasDerivedInformationAsParticipant) }
-                { iterateSimpleValue('Participant in performance of', node?.graph_node?.attributes?.participantInPerformanceOf) }
+                { <Box className="tab-content-row">
+                    <Links href={node?.graph_node?.attributes?.hasDerivedInformationAsParticipant} title="Derived information as participant" />
+                  </Box>
+                }
+                { <Box className="tab-content-row">
+                    <Links href={node?.graph_node?.attributes?.participantInPerformanceOf} title="Participant in performance of" />
+                  </Box>
+                }
                 { iterateSimpleValue('Specimen identifier', node?.graph_node?.attributes?.specimenHasIdentifier) }
 
                 { species.length > 0
