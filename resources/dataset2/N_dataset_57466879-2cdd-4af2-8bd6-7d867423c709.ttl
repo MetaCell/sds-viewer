@@ -1,0 +1,681 @@
+@prefix : <file:///ERROR/EMPTY/PREFIX/BANNED/> .
+@prefix awards: <http://uri.interlex.org/temp/uris/awards/> .
+@prefix collection: <https://api.blackfynn.io/collections/N:collection:> .
+@prefix contributor: <https://api.blackfynn.io/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/contributors/> .
+@prefix dataset: <https://api.blackfynn.io/datasets/N:dataset:> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix ilxtr: <http://uri.interlex.org/tgbugs/uris/readable/> .
+@prefix isAbout: <http://purl.obolibrary.org/obo/IAO_0000136> .
+@prefix NCBITaxon: <http://purl.obolibrary.org/obo/NCBITaxon_> .
+@prefix NIFRID: <http://uri.neuinfo.org/nif/nifstd/readable/> .
+@prefix ORCID: <https://orcid.org/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix PATO: <http://purl.obolibrary.org/obo/PATO_> .
+@prefix pio.api: <https://www.protocols.io/api/v3/protocols/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ror: <https://ror.org/> .
+@prefix sample: <https://api.blackfynn.io/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/samples/> .
+@prefix sparc: <http://uri.interlex.org/tgbugs/uris/readable/sparc/> .
+@prefix subject: <https://api.blackfynn.io/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/subjects/> .
+@prefix tech: <http://uri.interlex.org/tgbugs/uris/readable/technique/> .
+@prefix TEMP: <http://uri.interlex.org/temp/uris/> .
+@prefix TEMPRAW: <http://uri.interlex.org/temp/uris/raw/> .
+@prefix UBERON: <http://purl.obolibrary.org/obo/UBERON_> .
+@prefix unit: <http://uri.interlex.org/tgbugs/uris/readable/aspect/unit/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://cassava.ucsd.edu/sparc/ontologies/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709> a owl:Ontology ;
+    owl:versionIRI <https://cassava.ucsd.edu/sparc/ontologies/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709/version/1618274675.670088/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709> ;
+    owl:imports <https://raw.githubusercontent.com/SciCrunch/NIF-Ontology/sparc/ttl/sparc-methods.ttl>,
+        <https://raw.githubusercontent.com/SciCrunch/NIF-Ontology/sparc/ttl/sparc-mis-helper.ttl> ;
+    rdfs:label "Human Islet Microvasculature Analysis curation export graph" ;
+    rdfs:comment "SPARC single dataset graph for N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709" ;
+    owl:versionInfo "2021-04-13T00:44:35,670088Z" ;
+    isAbout: dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasUriHuman <https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709> ;
+    TEMP:TimestampExportStart "2021-04-13T00:28:22,384227Z" .
+
+### Individuals
+
+awards:OT2OD023861 a owl:NamedIndividual,
+        TEMP:FundedResearchProject .
+
+contributor:Elizabeth-Butterwork a owl:NamedIndividual,
+        sparc:Person ;
+    sparc:firstName "Elizabeth" ;
+    sparc:lastName "Butterwork" ;
+    TEMP:contributorTo dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasAffiliation "Dept. of Pathology, Immunology & Laboratory Medicine, University of Florida, Gainesville, Florida, United States of America",
+        ror:02y3ad647 ;
+    TEMP:middleName "A" .
+
+contributor:Jesus-Peñaloza-Aponte a owl:NamedIndividual,
+        sparc:Person ;
+    sparc:firstName "Jesus" ;
+    sparc:lastName "Peñaloza Aponte" ;
+    TEMP:contributorTo dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasAffiliation "Dept. of Pathology, Immunology & Laboratory Medicine, University of Florida, Gainesville, Florida, United States of America",
+        ror:02y3ad647 .
+
+contributor:Katelyn-Carty a owl:NamedIndividual,
+        sparc:Person ;
+    sparc:firstName "Katelyn" ;
+    sparc:lastName "Carty" ;
+    TEMP:contributorTo dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasAffiliation "Dept. of Pathology, Immunology & Laboratory Medicine, University of Florida, Gainesville, Florida, United States of America",
+        ror:02y3ad647 ;
+    TEMP:middleName "N" .
+
+contributor:Lith-Nasif a owl:NamedIndividual,
+        sparc:Person ;
+    sparc:firstName "Lith" ;
+    sparc:lastName "Nasif" ;
+    TEMP:contributorTo dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasAffiliation "Dept. of Pathology, Immunology & Laboratory Medicine, University of Florida, Gainesville, Florida, United States of America",
+        ror:02y3ad647 .
+
+contributor:no-orcid-no-name a owl:NamedIndividual,
+        sparc:Person ;
+    TEMP:contributorTo dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasAffiliation "Dept. of Pathology, Immunology & Laboratory Medicine, University of Florida, Gainesville, Florida, United States of America",
+        ror:02y3ad647 .
+
+dataset:57466879-2cdd-4af2-8bd6-7d867423c709 a owl:NamedIndividual,
+        sparc:Dataset ;
+    rdfs:label "Human Islet Microvasculature Analysis" ;
+    dc:title "Human Islet Microvasculature Analysis in Optically Cleared Pancreas using Vesselucida360 Analysis" ;
+    dc:description """This study was performed to establish 3D image analysis for optically cleared human pancreas samples with a focus on islet microvasculature. Three protocols are provided for the optically clearing step, immunofluorescence staining, and image analysis.
+
+**Data collection:** Multiplex immunofluorescence (3 stains - MsGcg, RbCol4, SMACy3) confocal images of human islet for alpha-cells (glucagon, visualized in BLUE), smooth muscle cells (smooth muscle actin, visualized in RED), and basement membranes (collagen IV, visualized in GREEN).
+
+**Primary conclusion:** None stated""" ;
+    isAbout: "Confocal Image",
+        "Microvasculature",
+        "Pancreas",
+        NCBITaxon:9606,
+        UBERON:0001264 ;
+    TEMP:collectionTitle "Human Islet Microvasculature Analysis" ;
+    TEMP:completenessOfDataset "Complete" ;
+    TEMP:contentsWereUpdatedAtTime "2021-02-01T13:39:56.491999+00:00"^^xsd:dateTime ;
+    TEMP:curationIndex 0 ;
+    TEMP:errorIndex 16 ;
+    TEMP:hasAdditionalFundingInformation "OT2OD023861" ;
+    TEMP:hasAwardNumber awards:OT2OD023861 ;
+    TEMP:hasContactPerson ORCID:0000-0001-6878-1235 ;
+    TEMP:hasDatasetTemplateSchemaVersion "1.2.3" ;
+    TEMP:hasDoi <https://doi.org/10.26275/fcrd-lbid> ;
+    TEMP:hasExpectedNumberOfSamples 34 ;
+    TEMP:hasExpectedNumberOfSubjects 5 ;
+    TEMP:hasExperimentalModality "microscopy" ;
+    TEMP:hasNumberOfContributors 6 ;
+    TEMP:hasNumberOfDirectories 80 ;
+    TEMP:hasNumberOfFiles 115 ;
+    TEMP:hasNumberOfSamples 34 ;
+    TEMP:hasNumberOfSubjects 5 ;
+    TEMP:hasProtocol pio.api:21331,
+        pio.api:29923,
+        pio.api:40153 ;
+    TEMP:hasResponsiblePrincipalInvestigator ORCID:0000-0001-6878-1235 ;
+    TEMP:hasSizeInBytes 26815585415 ;
+    TEMP:hasUriApi dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasUriHuman <https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:57466879-2cdd-4af2-8bd6-7d867423c709> ;
+    TEMP:isAboutParticipant sample:sub-6232_sam-1_sub-6232_islet1,
+        sample:sub-6232_sam-2_sub-6232_islet2,
+        sample:sub-6232_sam-3_sub-6232_islet3,
+        sample:sub-6232_sam-4_sub-6232_islet4,
+        sample:sub-6232_sam-5_sub-6232_islet5,
+        sample:sub-6232_sam-6_sub-6232_islet6,
+        sample:sub-6232_sam-7_sub-6232_islet7,
+        sample:sub-6238_sam-8_sub-6238_islet1,
+        sample:sub-6238_sam-9_sub-6238_islet2,
+        sample:sub-6238_sam-10_sub-6238_islet3,
+        sample:sub-6238_sam-11_sub-6238_islet4,
+        sample:sub-6238_sam-12_sub-6238_islet5,
+        sample:sub-6238_sam-13_sub-6238_islet6,
+        sample:sub-6289_sam-14_sub-6289_islet1,
+        sample:sub-6289_sam-15_sub-6289_islet2,
+        sample:sub-6289_sam-16_sub-6289_islet3,
+        sample:sub-6289_sam-17_sub-6289_islet4,
+        sample:sub-6289_sam-18_sub-6289_islet5,
+        sample:sub-6289_sam-19_sub-6289_islet6,
+        sample:sub-6289_sam-20_sub-6289_islet7,
+        sample:sub-6368_sam-21_sub-6368_islet1,
+        sample:sub-6368_sam-22_sub-6368_islet2,
+        sample:sub-6368_sam-23_sub-6368_islet3,
+        sample:sub-6368_sam-24_sub-6368_islet4,
+        sample:sub-6384_sam-25_sub-6384_islet1,
+        sample:sub-6384_sam-26_sub-6384_islet10,
+        sample:sub-6384_sam-27_sub-6384_islet2,
+        sample:sub-6384_sam-28_sub-6384_islet3,
+        sample:sub-6384_sam-29_sub-6384_islet4,
+        sample:sub-6384_sam-30_sub-6384_islet5,
+        sample:sub-6384_sam-31_sub-6384_islet6,
+        sample:sub-6384_sam-32_sub-6384_islet7,
+        sample:sub-6384_sam-33_sub-6384_islet8,
+        sample:sub-6384_sam-34_sub-6384_islet9,
+        subject:sub-6232,
+        subject:sub-6238,
+        subject:sub-6289,
+        subject:sub-6368,
+        subject:sub-6384 ;
+    TEMP:milestoneCompletionDate "2019-07-31T00:00:00"^^xsd:dateTime ;
+    TEMP:protocolEmploysTechnique <http://uri.interlex.org/tgbugs/uris/indexes/ontologies/methods/150>,
+        tech:analysis ;
+    TEMP:statusOnPlatform "12_PUBLISHED_INVESTIGATOR" ;
+    TEMP:submissionIndex 16 ;
+    TEMP:unclassifiedIndex 0 ;
+    TEMP:wasCreatedAtTime "2019-01-15T19:15:08.552709+00:00"^^xsd:dateTime ;
+    TEMP:wasUpdatedAtTime "2021-03-30T19:52:12.380000+00:00"^^xsd:dateTime .
+
+<https://doi.org/10.26275/fcrd-lbid> a owl:NamedIndividual,
+        TEMP:Dataset ;
+    rdfs:label "Human Islet Microvasculature Analysis" .
+
+ORCID:0000-0001-6878-1235 a owl:NamedIndividual,
+        sparc:Person ;
+    rdfs:label "Martha Campbell-Thompson" ;
+    sparc:firstName "Martha" ;
+    sparc:lastName "Campbell-Thomson" ;
+    sparc:hasORCIDId ORCID:0000-0001-6878-1235 ;
+    TEMP:contributorTo dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasAffiliation "Dept. of Pathology, Immunology & Laboratory Medicine, University of Florida, Gainesville, Florida, United States of America",
+        ror:02y3ad647 .
+
+pio.api:21331 a owl:NamedIndividual,
+        sparc:Protocol ;
+    rdfs:label "Human Islet Microvasculature Immunofluorescence in Optically Cleared Samples " ;
+    TEMP:protocolHasNumberOfSteps 12 .
+
+pio.api:29923 a owl:NamedIndividual,
+        sparc:Protocol ;
+    rdfs:label "Human Pancreas PACT Optical Clearing and High Resolution 3D Microscopy" ;
+    TEMP:protocolHasNumberOfSteps 66 .
+
+pio.api:40153 a owl:NamedIndividual,
+        sparc:Protocol ;
+    rdfs:label "Vesselucida 360 Protocol for Segmenting and Analyzing Human Islet Microvasculature" ;
+    TEMP:protocolHasNumberOfSteps 31 .
+
+ror:02y3ad647 a owl:NamedIndividual,
+        TEMP:Institution ;
+    rdfs:label "University of Florida" ;
+    NIFRID:synonym "UF",
+        "Universidad de la Florida",
+        "Universidad de la Florida"@es,
+        "University of the State of Florida",
+        "Université de floride",
+        "Université de floride"@fr .
+
+sample:sub-6232_sam-1_sub-6232_islet1 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasAssignedGroup "control" ;
+    TEMP:hasDerivedInformationAsParticipant dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasFolderAboutIt collection:8ceb7889-2545-42e1-932e-3886985d8244,
+        collection:3220eb3d-22f9-4dce-95ca-9f0f663e387d ;
+    TEMP:localId "sam-1_sub-6232_islet1" ;
+    TEMP:wasDerivedFromSubject subject:sub-6232 ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "vasculature of the the pancreas" .
+
+sample:sub-6232_sam-2_sub-6232_islet2 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasAssignedGroup "control" ;
+    TEMP:hasDerivedInformationAsParticipant dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasFolderAboutIt collection:acf4877c-609f-4419-bd12-dee5d238c90e,
+        collection:e99d5cdf-18c0-4bbd-bdb3-753d5f6e41bc ;
+    TEMP:localId "sam-2_sub-6232_islet2" ;
+    TEMP:wasDerivedFromSubject subject:sub-6232 ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "vasculature of the the pancreas" .
+
+sample:sub-6232_sam-3_sub-6232_islet3 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasAssignedGroup "control" ;
+    TEMP:hasDerivedInformationAsParticipant dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasFolderAboutIt collection:7c81d8a2-e1d3-407f-abf7-e665c99920f0,
+        collection:81461b67-e3de-48ce-a615-943a7afe34ed ;
+    TEMP:localId "sam-3_sub-6232_islet3" ;
+    TEMP:wasDerivedFromSubject subject:sub-6232 ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "vasculature of the the pancreas" .
+
+sample:sub-6232_sam-4_sub-6232_islet4 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasAssignedGroup "control" ;
+    TEMP:hasDerivedInformationAsParticipant dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasFolderAboutIt collection:e6fb5007-c68d-4725-ad5b-88226b4df100,
+        collection:e49e1708-530c-4af9-87e9-d2e53b7ed7fb ;
+    TEMP:localId "sam-4_sub-6232_islet4" ;
+    TEMP:wasDerivedFromSubject subject:sub-6232 ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "vasculature of the the pancreas" .
+
+sample:sub-6232_sam-5_sub-6232_islet5 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasAssignedGroup "control" ;
+    TEMP:hasDerivedInformationAsParticipant dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasFolderAboutIt collection:4b3d318f-ed8a-459f-b5e0-922250f49624,
+        collection:67f88015-634f-4c15-87f7-a2081b456429 ;
+    TEMP:localId "sam-5_sub-6232_islet5" ;
+    TEMP:wasDerivedFromSubject subject:sub-6232 ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "vasculature of the the pancreas" .
+
+sample:sub-6232_sam-6_sub-6232_islet6 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasAssignedGroup "control" ;
+    TEMP:hasDerivedInformationAsParticipant dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasFolderAboutIt collection:c52e3f7f-aa93-4cfe-b1d5-5349824865c9,
+        collection:e69d7c94-c273-450f-9b98-b2a1a86d54aa ;
+    TEMP:localId "sam-6_sub-6232_islet6" ;
+    TEMP:wasDerivedFromSubject subject:sub-6232 ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "vasculature of the the pancreas" .
+
+sample:sub-6232_sam-7_sub-6232_islet7 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasAssignedGroup "control" ;
+    TEMP:hasDerivedInformationAsParticipant dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasFolderAboutIt collection:3f13c25f-5306-476a-97ae-753ec232279a,
+        collection:7810ae3a-0a3a-4cb8-95c0-aa6d7e207c75 ;
+    TEMP:localId "sam-7_sub-6232_islet7" ;
+    TEMP:wasDerivedFromSubject subject:sub-6232 ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "vasculature of the the pancreas" .
+
+sample:sub-6238_sam-8_sub-6238_islet1 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasAssignedGroup "control" ;
+    TEMP:hasDerivedInformationAsParticipant dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasFolderAboutIt collection:178f15aa-f18c-47fd-890d-1f47f3155a46,
+        collection:a5345eec-3fcf-4203-b1ae-25f211577053 ;
+    TEMP:localId "sam-8_sub-6238_islet1" ;
+    TEMP:wasDerivedFromSubject subject:sub-6238 ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "vasculature of the the pancreas" .
+
+sample:sub-6238_sam-9_sub-6238_islet2 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasAssignedGroup "control" ;
+    TEMP:hasDerivedInformationAsParticipant dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasFolderAboutIt collection:5e319796-b80a-47e8-a0e6-9ec0ff2c68dc,
+        collection:9062eb2f-c9f9-4ce0-8395-5246556c638d ;
+    TEMP:localId "sam-9_sub-6238_islet2" ;
+    TEMP:wasDerivedFromSubject subject:sub-6238 ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "vasculature of the the pancreas" .
+
+sample:sub-6238_sam-10_sub-6238_islet3 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasAssignedGroup "control" ;
+    TEMP:hasDerivedInformationAsParticipant dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasFolderAboutIt collection:26621740-bff6-45b8-a02a-106654b1296d,
+        collection:d3ae9570-bc33-4374-ad1c-327ae2aba0cc ;
+    TEMP:localId "sam-10_sub-6238_islet3" ;
+    TEMP:wasDerivedFromSubject subject:sub-6238 ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "vasculature of the the pancreas" .
+
+sample:sub-6238_sam-11_sub-6238_islet4 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasAssignedGroup "control" ;
+    TEMP:hasDerivedInformationAsParticipant dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasFolderAboutIt collection:02576cb0-9ea6-49b5-9d4c-06ad034f7e21,
+        collection:d3754b63-4deb-48ee-b3bb-9444b172c9e8 ;
+    TEMP:localId "sam-11_sub-6238_islet4" ;
+    TEMP:wasDerivedFromSubject subject:sub-6238 ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "vasculature of the the pancreas" .
+
+sample:sub-6238_sam-12_sub-6238_islet5 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasAssignedGroup "control" ;
+    TEMP:hasDerivedInformationAsParticipant dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasFolderAboutIt collection:61678b49-d40a-4052-9972-0a2fafe62a31,
+        collection:d4566fe0-a973-41fc-8937-762eadbdc5a6 ;
+    TEMP:localId "sam-12_sub-6238_islet5" ;
+    TEMP:wasDerivedFromSubject subject:sub-6238 ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "vasculature of the the pancreas" .
+
+sample:sub-6238_sam-13_sub-6238_islet6 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasAssignedGroup "control" ;
+    TEMP:hasDerivedInformationAsParticipant dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasFolderAboutIt collection:ae16c606-5077-473d-94d4-5d7496ef45e0,
+        collection:e40da93c-e174-4ecd-87ab-7293db2f5ebf ;
+    TEMP:localId "sam-13_sub-6238_islet6" ;
+    TEMP:wasDerivedFromSubject subject:sub-6238 ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "vasculature of the the pancreas" .
+
+sample:sub-6289_sam-14_sub-6289_islet1 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasAssignedGroup "control" ;
+    TEMP:hasDerivedInformationAsParticipant dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasFolderAboutIt collection:4822a511-42df-4d0a-9f53-2f380d43a373,
+        collection:57101425-df48-4b7f-a077-c81eeb652679 ;
+    TEMP:localId "sam-14_sub-6289_islet1" ;
+    TEMP:wasDerivedFromSubject subject:sub-6289 ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "vasculature of the the pancreas" .
+
+sample:sub-6289_sam-15_sub-6289_islet2 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasAssignedGroup "control" ;
+    TEMP:hasDerivedInformationAsParticipant dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasFolderAboutIt collection:1a0f29ef-4011-46d2-bef0-4ba4552798c2,
+        collection:1ee81bac-0088-4c49-be03-48ed35915aed ;
+    TEMP:localId "sam-15_sub-6289_islet2" ;
+    TEMP:wasDerivedFromSubject subject:sub-6289 ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "vasculature of the the pancreas" .
+
+sample:sub-6289_sam-16_sub-6289_islet3 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasAssignedGroup "control" ;
+    TEMP:hasDerivedInformationAsParticipant dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasFolderAboutIt collection:98880f8b-9c96-4466-b824-246e03b633ce,
+        collection:be7c43f6-f385-4fc8-aa20-8ca301f5c72a ;
+    TEMP:localId "sam-16_sub-6289_islet3" ;
+    TEMP:wasDerivedFromSubject subject:sub-6289 ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "vasculature of the the pancreas" .
+
+sample:sub-6289_sam-17_sub-6289_islet4 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasAssignedGroup "control" ;
+    TEMP:hasDerivedInformationAsParticipant dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasFolderAboutIt collection:c276454f-3c7b-4bac-a7b9-8bdbde1635c4,
+        collection:dae6c6c6-95a8-42da-aae0-a05633322289 ;
+    TEMP:localId "sam-17_sub-6289_islet4" ;
+    TEMP:wasDerivedFromSubject subject:sub-6289 ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "vasculature of the the pancreas" .
+
+sample:sub-6289_sam-18_sub-6289_islet5 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasAssignedGroup "control" ;
+    TEMP:hasDerivedInformationAsParticipant dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasFolderAboutIt collection:2eea81d5-9f5f-4ddf-a771-f99a85d4bcb3,
+        collection:d308d68f-6a17-499e-bfd6-8c73e4a4b694 ;
+    TEMP:localId "sam-18_sub-6289_islet5" ;
+    TEMP:wasDerivedFromSubject subject:sub-6289 ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "vasculature of the the pancreas" .
+
+sample:sub-6289_sam-19_sub-6289_islet6 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasAssignedGroup "control" ;
+    TEMP:hasDerivedInformationAsParticipant dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasFolderAboutIt collection:537865f5-74dd-477f-9079-12aa1611a89f,
+        collection:d7f21208-059f-4da4-b0d2-7b899d96def1 ;
+    TEMP:localId "sam-19_sub-6289_islet6" ;
+    TEMP:wasDerivedFromSubject subject:sub-6289 ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "vasculature of the the pancreas" .
+
+sample:sub-6289_sam-20_sub-6289_islet7 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasAssignedGroup "control" ;
+    TEMP:hasDerivedInformationAsParticipant dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasFolderAboutIt collection:5b40f0b6-b072-431f-b1f2-a7462b714572,
+        collection:93c3ec07-14b1-402c-ad18-ec6a7c8148ba ;
+    TEMP:localId "sam-20_sub-6289_islet7" ;
+    TEMP:wasDerivedFromSubject subject:sub-6289 ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "vasculature of the the pancreas" .
+
+sample:sub-6368_sam-21_sub-6368_islet1 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasAssignedGroup "control" ;
+    TEMP:hasDerivedInformationAsParticipant dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasFolderAboutIt collection:72f2dbfc-3df6-4d04-83e8-23bb6db0373c,
+        collection:d18d164f-18ff-4dcf-8c11-25ebe94fe2b5 ;
+    TEMP:localId "sam-21_sub-6368_islet1" ;
+    TEMP:wasDerivedFromSubject subject:sub-6368 ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "vasculature of the the pancreas" .
+
+sample:sub-6368_sam-22_sub-6368_islet2 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasAssignedGroup "control" ;
+    TEMP:hasDerivedInformationAsParticipant dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasFolderAboutIt collection:665c38cc-01dc-4457-b607-d91d89728ca5,
+        collection:12317abc-7a20-494d-9d75-f957fb9fc7fa ;
+    TEMP:localId "sam-22_sub-6368_islet2" ;
+    TEMP:wasDerivedFromSubject subject:sub-6368 ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "vasculature of the the pancreas" .
+
+sample:sub-6368_sam-23_sub-6368_islet3 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasAssignedGroup "control" ;
+    TEMP:hasDerivedInformationAsParticipant dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasFolderAboutIt collection:d73d25f1-bd4e-405a-9f17-05fd7b57f7e5,
+        collection:d295a8c7-35a2-4fc5-ac6b-6c5914c78580 ;
+    TEMP:localId "sam-23_sub-6368_islet3" ;
+    TEMP:wasDerivedFromSubject subject:sub-6368 ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "vasculature of the the pancreas" .
+
+sample:sub-6368_sam-24_sub-6368_islet4 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasAssignedGroup "control" ;
+    TEMP:hasDerivedInformationAsParticipant dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasFolderAboutIt collection:0779c3ea-f3a2-4886-b79f-16ff3c430fb1,
+        collection:d83cce9f-2506-4f86-b057-309bf8b5aba8 ;
+    TEMP:localId "sam-24_sub-6368_islet4" ;
+    TEMP:wasDerivedFromSubject subject:sub-6368 ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "vasculature of the the pancreas" .
+
+sample:sub-6384_sam-25_sub-6384_islet1 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasAssignedGroup "control" ;
+    TEMP:hasDerivedInformationAsParticipant dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasFolderAboutIt collection:1e770e00-c7cc-4af4-b81e-e6ab3e6f3292,
+        collection:3b89040a-2a46-41e3-8fd1-42665e4b0042 ;
+    TEMP:localId "sam-25_sub-6384_islet1" ;
+    TEMP:wasDerivedFromSubject subject:sub-6384 ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "vasculature of the the pancreas" .
+
+sample:sub-6384_sam-26_sub-6384_islet10 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasAssignedGroup "control" ;
+    TEMP:hasDerivedInformationAsParticipant dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasFolderAboutIt collection:9f187db9-af30-47b3-bf96-f2cec84bdebd,
+        collection:da88316b-326e-47c2-b591-734f4216f63f ;
+    TEMP:localId "sam-26_sub-6384_islet10" ;
+    TEMP:wasDerivedFromSubject subject:sub-6384 ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "vasculature of the the pancreas" .
+
+sample:sub-6384_sam-27_sub-6384_islet2 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasAssignedGroup "control" ;
+    TEMP:hasDerivedInformationAsParticipant dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasFolderAboutIt collection:a4eacd5e-b058-4ea5-bbc8-d2b49adfac07,
+        collection:bd061d56-11d0-46b1-9063-7cf039cee2df ;
+    TEMP:localId "sam-27_sub-6384_islet2" ;
+    TEMP:wasDerivedFromSubject subject:sub-6384 ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "vasculature of the the pancreas" .
+
+sample:sub-6384_sam-28_sub-6384_islet3 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasAssignedGroup "control" ;
+    TEMP:hasDerivedInformationAsParticipant dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasFolderAboutIt collection:78e19dc3-231a-418c-88e8-ef02d196dc79,
+        collection:c018f24b-2128-41e4-84dd-85753871335b ;
+    TEMP:localId "sam-28_sub-6384_islet3" ;
+    TEMP:wasDerivedFromSubject subject:sub-6384 ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "vasculature of the the pancreas" .
+
+sample:sub-6384_sam-29_sub-6384_islet4 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasAssignedGroup "control" ;
+    TEMP:hasDerivedInformationAsParticipant dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasFolderAboutIt collection:3c91d1cd-861e-4c57-93c0-7fabb90ac96a,
+        collection:8b190216-52d2-41f3-b69a-6a51a0cd096d ;
+    TEMP:localId "sam-29_sub-6384_islet4" ;
+    TEMP:wasDerivedFromSubject subject:sub-6384 ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "vasculature of the the pancreas" .
+
+sample:sub-6384_sam-30_sub-6384_islet5 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasAssignedGroup "control" ;
+    TEMP:hasDerivedInformationAsParticipant dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasFolderAboutIt collection:1e6b668e-81f9-4b66-a52f-853eef52e9d6,
+        collection:35292f3d-8354-4165-9628-f14d54a870af ;
+    TEMP:localId "sam-30_sub-6384_islet5" ;
+    TEMP:wasDerivedFromSubject subject:sub-6384 ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "vasculature of the the pancreas" .
+
+sample:sub-6384_sam-31_sub-6384_islet6 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasAssignedGroup "control" ;
+    TEMP:hasDerivedInformationAsParticipant dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasFolderAboutIt collection:50669919-9eb5-4166-b0d4-8fc2d58e2a84,
+        collection:b6ef68f8-dd5c-4993-a44c-0e2fa375af90 ;
+    TEMP:localId "sam-31_sub-6384_islet6" ;
+    TEMP:wasDerivedFromSubject subject:sub-6384 ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "vasculature of the the pancreas" .
+
+sample:sub-6384_sam-32_sub-6384_islet7 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasAssignedGroup "control" ;
+    TEMP:hasDerivedInformationAsParticipant dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasFolderAboutIt collection:8ead058d-95c1-467f-9da5-e65916e6e9e2,
+        collection:bb664458-87af-45a2-bab0-5b03dba8f925 ;
+    TEMP:localId "sam-32_sub-6384_islet7" ;
+    TEMP:wasDerivedFromSubject subject:sub-6384 ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "vasculature of the the pancreas" .
+
+sample:sub-6384_sam-33_sub-6384_islet8 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasAssignedGroup "control" ;
+    TEMP:hasDerivedInformationAsParticipant dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasFolderAboutIt collection:9d540cbf-9c5e-4352-b480-3d75a16c1ea5,
+        collection:d08b5d88-ad54-4be0-a6ad-c6e63bbe65f4 ;
+    TEMP:localId "sam-33_sub-6384_islet8" ;
+    TEMP:wasDerivedFromSubject subject:sub-6384 ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "vasculature of the the pancreas" .
+
+sample:sub-6384_sam-34_sub-6384_islet9 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasAssignedGroup "control" ;
+    TEMP:hasDerivedInformationAsParticipant dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasFolderAboutIt collection:3c920690-466d-41fa-9e4e-5ff61dc5c3bf,
+        collection:4b08ef4a-4f31-497f-bf9a-fb7992a147b0 ;
+    TEMP:localId "sam-34_sub-6384_islet9" ;
+    TEMP:wasDerivedFromSubject subject:sub-6384 ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "vasculature of the the pancreas" .
+
+subject:sub-6232 a owl:NamedIndividual,
+        sparc:Subject ;
+    sparc:animalSubjectIsOfSpecies NCBITaxon:9606 ;
+    sparc:animalSubjectIsOfStrain "Caucasian" ;
+    TEMP:hasAge [ a sparc:Measurement ;
+            TEMP:hasUnit unit:year ;
+            rdf:value 14 ;
+            TEMP:asBaseUnits [ a ilxtr:Quantity ;
+                    TEMP:hasUnit unit:second ;
+                    rdf:value 4.418064e+08 ] ] ;
+    TEMP:hasAssignedGroup "Control" ;
+    TEMP:hasBiologicalSex PATO:0000383 ;
+    TEMP:hasDerivedInformationAsParticipant dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasFolderAboutIt collection:a6636a94-dafe-4680-a6a2-43f821924e9e,
+        collection:edb9e2e1-10f7-4950-abe0-228138cbbacb ;
+    TEMP:localId "sub-6232" .
+
+subject:sub-6238 a owl:NamedIndividual,
+        sparc:Subject ;
+    sparc:animalSubjectIsOfSpecies NCBITaxon:9606 ;
+    sparc:animalSubjectIsOfStrain "African American" ;
+    TEMP:hasAge [ a sparc:Measurement ;
+            TEMP:hasUnit unit:year ;
+            rdf:value 20 ;
+            TEMP:asBaseUnits [ a ilxtr:Quantity ;
+                    TEMP:hasUnit unit:second ;
+                    rdf:value 6.31152e+08 ] ] ;
+    TEMP:hasAssignedGroup "Control" ;
+    TEMP:hasBiologicalSex PATO:0000384 ;
+    TEMP:hasDerivedInformationAsParticipant dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasFolderAboutIt collection:1c9a3cba-e4c3-4cb8-a3ec-50cd2f11a93a,
+        collection:835c47cd-49b6-4d57-8d79-0b8e64bd3330 ;
+    TEMP:localId "sub-6238" .
+
+subject:sub-6289 a owl:NamedIndividual,
+        sparc:Subject ;
+    sparc:animalSubjectIsOfSpecies NCBITaxon:9606 ;
+    sparc:animalSubjectIsOfStrain "African American" ;
+    TEMP:hasAge [ a sparc:Measurement ;
+            TEMP:hasUnit unit:year ;
+            rdf:value 19 ;
+            TEMP:asBaseUnits [ a ilxtr:Quantity ;
+                    TEMP:hasUnit unit:second ;
+                    rdf:value 5.995944e+08 ] ] ;
+    TEMP:hasAssignedGroup "Control" ;
+    TEMP:hasBiologicalSex PATO:0000384 ;
+    TEMP:hasDerivedInformationAsParticipant dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasFolderAboutIt collection:1946c47f-c0cb-4645-bb63-3aaad8085cc1,
+        collection:7013fd7a-a34f-4b14-a62c-076c68685e57 ;
+    TEMP:localId "sub-6289" .
+
+subject:sub-6368 a owl:NamedIndividual,
+        sparc:Subject ;
+    sparc:animalSubjectIsOfSpecies NCBITaxon:9606 ;
+    sparc:animalSubjectIsOfStrain "Caucasian" ;
+    TEMP:hasAge [ a sparc:Measurement ;
+            TEMP:hasUnit unit:year ;
+            rdf:value 38 ;
+            TEMP:asBaseUnits [ a ilxtr:Quantity ;
+                    TEMP:hasUnit unit:second ;
+                    rdf:value 1.199189e+09 ] ] ;
+    TEMP:hasAssignedGroup "Control" ;
+    TEMP:hasBiologicalSex PATO:0000384 ;
+    TEMP:hasDerivedInformationAsParticipant dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasFolderAboutIt collection:98a9d89e-0e77-4be9-b4a0-caadbd1f2c2d,
+        collection:77213aa9-de8f-4b36-ba87-224f0a3f305c ;
+    TEMP:localId "sub-6368" .
+
+subject:sub-6384 a owl:NamedIndividual,
+        sparc:Subject ;
+    sparc:animalSubjectIsOfSpecies NCBITaxon:9606 ;
+    sparc:animalSubjectIsOfStrain "Caucasian" ;
+    TEMP:hasAge [ a sparc:Measurement ;
+            TEMP:hasUnit unit:year ;
+            rdf:value 17 ;
+            TEMP:asBaseUnits [ a ilxtr:Quantity ;
+                    TEMP:hasUnit unit:second ;
+                    rdf:value 5.364792e+08 ] ] ;
+    TEMP:hasAssignedGroup "Control" ;
+    TEMP:hasBiologicalSex PATO:0000384 ;
+    TEMP:hasDerivedInformationAsParticipant dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:hasFolderAboutIt collection:5fe36540-1bd7-4391-8ff0-de520cef39b2,
+        collection:98822928-1fba-4007-b69d-014506bd02d2 ;
+    TEMP:localId "sub-6384" .
+
+[] a owl:NamedIndividual,
+        sparc:DatasetContribution ;
+    sparc:isContactPerson false ;
+    TEMP:aboutContributor contributor:Elizabeth-Butterwork ;
+    TEMP:aboutDataset dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:contributorOrderIndex 1 ;
+    TEMP:hasRole TEMP:DataCollector .
+
+[] a owl:NamedIndividual,
+        sparc:DatasetContribution ;
+    sparc:isContactPerson false ;
+    TEMP:aboutContributor contributor:Jesus-Peñaloza-Aponte ;
+    TEMP:aboutDataset dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:contributorOrderIndex 4 ;
+    TEMP:hasRole TEMP:DataCollector .
+
+[] a owl:NamedIndividual,
+        sparc:DatasetContribution ;
+    sparc:isContactPerson false ;
+    TEMP:aboutContributor contributor:Katelyn-Carty ;
+    TEMP:aboutDataset dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:contributorOrderIndex 2 ;
+    TEMP:hasRole TEMP:DataCollector .
+
+[] a owl:NamedIndividual,
+        sparc:DatasetContribution ;
+    sparc:isContactPerson false ;
+    TEMP:aboutContributor contributor:Lith-Nasif ;
+    TEMP:aboutDataset dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:contributorOrderIndex 3 ;
+    TEMP:hasRole TEMP:DataCollector .
+
+[] a owl:NamedIndividual,
+        sparc:DatasetContribution ;
+    sparc:isContactPerson true ;
+    TEMP:aboutContributor ORCID:0000-0001-6878-1235 ;
+    TEMP:aboutDataset dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:contributorOrderIndex 0 ;
+    TEMP:hasRole TEMP:PrincipalInvestigator .
+
+[] a owl:NamedIndividual,
+        sparc:DatasetContribution ;
+    TEMP:aboutContributor contributor:no-orcid-no-name ;
+    TEMP:aboutDataset dataset:57466879-2cdd-4af2-8bd6-7d867423c709 ;
+    TEMP:contributorOrderIndex 5 .
+
+### Serialized using the ttlser deterministic serializer v1.2.0

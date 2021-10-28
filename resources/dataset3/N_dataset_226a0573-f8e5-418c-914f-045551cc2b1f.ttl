@@ -1,0 +1,301 @@
+@prefix : <file:///ERROR/EMPTY/PREFIX/BANNED/> .
+@prefix awards: <http://uri.interlex.org/temp/uris/awards/> .
+@prefix contributor: <https://api.blackfynn.io/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/contributors/> .
+@prefix dataset: <https://api.blackfynn.io/datasets/N:dataset:> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix isAbout: <http://purl.obolibrary.org/obo/IAO_0000136> .
+@prefix NCBITaxon: <http://purl.obolibrary.org/obo/NCBITaxon_> .
+@prefix ORCID: <https://orcid.org/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix PATO: <http://purl.obolibrary.org/obo/PATO_> .
+@prefix pio.api: <https://www.protocols.io/api/v3/protocols/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ror: <https://ror.org/> .
+@prefix RRID: <https://scicrunch.org/resolver/RRID:> .
+@prefix sparc: <http://uri.interlex.org/tgbugs/uris/readable/sparc/> .
+@prefix subject: <https://api.blackfynn.io/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/subjects/> .
+@prefix tech: <http://uri.interlex.org/tgbugs/uris/readable/technique/> .
+@prefix TEMP: <http://uri.interlex.org/temp/uris/> .
+@prefix UBERON: <http://purl.obolibrary.org/obo/UBERON_> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://cassava.ucsd.edu/sparc/ontologies/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f> a owl:Ontology ;
+    owl:versionIRI <https://cassava.ucsd.edu/sparc/ontologies/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f/version/1618274656.881625/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f> ;
+    owl:imports <https://raw.githubusercontent.com/SciCrunch/NIF-Ontology/sparc/ttl/sparc-methods.ttl>,
+        <https://raw.githubusercontent.com/SciCrunch/NIF-Ontology/sparc/ttl/sparc-mis-helper.ttl> ;
+    rdfs:label "Effects of nodose ganglion blockade on gastric motility during cervical vagus nerve stimulation measured with magnetic resonance imaging in rats curation export graph" ;
+    rdfs:comment "SPARC single dataset graph for N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f" ;
+    owl:versionInfo "2021-04-13T00:44:16,881625Z" ;
+    isAbout: dataset:226a0573-f8e5-418c-914f-045551cc2b1f ;
+    TEMP:hasUriHuman <https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f> ;
+    TEMP:TimestampExportStart "2021-04-13T00:28:22,384227Z" .
+
+### Individuals
+
+awards:OT2OD023847 a owl:NamedIndividual,
+        TEMP:FundedResearchProject .
+
+contributor:Deborah-Jaffey a owl:NamedIndividual,
+        sparc:Person ;
+    sparc:firstName "Deborah" ;
+    sparc:lastName "Jaffey" ;
+    TEMP:contributorTo dataset:226a0573-f8e5-418c-914f-045551cc2b1f ;
+    TEMP:hasAffiliation ror:02dqehb95 ;
+    TEMP:middleName "M" .
+
+dataset:226a0573-f8e5-418c-914f-045551cc2b1f a owl:NamedIndividual,
+        sparc:Dataset ;
+    rdfs:label "Effects of nodose ganglion blockade on gastric motility during cervical vagus nerve stimulation measured with magnetic resonance imaging in rats" ;
+    dc:title "Effects of nodose ganglion blockade on gastric motility during cervical vagus nerve stimulation measured with MRI" ;
+    dc:description "This study aims to evaluate the effects of cervical VNS on gastric motility in rats. Gastric MRI was performed during cervical VNS with and without afferent blockade at the nodose ganglion." ;
+    isAbout: "afferent blockade",
+        "gastric motility",
+        "MRI",
+        "rat",
+        "stomach",
+        "vagus nerve stimulation",
+        NCBITaxon:10116,
+        UBERON:0001759 ;
+    TEMP:collectionTitle "Effects of vagus nerve stimulation (VNS) and gastric electrical stimulation (GES) settings on gastric emptying and motility in rats." ;
+    TEMP:completenessOfDataset "hasNext" ;
+    TEMP:contentsWereUpdatedAtTime "2021-02-02T03:26:11.607179+00:00"^^xsd:dateTime ;
+    TEMP:curationIndex 2 ;
+    TEMP:errorIndex 4 ;
+    TEMP:hasAdditionalFundingInformation "OT2OD023847" ;
+    TEMP:hasAwardNumber awards:OT2OD023847 ;
+    TEMP:hasContactPerson contributor:Deborah-Jaffey,
+        ORCID:0000-0001-6689-7058,
+        ORCID:0000-0002-0355-8515,
+        ORCID:0000-0002-8773-4204 ;
+    TEMP:hasDatasetTemplateSchemaVersion "1.2.3" ;
+    TEMP:hasExpectedNumberOfSamples 0 ;
+    TEMP:hasExpectedNumberOfSubjects 8 ;
+    TEMP:hasExperimentalModality "electrophysiology" ;
+    TEMP:hasNumberOfContributors 5 ;
+    TEMP:hasNumberOfDirectories 51 ;
+    TEMP:hasNumberOfFiles 95 ;
+    TEMP:hasNumberOfSubjects 8 ;
+    TEMP:hasProtocol pio.api:31399 ;
+    TEMP:hasResponsiblePrincipalInvestigator ORCID:0000-0001-6689-7058,
+        ORCID:0000-0002-8773-4204 ;
+    TEMP:hasSizeInBytes 855229104 ;
+    TEMP:hasUriApi dataset:226a0573-f8e5-418c-914f-045551cc2b1f ;
+    TEMP:hasUriHuman <https://app.blackfynn.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:226a0573-f8e5-418c-914f-045551cc2b1f> ;
+    TEMP:isAboutParticipant subject:C1-101,
+        subject:C1-102,
+        subject:C1-103,
+        subject:C1-104,
+        subject:C2-101,
+        subject:C2-102,
+        subject:C2-103,
+        subject:C2-104 ;
+    TEMP:milestoneCompletionDate "2018-01-31T00:00:00"^^xsd:dateTime ;
+    TEMP:protocolEmploysTechnique <http://uri.interlex.org/tgbugs/uris/indexes/ontologies/methods/188>,
+        tech:MRI ;
+    TEMP:statusOnPlatform "05_CURATION_IN_PROGRESS_MBF_CURATORS" ;
+    TEMP:submissionIndex 2 ;
+    TEMP:unclassifiedIndex 0 ;
+    TEMP:wasCreatedAtTime "2020-02-18T00:55:36.678922+00:00"^^xsd:dateTime ;
+    TEMP:wasUpdatedAtTime "2021-02-17T20:24:07.551000+00:00"^^xsd:dateTime .
+
+ORCID:0000-0001-6689-7058 a owl:NamedIndividual,
+        sparc:Person ;
+    rdfs:label "Terry Powley" ;
+    sparc:firstName "Terry" ;
+    sparc:lastName "Powley" ;
+    sparc:hasORCIDId ORCID:0000-0001-6689-7058 ;
+    TEMP:contributorTo dataset:226a0573-f8e5-418c-914f-045551cc2b1f ;
+    TEMP:hasAffiliation ror:02dqehb95 ;
+    TEMP:middleName "L" .
+
+ORCID:0000-0001-7540-8236 a owl:NamedIndividual,
+        sparc:Person ;
+    rdfs:label "Bartek Rajwa" ;
+    sparc:firstName "Bartek" ;
+    sparc:lastName "Rajwa" ;
+    sparc:hasORCIDId ORCID:0000-0001-7540-8236 ;
+    TEMP:contributorTo dataset:226a0573-f8e5-418c-914f-045551cc2b1f ;
+    TEMP:hasAffiliation ror:02dqehb95 .
+
+ORCID:0000-0002-0355-8515 a owl:NamedIndividual,
+        sparc:Person ;
+    rdfs:label "Kun-Han Lu" ;
+    sparc:firstName "Kun-Han" ;
+    sparc:lastName "Lu" ;
+    sparc:hasORCIDId ORCID:0000-0002-0355-8515 ;
+    TEMP:contributorTo dataset:226a0573-f8e5-418c-914f-045551cc2b1f ;
+    TEMP:hasAffiliation ror:02dqehb95 .
+
+ORCID:0000-0002-8773-4204 a owl:NamedIndividual,
+        sparc:Person ;
+    rdfs:label "Zhongming Liu" ;
+    sparc:firstName "Zhongming" ;
+    sparc:lastName "Liu" ;
+    sparc:hasORCIDId ORCID:0000-0002-8773-4204 ;
+    TEMP:contributorTo dataset:226a0573-f8e5-418c-914f-045551cc2b1f ;
+    TEMP:hasAffiliation ror:02dqehb95 .
+
+pio.api:31399 a owl:NamedIndividual,
+        sparc:Protocol ;
+    rdfs:label "Effects of Vagus Nerve Stimulation/Gastric Electrical Stimulation on Gastric Emptying and Motility Assessed with Magnetic Resonance Imaging" ;
+    TEMP:protocolHasNumberOfSteps 21 .
+
+RRID:RGD_70508 a owl:NamedIndividual .
+
+subject:C1-101 a owl:NamedIndividual,
+        sparc:Subject ;
+    sparc:animalSubjectHasWeight 283 ;
+    sparc:animalSubjectIsOfSpecies NCBITaxon:10116 ;
+    sparc:animalSubjectIsOfStrain "Sprague-Dawley" ;
+    sparc:spatialLocationOfModulator "Left cervical vagus" ;
+    sparc:specimenHasIdentifier RRID:RGD_70508 ;
+    sparc:stimulatorUtilized "A-M Stimulator" ;
+    TEMP:hasAgeCategory "adult" ;
+    TEMP:hasAssignedGroup "VNS_wo_lidocaine" ;
+    TEMP:hasBiologicalSex PATO:0000384 ;
+    TEMP:hasDerivedInformationAsParticipant dataset:226a0573-f8e5-418c-914f-045551cc2b1f ;
+    TEMP:localId "C1-101" .
+
+subject:C1-102 a owl:NamedIndividual,
+        sparc:Subject ;
+    sparc:animalSubjectHasWeight 292 ;
+    sparc:animalSubjectIsOfSpecies NCBITaxon:10116 ;
+    sparc:animalSubjectIsOfStrain "Sprague-Dawley" ;
+    sparc:spatialLocationOfModulator "Left cervical vagus" ;
+    sparc:specimenHasIdentifier RRID:RGD_70508 ;
+    sparc:stimulatorUtilized "A-M Stimulator" ;
+    TEMP:hasAgeCategory "adult" ;
+    TEMP:hasAssignedGroup "VNS_wo_lidocaine" ;
+    TEMP:hasBiologicalSex PATO:0000384 ;
+    TEMP:hasDerivedInformationAsParticipant dataset:226a0573-f8e5-418c-914f-045551cc2b1f ;
+    TEMP:localId "C1-102" .
+
+subject:C1-103 a owl:NamedIndividual,
+        sparc:Subject ;
+    sparc:animalSubjectHasWeight 309 ;
+    sparc:animalSubjectIsOfSpecies NCBITaxon:10116 ;
+    sparc:animalSubjectIsOfStrain "Sprague-Dawley" ;
+    sparc:spatialLocationOfModulator "Left cervical vagus" ;
+    sparc:specimenHasIdentifier RRID:RGD_70508 ;
+    sparc:stimulatorUtilized "A-M Stimulator" ;
+    TEMP:hasAgeCategory "adult" ;
+    TEMP:hasAssignedGroup "VNS_wo_lidocaine" ;
+    TEMP:hasBiologicalSex PATO:0000384 ;
+    TEMP:hasDerivedInformationAsParticipant dataset:226a0573-f8e5-418c-914f-045551cc2b1f ;
+    TEMP:localId "C1-103" .
+
+subject:C1-104 a owl:NamedIndividual,
+        sparc:Subject ;
+    sparc:animalSubjectHasWeight 308 ;
+    sparc:animalSubjectIsOfSpecies NCBITaxon:10116 ;
+    sparc:animalSubjectIsOfStrain "Sprague-Dawley" ;
+    sparc:spatialLocationOfModulator "Left cervical vagus" ;
+    sparc:specimenHasIdentifier RRID:RGD_70508 ;
+    sparc:stimulatorUtilized "A-M Stimulator" ;
+    TEMP:hasAgeCategory "adult" ;
+    TEMP:hasAssignedGroup "VNS_wo_lidocaine" ;
+    TEMP:hasBiologicalSex PATO:0000384 ;
+    TEMP:hasDerivedInformationAsParticipant dataset:226a0573-f8e5-418c-914f-045551cc2b1f ;
+    TEMP:localId "C1-104" .
+
+subject:C2-101 a owl:NamedIndividual,
+        sparc:Subject ;
+    sparc:animalSubjectHasWeight 376 ;
+    sparc:animalSubjectIsOfSpecies NCBITaxon:10116 ;
+    sparc:animalSubjectIsOfStrain "Sprague-Dawley" ;
+    sparc:spatialLocationOfModulator "Left cervical vagus" ;
+    sparc:specimenHasIdentifier RRID:RGD_70508 ;
+    sparc:stimulatorUtilized "A-M Stimulator" ;
+    TEMP:hasAgeCategory "adult" ;
+    TEMP:hasAssignedGroup "VNS_w_lidocaine" ;
+    TEMP:hasBiologicalSex PATO:0000384 ;
+    TEMP:hasDerivedInformationAsParticipant dataset:226a0573-f8e5-418c-914f-045551cc2b1f ;
+    TEMP:localId "C2-101" .
+
+subject:C2-102 a owl:NamedIndividual,
+        sparc:Subject ;
+    sparc:animalSubjectHasWeight 332 ;
+    sparc:animalSubjectIsOfSpecies NCBITaxon:10116 ;
+    sparc:animalSubjectIsOfStrain "Sprague-Dawley" ;
+    sparc:spatialLocationOfModulator "Left cervical vagus" ;
+    sparc:specimenHasIdentifier RRID:RGD_70508 ;
+    sparc:stimulatorUtilized "A-M Stimulator" ;
+    TEMP:hasAgeCategory "adult" ;
+    TEMP:hasAssignedGroup "VNS_w_lidocaine" ;
+    TEMP:hasBiologicalSex PATO:0000384 ;
+    TEMP:hasDerivedInformationAsParticipant dataset:226a0573-f8e5-418c-914f-045551cc2b1f ;
+    TEMP:localId "C2-102" .
+
+subject:C2-103 a owl:NamedIndividual,
+        sparc:Subject ;
+    sparc:animalSubjectHasWeight 375 ;
+    sparc:animalSubjectIsOfSpecies NCBITaxon:10116 ;
+    sparc:animalSubjectIsOfStrain "Sprague-Dawley" ;
+    sparc:spatialLocationOfModulator "Left cervical vagus" ;
+    sparc:specimenHasIdentifier RRID:RGD_70508 ;
+    sparc:stimulatorUtilized "A-M Stimulator" ;
+    TEMP:hasAgeCategory "adult" ;
+    TEMP:hasAssignedGroup "VNS_w_lidocaine" ;
+    TEMP:hasBiologicalSex PATO:0000384 ;
+    TEMP:hasDerivedInformationAsParticipant dataset:226a0573-f8e5-418c-914f-045551cc2b1f ;
+    TEMP:localId "C2-103" .
+
+subject:C2-104 a owl:NamedIndividual,
+        sparc:Subject ;
+    sparc:animalSubjectHasWeight 344 ;
+    sparc:animalSubjectIsOfSpecies NCBITaxon:10116 ;
+    sparc:animalSubjectIsOfStrain "Sprague-Dawley" ;
+    sparc:spatialLocationOfModulator "Left cervical vagus" ;
+    sparc:specimenHasIdentifier RRID:RGD_70508 ;
+    sparc:stimulatorUtilized "A-M Stimulator" ;
+    TEMP:hasAgeCategory "adult" ;
+    TEMP:hasAssignedGroup "VNS_w_lidocaine" ;
+    TEMP:hasBiologicalSex PATO:0000384 ;
+    TEMP:hasDerivedInformationAsParticipant dataset:226a0573-f8e5-418c-914f-045551cc2b1f ;
+    TEMP:localId "C2-104" .
+
+[] a owl:NamedIndividual,
+        sparc:DatasetContribution ;
+    sparc:isContactPerson false ;
+    TEMP:aboutContributor ORCID:0000-0001-7540-8236 ;
+    TEMP:aboutDataset dataset:226a0573-f8e5-418c-914f-045551cc2b1f ;
+    TEMP:contributorOrderIndex 4 ;
+    TEMP:hasRole TEMP:DataManager .
+
+[] a owl:NamedIndividual,
+        sparc:DatasetContribution ;
+    sparc:isContactPerson true ;
+    TEMP:aboutContributor contributor:Deborah-Jaffey ;
+    TEMP:aboutDataset dataset:226a0573-f8e5-418c-914f-045551cc2b1f ;
+    TEMP:contributorOrderIndex 3 ;
+    TEMP:hasRole TEMP:ProjectMember .
+
+[] a owl:NamedIndividual,
+        sparc:DatasetContribution ;
+    sparc:isContactPerson true ;
+    TEMP:aboutContributor ORCID:0000-0001-6689-7058 ;
+    TEMP:aboutDataset dataset:226a0573-f8e5-418c-914f-045551cc2b1f ;
+    TEMP:contributorOrderIndex 1 ;
+    TEMP:hasRole TEMP:ContactPerson,
+        TEMP:PrincipalInvestigator .
+
+[] a owl:NamedIndividual,
+        sparc:DatasetContribution ;
+    sparc:isContactPerson true ;
+    TEMP:aboutContributor ORCID:0000-0002-0355-8515 ;
+    TEMP:aboutDataset dataset:226a0573-f8e5-418c-914f-045551cc2b1f ;
+    TEMP:contributorOrderIndex 0 ;
+    TEMP:hasRole TEMP:ContactPerson,
+        TEMP:DataCollector .
+
+[] a owl:NamedIndividual,
+        sparc:DatasetContribution ;
+    sparc:isContactPerson true ;
+    TEMP:aboutContributor ORCID:0000-0002-8773-4204 ;
+    TEMP:aboutDataset dataset:226a0573-f8e5-418c-914f-045551cc2b1f ;
+    TEMP:contributorOrderIndex 2 ;
+    TEMP:hasRole TEMP:ContactPerson,
+        TEMP:PrincipalInvestigator,
+        TEMP:ProjectLeader .
+
+### Serialized using the ttlser deterministic serializer v1.2.0
