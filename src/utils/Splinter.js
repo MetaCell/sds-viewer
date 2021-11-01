@@ -523,13 +523,15 @@ class Splinter {
             if (node.type === rdfTypes.Sample.key) {
                 if (node.attributes.derivedFrom !== undefined) {
                     let source = this.nodes.get(node.attributes.derivedFrom[0]);
-                    source.children_counter++
-                    //this.nodes.set(node.attributes.derivedFrom[0], source);
-                    array[index].level = source.level + 1;
-                    this.forced_edges.push({
-                        source: node.attributes.derivedFrom[0],
-                        target: node.id
-                    });
+                    if ( source !== undefined ) {
+                        source.children_counter++
+                        //this.nodes.set(node.attributes.derivedFrom[0], source);
+                        array[index].level = source.level + 1;
+                        this.forced_edges.push({
+                            source: node.attributes.derivedFrom[0],
+                            target: node.id
+                        });
+                    }
                 }
             }
 
