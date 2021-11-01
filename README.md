@@ -30,7 +30,7 @@
    - Linux
       - Install it with 
          `sudo apt-get install git`
-5. In terminal, type command `git clone -b feature/demo https://github.com/MetaCell/sds-viewer.git`
+5. In terminal, type command `git clone -b development https://github.com/MetaCell/sds-viewer.git`
    - Output should be something like this.
    ![image](https://user-images.githubusercontent.com/4562825/136595047-0255afff-3b52-4cbe-9e2b-575ec4e46a66.png)
 
