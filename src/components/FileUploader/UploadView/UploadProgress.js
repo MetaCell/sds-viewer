@@ -4,7 +4,7 @@ import Progress from './Progress';
 import FileExtension from './FileExtension';
 import CANCEL from '../../../images/cancel.svg';
 import SUCCESS from '../../../images/success.svg';
-const FileHandler = require('../../../utils/filesHandler');
+import FileHandler from '../../../utils/filesHandler';
 
 const uploadFile = (file, onProgress, onUpload) => {
   const fileHandler = new FileHandler();
