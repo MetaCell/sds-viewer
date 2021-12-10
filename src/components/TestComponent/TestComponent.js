@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-const Splinter = require('../../utils/Splinter');
-const FileHandler = require('../../utils/filesHandler');
+import Splinter from '../../utils/Splinter';
+import { FileHandler } from '../../utils/filesHandler';
 
 export default class TestComponent extends React.Component {
 
