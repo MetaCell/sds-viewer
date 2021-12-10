@@ -10,8 +10,7 @@ import LINK from '../../images/url.svg';
 import LINK_GREEN from '../../images/link-green.svg';
 import CANCEL from '../../images/cancel.svg';
 import UploadSubmit from './UploadSubmit';
-
-const FileHandler = require('../../utils/filesHandler');
+import FileHandler from '../../utils/filesHandler';
 
 const UrlUploader = ({ handleClose, handleDone }) => {
   const [loader, setLoader] = useState(false);

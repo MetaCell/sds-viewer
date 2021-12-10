@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-class FileHandler {
+export default class FileHandler {
 
     get_local_file(path, callback, progressCallback) {
         if (path === undefined)
@@ -37,5 +37,3 @@ class FileHandler {
         });
     }
 }
-
-module.exports = FileHandler
