@@ -1,8 +1,21 @@
 import NodesFactory from './nodesFactory';
-import { rdfTypes, type_key, typesModel } from './graphModel';
-import { subject_key, protocols_key, contributors_key } from '../constants';
+
+import {
+    rdfTypes,
+    type_key,
+    typesModel,
+    RDF_TO_JSON_TYPES
+} from './graphModel';
+
+import {
+    subject_key,
+    protocols_key,
+    contributors_key
+} from '../constants';
 
 const N3 = require('n3');
+const ttl2jsonld = require('@frogcat/ttl2jsonld').parse;
+
 const TMP_FILE = ".tmp";
 
 const SUBJECTS_LEVEL = 4;
@@ -70,6 +83,8 @@ class Splinter {
         this.tree_parents_map = undefined;
         this.dataset_id = this.processDatasetId();
         this.store = new N3.Store();
+        this.rdf_to_json = undefined;
+        this.rdf_to_json_map = undefined;
     }
 
     /* Initialise global maps before to start data manipulation */
@@ -79,6 +94,7 @@ class Splinter {
         this.tree_map = new Map();
         this.proxies_map = new Map();
         this.tree_parents_map = new Map();
+        this.rdf_to_json_map = new Map();
     }
 
 
@@ -110,8 +126,37 @@ class Splinter {
                     "type": prefix,
                     "iri": iri
                 };
-            }
+            };
             parser.parse(that.turtleFile, callbackParse, prefixCallback);
+        });
+    }
+
+    convertRDFToJson () {
+        this.rdf_to_json = ttl2jsonld(this.turtleFile);
+        this.rdf_to_json['@graph'].forEach(node => {
+            let found = false;
+            let toTrim = '';
+            if (Array.isArray(node['@type'])) {
+                found = RDF_TO_JSON_TYPES.some( item => {
+                    if (node['@type'].includes(item.key)) {
+                        toTrim = item.toTrim;
+                        return true;
+                    }
+                    return false;
+                });
+            } else {
+                found = RDF_TO_JSON_TYPES.some( item => {
+                    if (node['@type'] === item.key) {
+                        toTrim = item.toTrim;
+                        return true;
+                    }
+                    return false;
+                });
+            }
+            if (found) {
+                let id = this.types[toTrim].iri.id + node['@id'].replace(toTrim + ':', '');
+                this.rdf_to_json_map.set(id, node);
+            }
         });
     }
 
@@ -231,6 +276,7 @@ class Splinter {
     async processDataset() {
         this.initialiseNodesEdges()
         await this.processTurtle();
+        this.convertRDFToJson();
         this.processJSON();
         this.create_graph();
         this.create_tree();
@@ -268,6 +314,7 @@ class Splinter {
 
     build_node(node) {
         const graph_node = this.nodes.get(node.id);
+        const additional_properties = this.rdf_to_json_map.get(node.id);
         if (graph_node) {
             console.error("Issue with the build node, this node is already present");
             console.error(node);
@@ -280,8 +327,9 @@ class Splinter {
                 proxies: [],
                 properties: [],
                 tree_reference: null,
-                children_counter: 0
-            })
+                children_counter: 0,
+                additional_properties: additional_properties,
+            });
         }
     }
 

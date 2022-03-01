@@ -28,6 +28,28 @@ function extractProperties(node, ttlTypes) {
         }
     }
 
+    if (node.additional_properties) {
+        for (const json_prop of rdfTypes[node.type].additional_properties) {
+            let new_attribute = node.additional_properties;
+            for (const step of json_prop.path) {
+                if (new_attribute[step] !== undefined) {
+                    new_attribute = new_attribute[step];
+                } else {
+                    new_attribute = undefined;
+                    break;
+                }
+            }
+            if (new_attribute !== undefined) {
+                node.attributes[json_prop.property] = [];
+                if (json_prop.type === 'string') {
+                    node.attributes[json_prop.property].push(new_attribute.replace(json_prop.trimType, ''));
+                } else {
+                    node.attributes[json_prop.property].push(parseFloat(new_attribute));
+                }
+            }
+        }
+    }
+
     if (node?.attributes?.identifier !== undefined) {
         node.name = node.attributes.identifier;
     }
