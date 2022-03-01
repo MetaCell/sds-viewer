@@ -38,7 +38,13 @@ export function UploadProgress({ file, onDelete, onUpload }) {
           alt='Cancel'
         />
         ) : (
-          <img src={SUCCESS} width='24' alt='SUCCESS' />
+          <img
+          src={CANCEL}
+          onClick={() => onDelete(file)}
+          width='24'
+          style={{ cursor: 'pointer' }}
+          alt='Done'
+        />
         )
       }
     </Box>
