@@ -16,6 +16,10 @@ const App = () => {
   const datasets = useSelector(state => state.sdsState.datasets);
   const error_message = useSelector(state => state.sdsState.error_message);
 
+  const queryParams = new URLSearchParams(window.location.search);
+  const id = queryParams.get('id');
+  console.log("the id is " + id);
+
   return (
     <MuiThemeProvider theme={theme}>
       <CssBaseline />
