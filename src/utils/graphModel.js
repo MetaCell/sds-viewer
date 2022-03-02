@@ -1,5 +1,9 @@
 export const type_key = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type";
 
+export const RDF_TO_JSON_TYPES = [
+    {key: 'sparc:Subject', toTrim: 'subject'}
+];
+
 export const rdfTypes = {
     "Ontology": {
         "image": "./images/graph/database.svg",
@@ -128,7 +132,7 @@ export const rdfTypes = {
                 "label": "to be filled"
             },
             {
-                "type": "TEMP",
+                "type": "sparc",
                 "key": "hasBiologicalSex",
                 "property": "biologicalSex",
                 "label": "to be filled"
@@ -157,7 +161,51 @@ export const rdfTypes = {
                 "property": "participantInPerformanceOf",
                 "label": "to be filled"
             }
-    ]
+        ],
+        "additional_properties": [
+            {
+                "label": "Age unit",
+                "property": "ageUnit",
+                "path": [ "TEMP:hasAge", "TEMP:hasUnit", "@id" ],
+                "trimType": "unit:",
+                "type": "string"
+            },
+            {
+                "label": "Age value",
+                "property": "ageValue",
+                "path": [ "TEMP:hasAge", "rdf:value" ],
+                "trimType": "",
+                "type": "digit"
+            },
+            {
+                "label": "Age base unit",
+                "property": "ageBaseUnit",
+                "path": [ "TEMP:hasAge", "TEMP:asBaseUnits", "TEMP:hasUnit", "@id" ],
+                "trimType": "unit:",
+                "type": "string"
+            },
+            {
+                "label": "Age base value",
+                "property": "ageBaseValue",
+                "path": [ "TEMP:hasAge", "TEMP:asBaseUnits", "rdf:value", "@value" ],
+                "trimType": "",
+                "type": "digit"
+            },
+            {
+                "label": "Weight unit",
+                "property": "weightUnit",
+                "path": [ "sparc:animalSubjectHasWeight", "TEMP:hasUnit", "@id" ],
+                "trimType": "unit:",
+                "type": "string"
+            },
+            {
+                "label": "Weight value",
+                "property": "weightValue",
+                "path": [ "sparc:animalSubjectHasWeight", "rdf:value", "@value" ],
+                "trimType": "",
+                "type": "digit"
+            }
+        ]
     },
     "Sample": {
         "image": "./images/graph/folder.svg",

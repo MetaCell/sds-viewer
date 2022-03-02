@@ -2,6 +2,8 @@ import React from "react";
 import {
     Box,
     Typography,
+    List,
+    ListItemText,
 } from "@material-ui/core";
 import SimpleChip from './Views/SimpleChip';
 import SimpleLabelValue from './Views/SimpleLabelValue';
@@ -28,61 +30,88 @@ const SubjectDetails = (props) => {
         title = node.tree_node.basename;
     }
 
-    const populateAttributeArray = (array, prop) => {
-        array = prop.map( item => {
-            return item;
-        })
-    }
-
-    let species = [];
-    let strains = [];
-    let assignedGroups = [];
-    if (node.graph_node?.attributes?.hasAssignedGroup !== undefined) {
-        populateAttributeArray(assignedGroups, node.graph_node.attributes.hasAssignedGroup);
-    }
-    if (node.graph_node?.attributes?.subjectSpecies !== undefined) {
-        populateAttributeArray(species, node.graph_node.attributes.subjectSpecies);
-    }
-    if (node.graph_node?.attributes?.subjectStrain !== undefined) {
-        populateAttributeArray(strains, node.graph_node.attributes.subjectStrain);
-    }
+    const DETAILS_LIST = [
+        {
+            title: 'Age Unit',
+            value: node.graph_node.attributes?.ageUnit
+        },
+        {
+            title: 'Age Value',
+            value: node.graph_node.attributes?.ageValue
+        },
+        {
+            title: 'Age Base Unit',
+            value: node.graph_node.attributes?.ageBaseUnit
+        },
+        {
+            title: 'Age Base Value',
+            value: node.graph_node.attributes?.ageBaseValue
+        },
+        {
+            title: 'Weight Unit',
+            value: node.graph_node.attributes?.weightUnit
+        },
+        {
+            title: 'Weight Value',
+            value: node.graph_node.attributes?.weightValue
+        }
+    ];
 
     return (
         <Box id={idDetails}>
             <Box className="tab-content">
                 <SimpleLabelValue label={'Label'} value={title} heading={'Subject Details'} />
 
-                { iterateSimpleValue('Age', node?.graph_node?.attributes?.age) }
                 { iterateSimpleValue('Age Category', node?.graph_node?.attributes?.hasAgeCategory) }
+
+                <Box className="tab-content-row">
+                    <List component="nav" aria-label="main">
+                        {
+                            DETAILS_LIST?.map((item, index) => {
+                                if (item.value !== undefined) {
+                                    return (<ListItemText key={`detail_list_${index}`}>
+                                                <Typography component="label">{item?.title}</Typography>
+                                                <Typography>{item?.value}</Typography>
+                                        </ListItemText>);
+                                } else {
+                                    return <></>
+                                }
+                            })
+                        }
+                    </List>
+                </Box>
+
                 { iterateSimpleValue('Biological Sex', node?.graph_node?.attributes?.biologicalSex) }
-                { <Box className="tab-content-row">
-                    <Links href={node?.graph_node?.attributes?.hasDerivedInformationAsParticipant} title="Derived information as participant" />
-                  </Box>
+                {
+                    <Box className="tab-content-row">
+                        <Links href={node?.graph_node?.attributes?.hasDerivedInformationAsParticipant} title="Derived information as participant" />
+                    </Box>
                 }
-                { <Box className="tab-content-row">
-                    <Links href={node?.graph_node?.attributes?.participantInPerformanceOf} title="Participant in performance of" />
-                  </Box>
+                {
+                    <Box className="tab-content-row">
+                        <Links href={node?.graph_node?.attributes?.participantInPerformanceOf} title="Participant in performance of" />
+                    </Box>
                 }
                 { iterateSimpleValue('Specimen identifier', node?.graph_node?.attributes?.specimenHasIdentifier) }
 
-                { species.length > 0
+                { node.graph_node?.attributes?.subjectSpecies && node.graph_node?.attributes?.subjectSpecies.length > 0
                     ? ( <Box className="tab-content-row">
                             <Typography component="label">Species</Typography>
-                            <SimpleChip chips={species} />
+                            <SimpleChip chips={node.graph_node?.attributes?.subjectSpecies} />
                         </Box>)
                     : <> </>
                 }
-                { strains.length > 0
+                { node.graph_node?.attributes?.subjectStrain && node.graph_node?.attributes?.subjectStrain.length > 0
                     ? ( <Box className="tab-content-row">
                             <Typography component="label">Strains</Typography>
-                            <SimpleChip chips={strains} />
+                            <SimpleChip chips={node.graph_node?.attributes?.subjectStrain} />
                         </Box>)
                     : <> </>
                 }
-                { assignedGroups.length > 0
+                { node.graph_node?.attributes?.hasAssignedGroup && node.graph_node?.attributes?.hasAssignedGroup.length > 0
                     ? ( <Box className="tab-content-row">
                             <Typography component="label">Assigned Groups</Typography>
-                            <SimpleChip chips={assignedGroups} />
+                            <SimpleChip chips={node.graph_node?.attributes?.hasAssignedGroup} />
                         </Box>)
                     : <> </>
                 }
