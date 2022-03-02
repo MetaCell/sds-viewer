@@ -6,42 +6,66 @@ import  { FilesUploading } from './UploadView/FilesUploading';
 import { FILE_UPLOAD_PARAMS } from '../../constants';
 
 const Uploader = ({ handleClose, handleDone }) => {
-  const [files, setFiles] = useState([]);
-  const [loadedFiles, setLoadedFiles] = useState(0);
+  const [rdf, setRdf] = useState(undefined);
+  const [json, setJson] = useState(undefined);
 
   const handleChange = (files) => {
   };
 
   const onUpload = (file, data) => {
-    setLoadedFiles((loadedFiles) =>  loadedFiles + 1);
-    setFiles((curr) =>
-      curr.map((fw) => {
-        if (fw.file === file) {
-          return { ...fw, data };
-        }
-        return fw;
-      }),
-    );
+    if (rdf?.file === file && file.type === "text/turtle") {
+      setRdf({
+        ...rdf, data
+      })
+    } else if (json?.file === file && file.type === "application/json") {
+      setJson({
+        ...json, data
+      })
+    } else {
+      console.error("something weird happened!")
+    }
   }
 
-  const onDelete = (file)  => setFiles((curr) => curr.filter((fw) => fw.file !== file));
+  const onDelete = (file)  => {
+    if (rdf?.file === file && file.type === "text/turtle") {
+      setRdf(undefined);
+    } else if (json?.file === file && file.type === "application/json") {
+      setJson(undefined);
+    } else {
+      console.error("something weird happened!")
+    }
+  };
 
   const onDrop = (files, accept = true) => {
-    const updatedFiles = files.map((file) => ({
-      file,
-      errors: accept ? [] : [{ message: 'Error: File is too large' }],
-      id: Math.random(),
-    }));
-    setFiles((curr) => [...curr, ...updatedFiles]);
+    for (const file of files) {
+      if (file.type === "text/turtle") {
+        setRdf({
+          file,
+          errors: accept ? [] : [{ message: 'Error: File is too large' }],
+          id: Math.random(),
+        })
+      } else if (file.type === "application/json") {
+        setJson({
+          file,
+          errors: accept ? [] : [{ message: 'Error: File is too large' }],
+          id: Math.random(),
+        })
+      } else {
+        console.error("something weird happened!")
+      }
+    }
   };
 
   const nodeRef = React.useRef('dialog');
 
   const DropzoneUploadIcon = () => <img src={UploadIcon} alt="upload" />
 
+  const files = [rdf, json].filter(item => item !== undefined);
+
   return (
     <>
       <DropzoneArea
+        fileObjects={files.map(item => item.file)}
         onChange={(e) => handleChange(e)}
         showPreviewsInDropzone={false}
         onDrop={(accFiles) => onDrop(accFiles)}
@@ -59,7 +83,7 @@ const Uploader = ({ handleClose, handleDone }) => {
         <FilesUploading files={files} onDelete={onDelete} onUpload={onUpload} />
       ): null }
 
-      {loadedFiles === files.length && loadedFiles !== 0 && (
+      {json !== undefined && rdf !== undefined && (
         <UploadSubmit handleClose={() => {handleDone(files)}} />
       )}
     </>
