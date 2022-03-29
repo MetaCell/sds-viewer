@@ -7,7 +7,6 @@ const DatasetHeader = (props) => {
     const { node } = props;
     const headingStyle = {
         color: vars["dataset"],
-        textTransform: 'capitalize'
     }
 
     let title = undefined;
