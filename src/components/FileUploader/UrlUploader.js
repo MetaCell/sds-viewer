@@ -70,8 +70,8 @@ const UrlUploader = ({ handleClose, handleDone }) => {
       onUpload(url, fileData);
     };
     setLoader(true);
-    fileHandler.get_remote_file(url, callback);
-    fileHandler2.get_remote_file(getJsonURL(url), callback);
+    fileHandler.get_remote_file(url, callback, () => {});
+    fileHandler2.get_remote_file(getJsonURL(url), callback, () => {});
   };
 
   const removeUrl = () => {
