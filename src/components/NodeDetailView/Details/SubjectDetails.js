@@ -32,22 +32,6 @@ const SubjectDetails = (props) => {
 
     const DETAILS_LIST = [
         {
-            title: 'Age Unit',
-            value: node.graph_node.attributes?.ageUnit
-        },
-        {
-            title: 'Age Value',
-            value: node.graph_node.attributes?.ageValue
-        },
-        {
-            title: 'Age Base Unit',
-            value: node.graph_node.attributes?.ageBaseUnit
-        },
-        {
-            title: 'Age Base Value',
-            value: node.graph_node.attributes?.ageBaseValue
-        },
-        {
             title: 'Weight Unit',
             value: node.graph_node.attributes?.weightUnit
         },
