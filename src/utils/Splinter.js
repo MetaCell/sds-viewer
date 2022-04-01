@@ -567,6 +567,8 @@ class Splinter {
 
 
     fix_links() {
+        let nodesToRemove = [];
+
         this.forced_nodes.forEach((node, index, array) => {
             if (node.type === rdfTypes.Sample.key) {
                 if (node.attributes.derivedFrom !== undefined) {
@@ -583,6 +585,19 @@ class Splinter {
                 }
             }
 
+            if (node.type === rdfTypes.Subject.key) {
+                if (node.attributes?.specimenHasIdentifier !== undefined) {
+                    let source = this.nodes.get(node.attributes.specimenHasIdentifier[0]);
+                    if ( source !== undefined ) {
+                        node.attributes.specimenHasIdentifier[0] = source.attributes.label[0];
+                    }
+                }
+            }
+
+            if (node.type === rdfTypes.RRID.key) {
+                nodesToRemove.unshift(index);
+            }
+
             if ( node.level !== undefined ) {
                 if ( this.levelsMap[node.level] ) {
                     this.levelsMap[node.level] = [...this.levelsMap[node.level], node];
@@ -591,6 +606,10 @@ class Splinter {
                 }
             }
         });
+
+        nodesToRemove.forEach(element => {
+            this.forced_nodes.splice(element, 1);
+        })
     }
 
     identify_childless_parents() {
