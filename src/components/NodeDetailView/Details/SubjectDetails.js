@@ -8,7 +8,7 @@ import {
 import SimpleChip from './Views/SimpleChip';
 import SimpleLabelValue from './Views/SimpleLabelValue';
 import Links from './Views/Links';
-import { iterateSimpleValue } from './utils';
+import { iterateSimpleValue, simpleValue } from './utils';
 import { detailsLabel } from '../../../constants';
 
 const SubjectDetails = (props) => {
@@ -32,22 +32,6 @@ const SubjectDetails = (props) => {
 
     const DETAILS_LIST = [
         {
-            title: 'Age Unit',
-            value: node.graph_node.attributes?.ageUnit
-        },
-        {
-            title: 'Age Value',
-            value: node.graph_node.attributes?.ageValue
-        },
-        {
-            title: 'Age Base Unit',
-            value: node.graph_node.attributes?.ageBaseUnit
-        },
-        {
-            title: 'Age Base Value',
-            value: node.graph_node.attributes?.ageBaseValue
-        },
-        {
             title: 'Weight Unit',
             value: node.graph_node.attributes?.weightUnit
         },
@@ -63,6 +47,12 @@ const SubjectDetails = (props) => {
                 <SimpleLabelValue label={'Label'} value={title} heading={'Subject Details'} />
 
                 { iterateSimpleValue('Age Category', node?.graph_node?.attributes?.hasAgeCategory) }
+                { (node.graph_node.attributes?.ageValue && node.graph_node.attributes?.ageUnit)
+                    ? simpleValue('Age', node.graph_node.attributes?.ageValue + ' ' + node.graph_node.attributes?.ageUnit)
+                    : (node.graph_node.attributes?.ageBaseUnit && node.graph_node.attributes?.ageBaseValue)
+                        ? simpleValue('Age', node.graph_node.attributes?.ageBaseValue + ' ' + node.graph_node.attributes?.ageBaseUnit)
+                        : <> </>
+                }
 
                 <Box className="tab-content-row">
                     <List component="nav" aria-label="main">

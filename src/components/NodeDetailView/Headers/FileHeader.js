@@ -7,7 +7,6 @@ const FileHeader = (props) => {
     const { node } = props;
     const headingStyle = {
         color: vars["nifti"],
-        textTransform: 'capitalize'
     }
 
     let title = undefined;

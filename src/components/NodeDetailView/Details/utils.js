@@ -10,3 +10,11 @@ export const iterateSimpleValue = (label, value) => {
         return (<> </>);
     }
 }
+
+export const simpleValue = (label, value) => {
+    if (value !== undefined) {
+        return (<SimpleLabelValue key={label} label={label} value={value} />);
+    } else {
+        return (<> </>);
+    }
+}
