@@ -567,6 +567,8 @@ class Splinter {
 
 
     fix_links() {
+        let nodesToRemove = [];
+
         this.forced_nodes.forEach((node, index, array) => {
             if (node.type === rdfTypes.Sample.key) {
                 if (node.attributes.derivedFrom !== undefined) {
@@ -583,6 +585,19 @@ class Splinter {
                 }
             }
 
+            if (node.type === rdfTypes.Subject.key) {
+                if (node.attributes?.specimenHasIdentifier !== undefined) {
+                    let source = this.nodes.get(node.attributes.specimenHasIdentifier[0]);
+                    if ( source !== undefined ) {
+                        node.attributes.specimenHasIdentifier[0] = source.attributes.label[0];
+                    }
+                }
+            }
+
+            if (node.type === rdfTypes.RRID.key) {
+                nodesToRemove.unshift(index);
+            }
+
             if ( node.level !== undefined ) {
                 if ( this.levelsMap[node.level] ) {
                     this.levelsMap[node.level] = [...this.levelsMap[node.level], node];
@@ -591,6 +606,10 @@ class Splinter {
                 }
             }
         });
+
+        nodesToRemove.forEach(element => {
+            this.forced_nodes.splice(element, 1);
+        })
     }
 
     identify_childless_parents() {
@@ -718,8 +737,8 @@ class Splinter {
     generateData() {
         // generate the tree
         var tree_root = this.tree_map.get(this.root_id);
-        var children = this.tree_parents_map.get(tree_root.remote_id);
-        this.tree_parents_map.delete(tree_root.remote_id);
+        var children = this.tree_parents_map.get(tree_root?.remote_id);
+        this.tree_parents_map?.delete(tree_root?.remote_id);
         this.tree = this.generateLeaf(tree_root);
         children.forEach(leaf => {
             this.build_leaf(leaf, this.tree);
@@ -767,9 +786,9 @@ class Splinter {
     }
 
     generateLeaf(node, parent) {
-        node.id = node.uri_api
+        node.id = node?.uri_api
         node.parent = true;
-        node.text = parent !== undefined ? node.basename : this.dataset_id;
+        node.text = parent !== undefined ? node?.basename : this.dataset_id;
         node.type = node.mimetype === "inode/directory" ? rdfTypes.Collection.key : rdfTypes.File.key;
         node.path = (parent !== undefined && parent.path !== undefined) ? [node.id, ...parent.path] : [node.id];
         if (!node.items) {

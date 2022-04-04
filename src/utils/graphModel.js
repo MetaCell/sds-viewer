@@ -166,6 +166,12 @@ export const rdfTypes = {
                 "key": "participantInPerformanceOf",
                 "property": "participantInPerformanceOf",
                 "label": "to be filled"
+            },
+            {
+                "type": "",
+                "key": "participantInPerformanceOf",
+                "property": "participantInPerformanceOf",
+                "label": "to be filled"
             }
         ],
         "additional_properties": [
@@ -309,6 +315,18 @@ export const rdfTypes = {
             }
         ]
     },
+    "RRID": {
+        "image": "./images/graph/files/default_file.svg",
+        "key": "RRID",
+        "properties": [
+            {
+                "type": "rdfs",
+                "key": "label",
+                "property": "label",
+                "label": "Specifier label"
+            }
+        ]
+    },
     "Unknown": {
         "image": "./images/graph/files/default_file.svg",
         "key": "Unknown",
@@ -339,6 +357,9 @@ export const typesModel = {
         },
         subject: {
             "type": "Subject",
+        },
+        RRID: {
+            "type": "RRID",
         }
     },
     "sparc": {

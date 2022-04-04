@@ -1,4 +1,6 @@
 import React from 'react';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Loader from '@metacell/geppetto-meta-ui/loader/Loader';
 import { Box, Typography, Button } from '@material-ui/core';
 import { IMPORT_TEXT } from '../constants';
 

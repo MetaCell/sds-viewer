@@ -22,7 +22,7 @@ export default class FileHandler {
         reader.readAsText(path);
     }
 
-    get_remote_file(url, callback) {
+    get_remote_file(url, callback, errorCallback) {
         axios.get(url, {
             crossDomain: true,
             responseType: "stream",
@@ -33,7 +33,7 @@ export default class FileHandler {
             callback(url, response.data);
         }).catch(error => {
             console.log(error);
-            callback(undefined);
+            errorCallback(undefined);
         });
     }
 }

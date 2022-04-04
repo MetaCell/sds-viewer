@@ -4,7 +4,7 @@ import { Box, Button } from '@material-ui/core';
 
 const SidebarFooter = (props) => {
   return (
-    <Box display="flex" justifyContent="space-between">
+    <Box display="flex" sx={{ pl: 2 }} justifyContent="space-between">
       <Button
         variant='contained'
         disableElevation

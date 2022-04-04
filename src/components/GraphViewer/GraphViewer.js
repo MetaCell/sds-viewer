@@ -229,7 +229,7 @@ const GraphViewer = (props) => {
       ctx.beginPath();
 
       ctx.drawImage(
-        node.img,
+        node?.img,
         node.x - size - 1,
         node.y - size,
         ...nodeImageSize

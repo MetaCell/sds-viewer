@@ -21,6 +21,8 @@ export const sdsMiddleware = store => next => action => {
             break;
         case Actions.SELECT_INSTANCE:
             break;
+        case Actions.SET_DATASET_LIST:
+            break;
         default:
             break;
     }

@@ -50,14 +50,14 @@ export default class TestComponent extends React.Component {
         var callback = fileData => {
             this.setState({jsonFile: fileData});
         }
-        this.fileHandler.get_remote_file(this.state.urlJSON, callback);
+        this.fileHandler.get_remote_file(this.state.urlJSON, callback, () => {});
     }
 
     handleUrlTurtleDownload(event) {
         var callback = fileData => {
             this.setState({turtleFile: fileData});
         }
-        this.fileHandler.get_remote_file(this.state.urlTurtle, callback);
+        this.fileHandler.get_remote_file(this.state.urlTurtle, callback, () => {});
     }
 
     render() {
