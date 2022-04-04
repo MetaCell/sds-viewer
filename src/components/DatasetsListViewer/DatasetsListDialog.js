@@ -1,82 +1,83 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Dialog, Box, Typography, Paper, List } from '@material-ui/core';
+import { Dialog, Box, Typography, Paper, List, ListItem, ListItemText, Divider, TextField,DialogTitle, CircularProgress } from '@material-ui/core';
 import { addDataset, triggerError } from '../../redux/actions';
 import { NodeViewWidget } from '../../app/widgets';
 import {  addWidget } from '@metacell/geppetto-meta-client/common/layout/actions';
-import Splinter from '../../utils/Splinter';
+import DatasetsListSplinter from './DatasetsListSplinter';
 import { WidgetStatus } from "@metacell/geppetto-meta-client/common/layout/model";
+import FileHandler from '../../utils/filesHandler';
+import UploadSubmit from './../FileUploader/UploadSubmit';
 
 const DatasetsListDialog = (props) => {
   const dispatch = useDispatch();
-  const { open, handleClose } = props;
-  const [value, setValue] = React.useState(0);
+  const { open, setOpen } = props;
+  const [filteredDatasets, setFilteredDatasets] = React.useState([]);
+  const [datasets, setDatasets] = React.useState([]);
+  const url = "https://cassava.ucsd.edu/sparc/preview/archive/exports/2022-03-28T144957%2C413227-0700/curation-export.ttl";
+  const [selectedIndex, setSelectedIndex] = React.useState(1);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const handleListItemClick = (event, index) => {
+    setSelectedIndex(index);
   };
 
-  // TODO:
-  // The below is just an hack waiting for the design to be clarified, I need an entrypoint for the datasets
-  // that provides both the files and so far I do not want to implement anything that will be replaced later
-
-  const handleDone = async (files) => {
-    if ((files.length === 2) && (files[0].data !== undefined && files[1].data !== undefined)) {
-      let _json = undefined;
-      let _turtle = undefined;
-
-      for (let file of files) {
-        let extension = file.file.name.split('.').pop();
-        if (extension === "ttl") {
-          _turtle = file.data
-        }
-        if (extension === "json") {
-          _json = file.data
-        }
-      }
-      const splinter = new Splinter(_json, _turtle);
-      const _dataset = {
-        id: splinter.getDatasetId(),
-        graph: await splinter.getGraph(),
-        tree: await splinter.getTree(),
-        splinter: splinter
-      }
-
-      handleClose();
-      dispatch(addDataset(_dataset));
-      dispatch(addWidget({
-        id: _dataset.id,
-        name: _dataset.id.substring(0,10) + "... Graph",
-        component: "graphComponent",
-        panelName: "leftPanel",
-        enableClose: true,
-        enableRename: true,
-        enableDrag: true,
-        status: WidgetStatus.ACTIVE,
-        config: {
-          graph_id: _dataset.id,
-          component: "graphComponent",
-        }
-      }));
-      dispatch(addWidget(NodeViewWidget));
-    } else {
-      handleClose();
-      dispatch(triggerError("Just a test for the error dialog."))
-    }
+  const handleDone = (dataset) => {
+    console.log("Event ", dataset);
   }
 
-  return (
-    <Dialog open={open} onClose={handleClose}>
-      <Box className='dialog_header'>
-        <Typography component='h3'>Datasets List</Typography>
-      </Box>
+  const loadDatasets = () => {
+    const fileHandler = new FileHandler();
+    const callback = async (url, fileData) => {
+      let file = { id : "ttl", url : url , data : fileData, file : {name: "ttl", type: "text/turtle"}};
+      const splinter = new DatasetsListSplinter(undefined, file.data);
+      let graph = await splinter.getGraph();
+      let datasets = graph.nodes.filter( node =>  node?.attributes?.hasUriApi );
+      setDatasets(datasets);
+      setFilteredDatasets(datasets);
+    };
+    fileHandler.get_remote_file(url, callback);
+  }
+  
+  const handleChange = (event) => {
+    let filtered =  datasets.filter( dataset => dataset.attributes.label[0].includes(event.target.value) );
+    setFilteredDatasets( filtered );
+  };
 
-      <Box className='dialog_body'>
-        <Paper style={{maxHeight: 200, overflow: 'auto'}}>
-          <List>
-          </List>
-        </Paper>
+  useEffect(() => {
+    open && filteredDatasets.length === 0 && loadDatasets();
+  });
+
+  return (
+    <Dialog className="datasets_dialog" open={open} handleClose={() => setOpen(false)}>
+      <DialogTitle align="center">Datasets List</DialogTitle>
+      <Box className='datasets_list'>
+        <TextField fullWidth disabled={filteredDatasets.length === 0} label="Search List" id="fullWidth" onChange={handleChange} />
       </Box>
+      <Box className='datasets_list'>
+        { datasets.length > 0 ? 
+          <Paper className="datasets_dialog_list">
+            <List className='datasets_list'>
+              {filteredDatasets.map((dataset) => (
+                <>
+                <ListItem className="dataset_item" key={`item-${dataset.name}`} selected={selectedIndex === dataset.name} onClick={(event) => handleListItemClick(event, dataset.name)}>
+                  <ListItemText primary={<Typography type="caption" style={{ fontSize: '#000000' }}>{`${dataset.attributes.label[0]}`}</Typography>} />
+                </ListItem>
+                <Divider/>
+                </>
+              ))}
+            </List>
+          </Paper>
+          :
+          <CircularProgress className="datasets_loader" />
+        }
+      </Box>
+      { selectedIndex ?
+        <Box className='datasets_list'>
+          <UploadSubmit handleClose={() => handleDone(selectedIndex)} />
+        </Box>
+        :
+        null
+      }
     </Dialog>
   );
 };

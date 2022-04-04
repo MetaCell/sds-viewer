@@ -502,3 +502,30 @@
   width: 10vh !important;
   height : 10vh !important;
 }
+
+.datasets_list {
+  padding: 0 1rem 1rem 1rem;
+  overflow : hidden;
+}
+
+.dataset_item {
+  cursor: pointer;
+}
+
+.datasets_loader {
+  color : #3779E1 !important;
+  margin: 0 auto;
+  display: block !important;
+}
+
+.datasets_dialog {
+  height : 100%;
+  width: 40rem !important;
+  max-width: 40rem !important;
+  margin : 0 auto;
+}
+
+.datasets_dialog_list {
+  max-height : 20rem;
+  overflow: auto;
+}

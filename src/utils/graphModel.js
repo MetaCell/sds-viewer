@@ -80,6 +80,12 @@ export const rdfTypes = {
             },
             {
                 "type": "TEMP",
+                "key": "hasUriApi",
+                "property": "hasUriApi",
+                "label": "To be filled"
+            },
+            {
+                "type": "TEMP",
                 "key": "hasUriHuman",
                 "property": "hasUriHuman",
                 "label": "To be filled"
