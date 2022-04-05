@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from '@material-ui/core';
 import CHECK from '../../images/check.svg';
 
-const UploadSubmit = ({ handleClose }) => {
+const UploadSubmit = ({ handleClose, enabledButton }) => {
   return (
     <Button
       variant='contained'
@@ -10,6 +10,7 @@ const UploadSubmit = ({ handleClose }) => {
       disableElevation
       color='primary'
       onClick={handleClose}
+      disabled={enabledButton}
     >
       <img src={CHECK} alt='Check' />
       Done

@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   Dialog,
+  DialogActions,
   Box,
   Typography,
   Paper,
@@ -29,9 +30,7 @@ import config from "./../../config/app.json";
 const DatasetsListDialog = (props) => {
   const dispatch = useDispatch();
   const { open, handleClose } = props;
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
-  const [_turtle, setTurtle] = useState(undefined);
-  const [_json, setJson] = useState(undefined);
+  const [selectedIndex, setSelectedIndex] = React.useState(undefined);
   const datasets = useSelector((state) => state.sdsState.available_datasets);
   const [filteredDatasets, setFilteredDatasets] = React.useState(datasets);
 
@@ -43,8 +42,8 @@ const DatasetsListDialog = (props) => {
     setSelectedIndex(index);
   };
 
-  const fillDataset = async () => {
-    splinter = new Splinter(_json, _turtle);
+  const fillDataset = async (turtle, json) => {
+    splinter = new Splinter(json, turtle);
     const _dataset = {
       id: splinter.getDatasetId(),
       graph: await splinter.getGraph(),
@@ -74,18 +73,15 @@ const DatasetsListDialog = (props) => {
   const handleDone = (dataset) => {
     handleClose();
     turtle_url = config.repository_url + "datasets/N%3Adataset%3A" + dataset + ".ttl";
-    const ttlHandler = new FileHandler();
-    ttlHandler.get_remote_file(turtle_url, (url, data) => {
-      if (data) {
-        setTurtle(data);
-      }
-    });
-
-    json_url = config.repository_url + "path-metadata/" + dataset + "/LATEST_RUN/path-metadata.json";
-    const jsonHandler = new FileHandler();
-    jsonHandler.get_remote_file(json_url, (url, data) => {
-      if (data) {
-        setJson(data);
+    const fileHandler = new FileHandler();
+    fileHandler.get_remote_file(turtle_url, (url, turtleData) => {
+      if (turtleData) {
+        json_url = config.repository_url + "path-metadata/" + dataset + "/LATEST_RUN/path-metadata.json";
+        fileHandler.get_remote_file(json_url, (url, data) => {
+          if (data) {
+            fillDataset(turtleData, data);
+          }
+        });
       }
     });
   };
@@ -118,19 +114,17 @@ const DatasetsListDialog = (props) => {
 
   useEffect(() => {
     open && datasets.length === 0 && loadDatasets();
-    _turtle && _json && fillDataset();
   });
 
   return (
     <Dialog className="datasets_dialog" open={open} handleClose={handleClose}>
-      <DialogTitle align="center">
-        Datasets List
-        <IconButton
-          aria-label="close"
-          onClick={handleClose}
-        >
+      <DialogActions>
+        <IconButton className="dialog_close" onClick={handleClose}>
           <CloseIcon />
         </IconButton>
+      </DialogActions>
+      <DialogTitle align="center">
+        Datasets List
       </DialogTitle>
       <Box className="datasets_list">
         <TextField
@@ -173,11 +167,9 @@ const DatasetsListDialog = (props) => {
           <CircularProgress className="datasets_loader" />
         )}
       </Box>
-      {selectedIndex ? (
-        <Box className="datasets_list">
-          <UploadSubmit handleClose={() => handleDone(selectedIndex)} />
-        </Box>
-      ) : null}
+      <Box className="datasets_list">
+        <UploadSubmit handleClose={() => handleDone(selectedIndex)} enabledButton={selectedIndex === undefined } />
+      </Box>
     </Dialog>
   );
 };

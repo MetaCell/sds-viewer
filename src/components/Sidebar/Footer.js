@@ -4,12 +4,12 @@ import { Box, Button } from '@material-ui/core';
 
 const SidebarFooter = (props) => {
   return (
-    <Box display="flex" sx={{ pl: 2 }} justifyContent="space-between">
+    <Box display="flex" justifyContent="space-between">
       <Button
         variant='contained'
         disableElevation
         color='primary'
-        style={{ "width" : "50%", "min-width" : "50%" }}
+        style={{ "width" : "45%","min-width" : "45%" }}
         onClick={() => props.setOpenUploadDialog(true)}
       >
         <img src={Plus} alt='Plus' />
@@ -19,7 +19,7 @@ const SidebarFooter = (props) => {
         variant='contained'
         disableElevation
         color='primary'
-        style={{ "width" : "50%", "min-width" : "50%" }}
+        style={{ "width" : "45%", "min-width" : "45%" }}
         onClick={() => props.setOpenDatasetsListDialog(true)}
       >
         <img src={Plus} alt='Plus' />
