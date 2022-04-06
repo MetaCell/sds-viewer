@@ -530,10 +530,6 @@
   overflow: auto;
 }
 
-.dialog_close {
-  position: 'absolute';
-  left: '95%';
-  top: '-9%';
-  background-color: 'lightgray';
-  color: 'gray';
+.dialog_title {
+  padding: 0 !important;
 }

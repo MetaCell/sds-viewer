@@ -123,14 +123,15 @@ const DatasetsListDialog = (props) => {
           <CloseIcon />
         </IconButton>
       </DialogActions>
-      <DialogTitle align="center">
-        Datasets List
+      <DialogTitle className="dialog_title" align="center">
+        <Typography variant="h5">Datasets List</Typography>
+        <Typography variant="subtitle1">Select a dataset to load</Typography>
       </DialogTitle>
       <Box className="datasets_list">
         <TextField
           fullWidth
           disabled={datasets.length === 0}
-          label="Search List"
+          label="Search datasets by label"
           id="fullWidth"
           onChange={handleChange}
         />
