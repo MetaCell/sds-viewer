@@ -530,6 +530,10 @@
   overflow: auto;
 }
 
-.dialog_title {
-  padding: 0 !important;
+.dialog_close {
+  float: right;
+}
+
+.dialog_close:hover {
+  cursor: pointer;
 }

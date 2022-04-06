@@ -12,8 +12,7 @@ import {
   Divider,
   TextField,
   DialogTitle,
-  CircularProgress,
-  IconButton
+  CircularProgress
 } from "@material-ui/core";
 import { addDataset, setDatasetsList } from "../../redux/actions";
 import Splinter from "./../../utils/Splinter";
@@ -23,7 +22,7 @@ import DatasetsListSplinter from "./DatasetsListSplinter";
 import { WidgetStatus } from "@metacell/geppetto-meta-client/common/layout/model";
 import FileHandler from "../../utils/filesHandler";
 import UploadSubmit from "./../FileUploader/UploadSubmit";
-import CloseIcon from '@material-ui/icons/Close';
+import CLOSE from '../../images/close.svg';
 
 import config from "./../../config/app.json";
 
@@ -71,15 +70,22 @@ const DatasetsListDialog = (props) => {
   };
 
   const handleDone = (dataset) => {
-    handleClose();
-    turtle_url = config.repository_url + "datasets/N%3Adataset%3A" + dataset + ".ttl";
+    turtle_url =
+      config.repository_url + "datasets/N%3Adataset%3A" + dataset + ".ttl";
     const fileHandler = new FileHandler();
     fileHandler.get_remote_file(turtle_url, (url, turtleData) => {
       if (turtleData) {
-        json_url = config.repository_url + "path-metadata/" + dataset + "/LATEST_RUN/path-metadata.json";
+        json_url =
+          config.repository_url +
+          "path-metadata/" +
+          dataset +
+          "/LATEST_RUN/path-metadata.json";
         fileHandler.get_remote_file(json_url, (url, data) => {
           if (data) {
             fillDataset(turtleData, data);
+            setFilteredDatasets(datasets);
+            setSelectedIndex(undefined);
+            handleClose();
           }
         });
       }
@@ -98,6 +104,7 @@ const DatasetsListDialog = (props) => {
       const splinter = new DatasetsListSplinter(undefined, file.data);
       let graph = await splinter.getGraph();
       let datasets = graph.nodes.filter((node) => node?.attributes?.hasUriApi);
+      datasets.forEach( node => node.attributes ? node.attributes.lowerCaseLabel = node.attributes?.label?.[0]?.toLowerCase() : null );
       dispatch(setDatasetsList(datasets));
       setFilteredDatasets(datasets);
     };
@@ -107,69 +114,83 @@ const DatasetsListDialog = (props) => {
 
   const handleChange = (event) => {
     let filtered = datasets.filter((dataset) =>
-      dataset.attributes.label[0].includes(event.target.value)
+      dataset.attributes.lowerCaseLabel.includes(event.target.value) || dataset.name.includes(event.target.value)
     );
     setFilteredDatasets(filtered);
   };
+
+  const closeDialog = () => {
+    setFilteredDatasets(datasets);
+    setSelectedIndex(undefined);
+    handleClose();
+  }
 
   useEffect(() => {
     open && datasets.length === 0 && loadDatasets();
   });
 
   return (
-    <Dialog className="datasets_dialog" open={open} handleClose={handleClose}>
-      <DialogActions>
-        <IconButton className="dialog_close" onClick={handleClose}>
-          <CloseIcon />
-        </IconButton>
-      </DialogActions>
-      <DialogTitle className="dialog_title" align="center">
-        <Typography variant="h5">Datasets List</Typography>
+    <Dialog className="datasets_dialog" open={open} handleClose={closeDialog}>
+      <DialogTitle align="center">
+        <img
+          className="dialog_close"
+          src={CLOSE}
+          onClick={handleClose}
+          alt="Close"
+        />
+        <Typography variant="h3">Datasets List</Typography>
         <Typography variant="subtitle1">Select a dataset to load</Typography>
       </DialogTitle>
-      <Box className="datasets_list">
-        <TextField
-          fullWidth
-          disabled={datasets.length === 0}
-          label="Search datasets by label"
-          id="fullWidth"
-          onChange={handleChange}
-        />
-      </Box>
-      <Box className="datasets_list">
-        {datasets.length > 0 ? (
-          <Paper className="datasets_dialog_list">
-            <List className="datasets_list">
-              {filteredDatasets.map((dataset) => (
-                <>
-                  <ListItem
-                    className="dataset_item"
-                    key={`item-${dataset.name}`}
-                    selected={selectedIndex === dataset.name}
-                    onClick={(event) =>
-                      handleListItemClick(event, dataset.name)
-                    }
-                  >
-                    <ListItemText
-                      primary={
-                        <Typography
-                          type="caption"
-                          style={{ fontSize: "#000000" }}
-                        >{`${dataset.attributes?.label[0]}`}</Typography>
+      {datasets.length > 0 ? (
+        <>
+          <Box className="datasets_list">
+            <TextField
+              fullWidth
+              disabled={datasets.length === 0}
+              label="Search datasets by label"
+              id="fullWidth"
+              onChange={handleChange}
+            />
+          </Box>
+          <Box className="datasets_list">
+            <Paper className="datasets_dialog_list">
+              <List className="datasets_list">
+                {filteredDatasets.map((dataset) => (
+                  <>
+                    <ListItem
+                      className="dataset_item"
+                      key={`item-${dataset.name}`}
+                      selected={selectedIndex === dataset.name}
+                      onClick={(event) =>
+                        handleListItemClick(event, dataset.name)
                       }
-                    />
-                  </ListItem>
-                  <Divider />
-                </>
-              ))}
-            </List>
-          </Paper>
-        ) : (
+                    >
+                      <ListItemText
+                        primary={
+                          <Typography
+                            type="caption"
+                            style={{ fontSize: "#000000" }}
+                          >{`${dataset.attributes?.label[0]}`}</Typography>
+                        }
+                      />
+                    </ListItem>
+                    <Divider />
+                  </>
+                ))}
+              </List>
+            </Paper>
+          </Box>
+        </>
+      ) : (
+        <Box className="datasets_list">
           <CircularProgress className="datasets_loader" />
-        )}
-      </Box>
+        </Box>
+      )}
       <Box className="datasets_list">
-        <UploadSubmit handleClose={() => handleDone(selectedIndex)} enabledButton={selectedIndex === undefined } />
+        <UploadSubmit
+          handleClose={() => handleDone(selectedIndex)}
+          enabledButton={selectedIndex === undefined}
+        />
       </Box>
     </Dialog>
   );
