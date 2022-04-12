@@ -4,6 +4,7 @@ import * as LayoutActions from '@metacell/geppetto-meta-client/common/layout/act
 export const sdsInitialState = {
     "sdsState": {
         datasets: [],
+        available_datasets : [],
         all_tree: [],
         error_message: null,
         instance_selected: {
@@ -58,6 +59,11 @@ export default function sdsClientReducer(state = {}, action) {
             } else {
                 return state;
             }
+            case Actions.SET_DATASET_LIST:
+                return {
+                    ...state,
+                    available_datasets: action.data.datasets
+                };
         case Actions.DELETE_DATASET:
             if (action.data !== undefined) {
                 delete window.datasets[action.data.dataset_id];

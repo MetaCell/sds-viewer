@@ -502,3 +502,50 @@
   width: 10vh !important;
   height : 10vh !important;
 }
+
+.datasets_list {
+  padding: 0 1rem 1rem 1rem;
+  overflow : hidden;
+}
+
+.dataset_item {
+  cursor: pointer;
+}
+
+.datasets_loader {
+  color : #3779E1 !important;
+  margin: 0 auto;
+  display: block !important;
+}
+
+.datasets_dialog {
+  height : 100%;
+  width: 50rem !important;
+  max-width: 50rem !important;
+  margin : 0 auto;
+}
+
+.datasets_dialog_list {
+  max-height : 20rem;
+  overflow: auto;
+}
+
+.dialog_close {
+  float: right;
+}
+
+.dialog_close:hover {
+  cursor: pointer;
+}
+
+.datasets_list_results {
+  color : #3779E1 !important;
+}
+
+.dataset_list_text {
+  font-size: 15px;
+}
+
+.breadcrumb_selected {
+  color : #3779E1 !important;
+}

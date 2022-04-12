@@ -11,6 +11,7 @@ import Sidebar from './components/Sidebar/Sidebar';
 import EmptyContainer from './components/EmptyContainer';
 import ErrorDialog from './components/ErrorDialog/ErrorDialog';
 import UploadDialog from './components/FileUploader/UploadDialog';
+import DatasetsListDialog from './components/DatasetsListViewer/DatasetsListDialog';
 import { MuiThemeProvider, CssBaseline } from '@material-ui/core';
 import { addDataset } from './redux/actions';
 import { NodeViewWidget } from './app/widgets';
@@ -24,7 +25,8 @@ const App = () => {
   const id = queryParams.get('id');
 
   const dispatch = useDispatch();
-  const [openDialog, setOpenDialog] = useState(false);
+  const [openUploadDialog, setOpenUploadDialog] = useState(false);
+  const [openDatasetsListDialog, setOpenDatasetsListDialog] = useState(false);
   const datasets = useSelector(state => state.sdsState.datasets);
   const error_message = useSelector(state => state.sdsState.error_message);
   const [_turtle, setTurtle] = useState(undefined);
@@ -102,22 +104,32 @@ const App = () => {
     <MuiThemeProvider theme={theme}>
       <CssBaseline />
       <Box display="flex" className='main-structure'>
-        <Sidebar openDialog={openDialog} setOpenDialog={setOpenDialog} />
+        <Sidebar
+          openUploadDialog={openUploadDialog}
+          setOpenUploadDialog={setOpenUploadDialog}
+          openDatasetsListDialog={openDatasetsListDialog}
+          setOpenDatasetsListDialog={setOpenDatasetsListDialog}
+        />
         <Box className={'content full-round'}>
           { datasets.length > 0
             ? <MainLayout />
             : <EmptyContainer
                 loading={loading}
-                openDialog={openDialog}
-                setOpenDialog={setOpenDialog}
+                openUploadDialog={openUploadDialog}
+                setOpenUploadDialog={setOpenUploadDialog}
               />
           }
         </Box>
       </Box>
 
       <UploadDialog
-        open={openDialog}
-        handleClose={() => setOpenDialog(false)}
+        open={openUploadDialog}
+        handleClose={() => setOpenUploadDialog(false)}
+      />
+
+      <DatasetsListDialog
+        open={openDatasetsListDialog}
+        handleClose={() => setOpenDatasetsListDialog(false)}
       />
 
       <ErrorDialog

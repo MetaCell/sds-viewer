@@ -159,22 +159,21 @@ const GraphViewer = (props) => {
     setLoading(false);
   }
 
-  // Check State updates triggered by Redux at a global level
-  if (nodeSelected && nodeSelected?.id !== selectedNode?.id) {
-    let node = graphRef?.current?.props?.data?.nodes.find( item => item.id === nodeSelected.id && item.parent?.id === nodeSelected.parent?.id );
-    if (node) {
-      setSelectedNode(node);
-      handleNodeRightClick(node, null);
-    }
-  } else if ((nodeSelected === null || nodeSelected === undefined) && (selectedNode !== null && selectedNode !== undefined)) {
-    setSelectedNode(null);
-  }
-
   useEffect(() => {
     setLoading(true);
     setTimeout ( () => setLoading(false) , LOADING_TIME);
   }, []);
 
+  useEffect(() => {
+    if (nodeSelected && nodeSelected?.id !== selectedNode?.id) {
+      let node = graphRef?.current?.props?.data?.nodes.find( item => item.id === nodeSelected.id && item.parent?.id === nodeSelected.parent?.id );
+      if (node) {
+        handleNodeRightClick(node, null);
+        setSelectedNode(node);
+        setHoverNode(node);
+      }
+    }
+  }, [nodeSelected]);
 
   //Resume animation after component is updated, fixes issue with graphics going crazy.
   useEffect(() => {
@@ -220,7 +219,7 @@ const GraphViewer = (props) => {
       const size = 10;
       const nodeImageSize = [size * 2.4, size * 2.4];
       const hoverRectDimensions = [size * 3.2, size * 3.2];
-      const hoverRectPosition = [node.x - 14, node.y - 14];
+      const hoverRectPosition = [node.x - 20, node.y - 14];
       const textHoverPosition = [
         hoverRectPosition[0],
         hoverRectPosition[1] + hoverRectDimensions[1] + 2,
@@ -229,7 +228,7 @@ const GraphViewer = (props) => {
       ctx.beginPath();
 
       ctx.drawImage(
-        node.img,
+        node?.img,
         node.x - size - 1,
         node.y - size,
         ...nodeImageSize
@@ -242,7 +241,7 @@ const GraphViewer = (props) => {
         nodeName = nodeName.substr(0, 10).concat('...');
       }
       const textProps = [nodeName, node.x + 2, textHoverPosition[1] + 4.5];
-      if (node === hoverNode) {
+      if (node === hoverNode || node?.id === selectedNode?.id || node?.id === nodeSelected?.id ) {
         // image hover
         roundRect(
           ctx,
@@ -256,9 +255,9 @@ const GraphViewer = (props) => {
         roundRect(
           ctx,
           ...textHoverPosition,
-          hoverRectDimensions[0] + size / 2,
-          hoverRectDimensions[0] / 4,
-          hoverRectBorderRadius / 2,
+          hoverRectDimensions[0] + size,
+          hoverRectDimensions[0] / 2,
+          hoverRectBorderRadius,
           GRAPH_COLORS.textHoverRect
         );
         // reset canvas fill color
@@ -293,7 +292,7 @@ const GraphViewer = (props) => {
         // Create the Graph as 2 Dimensional
         d2={true}
         warmupTicks={1000}
-        cooldownTicks={30}
+        cooldownTicks={50}
         onEngineStop={onEngineStop}
         // Links properties
         linkColor = {handleLinkColor}

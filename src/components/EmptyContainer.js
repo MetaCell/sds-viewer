@@ -16,13 +16,13 @@ const EmptyContainer = (props) => {
             <Button
               variant='outlined'
               color='primary'
-              onClick={() => props.setOpenDialog(true)}
+              onClick={() => props.setOpenUploadDialog(true)}
             >
               + {IMPORT_TEXT}
             </Button>
         </>
       }
-      
+
     </Box>
   );
 };

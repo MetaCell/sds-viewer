@@ -1,5 +1,6 @@
 export const ADD_DATASET = 'ADD_DATASET'
 export const DELETE_DATASET = 'DELETE_DATASET'
+export const SET_DATASET_LIST = 'SET_DATASET_LIST'
 export const SELECT_INSTANCE = 'SELECT_INSTANCE'
 export const TRIGGER_ERROR = 'TRIGGER_ERROR'
 
@@ -8,9 +9,15 @@ export const addDataset = dataset => ({
     data: { dataset: dataset },
 });
 
+
 export const deleteDataset = dataset_id => ({
     type: DELETE_DATASET,
     data: { dataset_id: dataset_id },
+});
+
+export const setDatasetsList = datasets => ({
+    type: SET_DATASET_LIST,
+    data: { datasets: datasets },
 });
 
 export const selectInstance = instance => ({

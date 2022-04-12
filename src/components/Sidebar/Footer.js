@@ -1,18 +1,29 @@
 import Plus from '../../images/plus.svg';
-import { IMPORT_TEXT } from '../../constants';
+import { ADD_DATASET, LIST_DATASETS } from '../../constants';
 import { Box, Button } from '@material-ui/core';
 
 const SidebarFooter = (props) => {
   return (
-    <Box className='sidebar-footer'>
+    <Box display="flex" justifyContent="space-between">
       <Button
         variant='contained'
         disableElevation
         color='primary'
-        onClick={() => props.setOpenDialog(true)}
+        style={{ "width" : "45%","min-width" : "45%" }}
+        onClick={() => props.setOpenUploadDialog(true)}
       >
         <img src={Plus} alt='Plus' />
-        {IMPORT_TEXT}
+        {ADD_DATASET}
+      </Button>
+      <Button
+        variant='contained'
+        disableElevation
+        color='primary'
+        style={{ "width" : "45%", "min-width" : "45%" }}
+        onClick={() => props.setOpenDatasetsListDialog(true)}
+      >
+        <img src={Plus} alt='Plus' />
+        {LIST_DATASETS}
       </Button>
     </Box>
   );
