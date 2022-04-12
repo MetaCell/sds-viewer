@@ -520,8 +520,8 @@
 
 .datasets_dialog {
   height : 100%;
-  width: 40rem !important;
-  max-width: 40rem !important;
+  width: 50rem !important;
+  max-width: 50rem !important;
   margin : 0 auto;
 }
 
@@ -536,4 +536,16 @@
 
 .dialog_close:hover {
   cursor: pointer;
+}
+
+.datasets_list_results {
+  color : #3779E1 !important;
+}
+
+.dataset_list_text {
+  font-size: 15px;
+}
+
+.breadcrumb_selected {
+  color : #3779E1 !important;
 }

@@ -113,8 +113,9 @@ const DatasetsListDialog = (props) => {
   };
 
   const handleChange = (event) => {
+    const lowerCaseSearch = event.target.value.toLowerCase();
     let filtered = datasets.filter((dataset) =>
-      dataset.attributes.lowerCaseLabel.includes(event.target.value) || dataset.name.includes(event.target.value)
+      dataset.attributes.lowerCaseLabel.includes(lowerCaseSearch) || dataset.name.includes(lowerCaseSearch)
     );
     setFilteredDatasets(filtered);
   };
@@ -130,7 +131,16 @@ const DatasetsListDialog = (props) => {
   });
 
   return (
-    <Dialog className="datasets_dialog" open={open} handleClose={closeDialog}>
+    <Dialog 
+      className="datasets_dialog"
+      open={open}
+      handleClose={closeDialog}
+      PaperProps={{
+        style: {
+          width : '50rem'
+        },
+      }}
+    >
       <DialogTitle align="center">
         <img
           className="dialog_close"
@@ -152,6 +162,14 @@ const DatasetsListDialog = (props) => {
               onChange={handleChange}
             />
           </Box>
+          {filteredDatasets.length > 0 ? (
+            <Box className="datasets_list datasets_list_results" align="right">
+              <Typography>{filteredDatasets.length} found</Typography>
+            </Box>
+          )
+          :
+          null
+          }
           <Box className="datasets_list">
             <Paper className="datasets_dialog_list">
               <List className="datasets_list">
@@ -169,7 +187,7 @@ const DatasetsListDialog = (props) => {
                         primary={
                           <Typography
                             type="caption"
-                            style={{ fontSize: "#000000" }}
+                            className="dataset_list_text"
                           >{`${dataset.attributes?.label[0]}`}</Typography>
                         }
                       />

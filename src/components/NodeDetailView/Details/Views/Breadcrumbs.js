@@ -27,7 +27,7 @@ const HeaderBreadcrumbs = (props) => {
             ))
           ) : null
         }
-        <Typography onClick={() => {goToLink(links?.current.id)}} color="textPrimary">{links?.current.text}</Typography>
+        <Typography onClick={() => {goToLink(links?.current.id)}} className="breadcrumb_selected">{links?.current.text}</Typography>
       </Breadcrumbs>
       {/* <img src={CLOSE} onClick={closeViewer} alt="Close" /> */}
     </Box>

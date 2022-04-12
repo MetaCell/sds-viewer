@@ -159,6 +159,7 @@ const InstancesTreeView = (props) => {
         ref={treeRef}
         expanded={nodes}
         onNodeToggle={onNodeToggle}
+        selected={[nodeSelected?.tree_node?.id]}
       >
         { getTreeItemsFromData(items) }
       </TreeView>

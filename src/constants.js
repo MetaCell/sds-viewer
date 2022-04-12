@@ -1,5 +1,5 @@
-export const IMPORT_TEXT = 'Import a new dataset';
-export const ADD_DATASET = 'Add Dataset';
+export const IMPORT_TEXT = 'Load a new dataset';
+export const ADD_DATASET = 'Load Dataset';
 export const LIST_DATASETS = 'List Datasets';
 export const FILE_UPLOAD_PARAMS = {
   acceptedFileExtensions: ['.json', '.ttl'],
