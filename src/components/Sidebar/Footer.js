@@ -9,7 +9,7 @@ const SidebarFooter = (props) => {
         variant='contained'
         disableElevation
         color='primary'
-        style={{ "width" : "45%","min-width" : "45%" }}
+        style={{ "width" : "45%","minWidth" : "45%" }}
         onClick={() => props.setOpenUploadDialog(true)}
       >
         <img src={Plus} alt='Plus' />
@@ -19,7 +19,7 @@ const SidebarFooter = (props) => {
         variant='contained'
         disableElevation
         color='primary'
-        style={{ "width" : "45%", "min-width" : "45%" }}
+        style={{ "width" : "45%", "minWidth" : "45%" }}
         onClick={() => props.setOpenDatasetsListDialog(true)}
       >
         <img src={Plus} alt='Plus' />

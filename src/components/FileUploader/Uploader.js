@@ -13,11 +13,11 @@ const Uploader = ({ handleClose, handleDone }) => {
   };
 
   const onUpload = (file, data) => {
-    if (rdf?.file === file && file.type === "text/turtle") {
+    if (rdf?.file === file && (file.type === "text/turtle" || file.name.split('.').pop() === FILE_UPLOAD_PARAMS.acceptedFileExtensions[1])) {
       setRdf({
         ...rdf, data
       })
-    } else if (json?.file === file && file.type === "application/json") {
+    } else if (json?.file === file && (file.type === "application/json" || file.name.split('.').pop() === FILE_UPLOAD_PARAMS.acceptedFileExtensions[0])) {
       setJson({
         ...json, data
       })
@@ -27,9 +27,9 @@ const Uploader = ({ handleClose, handleDone }) => {
   }
 
   const onDelete = (file)  => {
-    if (rdf?.file === file && file.type === "text/turtle") {
+    if (rdf?.file === file && (file.type === "text/turtle" || file.name.split('.').pop() === FILE_UPLOAD_PARAMS.acceptedFileExtensions[1])) {
       setRdf(undefined);
-    } else if (json?.file === file && file.type === "application/json") {
+    } else if (json?.file === file && (file.type === "application/json" || file.name.split('.').pop() === FILE_UPLOAD_PARAMS.acceptedFileExtensions[0])) {
       setJson(undefined);
     } else {
       console.error("something weird happened!")
@@ -38,16 +38,16 @@ const Uploader = ({ handleClose, handleDone }) => {
 
   const onDrop = (files, accept = true) => {
     for (const file of files) {
-      if (file.type === "text/turtle") {
+      if (file.type === "text/turtle" || file.name.split('.').pop() === FILE_UPLOAD_PARAMS.acceptedFileExtensions[1]) {
         setRdf({
           file,
-          errors: accept ? [] : [{ message: 'Error: File is too large' }],
+          errors: file.size > FILE_UPLOAD_PARAMS.maxFileSize ? [{ message: 'Error: File is too large' }] : [] ,
           id: Math.random(),
         })
-      } else if (file.type === "application/json") {
+      } else if (file.type === "application/json" || file.name.split('.').pop() === FILE_UPLOAD_PARAMS.acceptedFileExtensions[0]) {
         setJson({
           file,
-          errors: accept ? [] : [{ message: 'Error: File is too large' }],
+          errors: file.size > FILE_UPLOAD_PARAMS.maxFileSize ? [{ message: 'Error: File is too large' }] : [] ,
           id: Math.random(),
         })
       } else {
@@ -64,7 +64,9 @@ const Uploader = ({ handleClose, handleDone }) => {
 
   return (
     <>
-      <DropzoneArea
+      {json !== undefined && rdf !== undefined 
+        ? <> </>
+        : <DropzoneArea
         fileObjects={files.map(item => item.file)}
         onChange={(e) => handleChange(e)}
         showPreviewsInDropzone={false}
@@ -77,7 +79,7 @@ const Uploader = ({ handleClose, handleDone }) => {
         Icon={DropzoneUploadIcon}
         dropzoneText={'Drag & Drop your files here'}
         filesLimit={FILE_UPLOAD_PARAMS.maxFiles}
-      />
+      /> }
 
       {files && files.length ? (
         <FilesUploading files={files} onDelete={onDelete} onUpload={onUpload} />
