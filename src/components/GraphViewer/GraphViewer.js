@@ -218,7 +218,7 @@ const GraphViewer = (props) => {
     (node, ctx) => {
       const size = 10;
       const nodeImageSize = [size * 2.4, size * 2.4];
-      const hoverRectDimensions = [size * 3.2, size * 3.2];
+      const hoverRectDimensions = [size * 4, size * 4];
       const hoverRectPosition = [node.x - 20, node.y - 14];
       const textHoverPosition = [
         hoverRectPosition[0],
@@ -255,8 +255,8 @@ const GraphViewer = (props) => {
         roundRect(
           ctx,
           ...textHoverPosition,
-          hoverRectDimensions[0] + size,
-          hoverRectDimensions[0] / 2,
+          hoverRectDimensions[0],
+          hoverRectDimensions[0] / 4,
           hoverRectBorderRadius,
           GRAPH_COLORS.textHoverRect
         );

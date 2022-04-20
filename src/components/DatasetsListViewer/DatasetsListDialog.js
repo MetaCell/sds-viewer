@@ -148,8 +148,8 @@ const DatasetsListDialog = (props) => {
           onClick={handleClose}
           alt="Close"
         />
-        <Typography variant="h3">Datasets List</Typography>
-        <Typography variant="subtitle1">Select a dataset to load</Typography>
+        <Typography variant="h3">{config.text.datasetsButtonText}</Typography>
+        <Typography variant="subtitle1">{config.text.datasetsButtonSubtitleText}</Typography>
       </DialogTitle>
       {datasets.length > 0 ? (
         <>
@@ -157,7 +157,7 @@ const DatasetsListDialog = (props) => {
             <TextField
               fullWidth
               disabled={datasets.length === 0}
-              label="Search datasets by label"
+              label={config.text.datasetsDialogSearchText}
               id="fullWidth"
               onChange={handleChange}
             />

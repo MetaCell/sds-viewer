@@ -79,13 +79,12 @@ const DatasetDetails = (props) => {
     return (
         <Box id={idDetails}>
             <Box className="tab-content">
-                <SimpleLabelValue label={'Updated On'} value={latestUpdate.toString()} heading={'Dataset Details'} />
-
+                <SimpleLabelValue label={'Label'} value={title} heading={'Dataset Details'} />
+                <SimpleLabelValue label={'Updated On'} value={latestUpdate.toString()} />
                 <Box className="tab-content-row">
                     <Typography component="label">About</Typography>
                     <SimpleChip chips={node.graph_node.attributes?.isAbout} />
                 </Box>
-                <SimpleLabelValue label={'Label'} value={title} />
                 <Box className="tab-content-row">
                     <List component="nav" aria-label="main">
                         {
