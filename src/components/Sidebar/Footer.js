@@ -1,5 +1,5 @@
 import Plus from '../../images/plus.svg';
-import { ADD_DATASET, LIST_DATASETS } from '../../constants';
+import { ADD_DATASET } from '../../constants';
 import { Box, Button } from '@material-ui/core';
 import config from "./../../config/app.json";
 

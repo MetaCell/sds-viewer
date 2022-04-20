@@ -30,6 +30,7 @@ const DatasetsListDialog = (props) => {
   const dispatch = useDispatch();
   const { open, handleClose } = props;
   const [selectedIndex, setSelectedIndex] = React.useState(undefined);
+  const [searchField, setSearchField] = React.useState("");
   const datasets = useSelector((state) => state.sdsState.available_datasets);
   const [filteredDatasets, setFilteredDatasets] = React.useState(datasets);
 
@@ -117,6 +118,7 @@ const DatasetsListDialog = (props) => {
     let filtered = datasets.filter((dataset) =>
       dataset.attributes.lowerCaseLabel.includes(lowerCaseSearch) || dataset.name.includes(lowerCaseSearch)
     );
+    setSearchField(lowerCaseSearch);
     setFilteredDatasets(filtered);
   };
 
@@ -124,6 +126,16 @@ const DatasetsListDialog = (props) => {
     setFilteredDatasets(datasets);
     setSelectedIndex(undefined);
     handleClose();
+  }
+
+  const getFormattedListTex = (label) => {
+    const reg = new RegExp(searchField, 'gi');
+
+    return searchField === undefined || searchField === "" 
+      ? 
+      label 
+      :
+      label.replace(reg, function(str) {return '<b>'+str+'</b>'});
   }
 
   useEffect(() => {
@@ -188,7 +200,11 @@ const DatasetsListDialog = (props) => {
                           <Typography
                             type="caption"
                             className="dataset_list_text"
-                          >{`${dataset.attributes?.label[0]}`}</Typography>
+                            dangerouslySetInnerHTML={{
+                              __html:
+                                getFormattedListTex(dataset.attributes?.label[0])
+                            }}
+                          />
                         }
                       />
                     </ListItem>

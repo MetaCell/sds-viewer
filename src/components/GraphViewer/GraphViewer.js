@@ -66,7 +66,6 @@ const GraphViewer = (props) => {
   const [highlightLinks, setHighlightLinks] = useState(new Set());
   const [selectedLayout, setSelectedLayout] = React.useState(TOP_DOWN);
   const [layoutAnchorEl, setLayoutAnchorEl] = React.useState(null);
-  const [resize, setResize] = useState({ width : "100%" , height : "100%" });
   const [cameraPosition, setCameraPosition] = useState({ x : 0 , y : 0 });
   const open = Boolean(layoutAnchorEl);
   const [loading, setLoading] = React.useState(false);

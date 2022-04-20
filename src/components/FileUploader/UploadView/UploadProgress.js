@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import Progress from './Progress';
 import FileExtension from './FileExtension';
 import CANCEL from '../../../images/cancel.svg';
-import SUCCESS from '../../../images/success.svg';
 import FileHandler from '../../../utils/filesHandler';
 
 const uploadFile = (file, onProgress, onUpload) => {
