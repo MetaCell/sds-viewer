@@ -13,6 +13,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import FormatAlignCenterIcon from '@material-ui/icons/FormatAlignCenter';
 import GeppettoGraphVisualization from '@metacell/geppetto-meta-ui/graph-visualization/Graph';
 import { GRAPH_SOURCE } from '../../constants';
+import { rdfTypes } from '../../utils/graphModel';
 
 const NODE_FONT = '500 6px Inter, sans-serif';
 const ONE_SECOND = 1000;
@@ -226,12 +227,19 @@ const GraphViewer = (props) => {
       const hoverRectBorderRadius = 2;
       ctx.beginPath();
 
-      ctx.drawImage(
-        node?.img,
-        node.x - size - 1,
-        node.y - size,
-        ...nodeImageSize
-      );
+      try {
+        ctx.drawImage(
+          node?.img,
+          node.x - size - 1,
+          node.y - size,
+          ...nodeImageSize
+        );
+      } catch (error) {
+        const img = new Image();
+        img.src = rdfTypes.Uknown.image
+        return img;
+      }
+
       ctx.font = NODE_FONT;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
