@@ -236,8 +236,16 @@ const GraphViewer = (props) => {
         );
       } catch (error) {
         const img = new Image();
-        img.src = rdfTypes.Uknown.image
-        return img;
+        img.src = rdfTypes.Unknown.image;
+        node.img = img;
+
+        // Add default icon if new icon wasn't found under images
+        ctx.drawImage(
+          node?.img,
+          node.x - size - 1,
+          node.y - size,
+          ...nodeImageSize
+        );
       }
 
       ctx.font = NODE_FONT;
