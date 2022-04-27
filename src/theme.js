@@ -1048,7 +1048,6 @@ const theme = createTheme({
             },
             '& .tab-content-row': {
               '& .chip-overflow': {
-                whiteSpace: 'nowrap',
                 overflow: 'auto',
                 marginRight: '-1rem',
               },

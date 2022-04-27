@@ -1,6 +1,7 @@
 import Plus from '../../images/plus.svg';
-import { ADD_DATASET, LIST_DATASETS } from '../../constants';
+import { ADD_DATASET } from '../../constants';
 import { Box, Button } from '@material-ui/core';
+import config from "./../../config/app.json";
 
 const SidebarFooter = (props) => {
   return (
@@ -22,8 +23,7 @@ const SidebarFooter = (props) => {
         style={{ "width" : "45%", "minWidth" : "45%" }}
         onClick={() => props.setOpenDatasetsListDialog(true)}
       >
-        <img src={Plus} alt='Plus' />
-        {LIST_DATASETS}
+        {config.text.datasetsButtonText}
       </Button>
     </Box>
   );

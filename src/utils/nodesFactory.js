@@ -6,7 +6,7 @@ function createImage(node) {
         const extension = node.name.split(".").pop();
         img.src = "./images/graph/files/" + extension + ".svg"
     } else {
-        img.src = (rdfTypes[String(node.type)]?.image !== "") ? rdfTypes[String(node.type)].image : rdfTypes.Uknown.image
+        img.src = (rdfTypes[String(node.type)]?.image !== "") ? rdfTypes[String(node.type)].image : rdfTypes.Unknown.image
     }
     return img;
 }

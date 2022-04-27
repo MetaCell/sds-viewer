@@ -13,6 +13,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import FormatAlignCenterIcon from '@material-ui/icons/FormatAlignCenter';
 import GeppettoGraphVisualization from '@metacell/geppetto-meta-ui/graph-visualization/Graph';
 import { GRAPH_SOURCE } from '../../constants';
+import { rdfTypes } from '../../utils/graphModel';
 
 const NODE_FONT = '500 6px Inter, sans-serif';
 const ONE_SECOND = 1000;
@@ -66,7 +67,6 @@ const GraphViewer = (props) => {
   const [highlightLinks, setHighlightLinks] = useState(new Set());
   const [selectedLayout, setSelectedLayout] = React.useState(TOP_DOWN);
   const [layoutAnchorEl, setLayoutAnchorEl] = React.useState(null);
-  const [resize, setResize] = useState({ width : "100%" , height : "100%" });
   const [cameraPosition, setCameraPosition] = useState({ x : 0 , y : 0 });
   const open = Boolean(layoutAnchorEl);
   const [loading, setLoading] = React.useState(false);
@@ -218,7 +218,7 @@ const GraphViewer = (props) => {
     (node, ctx) => {
       const size = 10;
       const nodeImageSize = [size * 2.4, size * 2.4];
-      const hoverRectDimensions = [size * 3.2, size * 3.2];
+      const hoverRectDimensions = [size * 4, size * 4];
       const hoverRectPosition = [node.x - 20, node.y - 14];
       const textHoverPosition = [
         hoverRectPosition[0],
@@ -227,12 +227,27 @@ const GraphViewer = (props) => {
       const hoverRectBorderRadius = 2;
       ctx.beginPath();
 
-      ctx.drawImage(
-        node?.img,
-        node.x - size - 1,
-        node.y - size,
-        ...nodeImageSize
-      );
+      try {
+        ctx.drawImage(
+          node?.img,
+          node.x - size - 1,
+          node.y - size,
+          ...nodeImageSize
+        );
+      } catch (error) {
+        const img = new Image();
+        img.src = rdfTypes.Unknown.image;
+        node.img = img;
+
+        // Add default icon if new icon wasn't found under images
+        ctx.drawImage(
+          node?.img,
+          node.x - size - 1,
+          node.y - size,
+          ...nodeImageSize
+        );
+      }
+
       ctx.font = NODE_FONT;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
@@ -255,8 +270,8 @@ const GraphViewer = (props) => {
         roundRect(
           ctx,
           ...textHoverPosition,
-          hoverRectDimensions[0] + size,
-          hoverRectDimensions[0] / 2,
+          hoverRectDimensions[0],
+          hoverRectDimensions[0] / 4,
           hoverRectBorderRadius,
           GRAPH_COLORS.textHoverRect
         );
