@@ -33,7 +33,7 @@ export default class FileHandler {
             callback(url, response.data);
         }).catch(error => {
             console.log(error);
-            errorCallback(undefined);
+            errorCallback && errorCallback(undefined);
         });
     }
 }
