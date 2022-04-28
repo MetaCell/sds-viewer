@@ -72,15 +72,14 @@ const DatasetsListDialog = (props) => {
 
   const handleDone = (dataset) => {
     turtle_url =
-      config.repository_url + "datasets/N%3Adataset%3A" + dataset + ".ttl";
+      config.datasets_url + dataset + "/LATEST/curation-export.ttl";
     const fileHandler = new FileHandler();
     fileHandler.get_remote_file(turtle_url, (url, turtleData) => {
       if (turtleData) {
         json_url =
-          config.repository_url +
-          "path-metadata/" +
+          config.datasets_url +
           dataset +
-          "/LATEST_RUN/path-metadata.json";
+          "/LATEST/path-metadata.json";
         fileHandler.get_remote_file(json_url, (url, data) => {
           if (data) {
             fillDataset(turtleData, data);
@@ -109,8 +108,8 @@ const DatasetsListDialog = (props) => {
       dispatch(setDatasetsList(datasets));
       setFilteredDatasets(datasets);
     };
-    const datasetsURL = config.repository_url + config.available_datasets;
-    fileHandler.get_remote_file(datasetsURL, callback);
+    const summaryURL = config.repository_url + config.available_datasets;
+    fileHandler.get_remote_file(summaryURL, callback);
   };
 
   const handleChange = (event) => {

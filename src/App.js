@@ -72,7 +72,7 @@ const App = () => {
   }
 
   if (id && id !== "" && _turtle === undefined) {
-    turtle_url = config.repository_url + 'datasets/N%3Adataset%3A' + id + '.ttl'
+    turtle_url = config.datasets_url + id + '/LATEST/curation-export.ttl'
     const ttlHandler = new FileHandler();
     ttlHandler.get_remote_file(turtle_url, (url, data) => {
       if (data) {
@@ -84,7 +84,7 @@ const App = () => {
   }
 
   if (id && id !== "" && _json === undefined) {
-    json_url = config.repository_url + 'path-metadata/' + id + '/LATEST_RUN/path-metadata.json'
+    json_url = config.datasets_url + id + '/LATEST/path-metadata.json'
     const jsonHandler = new FileHandler();
     jsonHandler.get_remote_file(json_url, (url, data) => {
       if (data) {
