@@ -72,7 +72,7 @@ const App = () => {
   }
 
   if (id && id !== "" && _turtle === undefined) {
-    turtle_url = config.datasets_url + "/LATEST/curation-export.ttl";
+    turtle_url = config.datasets_url + id + "/LATEST/curation-export.ttl";
     const ttlHandler = new FileHandler();
     ttlHandler.get_remote_file(turtle_url, (url, data) => {
       if (data) {
