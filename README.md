@@ -39,10 +39,17 @@
 8. Finally, to run application type `sudo yarn start`
 9. Last step should have opened a new browser tab with 'http://localhost:3000/', it will take a 1 minute before it finishes loading the first time.
    This should be the browser output.
-   ![image](https://user-images.githubusercontent.com/4562825/136596619-4cfb3ba9-48bb-42c4-b128-331d0bf7e6e8.png)
-
+   ![image](https://user-images.githubusercontent.com/4562825/166983757-c4ea69ba-5d9a-4792-881a-89113cb5b1b6.png)
 
 ## SDS Viewer User Manual
+Loading a SPARC Dataset:
+- Click on 'SPARCK Datasets' button, it's located on the lower left corner.
+- On the window that opens up, select the dataset you want to load. 
+![image](https://user-images.githubusercontent.com/4562825/166984322-83b4a8c2-aa29-4e6d-96e9-bcf4d125a3a9.png)
+- After selection, click 'Done'
+- Dataset will be loaded.
+- Datasets list comes from https://cassava.ucsd.edu/sparc/datasets/
+
 Loading an external dataset:
 - Click on 'Import a new dataset'
 - On the window that opens up, select 'From a URL'
