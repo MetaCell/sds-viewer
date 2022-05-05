@@ -45,7 +45,7 @@
 Users can load datasets in a few different ways. 
 
 1) Loading a SPARC Dataset:
-- Click on 'SPARCK Datasets' button, it's located on the lower left corner.
+- Click on 'SPARC Datasets' button, it's located on the lower left corner.
 - On the window that opens up, select the dataset you want to load. 
 ![image](https://user-images.githubusercontent.com/4562825/166984322-83b4a8c2-aa29-4e6d-96e9-bcf4d125a3a9.png)
 - After selection, click 'Done'
