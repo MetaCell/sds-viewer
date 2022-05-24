@@ -41,7 +41,7 @@ const DatasetDetails = (props) => {
         node.graph_node.attributes?.hasResponsiblePrincipalInvestigator.map(user => {
             const contributor = nodes.get(user);
             contactPerson.push({
-                name: contributor.name,
+                name: contributor?.name,
                 designation: 'Principal Investigator',
                 img: USER
             });
@@ -53,7 +53,7 @@ const DatasetDetails = (props) => {
         node.graph_node.attributes?.hasContactPerson.map(user => {
             const contributor = nodes.get(user);
             contactPerson.push({
-                name: contributor.name,
+                name: contributor?.name,
                 designation: 'Contributor',
                 img: USER
             });
