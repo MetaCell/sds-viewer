@@ -54,34 +54,12 @@ const SubjectDetails = (props) => {
                         : <> </>
                 }
 
-                <Box className="tab-content-row">
-                    <List component="nav" aria-label="main">
-                        {
-                            DETAILS_LIST?.map((item, index) => {
-                                if (item.value !== undefined) {
-                                    return (<ListItemText key={`detail_list_${index}`}>
-                                                <Typography component="label">{item?.title}</Typography>
-                                                <Typography>{item?.value}</Typography>
-                                        </ListItemText>);
-                                } else {
-                                    return <></>
-                                }
-                            })
-                        }
-                    </List>
-                </Box>
+                { (node.graph_node.attributes?.weightUnit && node.graph_node.attributes?.weightValue)
+                    ? simpleValue('Weight', node.graph_node.attributes?.weightValue + ' ' + node.graph_node.attributes?.weightUnit)
+                    : <> </>
+                }
 
                 { iterateSimpleValue('Biological Sex', node?.graph_node?.attributes?.biologicalSex) }
-                {
-                    <Box className="tab-content-row">
-                        <Links href={node?.graph_node?.attributes?.hasDerivedInformationAsParticipant} title="Derived information as participant" />
-                    </Box>
-                }
-                {
-                    <Box className="tab-content-row">
-                        <Links href={node?.graph_node?.attributes?.participantInPerformanceOf} title="Participant in performance of" />
-                    </Box>
-                }
                 { iterateSimpleValue('Specimen identifier', node?.graph_node?.attributes?.specimenHasIdentifier) }
 
                 { node.graph_node?.attributes?.subjectSpecies && node.graph_node?.attributes?.subjectSpecies.length > 0
@@ -104,6 +82,16 @@ const SubjectDetails = (props) => {
                             <SimpleChip chips={node.graph_node?.attributes?.hasAssignedGroup} />
                         </Box>)
                     : <> </>
+                }
+                                {
+                    <Box className="tab-content-row">
+                        <Links href={node?.graph_node?.attributes?.hasDerivedInformationAsParticipant} title="Derived information as participant" />
+                    </Box>
+                }
+                {
+                    <Box className="tab-content-row">
+                        <Links href={node?.graph_node?.attributes?.participantInPerformanceOf} title="Participant in performance of" />
+                    </Box>
                 }
             </Box>
         </Box>
