@@ -299,6 +299,13 @@ class Splinter {
                         typeFound.length = this.types[rdfType].iri.id.length;
                     }
                 }
+            } if (type.type === this.types.owl.iri.id + "Class") {
+                for (const rdfType in this.types) {
+                    if ((node.id.includes(this.types[rdfType].iri.id)) && (this.types[rdfType].iri.id.length > typeFound.length) && (typesModel.Class[String(this.types[rdfType].type)] !== undefined)) {
+                        typeFound.type = typesModel.Class[String(this.types[rdfType].type)].type;
+                        typeFound.length = this.types[rdfType].iri.id.length;
+                    }
+                }
             } else if (type.type === this.types.owl.iri.id + "Ontology") {
                 typeFound.type = typesModel.ontology.type;
                 typeFound.length = typesModel.ontology.length;
@@ -551,7 +558,9 @@ class Splinter {
                 target_node.level = protocols.level + 1;
                 target_node.parent = protocols;
                 this.nodes.set(target_node.id, target_node);
-            }
+            } else if (target_node.type === rdfTypes.NCBITaxon?.key || target_node.type === rdfTypes.PATO?.key) {
+                console.log(target_node);
+            } 
             let source_node = this.nodes.get(link.source);
             source_node.children_counter++;
             this.nodes.set(source_node.id, source_node);
@@ -592,9 +601,21 @@ class Splinter {
                         node.attributes.specimenHasIdentifier[0] = source.attributes.label[0];
                     }
                 }
+                if (node.attributes?.subjectSpecies !== undefined) {
+                    let source = this.nodes.get(node.attributes.subjectSpecies[0]);
+                    if ( source !== undefined ) {
+                        node.attributes.subjectSpecies[0] = source.attributes.label[0];
+                    }
+                }
+                if (node.attributes?.biologicalSex !== undefined) {
+                    let source = this.nodes.get(node.attributes.biologicalSex[0]);
+                    if ( source !== undefined ) {
+                        node.attributes.biologicalSex[0] = source.attributes.label[0];
+                    }
+                }
             }
 
-            if (node.type === rdfTypes.RRID.key) {
+            if (node.type === rdfTypes.RRID.key || node.type === rdfTypes.NCBITaxon?.key || node.type === rdfTypes.PATO?.key) {
                 nodesToRemove.unshift(index);
             }
 
@@ -672,6 +693,7 @@ class Splinter {
 
     mergeData() {
         this.nodes.forEach((value, key) => {
+            console.log("Value ", value.type);
             if (value.attributes !== undefined && value.attributes.hasFolderAboutIt !== undefined) {
                 const children = this.tree_parents_map.get(this.tree_map.get(value.attributes.hasFolderAboutIt[0])?.remote_id);
                 children?.forEach(child => {

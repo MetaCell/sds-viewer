@@ -327,6 +327,30 @@ export const rdfTypes = {
             }
         ]
     },
+    "NCBITaxon": {
+        "image": "./images/graph/files/default_file.svg",
+        "key": "NCBITaxon",
+        "properties": [
+            {
+                "type": "rdfs",
+                "key": "label",
+                "property": "label",
+                "label": "Specifier label"
+            }
+        ]
+    },
+    "PATO": {
+        "image": "./images/graph/files/default_file.svg",
+        "key": "PATO",
+        "properties": [
+            {
+                "type": "rdfs",
+                "key": "label",
+                "property": "label",
+                "label": "Specifier label"
+            }
+        ]
+    },
     "Unknown": {
         "image": "./images/graph/files/default_file.svg",
         "key": "Unknown",
@@ -360,6 +384,14 @@ export const typesModel = {
         },
         RRID: {
             "type": "RRID",
+        }
+    },
+    "Class": {
+        NCBITaxon: {
+            "type": "NCBITaxon",
+        },
+        PATO: {
+            "type": "PATO",
         }
     },
     "sparc": {
