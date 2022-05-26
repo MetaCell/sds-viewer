@@ -447,6 +447,16 @@ class Splinter {
         dataset_node.properties = dataset_node.properties.concat(ontology_node.properties);
         dataset_node.proxies = dataset_node.proxies.concat(ontology_node.proxies);
         dataset_node.level = 1;
+        let updatedAbout = [];
+        dataset_node.attributes.isAbout.forEach( (a) => { 
+            if( a.includes(rdfTypes.NCBITaxon.key) || a.includes(rdfTypes.PATO.key) || a.includes(rdfTypes.UBERON.key) ) {
+                let node = this.nodes.get(a);
+                updatedAbout.push(node?.attributes.label[0]);
+            } else {
+                updatedAbout.push(a);
+            }
+        });
+        dataset_node.attributes.isAbout = updatedAbout;
         this.nodes.set(dataset_node.id, dataset_node);
         this.nodes.delete(ontology_node.id);
         // fix links that were pointing to the ontology
@@ -558,9 +568,7 @@ class Splinter {
                 target_node.level = protocols.level + 1;
                 target_node.parent = protocols;
                 this.nodes.set(target_node.id, target_node);
-            } else if (target_node.type === rdfTypes.NCBITaxon?.key || target_node.type === rdfTypes.PATO?.key) {
-                console.log(target_node);
-            } 
+            }
             let source_node = this.nodes.get(link.source);
             source_node.children_counter++;
             this.nodes.set(source_node.id, source_node);
@@ -693,7 +701,6 @@ class Splinter {
 
     mergeData() {
         this.nodes.forEach((value, key) => {
-            console.log("Value ", value.type);
             if (value.attributes !== undefined && value.attributes.hasFolderAboutIt !== undefined) {
                 const children = this.tree_parents_map.get(this.tree_map.get(value.attributes.hasFolderAboutIt[0])?.remote_id);
                 children?.forEach(child => {

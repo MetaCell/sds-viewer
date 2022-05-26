@@ -351,6 +351,18 @@ export const rdfTypes = {
             }
         ]
     },
+    "UBERON": {
+        "image": "./images/graph/files/default_file.svg",
+        "key": "UBERON",
+        "properties": [
+            {
+                "type": "rdfs",
+                "key": "label",
+                "property": "label",
+                "label": "Specifier label"
+            }
+        ]
+    },
     "Unknown": {
         "image": "./images/graph/files/default_file.svg",
         "key": "Unknown",
@@ -392,6 +404,9 @@ export const typesModel = {
         },
         PATO: {
             "type": "PATO",
+        },
+        UBERON: {
+            "type": "UBERON",
         }
     },
     "sparc": {
