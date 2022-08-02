@@ -114,6 +114,12 @@ export const rdfTypes = {
                 "label": "to be filled"
             },
             {
+                "type": "TEMP",
+                "key": "hasFolderAboutIt",
+                "property": "hasFolderAboutIt",
+                "label": "Folder that contains collection and files about the sample"
+            },
+            {
                 "type": "sparc",
                 "key": "animalSubjectIsOfStrain",
                 "property": "subjectStrain",
