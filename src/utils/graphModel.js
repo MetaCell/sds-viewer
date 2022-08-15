@@ -31,6 +31,18 @@ export const rdfTypes = {
                 "label": "To be filled"
             },
             {
+                "type": "dc",
+                "key": "title",
+                "property": "title",
+                "label": "To be filled"
+            },
+            {
+                "type": "dc",
+                "key": "description",
+                "property": "description",
+                "label": "To be filled"
+            },
+            {
                 "type": "isAbout",
                 "key": "",
                 "property": "isAbout",
