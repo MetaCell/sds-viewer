@@ -449,12 +449,12 @@ class Splinter {
         dataset_node.proxies = dataset_node.proxies.concat(ontology_node.proxies);
         dataset_node.level = 1;
         let updatedAbout = [];
-        dataset_node.attributes.isAbout.forEach( (a) => { 
+        dataset_node.attributes.isAbout.forEach( (a) => {
             if( a.includes(rdfTypes.NCBITaxon.key) || a.includes(rdfTypes.PATO.key) || a.includes(rdfTypes.UBERON.key) ) {
                 let node = this.nodes.get(a);
-                updatedAbout.push(node?.attributes.label[0]);
+                updatedAbout.push({"value": node?.attributes.label[0], "link": node?.id});
             } else {
-                updatedAbout.push(a);
+                updatedAbout.push({"value": a});
             }
         });
         dataset_node.attributes.isAbout = updatedAbout;
