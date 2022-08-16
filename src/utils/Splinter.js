@@ -94,6 +94,7 @@ class Splinter {
         this.tree_map = new Map();
         this.proxies_map = new Map();
         this.tree_parents_map = new Map();
+        this.tree_parents_map2 = new Map();
         this.rdf_to_json_map = new Map();
     }
 
@@ -448,12 +449,12 @@ class Splinter {
         dataset_node.proxies = dataset_node.proxies.concat(ontology_node.proxies);
         dataset_node.level = 1;
         let updatedAbout = [];
-        dataset_node.attributes.isAbout.forEach( (a) => { 
+        dataset_node.attributes.isAbout.forEach( (a) => {
             if( a.includes(rdfTypes.NCBITaxon.key) || a.includes(rdfTypes.PATO.key) || a.includes(rdfTypes.UBERON.key) ) {
                 let node = this.nodes.get(a);
-                updatedAbout.push(node?.attributes.label[0]);
+                updatedAbout.push({"value": node?.attributes.label[0], "link": node?.id});
             } else {
-                updatedAbout.push(a);
+                updatedAbout.push({"value": a});
             }
         });
         dataset_node.attributes.isAbout = updatedAbout;
@@ -683,8 +684,10 @@ class Splinter {
             let children = this.tree_parents_map.get(leaf.parent_id);
             if (children) {
                 this.tree_parents_map.set(leaf.parent_id, [...children, leaf]);
+                this.tree_parents_map2.set(leaf.parent_id, [...children, leaf]);
             } else {
                 this.tree_parents_map.set(leaf.parent_id, [leaf]);
+                this.tree_parents_map2.set(leaf.parent_id, [leaf]);
             }
         }
     }
@@ -702,12 +705,52 @@ class Splinter {
     mergeData() {
         this.nodes.forEach((value, key) => {
             if (value.attributes !== undefined && value.attributes.hasFolderAboutIt !== undefined) {
-                const children = this.tree_parents_map.get(this.tree_map.get(value.attributes.hasFolderAboutIt[0])?.remote_id);
-                children?.forEach(child => {
-                    !this.filterNode(child) && this.linkToNode(child, value);
-                });
+                value.attributes.hasFolderAboutIt.forEach(folder => {
+                    let jsonNode = this.tree_map.get(folder);
+                    let newNode = this.buildFolder(jsonNode, value);
+                    let folderChildren = this.tree_parents_map2.get(newNode.parent_id).map(child => {
+                        child.parent_id = newNode.uri_api
+                        return child;
+                    });
+
+                    if (!this.filterNode(newNode) && (this.nodes.get(newNode.remote_id)) === undefined) {
+                        this.linkToNode(newNode, value);
+                    }
+
+                    if (this.tree_parents_map2.get(newNode.uri_api) === undefined) {
+                        this.tree_parents_map2.set(newNode.uri_api, folderChildren);
+                        this.tree_parents_map2.delete(newNode.parent_id);
+                        folderChildren?.forEach(child => {
+                            const child_node = this.nodes.get(this.proxies_map.get(child.uri_api));
+                            if (!this.filterNode(child) && child_node?.type !== rdfTypes.Sample.key) {
+                                this.linkToNode(child, this.nodes.get(newNode.remote_id));
+                            }
+                        });
+                    } else {
+                        let tempChildren = [...this.tree_parents_map2.get(newNode.uri_api), ...folderChildren];
+                        this.tree_parents_map2.set(newNode.uri_api, tempChildren);
+                        this.tree_parents_map2.delete(newNode.parent_id);
+                        tempChildren?.forEach(child => {
+                            const child_node = this.nodes.get(this.proxies_map.get(child.uri_api));
+                            if (!this.filterNode(child) && child_node?.type !== rdfTypes.Sample.key) {
+                                this.linkToNode(child, this.nodes.get(newNode.remote_id));
+                            }
+                        });
+                    }
+                })
             }
         });
+    }
+
+    buildFolder(item) {
+        let copiedItem = {...item};
+        let newName = copiedItem.dataset_relative_path.split('/')[0];
+        copiedItem.parent_id = copiedItem.remote_id;
+        copiedItem.remote_id = copiedItem.basename + '_' + newName;
+        copiedItem.uri_api = copiedItem.remote_id;
+        copiedItem.basename = newName;
+        // copiedItem.basename = copiedItem.remote_id;
+        return copiedItem;
     }
 
 
@@ -726,7 +769,7 @@ class Splinter {
             target: new_node.id
         });
         this.nodes.set(new_node.id, this.factory.createNode(new_node));
-        var children = this.tree_parents_map.get(node.remote_id);
+        var children = this.tree_parents_map2.get(node.remote_id);
         if (children?.length > 0) {
             children.forEach(child => {
                 !this.filterNode(child) && this.linkToNode(child, new_node);

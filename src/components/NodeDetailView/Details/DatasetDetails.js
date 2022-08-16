@@ -16,19 +16,23 @@ const DatasetDetails = (props) => {
     const nodes = window.datasets[node.dataset_id].splinter.nodes;
 
     let title = "";
+    let label = "";
     let idDetails = "";
+    let description = "";
     // both tree and graph nodes are present, extract data from both
     if (node?.tree_node && node?.graph_node) {
         idDetails = node.graph_node?.id + detailsLabel;
-        title = node?.graph_node.attributes?.label[0];
+        label = node?.graph_node.attributes?.label[0];
+        title = node?.graph_node.attributes?.title[0];
+        description = node?.graph_node.attributes?.description[0];
     // the below is the case where we have data only from the tree/hierarchy
     } else if (node?.tree_node) {
-        title = node?.tree_node?.basename;
+        label = node?.tree_node?.basename;
         idDetails = node?.tree_node?.id + detailsLabel;
     // the below is the case where we have data only from the graph
     } else {
         idDetails = node.graph_node?.id + detailsLabel;
-        title = node.graph_node?.attributes?.label[0];
+        label = node.graph_node?.attributes?.label[0];
     }
 
     let latestUpdate = "Not defined."
@@ -79,7 +83,14 @@ const DatasetDetails = (props) => {
     return (
         <Box id={idDetails}>
             <Box className="tab-content">
-                <SimpleLabelValue label={'Label'} value={title} heading={'Dataset Details'} />
+                { title !== ""
+                    ? (<>
+                            <SimpleLabelValue label={'Title'} value={title} heading={'Dataset Details'} />
+                            <SimpleLabelValue label={'Label'} value={label} />
+                        </>)
+                    : (<SimpleLabelValue label={'Label'} value={label} heading={'Dataset Details'} />)
+                }
+                : (<SimpleLabelValue label={'Description'} value={description} />)
                 <SimpleLabelValue label={'Updated On'} value={latestUpdate.toString()} />
                 <Box className="tab-content-row">
                     <Typography component="label">About</Typography>

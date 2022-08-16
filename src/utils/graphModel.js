@@ -1,24 +1,65 @@
 export const type_key = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type";
 
+
 export const RDF_TO_JSON_TYPES = [
     {key: 'sparc:Subject', toTrim: 'subject'}
 ];
+
 
 export const rdfTypes = {
     "Ontology": {
         "image": "./images/graph/database.svg",
         "key": "Ontology",
-        "properties": []
+        "properties": [
+            {
+                "type": "rdfs",
+                "key": "label",
+                "property": "label",
+                "label": "To be filled"
+            },
+            {
+                "type": "rdfs",
+                "key": "hasUriHuman",
+                "property": "hasUriHuman",
+                "label": "To be filled"
+            }
+        ]
     },
     "Award": {
         "image": "./images/graph/files/default_file.svg",
         "key": "Award",
-        "properties": []
+        "properties": [
+            {
+                "type": "rdfs",
+                "key": "label",
+                "property": "label",
+                "label": "To be filled"
+            },
+            {
+                "type": "rdfs",
+                "key": "hasUriHuman",
+                "property": "hasUriHuman",
+                "label": "To be filled"
+            }
+        ]
     },
     "Collection": {
         "image": "./images/graph/folder.svg",
         "key": "Collection",
-        "properties": []
+        "properties": [
+            {
+                "type": "rdfs",
+                "key": "label",
+                "property": "label",
+                "label": "To be filled"
+            },
+            {
+                "type": "rdfs",
+                "key": "hasUriHuman",
+                "property": "hasUriHuman",
+                "label": "To be filled"
+            }
+        ]
     },
     "Dataset": {
         "image": "./images/graph/dataset.svg",
@@ -28,6 +69,24 @@ export const rdfTypes = {
                 "type": "rdfs",
                 "key": "label",
                 "property": "label",
+                "label": "To be filled"
+            },
+            {
+                "type": "rdfs",
+                "key": "hasUriHuman",
+                "property": "hasUriHuman",
+                "label": "To be filled"
+            },
+            {
+                "type": "dc",
+                "key": "title",
+                "property": "title",
+                "label": "To be filled"
+            },
+            {
+                "type": "dc",
+                "key": "description",
+                "property": "description",
                 "label": "To be filled"
             },
             {
@@ -101,7 +160,20 @@ export const rdfTypes = {
     "File": {
         "image": "./images/graph/files/default_file.svg",
         "key": "File",
-        "properties": []
+        "properties": [
+            {
+                "type": "rdfs",
+                "key": "label",
+                "property": "label",
+                "label": "To be filled"
+            },
+            {
+                "type": "rdfs",
+                "key": "hasUriHuman",
+                "property": "hasUriHuman",
+                "label": "To be filled"
+            }
+        ]
     },
     "Subject": {
         "image": "./images/graph/folder.svg",
@@ -112,6 +184,12 @@ export const rdfTypes = {
                 "key": "animalSubjectIsOfSpecies",
                 "property": "subjectSpecies",
                 "label": "to be filled"
+            },
+            {
+                "type": "TEMP",
+                "key": "hasFolderAboutIt",
+                "property": "hasFolderAboutIt",
+                "label": "Folder that contains collection and files about the sample"
             },
             {
                 "type": "sparc",
@@ -168,10 +246,16 @@ export const rdfTypes = {
                 "label": "to be filled"
             },
             {
-                "type": "",
-                "key": "participantInPerformanceOf",
-                "property": "participantInPerformanceOf",
-                "label": "to be filled"
+                "type": "rdfs",
+                "key": "label",
+                "property": "label",
+                "label": "To be filled"
+            },
+            {
+                "type": "rdfs",
+                "key": "hasUriHuman",
+                "property": "hasUriHuman",
+                "label": "To be filled"
             }
         ],
         "additional_properties": [
@@ -270,6 +354,18 @@ export const rdfTypes = {
                 "key": "wasExtractedFromAnatomicalRegion",
                 "property": "wasExtractedFromAnatomicalRegion",
                 "label": "Unique instance identifier"
+            },
+            {
+                "type": "rdfs",
+                "key": "label",
+                "property": "label",
+                "label": "To be filled"
+            },
+            {
+                "type": "rdfs",
+                "key": "hasUriHuman",
+                "property": "hasUriHuman",
+                "label": "To be filled"
             }
         ]
     },
@@ -308,6 +404,12 @@ export const rdfTypes = {
                 "label": "To be filled"
             },
             {
+                "type": "rdfs",
+                "key": "hasUriHuman",
+                "property": "hasUriHuman",
+                "label": "To be filled"
+            },
+            {
                 "type": "TEMP",
                 "key": "protocolHasNumberOfSteps",
                 "property": "protocolHasNumberOfSteps",
@@ -323,7 +425,13 @@ export const rdfTypes = {
                 "type": "rdfs",
                 "key": "label",
                 "property": "label",
-                "label": "Specifier label"
+                "label": "To be filled"
+            },
+            {
+                "type": "rdfs",
+                "key": "hasUriHuman",
+                "property": "hasUriHuman",
+                "label": "To be filled"
             }
         ]
     },
@@ -335,7 +443,13 @@ export const rdfTypes = {
                 "type": "rdfs",
                 "key": "label",
                 "property": "label",
-                "label": "Specifier label"
+                "label": "To be filled"
+            },
+            {
+                "type": "rdfs",
+                "key": "hasUriHuman",
+                "property": "hasUriHuman",
+                "label": "To be filled"
             }
         ]
     },
@@ -347,7 +461,13 @@ export const rdfTypes = {
                 "type": "rdfs",
                 "key": "label",
                 "property": "label",
-                "label": "Specifier label"
+                "label": "To be filled"
+            },
+            {
+                "type": "rdfs",
+                "key": "hasUriHuman",
+                "property": "hasUriHuman",
+                "label": "To be filled"
             }
         ]
     },
@@ -359,7 +479,13 @@ export const rdfTypes = {
                 "type": "rdfs",
                 "key": "label",
                 "property": "label",
-                "label": "Specifier label"
+                "label": "To be filled"
+            },
+            {
+                "type": "rdfs",
+                "key": "hasUriHuman",
+                "property": "hasUriHuman",
+                "label": "To be filled"
             }
         ]
     },
