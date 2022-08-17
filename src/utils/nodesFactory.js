@@ -40,6 +40,10 @@ function extractProperties(node, ttlTypes) {
                 }
             }
             if (new_attribute !== undefined) {
+                if (typeof new_attribute === 'object' && new_attribute !== null && new_attribute[json_prop.innerPath]) {
+                    new_attribute = new_attribute[json_prop.innerPath];
+                }
+
                 node.attributes[json_prop.property] = [];
                 if (json_prop.type === 'string') {
                     node.attributes[json_prop.property].push(new_attribute.replace(json_prop.trimType, ''));

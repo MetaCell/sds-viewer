@@ -270,6 +270,7 @@ export const rdfTypes = {
                 "label": "Age value",
                 "property": "ageValue",
                 "path": [ "TEMP:hasAge", "rdf:value" ],
+                "innerPath": "@value",
                 "trimType": "",
                 "type": "digit"
             },
@@ -284,6 +285,7 @@ export const rdfTypes = {
                 "label": "Age base value",
                 "property": "ageBaseValue",
                 "path": [ "TEMP:hasAge", "TEMP:asBaseUnits", "rdf:value" ],
+                "innerPath": "@value",
                 "trimType": "",
                 "type": "digit"
             },
