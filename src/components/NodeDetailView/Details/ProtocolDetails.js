@@ -1,10 +1,12 @@
 import React from "react";
 import {
     Box,
+    Typography,
 } from "@material-ui/core";
-import SimpleLabelValue from './Views/SimpleLabelValue';
+import Links from './Views/Links';
 import { iterateSimpleValue } from './utils';
 import { detailsLabel } from '../../../constants';
+import SimpleLabelValue from './Views/SimpleLabelValue';
 
 const ProtocolDetails = (props) => {
     const { node } = props;
@@ -28,7 +30,14 @@ const ProtocolDetails = (props) => {
     return (
         <Box id={idDetails}>
             <Box className="tab-content">
-                <SimpleLabelValue label={'Label'} value={title} heading={'Protocol Details'} />
+                { node.graph_node.attributes?.hasUriHuman && node.graph_node.attributes?.hasUriHuman[0] !== ""
+                    ? (<Box className="tab-content-row">
+                            <Typography component="h3">{"Protocol Details"}</Typography>
+                            <Typography component="label">Label</Typography>
+                            <Links key={`label_href_link`} href={node.graph_node.attributes?.hasUriHuman[0]} title={title} />
+                        </Box>)
+                    : (<SimpleLabelValue label={'Label'} value={title} heading={'Protocol Details'} />)
+                }
                 { iterateSimpleValue('Number of steps', node?.graph_node?.attributes?.protocolHasNumberOfSteps) }
             </Box>
         </Box>

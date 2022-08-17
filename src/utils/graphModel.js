@@ -18,7 +18,7 @@ export const rdfTypes = {
                 "label": "To be filled"
             },
             {
-                "type": "rdfs",
+                "type": "TEMP",
                 "key": "hasUriHuman",
                 "property": "hasUriHuman",
                 "label": "To be filled"
@@ -36,7 +36,7 @@ export const rdfTypes = {
                 "label": "To be filled"
             },
             {
-                "type": "rdfs",
+                "type": "TEMP",
                 "key": "hasUriHuman",
                 "property": "hasUriHuman",
                 "label": "To be filled"
@@ -54,7 +54,7 @@ export const rdfTypes = {
                 "label": "To be filled"
             },
             {
-                "type": "rdfs",
+                "type": "TEMP",
                 "key": "hasUriHuman",
                 "property": "hasUriHuman",
                 "label": "To be filled"
@@ -72,7 +72,7 @@ export const rdfTypes = {
                 "label": "To be filled"
             },
             {
-                "type": "rdfs",
+                "type": "TEMP",
                 "key": "hasUriHuman",
                 "property": "hasUriHuman",
                 "label": "To be filled"
@@ -168,7 +168,7 @@ export const rdfTypes = {
                 "label": "To be filled"
             },
             {
-                "type": "rdfs",
+                "type": "TEMP",
                 "key": "hasUriHuman",
                 "property": "hasUriHuman",
                 "label": "To be filled"
@@ -252,7 +252,7 @@ export const rdfTypes = {
                 "label": "To be filled"
             },
             {
-                "type": "rdfs",
+                "type": "TEMP",
                 "key": "hasUriHuman",
                 "property": "hasUriHuman",
                 "label": "To be filled"
@@ -362,7 +362,7 @@ export const rdfTypes = {
                 "label": "To be filled"
             },
             {
-                "type": "rdfs",
+                "type": "TEMP",
                 "key": "hasUriHuman",
                 "property": "hasUriHuman",
                 "label": "To be filled"
@@ -404,7 +404,7 @@ export const rdfTypes = {
                 "label": "To be filled"
             },
             {
-                "type": "rdfs",
+                "type": "TEMP",
                 "key": "hasUriHuman",
                 "property": "hasUriHuman",
                 "label": "To be filled"
@@ -428,7 +428,7 @@ export const rdfTypes = {
                 "label": "To be filled"
             },
             {
-                "type": "rdfs",
+                "type": "TEMP",
                 "key": "hasUriHuman",
                 "property": "hasUriHuman",
                 "label": "To be filled"
@@ -446,7 +446,7 @@ export const rdfTypes = {
                 "label": "To be filled"
             },
             {
-                "type": "rdfs",
+                "type": "TEMP",
                 "key": "hasUriHuman",
                 "property": "hasUriHuman",
                 "label": "To be filled"
@@ -464,7 +464,7 @@ export const rdfTypes = {
                 "label": "To be filled"
             },
             {
-                "type": "rdfs",
+                "type": "TEMP",
                 "key": "hasUriHuman",
                 "property": "hasUriHuman",
                 "label": "To be filled"
@@ -482,7 +482,7 @@ export const rdfTypes = {
                 "label": "To be filled"
             },
             {
-                "type": "rdfs",
+                "type": "TEMP",
                 "key": "hasUriHuman",
                 "property": "hasUriHuman",
                 "label": "To be filled"

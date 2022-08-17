@@ -44,7 +44,14 @@ const SubjectDetails = (props) => {
     return (
         <Box id={idDetails}>
             <Box className="tab-content">
-                <SimpleLabelValue label={'Label'} value={title} heading={'Subject Details'} />
+                { node.graph_node.attributes?.hasUriHuman && node.graph_node.attributes?.hasUriHuman[0] !== ""
+                    ? (<Box className="tab-content-row">
+                            <Typography component="h3">{"Subject Details"}</Typography>
+                            <Typography component="label">Label</Typography>
+                            <Links key={`label_href_link`} href={node.graph_node.attributes?.hasUriHuman[0]} title={title} />
+                        </Box>)
+                    : (<SimpleLabelValue label={'Label'} value={title} heading={'Subject Details'} />)
+                }
 
                 { iterateSimpleValue('Age Category', node?.graph_node?.attributes?.hasAgeCategory) }
                 { (node.graph_node.attributes?.ageValue && node.graph_node.attributes?.ageUnit)
