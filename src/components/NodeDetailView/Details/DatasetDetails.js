@@ -6,7 +6,7 @@ import {
     ListItemText,
 } from "@material-ui/core";
 import Links from './Views/Links';
-import SimpleChip from './Views/SimpleChip';
+import SimpleLinkedChip from './Views/SimpleLinkedChip';
 import USER from "../../../images/user.svg";
 import SimpleLabelValue from './Views/SimpleLabelValue';
 import { detailsLabel } from '../../../constants';
@@ -97,12 +97,12 @@ const DatasetDetails = (props) => {
 
                 <Box className="tab-content-row">
                     <Typography component="label">About</Typography>
-                    <SimpleChip chips={node.graph_node.attributes?.isAbout} />
+                    <SimpleLinkedChip chips={node.graph_node.attributes?.isAbout} />
                 </Box>
 
                 <Box className="tab-content-row">
                     <Typography component="label">Protocol Techniques</Typography>
-                    <SimpleChip chips={node.graph_node.attributes?.protocolEmploysTechnique} />
+                    <SimpleLinkedChip chips={node.graph_node.attributes?.protocolEmploysTechnique} />
                 </Box>
 
                 <Box className="tab-content-row">

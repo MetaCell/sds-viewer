@@ -6,7 +6,7 @@ import {
     ListItemText,
 } from "@material-ui/core";
 import Links from './Views/Links';
-import SimpleChip from './Views/SimpleChip';
+import SimpleLinkedChip from './Views/SimpleLinkedChip';
 import SimpleLabelValue from './Views/SimpleLabelValue';
 import { detailsLabel } from '../../../constants';
 
@@ -64,7 +64,7 @@ const FileDetails = (props) => {
 
                 <Box className="tab-content-row">
                     <Typography component="label">About</Typography>
-                    <SimpleChip chips={node?.graph_node?.attributes?.isAbout} />
+                    <SimpleLinkedChip chips={node?.graph_node?.attributes?.isAbout} />
                 </Box>
                 { node?.tree_node?.uri_human !== undefined
                     ? (<Box className="tab-content-row">
