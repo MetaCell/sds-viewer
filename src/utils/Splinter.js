@@ -452,12 +452,31 @@ class Splinter {
         dataset_node.attributes.isAbout.forEach( (a) => {
             if( a.includes(rdfTypes.NCBITaxon.key) || a.includes(rdfTypes.PATO.key) || a.includes(rdfTypes.UBERON.key) ) {
                 let node = this.nodes.get(a);
-                updatedAbout.push({"value": node?.attributes.label[0], "link": node?.id});
+                if (node) {
+                    updatedAbout.push({"value": node?.attributes.label[0], "link": node?.id});
+                } else {
+                    updatedAbout.push({"value": a});
+                }
             } else {
                 updatedAbout.push({"value": a});
             }
         });
         dataset_node.attributes.isAbout = updatedAbout;
+
+        let updateTechniques = [];
+        dataset_node.attributes.protocolEmploysTechnique.forEach( (a) => {
+            if( a.includes(rdfTypes.NCBITaxon.key) || a.includes(rdfTypes.PATO.key) || a.includes(rdfTypes.UBERON.key) ) {
+                let node = this.nodes.get(a);
+                if (node) {
+                    updateTechniques.push({"value": node?.attributes.label[0], "link": node?.id});
+                } else {
+                    updateTechniques.push({"value": a});
+                }
+            } else {
+                updateTechniques.push({"value": a});
+            }
+        });
+        dataset_node.attributes.protocolEmploysTechnique = updateTechniques;
         this.nodes.set(dataset_node.id, dataset_node);
         this.nodes.delete(ontology_node.id);
         // fix links that were pointing to the ontology

@@ -7,10 +7,7 @@ import {
 const SimpleChip = ({chips}) => {
   return (
     <Box className="chip-overflow noscrollbar">
-      { chips?.map((item, index) => (item?.link === undefined
-        ? (<Chip key={`${item?.value}_${index}`} label={item?.value} />)
-        : (<Chip key={`${item?.value}_${index}`} label={item?.value} onClick={() => window.open(item.link, '_blank')}/>)))
-      }
+      { chips?.map((item, index) => <Chip key={`${item}_${index}`} label={item} /> ) }
     </Box>
   )
 }

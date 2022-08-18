@@ -6,7 +6,7 @@ import {
     ListItemText,
 } from "@material-ui/core";
 import Links from './Views/Links';
-import SimpleChip from './Views/SimpleChip';
+import SimpleLinkedChip from './Views/SimpleLinkedChip';
 import USER from "../../../images/user.svg";
 import SimpleLabelValue from './Views/SimpleLabelValue';
 import { detailsLabel } from '../../../constants';
@@ -83,19 +83,28 @@ const DatasetDetails = (props) => {
     return (
         <Box id={idDetails}>
             <Box className="tab-content">
-                { title !== ""
-                    ? (<>
-                            <SimpleLabelValue label={'Title'} value={title} heading={'Dataset Details'} />
-                            <SimpleLabelValue label={'Label'} value={label} />
-                        </>)
-                    : (<SimpleLabelValue label={'Label'} value={label} heading={'Dataset Details'} />)
+                <SimpleLabelValue label={'Title'} value={title} heading={'Dataset Details'} />
+                { node.graph_node.attributes?.hasUriHuman && node.graph_node.attributes?.hasUriHuman[0] !== ""
+                    ? (<Box className="tab-content-row">
+                            <Typography component="label">Label</Typography>
+                            <Links key={`label_href_link`} href={node.graph_node.attributes?.hasUriHuman[0]} title={label} />
+                        </Box>)
+                    : (<SimpleLabelValue label={'Label'} value={label} />)
                 }
-                : (<SimpleLabelValue label={'Description'} value={description} />)
+                <SimpleLabelValue label={'Description'} value={description} />
+
                 <SimpleLabelValue label={'Updated On'} value={latestUpdate.toString()} />
+
                 <Box className="tab-content-row">
                     <Typography component="label">About</Typography>
-                    <SimpleChip chips={node.graph_node.attributes?.isAbout} />
+                    <SimpleLinkedChip chips={node.graph_node.attributes?.isAbout} />
                 </Box>
+
+                <Box className="tab-content-row">
+                    <Typography component="label">Protocol Techniques</Typography>
+                    <SimpleLinkedChip chips={node.graph_node.attributes?.protocolEmploysTechnique} />
+                </Box>
+
                 <Box className="tab-content-row">
                     <List component="nav" aria-label="main">
                         {
@@ -113,7 +122,6 @@ const DatasetDetails = (props) => {
                     ? (<Box className="tab-content-row">
                             <Typography component="label">Links</Typography>
                             <Links key={`detail_links_dataset`} href={node.graph_node.attributes?.hasUriHuman[0]} title="Dataset" />
-                            <Links key={`detail_protocol_technique`} href={node.graph_node.attributes?.protocolEmploysTechnique} title="Protocol Technique" />
                         </Box>)
                     : <> </>
                 }
