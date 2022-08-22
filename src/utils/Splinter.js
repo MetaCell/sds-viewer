@@ -244,7 +244,12 @@ class Splinter {
                     if ( neighbors.length > 0 ) n.level = n.level + 1;
                 }
                 if ( neighbors.length > 0 ) {
-                    n.xPos = neighbors[0].xPos + (neighbors[neighbors.length-1].xPos - neighbors[0].xPos) * .5;
+                    let max = Number.MIN_SAFE_INTEGER, min = Number.MAX_SAFE_INTEGER;
+                    neighbors.forEach( neighbor => {
+                        if ( neighbor.xPos > max ) { max = neighbor.xPos };
+                        if ( neighbor.xPos < min ) { min = neighbor.xPos };
+                    });
+                    n.xPos = min === max ? min : min + (max - min) * .5;
                     positionsMap[n.level] = n.xPos + nodeSpace;
 
                 } else {
