@@ -117,6 +117,8 @@ const App = () => {
                 loading={loading}
                 openUploadDialog={openUploadDialog}
                 setOpenUploadDialog={setOpenUploadDialog}
+                openDatasetsListDialog={openDatasetsListDialog}
+                setOpenDatasetsListDialog={setOpenDatasetsListDialog}
               />
           }
         </Box>

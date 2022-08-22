@@ -171,6 +171,16 @@ class Splinter {
         return this.turtleData;
     }
 
+    updateLevels(n, previousLevel) {
+        n.map( node => {
+            if ( node.level > previousLevel ){
+                this.updateLevels(node.neighbors, node.level);
+                node.level = node.level + 1;
+            }
+        });
+
+        return;
+    }
 
     async getGraph() {
         if (this.nodes === undefined || this.edges === undefined) {
@@ -204,7 +214,7 @@ class Splinter {
         // Calculate level with max amount of nodes
         let maxLevel = Object.keys(this.levelsMap).reduce((a, b) => this.levelsMap[a].length > this.levelsMap[b].length ? a : b);
         // Space between nodes
-        let nodeSpace = 100;
+        let nodeSpace = 50;
         // The furthestLeft a node can be
         let furthestLeft = 0 - (Math.ceil(this.levelsMap[maxLevel].length)/2  * nodeSpace );
         let positionsMap = {};
@@ -216,24 +226,40 @@ class Splinter {
             this.levelsMap[level].sort((a, b) => a.attributes?.relativePath?.localeCompare(b.attributes?.relativePath));
         });
 
-        // Sort second and third level nodes
         this.levelsMap[3]?.sort((a, b) => a.parent?.type?.localeCompare(b.parent?.type));
-        this.levelsMap[2]?.sort((a, b) => b.neighbors.length - a.neighbors.length );
+
+        for ( let i = SUBJECTS_LEVEL; i < maxLevel ; i++ ){
+            this.levelsMap[i]?.sort((a, b) => a.parent?.id.localeCompare(b.parent?.id));
+        }
+        this.levelsMap[maxLevel]?.sort((a, b) => a.parent.id.localeCompare(b.parent.id));
 
         // Start assigning the graph from the bottom up
         let neighbors = 0;
         levelsMapKeys.reverse().forEach( level => {
             this.levelsMap[level].forEach ( (n, index) => {
                 neighbors = n?.neighbors?.filter(neighbor => { return neighbor.level > n.level });
+                // FIXME : Fix this, beter way to create positioning
+                if ( n.level === SUBJECTS_LEVEL + 2 ){
+                    this.updateLevels(n.neighbors, n.level);
+                    if ( neighbors.length > 0 ) n.level = n.level + 1;
+                }
                 if ( neighbors.length > 0 ) {
-                    n.xPos = neighbors[0].xPos + (neighbors[neighbors.length-1].xPos - neighbors[0].xPos) * .5;
+                    let max = Number.MIN_SAFE_INTEGER, min = Number.MAX_SAFE_INTEGER;
+                    neighbors.forEach( neighbor => {
+                        if ( neighbor.xPos > max ) { max = neighbor.xPos };
+                        if ( neighbor.xPos < min ) { min = neighbor.xPos };
+                    });
+                    n.xPos = min === max ? min : min + (max - min) * .5;
                     positionsMap[n.level] = n.xPos + nodeSpace;
+
                 } else {
                     n.xPos = positionsMap[n.level] + nodeSpace;
                     positionsMap[n.level] = n.xPos;
                 }
             })
         });
+
+        console.log(this.levelsMap);
 
         return {
             nodes: this.forced_nodes,
@@ -464,7 +490,7 @@ class Splinter {
         dataset_node.attributes.isAbout = updatedAbout;
 
         let updateTechniques = [];
-        dataset_node.attributes.protocolEmploysTechnique.forEach( (a) => {
+        dataset_node.attributes.protocolEmploysTechnique?.forEach( (a) => {
             if( a.includes(rdfTypes.NCBITaxon.key) || a.includes(rdfTypes.PATO.key) || a.includes(rdfTypes.UBERON.key) ) {
                 let node = this.nodes.get(a);
                 if (node) {
@@ -480,7 +506,7 @@ class Splinter {
         this.nodes.set(dataset_node.id, dataset_node);
         this.nodes.delete(ontology_node.id);
         // fix links that were pointing to the ontology
-        let temp_edges = this.edges.map(link => {
+        let temp_edges = this.edges?.map(link => {
             if (link.source === ontology_node.id) {
                 link.source = dataset_node.id
             }
@@ -587,6 +613,11 @@ class Splinter {
                 link.source = protocols_key;
                 target_node.level = protocols.level + 1;
                 target_node.parent = protocols;
+                this.nodes.set(target_node.id, target_node);
+            } else if (link.source === id && target_node.type === rdfTypes.Sample.key) {
+                link.source = target_node.attributes.derivedFrom[0];
+                target_node.level = subjects.level + 2;
+                target_node.parent = this.nodes.get(target_node.attributes.derivedFrom[0]);
                 this.nodes.set(target_node.id, target_node);
             }
             let source_node = this.nodes.get(link.source);
@@ -727,7 +758,7 @@ class Splinter {
                 value.attributes.hasFolderAboutIt.forEach(folder => {
                     let jsonNode = this.tree_map.get(folder);
                     let newNode = this.buildFolder(jsonNode, value);
-                    let folderChildren = this.tree_parents_map2.get(newNode.parent_id).map(child => {
+                    let folderChildren = this.tree_parents_map2.get(newNode.parent_id)?.map(child => {
                         child.parent_id = newNode.uri_api
                         return child;
                     });
@@ -746,7 +777,7 @@ class Splinter {
                             }
                         });
                     } else {
-                        let tempChildren = [...this.tree_parents_map2.get(newNode.uri_api), ...folderChildren];
+                        let tempChildren = folderChildren === undefined ? [...this.tree_parents_map2.get(newNode.uri_api)] : [...this.tree_parents_map2.get(newNode.uri_api), ...folderChildren];;
                         this.tree_parents_map2.set(newNode.uri_api, tempChildren);
                         this.tree_parents_map2.delete(newNode.parent_id);
                         tempChildren?.forEach(child => {

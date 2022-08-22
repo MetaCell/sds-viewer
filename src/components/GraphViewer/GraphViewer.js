@@ -254,6 +254,8 @@ const GraphViewer = (props) => {
       let nodeName = node.name;
       if (nodeName.length > 10) {
         nodeName = nodeName.substr(0, 10).concat('...');
+      } else if ( Array.isArray(nodeName) ){
+        nodeName = nodeName[0]?.substr(0, 10).concat('...');
       }
       const textProps = [nodeName, node.x + 2, textHoverPosition[1] + 4.5];
       if (node === hoverNode || node?.id === selectedNode?.id || node?.id === nodeSelected?.id ) {
@@ -312,8 +314,7 @@ const GraphViewer = (props) => {
         // Links properties
         linkColor = {handleLinkColor}
         linkWidth={2}
-        forceChargeStrength={maxNodesLevel * -20}
-        collideSize={5}
+        forceChargeStrength={maxNodesLevel * -5}
         linkDirectionalParticles={1}
         linkCurvature={link => {
           let curve = 0;

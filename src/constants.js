@@ -1,6 +1,7 @@
 export const IMPORT_TEXT = 'Load a new dataset';
 export const ADD_DATASET = 'Load Dataset';
 export const LIST_DATASETS = 'List Datasets';
+export const SPARC_DATASETS = 'SPARC Datasets';
 export const FILE_UPLOAD_PARAMS = {
   acceptedFileExtensions: ['json', 'ttl'],
   maxFileSize: 5242880,
