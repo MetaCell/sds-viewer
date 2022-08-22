@@ -233,8 +233,6 @@ class Splinter {
         }
         this.levelsMap[maxLevel]?.sort((a, b) => a.parent.id.localeCompare(b.parent.id));
 
-        console.log(this.levelsMap);
-
         // Start assigning the graph from the bottom up
         let neighbors = 0;
         levelsMapKeys.reverse().forEach( level => {
