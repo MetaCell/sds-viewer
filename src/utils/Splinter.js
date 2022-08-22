@@ -239,9 +239,9 @@ class Splinter {
             this.levelsMap[level].forEach ( (n, index) => {
                 neighbors = n?.neighbors?.filter(neighbor => { return neighbor.level > n.level });
                 // FIXME : Fix this, beter way to create positioning
-                if ( n.level === SUBJECTS_LEVEL + 1 ){
+                if ( n.level === SUBJECTS_LEVEL + 2 ){
                     this.updateLevels(n.neighbors, n.level);
-                    n.level = n.level + 1;
+                    if ( neighbors.length > 0 ) n.level = n.level + 1;
                 }
                 if ( neighbors.length > 0 ) {
                     n.xPos = neighbors[0].xPos + (neighbors[neighbors.length-1].xPos - neighbors[0].xPos) * .5;
