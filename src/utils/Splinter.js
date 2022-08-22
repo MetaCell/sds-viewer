@@ -174,8 +174,8 @@ class Splinter {
     updateLevels(n, previousLevel) {
         n.map( node => {
             if ( node.level > previousLevel ){
-                node.level = node.level + 1;
                 this.updateLevels(node.neighbors, node.level);
+                node.level = node.level + 1;
             }
         });
 
@@ -229,7 +229,7 @@ class Splinter {
         this.levelsMap[3]?.sort((a, b) => a.parent?.type?.localeCompare(b.parent?.type));
 
         for ( let i = SUBJECTS_LEVEL; i < maxLevel ; i++ ){
-            this.levelsMap[i]?.sort((a, b) => a.id.localeCompare(b.id));
+            this.levelsMap[i]?.sort((a, b) => a.parent?.id.localeCompare(b.parent?.id));
         }
         this.levelsMap[maxLevel]?.sort((a, b) => a.parent.id.localeCompare(b.parent.id));
 
@@ -238,22 +238,23 @@ class Splinter {
         levelsMapKeys.reverse().forEach( level => {
             this.levelsMap[level].forEach ( (n, index) => {
                 neighbors = n?.neighbors?.filter(neighbor => { return neighbor.level > n.level });
-                if ( n.level === SUBJECTS_LEVEL + 2){
+                // FIXME : Fix this, beter way to create positioning
+                if ( n.level === SUBJECTS_LEVEL + 1 ){
                     this.updateLevels(n.neighbors, n.level);
+                    n.level = n.level + 1;
                 }
                 if ( neighbors.length > 0 ) {
                     n.xPos = neighbors[0].xPos + (neighbors[neighbors.length-1].xPos - neighbors[0].xPos) * .5;
-                    if ( n.level === SUBJECTS_LEVEL + 2 ){
-                      n.level = n.level + 1;
-                    }
-                    
                     positionsMap[n.level] = n.xPos + nodeSpace;
+
                 } else {
                     n.xPos = positionsMap[n.level] + nodeSpace;
                     positionsMap[n.level] = n.xPos;
                 }
             })
         });
+
+        console.log(this.levelsMap);
 
         return {
             nodes: this.forced_nodes,
@@ -607,6 +608,11 @@ class Splinter {
                 link.source = protocols_key;
                 target_node.level = protocols.level + 1;
                 target_node.parent = protocols;
+                this.nodes.set(target_node.id, target_node);
+            } else if (link.source === id && target_node.type === rdfTypes.Sample.key) {
+                link.source = target_node.attributes.derivedFrom[0];
+                target_node.level = subjects.level + 2;
+                target_node.parent = this.nodes.get(target_node.attributes.derivedFrom[0]);
                 this.nodes.set(target_node.id, target_node);
             }
             let source_node = this.nodes.get(link.source);

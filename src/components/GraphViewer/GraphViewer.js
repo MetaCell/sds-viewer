@@ -37,7 +37,7 @@ const TOP_DOWN = {
 };
 const RADIAL_OUT = {
   label : "Radial",
-  layout : "radialout",
+  layout : "null",
   maxNodesLevel : (graph) => { 
     return graph.radialVariant
   }
@@ -257,7 +257,6 @@ const GraphViewer = (props) => {
       } else if ( Array.isArray(nodeName) ){
         nodeName = nodeName[0]?.substr(0, 10).concat('...');
       }
-      console.log(' name ', node.name);
       const textProps = [nodeName, node.x + 2, textHoverPosition[1] + 4.5];
       if (node === hoverNode || node?.id === selectedNode?.id || node?.id === nodeSelected?.id ) {
         // image hover
@@ -315,7 +314,7 @@ const GraphViewer = (props) => {
         // Links properties
         linkColor = {handleLinkColor}
         linkWidth={2}
-        forceChargeStrength={-1000}
+        forceChargeStrength={maxNodesLevel * -5}
         linkDirectionalParticles={1}
         linkCurvature={link => {
           let curve = 0;
@@ -347,7 +346,6 @@ const GraphViewer = (props) => {
             node.fy = 100 * node.level;
           }
         }}
-        dagLevelDistance = {100}
         onNodeHover={handleNodeHover}
         // Allows updating link properties, as color and curvature. Without this, linkCurvature doesn't work.
         onNodeClick={(node, event) => handleNodeLeftClick(node, event)}
