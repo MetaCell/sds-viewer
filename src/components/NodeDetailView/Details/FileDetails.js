@@ -56,7 +56,7 @@ const FileDetails = (props) => {
                     ? (<Box className="tab-content-row">
                             <Typography component="h3">{"File Details"}</Typography>
                             <Typography component="label">Label</Typography>
-                            <Links key={`label_href_link`} href={node.graph_node.attributes?.hasUriHuman[0]} title={title} />
+                            <Links key={`label_href_link`} href={node.graph_node?.attributes?.hasUriHuman[0]} title={title} />
                         </Box>)
                     : (<SimpleLabelValue label={'Label'} value={title} heading={'File Details'} />)
                 }
