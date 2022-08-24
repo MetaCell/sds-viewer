@@ -228,10 +228,19 @@ class Splinter {
 
         this.levelsMap[3]?.sort((a, b) => a.parent?.type?.localeCompare(b.parent?.type));
 
-        for ( let i = SUBJECTS_LEVEL; i < maxLevel ; i++ ){
-            this.levelsMap[i]?.sort((a, b) => a.parent?.id.localeCompare(b.parent?.id));
+        for ( let i = SUBJECTS_LEVEL; i <= maxLevel ; i++ ){
+            this.levelsMap[i]?.sort( (a, b) => { 
+                let aSubject = a
+                while (aSubject.type !== "Subject" ){
+                    aSubject = aSubject.parent;
+                }
+                let bSubject = b;
+                while (bSubject.type !== "Subject" ){
+                    bSubject = bSubject.parent;
+                }
+                return aSubject?.id > bSubject.id ? 1 : -1;
+            });
         }
-        this.levelsMap[maxLevel]?.sort((a, b) => a.parent.id.localeCompare(b.parent.id));
 
         console.log("Levels map ", this.levelsMap);
         
