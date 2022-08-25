@@ -228,18 +228,29 @@ class Splinter {
 
         this.levelsMap[3]?.sort((a, b) => a.parent?.type?.localeCompare(b.parent?.type));
 
-        for ( let i = SUBJECTS_LEVEL; i < maxLevel ; i++ ){
-            this.levelsMap[i]?.sort((a, b) => a.parent?.id.localeCompare(b.parent?.id));
+        for ( let i = SUBJECTS_LEVEL; i <= maxLevel ; i++ ){
+            this.levelsMap[i]?.sort( (a, b) => { 
+                let aSubject = a
+                while (aSubject.type !== "Subject" ){
+                    aSubject = aSubject.parent;
+                }
+                let bSubject = b;
+                while (bSubject.type !== "Subject" ){
+                    bSubject = bSubject.parent;
+                }
+                return aSubject?.id > bSubject.id ? 1 : -1;
+            });
         }
-        this.levelsMap[maxLevel]?.sort((a, b) => a.parent.id.localeCompare(b.parent.id));
 
+        console.log("Levels map ", this.levelsMap);
+        
         // Start assigning the graph from the bottom up
         let neighbors = 0;
         levelsMapKeys.reverse().forEach( level => {
             this.levelsMap[level].forEach ( (n, index) => {
                 neighbors = n?.neighbors?.filter(neighbor => { return neighbor.level > n.level });
                 // FIXME : Fix this, beter way to create positioning
-                if ( n.level === SUBJECTS_LEVEL + 2 ){
+                if ( n.level === SUBJECTS_LEVEL + 1 ){
                     this.updateLevels(n.neighbors, n.level);
                     if ( neighbors.length > 0 ) n.level = n.level + 1;
                 }
@@ -251,7 +262,6 @@ class Splinter {
                     });
                     n.xPos = min === max ? min : min + (max - min) * .5;
                     positionsMap[n.level] = n.xPos + nodeSpace;
-
                 } else {
                     n.xPos = positionsMap[n.level] + nodeSpace;
                     positionsMap[n.level] = n.xPos;
