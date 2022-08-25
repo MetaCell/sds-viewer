@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "license": "MIT",
   "private": true,
+  "homepage": "http://metacell.github.io/sds-viewer",
   "dependencies": {
     "@craco/craco": "^6.1.2",
     "@frogcat/ttl2jsonld": "^0.0.7",
