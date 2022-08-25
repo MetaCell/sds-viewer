@@ -3,8 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Progress from './Progress';
 import FileExtension from './FileExtension';
 import CANCEL from '../../../images/cancel.svg';
-import SUCCESS from '../../../images/success.svg';
-const FileHandler = require('../../../utils/filesHandler');
+import FileHandler from '../../../utils/filesHandler';
 
 const uploadFile = (file, onProgress, onUpload) => {
   const fileHandler = new FileHandler();
@@ -38,7 +37,13 @@ export function UploadProgress({ file, onDelete, onUpload }) {
           alt='Cancel'
         />
         ) : (
-          <img src={SUCCESS} width='24' alt='SUCCESS' />
+          <img
+          src={CANCEL}
+          onClick={() => onDelete(file)}
+          width='24'
+          style={{ cursor: 'pointer' }}
+          alt='Done'
+        />
         )
       }
     </Box>

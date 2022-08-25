@@ -7,7 +7,6 @@ const SubjectHeader = (props) => {
     const { node } = props;
     const headingStyle = {
         color: vars["volume"],
-        textTransform: 'capitalize'
     }
 
     let title = undefined;

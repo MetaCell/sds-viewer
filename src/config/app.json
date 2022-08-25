@@ -1,0 +1,10 @@
+{
+    "datasets_url": "https://cassava.ucsd.edu/sparc/datasets/",
+    "repository_url": "https://cassava.ucsd.edu/sparc/preview/exports/",
+    "available_datasets": "curation-export-published.ttl",
+    "text" : {
+        "datasetsButtonText" : "SPARC Datasets",
+        "datasetsDialogSearchText" : "Search datasets by label or id",
+        "datasetsButtonSubtitleText" : "Select a dataset to load"
+    }
+}

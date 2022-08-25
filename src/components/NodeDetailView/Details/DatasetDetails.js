@@ -6,7 +6,7 @@ import {
     ListItemText,
 } from "@material-ui/core";
 import Links from './Views/Links';
-import SimpleChip from './Views/SimpleChip';
+import SimpleLinkedChip from './Views/SimpleLinkedChip';
 import USER from "../../../images/user.svg";
 import SimpleLabelValue from './Views/SimpleLabelValue';
 import { detailsLabel } from '../../../constants';
@@ -16,19 +16,23 @@ const DatasetDetails = (props) => {
     const nodes = window.datasets[node.dataset_id].splinter.nodes;
 
     let title = "";
+    let label = "";
     let idDetails = "";
+    let description = "";
     // both tree and graph nodes are present, extract data from both
     if (node?.tree_node && node?.graph_node) {
         idDetails = node.graph_node?.id + detailsLabel;
-        title = node?.graph_node.attributes?.label[0];
+        label = node?.graph_node.attributes?.label[0];
+        title = node?.graph_node.attributes?.title[0];
+        description = node?.graph_node.attributes?.description[0];
     // the below is the case where we have data only from the tree/hierarchy
     } else if (node?.tree_node) {
-        title = node?.tree_node?.basename;
+        label = node?.tree_node?.basename;
         idDetails = node?.tree_node?.id + detailsLabel;
     // the below is the case where we have data only from the graph
     } else {
         idDetails = node.graph_node?.id + detailsLabel;
-        title = node.graph_node?.attributes?.label[0];
+        label = node.graph_node?.attributes?.label[0];
     }
 
     let latestUpdate = "Not defined."
@@ -41,7 +45,7 @@ const DatasetDetails = (props) => {
         node.graph_node.attributes?.hasResponsiblePrincipalInvestigator.map(user => {
             const contributor = nodes.get(user);
             contactPerson.push({
-                name: contributor.name,
+                name: contributor?.name,
                 designation: 'Principal Investigator',
                 img: USER
             });
@@ -53,7 +57,7 @@ const DatasetDetails = (props) => {
         node.graph_node.attributes?.hasContactPerson.map(user => {
             const contributor = nodes.get(user);
             contactPerson.push({
-                name: contributor.name,
+                name: contributor?.name,
                 designation: 'Contributor',
                 img: USER
             });
@@ -79,13 +83,28 @@ const DatasetDetails = (props) => {
     return (
         <Box id={idDetails}>
             <Box className="tab-content">
-                <SimpleLabelValue label={'Updated On'} value={latestUpdate.toString()} heading={'Dataset Details'} />
+                <SimpleLabelValue label={'Title'} value={title} heading={'Dataset Details'} />
+                { node.graph_node.attributes?.hasUriHuman && node.graph_node.attributes?.hasUriHuman[0] !== ""
+                    ? (<Box className="tab-content-row">
+                            <Typography component="label">Label</Typography>
+                            <Links key={`label_href_link`} href={node.graph_node.attributes?.hasUriHuman[0]} title={label} />
+                        </Box>)
+                    : (<SimpleLabelValue label={'Label'} value={label} />)
+                }
+                <SimpleLabelValue label={'Description'} value={description} />
+
+                <SimpleLabelValue label={'Updated On'} value={latestUpdate.toString()} />
 
                 <Box className="tab-content-row">
                     <Typography component="label">About</Typography>
-                    <SimpleChip chips={node.graph_node.attributes?.isAbout} />
+                    <SimpleLinkedChip chips={node.graph_node.attributes?.isAbout} />
                 </Box>
-                <SimpleLabelValue label={'Label'} value={title} />
+
+                <Box className="tab-content-row">
+                    <Typography component="label">Protocol Techniques</Typography>
+                    <SimpleLinkedChip chips={node.graph_node.attributes?.protocolEmploysTechnique} />
+                </Box>
+
                 <Box className="tab-content-row">
                     <List component="nav" aria-label="main">
                         {
@@ -103,7 +122,6 @@ const DatasetDetails = (props) => {
                     ? (<Box className="tab-content-row">
                             <Typography component="label">Links</Typography>
                             <Links key={`detail_links_dataset`} href={node.graph_node.attributes?.hasUriHuman[0]} title="Dataset" />
-                            <Links key={`detail_protocol_technique`} href={node.graph_node.attributes?.protocolEmploysTechnique} title="Protocol Technique" />
                         </Box>)
                     : <> </>
                 }

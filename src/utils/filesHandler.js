@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-class FileHandler {
+export default class FileHandler {
 
     get_local_file(path, callback, progressCallback) {
         if (path === undefined)
@@ -22,7 +22,7 @@ class FileHandler {
         reader.readAsText(path);
     }
 
-    get_remote_file(url, callback) {
+    get_remote_file(url, callback, errorCallback) {
         axios.get(url, {
             crossDomain: true,
             responseType: "stream",
@@ -33,9 +33,7 @@ class FileHandler {
             callback(url, response.data);
         }).catch(error => {
             console.log(error);
-            callback(undefined);
+            errorCallback && errorCallback(undefined);
         });
     }
 }
-
-module.exports = FileHandler

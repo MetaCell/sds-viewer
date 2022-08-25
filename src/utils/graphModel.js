@@ -1,20 +1,65 @@
 export const type_key = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type";
 
+
+export const RDF_TO_JSON_TYPES = [
+    {key: 'sparc:Subject', toTrim: 'subject'}
+];
+
+
 export const rdfTypes = {
     "Ontology": {
         "image": "./images/graph/database.svg",
         "key": "Ontology",
-        "properties": []
+        "properties": [
+            {
+                "type": "rdfs",
+                "key": "label",
+                "property": "label",
+                "label": "To be filled"
+            },
+            {
+                "type": "TEMP",
+                "key": "hasUriHuman",
+                "property": "hasUriHuman",
+                "label": "To be filled"
+            }
+        ]
     },
     "Award": {
         "image": "./images/graph/files/default_file.svg",
         "key": "Award",
-        "properties": []
+        "properties": [
+            {
+                "type": "rdfs",
+                "key": "label",
+                "property": "label",
+                "label": "To be filled"
+            },
+            {
+                "type": "TEMP",
+                "key": "hasUriHuman",
+                "property": "hasUriHuman",
+                "label": "To be filled"
+            }
+        ]
     },
     "Collection": {
         "image": "./images/graph/folder.svg",
         "key": "Collection",
-        "properties": []
+        "properties": [
+            {
+                "type": "rdfs",
+                "key": "label",
+                "property": "label",
+                "label": "To be filled"
+            },
+            {
+                "type": "TEMP",
+                "key": "hasUriHuman",
+                "property": "hasUriHuman",
+                "label": "To be filled"
+            }
+        ]
     },
     "Dataset": {
         "image": "./images/graph/dataset.svg",
@@ -24,6 +69,24 @@ export const rdfTypes = {
                 "type": "rdfs",
                 "key": "label",
                 "property": "label",
+                "label": "To be filled"
+            },
+            {
+                "type": "TEMP",
+                "key": "hasUriHuman",
+                "property": "hasUriHuman",
+                "label": "To be filled"
+            },
+            {
+                "type": "dc",
+                "key": "title",
+                "property": "title",
+                "label": "To be filled"
+            },
+            {
+                "type": "dc",
+                "key": "description",
+                "property": "description",
                 "label": "To be filled"
             },
             {
@@ -76,6 +139,12 @@ export const rdfTypes = {
             },
             {
                 "type": "TEMP",
+                "key": "hasUriApi",
+                "property": "hasUriApi",
+                "label": "To be filled"
+            },
+            {
+                "type": "TEMP",
                 "key": "hasUriHuman",
                 "property": "hasUriHuman",
                 "label": "To be filled"
@@ -91,7 +160,20 @@ export const rdfTypes = {
     "File": {
         "image": "./images/graph/files/default_file.svg",
         "key": "File",
-        "properties": []
+        "properties": [
+            {
+                "type": "rdfs",
+                "key": "label",
+                "property": "label",
+                "label": "To be filled"
+            },
+            {
+                "type": "TEMP",
+                "key": "hasUriHuman",
+                "property": "hasUriHuman",
+                "label": "To be filled"
+            }
+        ]
     },
     "Subject": {
         "image": "./images/graph/folder.svg",
@@ -102,6 +184,12 @@ export const rdfTypes = {
                 "key": "animalSubjectIsOfSpecies",
                 "property": "subjectSpecies",
                 "label": "to be filled"
+            },
+            {
+                "type": "TEMP",
+                "key": "hasFolderAboutIt",
+                "property": "hasFolderAboutIt",
+                "label": "Folder that contains collection and files about the sample"
             },
             {
                 "type": "sparc",
@@ -128,7 +216,7 @@ export const rdfTypes = {
                 "label": "to be filled"
             },
             {
-                "type": "TEMP",
+                "type": "sparc",
                 "key": "hasBiologicalSex",
                 "property": "biologicalSex",
                 "label": "to be filled"
@@ -156,8 +244,66 @@ export const rdfTypes = {
                 "key": "participantInPerformanceOf",
                 "property": "participantInPerformanceOf",
                 "label": "to be filled"
+            },
+            {
+                "type": "rdfs",
+                "key": "label",
+                "property": "label",
+                "label": "To be filled"
+            },
+            {
+                "type": "TEMP",
+                "key": "hasUriHuman",
+                "property": "hasUriHuman",
+                "label": "To be filled"
             }
-    ]
+        ],
+        "additional_properties": [
+            {
+                "label": "Age unit",
+                "property": "ageUnit",
+                "path": [ "TEMP:hasAge", "TEMP:hasUnit", "@id" ],
+                "trimType": "unit:",
+                "type": "string"
+            },
+            {
+                "label": "Age value",
+                "property": "ageValue",
+                "path": [ "TEMP:hasAge", "rdf:value" ],
+                "innerPath": "@value",
+                "trimType": "",
+                "type": "digit"
+            },
+            {
+                "label": "Age base unit",
+                "property": "ageBaseUnit",
+                "path": [ "TEMP:hasAge", "TEMP:asBaseUnits", "TEMP:hasUnit", "@id" ],
+                "trimType": "unit:",
+                "type": "string"
+            },
+            {
+                "label": "Age base value",
+                "property": "ageBaseValue",
+                "path": [ "TEMP:hasAge", "TEMP:asBaseUnits", "rdf:value" ],
+                "innerPath": "@value",
+                "trimType": "",
+                "type": "digit"
+            },
+            {
+                "label": "Weight unit",
+                "property": "weightUnit",
+                "path": [ "sparc:animalSubjectHasWeight", "TEMP:hasUnit", "@id" ],
+                "trimType": "unit:",
+                "type": "string"
+            },
+            {
+                "label": "Weight value",
+                "property": "weightValue",
+                "path": [ "sparc:animalSubjectHasWeight", "rdf:value", "@value" ],
+                "trimType": "",
+                "type": "digit"
+            }
+        ]
     },
     "Sample": {
         "image": "./images/graph/folder.svg",
@@ -210,6 +356,18 @@ export const rdfTypes = {
                 "key": "wasExtractedFromAnatomicalRegion",
                 "property": "wasExtractedFromAnatomicalRegion",
                 "label": "Unique instance identifier"
+            },
+            {
+                "type": "rdfs",
+                "key": "label",
+                "property": "label",
+                "label": "To be filled"
+            },
+            {
+                "type": "TEMP",
+                "key": "hasUriHuman",
+                "property": "hasUriHuman",
+                "label": "To be filled"
             }
         ]
     },
@@ -249,8 +407,86 @@ export const rdfTypes = {
             },
             {
                 "type": "TEMP",
+                "key": "hasUriHuman",
+                "property": "hasUriHuman",
+                "label": "To be filled"
+            },
+            {
+                "type": "TEMP",
                 "key": "protocolHasNumberOfSteps",
                 "property": "protocolHasNumberOfSteps",
+                "label": "To be filled"
+            }
+        ]
+    },
+    "RRID": {
+        "image": "./images/graph/files/default_file.svg",
+        "key": "RRID",
+        "properties": [
+            {
+                "type": "rdfs",
+                "key": "label",
+                "property": "label",
+                "label": "To be filled"
+            },
+            {
+                "type": "TEMP",
+                "key": "hasUriHuman",
+                "property": "hasUriHuman",
+                "label": "To be filled"
+            }
+        ]
+    },
+    "NCBITaxon": {
+        "image": "./images/graph/files/default_file.svg",
+        "key": "NCBITaxon",
+        "properties": [
+            {
+                "type": "rdfs",
+                "key": "label",
+                "property": "label",
+                "label": "To be filled"
+            },
+            {
+                "type": "TEMP",
+                "key": "hasUriHuman",
+                "property": "hasUriHuman",
+                "label": "To be filled"
+            }
+        ]
+    },
+    "PATO": {
+        "image": "./images/graph/files/default_file.svg",
+        "key": "PATO",
+        "properties": [
+            {
+                "type": "rdfs",
+                "key": "label",
+                "property": "label",
+                "label": "To be filled"
+            },
+            {
+                "type": "TEMP",
+                "key": "hasUriHuman",
+                "property": "hasUriHuman",
+                "label": "To be filled"
+            }
+        ]
+    },
+    "UBERON": {
+        "image": "./images/graph/files/default_file.svg",
+        "key": "UBERON",
+        "properties": [
+            {
+                "type": "rdfs",
+                "key": "label",
+                "property": "label",
+                "label": "To be filled"
+            },
+            {
+                "type": "TEMP",
+                "key": "hasUriHuman",
+                "property": "hasUriHuman",
                 "label": "To be filled"
             }
         ]
@@ -285,6 +521,20 @@ export const typesModel = {
         },
         subject: {
             "type": "Subject",
+        },
+        RRID: {
+            "type": "RRID",
+        }
+    },
+    "Class": {
+        NCBITaxon: {
+            "type": "NCBITaxon",
+        },
+        PATO: {
+            "type": "PATO",
+        },
+        UBERON: {
+            "type": "UBERON",
         }
     },
     "sparc": {

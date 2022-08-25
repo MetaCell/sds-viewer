@@ -10,8 +10,7 @@ import LINK from '../../images/url.svg';
 import LINK_GREEN from '../../images/link-green.svg';
 import CANCEL from '../../images/cancel.svg';
 import UploadSubmit from './UploadSubmit';
-
-const FileHandler = require('../../utils/filesHandler');
+import FileHandler from '../../utils/filesHandler';
 
 const UrlUploader = ({ handleClose, handleDone }) => {
   const [loader, setLoader] = useState(false);
@@ -71,8 +70,8 @@ const UrlUploader = ({ handleClose, handleDone }) => {
       onUpload(url, fileData);
     };
     setLoader(true);
-    fileHandler.get_remote_file(url, callback);
-    fileHandler2.get_remote_file(getJsonURL(url), callback);
+    fileHandler.get_remote_file(url, callback, () => {});
+    fileHandler2.get_remote_file(getJsonURL(url), callback, () => {});
   };
 
   const removeUrl = () => {

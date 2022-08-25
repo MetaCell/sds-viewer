@@ -15,8 +15,10 @@ const Sidebar = (props) => {
       <SidebarFooter
         setExpand={setExpand}
         expand={expand}
-        openDialog={props.openDialog}
-        setOpenDialog={props.setOpenDialog}
+        openUploadDialog={props.openUploadDialog}
+        setOpenUploadDialog={props.setOpenUploadDialog}
+        openDatasetsListDialog={props.openDatasetsListDialog}
+        setOpenDatasetsListDialog={props.setOpenDatasetsListDialog}
       />
     </Box>
   );
