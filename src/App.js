@@ -112,16 +112,20 @@ const App = () => {
     let graph = await splinter.getGraph();
     let datasets = graph.nodes.filter((node) => node?.attributes?.hasDoi);
     const match = datasets.find( node => node.attributes?.hasDoi?.[0]?.includes(doi) );
-    console.log("Match dataset ", match)
-    const datasetID = match.name;
-    turtle_url = config.datasets_url + datasetID + "/LATEST/curation-export.ttl";
-    const ttlHandler = new FileHandler();
-    ttlHandler.get_remote_file(turtle_url, (url, data) => {
-      if (data) {
-        setTurtle(data);
-        loadJSONFile(datasetID);
-      }
-    },null);
+    if ( match ) {
+      const datasetID = match.name;
+      turtle_url = config.datasets_url + datasetID + "/LATEST/curation-export.ttl";
+      const ttlHandler = new FileHandler();
+      ttlHandler.get_remote_file(turtle_url, (url, data) => {
+        if (data) {
+          setTurtle(data);
+          loadJSONFile(datasetID);
+        }
+      },null);
+    } else {
+      setLoading(false);
+      setInitialised(false);
+    }
   };
 
   if (datasetID && datasetID !== "" && _turtle === undefined) {
