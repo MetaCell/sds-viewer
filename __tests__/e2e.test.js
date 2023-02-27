@@ -159,4 +159,27 @@ describe("SDS Viewer e2e Test: Sparc Dataset", () => {
         expect(folder_lenght).toBe(2)
     })
 
+
+    test('Open Dataset through its ID', async () => {
+
+        console.log('Opening a Dataset thorugh the ID')
+
+        await page.goto(DEV_URL)
+        await page.waitForSelector(selectors.EMPTY_DATASET_LIST_SELECTOR);
+        await page.waitForTimeout(ONE_SECOND * 3)
+        await page.goto(DEV_URL + '?id=' + DATASET_ID)
+        await page.waitForTimeout(ONE_SECOND * 3)
+        await page.waitForSelector(selectors.FELINE_DATASET_IMG_SELECTOR)
+        await page.waitForSelector(selectors.GRAPH_SELECTOR)
+
+        console.log('Dataset loaded')
+
+        const data_ids = await page.$$eval(selectors.DATA_ID_SELECTOR, data_ids => {
+            return data_ids.map(data_id => data_id.innerHTML);
+        });
+
+        expect(data_ids[0]).toBe(DATASET_ID)
+
+    })
+
 })
