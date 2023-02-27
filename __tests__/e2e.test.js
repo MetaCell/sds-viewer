@@ -96,29 +96,67 @@ describe("SDS Viewer e2e Test: Sparc Dataset", () => {
     test('Load and check SPARC Dataset', async () => {
 
         console.log('Loading a SPARC dataset')
-    
+
         await page.click(selectors.ENABLED_DONE_BUTTON_SELECTOR)
         await page.waitForSelector(selectors.LOADED_DATASET_SELECTOR)
         await page.waitForSelector(selectors.GRAPH_SELECTOR)
-    
+
         console.log('Dataset loaded')
-    
+
         const folder = await page.$$(selectors.LOADED_DATASET_SELECTOR)
         const folder_lenght = folder.length
-    
+
         expect(folder_lenght).toBe(1)
-    
+
         await page.click(selectors.OPEN_FOLDER_BUTTON_SELECTOR)
-    
+
         const data_folders = await page.$$eval(selectors.LOADED_DATASET_SELECTOR, data_folders => {
-          return data_folders.map(data_folder => data_folder.innerHTML);
+            return data_folders.map(data_folder => data_folder.innerHTML);
         });
-    
+
         expect(data_folders).toContain('primary')
         expect(data_folders).toContain('source')
         expect(data_folders).toContain('derivative')
         expect(data_folders).toContain('subjects.xlsx')
-    
-      })
+
+    })
+
+
+
+    test('Load another SPARC Dataset', async () => {
+
+        console.log('Loading another SPARC dataset')
+
+        const load_dataset_button = await page.$$(selectors.LOAD_BUTTONS_SELECTOR)
+
+        for (var i = 0; i < load_dataset_button.length; i++) {
+            load_dataset_button[1].click()
+
+        }
+
+        await page.waitForSelector(selectors.DATASET_LIST_SELECTOR)
+        await page.waitForSelector(selectors.DATASET_ITEM_SELECTOR)
+        await page.waitForSelector(selectors.DONE_BUTTON_SELECTOR, { disabled: true })
+
+        const sparc_dataset_list = await page.$$(selectors.SPARC_DATASET_LIST_SELECTOR)
+        const sparc_dataset_list_count = sparc_dataset_list.length
+        for (var i = 0; i < sparc_dataset_list_count; i++) {
+            await sparc_dataset_list[1].click()
+        }
+
+        await page.waitForSelector(selectors.ENABLED_DONE_BUTTON_SELECTOR)
+
+        await page.click(selectors.ENABLED_DONE_BUTTON_SELECTOR)
+        await page.waitForSelector(selectors.LOADED_DATASET_SELECTOR)
+
+        console.log('Dataset loaded')
+
+        await page.waitForSelector(selectors.GRAPH_SELECTOR)
+        await page.waitForTimeout(ONE_MINUTE * 1.5)
+        const folder = await page.$$(selectors.LOADED_DATASET_SELECTOR)
+        const folder_lenght = folder.length
+
+        expect(folder_lenght).toBe(2)
+    })
 
 })
