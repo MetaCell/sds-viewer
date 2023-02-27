@@ -92,4 +92,33 @@ describe("SDS Viewer e2e Test: Sparc Dataset", () => {
 
     })
 
+
+    test('Load and check SPARC Dataset', async () => {
+
+        console.log('Loading a SPARC dataset')
+    
+        await page.click(selectors.ENABLED_DONE_BUTTON_SELECTOR)
+        await page.waitForSelector(selectors.LOADED_DATASET_SELECTOR)
+        await page.waitForSelector(selectors.GRAPH_SELECTOR)
+    
+        console.log('Dataset loaded')
+    
+        const folder = await page.$$(selectors.LOADED_DATASET_SELECTOR)
+        const folder_lenght = folder.length
+    
+        expect(folder_lenght).toBe(1)
+    
+        await page.click(selectors.OPEN_FOLDER_BUTTON_SELECTOR)
+    
+        const data_folders = await page.$$eval(selectors.LOADED_DATASET_SELECTOR, data_folders => {
+          return data_folders.map(data_folder => data_folder.innerHTML);
+        });
+    
+        expect(data_folders).toContain('primary')
+        expect(data_folders).toContain('source')
+        expect(data_folders).toContain('derivative')
+        expect(data_folders).toContain('subjects.xlsx')
+    
+      })
+
 })
