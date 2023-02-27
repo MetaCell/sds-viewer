@@ -182,4 +182,75 @@ describe("SDS Viewer e2e Test: Sparc Dataset", () => {
 
     })
 
+    //SDS Viewer has a bug on this section
+    test.skip('Load Dataset through URL', async () => {
+        await page.goto(DEV_URL)
+        await page.waitForSelector(selectors.EMPTY_DATASET_LIST_SELECTOR);
+
+        const load_dataset_button = await page.$$(selectors.LOAD_BUTTONS_SELECTOR)
+
+        for (var i = 0; i < load_dataset_button.length; i++) {
+            load_dataset_button[0].click()
+        }
+
+        await page.waitForSelector(selectors.LOAD_DATA_POPUP_SELECTOR)
+        await page.click(selectors.LOAD_THROUGH_URL_TAB_SELECTOR)
+        await page.waitForSelector(selectors.URL_UPLOADER_SELECTOR)
+        expect(page).toFill(selectors.URL_UPLOADER_SELECTOR, 'https://app.pennsieve.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:0a5a2827-2b39-4085-87ea-2b7fbbe27cc8')
+        await page.waitForTimeout(ONE_MINUTE)
+        await page.waitForSelector(selectors.ENABLED_DONE_BUTTON_SELECTOR, { disabled: false })
+
+
+    })
+
+    //SDS Viewer has a bug on this section
+    test.skip('Load Dataset from Local System', async () => {
+        await page.goto(DEV_URL)
+        await page.waitForSelector(selectors.EMPTY_DATASET_LIST_SELECTOR);
+
+        const CURATION_EXPORT_JSON_LINK = 'https://cassava.ucsd.edu/sparc/datasets/0075239e-a195-4ee3-8729-72ffd220fcf7/2022-08-16T172813%2C126986Z/curation-export.json'
+        const CUTATION_EXPORT_TTL_LINK = 'https://cassava.ucsd.edu/sparc/datasets/0075239e-a195-4ee3-8729-72ffd220fcf7/2022-08-16T172813%2C126986Z/curation-export.ttl'
+
+        await axios.get(CURATION_EXPORT_JSON_LINK, { responseType: "arraybuffer" }).then(response => {
+            fs.writeFile('./Tests/assets/curation-export.json', response.data, (err) => {
+                if (err) throw err;
+                // console.log('curation-export.json file fetched');
+            });
+        });
+
+        await axios.get(CUTATION_EXPORT_TTL_LINK, { responseType: "arraybuffer" }).then(response => {
+            fs.writeFile('./Tests/assets/curation-export.ttl', response.data, (err) => {
+                if (err) throw err;
+                // console.log('curation-export.ttl file fetched');
+            });
+        });
+
+        const load_dataset_button = await page.$$(selectors.LOAD_BUTTONS_SELECTOR)
+
+        for (var i = 0; i < load_dataset_button.length; i++) {
+            load_dataset_button[0].click()
+        }
+
+        await page.waitForSelector(selectors.LOCAL_UPLOAD_TAB_SELECTOR)
+        await page.click(selectors.LOCAL_UPLOAD_TAB_SELECTOR)
+
+        const [jsonfileChooser] = await Promise.all([
+            page.waitForFileChooser(),
+            page.click(selectors.LOCAL_SYSTEM_UPLOAD_BUTTON_SELECTOR)
+        ]);
+        await jsonfileChooser.accept([__dirname + '/assets/curation-export.json']);
+
+        await page.waitForTimeout(ONE_MINUTE)
+
+        const [ttlfileChooser] = await Promise.all([
+            page.waitForFileChooser(),
+            page.click(selectors.LOCAL_SYSTEM_UPLOAD_BUTTON_SELECTOR)
+        ]);
+        await ttlfileChooser.accept([__dirname + '/assets/curation-export.ttl']);
+
+        await page.waitForSelector(selectors.ENABLED_DONE_BUTTON_SELECTOR)
+
+    })
+
+
 })
