@@ -314,7 +314,7 @@ const GraphViewer = (props) => {
         // Links properties
         linkColor = {handleLinkColor}
         linkWidth={2}
-        forceChargeStrength={maxNodesLevel * -5}
+        forceChargeStrength={maxNodesLevel * -10}
         linkDirectionalParticles={1}
         linkCurvature={link => {
           let curve = 0;

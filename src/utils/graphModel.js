@@ -115,8 +115,8 @@ export const rdfTypes = {
             },
             {
                 "type": "TEMP",
-                "key": "hasContactPerson",
-                "property": "hasContactPerson",
+                "key": "hasDoi",
+                "property": "hasDoi",
                 "label": "To be filled"
             },
             {
