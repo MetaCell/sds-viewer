@@ -145,6 +145,12 @@ export const rdfTypes = {
             },
             {
                 "type": "TEMP",
+                "key": "hasProtocol",
+                "property": "hasProtocol",
+                "label": "To be filled"
+            },
+            {
+                "type": "TEMP",
                 "key": "hasUriHuman",
                 "property": "hasUriHuman",
                 "label": "To be filled"

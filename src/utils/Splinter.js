@@ -529,6 +529,10 @@ class Splinter {
         return dataset_node;
     }
 
+    organise_subjects(parent){
+    
+    }
+
 
     organise_nodes(parent) {
         // structure the graph per category
@@ -681,6 +685,35 @@ class Splinter {
                     if ( source !== undefined ) {
                         node.attributes.biologicalSex[0] = source.attributes.label[0];
                     }
+                }
+
+                if (node.attributes?.hasDerivedInformationAsParticipant !== undefined) {
+                    let source = this.nodes.get(node.attributes.participantInPerformanceOf[0]);
+                    if ( source !== undefined ) {
+                        node.attributes.hasDerivedInformationAsParticipant[0] = source.attributes.hasUriHuman[0];
+                    }
+                }
+
+                if (node.attributes?.participantInPerformanceOf !== undefined) {
+                    let source = this.nodes.get(node.attributes.participantInPerformanceOf[0]);
+                    if ( source !== undefined ) {
+                        node.attributes.participantInPerformanceOf[0] = source.attributes.hasUriHuman[0];
+                    }
+                }
+            }
+
+            if (node.type === rdfTypes.Dataset.key) {
+                if (node.attributes?.hasUriHuman !== undefined) {
+                    let source = this.nodes.get(node.attributes.hasProtocol[0]);
+                    if ( source !== undefined ) {
+                        node.attributes.hasUriHuman[0] = source.attributes.hasUriHuman[0];
+                    }
+                }
+            }
+
+            if (node.type === rdfTypes.File.key) {
+                if (node?.tree_reference?.uri_human  !== undefined) {
+                    node.tree_reference.uri_human = Array.from(this.nodes)[0][1].attributes.hasUriHuman[0];
                 }
             }
 
