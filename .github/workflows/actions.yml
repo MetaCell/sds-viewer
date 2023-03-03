@@ -30,7 +30,7 @@ jobs:
       run: |
           #install dependencies
           npm ci
-          # run scaffold element snapshot tests
-          npm run snapshot_test
+          # run tests
+          npm run e2e_test
       env:
           CI: true
