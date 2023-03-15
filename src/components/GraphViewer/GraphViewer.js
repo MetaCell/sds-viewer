@@ -1,4 +1,4 @@
-import * as d3 from 'd3';
+import * as d3 from 'd3-force-3d'
 import Menu from '@material-ui/core/Menu';
 import { IconButton } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -15,7 +15,7 @@ import GeppettoGraphVisualization from '@metacell/geppetto-meta-ui/graph-visuali
 import { GRAPH_SOURCE } from '../../constants';
 import { rdfTypes } from '../../utils/graphModel';
 
-const NODE_FONT = '500 6px Inter, sans-serif';
+const NODE_FONT = '500 5px Inter, sans-serif';
 const ONE_SECOND = 1000;
 const LOADING_TIME = 3000;
 const ZOOM_DEFAULT = 1;
@@ -60,19 +60,46 @@ const roundRect = (ctx, x, y, width, height, radius, color, alpha) => {
 
 const GraphViewer = (props) => {
   const dispatch = useDispatch();
+  const getPrunedTree = () => {
+    let nodesById = Object.fromEntries(window.datasets[props.graph_id].graph?.nodes?.map(node => [node.id, node]));
+    window.datasets[props.graph_id].graph?.links?.forEach(link => {
+      const source = (typeof link.source) === 'object' ? link.source.id : link.source;
+      const target = (typeof link.target) === 'object' ? link.target.id : link.target;
+      const linkFound = !nodesById[source]?.childLinks?.find( l =>
+        source === ((typeof l.source) === 'object' ? l.source.id : l.source) && target === ((typeof l.target) === 'object' ? l.target.id : l.target) 
+      );
+      if ( linkFound ) {
+        nodesById[source]?.childLinks?.push(link);
+      }
+    });
+  
+    console.log("Nodes ID ", nodesById); 
+    const visibleNodes = [];
+    const visibleLinks = [];
+
+    (function traverseTree(node = nodesById[window.datasets[props.graph_id].graph?.nodes?.[0].id]) {
+      visibleNodes.push(node);
+      if (node.collapsed) return;
+      visibleLinks.push(...node.childLinks);
+      let nodes = node.childLinks.map(link => (typeof link.target) === 'object' ? link.target : nodesById[link.target]);
+      nodes?.forEach(traverseTree);
+    })(); // IIFE
+
+    return { nodes : visibleNodes, links : visibleLinks, levelsMap : window.datasets[props.graph_id].graph.levelsMap, hierarchyVariant : window.datasets[props.graph_id].graph.hierarchyVariant };
+  };
+
   const graphRef = React.useRef(null);
   const [hoverNode, setHoverNode] = useState(null);
   const [selectedNode, setSelectedNode] = useState(null);
   const [highlightNodes, setHighlightNodes] = useState(new Set());
   const [highlightLinks, setHighlightLinks] = useState(new Set());
-  const [selectedLayout, setSelectedLayout] = React.useState(TOP_DOWN);
+  const [selectedLayout, setSelectedLayout] = React.useState(RADIAL_OUT);
   const [layoutAnchorEl, setLayoutAnchorEl] = React.useState(null);
   const [cameraPosition, setCameraPosition] = useState({ x : 0 , y : 0 });
   const open = Boolean(layoutAnchorEl);
   const [loading, setLoading] = React.useState(false);
-
+  const [data, setData] = React.useState(getPrunedTree());
   const nodeSelected = useSelector(state => state.sdsState.instance_selected.graph_node);
-  const layout = useSelector(state => state.sdsState.layout);
 
   const handleLayoutClick = (event) => {
     setLayoutAnchorEl(event.currentTarget);
@@ -85,16 +112,33 @@ const GraphViewer = (props) => {
   const handleLayoutChange = (target) => {
     handleLayoutClose()
     setSelectedLayout(target);
+    setForce();
   };
 
+  
   const handleNodeLeftClick = (node, event) => {
+    if ( node?.id === selectedNode?.id ) {
+      if ( node.type === rdfTypes.Subject.key || node.type === rdfTypes.Collection.key || node.type === rdfTypes.Group.key ) {
+        node.collapsed = !node.collapsed;
+        const updatedData = getPrunedTree();
+        setData(updatedData);
+      }
+    }
     dispatch(selectInstance({
       dataset_id: props.graph_id,
       graph_node: node.id,
       tree_node: node?.tree_reference?.id,
       source: GRAPH_SOURCE
     }));
+    setSelectedNode(node);
+    node?.id === selectedNode?.id && handleNodeRightClick(node);
   };
+
+  useEffect(() => {
+    resetCamera();
+    setForce();
+    console.log("Reset camera");
+  }, []);
 
   const handleLinkColor = link => {
     let linkColor = GRAPH_COLORS.link;
@@ -151,37 +195,50 @@ const GraphViewer = (props) => {
   const resetCamera = () => {
     graphRef?.current?.ggv?.current.zoomToFit();
     let center =  graphRef?.current?.ggv?.current.centerAt();
-    setCameraPosition({ x :  center.x , y :  center.y });
+    setCameraPosition({ x :  center?.x , y :  center?.y });
   };
 
+  const setForce = () => {
+    let force = -150;
+    if ( selectedLayout.layout === TOP_DOWN.layout ) {
+      force = -150;
+    } else if ( selectedLayout.layout === RADIAL_OUT.layout ) {
+      force = -75;
+    } 
+    graphRef?.current?.ggv?.current.d3Force('link').distance(0).strength(1);
+    graphRef?.current?.ggv?.current.d3Force("charge").strength(force * 2);
+    graphRef?.current?.ggv?.current.d3Force('collide', d3.forceCollide(0)); 
+    graphRef?.current?.ggv?.current.d3Force('x', d3.forceX());
+    graphRef?.current?.ggv?.current.d3Force('y', d3.forceY());
+    graphRef?.current?.ggv?.current.d3Force('center', d3.forceCenter(0,0));
+    graphRef?.current?.ggv?.current.d3Force("manyBody", d3.forceManyBody().strength(node => force * Math.sqrt(100 / graphRef?.current?.props?.data?.levelsMap[node.level]?.length )));
+  }
+
   const onEngineStop = () => {
+    setForce();
+    console.log("on engine stop")
     resetCamera();
-    setLoading(false);
   }
 
   useEffect(() => {
     setLoading(true);
-    setTimeout ( () => setLoading(false) , LOADING_TIME);
+    setForce();
+
+    setTimeout ( () => { 
+      setLoading(false);
+      setForce();
+      // resetCamera();
+    }, LOADING_TIME);
   }, []);
 
   useEffect(() => {
-    if (nodeSelected && nodeSelected?.id !== selectedNode?.id) {
-      let node = graphRef?.current?.props?.data?.nodes.find( item => item.id === nodeSelected.id && item.parent?.id === nodeSelected.parent?.id );
-      if (node) {
-        handleNodeRightClick(node, null);
-        setSelectedNode(node);
-        setHoverNode(node);
-      }
-    }
-  }, [nodeSelected]);
+    console.log("Selectedlayout " , selectedLayout);
+    setForce();
+},[selectedLayout]) 
 
-  //Resume animation after component is updated, fixes issue with graphics going crazy.
   useEffect(() => {
-    // selectedNode && handleNodeRightClick(selectedNode, null);
-    graphRef?.current?.ggv?.current.centerAt(cameraPosition.x, cameraPosition.y);
-    graphRef?.current?.ggv?.current.d3Force('collide', d3.forceCollide(4));
-    graphRef?.current?.ggv?.current.d3Force("manyBody", d3.forceManyBody().strength(-100))
-  },[layout]);
+    // console.log("use effect")
+  });
 
   const handleNodeHover = (node) => {
     highlightNodes.clear();
@@ -216,21 +273,21 @@ const GraphViewer = (props) => {
 
   const paintNode = React.useCallback(
     (node, ctx) => {
-      const size = 10;
+      const size = 7.5;
       const nodeImageSize = [size * 2.4, size * 2.4];
-      const hoverRectDimensions = [size * 4, size * 4];
-      const hoverRectPosition = [node.x - 20, node.y - 14];
+      const hoverRectDimensions = [size * 4.2, size * 4.2];
+      const hoverRectPosition = [node.x - hoverRectDimensions[0]/2, node.y - hoverRectDimensions[1]/2];
       const textHoverPosition = [
         hoverRectPosition[0],
-        hoverRectPosition[1] + hoverRectDimensions[1] + 2,
+        hoverRectPosition[1] + hoverRectDimensions[1],
       ];
-      const hoverRectBorderRadius = 2;
+      const hoverRectBorderRadius = 1;
       ctx.beginPath();
 
       try {
         ctx.drawImage(
           node?.img,
-          node.x - size - 1,
+          node.x - size,
           node.y - size,
           ...nodeImageSize
         );
@@ -250,14 +307,14 @@ const GraphViewer = (props) => {
 
       ctx.font = NODE_FONT;
       ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
+      ctx.textBaseline = 'top';
       let nodeName = node.name;
       if (nodeName.length > 10) {
-        nodeName = nodeName.substr(0, 10).concat('...');
+        nodeName = nodeName.substr(0, 9).concat('...');
       } else if ( Array.isArray(nodeName) ){
-        nodeName = nodeName[0]?.substr(0, 10).concat('...');
+        nodeName = nodeName[0]?.substr(0, 9).concat('...');
       }
-      const textProps = [nodeName, node.x + 2, textHoverPosition[1] + 4.5];
+      const textProps = [nodeName, node.x, textHoverPosition[1]];
       if (node === hoverNode || node?.id === selectedNode?.id || node?.id === nodeSelected?.id ) {
         // image hover
         roundRect(
@@ -273,7 +330,7 @@ const GraphViewer = (props) => {
           ctx,
           ...textHoverPosition,
           hoverRectDimensions[0],
-          hoverRectDimensions[0] / 4,
+          hoverRectDimensions[1] / 4,
           hoverRectBorderRadius,
           GRAPH_COLORS.textHoverRect
         );
@@ -287,7 +344,6 @@ const GraphViewer = (props) => {
     [hoverNode]
   );
 
-  let maxNodesLevel = selectedLayout.maxNodesLevel(window.datasets[props.graph_id].graph);
   return (
     <div className={'graph-view'}>
       { loading?
@@ -303,49 +359,31 @@ const GraphViewer = (props) => {
       }} />
       :
       <GeppettoGraphVisualization
-        ref={graphRef}
+        ref={ graphRef }
         // Graph data with Nodes and Links to populate
-        data={window.datasets[props.graph_id].graph}
+        data={data}
         // Create the Graph as 2 Dimensional
         d2={true}
-        warmupTicks={1000}
-        cooldownTicks={50}
         onEngineStop={onEngineStop}
+        cooldownTime={data?.nodes?.length + data?.links?.length}
         // Links properties
         linkColor = {handleLinkColor}
         linkWidth={2}
-        forceChargeStrength={maxNodesLevel * -10}
+        dagLevelDistance={selectedLayout.layout === TOP_DOWN.layout ? 60 : 0}
         linkDirectionalParticles={1}
-        linkCurvature={link => {
-          let curve = 0;
-
-          if ( selectedLayout.layout !== RADIAL_OUT.layout ){
-            if ( link.source.fx > link.target.fx ) {
-              curve = curve * -1;
-            }
-            else if ( link.source.fx === link.target.fx ) {
-              curve = 0;
-            } else if ( link.source.fx >= link.target.fx ) {
-              curve = -.05;
-            } else {
-              curve = .05;
-            }
-          }
-
-          return curve;
-        }}
+        forceRadial={15}
+        warmupTicks={data?.nodes?.length + data?.links?.length}
         linkDirectionalParticleWidth={link => highlightLinks.has(link) ? 4 : 0}
         linkCanvasObjectMode={'replace'}
         onLinkHover={handleLinkHover}
         // Override drawing of canvas objects, draw an image as a node
         nodeCanvasObject={paintNode}
+        // d3VelocityDecay={0.3}
         nodeCanvasObjectMode={node => 'replace'}
-        nodeVal = { node => {
-          if ( selectedLayout.layout !== RADIAL_OUT.layout ){
-            node.fx = node.xPos;
-            node.fy = 100 * node.level;
-          }
-        }}
+        nodeVal = { node => 
+          100 / (node.level + 1)
+        }
+        nodeRelSize={2.5}
         onNodeHover={handleNodeHover}
         // Allows updating link properties, as color and curvature. Without this, linkCurvature doesn't work.
         onNodeClick={(node, event) => handleNodeLeftClick(node, event)}

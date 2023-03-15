@@ -6,12 +6,6 @@ import {
     typesModel
 } from './../../utils/graphModel';
 
-import {
-    subject_key,
-    protocols_key,
-    contributors_key
-} from './../../constants';
-
 const N3 = require('n3');
 
 const TMP_FILE = ".tmp";
@@ -278,65 +272,6 @@ class Splinter {
     organise_nodes(parent) {
         // structure the graph per category
         const id = parent.id;
-        const subjects = {
-            id: subject_key,
-            name: "Subjects",
-            type: typesModel.NamedIndividual.subject.type,
-            properties: [],
-            parent : parent,
-            proxies: [],
-            tree_reference: null,
-            children_counter: 0
-        };
-        if (this.nodes.get(subject_key) === undefined) {
-            this.nodes.set(subject_key, this.factory.createNode(subjects));
-            this.edges.push({
-                source: id,
-                target: subjects.id
-            })
-        } else {
-            console.error("The subjects node already exists!");
-        }
-
-        const protocols = {
-            id: protocols_key,
-            name: "Protocols",
-            type: typesModel.sparc.Protocol.type,
-            properties: [],
-            parent : parent,
-            proxies: [],
-            tree_reference: null,
-            children_counter: 0
-        };
-        if (this.nodes.get(protocols_key) ===  undefined) {
-            this.nodes.set(protocols_key, this.factory.createNode(protocols));
-            this.edges.push({
-                source: id,
-                target: protocols.id
-            })
-        } else {
-            console.error("The subjects node already exists!");
-        }
-
-        const contributors = {
-            id: contributors_key,
-            name: "Contributors",
-            type: typesModel.NamedIndividual.contributor.type,
-            properties: [],
-            parent : parent,
-            proxies: [],
-            tree_reference: null,
-            children_counter: 0
-        };
-        if (this.nodes.get(contributors_key) === undefined) {
-            this.nodes.set(contributors_key, this.factory.createNode(contributors));
-            this.edges.push({
-                source: id,
-                target: contributors.id
-            })
-        } else {
-            console.error("The subjects node already exists!");
-        }
 
         this.forced_edges = this.edges.filter(link => {
             if ((link.target === link.source)
@@ -350,60 +285,16 @@ class Splinter {
                 link.target = link.source;
                 link.source = temp;
             }
-            let target_node = this.nodes.get(link.target);
-            if (link.source === id && link.target !== subject_key && target_node.type === rdfTypes.Subject.key) {
-                link.source = subject_key;
-                target_node.level = subjects.level + 1;
-                target_node.parent = subjects;
-                this.nodes.set(target_node.id, target_node);
-            } else if (link.source === id && link.target !== contributors_key && target_node.type === rdfTypes.Person.key) {
-                link.source = contributors_key;
-                target_node.level = contributors.level + 1;
-                target_node.parent = contributors;
-                this.nodes.set(target_node.id, target_node);
-            } else if (link.source === id && link.target !== protocols_key && target_node.type === rdfTypes.Protocol.key) {
-                link.source = protocols_key;
-                target_node.level = protocols.level + 1;
-                target_node.parent = protocols;
-                this.nodes.set(target_node.id, target_node);
-            }
             let source_node = this.nodes.get(link.source);
             source_node.children_counter++;
             this.nodes.set(source_node.id, source_node);
             return link;
         }).filter(link => {
             let target_node = this.nodes.get(link.target);
-            if ((link.source === id && (target_node.type !== rdfTypes.Award.key) && (link.target !== contributors_key && link.target !== subject_key && link.target !== protocols_key))) {
-                return false;
+            if (target_node.type === rdfTypes.Dataset.key){
+                return true;
             }
-            return true;
-        });
-    }
-
-    fix_links() {
-        this.forced_nodes.forEach((node, index, array) => {
-            if (node.type === rdfTypes.Sample.key) {
-                if (node.attributes.derivedFrom !== undefined) {
-                    let source = this.nodes.get(node.attributes.derivedFrom[0]);
-                    if ( source !== undefined ) {
-                        source.children_counter++
-                        //this.nodes.set(node.attributes.derivedFrom[0], source);
-                        array[index].level = source.level + 1;
-                        this.forced_edges.push({
-                            source: node.attributes.derivedFrom[0],
-                            target: node.id
-                        });
-                    }
-                }
-            }
-
-            if ( node.level !== undefined ) {
-                if ( this.levelsMap[node.level] ) {
-                    this.levelsMap[node.level] = [...this.levelsMap[node.level], node];
-                } else {
-                    this.levelsMap[node.level] = [node];
-                }
-            }
+            return false;
         });
     }
 
@@ -522,9 +413,6 @@ class Splinter {
             
             return value;
         })
-
-        this.fix_links();
-        this.identify_childless_parents();
     }
 
     build_leaf(node, parent) {

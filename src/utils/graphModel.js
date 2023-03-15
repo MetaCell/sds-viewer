@@ -61,6 +61,18 @@ export const rdfTypes = {
             }
         ]
     },
+    "Group": {
+        "image": "./images/graph/folder.svg",
+        "key": "Group",
+        "properties": [
+            {
+                "type": "rdfs",
+                "key": "label",
+                "property": "label",
+                "label": "To be filled"
+            }
+        ]
+    },
     "Dataset": {
         "image": "./images/graph/dataset.svg",
         "key": "Dataset",
@@ -515,6 +527,9 @@ export const typesModel = {
         },
         collection: {
             "type": "Collection"
+        },
+        group: {
+            "type": "Group"
         },
         contributor: {
             "type": "Person"
