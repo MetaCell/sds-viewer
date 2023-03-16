@@ -365,7 +365,7 @@ const GraphViewer = (props) => {
         // Create the Graph as 2 Dimensional
         d2={true}
         onEngineStop={onEngineStop}
-        cooldownTime={data?.nodes?.length + data?.links?.length}
+        cooldownTime={data?.nodes?.length + data?.links?.length * 30}
         // Links properties
         linkColor = {handleLinkColor}
         linkWidth={2}
