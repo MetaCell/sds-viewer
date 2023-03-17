@@ -529,7 +529,7 @@ class Splinter {
         const subjects = {
             id: subject_key,
             name: "Subjects",
-            type: typesModel.NamedIndividual.subject.type,
+            type: typesModel.NamedIndividual.group.type,
             properties: [],
             parent : parent,
             proxies: [],
