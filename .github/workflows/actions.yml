@@ -25,7 +25,7 @@ jobs:
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
-          node-version: [14.17]
+          node-version: 14.17
     - name: SDS Viewer elements snapshot test
       run: |
           #install dependencies
