@@ -29,7 +29,7 @@ jobs:
     - name: SDS Viewer elements snapshot test
       run: |
           #install dependencies
-          yarn
+          npm ci
           # run tests
           npm run e2e_test
       env:
