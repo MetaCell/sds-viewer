@@ -45,7 +45,7 @@
     "deploy": "gh-pages -d build",
     "build": "craco build",
     "test": "jest",
-    "e2e_test": "jest e2e.test.js"
+    "e2e_test": "./node_modules/.bin/jest e2e.test.js --no-sandbox"
   },
   "eslintConfig": {
     "extends": "react-app"
