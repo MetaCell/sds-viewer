@@ -62,7 +62,7 @@ export const rdfTypes = {
         ]
     },
     "Group": {
-        "image": "./images/graph/folder.svg",
+        "image": "./images/graph/group.svg",
         "key": "Group",
         "properties": [
             {

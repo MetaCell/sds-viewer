@@ -64,7 +64,7 @@ const Collection = function (node) {
     nodeDetail.getHeader = () => {
         return (
             <>
-                <CollectionHeader node={node} />
+                {/* <CollectionHeader node={node} /> */}
             </>
         )
     };
@@ -72,7 +72,7 @@ const Collection = function (node) {
     nodeDetail.getDetail = () => {
         return (
             <>
-                <CollectionDetails node={node} />
+                {/* <CollectionDetails node={node} /> */}
             </>
         )
     };
@@ -80,8 +80,8 @@ const Collection = function (node) {
     nodeDetail.getAll = () => {
         return (
             <>
-                <CollectionHeader node={node} />
-                <CollectionDetails node={node} />
+                {/* <CollectionHeader node={node} />
+                <CollectionDetails node={node} /> */}
             </>
         )
     }

@@ -27,6 +27,7 @@ const GRAPH_COLORS = {
   textHoverRect: '#3779E1',
   textHover: 'white',
   textColor: '#2E3A59',
+  collapsedFolder : 'red'
 };
 const TOP_DOWN = {
   label : "Top Down",
@@ -73,7 +74,6 @@ const GraphViewer = (props) => {
       }
     });
   
-    console.log("Nodes ID ", nodesById); 
     const visibleNodes = [];
     const visibleLinks = [];
 
@@ -118,7 +118,8 @@ const GraphViewer = (props) => {
   
   const handleNodeLeftClick = (node, event) => {
     if ( node?.id === selectedNode?.id ) {
-      if ( node.type === rdfTypes.Subject.key || node.type === rdfTypes.Collection.key || node.type === rdfTypes.Group.key ) {
+      if ( node.type === rdfTypes.Subject.key || node.type === rdfTypes.Collection.key 
+        || node.type === rdfTypes.Group.key || node.type === rdfTypes.Sample.key ) {
         node.collapsed = !node.collapsed;
         const updatedData = getPrunedTree();
         setData(updatedData);
@@ -131,13 +132,12 @@ const GraphViewer = (props) => {
       source: GRAPH_SOURCE
     }));
     setSelectedNode(node);
-    node?.id === selectedNode?.id && handleNodeRightClick(node);
+    setTimeout( () => node?.id === selectedNode?.id && handleNodeRightClick(node), data?.nodes?.length + data?.links?.length );
   };
 
   useEffect(() => {
     resetCamera();
     setForce();
-    console.log("Reset camera");
   }, []);
 
   const handleLinkColor = link => {
@@ -203,11 +203,11 @@ const GraphViewer = (props) => {
     if ( selectedLayout.layout === TOP_DOWN.layout ) {
       force = -150;
     } else if ( selectedLayout.layout === RADIAL_OUT.layout ) {
-      force = -75;
+      force = -100;
     } 
     graphRef?.current?.ggv?.current.d3Force('link').distance(0).strength(1);
     graphRef?.current?.ggv?.current.d3Force("charge").strength(force * 2);
-    graphRef?.current?.ggv?.current.d3Force('collide', d3.forceCollide(0)); 
+    graphRef?.current?.ggv?.current.d3Force('collision', d3.forceCollide(20)); 
     graphRef?.current?.ggv?.current.d3Force('x', d3.forceX());
     graphRef?.current?.ggv?.current.d3Force('y', d3.forceY());
     graphRef?.current?.ggv?.current.d3Force('center', d3.forceCenter(0,0));
@@ -216,8 +216,6 @@ const GraphViewer = (props) => {
 
   const onEngineStop = () => {
     setForce();
-    console.log("on engine stop")
-    resetCamera();
   }
 
   useEffect(() => {
@@ -227,18 +225,12 @@ const GraphViewer = (props) => {
     setTimeout ( () => { 
       setLoading(false);
       setForce();
-      // resetCamera();
     }, LOADING_TIME);
   }, []);
 
   useEffect(() => {
-    console.log("Selectedlayout " , selectedLayout);
     setForce();
 },[selectedLayout]) 
-
-  useEffect(() => {
-    // console.log("use effect")
-  });
 
   const handleNodeHover = (node) => {
     highlightNodes.clear();
@@ -285,6 +277,7 @@ const GraphViewer = (props) => {
       ctx.beginPath();
 
       try {
+        node.type === rdfTypes.Sample.key && console.log("Node ", node);
         ctx.drawImage(
           node?.img,
           node.x - size,
@@ -295,6 +288,7 @@ const GraphViewer = (props) => {
         const img = new Image();
         img.src = rdfTypes.Unknown.image;
         node.img = img;
+        console.log("Node ", node);
 
         // Add default icon if new icon wasn't found under images
         ctx.drawImage(
@@ -340,6 +334,13 @@ const GraphViewer = (props) => {
         ctx.fillStyle = GRAPH_COLORS.textColor;
       }
       ctx.fillText(...textProps);
+      if ( node.childLinks?.length && node.collapsed ) {
+        const collapsedNodes = [node.childLinks?.length, node.x, textHoverPosition[1]];
+        ctx.fillStyle = GRAPH_COLORS.collapsedFolder;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'bottom';
+        ctx.fillText(...collapsedNodes);
+      }
     },
     [hoverNode]
   );
@@ -365,7 +366,7 @@ const GraphViewer = (props) => {
         // Create the Graph as 2 Dimensional
         d2={true}
         onEngineStop={onEngineStop}
-        cooldownTime={data?.nodes?.length + data?.links?.length * 30}
+        cooldownTime={data?.nodes?.length + data?.links?.length * 10}
         // Links properties
         linkColor = {handleLinkColor}
         linkWidth={2}
@@ -378,7 +379,7 @@ const GraphViewer = (props) => {
         onLinkHover={handleLinkHover}
         // Override drawing of canvas objects, draw an image as a node
         nodeCanvasObject={paintNode}
-        // d3VelocityDecay={0.3}
+        d3VelocityDecay={0.3}
         nodeCanvasObjectMode={node => 'replace'}
         nodeVal = { node => 
           100 / (node.level + 1)

@@ -519,7 +519,7 @@ class Splinter {
         target_node.level = parent.level + 1;
         target_node.parent = parent;
         target_node.childLinks = [];
-        target_node.collapsed = target_node.type === typesModel.NamedIndividual.subject.type;
+        target_node.collapsed = target_node.parent.type === typesModel.NamedIndividual.subject.type;
         this.nodes.set(target_node.id, target_node);
     }
 
@@ -529,7 +529,7 @@ class Splinter {
         const subjects = {
             id: subject_key,
             name: "Subjects",
-            type: typesModel.NamedIndividual.collection.type,
+            type: typesModel.NamedIndividual.subject.type,
             properties: [],
             parent : parent,
             proxies: [],
@@ -698,15 +698,6 @@ class Splinter {
                 }
             }
 
-            if (node.type === rdfTypes.Dataset.key) {
-                if (node.attributes?.hasProtocol !== undefined) {
-                    let source = this.nodes.get(node.attributes.hasProtocol[0]);
-                    if ( source !== undefined ) {
-                        node.attributes.hasUriHuman[0] = source.attributes.hasUriHuman[0];
-                    }
-                }
-            }
-
             if (node.type === rdfTypes.File.key) {
                 if (node?.tree_reference?.uri_human  !== undefined) {
                     node.tree_reference.uri_human = Array.from(this.nodes)[0][1].attributes.hasUriHuman[0];
@@ -733,7 +724,7 @@ class Splinter {
 
     identify_childless_parents() {
         this.forced_nodes.forEach((node, index, array) => {
-            if ((node.type === rdfTypes.Sample.key || node.type === rdfTypes.Subject.key) && (node.children_counter === 0)) {
+            if ((node.type === rdfTypes.Sample.key || node.type === rdfTypes.Collection.key || node.type === rdfTypes.Subject.key) && (node.children_counter === 0)) {
                 node.img.src = "./images/graph/question_mark.svg"
             }
         });
@@ -858,7 +849,7 @@ class Splinter {
             target: new_node.id
         });
         new_node.childLinks = [];
-        new_node.collapsed = new_node.type === typesModel.NamedIndividual.subject.type
+        new_node.collapsed = new_node.parent.type === typesModel.NamedIndividual.subject.type
         this.nodes.set(new_node.id, this.factory.createNode(new_node));
         var children = this.tree_parents_map2.get(node.remote_id);
         if (children?.length > 0) {
