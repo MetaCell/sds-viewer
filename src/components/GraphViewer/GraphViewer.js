@@ -1,19 +1,21 @@
 import * as d3 from 'd3-force-3d'
 import Menu from '@material-ui/core/Menu';
-import { IconButton } from '@material-ui/core';
+import { IconButton, Tooltip } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
 import React, { useState, useEffect } from 'react';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import LayersIcon from '@material-ui/icons/Layers';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 import RefreshIcon from '@material-ui/icons/Refresh';
+import UnfoldMoreIcon from '@material-ui/icons/UnfoldMore';
+import UnfoldLessIcon from '@material-ui/icons/UnfoldLess';
 import { selectInstance } from '../../redux/actions';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { useSelector, useDispatch } from 'react-redux';
 import FormatAlignCenterIcon from '@material-ui/icons/FormatAlignCenter';
 import GeppettoGraphVisualization from '@metacell/geppetto-meta-ui/graph-visualization/Graph';
 import { GRAPH_SOURCE } from '../../constants';
-import { rdfTypes } from '../../utils/graphModel';
+import { rdfTypes, typesModel } from '../../utils/graphModel';
 
 const NODE_FONT = '500 5px Inter, sans-serif';
 const ONE_SECOND = 1000;
@@ -30,14 +32,14 @@ const GRAPH_COLORS = {
   collapsedFolder : 'red'
 };
 const TOP_DOWN = {
-  label : "Top Down",
+  label : "Tree View",
   layout : "td",
   maxNodesLevel : (graph) => { 
     return graph.hierarchyVariant;
   }
 };
 const RADIAL_OUT = {
-  label : "Radial",
+  label : "Radial View",
   layout : "null",
   maxNodesLevel : (graph) => { 
     return graph.radialVariant
@@ -100,6 +102,7 @@ const GraphViewer = (props) => {
   const [loading, setLoading] = React.useState(false);
   const [data, setData] = React.useState(getPrunedTree());
   const nodeSelected = useSelector(state => state.sdsState.instance_selected.graph_node);
+  const [collapsed, setCollapsed] = React.useState(true);
 
   const handleLayoutClick = (event) => {
     setLayoutAnchorEl(event.currentTarget);
@@ -160,6 +163,14 @@ const GraphViewer = (props) => {
     setCameraPosition({ x :  node.x , y :  node.y });
   };
 
+  const expandAll = (event) => {
+    window.datasets[props.graph_id].graph?.nodes?.forEach( node => {
+      collapsed ? node.collapsed = !collapsed : node.collapsed = node?.parent?.type === typesModel.NamedIndividual.subject.type;
+    })
+    let updatedData = getPrunedTree();
+    setData(updatedData);
+    setCollapsed(!collapsed)
+  }
 
   /**
    * Zoom in
@@ -205,7 +216,7 @@ const GraphViewer = (props) => {
     } else if ( selectedLayout.layout === RADIAL_OUT.layout ) {
       force = -100;
     } 
-    graphRef?.current?.ggv?.current.d3Force('link').distance(0).strength(1);
+    graphRef?.current?.ggv?.current.d3Force('link').strength(1);
     graphRef?.current?.ggv?.current.d3Force("charge").strength(force * 2);
     graphRef?.current?.ggv?.current.d3Force('collision', d3.forceCollide(20)); 
     graphRef?.current?.ggv?.current.d3Force('x', d3.forceX());
@@ -340,6 +351,7 @@ const GraphViewer = (props) => {
         ctx.textAlign = 'center';
         ctx.textBaseline = 'bottom';
         ctx.fillText(...collapsedNodes);
+        ctx.fillStyle = GRAPH_COLORS.textColor;
       }
     },
     [hoverNode]
@@ -366,20 +378,20 @@ const GraphViewer = (props) => {
         // Create the Graph as 2 Dimensional
         d2={true}
         onEngineStop={onEngineStop}
-        cooldownTime={data?.nodes?.length + data?.links?.length * 10}
+        // cooldownTime={data?.nodes?.length + data?.links?.length * 10}
         // Links properties
         linkColor = {handleLinkColor}
         linkWidth={2}
         dagLevelDistance={selectedLayout.layout === TOP_DOWN.layout ? 60 : 0}
         linkDirectionalParticles={1}
         forceRadial={15}
-        warmupTicks={data?.nodes?.length + data?.links?.length}
+        warmupTicks={data?.nodes?.length}
         linkDirectionalParticleWidth={link => highlightLinks.has(link) ? 4 : 0}
         linkCanvasObjectMode={'replace'}
         onLinkHover={handleLinkHover}
         // Override drawing of canvas objects, draw an image as a node
         nodeCanvasObject={paintNode}
-        d3VelocityDecay={0.3}
+        // d3VelocityDecay={0.3}
         nodeCanvasObjectMode={node => 'replace'}
         nodeVal = { node => 
           100 / (node.level + 1)
@@ -401,8 +413,10 @@ const GraphViewer = (props) => {
         // React element for controls goes here
         controls={
           <div className='graph-view_controls'>
-            <IconButton aria-controls="layout-menu" aria-haspopup="true" onClick={handleLayoutClick}>
-              <FormatAlignCenterIcon />
+            <IconButton area-label="GraphLayout" aria-controls="layout-menu" aria-haspopup="true" onClick={handleLayoutClick}>
+              <Tooltip id="button-report" title="Change Graph Layout">
+                <FormatAlignCenterIcon />
+              </Tooltip>
             </IconButton>
             <Menu
               id="layout-menu"
@@ -414,14 +428,25 @@ const GraphViewer = (props) => {
               <MenuItem selected={RADIAL_OUT.layout === selectedLayout.layout} onClick={() => handleLayoutChange(RADIAL_OUT)}>{RADIAL_OUT.label}</MenuItem>
               <MenuItem selected={TOP_DOWN.layout === selectedLayout.layout} onClick={() => handleLayoutChange(TOP_DOWN)}>{TOP_DOWN.label}</MenuItem>
             </Menu>
-            <IconButton onClick={(e) => zoomIn()}>
-              <ZoomInIcon />
+            <IconButton area-label="ZoomIn" onClick={(e) => zoomIn()}>
+              <Tooltip id="button-report" title="Zoom In">
+                <ZoomInIcon />
+              </Tooltip>
             </IconButton>
-            <IconButton onClick={(e) => zoomOut()}>
-              <ZoomOutIcon />
+            <IconButton area-label="ZoomOut" onClick={(e) => zoomOut()}>
+              <Tooltip id="button-report" title="Zoom Out">
+                <ZoomOutIcon />
+              </Tooltip>
             </IconButton>
-            <IconButton onClick={(e) => resetCamera()}>
-              <RefreshIcon />
+            <IconButton area-label="ResetCamera" onClick={(e) => resetCamera()}>
+              <Tooltip id="button-report" title="Reset Camera">
+                <RefreshIcon />
+              </Tooltip>
+            </IconButton>
+            <IconButton area-label="Expand" onClick={(e) => expandAll(e)}>
+              <Tooltip id="button-report" title={ !collapsed ? "Collapse All" : "Expand All"}>
+                { !collapsed ? <UnfoldLessIcon/> : <UnfoldMoreIcon /> }
+              </Tooltip>
             </IconButton>
             <LayersIcon />
           </div>
