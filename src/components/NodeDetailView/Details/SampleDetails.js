@@ -34,21 +34,12 @@ const SampleDetails = (props) => {
                     ? (<Box className="tab-content-row">
                             <Typography component="h3">{"Sample Details"}</Typography>
                             <Typography component="label">Label</Typography>
-                            <Links key={`label_href_link`} href={node.graph_node.attributes?.hasUriHuman[0]} title={title} />
                         </Box>)
                     : (<SimpleLabelValue label={'Label'} value={title} heading={'Sample Details'} />)
                 }
 
                 { iterateSimpleValue('Assigned group', node?.graph_node?.attributes?.hasAssignedGroup) }
-                {
-                    <Box className="tab-content-row">
-                        <Typography component="label">{"Derived Information"}</Typography>
-                        <Links href={node?.graph_node?.attributes?.hasDerivedInformationAsParticipant} title="Derived information as participant" />
-                    </Box>
-                }
                 { iterateSimpleValue('Digital artifact', node?.graph_node?.attributes?.hasDigitalArtifactThatIsAboutIt) }
-                { iterateSimpleValue('Participant in performance of', node?.graph_node?.attributes?.participantInPerformanceOf) }
-                { iterateSimpleValue('Derived from subject', node?.graph_node?.attributes?.wasDerivedFromSubject) }
                 { iterateSimpleValue('Extracted from Anatomical region', node?.graph_node?.attributes?.wasExtractedFromAnatomicalRegion) }
             </Box>
         </Box>

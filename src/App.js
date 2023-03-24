@@ -58,6 +58,8 @@ const App = () => {
       tree: await splinter.getTree(),
       splinter: splinter
     };
+    console.log("Graph ", _dataset.graph);
+
     dispatch(addDataset(_dataset));
     dispatch(addWidget({
       id: _dataset.id,
@@ -129,6 +131,7 @@ const App = () => {
     };
     const splinter = new DatasetsListSplinter(undefined, file.data);
     let graph = await splinter.getGraph();
+    console.log("Graph ", graph);
     let datasets = graph.nodes.filter((node) => node?.attributes?.hasDoi);
     const match = datasets.find( node => node.attributes?.hasDoi?.[0]?.includes(doi));
     if ( match ) {

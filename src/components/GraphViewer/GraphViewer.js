@@ -135,7 +135,7 @@ const GraphViewer = (props) => {
       source: GRAPH_SOURCE
     }));
     setSelectedNode(node);
-    setTimeout( () => node?.id === selectedNode?.id && handleNodeRightClick(node), data?.nodes?.length + data?.links?.length );
+    setTimeout( () => (node?.id === selectedNode?.id && selectedLayout.layout !== TOP_DOWN.layout) && handleNodeRightClick(node), data?.nodes?.length + data?.links?.length );
   };
 
   useEffect(() => {
@@ -210,23 +210,26 @@ const GraphViewer = (props) => {
   };
 
   const setForce = () => {
-    let force = -150;
-    if ( selectedLayout.layout === TOP_DOWN.layout ) {
-      force = -150;
-    } else if ( selectedLayout.layout === RADIAL_OUT.layout ) {
-      force = -100;
-    } 
-    graphRef?.current?.ggv?.current.d3Force('link').strength(1);
-    graphRef?.current?.ggv?.current.d3Force("charge").strength(force * 2);
-    graphRef?.current?.ggv?.current.d3Force('collision', d3.forceCollide(20)); 
-    graphRef?.current?.ggv?.current.d3Force('x', d3.forceX());
-    graphRef?.current?.ggv?.current.d3Force('y', d3.forceY());
-    graphRef?.current?.ggv?.current.d3Force('center', d3.forceCenter(0,0));
-    graphRef?.current?.ggv?.current.d3Force("manyBody", d3.forceManyBody().strength(node => force * Math.sqrt(100 / graphRef?.current?.props?.data?.levelsMap[node.level]?.length )));
+    if ( selectedLayout.layout !== TOP_DOWN.layout ){
+      let force = -150;
+      if ( selectedLayout.layout === TOP_DOWN.layout ) {
+        force = -150;
+      } else if ( selectedLayout.layout === RADIAL_OUT.layout ) {
+        force = -100;
+      } 
+      graphRef?.current?.ggv?.current.d3Force('link').distance(0).strength(1);
+      graphRef?.current?.ggv?.current.d3Force("charge").strength(force * 2);
+      graphRef?.current?.ggv?.current.d3Force('collision', d3.forceCollide(20)); 
+      graphRef?.current?.ggv?.current.d3Force('x', d3.forceX());
+      graphRef?.current?.ggv?.current.d3Force('y', d3.forceY());
+      graphRef?.current?.ggv?.current.d3Force('center', d3.forceCenter(0,0));
+      graphRef?.current?.ggv?.current.d3Force("manyBody", d3.forceManyBody().strength(node => force * Math.sqrt(100 / graphRef?.current?.props?.data?.levelsMap[node.level]?.length )));
+    }
   }
 
   const onEngineStop = () => {
     setForce();
+    resetCamera();
   }
 
   useEffect(() => {
@@ -288,7 +291,6 @@ const GraphViewer = (props) => {
       ctx.beginPath();
 
       try {
-        node.type === rdfTypes.Sample.key && console.log("Node ", node);
         ctx.drawImage(
           node?.img,
           node.x - size,
@@ -299,7 +301,6 @@ const GraphViewer = (props) => {
         const img = new Image();
         img.src = rdfTypes.Unknown.image;
         node.img = img;
-        console.log("Node ", node);
 
         // Add default icon if new icon wasn't found under images
         ctx.drawImage(
@@ -378,7 +379,7 @@ const GraphViewer = (props) => {
         // Create the Graph as 2 Dimensional
         d2={true}
         onEngineStop={onEngineStop}
-        // cooldownTime={data?.nodes?.length + data?.links?.length * 10}
+        cooldownTime={1000}
         // Links properties
         linkColor = {handleLinkColor}
         linkWidth={2}
@@ -393,9 +394,14 @@ const GraphViewer = (props) => {
         nodeCanvasObject={paintNode}
         // d3VelocityDecay={0.3}
         nodeCanvasObjectMode={node => 'replace'}
-        nodeVal = { node => 
-          100 / (node.level + 1)
-        }
+        nodeVal = { node => {
+          if ( selectedLayout.layout === TOP_DOWN.layout ){
+            node.fx = node.xPos;
+            node.fy = 100 * node.level;
+          }
+
+          return 100 / (node.level + 1);
+        }}
         nodeRelSize={2.5}
         onNodeHover={handleNodeHover}
         // Allows updating link properties, as color and curvature. Without this, linkCurvature doesn't work.

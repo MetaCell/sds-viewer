@@ -189,34 +189,91 @@ class Splinter {
             await this.processDataset();
         }
 
+        let filteredNodes = this.forced_nodes?.filter( n => n.type !== rdfTypes.UBERON.key && !(n.type === rdfTypes.Collection.key && n.children_counter === 0));
         let cleanLinks = [];
-        let self = this;
 
         // Assign neighbors, to highlight links
         this.forced_edges.forEach(link => {
             // Search for existing links
             let existingLing = cleanLinks.find( l => l.source === link.source && l.target === link.target );
             if ( !existingLing ) {
-                const a = self.forced_nodes.find( node => node.id === link.source );
-                const b = self.forced_nodes.find( node => node.id === link.target );
-                !a.neighbors && (a.neighbors = []);
-                !b.neighbors && (b.neighbors = []);
-                a.neighbors.push(b);
-                b.neighbors.push(a);
+                const a = filteredNodes.find( node => node.id === link.source );
+                const b = filteredNodes.find( node => node.id === link.target );
+                if ( a && b ) {
+                    !a.neighbors && (a.neighbors = []);
+                    !b.neighbors && (b.neighbors = []);
+                    a.neighbors.push(b);
+                    b.neighbors.push(a);
 
-                !a.links && (a.links = []);
-                !b.links && (b.links = []);
-                a.links.push(link);
-                b.links.push(link);
+                    !a.links && (a.links = []);
+                    !b.links && (b.links = []);
+                    a.links.push(link);
+                    b.links.push(link);
 
-                cleanLinks.push(link);
+                    cleanLinks.push(link);
+                }
             }
         });
 
         // Calculate level with max amount of nodes
         let maxLevel = Object.keys(this.levelsMap).reduce((a, b) => this.levelsMap[a].length > this.levelsMap[b].length ? a : b);
+        // Space between nodes
+        let nodeSpace = 50;
+        // The furthestLeft a node can be
+        let furthestLeft = 0 - (Math.ceil(this.levelsMap[maxLevel].length)/2  * nodeSpace );
+        let positionsMap = {};
+
+        let levelsMapKeys = Object.keys(this.levelsMap);
+
+        levelsMapKeys.forEach( level => {
+            positionsMap[level] = furthestLeft + nodeSpace/2;
+            this.levelsMap[level].sort((a, b) => a.attributes?.relativePath?.localeCompare(b.attributes?.relativePath));
+        });
+
+        for ( let i = SUBJECTS_LEVEL; i <= maxLevel ; i++ ){
+            this.levelsMap[i]?.sort( (a, b) => { 
+                let aSubject = a
+                while (aSubject?.type !== "Subject" && aSubject){
+                    aSubject = aSubject?.parent;
+                }
+                let bSubject = b;
+                while (bSubject?.type !== "Subject" && bSubject){
+                    bSubject = bSubject?.parent;
+                }
+                return aSubject?.id > bSubject?.id ? 1 : -1;
+            });            
+        }
+        console.log("Levels map ", this.levelsMap);
+
+        // Start assigning the graph from the bottom up
+        let neighbors = 0;
+        levelsMapKeys.reverse().forEach( level => {
+            this.levelsMap[level].forEach ( (n, index) => {
+                neighbors = n?.neighbors?.filter(neighbor => { return neighbor.level > n.level });
+                // FIXME : Fix this, beter way to create positioning
+                if ( n.level === SUBJECTS_LEVEL + 1 ){
+                    this.updateLevels(n.neighbors, n.level);
+                    if ( neighbors?.length > 0 ) n.level = n.level + 1;
+                }
+                if ( neighbors?.length > 0 ) {
+                    let max = Number.MIN_SAFE_INTEGER, min = Number.MAX_SAFE_INTEGER;
+                    neighbors.forEach( neighbor => {
+                        if ( neighbor.xPos > max ) { max = neighbor.xPos };
+                        if ( neighbor.xPos < min ) { min = neighbor.xPos };
+                    });
+                    n.xPos = min === max ? min : min + (max - min) * .5;
+                    positionsMap[n.level] = n.xPos + nodeSpace;
+                } else {
+                    n.xPos = positionsMap[n.level] + nodeSpace;
+                    positionsMap[n.level] = n.xPos;
+                }
+            })
+        });
+
+        console.log(this.levelsMap);
+
         return {
-            nodes: this.forced_nodes?.filter( n => n.type !== rdfTypes.UBERON.key),
+            nodes: filteredNodes,
             links: cleanLinks,
             levelsMap : this.levelsMap,
             hierarchyVariant : maxLevel * 20
@@ -724,7 +781,7 @@ class Splinter {
 
     identify_childless_parents() {
         this.forced_nodes.forEach((node, index, array) => {
-            if ((node.type === rdfTypes.Sample.key || node.type === rdfTypes.Collection.key || node.type === rdfTypes.Subject.key) && (node.children_counter === 0)) {
+            if ((node.type === rdfTypes.Sample.key || node.type === rdfTypes.Subject.key) && (node.children_counter === 0)) {
                 node.img.src = "./images/graph/question_mark.svg"
             }
         });
