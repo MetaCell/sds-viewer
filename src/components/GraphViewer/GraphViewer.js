@@ -1,21 +1,23 @@
-import * as d3 from 'd3';
+import * as d3 from 'd3-force-3d'
 import Menu from '@material-ui/core/Menu';
-import { IconButton } from '@material-ui/core';
+import { IconButton, Tooltip } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
 import React, { useState, useEffect } from 'react';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import LayersIcon from '@material-ui/icons/Layers';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 import RefreshIcon from '@material-ui/icons/Refresh';
+import UnfoldMoreIcon from '@material-ui/icons/UnfoldMore';
+import UnfoldLessIcon from '@material-ui/icons/UnfoldLess';
 import { selectInstance } from '../../redux/actions';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { useSelector, useDispatch } from 'react-redux';
 import FormatAlignCenterIcon from '@material-ui/icons/FormatAlignCenter';
 import GeppettoGraphVisualization from '@metacell/geppetto-meta-ui/graph-visualization/Graph';
 import { GRAPH_SOURCE } from '../../constants';
-import { rdfTypes } from '../../utils/graphModel';
+import { rdfTypes, typesModel } from '../../utils/graphModel';
 
-const NODE_FONT = '500 6px Inter, sans-serif';
+const NODE_FONT = '500 5px Inter, sans-serif';
 const ONE_SECOND = 1000;
 const LOADING_TIME = 3000;
 const ZOOM_DEFAULT = 1;
@@ -27,16 +29,17 @@ const GRAPH_COLORS = {
   textHoverRect: '#3779E1',
   textHover: 'white',
   textColor: '#2E3A59',
+  collapsedFolder : 'red'
 };
 const TOP_DOWN = {
-  label : "Top Down",
+  label : "Tree View",
   layout : "td",
   maxNodesLevel : (graph) => { 
     return graph.hierarchyVariant;
   }
 };
 const RADIAL_OUT = {
-  label : "Radial",
+  label : "Radial View",
   layout : "null",
   maxNodesLevel : (graph) => { 
     return graph.radialVariant
@@ -60,19 +63,46 @@ const roundRect = (ctx, x, y, width, height, radius, color, alpha) => {
 
 const GraphViewer = (props) => {
   const dispatch = useDispatch();
+  const getPrunedTree = () => {
+    let nodesById = Object.fromEntries(window.datasets[props.graph_id].graph?.nodes?.map(node => [node.id, node]));
+    window.datasets[props.graph_id].graph?.links?.forEach(link => {
+      const source = (typeof link.source) === 'object' ? link.source.id : link.source;
+      const target = (typeof link.target) === 'object' ? link.target.id : link.target;
+      const linkFound = !nodesById[source]?.childLinks?.find( l =>
+        source === ((typeof l.source) === 'object' ? l.source.id : l.source) && target === ((typeof l.target) === 'object' ? l.target.id : l.target) 
+      );
+      if ( linkFound ) {
+        nodesById[source]?.childLinks?.push(link);
+      }
+    });
+  
+    const visibleNodes = [];
+    const visibleLinks = [];
+
+    (function traverseTree(node = nodesById[window.datasets[props.graph_id].graph?.nodes?.[0].id]) {
+      visibleNodes.push(node);
+      if (node.collapsed) return;
+      visibleLinks.push(...node.childLinks);
+      let nodes = node.childLinks.map(link => (typeof link.target) === 'object' ? link.target : nodesById[link.target]);
+      nodes?.forEach(traverseTree);
+    })(); // IIFE
+
+    return { nodes : visibleNodes, links : visibleLinks, levelsMap : window.datasets[props.graph_id].graph.levelsMap, hierarchyVariant : window.datasets[props.graph_id].graph.hierarchyVariant };
+  };
+
   const graphRef = React.useRef(null);
   const [hoverNode, setHoverNode] = useState(null);
   const [selectedNode, setSelectedNode] = useState(null);
   const [highlightNodes, setHighlightNodes] = useState(new Set());
   const [highlightLinks, setHighlightLinks] = useState(new Set());
-  const [selectedLayout, setSelectedLayout] = React.useState(TOP_DOWN);
+  const [selectedLayout, setSelectedLayout] = React.useState(RADIAL_OUT);
   const [layoutAnchorEl, setLayoutAnchorEl] = React.useState(null);
   const [cameraPosition, setCameraPosition] = useState({ x : 0 , y : 0 });
   const open = Boolean(layoutAnchorEl);
   const [loading, setLoading] = React.useState(false);
-
+  const [data, setData] = React.useState(getPrunedTree());
   const nodeSelected = useSelector(state => state.sdsState.instance_selected.graph_node);
-  const layout = useSelector(state => state.sdsState.layout);
+  const [collapsed, setCollapsed] = React.useState(true);
 
   const handleLayoutClick = (event) => {
     setLayoutAnchorEl(event.currentTarget);
@@ -85,16 +115,33 @@ const GraphViewer = (props) => {
   const handleLayoutChange = (target) => {
     handleLayoutClose()
     setSelectedLayout(target);
+    setForce();
   };
 
+  
   const handleNodeLeftClick = (node, event) => {
+    if ( node?.id === selectedNode?.id ) {
+      if ( node.type === rdfTypes.Subject.key || node.type === rdfTypes.Collection.key 
+        || node.type === rdfTypes.Group.key || node.type === rdfTypes.Sample.key ) {
+        node.collapsed = !node.collapsed;
+        const updatedData = getPrunedTree();
+        setData(updatedData);
+      }
+    }
     dispatch(selectInstance({
       dataset_id: props.graph_id,
       graph_node: node.id,
       tree_node: node?.tree_reference?.id,
       source: GRAPH_SOURCE
     }));
+    setSelectedNode(node);
+    setTimeout( () => (node?.id === selectedNode?.id && selectedLayout.layout !== TOP_DOWN.layout) && handleNodeRightClick(node), data?.nodes?.length + data?.links?.length );
   };
+
+  useEffect(() => {
+    resetCamera();
+    setForce();
+  }, []);
 
   const handleLinkColor = link => {
     let linkColor = GRAPH_COLORS.link;
@@ -116,6 +163,14 @@ const GraphViewer = (props) => {
     setCameraPosition({ x :  node.x , y :  node.y });
   };
 
+  const expandAll = (event) => {
+    window.datasets[props.graph_id].graph?.nodes?.forEach( node => {
+      collapsed ? node.collapsed = !collapsed : node.collapsed = node?.parent?.type === typesModel.NamedIndividual.subject.type;
+    })
+    let updatedData = getPrunedTree();
+    setData(updatedData);
+    setCollapsed(!collapsed)
+  }
 
   /**
    * Zoom in
@@ -151,37 +206,45 @@ const GraphViewer = (props) => {
   const resetCamera = () => {
     graphRef?.current?.ggv?.current.zoomToFit();
     let center =  graphRef?.current?.ggv?.current.centerAt();
-    setCameraPosition({ x :  center.x , y :  center.y });
+    setCameraPosition({ x :  center?.x , y :  center?.y });
   };
 
+  const setForce = () => {
+    if ( selectedLayout.layout !== TOP_DOWN.layout ){
+      let force = -150;
+      if ( selectedLayout.layout === TOP_DOWN.layout ) {
+        force = -150;
+      } else if ( selectedLayout.layout === RADIAL_OUT.layout ) {
+        force = -100;
+      } 
+      graphRef?.current?.ggv?.current.d3Force('link').distance(0).strength(1);
+      graphRef?.current?.ggv?.current.d3Force("charge").strength(force * 2);
+      graphRef?.current?.ggv?.current.d3Force('collision', d3.forceCollide(20)); 
+      graphRef?.current?.ggv?.current.d3Force('x', d3.forceX());
+      graphRef?.current?.ggv?.current.d3Force('y', d3.forceY());
+      graphRef?.current?.ggv?.current.d3Force('center', d3.forceCenter(0,0));
+      graphRef?.current?.ggv?.current.d3Force("manyBody", d3.forceManyBody().strength(node => force * Math.sqrt(100 / graphRef?.current?.props?.data?.levelsMap[node.level]?.length )));
+    }
+  }
+
   const onEngineStop = () => {
+    setForce();
     resetCamera();
-    setLoading(false);
   }
 
   useEffect(() => {
     setLoading(true);
-    setTimeout ( () => setLoading(false) , LOADING_TIME);
+    setForce();
+
+    setTimeout ( () => { 
+      setLoading(false);
+      setForce();
+    }, LOADING_TIME);
   }, []);
 
   useEffect(() => {
-    if (nodeSelected && nodeSelected?.id !== selectedNode?.id) {
-      let node = graphRef?.current?.props?.data?.nodes.find( item => item.id === nodeSelected.id && item.parent?.id === nodeSelected.parent?.id );
-      if (node) {
-        handleNodeRightClick(node, null);
-        setSelectedNode(node);
-        setHoverNode(node);
-      }
-    }
-  }, [nodeSelected]);
-
-  //Resume animation after component is updated, fixes issue with graphics going crazy.
-  useEffect(() => {
-    // selectedNode && handleNodeRightClick(selectedNode, null);
-    graphRef?.current?.ggv?.current.centerAt(cameraPosition.x, cameraPosition.y);
-    graphRef?.current?.ggv?.current.d3Force('collide', d3.forceCollide(4));
-    graphRef?.current?.ggv?.current.d3Force("manyBody", d3.forceManyBody().strength(-100))
-  },[layout]);
+    setForce();
+},[selectedLayout]) 
 
   const handleNodeHover = (node) => {
     highlightNodes.clear();
@@ -216,21 +279,21 @@ const GraphViewer = (props) => {
 
   const paintNode = React.useCallback(
     (node, ctx) => {
-      const size = 10;
+      const size = 7.5;
       const nodeImageSize = [size * 2.4, size * 2.4];
-      const hoverRectDimensions = [size * 4, size * 4];
-      const hoverRectPosition = [node.x - 20, node.y - 14];
+      const hoverRectDimensions = [size * 4.2, size * 4.2];
+      const hoverRectPosition = [node.x - hoverRectDimensions[0]/2, node.y - hoverRectDimensions[1]/2];
       const textHoverPosition = [
         hoverRectPosition[0],
-        hoverRectPosition[1] + hoverRectDimensions[1] + 2,
+        hoverRectPosition[1] + hoverRectDimensions[1],
       ];
-      const hoverRectBorderRadius = 2;
+      const hoverRectBorderRadius = 1;
       ctx.beginPath();
 
       try {
         ctx.drawImage(
           node?.img,
-          node.x - size - 1,
+          node.x - size,
           node.y - size,
           ...nodeImageSize
         );
@@ -250,14 +313,14 @@ const GraphViewer = (props) => {
 
       ctx.font = NODE_FONT;
       ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
+      ctx.textBaseline = 'top';
       let nodeName = node.name;
       if (nodeName.length > 10) {
-        nodeName = nodeName.substr(0, 10).concat('...');
+        nodeName = nodeName.substr(0, 9).concat('...');
       } else if ( Array.isArray(nodeName) ){
-        nodeName = nodeName[0]?.substr(0, 10).concat('...');
+        nodeName = nodeName[0]?.substr(0, 9).concat('...');
       }
-      const textProps = [nodeName, node.x + 2, textHoverPosition[1] + 4.5];
+      const textProps = [nodeName, node.x, textHoverPosition[1]];
       if (node === hoverNode || node?.id === selectedNode?.id || node?.id === nodeSelected?.id ) {
         // image hover
         roundRect(
@@ -273,7 +336,7 @@ const GraphViewer = (props) => {
           ctx,
           ...textHoverPosition,
           hoverRectDimensions[0],
-          hoverRectDimensions[0] / 4,
+          hoverRectDimensions[1] / 4,
           hoverRectBorderRadius,
           GRAPH_COLORS.textHoverRect
         );
@@ -283,11 +346,18 @@ const GraphViewer = (props) => {
         ctx.fillStyle = GRAPH_COLORS.textColor;
       }
       ctx.fillText(...textProps);
+      if ( node.childLinks?.length && node.collapsed ) {
+        const collapsedNodes = [node.childLinks?.length, node.x, textHoverPosition[1]];
+        ctx.fillStyle = GRAPH_COLORS.collapsedFolder;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'bottom';
+        ctx.fillText(...collapsedNodes);
+        ctx.fillStyle = GRAPH_COLORS.textColor;
+      }
     },
     [hoverNode]
   );
 
-  let maxNodesLevel = selectedLayout.maxNodesLevel(window.datasets[props.graph_id].graph);
   return (
     <div className={'graph-view'}>
       { loading?
@@ -303,49 +373,36 @@ const GraphViewer = (props) => {
       }} />
       :
       <GeppettoGraphVisualization
-        ref={graphRef}
+        ref={ graphRef }
         // Graph data with Nodes and Links to populate
-        data={window.datasets[props.graph_id].graph}
+        data={data}
         // Create the Graph as 2 Dimensional
         d2={true}
-        warmupTicks={1000}
-        cooldownTicks={50}
         onEngineStop={onEngineStop}
+        cooldownTime={1000}
         // Links properties
         linkColor = {handleLinkColor}
         linkWidth={2}
-        forceChargeStrength={maxNodesLevel * -10}
+        dagLevelDistance={selectedLayout.layout === TOP_DOWN.layout ? 60 : 0}
         linkDirectionalParticles={1}
-        linkCurvature={link => {
-          let curve = 0;
-
-          if ( selectedLayout.layout !== RADIAL_OUT.layout ){
-            if ( link.source.fx > link.target.fx ) {
-              curve = curve * -1;
-            }
-            else if ( link.source.fx === link.target.fx ) {
-              curve = 0;
-            } else if ( link.source.fx >= link.target.fx ) {
-              curve = -.05;
-            } else {
-              curve = .05;
-            }
-          }
-
-          return curve;
-        }}
+        forceRadial={15}
+        warmupTicks={data?.nodes?.length}
         linkDirectionalParticleWidth={link => highlightLinks.has(link) ? 4 : 0}
         linkCanvasObjectMode={'replace'}
         onLinkHover={handleLinkHover}
         // Override drawing of canvas objects, draw an image as a node
         nodeCanvasObject={paintNode}
+        // d3VelocityDecay={0.3}
         nodeCanvasObjectMode={node => 'replace'}
         nodeVal = { node => {
-          if ( selectedLayout.layout !== RADIAL_OUT.layout ){
+          if ( selectedLayout.layout === TOP_DOWN.layout ){
             node.fx = node.xPos;
             node.fy = 100 * node.level;
           }
+
+          return 100 / (node.level + 1);
         }}
+        nodeRelSize={2.5}
         onNodeHover={handleNodeHover}
         // Allows updating link properties, as color and curvature. Without this, linkCurvature doesn't work.
         onNodeClick={(node, event) => handleNodeLeftClick(node, event)}
@@ -362,8 +419,10 @@ const GraphViewer = (props) => {
         // React element for controls goes here
         controls={
           <div className='graph-view_controls'>
-            <IconButton aria-controls="layout-menu" aria-haspopup="true" onClick={handleLayoutClick}>
-              <FormatAlignCenterIcon />
+            <IconButton area-label="GraphLayout" aria-controls="layout-menu" aria-haspopup="true" onClick={handleLayoutClick}>
+              <Tooltip id="button-report" title="Change Graph Layout">
+                <FormatAlignCenterIcon />
+              </Tooltip>
             </IconButton>
             <Menu
               id="layout-menu"
@@ -375,14 +434,25 @@ const GraphViewer = (props) => {
               <MenuItem selected={RADIAL_OUT.layout === selectedLayout.layout} onClick={() => handleLayoutChange(RADIAL_OUT)}>{RADIAL_OUT.label}</MenuItem>
               <MenuItem selected={TOP_DOWN.layout === selectedLayout.layout} onClick={() => handleLayoutChange(TOP_DOWN)}>{TOP_DOWN.label}</MenuItem>
             </Menu>
-            <IconButton onClick={(e) => zoomIn()}>
-              <ZoomInIcon />
+            <IconButton area-label="ZoomIn" onClick={(e) => zoomIn()}>
+              <Tooltip id="button-report" title="Zoom In">
+                <ZoomInIcon />
+              </Tooltip>
             </IconButton>
-            <IconButton onClick={(e) => zoomOut()}>
-              <ZoomOutIcon />
+            <IconButton area-label="ZoomOut" onClick={(e) => zoomOut()}>
+              <Tooltip id="button-report" title="Zoom Out">
+                <ZoomOutIcon />
+              </Tooltip>
             </IconButton>
-            <IconButton onClick={(e) => resetCamera()}>
-              <RefreshIcon />
+            <IconButton area-label="ResetCamera" onClick={(e) => resetCamera()}>
+              <Tooltip id="button-report" title="Reset Camera">
+                <RefreshIcon />
+              </Tooltip>
+            </IconButton>
+            <IconButton area-label="Expand" onClick={(e) => expandAll(e)}>
+              <Tooltip id="button-report" title={ !collapsed ? "Collapse All" : "Expand All"}>
+                { !collapsed ? <UnfoldLessIcon/> : <UnfoldMoreIcon /> }
+              </Tooltip>
             </IconButton>
             <LayersIcon />
           </div>

@@ -2,6 +2,7 @@
     "datasets_url": "https://cassava.ucsd.edu/sparc/datasets/",
     "repository_url": "https://cassava.ucsd.edu/sparc/preview/exports/",
     "available_datasets": "curation-export-published.ttl",
+    "groups" : { "order" : [{"subjectSpecies" : { "tag" : "Subject Species"}}, {"subjectStrain" : { "tag" : "Subject Strain"}}, {"biologicalSex" : { "tag" : "Subject Sex"}}, {"hasAgeCategory" : { "tag" : "Subject Age"}}]},
     "text" : {
         "datasetsButtonText" : "SPARC Datasets",
         "datasetsDialogSearchText" : "Search datasets by label or id",

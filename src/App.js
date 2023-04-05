@@ -1,6 +1,6 @@
 import './flexlayout.css';
 import theme from './theme';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { hot } from 'react-hot-loader';
 import Box from '@material-ui/core/Box';
 import Splinter from './utils/Splinter';
@@ -50,14 +50,16 @@ const App = () => {
   let json_url = '';
   let splinter = undefined;
 
-  const fillDataset = async () => {
-    splinter = new Splinter(_json, _turtle);
+  const fillDataset = async (turtle, json) => {
+    splinter = new Splinter(json, turtle);
     const _dataset = {
       id: splinter.getDatasetId(),
       graph: await splinter.getGraph(),
       tree: await splinter.getTree(),
       splinter: splinter
     };
+    console.log("Graph ", _dataset.graph);
+
     dispatch(addDataset(_dataset));
     dispatch(addWidget({
       id: _dataset.id,
@@ -101,6 +103,25 @@ const App = () => {
     });
   };
 
+  const loadFiles = async(datasetID) => {
+    turtle_url = config.datasets_url + datasetID + "/LATEST/curation-export.ttl";
+      const ttlHandler = new FileHandler();
+      ttlHandler.get_remote_file(turtle_url, (url, turtleData) => {
+        if (turtleData) {
+          json_url = config.datasets_url + datasetID + '/LATEST/path-metadata.json';    
+          const jsonHandler = new FileHandler();
+          jsonHandler.get_remote_file(json_url, (url, jsonData) => {
+            if (turtleData && jsonData && !initialised) {
+              fillDataset(turtleData, jsonData);
+              setInitialised(true);
+            }
+          }, () => {
+            setLoading(false);
+          });
+        }
+      },null);
+  }
+
   const loadDatsetFromDOI = async (url, fileData) => {
     let file = {
       id: "ttl",
@@ -110,45 +131,31 @@ const App = () => {
     };
     const splinter = new DatasetsListSplinter(undefined, file.data);
     let graph = await splinter.getGraph();
+    console.log("Graph ", graph);
     let datasets = graph.nodes.filter((node) => node?.attributes?.hasDoi);
-    const match = datasets.find( node => node.attributes?.hasDoi?.[0]?.includes(doi) );
+    const match = datasets.find( node => node.attributes?.hasDoi?.[0]?.includes(doi));
     if ( match ) {
       const datasetID = match.name;
-      turtle_url = config.datasets_url + datasetID + "/LATEST/curation-export.ttl";
-      const ttlHandler = new FileHandler();
-      ttlHandler.get_remote_file(turtle_url, (url, data) => {
-        if (data) {
-          setTurtle(data);
-          loadJSONFile(datasetID);
-        }
-      },null);
+      loadFiles(datasetID);
     } else {
       setLoading(false);
       setInitialised(false);
     }
   };
 
-  if (datasetID && datasetID !== "" && _turtle === undefined) {
-    loadTurtleFile();
-  }
-
-  if (datasetID && datasetID !== "" && _json === undefined) {
-    loadJSONFile(datasetID);
-  }
-
-  if (doi && doi !== "" && doiMatch) {
-    if ( doiMatch ){
-      const fileHandler = new FileHandler();
-      const summaryURL = config.repository_url + config.available_datasets;
-      fileHandler.get_remote_file(summaryURL, loadDatsetFromDOI);
-      setDoiMatch(false)
+  useEffect(() => {
+    if (datasetID && datasetID !== "" ) {
+      loadFiles(datasetID);
     }
-  }
 
-  if (_turtle && _json && !initialised) {
-    fillDataset();
-    setInitialised(true);
-  }
+    if (doi && doi !== "" ) {
+      if ( doiMatch ){
+        const fileHandler = new FileHandler();
+        const summaryURL = config.repository_url + config.available_datasets;
+        fileHandler.get_remote_file(summaryURL, loadDatsetFromDOI);
+      }
+    }
+  }, []);
 
   return (
     <MuiThemeProvider theme={theme}>

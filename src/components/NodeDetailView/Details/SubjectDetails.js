@@ -90,18 +90,6 @@ const SubjectDetails = (props) => {
                         </Box>)
                     : <> </>
                 }
-                { node?.graph_node?.attributes?.hasDerivedInformationAsParticipant !== undefined
-                    ? (<Box className="tab-content-row">
-                            <Links href={node?.graph_node?.attributes?.hasDerivedInformationAsParticipant} title="Derived information as participant" />
-                        </Box>)
-                    : <></>
-                }
-                { node?.graph_node?.attributes?.participantInPerformanceOf !== undefined
-                    ? (<Box className="tab-content-row">
-                            <Links href={node?.graph_node?.attributes?.participantInPerformanceOf} title="Participant in performance of" />
-                        </Box>)
-                    : <> </>
-                }
             </Box>
         </Box>
     );

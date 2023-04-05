@@ -84,10 +84,10 @@ const DatasetDetails = (props) => {
         <Box id={idDetails}>
             <Box className="tab-content">
                 <SimpleLabelValue label={'Title'} value={title} heading={'Dataset Details'} />
-                { node.graph_node.attributes?.hasUriHuman && node.graph_node.attributes?.hasUriHuman[0] !== ""
+                { node.graph_node.attributes?.hasDoi && node.graph_node.attributes?.hasDoi[0] !== ""
                     ? (<Box className="tab-content-row">
                             <Typography component="label">Label</Typography>
-                            <Links key={`label_href_link`} href={node.graph_node.attributes?.hasUriHuman[0]} title={label} />
+                            <Links key={`label_href_link`} href={node.graph_node.attributes?.hasDoi[0]} title={label} />
                         </Box>)
                     : (<SimpleLabelValue label={'Label'} value={label} />)
                 }
@@ -118,10 +118,10 @@ const DatasetDetails = (props) => {
                     </List>
                 </Box>
 
-                { node.graph_node.attributes?.hasUriHuman !== undefined
+                { node.graph_node.attributes?.hasDoi !== undefined
                     ? (<Box className="tab-content-row">
                             <Typography component="label">Links</Typography>
-                            <Links key={`detail_links_dataset`} href={node.graph_node.attributes?.hasUriHuman[0]} title="Dataset" />
+                            <Links key={`detail_links_dataset`} href={node.graph_node.attributes?.hasDoi[0]} title="Dataset" />
                         </Box>)
                     : <> </>
                 }
