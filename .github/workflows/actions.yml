@@ -25,12 +25,12 @@ jobs:
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 16.X
     - name: SDS Viewer elements snapshot test
       run: |
           #install dependencies
-          npm ci
-          # run scaffold element snapshot tests
-          npm run snapshot_test
+          yarn
+          # run tests
+          npm run e2e_test
       env:
           CI: true
