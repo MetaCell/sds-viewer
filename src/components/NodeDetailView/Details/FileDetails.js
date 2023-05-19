@@ -52,7 +52,7 @@ const FileDetails = (props) => {
     return (
         <Box className="secondary-sidebar_body" id={idDetails}>
             <Box className="tab-content">
-                { node.graph_node.attributes?.hasUriHuman && node.graph_node.attributes?.hasUriHuman[0] !== ""
+                { node.graph_node?.attributes?.hasUriHuman && node.graph_node?.attributes?.hasUriHuman[0] !== ""
                     ? (<Box className="tab-content-row">
                             <Typography component="h3">{"File Details"}</Typography>
                             <Typography component="label">Label</Typography>
