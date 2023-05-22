@@ -186,7 +186,7 @@ class Splinter {
             await this.processDataset();
         }
 
-        let filteredNodes = this.forced_nodes?.filter( n => n.type !== rdfTypes.UBERON.key && !(n.type === rdfTypes.Collection.key && n.children_counter === 0));
+        let filteredNodes = this.forced_nodes?.filter( n => n.type !== rdfTypes.UBERON.key && n.type !== rdfTypes.Award.key && !(n.type === rdfTypes.Collection.key && n.children_counter === 0));
         let cleanLinks = [];
         let that = this;
         filteredNodes?.forEach( n => {
@@ -224,9 +224,9 @@ class Splinter {
             if ( n.type === rdfTypes.File.key ) {
                 n.collapsed = true; 
             }
-            if ( n.type === typesModel.NamedIndividual.contributor.type ) {
-                n.collapsed = true; 
-            }
+            // if ( n.type === typesModel.NamedIndividual.contributor.type ) {
+            //     n.collapsed = true; 
+            // }
             if ( n.type ===  typesModel.NamedIndividual.subject.type ) {
                 n.collapsed = true; 
             }
@@ -265,6 +265,7 @@ class Splinter {
         console.log("Force edges ", this.forced_edges)
 
 
+        filteredNodes = filteredNodes.filter( n => n.type !== rdfTypes.Award.key );
         console.log("Forced nodes ", filteredNodes)
         return {
             nodes: filteredNodes,
@@ -530,24 +531,25 @@ class Splinter {
 
     organise_subjects(target_node, link, groups){
         let parent = this.nodes.get(subject_key);
-        config.groups.order.forEach( category => {
-            let group = Object.keys(category)[0];
-            if ( target_node.attributes[group]?.[0] ) {
-                let source = this.nodes.get(target_node.attributes[group]?.[0]);
+        let keys = Object.keys(config.groups.order);
+        keys.forEach( key => {
+            let group = config.groups.order[key];
+            if ( target_node.attributes[key]?.[0] ) {
+                let source = this.nodes.get(target_node.attributes[key]?.[0]);
                 if ( source !== undefined ) {
-                    target_node.attributes[group][0] = source.attributes.label[0];
+                    target_node.attributes[key][0] = source.attributes.label[0];
                 }
                 
-                const groupID = parent.id + "_" + target_node.attributes[group]?.[0].replace(/\s/g, "");
+                const groupID = parent.id + "_" + target_node.attributes[key]?.[0].replace(/\s/g, "");
 
                 if ( this.nodes.get(groupID) === undefined ) {
-                    let name = target_node.attributes[group]?.[0];
+                    let name = target_node.attributes[key]?.[0];
 
                     const groupNode = {
                         id: groupID,
                         name: name,
                         type: typesModel.NamedIndividual.group.type,
-                        properties: category[group],
+                        properties: key,
                         parent : parent,
                         proxies: [],
                         level: parent.level + 1,
@@ -559,18 +561,21 @@ class Splinter {
                         subjects : 0,
                     };
                     let nodeF = this.factory.createNode(groupNode);
+                    const img = new Image();
+                    img.src = group.icon;
+                    nodeF.img = img;
                     this.nodes.set(groupID, nodeF);
                     groups.push({
                         source: parent.id,
                         target: nodeF.id
                     });
-                    this.groups[group] ? this.groups[group][nodeF.name] = nodeF :  this.groups[group] = {[nodeF.name] : nodeF};
+                    this.groups[key] ? this.groups[key][nodeF.name] = nodeF :  this.groups[key] = {[nodeF.name] : nodeF};
                     parent = groupNode;
                 } else {
                     parent = this.nodes.get(groupID);
                 }
             } else {
-                console.error("The group node already exists!", group);
+                console.error("The group node already exists!", group.tag);
             }
         });
         link.source = parent.id;
@@ -599,6 +604,9 @@ class Splinter {
         };
         if (this.nodes.get(subject_key) === undefined) {
             this.nodes.set(subject_key, this.factory.createNode(subjects));
+            const img = new Image();
+            img.src =  "./images/graph/group.svg";
+            subjects.img = img; 
             this.edges.push({
                 source: id,
                 target: subjects.id
