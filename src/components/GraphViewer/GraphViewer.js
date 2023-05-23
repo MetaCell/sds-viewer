@@ -107,49 +107,69 @@ const GraphViewer = (props) => {
     })(); // IIFE
 
     if ( selectedLayout.layout === TOP_DOWN.layout ){
+      let levels = {};
+      visibleNodes.forEach( n => {
+        if ( levels[n.level] ){
+          levels[n.level].push(n);
+        } else {
+          levels[n.level] = [n];
+        }
+      })
+      
       // Calculate level with max amount of nodes
-      let maxLevel = Object.keys(levelsMap).reduce((a, b) => levelsMap[a].length > levelsMap[b].length ? a : b);
+      let maxLevel = Object.keys(levels).reduce((a, b) => levels[a].length > levels[b].length ? a : b);
+      let maxLevelNodes = levels[maxLevel];
+
+      console.log("maxlevel ", maxLevel);
+      console.log("max level nodes ", maxLevelNodes);
       // Space between nodes
       let nodeSpace = 50;
       // The furthestLeft a node can be
-      let furthestLeft = 0 - (Math.ceil(levelsMap[maxLevel].length)/2  * nodeSpace );
+      let furthestLeft = 0 - (Math.ceil(maxLevelNodes.length)/2  * nodeSpace );
       let positionsMap = {};
 
-      let levelsMapKeys = Object.keys(levelsMap);
+      let levelsMapKeys = Object.keys(levels);
 
       levelsMapKeys.forEach( level => {
           positionsMap[level] = furthestLeft + nodeSpace/2;
-          levelsMap[level].sort((a, b) => a.attributes?.relativePath?.localeCompare(b.attributes?.relativePath));
+          levels[level].sort((a, b) => a.attributes?.relativePath?.localeCompare(b.attributes?.relativePath));
       });
 
-      for ( let i = 3; i <= maxLevel ; i++ ){
-          levelsMap[i]?.sort( (a, b) => { 
+      for ( let i = 1; i <= maxLevel ; i++ ){
+        levels[i]?.sort( (a, b) => { 
               return a?.parent?.id > b?.parent?.id ? 1 : -1;
           });            
       }
-      console.log("Levels map ", levelsMap);
+      console.log("Levels map ", levels);
 
       // Start assigning the graph from the bottom up
       let neighbors = 0;
       levelsMapKeys.reverse().forEach( level => {
-          levelsMap[level].forEach ( (n, index) => {
+        levels[level].forEach ( (n, index) => {
               neighbors = n?.neighbors?.filter(neighbor => { return neighbor.level >= n.level });
-              if ( neighbors?.length > 0 ) {
+              if ( !n.collapsed ) {
+              if ( neighbors?.length > 0  ) {
                   let max = Number.MIN_SAFE_INTEGER, min = Number.MAX_SAFE_INTEGER;
                   neighbors.forEach( neighbor => {
                       if ( neighbor.xPos > max ) { max = neighbor.xPos };
-                      if ( neighbor.xPos < min ) { min = neighbor.xPos };
+                      if ( neighbor.xPos <= min ) { min = neighbor.xPos };
                   });
-                  n.xPos = min === max ? min : min + (max - min) * .5;
+                  n.xPos = min === max ? min  : min + ((max - min) * .5);
                   positionsMap[n.level] = n.xPos + nodeSpace;
               } else {
                   n.xPos = positionsMap[n.level] + nodeSpace;
                   positionsMap[n.level] = n.xPos;
               }
+            } else {
+              n.xPos = positionsMap[n.level] ;
+              positionsMap[n.level] = n.xPos+ nodeSpace;
+            }
           })
       });
+      console.log("positionsMap ", positionsMap);
 
     }
+
 
     return { nodes : visibleNodes, links : visibleLinks, levelsMap : levelsMap, hierarchyVariant : maxLevel * 20 };
 
@@ -184,18 +204,20 @@ const GraphViewer = (props) => {
     setForce();
   };
 
-  const collapseSubLevels = (node, collapsed) => {
+  const collapseSubLevels = (node, collapsed, children) => {
     node?.childLinks?.forEach( n => {
-      n.target.collapsed = collapsed;
-      collapseSubLevels(n.target, collapsed);
+      if ( collapsed !== undefined ) n.target.collapsed = collapsed;
+      collapseSubLevels(n.target, collapsed, children);
+      children.links = children.links + 1;
     });
   }
 
-  
   const handleNodeLeftClick = (node, event) => {
     if ( node?.id === selectedNode?.id ) {
         node.collapsed = !node.collapsed;
-        collapseSubLevels(node, node.collapsed)
+        if ( node.type === rdfTypes.Subject.key || node.type === rdfTypes.Collection.key ) {
+          collapseSubLevels(node, node.collapsed, { links : 0 });
+        } 
         const updatedData = getPrunedTree();
         setData(updatedData);
     }
@@ -294,7 +316,7 @@ const GraphViewer = (props) => {
 
   const onEngineStop = () => {
     setForce();
-    // resetCamera();
+    resetCamera();
   }
 
   useEffect(() => {
@@ -419,7 +441,9 @@ const GraphViewer = (props) => {
       }
       ctx.fillText(...textProps);
       if ( node.childLinks?.length && node.collapsed ) {
-        const collapsedNodes = [node.childLinks?.length, node.x, textHoverPosition[1]];
+        let children = { links : 0 };
+        collapseSubLevels(node, undefined, children)
+        const collapsedNodes = [children.links, node.x, textHoverPosition[1]];
         ctx.fillStyle = GRAPH_COLORS.collapsedFolder;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'bottom';
@@ -473,7 +497,7 @@ const GraphViewer = (props) => {
             return 100 / (node.level + 1);
           }
         }}
-        nodeRelSize={2.5}
+        nodeRelSize={10}
         onNodeHover={handleNodeHover}
         // Allows updating link properties, as color and curvature. Without this, linkCurvature doesn't work.
         onNodeClick={(node, event) => handleNodeLeftClick(node, event)}

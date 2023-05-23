@@ -199,7 +199,6 @@ class Splinter {
                         }
                     }
                 })
-                n.collapsed = false;  
             }
             if ( n.type === rdfTypes.Sample.key ) {
                 let keys = Object.keys(that.groups);
@@ -210,25 +209,6 @@ class Splinter {
                         }
                     }
                 }) 
-                n.collapsed = true; 
-            }
-            if ( n.type === rdfTypes.Collection.key ) {
-                n.collapsed = true; 
-            }
-            if ( n.type === rdfTypes.Group.key ) {
-                n.collapsed = false; 
-            }
-            if ( n.type === rdfTypes.Dataset.key ) {
-                n.collapsed = false; 
-            }
-            if ( n.type === rdfTypes.File.key ) {
-                n.collapsed = true; 
-            }
-            // if ( n.type === typesModel.NamedIndividual.contributor.type ) {
-            //     n.collapsed = true; 
-            // }
-            if ( n.type ===  typesModel.NamedIndividual.subject.type ) {
-                n.collapsed = true; 
             }
         })
         console.log("Force edges ", this.forced_edges)
@@ -243,9 +223,13 @@ class Splinter {
                 if ( a && b ) {
                     !a.neighbors && (a.neighbors = []);
                     !b.neighbors && (b.neighbors = []);
-                    a.neighbors.push(b);
-                    b.neighbors.push(a);
-
+                    if ( !a.neighbors.find( n => n.id === b.id )){
+                        a.neighbors.push(b);
+                    }
+                    if ( !b.neighbors.find( n => n.id === a.id )){
+                        b.neighbors.push(a);
+                    }
+                    
                     !a.links && (a.links = []);
                     !b.links && (b.links = []);
                     a.links.push(link);
