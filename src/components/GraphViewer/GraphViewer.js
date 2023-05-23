@@ -176,7 +176,7 @@ const GraphViewer = (props) => {
   const [selectedNode, setSelectedNode] = useState(null);
   const [highlightNodes, setHighlightNodes] = useState(new Set());
   const [highlightLinks, setHighlightLinks] = useState(new Set());
-  const [selectedLayout, setSelectedLayout] = React.useState(TOP_DOWN);
+  const [selectedLayout, setSelectedLayout] = React.useState(RADIAL_OUT);
   const [layoutAnchorEl, setLayoutAnchorEl] = React.useState(null);
   const [cameraPosition, setCameraPosition] = useState({ x : 0 , y : 0 });
   const open = Boolean(layoutAnchorEl);
@@ -493,7 +493,7 @@ const GraphViewer = (props) => {
             return 100 / (node.level + 1);
           }
         }}
-        nodeRelSize={15}
+        nodeRelSize={2.5}
         onNodeHover={handleNodeHover}
         // Allows updating link properties, as color and curvature. Without this, linkCurvature doesn't work.
         onNodeClick={(node, event) => handleNodeLeftClick(node, event)}
