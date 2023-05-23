@@ -132,7 +132,7 @@ const GraphViewer = (props) => {
 
       levelsMapKeys.forEach( level => {
           positionsMap[level] = furthestLeft + nodeSpace/2;
-          levels[level].sort((a, b) => a.attributes?.relativePath?.localeCompare(b.attributes?.relativePath));
+          levels[level].sort((a, b) => a?.parent?.id > b?.parent?.id ? 1 : -1)
       });
 
       for ( let i = 1; i <= maxLevel ; i++ ){
@@ -140,7 +140,7 @@ const GraphViewer = (props) => {
               return a?.parent?.id > b?.parent?.id ? 1 : -1;
           });            
       }
-      console.log("Levels map ", levels);
+      // console.log("Levels map ", levels);
 
       // Start assigning the graph from the bottom up
       let neighbors = 0;
@@ -148,29 +148,25 @@ const GraphViewer = (props) => {
         levels[level].forEach ( (n, index) => {
               neighbors = n?.neighbors?.filter(neighbor => { return neighbor.level >= n.level });
               if ( !n.collapsed ) {
-              if ( neighbors?.length > 0  ) {
-                  let max = Number.MIN_SAFE_INTEGER, min = Number.MAX_SAFE_INTEGER;
-                  neighbors.forEach( neighbor => {
-                      if ( neighbor.xPos > max ) { max = neighbor.xPos };
-                      if ( neighbor.xPos <= min ) { min = neighbor.xPos };
-                  });
-                  n.xPos = min === max ? min  : min + ((max - min) * .5);
-                  positionsMap[n.level] = n.xPos + nodeSpace;
-              } else {
+                if ( neighbors?.length > 0  ) {
+                    let max = Number.MIN_SAFE_INTEGER, min = Number.MAX_SAFE_INTEGER;
+                    neighbors.forEach( neighbor => {
+                        if ( neighbor.xPos > max ) { max = neighbor.xPos };
+                        if ( neighbor.xPos <= min ) { min = neighbor.xPos };
+                    });
+                    n.xPos = min === max ? min  : min + ((max - min) * .5);
+                    positionsMap[n.level] = n.xPos + nodeSpace;
+                } else {
                   n.xPos = positionsMap[n.level] + nodeSpace;
                   positionsMap[n.level] = n.xPos;
-              }
+                }
             } else {
               n.xPos = positionsMap[n.level] ;
               positionsMap[n.level] = n.xPos+ nodeSpace;
             }
           })
       });
-      console.log("positionsMap ", positionsMap);
-
     }
-
-
     return { nodes : visibleNodes, links : visibleLinks, levelsMap : levelsMap, hierarchyVariant : maxLevel * 20 };
 
   };
@@ -481,7 +477,7 @@ const GraphViewer = (props) => {
         linkWidth={2}
         dagLevelDistance={selectedLayout.layout === TOP_DOWN.layout ? 60 : 0}
         linkDirectionalParticles={1}
-        //forceRadial={15}
+        forceRadial={selectedLayout.layout === TOP_DOWN.layout ? 0 : 15}
         warmupTicks={data?.nodes?.length}
         linkDirectionalParticleWidth={link => highlightLinks.has(link) ? 4 : 0}
         linkCanvasObjectMode={'replace'}
@@ -497,7 +493,7 @@ const GraphViewer = (props) => {
             return 100 / (node.level + 1);
           }
         }}
-        nodeRelSize={10}
+        nodeRelSize={15}
         onNodeHover={handleNodeHover}
         // Allows updating link properties, as color and curvature. Without this, linkCurvature doesn't work.
         onNodeClick={(node, event) => handleNodeLeftClick(node, event)}
