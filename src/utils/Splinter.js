@@ -990,24 +990,28 @@ class Splinter {
     }
 
     generateLeaf(node, parent) {
-        node.id = node?.uri_api
-        node.parent = true;
-        node.text = parent !== undefined ? node?.basename : this.dataset_id;
-        node.type = node.mimetype === "inode/directory" ? rdfTypes.Collection.key : rdfTypes.File.key;
-        node.path = (parent !== undefined && parent.path !== undefined) ? [node.id, ...parent.path] : [node.id];
-        if (!node.items) {
-            node.items = [];
+        if ( node ) {
+            node.id = node?.uri_api
+            node.parent = true;
+            node.text = parent !== undefined ? node?.basename : this.dataset_id;
+            node.type = node.mimetype === "inode/directory" ? rdfTypes.Collection.key : rdfTypes.File.key;
+            node.path = (parent !== undefined && parent.path !== undefined) ? [node.id, ...parent.path] : [node.id];
+            if (!node.items) {
+                node.items = [];
+            }
+            node.graph_reference = this.findReference(node.uri_api);
+            this.tree_map.set(node.id, node);
+            const newNode = {
+                id: node.uri_api,
+                text: node.text,
+                items: node.items,
+                graph_reference: node?.graph_reference?.id,
+                path: node.path
+            }
+            return newNode;
+        } else {
+            return {}
         }
-        node.graph_reference = this.findReference(node.uri_api);
-        this.tree_map.set(node.id, node);
-        const newNode = {
-            id: node.uri_api,
-            text: node.text,
-            items: node.items,
-            graph_reference: node?.graph_reference?.id,
-            path: node.path
-        }
-        return newNode;
     }
 
     findReference(id) {

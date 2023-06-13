@@ -29,8 +29,21 @@ const MainLayout = () => {
 
             myManager.model.visitNodes((node, level) => {
                 node.setEventListener("resize", (node) => {
+                    let visibleChild = myManager.model._activeTabSet._children.filter(element => 
+                        element._visible
+                    );
                     const event = new CustomEvent('nodeResized', {
-                        detail: node
+                        detail: visibleChild
+                    });
+                    document.dispatchEvent(event);
+
+                });
+                node.setEventListener("visibility", (node, data) => {
+                    let visibleChild = myManager.model._activeTabSet._children.filter(element => 
+                        !element._visible
+                    );
+                    const event = new CustomEvent('nodeVisible', {
+                        detail: visibleChild
                     });
                     document.dispatchEvent(event);
 

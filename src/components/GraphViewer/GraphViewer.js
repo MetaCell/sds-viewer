@@ -63,18 +63,19 @@ const roundRect = (ctx, x, y, width, height, radius, color, alpha) => {
 
 const GraphViewer = (props) => {
   const dispatch = useDispatch();
-
- 
-  const updateLevels = (n, previousLevel) => {
-    n?.map( node => {
-        if ( node?.level > previousLevel ){
-            updateLevels(node?.neighbors, node.level);
-            node.level = node.level + 1;
-        }
-    });
-
-    return;
-  }
+  const graphRef = React.useRef(null);
+  const [hoverNode, setHoverNode] = useState(null);
+  const [selectedNode, setSelectedNode] = useState(null);
+  const [highlightNodes, setHighlightNodes] = useState(new Set());
+  const [highlightLinks, setHighlightLinks] = useState(new Set());
+  const [selectedLayout, setSelectedLayout] = React.useState(RADIAL_OUT);
+  const [layoutAnchorEl, setLayoutAnchorEl] = React.useState(null);
+  const [cameraPosition, setCameraPosition] = useState({ x : 0 , y : 0 });
+  const open = Boolean(layoutAnchorEl);
+  const [loading, setLoading] = React.useState(false);
+  const nodeSelected = useSelector(state => state.sdsState.instance_selected.graph_node);
+  const groupSelected = useSelector(state => state.sdsState.group_selected.graph_node);
+  const [collapsed, setCollapsed] = React.useState(true);
 
   const getPrunedTree = () => {
     let nodesById = Object.fromEntries(window.datasets[props.graph_id].graph?.nodes?.map(node => [node.id, node]));
@@ -106,7 +107,7 @@ const GraphViewer = (props) => {
       nodes?.forEach(traverseTree);
     })(); // IIFE
 
-    if ( selectedLayout.layout === TOP_DOWN.layout ){
+    if ( selectedLayout.layout === TOP_DOWN.layout && !collapsed ){
       let levels = {};
       visibleNodes.forEach( n => {
         if ( levels[n.level] ){
@@ -117,6 +118,7 @@ const GraphViewer = (props) => {
       })
       
       // Calculate level with max amount of nodes
+      let highestLevel = Object.keys(levels).length;
       let maxLevel = Object.keys(levels).reduce((a, b) => levels[a].length > levels[b].length ? a : b);
       let maxLevelNodes = levels[maxLevel];
 
@@ -131,22 +133,33 @@ const GraphViewer = (props) => {
       let levelsMapKeys = Object.keys(levels);
 
       levelsMapKeys.forEach( level => {
-          positionsMap[level] = furthestLeft + nodeSpace/2;
+          furthestLeft =  0 - (Math.ceil(levels[level].length)/2  * nodeSpace );
+          positionsMap[level] = furthestLeft + nodeSpace;
           levels[level].sort((a, b) => a?.parent?.id > b?.parent?.id ? 1 : -1)
       });
 
-      for ( let i = 1; i <= maxLevel ; i++ ){
+      console.log("Highest level ", highestLevel)
+      for ( let i = 1; i <= highestLevel ; i++ ){
         levels[i]?.sort( (a, b) => { 
-              return a?.parent?.id > b?.parent?.id ? 1 : -1;
-          });            
+          if (a?.parent?.id < b?.parent?.id) {
+            return 1;
+          }
+          if (a?.parent?.id > b?.parent?.id) {
+            return -1;
+          }
+          return 0;
+        });            
       }
-      // console.log("Levels map ", levels);
+      console.log("Levels map ", levels);
 
       // Start assigning the graph from the bottom up
       let neighbors = 0;
       levelsMapKeys.reverse().forEach( level => {
+        let collapsedInLevel = levels[level].filter( n => n.collapsed);
+        let notcollapsedInLevel = levels[level].filter( n => !n.collapsed);
         levels[level].forEach ( (n, index) => {
-              neighbors = n?.neighbors?.filter(neighbor => { return neighbor.level >= n.level });
+              neighbors = n?.neighbors?.filter(neighbor => { return neighbor.level > n.level });
+
               if ( !n.collapsed ) {
                 if ( neighbors?.length > 0  ) {
                     let max = Number.MIN_SAFE_INTEGER, min = Number.MAX_SAFE_INTEGER;
@@ -154,37 +167,27 @@ const GraphViewer = (props) => {
                         if ( neighbor.xPos > max ) { max = neighbor.xPos };
                         if ( neighbor.xPos <= min ) { min = neighbor.xPos };
                     });
-                    n.xPos = min === max ? min  : min + ((max - min) * .5);
+                    n.xPos = min === max ? min : min + ((max - min) * .5);
                     positionsMap[n.level] = n.xPos + nodeSpace;
                 } else {
                   n.xPos = positionsMap[n.level] + nodeSpace;
                   positionsMap[n.level] = n.xPos;
                 }
-            } else {
+            }else {
               n.xPos = positionsMap[n.level] ;
-              positionsMap[n.level] = n.xPos+ nodeSpace;
-            }
+              positionsMap[n.level] = n.xPos + nodeSpace;
+              if ( notcollapsedInLevel?.length > 0 ) {
+
+              }
+            }              
           })
       });
+      console.log("positionsMap ", positionsMap)
     }
     return { nodes : visibleNodes, links : visibleLinks, levelsMap : levelsMap, hierarchyVariant : maxLevel * 20 };
 
   };
-
-  const graphRef = React.useRef(null);
-  const [hoverNode, setHoverNode] = useState(null);
-  const [selectedNode, setSelectedNode] = useState(null);
-  const [highlightNodes, setHighlightNodes] = useState(new Set());
-  const [highlightLinks, setHighlightLinks] = useState(new Set());
-  const [selectedLayout, setSelectedLayout] = React.useState(RADIAL_OUT);
-  const [layoutAnchorEl, setLayoutAnchorEl] = React.useState(null);
-  const [cameraPosition, setCameraPosition] = useState({ x : 0 , y : 0 });
-  const open = Boolean(layoutAnchorEl);
-  const [loading, setLoading] = React.useState(false);
   const [data, setData] = React.useState(getPrunedTree());
-  const nodeSelected = useSelector(state => state.sdsState.instance_selected.graph_node);
-  const groupSelected = useSelector(state => state.sdsState.group_selected.graph_node);
-  const [collapsed, setCollapsed] = React.useState(true);
 
   const handleLayoutClick = (event) => {
     setLayoutAnchorEl(event.currentTarget);
@@ -251,9 +254,10 @@ const GraphViewer = (props) => {
     window.datasets[props.graph_id].graph?.nodes?.forEach( node => {
       collapsed ? node.collapsed = !collapsed : node.collapsed = node?.type === typesModel.NamedIndividual.subject.type;
     })
+    setCollapsed(!collapsed)
     let updatedData = getPrunedTree();
     setData(updatedData);
-    setCollapsed(!collapsed)
+    resetCamera();
   }
 
   /**
@@ -289,8 +293,6 @@ const GraphViewer = (props) => {
    */
   const resetCamera = () => {
     graphRef?.current?.ggv?.current.zoomToFit();
-    let center =  graphRef?.current?.ggv?.current.centerAt();
-    setCameraPosition({ x :  center?.x , y :  center?.y });
   };
 
   const setForce = () => {
@@ -303,10 +305,10 @@ const GraphViewer = (props) => {
       graphRef?.current?.ggv?.current.d3Force('y', d3.forceY());
       graphRef?.current?.ggv?.current.d3Force('center', d3.forceCenter(0,0));
       graphRef?.current?.ggv?.current.d3Force("manyBody", d3.forceManyBody().strength(node => force * Math.sqrt(100 / window.datasets[props.graph_id].graph.levelsMap[node.level]?.length )));
-    } else {
-      // graphRef?.current?.ggv?.current.d3Force('collision', d3.forceCollide(20));
-      // graphRef?.current?.ggv?.current.d3Force('link').distance(0).strength(1);
-      //graphRef?.current?.ggv?.current.d3Force("charge").strength(-10);
+     } else {
+      graphRef?.current?.ggv?.current.d3Force('collision', d3.forceCollide(20));
+      graphRef?.current?.ggv?.current.d3Force('link').distance(0).strength(1);
+      graphRef?.current?.ggv?.current.d3Force("charge").strength(-10);
     }
   }
 
@@ -330,11 +332,41 @@ const GraphViewer = (props) => {
   },[selectedLayout]);
 
   useEffect(() => {
+    document.addEventListener("nodeVisible", (e) => {
+      let visibleNodes = e.detail;
+      let match = visibleNodes?.find( v => v?._attributes?.id === props.graph_id );
+      if ( match ) {
+        setLoading(true);
+        setTimeout( timeout => {
+          setForce()
+          setLoading(false);
+        },10)
+      }
+    });
+    document.addEventListener("nodeResized", (e) => {
+      let visibleNodes = e.detail;
+      let match = visibleNodes?.find( v => v?._attributes?.id === props.graph_id );
+      if ( match ) {
+        resetCamera();
+        let center =  graphRef?.current?.ggv?.current.centerAt();
+        setCameraPosition({ x :  center?.x , y :  center?.y });
+      }
+    });
+  });
+
+  useEffect(() => {
     if ( groupSelected ) { 
       setSelectedNode(groupSelected);
       handleNodeRightClick(groupSelected);
     }
   },[groupSelected]) 
+
+  useEffect(() => {
+    if ( nodeSelected ) { 
+      setSelectedNode(nodeSelected);
+      handleNodeRightClick(nodeSelected);
+    }
+  },[nodeSelected]) 
 
   const handleNodeHover = (node) => {
     highlightNodes.clear();
@@ -466,19 +498,20 @@ const GraphViewer = (props) => {
       :
       <GeppettoGraphVisualization
         ref={ graphRef }
+        id = {props.graph_id}
         // Graph data with Nodes and Links to populate
         data={data}
         // Create the Graph as 2 Dimensional
         d2={true}
         onEngineStop={onEngineStop}
-        cooldownTime={1000}
+        cooldownTime={selectedLayout.layout === TOP_DOWN.layout ? Infinity : 1500}
+        warmupTicks={data?.nodes?.length}
         // Links properties
         linkColor = {handleLinkColor}
         linkWidth={2}
-        dagLevelDistance={selectedLayout.layout === TOP_DOWN.layout ? 60 : 0}
+        dagLevelDistance={selectedLayout.layout === TOP_DOWN.layout ? 75 : 0}
         linkDirectionalParticles={1}
         forceRadial={selectedLayout.layout === TOP_DOWN.layout ? 0 : 15}
-        warmupTicks={data?.nodes?.length}
         linkDirectionalParticleWidth={link => highlightLinks.has(link) ? 4 : 0}
         linkCanvasObjectMode={'replace'}
         onLinkHover={handleLinkHover}
@@ -486,7 +519,7 @@ const GraphViewer = (props) => {
         nodeCanvasObject={paintNode}
         nodeCanvasObjectMode={node => 'replace'}
         nodeVal = { node => {
-          if ( selectedLayout.layout === TOP_DOWN.layout ){
+          if ( selectedLayout.layout === TOP_DOWN.layout && !collapsed){
             node.fx = node.xPos;
             node.fy = 50 * node.level;
           } else {
