@@ -218,9 +218,9 @@ class Splinter {
             // Search for existing links
             let existingLing = cleanLinks.find( l => l.source === link.source && l.target === link.target );
             if ( !existingLing ) {
-                const a = filteredNodes.find( node => node.id === link.source );
-                const b = filteredNodes.find( node => node.id === link.target );
-                if ( a && b ) {
+                const a = this.nodes.get( link.source );
+                const b = this.nodes.get( link.target );
+                if ( a && b && ( a?.type !== rdfTypes.Award.key && b?.type !== rdfTypes.Award.key )) {
                     !a.neighbors && (a.neighbors = []);
                     !b.neighbors && (b.neighbors = []);
                     if ( !a.neighbors.find( n => n.id === b.id )){
@@ -245,12 +245,6 @@ class Splinter {
                 }
             }
         });
-
-        console.log("Force edges ", this.forced_edges)
-
-
-        filteredNodes = filteredNodes.filter( n => n.type !== rdfTypes.Award.key );
-        console.log("Forced nodes ", filteredNodes)
         return {
             nodes: filteredNodes,
             links: cleanLinks,
@@ -564,6 +558,7 @@ class Splinter {
         });
         link.source = parent.id;
         target_node.level = parent.level + 1;
+        target_node.id = parent.id + target_node.name;
         target_node.parent = parent;
         target_node.childLinks = [];
         target_node.collapsed = target_node.type === typesModel.NamedIndividual.subject.type;
@@ -894,6 +889,8 @@ class Splinter {
         parent.children_counter++;
         const new_node = this.buildNodeFromJson(node, level);
         new_node.parent = parent;
+        new_node.id = parent.id + new_node.id;
+        node.remote_id = new_node.id;
         this.forced_edges.push({
             source: parent.id,
             target: new_node.id
@@ -999,7 +996,12 @@ class Splinter {
             if (!node.items) {
                 node.items = [];
             }
-            node.graph_reference = this.findReference(node.uri_api);
+            node.graph_reference = this.findReference(node.remote_id);
+            if ( node.graph_reference === undefined ) {
+                node.graph_reference = this.findReference(node.uri_api);
+            }
+            console.log("Node ", node)
+            console.log("Graph reference ", node.graph_reference)
             this.tree_map.set(node.id, node);
             const newNode = {
                 id: node.uri_api,

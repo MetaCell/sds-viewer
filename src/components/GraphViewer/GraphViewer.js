@@ -14,7 +14,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { useSelector, useDispatch } from 'react-redux';
 import FormatAlignCenterIcon from '@material-ui/icons/FormatAlignCenter';
 import GeppettoGraphVisualization from '@metacell/geppetto-meta-ui/graph-visualization/Graph';
-import { GRAPH_SOURCE, SUBJECTS_LEVEL } from '../../constants';
+import { GRAPH_SOURCE } from '../../constants';
 import { rdfTypes, typesModel } from '../../utils/graphModel';
 
 const NODE_FONT = '500 5px Inter, sans-serif';
@@ -46,6 +46,8 @@ const RADIAL_OUT = {
   }
 };
 
+const nodeSpace = 50;
+
 const roundRect = (ctx, x, y, width, height, radius, color, alpha) => {
   if (width < 2 * radius) radius = width / 2;
   if (height < 2 * radius) radius = height / 2;
@@ -63,19 +65,26 @@ const roundRect = (ctx, x, y, width, height, radius, color, alpha) => {
 
 const GraphViewer = (props) => {
   const dispatch = useDispatch();
-  const graphRef = React.useRef(null);
-  const [hoverNode, setHoverNode] = useState(null);
-  const [selectedNode, setSelectedNode] = useState(null);
-  const [highlightNodes, setHighlightNodes] = useState(new Set());
-  const [highlightLinks, setHighlightLinks] = useState(new Set());
-  const [selectedLayout, setSelectedLayout] = React.useState(RADIAL_OUT);
-  const [layoutAnchorEl, setLayoutAnchorEl] = React.useState(null);
-  const [cameraPosition, setCameraPosition] = useState({ x : 0 , y : 0 });
-  const open = Boolean(layoutAnchorEl);
-  const [loading, setLoading] = React.useState(false);
-  const nodeSelected = useSelector(state => state.sdsState.instance_selected.graph_node);
-  const groupSelected = useSelector(state => state.sdsState.group_selected.graph_node);
-  const [collapsed, setCollapsed] = React.useState(true);
+
+  const updateNodes = (nodes, conflictNode, positionsMap, level, index) => {
+    let matchIndex = index;
+    for ( let i = 0; i < index ; i++ ) {
+      let conflict = nodes.find ( n => !n.collapsed && n?.parent?.id === nodes[i]?.parent?.id)
+      if ( conflict === undefined ){
+        conflict = nodes.find ( n => !n.collapsed )
+        if ( conflict === undefined ){
+          conflict = conflictNode;
+        }
+      }
+      matchIndex = nodes.findIndex( n => n.id === conflict.id );
+      let furthestLeft = conflict?.xPos;
+      if ( nodes[i].collapsed ) {
+        furthestLeft =  conflict.xPos - ((((matchIndex - i )/2))  * nodeSpace ); 
+        nodes[i].xPos =furthestLeft;
+      }
+      positionsMap[level] = furthestLeft + nodeSpace;
+    }
+  }
 
   const getPrunedTree = () => {
     let nodesById = Object.fromEntries(window.datasets[props.graph_id].graph?.nodes?.map(node => [node.id, node]));
@@ -94,7 +103,6 @@ const GraphViewer = (props) => {
     const visibleLinks = [];
 
     let levelsMap = window.datasets[props.graph_id].graph.levelsMap;
-    console.log("LM ", levelsMap);
     // // Calculate level with max amount of nodes
     let maxLevel = Object.keys(levelsMap).reduce((a, b) => levelsMap[a].filter( l => !l.collapsed ).length > levelsMap[b].filter( l => !l.collapsed ).length ? a : b);
     
@@ -107,7 +115,7 @@ const GraphViewer = (props) => {
       nodes?.forEach(traverseTree);
     })(); // IIFE
 
-    if ( selectedLayout.layout === TOP_DOWN.layout && !collapsed ){
+    if ( selectedLayout.layout === TOP_DOWN.layout ){
       let levels = {};
       visibleNodes.forEach( n => {
         if ( levels[n.level] ){
@@ -122,10 +130,7 @@ const GraphViewer = (props) => {
       let maxLevel = Object.keys(levels).reduce((a, b) => levels[a].length > levels[b].length ? a : b);
       let maxLevelNodes = levels[maxLevel];
 
-      console.log("maxlevel ", maxLevel);
-      console.log("max level nodes ", maxLevelNodes);
       // Space between nodes
-      let nodeSpace = 50;
       // The furthestLeft a node can be
       let furthestLeft = 0 - (Math.ceil(maxLevelNodes.length)/2  * nodeSpace );
       let positionsMap = {};
@@ -133,24 +138,18 @@ const GraphViewer = (props) => {
       let levelsMapKeys = Object.keys(levels);
 
       levelsMapKeys.forEach( level => {
-          furthestLeft =  0 - (Math.ceil(levels[level].length)/2  * nodeSpace );
-          positionsMap[level] = furthestLeft + nodeSpace;
-          levels[level].sort((a, b) => a?.parent?.id > b?.parent?.id ? 1 : -1)
-      });
-
-      console.log("Highest level ", highestLevel)
-      for ( let i = 1; i <= highestLevel ; i++ ){
-        levels[i]?.sort( (a, b) => { 
-          if (a?.parent?.id < b?.parent?.id) {
-            return 1;
-          }
-          if (a?.parent?.id > b?.parent?.id) {
+        furthestLeft =  0 - (Math.ceil(levels[level].length)/2  * nodeSpace ); 
+        positionsMap[level] = furthestLeft + nodeSpace;
+        levels[level]?.sort( (a, b) => { 
+          if (a?.id < b?.id) {
             return -1;
           }
-          return 0;
-        });            
-      }
-      console.log("Levels map ", levels);
+          if (a?.id > b?.id) {
+            return 1;
+          }
+          return 1;
+        });        
+      });
 
       // Start assigning the graph from the bottom up
       let neighbors = 0;
@@ -159,7 +158,6 @@ const GraphViewer = (props) => {
         let notcollapsedInLevel = levels[level].filter( n => !n.collapsed);
         levels[level].forEach ( (n, index) => {
               neighbors = n?.neighbors?.filter(neighbor => { return neighbor.level > n.level });
-
               if ( !n.collapsed ) {
                 if ( neighbors?.length > 0  ) {
                     let max = Number.MIN_SAFE_INTEGER, min = Number.MAX_SAFE_INTEGER;
@@ -169,25 +167,40 @@ const GraphViewer = (props) => {
                     });
                     n.xPos = min === max ? min : min + ((max - min) * .5);
                     positionsMap[n.level] = n.xPos + nodeSpace;
+                    if ( notcollapsedInLevel?.length > 0 && collapsedInLevel.length > 0) {
+                      updateNodes(levels[level], n, positionsMap, level, index);
+                    }
+                    positionsMap[n.level] = n.xPos + nodeSpace;
                 } else {
                   n.xPos = positionsMap[n.level] + nodeSpace;
                   positionsMap[n.level] = n.xPos;
+                  
                 }
             }else {
-              n.xPos = positionsMap[n.level] ;
-              positionsMap[n.level] = n.xPos + nodeSpace;
-              if ( notcollapsedInLevel?.length > 0 ) {
-
-              }
+              n.xPos = positionsMap[n.level] + nodeSpace;
+              positionsMap[n.level] = n.xPos ;
             }              
           })
       });
-      console.log("positionsMap ", positionsMap)
     }
     return { nodes : visibleNodes, links : visibleLinks, levelsMap : levelsMap, hierarchyVariant : maxLevel * 20 };
 
   };
+
+  const graphRef = React.useRef(null);
+  const [hoverNode, setHoverNode] = useState(null);
+  const [selectedNode, setSelectedNode] = useState(null);
+  const [highlightNodes, setHighlightNodes] = useState(new Set());
+  const [highlightLinks, setHighlightLinks] = useState(new Set());
+  const [selectedLayout, setSelectedLayout] = React.useState(RADIAL_OUT);
+  const [layoutAnchorEl, setLayoutAnchorEl] = React.useState(null);
+  const [cameraPosition, setCameraPosition] = useState({ x : 0 , y : 0 });
+  const open = Boolean(layoutAnchorEl);
+  const [loading, setLoading] = React.useState(false);
   const [data, setData] = React.useState(getPrunedTree());
+  const nodeSelected = useSelector(state => state.sdsState.instance_selected.graph_node);
+  const groupSelected = useSelector(state => state.sdsState.group_selected.graph_node);
+  const [collapsed, setCollapsed] = React.useState(true);
 
   const handleLayoutClick = (event) => {
     setLayoutAnchorEl(event.currentTarget);
@@ -220,14 +233,15 @@ const GraphViewer = (props) => {
         const updatedData = getPrunedTree();
         setData(updatedData);
     }
+    
+    setSelectedNode(node);
+    handleNodeHover(node);
     dispatch(selectInstance({
       dataset_id: props.graph_id,
       graph_node: node.id,
       tree_node: node?.tree_reference?.id,
       source: GRAPH_SOURCE
     }));
-    setSelectedNode(node);
-    setTimeout( () => (selectedLayout.layout !== TOP_DOWN.layout) && handleNodeRightClick(node), data?.nodes?.length + data?.links?.length );
   };
 
   const handleLinkColor = link => {
@@ -254,10 +268,9 @@ const GraphViewer = (props) => {
     window.datasets[props.graph_id].graph?.nodes?.forEach( node => {
       collapsed ? node.collapsed = !collapsed : node.collapsed = node?.type === typesModel.NamedIndividual.subject.type;
     })
-    setCollapsed(!collapsed)
     let updatedData = getPrunedTree();
     setData(updatedData);
-    resetCamera();
+    setCollapsed(!collapsed)
   }
 
   /**
@@ -305,16 +318,17 @@ const GraphViewer = (props) => {
       graphRef?.current?.ggv?.current.d3Force('y', d3.forceY());
       graphRef?.current?.ggv?.current.d3Force('center', d3.forceCenter(0,0));
       graphRef?.current?.ggv?.current.d3Force("manyBody", d3.forceManyBody().strength(node => force * Math.sqrt(100 / window.datasets[props.graph_id].graph.levelsMap[node.level]?.length )));
-     } else {
-      graphRef?.current?.ggv?.current.d3Force('collision', d3.forceCollide(20));
-      graphRef?.current?.ggv?.current.d3Force('link').distance(0).strength(1);
-      graphRef?.current?.ggv?.current.d3Force("charge").strength(-10);
     }
   }
 
   const onEngineStop = () => {
     setForce();
-    resetCamera();
+    if ( !selectedNode || selectedNode?.level === 1) {
+      resetCamera();
+    } else if ( !selectedNode?.collapsed && selectedNode.dataset_id === props.graph_id ){
+      graphRef?.current?.ggv?.current.centerAt(selectedNode.x, selectedNode.y, ONE_SECOND);
+      graphRef?.current?.ggv?.current.zoom(2, ONE_SECOND);
+    }
   }
 
   useEffect(() => {
@@ -329,6 +343,7 @@ const GraphViewer = (props) => {
 
   useEffect(() => {
     setForce();
+    resetCamera();
   },[selectedLayout]);
 
   useEffect(() => {
@@ -357,14 +372,30 @@ const GraphViewer = (props) => {
   useEffect(() => {
     if ( groupSelected ) { 
       setSelectedNode(groupSelected);
-      handleNodeRightClick(groupSelected);
+      handleNodeHover(groupSelected);
+      graphRef?.current?.ggv?.current.centerAt(groupSelected.x, groupSelected.y, ONE_SECOND);
+      graphRef?.current?.ggv?.current.zoom(2, ONE_SECOND);
     }
   },[groupSelected]) 
 
   useEffect(() => {
     if ( nodeSelected ) { 
+      let node = nodeSelected;
+      let collapsed = nodeSelected.collapsed
+      while ( node?.parent && !collapsed ) {
+        node = node.parent;
+        collapsed = node.collapsed
+      }
+      if ( collapsed ) {
+        node.collapsed = !node.collapsed;
+        collapseSubLevels(node, node.collapsed, { links : 0 });
+        const updatedData = getPrunedTree();
+        setData(updatedData);
+      }
       setSelectedNode(nodeSelected);
-      handleNodeRightClick(nodeSelected);
+      handleNodeHover(nodeSelected);
+      graphRef?.current?.ggv?.current.centerAt(nodeSelected.x, nodeSelected.y, ONE_SECOND);
+      graphRef?.current?.ggv?.current.zoom(2, ONE_SECOND);
     }
   },[nodeSelected]) 
 
@@ -504,12 +535,13 @@ const GraphViewer = (props) => {
         // Create the Graph as 2 Dimensional
         d2={true}
         onEngineStop={onEngineStop}
-        cooldownTime={selectedLayout.layout === TOP_DOWN.layout ? Infinity : 1500}
+        // cooldownTime={500}
+        cooldownTime={1000}
         warmupTicks={data?.nodes?.length}
         // Links properties
         linkColor = {handleLinkColor}
         linkWidth={2}
-        dagLevelDistance={selectedLayout.layout === TOP_DOWN.layout ? 75 : 0}
+        dagLevelDistance={selectedLayout.layout === TOP_DOWN.layout ? 60 : 0}
         linkDirectionalParticles={1}
         forceRadial={selectedLayout.layout === TOP_DOWN.layout ? 0 : 15}
         linkDirectionalParticleWidth={link => highlightLinks.has(link) ? 4 : 0}
@@ -519,7 +551,7 @@ const GraphViewer = (props) => {
         nodeCanvasObject={paintNode}
         nodeCanvasObjectMode={node => 'replace'}
         nodeVal = { node => {
-          if ( selectedLayout.layout === TOP_DOWN.layout && !collapsed){
+          if ( selectedLayout.layout === TOP_DOWN.layout ){
             node.fx = node.xPos;
             node.fy = 50 * node.level;
           } else {

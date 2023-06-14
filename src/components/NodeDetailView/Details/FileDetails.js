@@ -22,7 +22,7 @@ const FileDetails = (props) => {
     // the below is the case where we have data only from the tree/hierarchy
     } else if (node.graph_node) {
         idDetails = node.graph_node.id + detailsLabel;
-        title = node.graph_node.attributes?.label[0];
+        title = node.graph_node.attributes?.label?.[0];
     // the below is the case where we have data only from the graph
     } else {
         title = node.tree_node.basename;
