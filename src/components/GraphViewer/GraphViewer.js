@@ -19,7 +19,7 @@ import { rdfTypes, typesModel } from '../../utils/graphModel';
 
 const NODE_FONT = '500 5px Inter, sans-serif';
 const ONE_SECOND = 1000;
-const LOADING_TIME = 3000;
+const LOADING_TIME = 1000;
 const ZOOM_DEFAULT = 1;
 const ZOOM_SENSITIVITY = 0.2;
 const GRAPH_COLORS = {
@@ -83,6 +83,8 @@ const GraphViewer = (props) => {
         nodes[i].xPos =furthestLeft;
       }
       positionsMap[level] = furthestLeft + nodeSpace;
+      nodes[i].fx = nodes[i].xPos;
+      nodes[i].fy = 50 * nodes[i].level;
     }
   }
 
@@ -171,20 +173,28 @@ const GraphViewer = (props) => {
                       updateNodes(levels[level], n, positionsMap, level, index);
                     }
                     positionsMap[n.level] = n.xPos + nodeSpace;
+                    n.fx = n.xPos;
+                    n.fy = 50 * n.level;
                 } else {
                   n.xPos = positionsMap[n.level] + nodeSpace;
                   positionsMap[n.level] = n.xPos;
+                  n.fx = n.xPos;
+                  n.fy = 50 * n.level;
                   
                 }
             }else {
               n.xPos = positionsMap[n.level] + nodeSpace;
               positionsMap[n.level] = n.xPos ;
+              n.fx = n.xPos;
+              n.fy = 50 * n.level;
             }              
           })
       });
     }
-    return { nodes : visibleNodes, links : visibleLinks, levelsMap : levelsMap, hierarchyVariant : maxLevel * 20 };
 
+    const graph = { nodes : visibleNodes, links : visibleLinks, levelsMap : levelsMap, hierarchyVariant : maxLevel * 20 };
+    console.log("Graph ", graph);
+    return graph;
   };
 
   const graphRef = React.useRef(null);
@@ -197,7 +207,7 @@ const GraphViewer = (props) => {
   const [cameraPosition, setCameraPosition] = useState({ x : 0 , y : 0 });
   const open = Boolean(layoutAnchorEl);
   const [loading, setLoading] = React.useState(false);
-  const [data, setData] = React.useState(getPrunedTree());
+  const [data, setData] = React.useState({ nodes : [], links : []});
   const nodeSelected = useSelector(state => state.sdsState.instance_selected.graph_node);
   const groupSelected = useSelector(state => state.sdsState.group_selected.graph_node);
   const [collapsed, setCollapsed] = React.useState(true);
@@ -225,23 +235,24 @@ const GraphViewer = (props) => {
   }
 
   const handleNodeLeftClick = (node, event) => {
-    if ( node?.id === selectedNode?.id ) {
-        node.collapsed = !node.collapsed;
-        if ( node.type === rdfTypes.Subject.key || node.type === rdfTypes.Collection.key ) {
-          collapseSubLevels(node, node.collapsed, { links : 0 });
-        } 
-        const updatedData = getPrunedTree();
-        setData(updatedData);
-    }
-    
-    setSelectedNode(node);
+    if ( node.type === rdfTypes.Subject.key || node.type === rdfTypes.Collection.key ) {
+      node.collapsed = !node.collapsed;
+      collapseSubLevels(node, node.collapsed, { links : 0 });
+      const updatedData = getPrunedTree();
+      setData(updatedData);
+    } 
+    setSelectedNode(node)
     handleNodeHover(node);
-    dispatch(selectInstance({
-      dataset_id: props.graph_id,
-      graph_node: node.id,
-      tree_node: node?.tree_reference?.id,
-      source: GRAPH_SOURCE
-    }));
+    handleNodeRightClick(node);
+
+    if ( node?.id !== selectedNode?.id ) {
+      dispatch(selectInstance({
+        dataset_id: props.graph_id,
+        graph_node: node.id,
+        tree_node: node?.tree_reference?.id,
+        source: GRAPH_SOURCE
+      }));  
+    }
   };
 
   const handleLinkColor = link => {
@@ -261,7 +272,7 @@ const GraphViewer = (props) => {
   const handleNodeRightClick = (node, event) => {
     graphRef?.current?.ggv?.current.centerAt(node.x, node.y, ONE_SECOND);
     graphRef?.current?.ggv?.current.zoom(2, ONE_SECOND);
-    setCameraPosition({ x :  node.x , y :  node.y });
+    //setCameraPosition({ x :  node.x , y :  node.y });
   };
 
   const expandAll = (event) => {
@@ -316,25 +327,28 @@ const GraphViewer = (props) => {
       graphRef?.current?.ggv?.current.d3Force('collision', d3.forceCollide(20)); 
       graphRef?.current?.ggv?.current.d3Force('x', d3.forceX());
       graphRef?.current?.ggv?.current.d3Force('y', d3.forceY());
-      graphRef?.current?.ggv?.current.d3Force('center', d3.forceCenter(0,0));
       graphRef?.current?.ggv?.current.d3Force("manyBody", d3.forceManyBody().strength(node => force * Math.sqrt(100 / window.datasets[props.graph_id].graph.levelsMap[node.level]?.length )));
     }
+    graphRef?.current?.ggv?.current.d3Force('center', null);
   }
 
   const onEngineStop = () => {
     setForce();
-    if ( !selectedNode || selectedNode?.level === 1) {
+    if ( (!selectedNode || selectedNode?.level === 1) ) {
       resetCamera();
-    } else if ( !selectedNode?.collapsed && selectedNode.dataset_id === props.graph_id ){
+    } else if ( selectedNode?.level !== 1 && selectedNode.dataset_id === props.graph_id ){
       graphRef?.current?.ggv?.current.centerAt(selectedNode.x, selectedNode.y, ONE_SECOND);
       graphRef?.current?.ggv?.current.zoom(2, ONE_SECOND);
+    } else {
+      resetCamera();
     }
   }
 
   useEffect(() => {
+    const updatedData = getPrunedTree();
+    setData(updatedData);
     setLoading(true);
     setForce();
-
     setTimeout ( () => { 
       setLoading(false);
       setForce();
@@ -342,8 +356,13 @@ const GraphViewer = (props) => {
   }, []);
 
   useEffect(() => {
+    setLoading(true);
+    const updatedData = getPrunedTree();
+    setData(updatedData);
     setForce();
-    resetCamera();
+    setTimeout ( () => {
+      setLoading(false);
+    }, LOADING_TIME);
   },[selectedLayout]);
 
   useEffect(() => {
@@ -351,11 +370,12 @@ const GraphViewer = (props) => {
       let visibleNodes = e.detail;
       let match = visibleNodes?.find( v => v?._attributes?.id === props.graph_id );
       if ( match ) {
-        setLoading(true);
+        const updatedData = getPrunedTree();
+        setData(updatedData);
         setTimeout( timeout => {
           setForce()
-          setLoading(false);
-        },10)
+          resetCamera();
+        },100)
       }
     });
     document.addEventListener("nodeResized", (e) => {
@@ -380,22 +400,28 @@ const GraphViewer = (props) => {
 
   useEffect(() => {
     if ( nodeSelected ) { 
-      let node = nodeSelected;
-      let collapsed = nodeSelected.collapsed
-      while ( node?.parent && !collapsed ) {
-        node = node.parent;
-        collapsed = node.collapsed
+      if ( nodeSelected?.id !== selectedNode?.id ){
+        let node = nodeSelected;
+        let collapsed = nodeSelected.collapsed
+        while ( node?.parent && !collapsed ) {
+          node = node.parent;
+          collapsed = node.collapsed
+        }
+        if ( collapsed ) {
+          node.collapsed = !node.collapsed;
+          collapseSubLevels(node, node.collapsed, { links : 0 });
+          const updatedData = getPrunedTree();
+          setData(updatedData);
+        }
+        setSelectedNode(nodeSelected);
+        handleNodeHover(nodeSelected);
+        graphRef?.current?.ggv?.current.centerAt(nodeSelected.x, nodeSelected.y, ONE_SECOND);
+        graphRef?.current?.ggv?.current.zoom(2, ONE_SECOND);
+      } else {
+        handleNodeHover(nodeSelected);
+        graphRef?.current?.ggv?.current.centerAt(nodeSelected.x, nodeSelected.y, ONE_SECOND);
+        graphRef?.current?.ggv?.current.zoom(2, ONE_SECOND);
       }
-      if ( collapsed ) {
-        node.collapsed = !node.collapsed;
-        collapseSubLevels(node, node.collapsed, { links : 0 });
-        const updatedData = getPrunedTree();
-        setData(updatedData);
-      }
-      setSelectedNode(nodeSelected);
-      handleNodeHover(nodeSelected);
-      graphRef?.current?.ggv?.current.centerAt(nodeSelected.x, nodeSelected.y, ONE_SECOND);
-      graphRef?.current?.ggv?.current.zoom(2, ONE_SECOND);
     }
   },[nodeSelected]) 
 
@@ -535,9 +561,10 @@ const GraphViewer = (props) => {
         // Create the Graph as 2 Dimensional
         d2={true}
         onEngineStop={onEngineStop}
-        // cooldownTime={500}
-        cooldownTime={1000}
+        cooldownTicks={data?.nodes?.length}
         warmupTicks={data?.nodes?.length}
+        cooldownTime={Infinity}
+        // warmupTicks={data?.nodes?.length}
         // Links properties
         linkColor = {handleLinkColor}
         linkWidth={2}

@@ -1000,8 +1000,6 @@ class Splinter {
             if ( node.graph_reference === undefined ) {
                 node.graph_reference = this.findReference(node.uri_api);
             }
-            console.log("Node ", node)
-            console.log("Graph reference ", node.graph_reference)
             this.tree_map.set(node.id, node);
             const newNode = {
                 id: node.uri_api,
