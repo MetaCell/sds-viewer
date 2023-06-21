@@ -356,13 +356,9 @@ const GraphViewer = (props) => {
   }, []);
 
   useEffect(() => {
-    setLoading(true);
     const updatedData = getPrunedTree();
     setData(updatedData);
     setForce();
-    setTimeout ( () => {
-      setLoading(false);
-    }, LOADING_TIME);
   },[selectedLayout]);
 
   useEffect(() => {
