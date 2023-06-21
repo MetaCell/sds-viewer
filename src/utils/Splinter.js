@@ -12,17 +12,13 @@ import config from './../config/app.json';
 import {
     subject_key,
     protocols_key,
-    contributors_key
+    contributors_key, SUBJECTS_LEVEL, PROTOCOLS_LEVEL, CRONTRIBUTORS_LEVEL
 } from '../constants';
 
 const N3 = require('n3');
 const ttl2jsonld = require('@frogcat/ttl2jsonld').parse;
 
 const TMP_FILE = ".tmp";
-
-const SUBJECTS_LEVEL = 2;
-const PROTOCOLS_LEVEL = 2, CRONTRIBUTORS_LEVEL = 2;
-
 
 /*
  * Brief explanation of the Splinter module:
@@ -73,6 +69,7 @@ class Splinter {
         this.types = {};
         this.jsonData = {};
         this.levelsMap = {};
+        this.groups = {};
         this.turtleData = [];
         this.tree = undefined;
         this.nodes = undefined;
@@ -189,94 +186,69 @@ class Splinter {
             await this.processDataset();
         }
 
-        let filteredNodes = this.forced_nodes?.filter( n => n.type !== rdfTypes.UBERON.key && !(n.type === rdfTypes.Collection.key && n.children_counter === 0));
+        let filteredNodes = this.forced_nodes?.filter( n => n.type !== rdfTypes.UBERON.key && n.type !== rdfTypes.Award.key && !(n.type === rdfTypes.Collection.key && n.children_counter === 0));
         let cleanLinks = [];
+        let that = this;
+        filteredNodes?.forEach( n => {
+            if ( n.type === rdfTypes.Subject.key ) {
+                let keys = Object.keys(that.groups);
+                keys.forEach( key => {
+                    if ( n.attributes ) {
+                        if ( n?.attributes[key] ) {
+                            that.groups[key][n.attributes[key][0]].subjects += 1; 
+                        }
+                    }
+                })
+            }
+            if ( n.type === rdfTypes.Sample.key ) {
+                let keys = Object.keys(that.groups);
+                keys.forEach( key => {
+                    if ( n.attributes ){
+                        if ( n?.attributes[key] ) {
+                            that.groups[key][n.attributes[key][0]].samples += 1; 
+                        }
+                    }
+                }) 
+            }
+        })
+        console.log("Force edges ", this.forced_edges)
 
         // Assign neighbors, to highlight links
         this.forced_edges.forEach(link => {
             // Search for existing links
             let existingLing = cleanLinks.find( l => l.source === link.source && l.target === link.target );
             if ( !existingLing ) {
-                const a = filteredNodes.find( node => node.id === link.source );
-                const b = filteredNodes.find( node => node.id === link.target );
-                if ( a && b ) {
+                const a = this.nodes.get( link.source );
+                const b = this.nodes.get( link.target );
+                if ( a && b && ( a?.type !== rdfTypes.Award.key && b?.type !== rdfTypes.Award.key )) {
                     !a.neighbors && (a.neighbors = []);
                     !b.neighbors && (b.neighbors = []);
-                    a.neighbors.push(b);
-                    b.neighbors.push(a);
-
+                    if ( !a.neighbors.find( n => n.id === b.id )){
+                        a.neighbors.push(b);
+                    }
+                    if ( !b.neighbors.find( n => n.id === a.id )){
+                        b.neighbors.push(a);
+                    }
+                    
                     !a.links && (a.links = []);
                     !b.links && (b.links = []);
                     a.links.push(link);
                     b.links.push(link);
-
+                    if ( !link.source.id ) {
+                        link.source = this.nodes.get(link.source)
+                    }
+        
+                    if ( !link.target.id ) {
+                        link.target = this.nodes.get(link.target)
+                    }
                     cleanLinks.push(link);
                 }
             }
         });
-
-        // Calculate level with max amount of nodes
-        let maxLevel = Object.keys(this.levelsMap).reduce((a, b) => this.levelsMap[a].length > this.levelsMap[b].length ? a : b);
-        // Space between nodes
-        let nodeSpace = 50;
-        // The furthestLeft a node can be
-        let furthestLeft = 0 - (Math.ceil(this.levelsMap[maxLevel].length)/2  * nodeSpace );
-        let positionsMap = {};
-
-        let levelsMapKeys = Object.keys(this.levelsMap);
-
-        levelsMapKeys.forEach( level => {
-            positionsMap[level] = furthestLeft + nodeSpace/2;
-            this.levelsMap[level].sort((a, b) => a.attributes?.relativePath?.localeCompare(b.attributes?.relativePath));
-        });
-
-        for ( let i = SUBJECTS_LEVEL; i <= maxLevel ; i++ ){
-            this.levelsMap[i]?.sort( (a, b) => { 
-                let aSubject = a
-                while (aSubject?.type !== "Subject" && aSubject){
-                    aSubject = aSubject?.parent;
-                }
-                let bSubject = b;
-                while (bSubject?.type !== "Subject" && bSubject){
-                    bSubject = bSubject?.parent;
-                }
-                return aSubject?.id > bSubject?.id ? 1 : -1;
-            });            
-        }
-        console.log("Levels map ", this.levelsMap);
-
-        // Start assigning the graph from the bottom up
-        let neighbors = 0;
-        levelsMapKeys.reverse().forEach( level => {
-            this.levelsMap[level].forEach ( (n, index) => {
-                neighbors = n?.neighbors?.filter(neighbor => { return neighbor.level > n.level });
-                // FIXME : Fix this, beter way to create positioning
-                if ( n.level === SUBJECTS_LEVEL + 1 ){
-                    this.updateLevels(n.neighbors, n.level);
-                    if ( neighbors?.length > 0 ) n.level = n.level + 1;
-                }
-                if ( neighbors?.length > 0 ) {
-                    let max = Number.MIN_SAFE_INTEGER, min = Number.MAX_SAFE_INTEGER;
-                    neighbors.forEach( neighbor => {
-                        if ( neighbor.xPos > max ) { max = neighbor.xPos };
-                        if ( neighbor.xPos < min ) { min = neighbor.xPos };
-                    });
-                    n.xPos = min === max ? min : min + (max - min) * .5;
-                    positionsMap[n.level] = n.xPos + nodeSpace;
-                } else {
-                    n.xPos = positionsMap[n.level] + nodeSpace;
-                    positionsMap[n.level] = n.xPos;
-                }
-            })
-        });
-
-        console.log(this.levelsMap);
-
         return {
             nodes: filteredNodes,
             links: cleanLinks,
-            levelsMap : this.levelsMap,
-            hierarchyVariant : maxLevel * 20
+            levelsMap : this.levelsMap
         };
     }
 
@@ -452,6 +424,17 @@ class Splinter {
         }
     }
 
+    replaceNode(a) {
+        let newNode = {"value": a};
+        if( a?.includes(rdfTypes.NCBITaxon.key) || a?.includes(rdfTypes.PATO.key) || a?.includes(rdfTypes.UBERON.key) || a?.includes(rdfTypes.RRID.key) ) {
+            let node = this.nodes.get(a);
+            if (node) {
+                newNode = {"value": node?.attributes.label[0], "link": node?.id};
+            }
+        }
+
+        return newNode;
+    }
 
     cast_nodes() {
         // prepare 2 place holders for the dataset and ontology node, the ontology node is not required but
@@ -486,19 +469,11 @@ class Splinter {
         // merge the 2 nodes together
         dataset_node.properties = dataset_node.properties.concat(ontology_node.properties);
         dataset_node.proxies = dataset_node.proxies.concat(ontology_node.proxies);
-        dataset_node.level = 1;
         let updatedAbout = [];
+        dataset_node.level = 1;
+        let that = this;
         dataset_node?.attributes?.isAbout?.forEach( (a) => {
-            if( a.includes(rdfTypes.NCBITaxon.key) || a.includes(rdfTypes.PATO.key) || a.includes(rdfTypes.UBERON.key) ) {
-                let node = this.nodes.get(a);
-                if (node) {
-                    updatedAbout.push({"value": node?.attributes.label[0], "link": node?.id});
-                } else {
-                    updatedAbout.push({"value": a});
-                }
-            } else {
-                updatedAbout.push({"value": a});
-            }
+            updatedAbout.push(that.replaceNode(a));
         });
         dataset_node.attributes.isAbout = updatedAbout;
 
@@ -534,49 +509,59 @@ class Splinter {
 
     organise_subjects(target_node, link, groups){
         let parent = this.nodes.get(subject_key);
-        config.groups.order.forEach( category => {
-            let group = Object.keys(category)[0];
-            if ( target_node.attributes[group]?.[0] ) {
-                let source = this.nodes.get(target_node.attributes[group]?.[0]);
+        let keys = Object.keys(config.groups.order);
+        keys.forEach( key => {
+            let group = config.groups.order[key];
+            if ( target_node.attributes[key]?.[0] ) {
+                let source = this.nodes.get(target_node.attributes[key]?.[0]);
                 if ( source !== undefined ) {
-                    target_node.attributes[group][0] = source.attributes.label[0];
+                    target_node.attributes[key][0] = source.attributes.label[0];
                 }
                 
-                const groupID = parent.id + "_" + target_node.attributes[group]?.[0].replace(/\s/g, "");
+                const groupID = parent.id + "_" + target_node.attributes[key]?.[0].replace(/\s/g, "");
 
                 if ( this.nodes.get(groupID) === undefined ) {
+                    let name = target_node.attributes[key]?.[0];
+
                     const groupNode = {
                         id: groupID,
-                        name: target_node.attributes[group]?.[0],
+                        name: name,
                         type: typesModel.NamedIndividual.group.type,
-                        properties: category[group],
+                        properties: key,
                         parent : parent,
                         proxies: [],
                         level: parent.level + 1,
                         tree_reference: null,
                         children_counter: 0,
                         collapsed : false,
-                        childLinks : []
+                        childLinks : [],
+                        samples : 0, 
+                        subjects : 0,
                     };
                     let nodeF = this.factory.createNode(groupNode);
+                    const img = new Image();
+                    img.src = group.icon;
+                    nodeF.img = img;
                     this.nodes.set(groupID, nodeF);
                     groups.push({
                         source: parent.id,
                         target: nodeF.id
                     });
+                    this.groups[key] ? this.groups[key][nodeF.name] = nodeF :  this.groups[key] = {[nodeF.name] : nodeF};
                     parent = groupNode;
                 } else {
                     parent = this.nodes.get(groupID);
                 }
             } else {
-                console.error("The group node already exists!", group);
+                console.error("The group node already exists!", group.tag);
             }
         });
         link.source = parent.id;
         target_node.level = parent.level + 1;
+        target_node.id = parent.id + target_node.name;
         target_node.parent = parent;
         target_node.childLinks = [];
-        target_node.collapsed = target_node.parent.type === typesModel.NamedIndividual.subject.type;
+        target_node.collapsed = target_node.type === typesModel.NamedIndividual.subject.type;
         this.nodes.set(target_node.id, target_node);
     }
 
@@ -586,7 +571,7 @@ class Splinter {
         const subjects = {
             id: subject_key,
             name: "Subjects",
-            type: typesModel.NamedIndividual.group.type,
+            type: rdfTypes.Group.key,
             properties: [],
             parent : parent,
             proxies: [],
@@ -598,6 +583,9 @@ class Splinter {
         };
         if (this.nodes.get(subject_key) === undefined) {
             this.nodes.set(subject_key, this.factory.createNode(subjects));
+            const img = new Image();
+            img.src =  "./images/graph/group.svg";
+            subjects.img = img; 
             this.edges.push({
                 source: id,
                 target: subjects.id
@@ -781,7 +769,7 @@ class Splinter {
 
     identify_childless_parents() {
         this.forced_nodes.forEach((node, index, array) => {
-            if ((node.type === rdfTypes.Sample.key || node.type === rdfTypes.Subject.key) && (node.children_counter === 0)) {
+            if ((node.type === rdfTypes.Sample.key) && (node.children_counter === 0)) {
                 node.img.src = "./images/graph/question_mark.svg"
             }
         });
@@ -901,12 +889,14 @@ class Splinter {
         parent.children_counter++;
         const new_node = this.buildNodeFromJson(node, level);
         new_node.parent = parent;
+        new_node.id = parent.id + new_node.id;
+        node.remote_id = new_node.id;
         this.forced_edges.push({
             source: parent.id,
             target: new_node.id
         });
         new_node.childLinks = [];
-        new_node.collapsed = new_node.parent.type === typesModel.NamedIndividual.subject.type
+        new_node.collapsed = new_node.type === typesModel.NamedIndividual.subject.type 
         this.nodes.set(new_node.id, this.factory.createNode(new_node));
         var children = this.tree_parents_map2.get(node.remote_id);
         if (children?.length > 0) {
@@ -997,24 +987,31 @@ class Splinter {
     }
 
     generateLeaf(node, parent) {
-        node.id = node?.uri_api
-        node.parent = true;
-        node.text = parent !== undefined ? node?.basename : this.dataset_id;
-        node.type = node.mimetype === "inode/directory" ? rdfTypes.Collection.key : rdfTypes.File.key;
-        node.path = (parent !== undefined && parent.path !== undefined) ? [node.id, ...parent.path] : [node.id];
-        if (!node.items) {
-            node.items = [];
+        if ( node ) {
+            node.id = node?.uri_api
+            node.parent = true;
+            node.text = parent !== undefined ? node?.basename : this.dataset_id;
+            node.type = node.mimetype === "inode/directory" ? rdfTypes.Collection.key : rdfTypes.File.key;
+            node.path = (parent !== undefined && parent.path !== undefined) ? [node.id, ...parent.path] : [node.id];
+            if (!node.items) {
+                node.items = [];
+            }
+            node.graph_reference = this.findReference(node.remote_id);
+            if ( node.graph_reference === undefined ) {
+                node.graph_reference = this.findReference(node.uri_api);
+            }
+            this.tree_map.set(node.id, node);
+            const newNode = {
+                id: node.uri_api,
+                text: node.text,
+                items: node.items,
+                graph_reference: node?.graph_reference?.id,
+                path: node.path
+            }
+            return newNode;
+        } else {
+            return {}
         }
-        node.graph_reference = this.findReference(node.uri_api);
-        this.tree_map.set(node.id, node);
-        const newNode = {
-            id: node.uri_api,
-            text: node.text,
-            items: node.items,
-            graph_reference: node?.graph_reference?.id,
-            path: node.path
-        }
-        return newNode;
     }
 
     findReference(id) {

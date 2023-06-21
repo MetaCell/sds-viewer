@@ -13,6 +13,12 @@ export const sdsInitialState = {
             tree_node: null,
             source: ""
         },
+        group_selected: {
+            dataset_id: null,
+            graph_node: null,
+            tree_node: null,
+            source: ""
+        },
         layout : {}
     }
 };
@@ -20,6 +26,22 @@ export const sdsInitialState = {
 
 export default function sdsClientReducer(state = {}, action) {
     switch (action.type) {
+        case Actions.SELECT_GROUP:
+            if (action.data !== undefined) {
+                const splinter = window.datasets[action.data.dataset_id].splinter;
+                const graph_node = splinter.nodes.get(action.data.graph_node);
+                const tree_node = splinter.tree_map.get(action.data.tree_node);
+                return {
+                    ...state,
+                    group_selected: {
+                        dataset_id: action.data.dataset_id,
+                        graph_node: graph_node ? graph_node : null,
+                        tree_node: tree_node ? tree_node : null,
+                        source: action.data.source
+                    }
+                };
+            }
+            break;
         case Actions.SELECT_INSTANCE:
             if (action.data !== undefined) {
                 const splinter = window.datasets[action.data.dataset_id].splinter;
