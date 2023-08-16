@@ -375,12 +375,12 @@ const GraphViewer = (props) => {
   });
 
   useEffect(() => {
-    if ( groupSelected ) { 
-      setSelectedNode(groupSelected);
-      handleNodeHover(groupSelected);
-      graphRef?.current?.ggv?.current.centerAt(groupSelected.x, groupSelected.y, ONE_SECOND);
-      graphRef?.current?.ggv?.current.zoom(2, ONE_SECOND);
-    }
+    // if ( groupSelected ) { 
+    //   setSelectedNode(groupSelected);
+    //   handleNodeHover(groupSelected);
+    //   graphRef?.current?.ggv?.current.centerAt(groupSelected.x, groupSelected.y, ONE_SECOND);
+    //   graphRef?.current?.ggv?.current.zoom(2, ONE_SECOND);
+    // }
   },[groupSelected]) 
 
   useEffect(() => {
@@ -541,8 +541,7 @@ const GraphViewer = (props) => {
         data={data}
         // Create the Graph as 2 Dimensional
         d2={true}
-        cooldownTicks={data?.nodes?.length}
-        warmupTicks={data?.nodes?.length}
+        cooldownTicks={selectedLayout.layout === TOP_DOWN.layout ? 0 : data?.nodes?.length}
         onEngineStop={onEngineStop}
         // Links properties
         linkColor = {handleLinkColor}
