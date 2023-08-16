@@ -241,9 +241,7 @@ const GraphViewer = (props) => {
       const updatedData = getPrunedTree();
       setData(updatedData);
     } 
-    setSelectedNode(node)
     handleNodeHover(node);
-    handleNodeRightClick(node);
 
     if ( node?.id !== selectedNode?.id ) {
       dispatch(selectInstance({
@@ -334,14 +332,6 @@ const GraphViewer = (props) => {
 
   const onEngineStop = () => {
     setForce();
-    if ( (!selectedNode || selectedNode?.level === 1) ) {
-      resetCamera();
-    } else if ( selectedNode?.level !== 1 && selectedNode.dataset_id === props.graph_id ){
-      graphRef?.current?.ggv?.current.centerAt(selectedNode.x, selectedNode.y, ONE_SECOND);
-      graphRef?.current?.ggv?.current.zoom(2, ONE_SECOND);
-    } else {
-      resetCamera();
-    }
   }
 
   useEffect(() => {
@@ -358,7 +348,6 @@ const GraphViewer = (props) => {
   useEffect(() => {
     const updatedData = getPrunedTree();
     setData(updatedData);
-    setForce();
   },[selectedLayout]);
 
   useEffect(() => {
@@ -411,12 +400,8 @@ const GraphViewer = (props) => {
         }
         setSelectedNode(nodeSelected);
         handleNodeHover(nodeSelected);
-        graphRef?.current?.ggv?.current.centerAt(nodeSelected.x, nodeSelected.y, ONE_SECOND);
-        graphRef?.current?.ggv?.current.zoom(2, ONE_SECOND);
       } else {
         handleNodeHover(nodeSelected);
-        graphRef?.current?.ggv?.current.centerAt(nodeSelected.x, nodeSelected.y, ONE_SECOND);
-        graphRef?.current?.ggv?.current.zoom(2, ONE_SECOND);
       }
     }
   },[nodeSelected]) 
@@ -556,11 +541,9 @@ const GraphViewer = (props) => {
         data={data}
         // Create the Graph as 2 Dimensional
         d2={true}
-        onEngineStop={onEngineStop}
         cooldownTicks={data?.nodes?.length}
         warmupTicks={data?.nodes?.length}
-        cooldownTime={Infinity}
-        // warmupTicks={data?.nodes?.length}
+        onEngineStop={onEngineStop}
         // Links properties
         linkColor = {handleLinkColor}
         linkWidth={2}
