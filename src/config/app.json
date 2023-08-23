@@ -1,6 +1,7 @@
 {
     "datasets_url": "https://cassava.ucsd.edu/sparc/datasets/",
     "repository_url": "https://cassava.ucsd.edu/sparc/preview/exports/",
+    "docs_url": "https://github.com/MetaCell/sds-viewer/blob/development/README.md",
     "available_datasets": "curation-export-published.ttl",
     "text" : {
         "datasetsButtonText" : "SPARC Datasets",
