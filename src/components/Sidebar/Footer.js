@@ -26,6 +26,11 @@ const SidebarFooter = (props) => {
         {config.text.datasetsButtonText}
       </Button>
     </Box>
+    <Box display="flex" justifyContent="space-between">
+      <div style="color: white; text-align: center;">
+        {config.text.footerText}
+      </div>
+    </Box>
   );
 };
 
