@@ -27,8 +27,8 @@ const SidebarFooter = (props) => {
       </Button>
     </Box>
     <Box display="flex" justifyContent="space-between">
-      <div style="color: white; text-align: center;">
-        {config.text.footerText}
+      <div style="color: white; font-size: 12px;">
+        <a href="{config.docs_url}" target="_blank">User manual</a>
       </div>
     </Box>
   );
