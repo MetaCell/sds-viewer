@@ -1,6 +1,6 @@
 import './flexlayout.css';
 import theme from './theme';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { hot } from 'react-hot-loader';
 import Box from '@material-ui/core/Box';
 import Splinter from './utils/Splinter';
@@ -17,12 +17,14 @@ import { addDataset } from './redux/actions';
 import { NodeViewWidget } from './app/widgets';
 import {  addWidget } from '@metacell/geppetto-meta-client/common/layout/actions';
 import { WidgetStatus } from "@metacell/geppetto-meta-client/common/layout/model";
+import DatasetsListSplinter from "./components/DatasetsListViewer/DatasetsListSplinter";
 
 import config from './config/app.json';
 
 const App = () => {
   const queryParams = new URLSearchParams(window.location.search);
-  const id = queryParams.get('id');
+  const datasetID = queryParams.get('id');
+  const doi = queryParams.get('doi');
 
   const dispatch = useDispatch();
   const [openUploadDialog, setOpenUploadDialog] = useState(false);
@@ -31,9 +33,13 @@ const App = () => {
   const error_message = useSelector(state => state.sdsState.error_message);
   const [_turtle, setTurtle] = useState(undefined);
   const [_json, setJson] = useState(undefined);
+  const [doiMatch, setDoiMatch] = useState(true);
   const [initialised, setInitialised] = useState(false);
   const [loading, setLoading] = useState(() => {
-    if (id && id !== "") {
+    if (datasetID && datasetID !== "") {
+      return true;
+    }
+    if (doi && doi !== "") {
       return true;
     }
     return false;
@@ -44,14 +50,16 @@ const App = () => {
   let json_url = '';
   let splinter = undefined;
 
-  const fillDataset = async () => {
-    splinter = new Splinter(_json, _turtle);
+  const fillDataset = async (turtle, json) => {
+    splinter = new Splinter(json, turtle);
     const _dataset = {
       id: splinter.getDatasetId(),
       graph: await splinter.getGraph(),
       tree: await splinter.getTree(),
       splinter: splinter
     };
+    console.log("Graph ", _dataset.graph);
+
     dispatch(addDataset(_dataset));
     dispatch(addWidget({
       id: _dataset.id,
@@ -71,8 +79,8 @@ const App = () => {
     setLoading(false);
   }
 
-  if (id && id !== "" && _turtle === undefined) {
-    turtle_url = config.datasets_url + id + "/LATEST/curation-export.ttl";
+  const loadTurtleFile = async () => {
+    turtle_url = config.datasets_url + datasetID + "/LATEST/curation-export.ttl";
     const ttlHandler = new FileHandler();
     ttlHandler.get_remote_file(turtle_url, (url, data) => {
       if (data) {
@@ -81,10 +89,10 @@ const App = () => {
     }, () => {
       setLoading(false);
     });
-  }
+  };
 
-  if (id && id !== "" && _json === undefined) {
-    json_url = config.datasets_url + id + '/LATEST/path-metadata.json';    
+  const loadJSONFile = async (datasetID) => {
+    json_url = config.datasets_url + datasetID + '/LATEST/path-metadata.json';    
     const jsonHandler = new FileHandler();
     jsonHandler.get_remote_file(json_url, (url, data) => {
       if (data) {
@@ -93,12 +101,61 @@ const App = () => {
     }, () => {
       setLoading(false);
     });
+  };
+
+  const loadFiles = async(datasetID) => {
+    turtle_url = config.datasets_url + datasetID + "/LATEST/curation-export.ttl";
+      const ttlHandler = new FileHandler();
+      ttlHandler.get_remote_file(turtle_url, (url, turtleData) => {
+        if (turtleData) {
+          json_url = config.datasets_url + datasetID + '/LATEST/path-metadata.json';    
+          const jsonHandler = new FileHandler();
+          jsonHandler.get_remote_file(json_url, (url, jsonData) => {
+            if (turtleData && jsonData && !initialised) {
+              fillDataset(turtleData, jsonData);
+              setInitialised(true);
+            }
+          }, () => {
+            setLoading(false);
+          });
+        }
+      },null);
   }
 
-  if (_turtle && _json && !initialised) {
-    fillDataset();
-    setInitialised(true);
-  }
+  const loadDatsetFromDOI = async (url, fileData) => {
+    let file = {
+      id: "ttl",
+      url: url,
+      data: fileData,
+      file: { name: "ttl", type: "text/turtle" },
+    };
+    const splinter = new DatasetsListSplinter(undefined, file.data);
+    let graph = await splinter.getGraph();
+    console.log("Graph ", graph);
+    let datasets = graph.nodes.filter((node) => node?.attributes?.hasDoi);
+    const match = datasets.find( node => node.attributes?.hasDoi?.[0]?.includes(doi));
+    if ( match ) {
+      const datasetID = match.name;
+      loadFiles(datasetID);
+    } else {
+      setLoading(false);
+      setInitialised(false);
+    }
+  };
+
+  useEffect(() => {
+    if (datasetID && datasetID !== "" ) {
+      loadFiles(datasetID);
+    }
+
+    if (doi && doi !== "" ) {
+      if ( doiMatch ){
+        const fileHandler = new FileHandler();
+        const summaryURL = config.repository_url + config.available_datasets;
+        fileHandler.get_remote_file(summaryURL, loadDatsetFromDOI);
+      }
+    }
+  }, []);
 
   return (
     <MuiThemeProvider theme={theme}>

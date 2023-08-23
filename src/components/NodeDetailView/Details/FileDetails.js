@@ -22,7 +22,7 @@ const FileDetails = (props) => {
     // the below is the case where we have data only from the tree/hierarchy
     } else if (node.graph_node) {
         idDetails = node.graph_node.id + detailsLabel;
-        title = node.graph_node.attributes?.label[0];
+        title = node.graph_node.attributes?.label?.[0];
     // the below is the case where we have data only from the graph
     } else {
         title = node.tree_node.basename;
@@ -52,7 +52,7 @@ const FileDetails = (props) => {
     return (
         <Box className="secondary-sidebar_body" id={idDetails}>
             <Box className="tab-content">
-                { node.graph_node.attributes?.hasUriHuman && node.graph_node.attributes?.hasUriHuman[0] !== ""
+                { node.graph_node?.attributes?.hasUriHuman && node.graph_node?.attributes?.hasUriHuman[0] !== ""
                     ? (<Box className="tab-content-row">
                             <Typography component="h3">{"File Details"}</Typography>
                             <Typography component="label">Label</Typography>

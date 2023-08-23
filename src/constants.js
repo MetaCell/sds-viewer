@@ -17,3 +17,6 @@ export const contributors_key = "all_contributors";
 
 export const GRAPH_SOURCE = "GRAPH";
 export const TREE_SOURCE = "TREE";
+export const SUBJECTS_LEVEL = 2;
+export const PROTOCOLS_LEVEL = 2;
+export const CRONTRIBUTORS_LEVEL = 2;

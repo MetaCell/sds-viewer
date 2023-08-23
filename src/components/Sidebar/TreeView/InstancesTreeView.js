@@ -39,11 +39,7 @@ const InstancesTreeView = (props) => {
   };
 
   const onNodeToggle = (e, nodeIds) => {
-    if (nodeIds.length === 0) {
-      return;
-    }
-
-    if ((nodes.length !== nodeIds.length) && (nodes[0] === nodeIds[0])) {
+    if ((nodes.length !== nodeIds?.length) && (nodes[0] === nodeIds?.[0])) {
       var original = [...nodes];
       var newPath = [...nodeIds];
       while (original[0] === newPath[0]) {
@@ -56,6 +52,8 @@ const InstancesTreeView = (props) => {
     const node = window.datasets[dataset_id].splinter.tree_map.get(nodeIds[0]);
     if (node && node.path !== undefined && node.path[0] !== nodes[0]) {
       setNodes(node.path);
+    } else {
+      setNodes([]);
     }
   };
 

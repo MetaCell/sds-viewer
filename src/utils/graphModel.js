@@ -61,6 +61,18 @@ export const rdfTypes = {
             }
         ]
     },
+    "Group": {
+        "image": "./images/graph/group.svg",
+        "key": "Group",
+        "properties": [
+            {
+                "type": "rdfs",
+                "key": "label",
+                "property": "label",
+                "label": "To be filled"
+            }
+        ]
+    },
     "Dataset": {
         "image": "./images/graph/dataset.svg",
         "key": "Dataset",
@@ -115,8 +127,8 @@ export const rdfTypes = {
             },
             {
                 "type": "TEMP",
-                "key": "hasContactPerson",
-                "property": "hasContactPerson",
+                "key": "hasDoi",
+                "property": "hasDoi",
                 "label": "To be filled"
             },
             {
@@ -141,6 +153,12 @@ export const rdfTypes = {
                 "type": "TEMP",
                 "key": "hasUriApi",
                 "property": "hasUriApi",
+                "label": "To be filled"
+            },
+            {
+                "type": "TEMP",
+                "key": "hasProtocol",
+                "property": "hasProtocol",
                 "label": "To be filled"
             },
             {
@@ -509,6 +527,9 @@ export const typesModel = {
         },
         collection: {
             "type": "Collection"
+        },
+        group: {
+            "type": "Group"
         },
         contributor: {
             "type": "Person"

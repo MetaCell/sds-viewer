@@ -6,6 +6,7 @@ import {
     ListItemText,
 } from "@material-ui/core";
 import SimpleChip from './Views/SimpleChip';
+import SimpleLinkedChip from './Views/SimpleLinkedChip';
 import SimpleLabelValue from './Views/SimpleLabelValue';
 import Links from './Views/Links';
 import { iterateSimpleValue, simpleValue } from './utils';
@@ -13,7 +14,7 @@ import { detailsLabel } from '../../../constants';
 
 const SubjectDetails = (props) => {
     const { node } = props;
-
+    node.graph_node.dataset_id = node.dataset_id;
     let title = "";
     let idDetails = "";
     // both tree and graph nodes are present, extract data from both
@@ -41,6 +42,22 @@ const SubjectDetails = (props) => {
         }
     ];
 
+    const getGroupNode = (groupName, node)=> {
+        let n = node.graph_node.parent;
+        let match = false;
+        while ( n && !match ) {
+            if ( n.name === groupName ) {
+              match = true;
+            }else {
+              n = n.parent;
+            }
+        }
+
+        n.dataset_id = node.dataset_id;
+
+        return n;
+    }
+
     return (
         <Box id={idDetails}>
             <Box className="tab-content">
@@ -50,10 +67,19 @@ const SubjectDetails = (props) => {
                             <Typography component="label">Label</Typography>
                             <Links key={`label_href_link`} href={node.graph_node.attributes?.hasUriHuman[0]} title={title} />
                         </Box>)
-                    : (<SimpleLabelValue label={'Label'} value={title} heading={'Subject Details'} />)
+                    : (( <Box className="tab-content-row">
+                            <Typography component="label">Subject Details</Typography>
+                            <SimpleLinkedChip chips={[{ value : title}]} node={node.graph_node} />
+                        </Box>))
                 }
 
-                { iterateSimpleValue('Age Category', node?.graph_node?.attributes?.hasAgeCategory) }
+                { node.graph_node?.attributes?.hasAgeCategory
+                    ? ( <Box className="tab-content-row">
+                            <Typography component="label">Age Category</Typography>
+                            <SimpleLinkedChip chips={[{ value : node.graph_node?.attributes?.hasAgeCategory}]} node={getGroupNode(node.graph_node?.attributes?.hasAgeCategory[0], node)}/>
+                        </Box>)
+                    : <> </>
+                }
                 { (node.graph_node.attributes?.ageValue && node.graph_node.attributes?.ageUnit)
                     ? simpleValue('Age', node.graph_node.attributes?.ageValue + ' ' + node.graph_node.attributes?.ageUnit)
                     : (node.graph_node.attributes?.ageBaseUnit && node.graph_node.attributes?.ageBaseValue)
@@ -66,20 +92,25 @@ const SubjectDetails = (props) => {
                     : <> </>
                 }
 
-                { iterateSimpleValue('Biological Sex', node?.graph_node?.attributes?.biologicalSex) }
-                { iterateSimpleValue('Specimen identifier', node?.graph_node?.attributes?.specimenHasIdentifier) }
-
-                { node.graph_node?.attributes?.subjectSpecies && node.graph_node?.attributes?.subjectSpecies.length > 0
+                { node.graph_node?.attributes?.biologicalSex
                     ? ( <Box className="tab-content-row">
-                            <Typography component="label">Species</Typography>
-                            <SimpleChip chips={node.graph_node?.attributes?.subjectSpecies} />
+                            <Typography component="label">Biological Sex</Typography>
+                            <SimpleLinkedChip chips={[{ value : node.graph_node?.attributes?.biologicalSex}]} node={getGroupNode(node.graph_node?.attributes?.biologicalSex[0], node)} />
                         </Box>)
                     : <> </>
                 }
-                { node.graph_node?.attributes?.subjectStrain && node.graph_node?.attributes?.subjectStrain.length > 0
+                { iterateSimpleValue('Specimen identifier', node?.graph_node?.attributes?.specimenHasIdentifier) }
+                { node.graph_node?.attributes?.subjectSpecies
+                    ? ( <Box className="tab-content-row">
+                            <Typography component="label">Species</Typography>
+                            <SimpleLinkedChip chips={[{ value : node.graph_node?.attributes?.subjectSpecies}]} node={getGroupNode(node.graph_node?.attributes?.subjectSpecies[0], node)} />
+                        </Box>)
+                    : <> </>
+                }
+                { node.graph_node?.attributes?.subjectStrain
                     ? ( <Box className="tab-content-row">
                             <Typography component="label">Strains</Typography>
-                            <SimpleChip chips={node.graph_node?.attributes?.subjectStrain} />
+                            <SimpleLinkedChip chips={[{ value : node.graph_node?.attributes?.subjectStrain}]} node={getGroupNode(node.graph_node?.attributes?.subjectStrain[0], node)} />
                         </Box>)
                     : <> </>
                 }
@@ -87,18 +118,6 @@ const SubjectDetails = (props) => {
                     ? ( <Box className="tab-content-row">
                             <Typography component="label">Assigned Groups</Typography>
                             <SimpleChip chips={node.graph_node?.attributes?.hasAssignedGroup} />
-                        </Box>)
-                    : <> </>
-                }
-                { node?.graph_node?.attributes?.hasDerivedInformationAsParticipant !== undefined
-                    ? (<Box className="tab-content-row">
-                            <Links href={node?.graph_node?.attributes?.hasDerivedInformationAsParticipant} title="Derived information as participant" />
-                        </Box>)
-                    : <></>
-                }
-                { node?.graph_node?.attributes?.participantInPerformanceOf !== undefined
-                    ? (<Box className="tab-content-row">
-                            <Links href={node?.graph_node?.attributes?.participantInPerformanceOf} title="Participant in performance of" />
                         </Box>)
                     : <> </>
                 }
