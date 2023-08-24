@@ -34,25 +34,30 @@ Users can load datasets in a few different ways.
 
 4) Loading a dataset specifying ID as parameter
    - Users can specify the id of the dataset as a parameter on the URL and load it this way.
-   - For example, if user wants to load Dataset with ID 013224e7-e3e3-4d8a-90ef-d1b237323eff, we can add the id as parameter : 
-     https://metacell.github.io/sds-viewer/?id=013224e7-e3e3-4d8a-90ef-d1b237323eff
+   - For example, if user wants to load Dataset with ID 0a5a2827-2b39-4085-87ea-2b7fbbe27cc8, we can add the id as parameter : 
+     https://metacell.github.io/sds-viewer/?id=0a5a2827-2b39-4085-87ea-2b7fbbe27cc8
      This will open up the SDS Viewer with the dataset already loaded.
+     
+![loadwithid](https://github.com/MetaCell/sds-viewer/assets/99416933/2daf28db-c604-4d2d-9a3f-c9de494d5d6f)
+
+     
 
 ### Navigating the SDS Viewer
    - Users can search for subjects, folders and files on the sidebar. Selecting an item on the sidebar will display the Metadata for it and zoom the Graph to its corresponding node. 
 
-![image](https://user-images.githubusercontent.com/4562825/186722724-45df437a-4105-468a-8df9-e63f4d979163.png)
+![clickonitem](https://github.com/MetaCell/sds-viewer/assets/99416933/824f8c44-d8fd-473b-a9bd-ce2ebed701ad)
 
    - Selecting an item on the Graph will display its Metadata. 
 
 ![image](https://user-images.githubusercontent.com/4562825/186723085-c6573146-82dc-4fb7-ae95-588f7b1e4842.png)
 
-   - Navigating the Graph Viewer can be done with the mouse. There's also controlers on the bottom right that allows the user to change the Layout view, zoom in/out, and reset the view to its original state.
-![image](https://user-images.githubusercontent.com/4562825/186723372-2529d10e-e257-4834-b19e-7ec47ec306e5.png)
+   - Navigating the Graph Viewer can be done with the mouse. There's also controlers on the bottom right that allows the user to change the Layout view, zoom in/out, reset the view to its original state and expand all data in the viewer.
+
+![controllers](https://github.com/MetaCell/sds-viewer/assets/99416933/30aa8bb3-ec61-46d8-9f83-55ade15b95c0)
 
    - Multiple Datasets can be loaded at the same time, which will open a new Graph Viewer Component for each dataset.
 
-![image](https://user-images.githubusercontent.com/4562825/186723829-201ebc46-6bf2-4b7a-9d03-bf97fe0a37c5.png)
+![multiple](https://github.com/MetaCell/sds-viewer/assets/99416933/a74fa033-ccd4-4609-b50f-852ce44d347a)
 
 
 ### Datasets Used
