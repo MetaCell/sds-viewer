@@ -1,6 +1,6 @@
 {
-  "short_name": "SDS Viewer",
-  "name": "SDS Viewer",
+  "short_name": "SPARC Dataset (SDS) Viewer",
+  "name": "SPARC Dataset (SDS) Viewer",
   "icons": [
     {
       "src": "favicon.ico",

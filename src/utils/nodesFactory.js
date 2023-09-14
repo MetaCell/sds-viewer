@@ -7,7 +7,7 @@ function createImage(node) {
         img.src = "./images/graph/files/" + extension + ".svg"
     } else {
         if ( node.type !== "Group" ) {
-            img.src = (rdfTypes[String(node.type)]?.image !== "") ? rdfTypes[String(node.type)].image : rdfTypes.Unknown.image
+            img.src = (rdfTypes[String(node.type)]?.image !== "") ? rdfTypes[String(node.type)]?.image : rdfTypes.Unknown?.image
         }
     }
     return img;
