@@ -1,6 +1,6 @@
 import Plus from '../../images/plus.svg';
 import { ADD_DATASET } from '../../constants';
-import { Box, Button, Typography } from '@material-ui/core';
+import { Box, Button, Typography, Link } from '@material-ui/core';
 import config from "./../../config/app.json";
 
 const SidebarFooter = (props) => {
@@ -27,8 +27,11 @@ const SidebarFooter = (props) => {
           {config.text.datasetsButtonText}
         </Button>
       </Box>
-      <Box display="flex" justifyContent="space-between">
-        <Typography align="center" className='no-instance' variant='h6'><a style={{"color" : "white" }} align="center" href={config.docs_url} target="_blank">User manual</a></Typography>
+      <Box display="flex" justifyContent="center">
+        <Typography variant='body1'><Link href={config.docs_url}>User manual</Link></Typography>
+      </Box>
+      <Box display="flex" justifyContent="center">
+        <Typography variant='caption'>Powered by MetaCell</Typography>
       </Box>
     </Box>
   );
