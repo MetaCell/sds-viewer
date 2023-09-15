@@ -1154,6 +1154,13 @@ const theme = createTheme({
           bottom: '0',
           zIndex: '100',
         },
+        '.user-manual_controls': {
+          width: '.75rem',
+          position: 'absolute',
+          top: '0',
+          right : '10px',
+          zIndex: '100',
+        },
       },
     },
   },

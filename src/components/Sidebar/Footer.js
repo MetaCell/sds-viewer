@@ -28,10 +28,7 @@ const SidebarFooter = (props) => {
         </Button>
       </Box>
       <Box display="flex" justifyContent="center">
-        <Typography variant='body1'><Link href={config.docs_url}>User manual</Link></Typography>
-      </Box>
-      <Box display="flex" justifyContent="center">
-        <Typography variant='caption'>Powered by MetaCell</Typography>
+        <Typography variant='subtitle1' color='primary'>Powered by MetaCell</Typography>
       </Box>
     </Box>
   );
