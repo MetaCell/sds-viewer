@@ -24,7 +24,7 @@ Users can load datasets in a few different ways.
    - Click 'Load' and then 'Done'
    - Dataset will be loaded
 
-3) Loading an local dataset:
+3) Loading an local dataset ***Warning: If turtle and json file don't adhere to SPARC Dataset File structure, loaing the files locally won't work:
    - Click on 'Import a new dataset'
    - On the window that opens up, stay on 'Local System'.
    - Add turtle and json file at the same time. 
