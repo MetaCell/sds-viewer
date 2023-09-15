@@ -235,7 +235,7 @@ const GraphViewer = (props) => {
   }
 
   const handleNodeLeftClick = (node, event) => {
-    if ( node.type === rdfTypes.Subject.key || node.type === rdfTypes.Collection.key ) {
+    if ( node.type === rdfTypes.Subject.key || node.type === rdfTypes.Sample.key || node.type === rdfTypes.Collection.key ) {
       node.collapsed = !node.collapsed;
       collapseSubLevels(node, node.collapsed, { links : 0 });
       const updatedData = getPrunedTree();
