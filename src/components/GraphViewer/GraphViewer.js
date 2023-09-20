@@ -1,21 +1,21 @@
 import * as d3 from 'd3-force-3d'
 import Menu from '@material-ui/core/Menu';
-import { IconButton, Tooltip } from '@material-ui/core';
-import MenuItem from '@material-ui/core/MenuItem';
+import { IconButton, Tooltip, Link, MenuItem, CircularProgress } from '@material-ui/core';
 import React, { useState, useEffect } from 'react';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import LayersIcon from '@material-ui/icons/Layers';
+import HelpIcon from '@material-ui/icons/Help';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import UnfoldMoreIcon from '@material-ui/icons/UnfoldMore';
 import UnfoldLessIcon from '@material-ui/icons/UnfoldLess';
 import { selectInstance } from '../../redux/actions';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import { useSelector, useDispatch } from 'react-redux';
 import FormatAlignCenterIcon from '@material-ui/icons/FormatAlignCenter';
 import GeppettoGraphVisualization from '@metacell/geppetto-meta-ui/graph-visualization/Graph';
 import { GRAPH_SOURCE } from '../../constants';
 import { rdfTypes, typesModel } from '../../utils/graphModel';
+import config from "./../../config/app.json";
 
 const NODE_FONT = '500 5px Inter, sans-serif';
 const ONE_SECOND = 1000;
@@ -235,7 +235,7 @@ const GraphViewer = (props) => {
   }
 
   const handleNodeLeftClick = (node, event) => {
-    if ( node.type === rdfTypes.Subject.key || node.type === rdfTypes.Collection.key ) {
+    if ( node.type === rdfTypes.Subject.key || node.type === rdfTypes.Sample.key || node.type === rdfTypes.Collection.key ) {
       node.collapsed = !node.collapsed;
       collapseSubLevels(node, node.collapsed, { links : 0 });
       const updatedData = getPrunedTree();
@@ -561,9 +561,8 @@ const GraphViewer = (props) => {
           if ( selectedLayout.layout === TOP_DOWN.layout ){
             node.fx = node.xPos;
             node.fy = 50 * node.level;
-          } else {
-            return 100 / (node.level + 1);
           }
+          return 100 / (node.level + 1);
         }}
         nodeRelSize={2.5}
         onNodeHover={handleNodeHover}
@@ -581,6 +580,14 @@ const GraphViewer = (props) => {
         enablePointerInteraction={true}
         // React element for controls goes here
         controls={
+          <div>
+          <div className='user-manual_controls'>
+            <IconButton component={Link} area-label="ZoomIn" onClick={() => window.open(config.docs_url, '_blank')}>
+              <Tooltip id="button-report" title="User Manual Documentation">
+                <HelpIcon />
+              </Tooltip>
+            </IconButton>
+          </div>
           <div className='graph-view_controls'>
             <IconButton area-label="GraphLayout" aria-controls="layout-menu" aria-haspopup="true" onClick={handleLayoutClick}>
               <Tooltip id="button-report" title="Change Graph Layout">
@@ -618,6 +625,7 @@ const GraphViewer = (props) => {
               </Tooltip>
             </IconButton>
             <LayersIcon />
+          </div>
           </div>
         }
       />
