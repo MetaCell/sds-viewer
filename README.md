@@ -13,7 +13,6 @@ Users can load datasets from the SPARC portal in a couple of ways:
    ![image](https://user-images.githubusercontent.com/4562825/166984322-83b4a8c2-aa29-4e6d-96e9-bcf4d125a3a9.png)
    - After selection, click 'Done'
    - Dataset will be loaded.
-   - Datasets list comes from https://cassava.ucsd.edu/sparc/datasets/
 
 2) Loading a dataset specifying DOI as parameter
    - Users can specify the DOI of a SPARC Portal dataset as a parameter on the URL and load it this way.
@@ -48,29 +47,6 @@ The SPARC SDS Viewer used SPARC Portal datasets.
 ### Error Handling
 - In the case of encountering an error, take a screenshot and report it with us please by opening an [issue](https://github.com/MetaCell/sds-viewer/issues/new)
 - To go back , click on the 'x' to go back to the previous screen.
-
-### Using local datasets
-
-The SPARC SDS Viewer can be used with local datasets not found on the SPARC portal, as long as the datasets are using valid SDS format. To run a local dataset, add query parameter 'local' to URL. e.g. http://localhost:3000/sds-viewer/?local=true
-
-Some external datasets that can be loaded via URL can be found here The datasets we have been testing can be found here https://cassava.ucsd.edu/sparc/preview/archive/exports/2021-06-21T103507%2C091927-0700/
-
-1) Loading an external dataset with a URL :
-   - Click on 'Import a new dataset'
-   - On the window that opens up, select 'From a URL'
-   - Paste the dataset url onto the textfield. For this use case, we only need to enter the URL of the turtle file.
-     URL example https://cassava.ucsd.edu/sparc/preview/archive/exports/2021-06-21T103507%2C091927-0700/datasets/N%3Adataset%3A02d6f93c-56cd-471b-bbb9-99f65f47d203.ttl
-     ![image](https://user-images.githubusercontent.com/4562825/136597116-4098f4eb-34ce-4abd-92fa-c6fbf6f2c92e.png)
-   - Click 'Load' and then 'Done'
-   - Dataset will be loaded
-
-2) Loading an local dataset ***Warning: If turtle and json file don't adhere to SPARC Dataset File structure, loaing the files locally won't work:
-   - Click on 'Import a new dataset'
-   - On the window that opens up, stay on 'Local System'.
-   - Add turtle and json file at the same time. 
-     ![image](https://user-images.githubusercontent.com/4562825/136603905-83145d22-0bff-47b2-ae09-7117acc4c246.png)
-   - Click 'Done'
-   - Dataset will be loaded
 
 ## SDS Viewer Running Instructions
 
