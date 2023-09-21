@@ -29,15 +29,15 @@ import config from "./../../config/app.json";
 const DatasetsListDialog = (props) => {
   const dispatch = useDispatch();
   const { open, handleClose } = props;
-  const [selectedIndex, setSelectedIndex] = React.useState(undefined);
   const [searchField, setSearchField] = React.useState("");
   const datasets = useSelector((state) => state.sdsState.available_datasets);
   const [filteredDatasets, setFilteredDatasets] = React.useState(datasets);
+  const PUBLISHED = "PUBLISHED";
 
   let turtle_url = "";
   let json_url = "";
   let splinter = undefined;
-
+  let selectedIndex = selectedIndex;
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
   };
@@ -105,6 +105,7 @@ const DatasetsListDialog = (props) => {
       let graph = await splinter.getGraph();
       let datasets = graph.nodes.filter((node) => node?.attributes?.hasUriApi);
       datasets.forEach( node => node.attributes ? node.attributes.lowerCaseLabel = node.attributes?.label?.[0]?.toLowerCase() : null );
+      datasets = datasets.filter( node => node?.attributes?.statusOnPlatform?.[0]?.includes(PUBLISHED) );
       dispatch(setDatasetsList(datasets));
       setFilteredDatasets(datasets);
     };
