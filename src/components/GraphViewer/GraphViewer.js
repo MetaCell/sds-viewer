@@ -581,13 +581,6 @@ const GraphViewer = (props) => {
         // React element for controls goes here
         controls={
           <div>
-          <div className='user-manual_controls'>
-            <IconButton component={Link} area-label="ZoomIn" onClick={() => window.open(config.docs_url, '_blank')}>
-              <Tooltip id="button-report" title="User Manual Documentation">
-                <HelpIcon />
-              </Tooltip>
-            </IconButton>
-          </div>
           <div className='graph-view_controls'>
             <IconButton area-label="GraphLayout" aria-controls="layout-menu" aria-haspopup="true" onClick={handleLayoutClick}>
               <Tooltip id="button-report" title="Change Graph Layout">
