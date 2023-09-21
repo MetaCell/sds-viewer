@@ -19,14 +19,17 @@ The SDS Viewer can now be launched directly from datasets and models on the SPAR
    - For example, if user wants to load Dataset with DOI 10.26275/qskp-awpu, we can add the id as parameter : 
      https://metacell.github.io/sds-viewer/?doi=10.26275/qskp-awpu
      This will open up the SDS Viewer with the dataset already loaded.
-     
-![loadwithid](https://github.com/MetaCell/sds-viewer/assets/99416933/2daf28db-c604-4d2d-9a3f-c9de494d5d6f)
+
+##### Loaded dataset example #####
+![Screenshot 2023-09-21 at 3 50 49 PM](https://github.com/MetaCell/sds-viewer/assets/4562825/e7247cf1-df5e-498d-a418-4cbc7f4c4de2)
+##### SPARC Dataset used #####
+![Screenshot 2023-09-21 at 3 53 33 PM](https://github.com/MetaCell/sds-viewer/assets/4562825/f3e287ed-f93a-436b-b3b0-b85cb1c0857c)
 
      
 ### Navigating the SDS Viewer
    - Users can search for subjects, folders and files on the sidebar. Selecting an item on the sidebar will display the Metadata for it and zoom the Graph to its corresponding node. 
+![Screenshot 2023-09-21 at 4 04 23 PM](https://github.com/MetaCell/sds-viewer/assets/4562825/b64ea659-607f-42f7-b58f-edb01e31ab40)
 
-![clickonitem](https://github.com/MetaCell/sds-viewer/assets/99416933/824f8c44-d8fd-473b-a9bd-ce2ebed701ad)
 
    - Selecting an item on the Graph will display its Metadata. 
 
