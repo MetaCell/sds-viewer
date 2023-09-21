@@ -5,9 +5,9 @@ Deployed version : https://metacell.github.io/sds-viewer/
 
 ## SDS Viewer User Manual 
 
-Users can load datasets in a few different ways. 
+Users can load datasets from the SPARC portal in a couple of ways:
 
-1) Loading a SPARC Dataset:
+1) Loading a SPARC Dataset from list:
    - Click on 'SPARC Datasets' button, it's located on the lower left corner.
    - On the window that opens up, select the dataset you want to load. 
    ![image](https://user-images.githubusercontent.com/4562825/166984322-83b4a8c2-aa29-4e6d-96e9-bcf4d125a3a9.png)
@@ -15,33 +15,15 @@ Users can load datasets in a few different ways.
    - Dataset will be loaded.
    - Datasets list comes from https://cassava.ucsd.edu/sparc/datasets/
 
-2) Loading an external dataset with a URL :
-   - Click on 'Import a new dataset'
-   - On the window that opens up, select 'From a URL'
-   - Paste the dataset url onto the textfield. For this use case, we only need to enter the URL of the turtle file.
-     URL example https://cassava.ucsd.edu/sparc/preview/archive/exports/2021-06-21T103507%2C091927-0700/datasets/N%3Adataset%3A02d6f93c-56cd-471b-bbb9-99f65f47d203.ttl
-     ![image](https://user-images.githubusercontent.com/4562825/136597116-4098f4eb-34ce-4abd-92fa-c6fbf6f2c92e.png)
-   - Click 'Load' and then 'Done'
-   - Dataset will be loaded
-
-3) Loading an local dataset ***Warning: If turtle and json file don't adhere to SPARC Dataset File structure, loaing the files locally won't work:
-   - Click on 'Import a new dataset'
-   - On the window that opens up, stay on 'Local System'.
-   - Add turtle and json file at the same time. 
-     ![image](https://user-images.githubusercontent.com/4562825/136603905-83145d22-0bff-47b2-ae09-7117acc4c246.png)
-   - Click 'Done'
-   - Dataset will be loaded
-
-4) Loading a dataset specifying ID as parameter
-   - Users can specify the id of the dataset as a parameter on the URL and load it this way.
-   - For example, if user wants to load Dataset with ID 0a5a2827-2b39-4085-87ea-2b7fbbe27cc8, we can add the id as parameter : 
-     https://metacell.github.io/sds-viewer/?id=0a5a2827-2b39-4085-87ea-2b7fbbe27cc8
+2) Loading a dataset specifying DOI as parameter
+   - Users can specify the DOI of a SPARC Portal dataset as a parameter on the URL and load it this way.
+   - For example, if user wants to load Dataset with DOI 10.26275/qskp-awpu, we can add the id as parameter : 
+     https://metacell.github.io/sds-viewer/?doi=10.26275/qskp-awpu
      This will open up the SDS Viewer with the dataset already loaded.
      
 ![loadwithid](https://github.com/MetaCell/sds-viewer/assets/99416933/2daf28db-c604-4d2d-9a3f-c9de494d5d6f)
 
      
-
 ### Navigating the SDS Viewer
    - Users can search for subjects, folders and files on the sidebar. Selecting an item on the sidebar will display the Metadata for it and zoom the Graph to its corresponding node. 
 
@@ -61,12 +43,34 @@ Users can load datasets in a few different ways.
 
 
 ### Datasets Used
-The datasets we have been testing can be found here https://cassava.ucsd.edu/sparc/preview/archive/exports/2021-06-21T103507%2C091927-0700/
+The SPARC SDS Viewer used SPARC Portal datasets. 
 
 ### Error Handling
 - In the case of encountering an error, take a screenshot and report it with us please by opening an [issue](https://github.com/MetaCell/sds-viewer/issues/new)
 - To go back , click on the 'x' to go back to the previous screen.
 
+### Using local datasets
+
+The SPARC SDS Viewer can be used with local datasets not found on the SPARC portal, as long as the datasets are using valid SDS format. To run a local dataset, add query parameter 'local' to URL. e.g. http://localhost:3000/sds-viewer/?local=true
+
+Some external datasets that can be loaded via URL can be found here The datasets we have been testing can be found here https://cassava.ucsd.edu/sparc/preview/archive/exports/2021-06-21T103507%2C091927-0700/
+
+1) Loading an external dataset with a URL :
+   - Click on 'Import a new dataset'
+   - On the window that opens up, select 'From a URL'
+   - Paste the dataset url onto the textfield. For this use case, we only need to enter the URL of the turtle file.
+     URL example https://cassava.ucsd.edu/sparc/preview/archive/exports/2021-06-21T103507%2C091927-0700/datasets/N%3Adataset%3A02d6f93c-56cd-471b-bbb9-99f65f47d203.ttl
+     ![image](https://user-images.githubusercontent.com/4562825/136597116-4098f4eb-34ce-4abd-92fa-c6fbf6f2c92e.png)
+   - Click 'Load' and then 'Done'
+   - Dataset will be loaded
+
+2) Loading an local dataset ***Warning: If turtle and json file don't adhere to SPARC Dataset File structure, loaing the files locally won't work:
+   - Click on 'Import a new dataset'
+   - On the window that opens up, stay on 'Local System'.
+   - Add turtle and json file at the same time. 
+     ![image](https://user-images.githubusercontent.com/4562825/136603905-83145d22-0bff-47b2-ae09-7117acc4c246.png)
+   - Click 'Done'
+   - Dataset will be loaded
 
 ## SDS Viewer Running Instructions
 

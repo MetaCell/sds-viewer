@@ -118,11 +118,32 @@ const DatasetDetails = (props) => {
                     </List>
                 </Box>
 
+                { node.graph_node.attributes?.hasExperimentalApproach !== undefined
+                    ? (<SimpleLabelValue label={'Experimental Approach'} value={node.graph_node.attributes?.hasExperimentalApproach} />
+                    )
+                    : <> </>
+                }
+
                 { node.graph_node.attributes?.hasDoi !== undefined
                     ? (<Box className="tab-content-row">
                             <Typography component="label">Links</Typography>
                             <Links key={`detail_links_dataset`} href={node.graph_node.attributes?.hasDoi?.[0]} title="Dataset" />
                         </Box>)
+                    : <> </>
+                }
+                { node.graph_node.attributes?.hasAdditionalFundingInformation !== undefined
+                    ? (<SimpleLabelValue label={'Additional Funding Information'} value={node.graph_node.attributes?.hasAdditionalFundingInformation} />
+                    )
+                    : <> </>
+                }
+                { node.graph_node.attributes?.statusOnPlatform !== undefined
+                    ? (<SimpleLabelValue label={'Status on Platform'} value={node.graph_node.attributes?.statusOnPlatform} />
+                    )
+                    : <> </>
+                }
+                { node.graph_node.attributes?.hasLicense !== undefined
+                    ? (<SimpleLabelValue label={'License'} value={node.graph_node.attributes?.hasLicense} />
+                    )
                     : <> </>
                 }
             </Box>

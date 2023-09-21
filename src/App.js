@@ -11,6 +11,9 @@ import Sidebar from './components/Sidebar/Sidebar';
 import EmptyContainer from './components/EmptyContainer';
 import ErrorDialog from './components/ErrorDialog/ErrorDialog';
 import UploadDialog from './components/FileUploader/UploadDialog';
+import { IconButton, Tooltip, Link, Typography } from '@material-ui/core';
+import HelpIcon from '@material-ui/icons/Help';
+import BugReportIcon from '@material-ui/icons/BugReport';
 import DatasetsListDialog from './components/DatasetsListViewer/DatasetsListDialog';
 import { MuiThemeProvider, CssBaseline } from '@material-ui/core';
 import { addDataset } from './redux/actions';
@@ -25,6 +28,7 @@ const App = () => {
   const queryParams = new URLSearchParams(window.location.search);
   const datasetID = queryParams.get('id');
   const doi = queryParams.get('doi');
+  const local = queryParams.get('local');
 
   const dispatch = useDispatch();
   const [openUploadDialog, setOpenUploadDialog] = useState(false);
@@ -160,12 +164,28 @@ const App = () => {
   return (
     <MuiThemeProvider theme={theme}>
       <CssBaseline />
+      <div className='user-manual_controls'>
+        <Typography justifyContent="right" variant='subtitle1' color='primary'> Version 1</Typography>
+        <Box display="flex" justifyContent="center">
+        <IconButton ustifyContent="right" component={Link} area-label="report" onClick={() => window.open(config.issues_url, '_blank')}>
+          <Tooltip id="button-report" title="Report Issues">
+            <BugReportIcon />
+          </Tooltip>
+        </IconButton>
+        <IconButton ustifyContent="right" component={Link} area-label="manual" onClick={() => window.open(config.docs_url, '_blank')}>
+          <Tooltip id="button-manual" title="User Manual Documentation">
+            <HelpIcon />
+          </Tooltip>
+        </IconButton>
+        </Box>
+      </div>
       <Box display="flex" className='main-structure'>
         <Sidebar
           openUploadDialog={openUploadDialog}
           setOpenUploadDialog={setOpenUploadDialog}
           openDatasetsListDialog={openDatasetsListDialog}
           setOpenDatasetsListDialog={setOpenDatasetsListDialog}
+          local={local}
         />
         <Box className={'content full-round'}>
           { datasets.length > 0

@@ -172,6 +172,30 @@ export const rdfTypes = {
                 "key": "protocolEmploysTechnique",
                 "property": "protocolEmploysTechnique",
                 "label": "To be filled"
+            },
+            {
+                "type": "TEMP",
+                "key": "hasAdditionalFundingInformation",
+                "property": "hasAdditionalFundingInformation",
+                "label": "To be filled"
+            },
+            {
+                "type": "TEMP",
+                "key": "hasExperimentalApproach",
+                "property": "hasExperimentalApproach",
+                "label": "To be filled"
+            },
+            {
+                "type": "TEMP",
+                "key": "hasLicense",
+                "property": "hasLicense",
+                "label": "To be filled"
+            },
+            {
+                "type": "TEMP",
+                "key": "statusOnPlatform",
+                "property": "statusOnPlatform",
+                "label": "To be filled"
             }
         ]
     },
@@ -225,6 +249,18 @@ export const rdfTypes = {
                 "type": "TEMP",
                 "key": "hasAgeCategory",
                 "property": "hasAgeCategory",
+                "label": "to be filled"
+            },
+            {
+                "type": "TEMP",
+                "key": "hasAgeMin",
+                "property": "hasAgeMin",
+                "label": "to be filled"
+            },
+            {
+                "type": "TEMP",
+                "key": "hasAgeMax",
+                "property": "hasAgeMax",
                 "label": "to be filled"
             },
             {
@@ -409,6 +445,12 @@ export const rdfTypes = {
                 "type": "TEMP",
                 "key": "middleName",
                 "property": "middleName",
+                "label": "To be filled"
+            },
+            {
+                "type": "TEMP",
+                "key": "hasAffiliation",
+                "property": "hasAffiliation",
                 "label": "To be filled"
             },
         ]

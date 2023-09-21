@@ -19,6 +19,7 @@ const Sidebar = (props) => {
         setOpenUploadDialog={props.setOpenUploadDialog}
         openDatasetsListDialog={props.openDatasetsListDialog}
         setOpenDatasetsListDialog={props.setOpenDatasetsListDialog}
+        local={props.local}
       />
     </Box>
   );
