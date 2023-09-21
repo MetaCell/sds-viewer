@@ -1,7 +1,6 @@
 Deployed version : https://metacell.github.io/sds-viewer/
 - [User Manual - Loading Datasets](https://github.com/MetaCell/sds-viewer/tree/development#sds-viewer-user-manual)
 - [User Manual - Navigating the Components](https://github.com/MetaCell/sds-viewer/tree/development#navigating-the-sds-viewer)
-- [Running Application Locally](https://github.com/MetaCell/sds-viewer/tree/development#sds-viewer-running-instructions)
 
 ## SDS Viewer User Manual 
 
