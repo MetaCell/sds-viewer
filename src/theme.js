@@ -1155,10 +1155,9 @@ const theme = createTheme({
           zIndex: '100',
         },
         '.user-manual_controls': {
-          width: '.75rem',
           position: 'absolute',
           top: '0',
-          right : '10px',
+          right : '2rem',
           zIndex: '100',
         },
       },

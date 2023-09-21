@@ -4,7 +4,10 @@ import NodeFooter from "./Footers/Footer";
 import DetailsFactory from './factory';
 import { useSelector } from 'react-redux'
 import Breadcrumbs from "./Details/Views/Breadcrumbs";
+import { IconButton, Tooltip, Link } from '@material-ui/core';
+import HelpIcon from '@material-ui/icons/Help';
 import { subject_key, protocols_key, contributors_key } from '../../constants';
+import config from "./../../config/app.json";
 
 const NodeDetailView = (props) => {
   var otherDetails = undefined;
@@ -87,7 +90,7 @@ const NodeDetailView = (props) => {
 
   return (
     <Box className={"secondary-sidebar" + (props.open ? " in" : "")}>
-      <Box className="secondary-sidebar_breadcrumb">
+      <Box className="secondary-sidebar_breadcrumb" sx={{mt : "1rem"}}>
         <Breadcrumbs close={false} links={links} />
       </Box>
       {/**{ nodeDetails.getHeader() }*/}
