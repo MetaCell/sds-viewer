@@ -119,7 +119,7 @@ const DatasetDetails = (props) => {
                 </Box>
 
                 { node.graph_node.attributes?.hasExperimentalApproach !== undefined
-                    ? (<SimpleLabelValue label={'Experimental Approach'} value={node.graph_node.attributes?.hasExperimentalApproach} />
+                    ? (<SimpleLabelValue label={'Experimental Approach'} value={node.graph_node.attributes?.hasExperimentalApproach?.toString()} />
                     )
                     : <> </>
                 }

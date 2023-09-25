@@ -673,9 +673,11 @@ class Splinter {
                 this.nodes.set(target_node.id, target_node);
             }
             let source_node = this.nodes.get(link.source);
-            source_node.chidLinks = [];
-            source_node.children_counter++;
-            this.nodes.set(source_node.id, source_node);
+            if ( source_node?.childLinks ) {
+                source_node.childLinks = [];
+                source_node.children_counter++;
+                this.nodes.set(source_node.id, source_node);
+            }
             return link;
         }).filter(link => {
             let target_node = this.nodes.get(link.target);
@@ -883,7 +885,7 @@ class Splinter {
         let level = parent.level;
         if (parent.type === rdfTypes.Sample.key) {
             if (parent.attributes.derivedFrom !== undefined) {
-                level = this.nodes.get(parent.attributes.derivedFrom[0]).level + 1;
+                level = this.nodes.get(parent.attributes.derivedFrom[0])?.level + 1;
             }
         }
         parent.children_counter++;
