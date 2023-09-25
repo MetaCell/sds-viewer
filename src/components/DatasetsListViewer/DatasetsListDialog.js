@@ -30,6 +30,7 @@ const DatasetsListDialog = (props) => {
   const dispatch = useDispatch();
   const { open, handleClose } = props;
   const [searchField, setSearchField] = React.useState("");
+  const [selectedIndex, setSelectedIndex] = React.useState(undefined);
   const datasets = useSelector((state) => state.sdsState.available_datasets);
   const [filteredDatasets, setFilteredDatasets] = React.useState(datasets);
   const PUBLISHED = "PUBLISHED";
@@ -37,7 +38,6 @@ const DatasetsListDialog = (props) => {
   let turtle_url = "";
   let json_url = "";
   let splinter = undefined;
-  let selectedIndex = selectedIndex;
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
   };

@@ -941,7 +941,7 @@ class Splinter {
         var children = this.tree_parents_map.get(tree_root?.remote_id);
         this.tree_parents_map?.delete(tree_root?.remote_id);
         this.tree = this.generateLeaf(tree_root);
-        children.forEach(leaf => {
+        children?.forEach(leaf => {
             this.build_leaf(leaf, this.tree);
         });
 

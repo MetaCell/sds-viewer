@@ -22,7 +22,7 @@ const NodeDetailView = (props) => {
     }
   };
   var path = []
-  if (nodeSelected.tree_node !== undefined && nodeSelected.tree_node !== null) {
+  if (nodeSelected.tree_node.path !== undefined && nodeSelected.tree_node !== null) {
     path = [...nodeSelected.tree_node.path]
     path.shift();
     otherDetails = path.reverse().map( singleNode => {

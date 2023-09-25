@@ -25,7 +25,7 @@ const InstancesTreeView = (props) => {
     dispatch(selectInstance({
       dataset_id: dataset_id,
       graph_node: node?.graph_reference?.id,
-      tree_node: node.id,
+      tree_node: node?.id,
       source: TREE_SOURCE
     }));
     if (widgets[dataset_id] !== undefined) {
