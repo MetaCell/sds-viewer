@@ -60,8 +60,18 @@ const FileDetails = (props) => {
                         </Box>)
                     : (<SimpleLabelValue label={'Label'} value={title} heading={'File Details'} />)
                 }
-                <SimpleLabelValue label={'Updated On'} value={latestUpdate.toString()} />
-
+                { node.graph_node?.attributes?.publishedURI && node.graph_node?.attributes?.publishedURI !== ""
+                    ? (<Box className="tab-content-row">
+                            <Typography component="h3">{"File Details"}</Typography>
+                            <Typography component="label">Published Dataset</Typography>
+                            <Links key={`label_href_link`} href={node.graph_node?.attributes?.publishedURI} title={"Sparc Portal Link"} />
+                        </Box>)
+                    : (<SimpleLabelValue label={'Label'} value={title} heading={'File Details'} />)
+                }
+                {latestUpdate.toString() ? 
+                    <SimpleLabelValue label={'Updated On'} value={latestUpdate.toString()} />
+                    : (<> </>)
+                }
                 <Box className="tab-content-row">
                     <Typography component="label">About</Typography>
                     <SimpleLinkedChip chips={node?.graph_node?.attributes?.isAbout} />

@@ -7,10 +7,10 @@
     "groups" : { 
         "order" : 
         {
-            "subjectSpecies" : { "tag" : "Subject Species", "icon" : "./images/graph/species.png"}, 
-            "subjectStrain" : { "tag" : "Subject Strain", "icon" : "./images/graph/strain.png"},
-            "biologicalSex" : { "tag" : "Subject Sex", "icon" : "./images/graph/sex.png"}, 
-            "hasAgeCategory" : { "tag" : "Subject Age", "icon" : "./images/graph/age.png"}
+            "subjectSpecies" : { "tag" : "Subject Species", "icon" : "./images/graph/species.svg"}, 
+            "subjectStrain" : { "tag" : "Subject Strain", "icon" : "./images/graph/strains.svg"},
+            "biologicalSex" : { "tag" : "Subject Sex", "icon" : "./images/graph/sex.svg"}, 
+            "hasAgeCategory" : { "tag" : "Subject Age", "icon" : "./images/graph/age.svg"}
         }
     },
     "text" : {

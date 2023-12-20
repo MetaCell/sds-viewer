@@ -749,6 +749,13 @@ class Splinter {
                 if (node?.tree_reference?.uri_human  !== undefined) {
                     node.tree_reference.uri_human = Array.from(this.nodes)[0][1].attributes.hasUriHuman[0];
                 }
+
+                if (node.attributes?.relativePath !== undefined) {
+                    node.attributes.publishedURI = 
+                        Array.from(this.nodes)[0][1].attributes.hasUriPublished[0]?.replace("datasets", "file") + 
+                        "/1?path=files/" +
+                        node.attributes?.relativePath;
+                }
             }
 
             if (node.type === rdfTypes.RRID.key || node.type === rdfTypes.NCBITaxon?.key || node.type === rdfTypes.PATO?.key) {
@@ -924,6 +931,7 @@ class Splinter {
                 mimetype: item.mimetype,
                 updated: item.timestamp_updated,
                 status: item.status,
+                publishedURI : ""
             },
             types: [],
             name: item.basename,

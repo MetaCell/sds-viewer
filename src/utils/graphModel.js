@@ -90,6 +90,12 @@ export const rdfTypes = {
                 "label": "To be filled"
             },
             {
+                "type": "TEMP",
+                "key": "hasUriPublished",
+                "property": "hasUriPublished",
+                "label": "To be filled"
+            },
+            {
                 "type": "dc",
                 "key": "title",
                 "property": "title",
