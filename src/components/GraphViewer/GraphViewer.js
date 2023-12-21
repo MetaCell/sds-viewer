@@ -1,6 +1,6 @@
 import * as d3 from 'd3-force-3d'
 import Menu from '@material-ui/core/Menu';
-import { IconButton, Tooltip, Link, MenuItem, CircularProgress } from '@material-ui/core';
+import { IconButton, Tooltip,Typography, Box, Link, MenuItem, CircularProgress } from '@material-ui/core';
 import React, { useState, useEffect } from 'react';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import LayersIcon from '@material-ui/icons/Layers';
@@ -9,6 +9,7 @@ import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import UnfoldMoreIcon from '@material-ui/icons/UnfoldMore';
 import UnfoldLessIcon from '@material-ui/icons/UnfoldLess';
+import BugReportIcon from '@material-ui/icons/BugReport';
 import { selectInstance } from '../../redux/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import FormatAlignCenterIcon from '@material-ui/icons/FormatAlignCenter';
@@ -618,6 +619,21 @@ const GraphViewer = (props) => {
               </Tooltip>
             </IconButton>
             <LayersIcon />
+          </div>
+          <div className='user-manual_controls'>
+            <Box display="flex" justifyContent="center">
+            <Typography justifyContent="right" variant='subtitle2' color='primary'> Version 1</Typography>
+            <IconButton ustifyContent="right" component={Link} area-label="report" onClick={() => window.open(config.issues_url, '_blank')}>
+              <Tooltip id="button-report" title="Report Issues">
+                <BugReportIcon />
+              </Tooltip>
+            </IconButton>
+            <IconButton ustifyContent="right" component={Link} area-label="manual" onClick={() => window.open(config.docs_url, '_blank')}>
+              <Tooltip id="button-manual" title="User Manual Documentation">
+                <HelpIcon />
+              </Tooltip>
+            </IconButton>
+            </Box>
           </div>
           </div>
         }

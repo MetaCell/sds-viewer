@@ -316,7 +316,13 @@ export const rdfTypes = {
                 "key": "hasUriHuman",
                 "property": "hasUriHuman",
                 "label": "To be filled"
-            }
+            },
+            {
+                "type": "TEMP",
+                "key": "publishedURI",
+                "property": "publishedURI",
+                "label": "to be filled"
+            },
         ],
         "additional_properties": [
             {
