@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Box } from "@material-ui/core";
 import NodeFooter from "./Footers/Footer";
 import DetailsFactory from './factory';
@@ -8,8 +8,11 @@ import { IconButton, Tooltip, Link } from '@material-ui/core';
 import HelpIcon from '@material-ui/icons/Help';
 import { subject_key, protocols_key, contributors_key } from '../../constants';
 import config from "./../../config/app.json";
+import {TuneRounded} from "@material-ui/icons";
 
 const NodeDetailView = (props) => {
+  const [showSettingsContent, setShowSettingsContent] = useState(false);
+
   var otherDetails = undefined;
   const factory = new DetailsFactory();
   const nodeSelected = useSelector(state => state.sdsState.instance_selected);
@@ -87,6 +90,9 @@ const NodeDetailView = (props) => {
       text: nodeSelected.graph_node.name
     };
   }
+  const toggleContent = () => {
+    setShowSettingsContent(!showSettingsContent);
+  };
 
   return (
     <Box className={"secondary-sidebar" + (props.open ? " in" : "")}>
@@ -95,8 +101,12 @@ const NodeDetailView = (props) => {
       </Box>
       {/**{ nodeDetails.getHeader() }*/}
       { otherDetails }
-      { nodeDetails.getDetail() }
+      { showSettingsContent ? nodeDetails.getSettings() : nodeDetails.getDetail() }
+
       <NodeFooter />
+      { !showSettingsContent && <Box className='overlay-button-container'>
+        <IconButton className="overlay-button" onClick={toggleContent}><TuneRounded /></IconButton>
+      </Box> }
     </Box>
   );
 };

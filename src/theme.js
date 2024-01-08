@@ -414,6 +414,24 @@ const theme = createTheme({
             display: 'none',
           },
         },
+        '& .overlay-button-container': {
+          position: 'sticky',
+          bottom: 0,
+          zIndex: 1000,
+          padding: '20px 0',
+          background: 'linear-gradient(180deg, rgb(255 255 255 / 87%) 8%, #FFF 100%)',
+          display: 'flex',
+          justifyContent: 'center',
+        },
+        '& .overlay-button': {
+          padding: '10px 20px',
+          width: '3rem',
+          height: '3rem',
+          backgroundColor: 'rgba(46, 58, 89, 0.10)',
+          color: '#2E3A59',
+          borderRadius: '50%',
+          cursor: 'pointer',
+        },
         '.dialog': {
           '&_body': {
             background: dialogBodyBgColor,
