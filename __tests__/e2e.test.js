@@ -44,6 +44,7 @@ describe("SDS Viewer e2e Test: Sparc Dataset", () => {
         await page.waitForSelector(selectors.EMPTY_DATASET_VIEWER_SELECTOR);
     });
 
+
     test("Home Page", async () => {
         await page.waitForSelector(selectors.EMPTY_DATASET_VIEWER_SELECTOR);
 
@@ -56,24 +57,24 @@ describe("SDS Viewer e2e Test: Sparc Dataset", () => {
                 customSnapshotIdentifier: 'Home Page'
             });
 
+
     });
 
 
-    test('Choose from SPARC Dataset List', async () => {
+    test('Choose SPARC Dataset List', async () => {
 
         console.log('Opening SPARC Datasets')
 
         await page.waitForSelector(selectors.LOAD_BUTTONS_SELECTOR)
 
         const load_dataset_button = await page.$$(selectors.LOAD_BUTTONS_SELECTOR)
-
         for (var i = 0; i < load_dataset_button.length; i++) {
-            load_dataset_button[1].click()
+            load_dataset_button[0].click()
 
         }
-
-        await page.waitForSelector(selectors.DATASET_LIST_SELECTOR)
-        await page.waitForSelector(selectors.DATASET_ITEM_SELECTOR)
+        await page.waitForTimeout(ONE_SECOND * 3)
+        await page.waitForSelector(selectors.DATASET_LIST_SELECTOR, {timeout: 60000})
+        await page.waitForSelector(selectors.DATASET_ITEM_SELECTOR, {timeout: 60000})
         await page.waitForSelector(selectors.DONE_BUTTON_SELECTOR, { disabled: true })
         const sparc_dataset_counts = await page.$$eval(selectors.DATASET_COUNT_NUMBER_SELECTOR, sparc_dataset_counts => {
             return sparc_dataset_counts.map(sparc_dataset_count => sparc_dataset_count.innerHTML);
@@ -107,8 +108,15 @@ describe("SDS Viewer e2e Test: Sparc Dataset", () => {
         const folder_lenght = folder.length
 
         expect(folder_lenght).toBe(1)
-
+        await page.waitForTimeout(3000)
+        await page.waitForSelector(selectors.OPEN_FOLDER_BUTTON_SELECTOR)
         await page.click(selectors.OPEN_FOLDER_BUTTON_SELECTOR)
+        await page.waitForSelector(selectors.SUBFOLDERS_SELECTOR)
+        await page.waitForTimeout(3000)
+
+        const folder_after_click = await page.$$(selectors.LOADED_DATASET_SELECTOR)
+        const folder_lenght_after_click = folder_after_click.length
+        expect(folder_lenght_after_click).toBeGreaterThan(folder_lenght)
 
         const data_folders = await page.$$eval(selectors.LOADED_DATASET_SELECTOR, data_folders => {
             return data_folders.map(data_folder => data_folder.innerHTML);
@@ -119,9 +127,14 @@ describe("SDS Viewer e2e Test: Sparc Dataset", () => {
         expect(data_folders).toContain('derivative')
         expect(data_folders).toContain('subjects.xlsx')
 
+        await console.log('... taking snapshot ...')
+        expect(await page.screenshot())
+            .toMatchImageSnapshot({
+                ...SNAPSHOT_OPTIONS,
+                customSnapshotIdentifier: 'Dataset Loaded'
+            });
+
     })
-
-
 
     test('Load another SPARC Dataset', async () => {
 
@@ -130,7 +143,7 @@ describe("SDS Viewer e2e Test: Sparc Dataset", () => {
         const load_dataset_button = await page.$$(selectors.LOAD_BUTTONS_SELECTOR)
 
         for (var i = 0; i < load_dataset_button.length; i++) {
-            load_dataset_button[1].click()
+            load_dataset_button[0].click()
 
         }
 
@@ -152,13 +165,20 @@ describe("SDS Viewer e2e Test: Sparc Dataset", () => {
         console.log('Dataset loaded')
 
         await page.waitForSelector(selectors.GRAPH_SELECTOR)
-        await page.waitForTimeout(ONE_MINUTE * 1.5)
+        await page.waitForTimeout(10000)
         const folder = await page.$$(selectors.LOADED_DATASET_SELECTOR)
         const folder_lenght = folder.length
 
         expect(folder_lenght).toBe(2)
-    })
 
+        await console.log('... taking snapshot ...')
+        expect(await page.screenshot())
+            .toMatchImageSnapshot({
+                ...SNAPSHOT_OPTIONS,
+                customSnapshotIdentifier: '2 Datasets Loaded'
+            });
+
+    })
 
     test('Open Dataset through its ID', async () => {
 
@@ -180,9 +200,16 @@ describe("SDS Viewer e2e Test: Sparc Dataset", () => {
 
         expect(data_ids[0]).toBe(DATASET_ID)
 
+        await console.log('... taking snapshot ...')
+        expect(await page.screenshot())
+            .toMatchImageSnapshot({
+                ...SNAPSHOT_OPTIONS,
+                customSnapshotIdentifier: 'Dataset Loaded'
+            });
+
     })
 
-    //SDS Viewer has a bug on this section
+    // No Longer applicable
     test.skip('Load Dataset through URL', async () => {
         await page.goto(DEV_URL)
         await page.waitForSelector(selectors.EMPTY_DATASET_LIST_SELECTOR);
@@ -203,7 +230,7 @@ describe("SDS Viewer e2e Test: Sparc Dataset", () => {
 
     })
 
-    //SDS Viewer has a bug on this section
+    // No Longer applicable
     test.skip('Load Dataset from Local System', async () => {
         await page.goto(DEV_URL)
         await page.waitForSelector(selectors.EMPTY_DATASET_LIST_SELECTOR);
@@ -254,3 +281,6 @@ describe("SDS Viewer e2e Test: Sparc Dataset", () => {
 
 
 })
+
+
+
