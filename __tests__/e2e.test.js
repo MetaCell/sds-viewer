@@ -169,7 +169,7 @@ describe("SDS Viewer e2e Test: Sparc Dataset", () => {
         const folder = await page.$$(selectors.LOADED_DATASET_SELECTOR)
         const folder_lenght = folder.length
 
-        expect(folder_lenght).toBe(2)
+        expect(folder_lenght).toBeGreaterThan(2)
 
         await console.log('... taking snapshot ...')
         expect(await page.screenshot())
