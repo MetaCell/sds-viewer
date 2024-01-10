@@ -30,42 +30,42 @@ const FileDetails = (props) => {
     }
 
     let latestUpdate = "Not defined."
-    if (node?.tree_node?.timestamp_updated !== undefined) {
-        latestUpdate = new Date(node?.tree_node?.timestamp_updated.split(",")[0]);
+    if (node?.graph_node.attributes?.updated !== undefined) {
+        latestUpdate = node?.attributes?.updated;
     }
 
     const DETAILS_LIST = [
         {
-            title: 'Type',
-            value: node?.tree_node?.type
-        },
-        {
             title: 'Mimetype',
-            value: node?.tree_node?.mimetype
+            value: node?.graph_node?.attributes?.mimetype
         },
         {
             title: 'Size Bytes',
-            value: node?.tree_node?.size_bytes
+            value: node?.graph_node?.attributes?.size
         }
     ];
 
     return (
         <Box className="secondary-sidebar_body" id={idDetails}>
             <Box className="tab-content">
-                { node.graph_node?.attributes?.hasUriHuman && node.graph_node?.attributes?.hasUriHuman[0] !== ""
+                { node.graph_node?.attributes?.identifier
                     ? (<Box className="tab-content-row">
                             <Typography component="h3">{"File Details"}</Typography>
-                            <Typography component="label">Label</Typography>
-                            <Links key={`label_href_link`} href={node.graph_node?.attributes?.hasUriHuman[0]} title={title} />
+                            <SimpleLabelValue label={'Label'} value={node.graph_node?.attributes?.identifier} />
                         </Box>)
                     : (<SimpleLabelValue label={'Label'} value={title} heading={'File Details'} />)
                 }
-                <SimpleLabelValue label={'Updated On'} value={latestUpdate.toString()} />
-
-                <Box className="tab-content-row">
-                    <Typography component="label">About</Typography>
-                    <SimpleLinkedChip chips={node?.graph_node?.attributes?.isAbout} />
-                </Box>
+                { node.graph_node?.attributes?.publishedURI && node.graph_node?.attributes?.publishedURI !== ""
+                    ? (<Box className="tab-content-row">
+                            <Typography component="label">Published Dataset File</Typography>
+                            <Links key={`label_href_link`} href={node.graph_node?.attributes?.publishedURI} title={node.graph_node?.attributes?.identifier} />
+                        </Box>)
+                    : <></>
+                }
+                {latestUpdate ? 
+                    <SimpleLabelValue label={'Updated On'} value={latestUpdate} />
+                    : (<> </>)
+                }
                 { node?.tree_node?.uri_human !== undefined
                     ? (<Box className="tab-content-row">
                             <Links href={node?.tree_node?.uri_human} title="Human URI" />

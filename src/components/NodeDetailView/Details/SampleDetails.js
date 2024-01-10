@@ -38,6 +38,14 @@ const SampleDetails = (props) => {
                     : (<SimpleLabelValue label={'Label'} value={title} heading={'Sample Details'} />)
                 }
 
+                { node.graph_node?.attributes?.publishedURI && node.graph_node?.attributes?.publishedURI !== ""
+                    ? (<Box className="tab-content-row">
+                            <Typography component="label">SPARC Portal Link</Typography>
+                            <Links key={`label_href_link`} href={node.graph_node?.attributes?.publishedURI} title={node.tree_node.basename} />
+                        </Box>)
+                    : <></>
+                }
+
                 { iterateSimpleValue('Assigned group', node?.graph_node?.attributes?.hasAssignedGroup) }
                 { iterateSimpleValue('Digital artifact', node?.graph_node?.attributes?.hasDigitalArtifactThatIsAboutIt) }
                 { iterateSimpleValue('Extracted from Anatomical region', node?.graph_node?.attributes?.wasExtractedFromAnatomicalRegion) }

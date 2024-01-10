@@ -10,8 +10,9 @@ export const DATASET_COUNT_NUMBER_SELECTOR = 'p[class="MuiTypography-root MuiTyp
 export const SPARC_DATASET_LIST_SELECTOR = 'li[class="MuiListItem-root dataset_item MuiListItem-gutters"]';
 export const ENABLED_DONE_BUTTON_SELECTOR = 'button[class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-disableElevation MuiButton-fullWidth"]';
 export const LOADED_DATASET_SELECTOR = 'p[class="MuiTypography-root labelText MuiTypography-body2"]';
-export const GRAPH_SELECTOR = '#graph-2d';
+export const GRAPH_SELECTOR = '.graph-view';
 export const OPEN_FOLDER_BUTTON_SELECTOR = 'span[class="MuiTypography-root labelCaption MuiTypography-caption MuiTypography-colorInherit"]';
+export const SUBFOLDERS_SELECTOR = 'ul[class="MuiCollapse-root MuiTreeItem-group MuiCollapse-entered"]'
 export const FELINE_DATASET_IMG_SELECTOR = 'img[alt="Feline brainstem neuron extracellular potential recordings"]';
 export const DATA_ID_SELECTOR = 'h6[class="MuiTypography-root breadcrumb_selected MuiTypography-subtitle2"]';
 export const URL_UPLOADER_SELECTOR = '#url-uploader';

@@ -2,8 +2,6 @@ import React from "react";
 import {
     Box,
     Typography,
-    List,
-    ListItemText,
 } from "@material-ui/core";
 import SimpleChip from './Views/SimpleChip';
 import SimpleLinkedChip from './Views/SimpleLinkedChip';
@@ -73,6 +71,14 @@ const SubjectDetails = (props) => {
                         </Box>))
                 }
 
+                { node.graph_node?.attributes?.publishedURI && node.graph_node?.attributes?.publishedURI !== ""
+                    ? (<Box className="tab-content-row">
+                            <Typography component="label">SPARC Portal Link</Typography>
+                            <Links key={`label_href_link`} href={node.graph_node?.attributes?.publishedURI} title={node.tree_node.basename} />
+                        </Box>)
+                    : <></>
+                }
+
                 { node.graph_node?.attributes?.hasAgeCategory
                     ? ( <Box className="tab-content-row">
                             <Typography component="label">Age Category</Typography>
@@ -99,7 +105,13 @@ const SubjectDetails = (props) => {
                         </Box>)
                     : <> </>
                 }
-                { iterateSimpleValue('Specimen identifier', node?.graph_node?.attributes?.specimenHasIdentifier) }
+                { node.graph_node?.attributes?.specimenHasIdentifier && node.graph_node?.attributes?.specimenHasIdentifier !== ""
+                    ? (<Box className="tab-content-row">
+                            <Typography component="label">Specimen identifier</Typography>
+                            <Links key={`label_href_link`} href={node?.graph_node?.attributes?.specimenHasIdentifier} title={node.graph_node?.attributes?.specimenHasIdentifier} />
+                        </Box>)
+                    : <></>
+                }
                 { node.graph_node?.attributes?.subjectSpecies
                     ? ( <Box className="tab-content-row">
                             <Typography component="label">Species</Typography>
