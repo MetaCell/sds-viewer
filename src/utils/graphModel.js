@@ -100,6 +100,13 @@ export const rdfTypes = {
             },
             {
                 "type": "TEMP",
+                "key": "hasUriPublished",
+                "property": "hasUriPublished",
+                "label": "Published URI",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
                 "key": "contentsWereUpdatedAtTime",
                 "property": "latestUpdate",
                 "label": "Contents Updated On",

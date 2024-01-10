@@ -15,7 +15,7 @@ import { rdfTypes } from "../../../utils/graphModel";
 const DatasetDetails = (props) => {
     const { node } = props;
 
-    let datasetPropertiesModel = {...rdfTypes["Dataset"].properties};
+    let datasetPropertiesModel = [...rdfTypes["Dataset"].properties];
 
     const isValidUrl = (urlString) => {
         var urlPattern = new RegExp('^(https?:\\/\\/)?' + // validate protocol
