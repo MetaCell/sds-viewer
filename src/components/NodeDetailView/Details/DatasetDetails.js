@@ -29,7 +29,7 @@ const DatasetDetails = (props) => {
 
     return (
         
-        <Box id={idDetails}>
+        <Box id={node.graph_node?.id + detailsLabel}>
             <Box className="tab-content">
                 {datasetPropertiesModel?.map( property => {
                     if ( property.visible ){
