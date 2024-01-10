@@ -78,124 +78,263 @@ export const rdfTypes = {
         "key": "Dataset",
         "properties": [
             {
-                "type": "rdfs",
-                "key": "label",
-                "property": "label",
-                "label": "To be filled"
-            },
-            {
-                "type": "TEMP",
-                "key": "hasUriHuman",
-                "property": "hasUriHuman",
-                "label": "To be filled"
-            },
-            {
                 "type": "dc",
                 "key": "title",
                 "property": "title",
-                "label": "To be filled"
+                "label": "Title",
+                "visible" : true
+            },
+            {
+                "type": "rdfs",
+                "key": "label",
+                "property": "label",
+                "label": "Label",
+                "visible" : true
             },
             {
                 "type": "dc",
                 "key": "description",
                 "property": "description",
-                "label": "To be filled"
-            },
-            {
-                "type": "isAbout",
-                "key": "",
-                "property": "isAbout",
-                "label": "To be filled"
+                "label": "Description",
+                "visible" : true
             },
             {
                 "type": "TEMP",
                 "key": "contentsWereUpdatedAtTime",
                 "property": "latestUpdate",
-                "label": "To be filled"
+                "label": "Contents Updated On",
+                "visible" : true
             },
             {
-                "type": "TEMP",
-                "key": "errorIndex",
-                "property": "errorIndex",
-                "label": "To be filled"
-            },
-            {
-                "type": "TEMP",
-                "key": "hasAwardNumber",
-                "property": "hasAwardNumber",
-                "label": "To be filled"
-            },
-            {
-                "type": "TEMP",
-                "key": "hasDoi",
-                "property": "hasDoi",
-                "label": "To be filled"
-            },
-            {
-                "type": "TEMP",
-                "key": "hasDatasetTemplateSchemaVersion",
-                "property": "hasDatasetTemplateSchemaVersion",
-                "label": "To be filled"
-            },
-            {
-                "type": "TEMP",
-                "key": "hasExperimentalModality",
-                "property": "hasExperimentalModality",
-                "label": "To be filled"
-            },
-            {
-                "type": "TEMP",
-                "key": "hasResponsiblePrincipalInvestigator",
-                "property": "hasResponsiblePrincipalInvestigator",
-                "label": "To be filled"
-            },
-            {
-                "type": "TEMP",
-                "key": "hasUriApi",
-                "property": "hasUriApi",
-                "label": "To be filled"
-            },
-            {
-                "type": "TEMP",
-                "key": "hasProtocol",
-                "property": "hasProtocol",
-                "label": "To be filled"
-            },
-            {
-                "type": "TEMP",
-                "key": "hasUriHuman",
-                "property": "hasUriHuman",
-                "label": "To be filled"
+                "type": "isAbout",
+                "key": "",
+                "property": "isAbout",
+                "label": "About",
+                "visible" : true
             },
             {
                 "type": "TEMP",
                 "key": "protocolEmploysTechnique",
                 "property": "protocolEmploysTechnique",
-                "label": "To be filled"
+                "label": "Protocol Employs Technique",
+                "visible" : true
             },
             {
                 "type": "TEMP",
-                "key": "hasAdditionalFundingInformation",
-                "property": "hasAdditionalFundingInformation",
-                "label": "To be filled"
+                "key": "errorIndex",
+                "property": "errorIndex",
+                "label": "Error Index",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "hasDatasetTemplateSchemaVersion",
+                "property": "hasDatasetTemplateSchemaVersion",
+                "label": "Template Schema Version",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "hasExperimentalModality",
+                "property": "hasExperimentalModality",
+                "label": "Experimental Modality",
+                "visible" : true
             },
             {
                 "type": "TEMP",
                 "key": "hasExperimentalApproach",
                 "property": "hasExperimentalApproach",
-                "label": "To be filled"
+                "label": "Experimental Approach",
+                "visible" : true
             },
             {
                 "type": "TEMP",
-                "key": "hasLicense",
-                "property": "hasLicense",
-                "label": "To be filled"
+                "key": "hasDoi",
+                "property": "hasDoi",
+                "label": "DOI",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "hasAdditionalFundingInformation",
+                "property": "hasAdditionalFundingInformation",
+                "label": "Additional Funding Information",
+                "visible" : true
             },
             {
                 "type": "TEMP",
                 "key": "statusOnPlatform",
                 "property": "statusOnPlatform",
-                "label": "To be filled"
+                "label": "Status On Platform",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "hasLicense",
+                "property": "hasLicense",
+                "label": "License",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "hasUriHuman",
+                "property": "hasUriHuman",
+                "label": "URI Human",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "curationIndex",
+                "property": "curationIndex",
+                "label": "Curation Index",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "hasAwardNumber",
+                "property": "hasAwardNumber",
+                "label": "Award Number",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "hasExpectedNumberOfSamples",
+                "property": "hasExpectedNumberOfSamples",
+                "label": "Expected Number of Samples",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "hasExpectedNumberOfSubjects",
+                "property": "hasExpectedNumberOfSubjects",
+                "label": "Expected Number of Subjects",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "hasResponsiblePrincipalInvestigator",
+                "property": "hasResponsiblePrincipalInvestigator",
+                "label": "Responsible Principal Investigator",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "hasUriApi",
+                "property": "hasUriApi",
+                "label": "URI API",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "hasProtocol",
+                "property": "hasProtocol",
+                "label": "Protocol",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "hasUriHuman",
+                "property": "hasUriHuman",
+                "label": "URI Human",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "hasNumberOfContributors",
+                "property": "hasNumberOfContributors",
+                "label": "Number of Contributors",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "hasNumberOfDirectories",
+                "property": "hasNumberOfDirectories",
+                "label": "Number of Directories",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "hasNumberOfFiles",
+                "property": "hasNumberOfFiles",
+                "label": "Number of Files",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "hasNumberOfPerformances",
+                "property": "hasNumberOfPerformances",
+                "label": "Number of Performances",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "hasNumberOfSamples",
+                "property": "hasNumberOfSamples",
+                "label": "Number of Samples",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "hasNumberOfSubjects",
+                "property": "hasNumberOfSubjects",
+                "label": "Number of Subjects",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "hasPathErrorReport",
+                "property": "hasPathErrorReport",
+                "label": "Path Error Report",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "hasSizeInBytes",
+                "property": "hasSizeInBytes",
+                "label": "Size In Bytes",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "milestoneCompletionDate",
+                "property": "milestoneCompletionDate",
+                "label": "Milestone Completion Date",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "speciesCollectedFrom",
+                "property": "speciesCollectedFrom",
+                "label": "Species Collected From",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "submissionIndex",
+                "property": "submissionIndex",
+                "label": "Submission Index",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "unclassifiedIndex",
+                "property": "unclassifiedIndex",
+                "label": "Unclassified Index",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "wasCreatedAtTime",
+                "property": "wasCreatedAtTime",
+                "label": "Created At",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "wasUpdatedAtTime",
+                "property": "wasUpdatedAtTime",
+                "label": "Updated Last On",
+                "visible" : true
             }
         ]
     },
