@@ -29,17 +29,6 @@ const SubjectDetails = (props) => {
         title = node.tree_node.basename;
     }
 
-    const DETAILS_LIST = [
-        {
-            title: 'Weight Unit',
-            value: node.graph_node.attributes?.weightUnit
-        },
-        {
-            title: 'Weight Value',
-            value: node.graph_node.attributes?.weightValue
-        }
-    ];
-
     const getGroupNode = (groupName, node)=> {
         let n = node.graph_node.parent;
         let match = false;
@@ -57,19 +46,9 @@ const SubjectDetails = (props) => {
     }
 
     return (
-        <Box id={idDetails}>
+        <Box id={node?.graph_node?.id + detailsLabel}>
             <Box className="tab-content">
-                { node.graph_node.attributes?.hasUriHuman && node.graph_node.attributes?.hasUriHuman[0] !== ""
-                    ? (<Box className="tab-content-row">
-                            <Typography component="h3">{"Subject Details"}</Typography>
-                            <Typography component="label">Label</Typography>
-                            <Links key={`label_href_link`} href={node.graph_node.attributes?.hasUriHuman[0]} title={title} />
-                        </Box>)
-                    : (( <Box className="tab-content-row">
-                            <Typography component="label">Subject Details</Typography>
-                            <SimpleLinkedChip chips={[{ value : title}]} node={node.graph_node} />
-                        </Box>))
-                }
+                <SimpleLabelValue label={""} value={""} heading={title} />
 
                 { node.graph_node?.attributes?.publishedURI && node.graph_node?.attributes?.publishedURI !== ""
                     ? (<Box className="tab-content-row">
