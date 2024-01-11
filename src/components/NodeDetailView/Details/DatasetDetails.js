@@ -11,21 +11,12 @@ import USER from "../../../images/user.svg";
 import SimpleLabelValue from './Views/SimpleLabelValue';
 import { detailsLabel } from '../../../constants';
 import { rdfTypes } from "../../../utils/graphModel";
+import { isValidUrl } from './utils';
 
 const DatasetDetails = (props) => {
     const { node } = props;
 
     let datasetPropertiesModel = [...rdfTypes["Dataset"].properties];
-
-    const isValidUrl = (urlString) => {
-        var urlPattern = new RegExp('^(https?:\\/\\/)?' + // validate protocol
-            '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // validate domain name
-            '((\\d{1,3}\\.){3}\\d{1,3}))' + // validate OR ip (v4) address
-            '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // validate port and path
-            '(\\?[;&a-z\\d%_.~+=-]*)?' + // validate query string
-            '(\\#[-a-z\\d_]*)?$', 'i'); // validate fragment locator
-        return !!urlPattern.test(urlString);
-    }
 
     return (
         
