@@ -1,21 +1,20 @@
-import React, {useState} from "react";
 import { Box } from "@material-ui/core";
 import NodeFooter from "./Footers/Footer";
 import DetailsFactory from './factory';
-import { useSelector } from 'react-redux'
 import Breadcrumbs from "./Details/Views/Breadcrumbs";
-import { IconButton, Tooltip, Link } from '@material-ui/core';
-import HelpIcon from '@material-ui/icons/Help';
+import { IconButton } from '@material-ui/core';
 import { subject_key, protocols_key, contributors_key } from '../../constants';
-import config from "./../../config/app.json";
 import {TuneRounded} from "@material-ui/icons";
+import { useSelector, useDispatch } from 'react-redux'
+import { toggleSettingsPanelVisibility } from '../../redux/actions';
 
 const NodeDetailView = (props) => {
-  const [showSettingsContent, setShowSettingsContent] = useState(false);
+  const dispatch = useDispatch();
 
   var otherDetails = undefined;
   const factory = new DetailsFactory();
   const nodeSelected = useSelector(state => state.sdsState.instance_selected);
+  const showSettingsContent = useSelector(state => state.sdsState.settings_panel_visible);
   const nodeDetails = factory.createDetails(nodeSelected);
   let links = {
     pages: [],
@@ -91,7 +90,7 @@ const NodeDetailView = (props) => {
     };
   }
   const toggleContent = () => {
-    setShowSettingsContent(!showSettingsContent);
+    dispatch(toggleSettingsPanelVisibility(!showSettingsContent));
   };
 
   return (
@@ -99,7 +98,6 @@ const NodeDetailView = (props) => {
       <Box className="secondary-sidebar_breadcrumb" sx={{mt : "1rem"}}>
         <Breadcrumbs close={false} links={links} />
       </Box>
-      {/**{ nodeDetails.getHeader() }*/}
       { otherDetails }
       { showSettingsContent ? nodeDetails.getSettings() : nodeDetails.getDetail() }
 

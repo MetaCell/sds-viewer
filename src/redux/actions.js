@@ -4,12 +4,12 @@ export const SET_DATASET_LIST = 'SET_DATASET_LIST'
 export const SELECT_INSTANCE = 'SELECT_INSTANCE'
 export const TRIGGER_ERROR = 'TRIGGER_ERROR'
 export const SELECT_GROUP = 'SELECT_GROUP'
+export const TOGGLE_METADATA_SETTINGS = 'TOGGLE_METADATA_SETTINGS'
 
 export const addDataset = dataset => ({
     type: ADD_DATASET,
     data: { dataset: dataset },
 });
-
 
 export const deleteDataset = dataset_id => ({
     type: DELETE_DATASET,
@@ -44,4 +44,9 @@ export const selectGroup = instance => ({
 export const triggerError = message => ({
     type: TRIGGER_ERROR,
     data: { error_message: message },
+});
+
+export const toggleSettingsPanelVisibility = visible => ({
+    type: TOGGLE_METADATA_SETTINGS,
+    data: { visible: visible },
 });

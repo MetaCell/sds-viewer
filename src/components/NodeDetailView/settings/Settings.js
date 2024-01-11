@@ -1,8 +1,18 @@
-import React from "react";
 import { Box, Button, Typography } from "@material-ui/core";
 import SettingsGroup from "./SettingsGroup";
 import FolderIcon from "@material-ui/icons/Folder";
+import { useSelector, useDispatch } from 'react-redux'
+import { toggleSettingsPanelVisibility } from '../../../redux/actions';
+
+
 const Settings = props => {
+  const dispatch = useDispatch();
+  const showSettingsContent = useSelector(state => state.sdsState.settings_panel_visible);
+
+  const save = () => {
+    dispatch(toggleSettingsPanelVisibility(!showSettingsContent));
+  };
+
   return (
     <Box style={{ position: "relative", maxHeight: "84vh", overflow: "auto" }}>
       <Box
@@ -35,7 +45,7 @@ const Settings = props => {
           justifyContent: "center"
         }}
       >
-        <Button variant="contained" disableElevation color="primary" fullWidth>
+        <Button variant="contained" disableElevation color="primary" onClick={save} fullWidth>
           Save
         </Button>
       </Box>

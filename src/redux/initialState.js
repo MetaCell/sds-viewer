@@ -19,7 +19,8 @@ export const sdsInitialState = {
             tree_node: null,
             source: ""
         },
-        layout : {}
+        layout : {},
+        settings_panel_visible : false
     }
 };
 
@@ -107,6 +108,8 @@ export default function sdsClientReducer(state = {}, action) {
             break;
         case LayoutActions.layoutActions.SET_LAYOUT:
             return { ...state, layout : action.data.layout};
+        case Actions.TOGGLE_METADATA_SETTINGS:
+            return { ...state, settings_panel_visible : action.data.visible};
         default:
             return state;
     }
