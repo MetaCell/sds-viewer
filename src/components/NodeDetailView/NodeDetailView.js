@@ -66,7 +66,7 @@ const NodeDetailView = (props) => {
         <Breadcrumbs close={false} links={links} />
       </Box>
       { otherDetails }
-      { showSettingsContent ? nodeDetails.getSettings() : nodeDetails.getDetail() }
+      { showSettingsContent && nodeDetails.getSettings ? nodeDetails.getSettings() : nodeDetails.getDetail() }
 
       <NodeFooter />
       { !showSettingsContent && <Box className='overlay-button-container'>

@@ -84,6 +84,14 @@ const Collection = function (node) {
             </>
         )
     }
+
+    nodeDetail.getSettings = () => {
+        return (
+            <>
+                <Settings node={node} />
+            </>
+        )
+    }
     return nodeDetail;
 };
 
@@ -112,6 +120,14 @@ const Group = function (node) {
             <>
                 <CollectionHeader node={node} />
                 <GroupDetails node={node} />
+            </>
+        )
+    }
+    
+    nodeDetail.getSettings = () => {
+        return (
+            <>
+                <Settings node={node} />
             </>
         )
     }
@@ -216,6 +232,14 @@ const Sample = function (node) {
             </>
         )
     }
+
+    nodeDetail.getSettings = () => {
+        return (
+            <>
+                <Settings node={node} />
+            </>
+        )
+    }
     return nodeDetail;
 };
 
@@ -247,6 +271,14 @@ const Subject = function (node) {
             </>
         )
     }
+
+    nodeDetail.getSettings = () => {
+        return (
+            <>
+                <Settings node={node} />
+            </>
+        )
+    }
     return nodeDetail;
 };
 
@@ -275,6 +307,14 @@ const File = function (node) {
             <>
                 <FileHeader node={node} />
                 <FileDetails node={node} />
+            </>
+        )
+    }
+
+    nodeDetail.getSettings = () => {
+        return (
+            <>
+                <Settings node={node} />
             </>
         )
     }
