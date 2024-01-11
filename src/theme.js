@@ -1169,13 +1169,13 @@ const theme = createTheme({
         '.graph-view_controls': {
           width: '.75rem',
           position: 'absolute',
-          bottom: '0',
+          bottom: '1rem',
           zIndex: '100',
         },
         '.user-manual_controls': {
           position: 'absolute',
-          top: '0',
-          right : '2rem',
+          bottom: '0',
+          right : '0rem',
           zIndex: '100',
         },
       },

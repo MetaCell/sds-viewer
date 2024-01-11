@@ -537,6 +537,7 @@ class Splinter {
                         childLinks : [],
                         samples : 0, 
                         subjects : 0,
+                        publishedURI : ""
                     };
                     let nodeF = this.factory.createNode(groupNode);
                     const img = new Image();
@@ -558,6 +559,7 @@ class Splinter {
         });
         link.source = parent.id;
         target_node.level = parent.level + 1;
+        target_node.attributes.publishedURI = ""
         target_node.id = parent.id + target_node.name;
         target_node.parent = parent;
         target_node.childLinks = [];
@@ -708,6 +710,13 @@ class Splinter {
                         });
                     }
                 }
+
+                if (node.attributes?.relativePath !== undefined) {
+                    node.attributes.publishedURI = 
+                        Array.from(this.nodes)[0][1].attributes.hasUriPublished[0]?.replace("datasets", "file") + 
+                        "/1?path=files/" +
+                        node.attributes?.relativePath;
+                }
             }
 
             if (node.type === rdfTypes.Subject.key) {
@@ -743,11 +752,38 @@ class Splinter {
                         node.attributes.participantInPerformanceOf[0] = source.attributes.hasUriHuman[0];
                     }
                 }
+
+                if (node.tree_reference?.dataset_relative_path !== undefined) {
+                    node.attributes.publishedURI = 
+                        Array.from(this.nodes)[0][1].attributes.hasUriPublished[0]?.replace("datasets", "file") + 
+                        "/1?path=files/" +
+                        node.tree_reference?.dataset_relative_path;
+                }
             }
 
             if (node.type === rdfTypes.File.key) {
                 if (node?.tree_reference?.uri_human  !== undefined) {
                     node.tree_reference.uri_human = Array.from(this.nodes)[0][1].attributes.hasUriHuman[0];
+                }
+
+                if (node.attributes?.relativePath !== undefined) {
+                    node.attributes.publishedURI = 
+                        Array.from(this.nodes)[0][1].attributes.hasUriPublished[0]?.replace("datasets", "file") + 
+                        "/1?path=files/" +
+                        node.attributes?.relativePath;
+                }
+            }
+
+            if (node.type === rdfTypes.Collection.key) {
+                if (node?.tree_reference?.uri_human  !== undefined) {
+                    node.tree_reference.uri_human = Array.from(this.nodes)[0][1].attributes.hasUriHuman[0];
+                }
+
+                if (node.attributes?.relativePath !== undefined) {
+                    node.attributes.publishedURI = 
+                        Array.from(this.nodes)[0][1].attributes.hasUriPublished[0]?.replace("datasets", "file") + 
+                        "/1?path=files/" +
+                        node.attributes?.relativePath;
                 }
             }
 
@@ -924,6 +960,7 @@ class Splinter {
                 mimetype: item.mimetype,
                 updated: item.timestamp_updated,
                 status: item.status,
+                publishedURI : ""
             },
             types: [],
             name: item.basename,
