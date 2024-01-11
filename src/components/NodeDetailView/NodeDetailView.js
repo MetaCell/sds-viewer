@@ -1,14 +1,20 @@
 import { Box } from "@material-ui/core";
 import NodeFooter from "./Footers/Footer";
 import DetailsFactory from './factory';
-import { useSelector } from 'react-redux'
 import Breadcrumbs from "./Details/Views/Breadcrumbs";
+import { IconButton } from '@material-ui/core';
 import { subject_key, protocols_key, contributors_key } from '../../constants';
+import {TuneRounded} from "@material-ui/icons";
+import { useSelector, useDispatch } from 'react-redux'
+import { toggleSettingsPanelVisibility } from '../../redux/actions';
 
 const NodeDetailView = (props) => {
+  const dispatch = useDispatch();
+
   var otherDetails = undefined;
   const factory = new DetailsFactory();
   const nodeSelected = useSelector(state => state.sdsState.instance_selected);
+  const showSettingsContent = useSelector(state => state.sdsState.settings_panel_visible);
   const nodeDetails = factory.createDetails(nodeSelected);
   let links = {
     pages: [],
@@ -50,16 +56,22 @@ const NodeDetailView = (props) => {
     id: nodeSelected.graph_node.id,
     text: nodeSelected.graph_node.name
   };
+  const toggleContent = () => {
+    dispatch(toggleSettingsPanelVisibility(!showSettingsContent));
+  };
 
   return (
     <Box className={"secondary-sidebar" + (props.open ? " in" : "")}>
       <Box className="secondary-sidebar_breadcrumb" sx={{mt : "1rem"}}>
         <Breadcrumbs close={false} links={links} />
       </Box>
-      {/**{ nodeDetails.getHeader() }*/}
       { otherDetails }
-      { nodeDetails.getDetail() }
+      { showSettingsContent && nodeDetails.getSettings ? nodeDetails.getSettings() : nodeDetails.getDetail() }
+
       <NodeFooter />
+      { !showSettingsContent && <Box className='overlay-button-container'>
+        <IconButton className="overlay-button" onClick={toggleContent}><TuneRounded /></IconButton>
+      </Box> }
     </Box>
   );
 };
