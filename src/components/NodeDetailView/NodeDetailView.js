@@ -35,6 +35,7 @@ const NodeDetailView = (props) => {
 
   otherDetails = path.reverse().map( singleNode => {
     const graph_node = window.datasets[nodeSelected.dataset_id].splinter.nodes.get(singleNode);
+    console.log("dataset id ",  nodeSelected.dataset_id)
     const new_node = {
       dataset_id: nodeSelected.dataset_id,
       graph_node: graph_node,
