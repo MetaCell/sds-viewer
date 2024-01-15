@@ -68,10 +68,17 @@ export const rdfTypes = {
         "key": "Group",
         "properties": [
             {
-                "type": "rdfs",
-                "key": "label",
-                "property": "label",
-                "label": "Label",
+                "type": "TEMP",
+                "key": "name",
+                "property": "name",
+                "label": "Name",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "subjects",
+                "property": "subjects",
+                "label": "Number of Subjects",
                 "visible" : true
             }
         ]
@@ -361,16 +368,30 @@ export const rdfTypes = {
             },
             {
                 "type": "TEMP",
-                "key": "publishedURI",
-                "property": "publishedURI",
-                "label": "Human URI",
+                "key": "mimetype",
+                "property": "mimetype",
+                "label": "Mimetype",
                 "visible" : true
             },
             {
                 "type": "TEMP",
                 "key": "size",
                 "property": "size",
-                "label": "size",
+                "label": "Size",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "updated",
+                "property": "updated",
+                "label": "Updated On",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "publishedURI",
+                "property": "publishedURI",
+                "label": "Published URI",
                 "visible" : true
             }
         ]

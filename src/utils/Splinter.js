@@ -211,7 +211,6 @@ class Splinter {
                 }) 
             }
         })
-        console.log("Force edges ", this.forced_edges)
 
         // Assign neighbors, to highlight links
         this.forced_edges.forEach(link => {
@@ -536,7 +535,8 @@ class Splinter {
                         childLinks : [],
                         samples : 0, 
                         subjects : 0,
-                        publishedURI : ""
+                        publishedURI : "",
+                        dataset_id : this.dataset_id
                     };
                     let nodeF = this.factory.createNode(groupNode);
                     const img = new Image();
@@ -722,21 +722,18 @@ class Splinter {
                 if (node.attributes?.animalSubjectIsOfStrain !== undefined) {
                     let source = this.nodes.get(node.attributes.animalSubjectIsOfStrain[0]);
                     if ( source !== undefined ) {
-                        console.log("source speciment", source )
                         node.attributes.animalSubjectIsOfStrain[0] = source.attributes.label[0];
                     }
                 }
                 if (node.attributes?.animalSubjectIsOfSpecies !== undefined) {
                     let source = this.nodes.get(node.attributes.animalSubjectIsOfSpecies[0]);
                     if ( source !== undefined ) {
-                        console.log("source species ",source )
                         node.attributes.animalSubjectIsOfSpecies[0] = source.attributes.label[0];
                     }
                 }
                 if (node.attributes?.hasBiologicalSex !== undefined) {
                     let source = this.nodes.get(node.attributes.hasBiologicalSex[0]);
                     if ( source !== undefined ) {
-                        console.log("source biological sex ", source )
                         node.attributes.hasBiologicalSex[0] = source.attributes.label[0];
                     }
                 }

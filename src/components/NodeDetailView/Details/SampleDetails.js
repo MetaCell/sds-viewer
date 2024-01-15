@@ -6,14 +6,14 @@ import SimpleLabelValue from './Views/SimpleLabelValue';
 import SimpleLinkedChip from './Views/SimpleLinkedChip';
 import Links from './Views/Links';
 import { detailsLabel } from '../../../constants';
-import { rdfTypes } from "../../../utils/graphModel";
 import { isValidUrl } from './utils';
+import { useSelector } from 'react-redux'
 
 
 const SampleDetails = (props) => {
     const { node } = props;
 
-    let samplePropertiesModel = [...rdfTypes["Sample"].properties];
+    const samplePropertiesModel = useSelector(state => state.sdsState.metadata_model.sample);
 
     return (
         <Box id={node?.graph_node?.attributes.localId + detailsLabel}>

@@ -194,7 +194,6 @@ const GraphViewer = (props) => {
     }
 
     const graph = { nodes : visibleNodes, links : visibleLinks, levelsMap : levelsMap, hierarchyVariant : maxLevel * 20 };
-    console.log("Graph ", graph);
     return graph;
   };
 

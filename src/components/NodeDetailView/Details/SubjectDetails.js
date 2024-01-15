@@ -8,10 +8,12 @@ import Links from './Views/Links';
 import { detailsLabel } from '../../../constants';
 import { rdfTypes } from "../../../utils/graphModel";
 import { isValidUrl } from './utils';
+import { useSelector } from 'react-redux'
 
 const SubjectDetails = (props) => {
     const { node } = props;
-    let subjectPropertiesModel = [...rdfTypes["Subject"].properties];
+
+    const subjectPropertiesModel = useSelector(state => state.sdsState.metadata_model.subject);
 
     const getGroupNode = (groupName, node)=> {
         let n = node.graph_node.parent;
@@ -22,14 +24,6 @@ const SubjectDetails = (props) => {
             } else {
               n = n.parent;
             }
-        }
-
-        if ( n?.dataset_id ) {
-            n.dataset_id = node.dataset_id;
-        } else {
-            console.log("Empty node found ", node)
-            console.log("Empty n found ", n)
-            console.log("Empty groupName ", groupName)
         }
 
         return n;

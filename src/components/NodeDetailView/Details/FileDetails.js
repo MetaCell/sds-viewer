@@ -1,106 +1,51 @@
-import React from "react";
 import {
     Box,
-    Typography,
-    List,
-    ListItemText,
+    Typography
 } from "@material-ui/core";
 import Links from './Views/Links';
 import SimpleLinkedChip from './Views/SimpleLinkedChip';
 import SimpleLabelValue from './Views/SimpleLabelValue';
 import { detailsLabel } from '../../../constants';
+import { useSelector } from 'react-redux'
+import { isValidUrl } from './utils';
 
 const FileDetails = (props) => {
     const { node } = props;
-
-    let title = "";
-    let idDetails = "";
-    // both tree and graph nodes are present, extract data from both
-    if (node?.tree_node && node?.graph_node) {
-        title = node.tree_node.basename;
-        idDetails = node.tree_node.id + detailsLabel;
-    // the below is the case where we have data only from the tree/hierarchy
-    } else if (node.graph_node) {
-        idDetails = node.graph_node.id + detailsLabel;
-        title = node.graph_node.attributes?.label?.[0];
-    // the below is the case where we have data only from the graph
-    } else {
-        title = node.tree_node.basename;
-        idDetails = node.tree_node.id + detailsLabel;
-    }
-
-    let latestUpdate = "Not defined."
-    if (node?.graph_node.attributes?.updated !== undefined) {
-        latestUpdate = node?.attributes?.updated;
-    }
-
-    const DETAILS_LIST = [
-        {
-            title: 'Mimetype',
-            value: node?.graph_node?.attributes?.mimetype
-        },
-        {
-            title: 'Size Bytes',
-            value: node?.graph_node?.attributes?.size
-        }
-    ];
+    const filePropertiesModel = useSelector(state => state.sdsState.metadata_model.file);
 
     return (
-        <Box className="secondary-sidebar_body" id={idDetails}>
+        <Box className="secondary-sidebar_body" id={node?.graph_node?.attributes.identifier + detailsLabel}>
             <Box className="tab-content">
-                { node.graph_node?.attributes?.identifier
-                    ? (<Box className="tab-content-row">
-                            <Typography component="h3">{"File Details"}</Typography>
-                            <SimpleLabelValue label={'Label'} value={node.graph_node?.attributes?.identifier} />
-                        </Box>)
-                    : (<SimpleLabelValue label={'Label'} value={title} heading={'File Details'} />)
-                }
-                { node.graph_node?.attributes?.publishedURI && node.graph_node?.attributes?.publishedURI !== ""
-                    ? (<Box className="tab-content-row">
-                            <Typography component="label">Published Dataset File</Typography>
-                            <Links key={`label_href_link`} href={node.graph_node?.attributes?.publishedURI} title={node.graph_node?.attributes?.identifier} />
-                        </Box>)
-                    : <></>
-                }
-                {latestUpdate ? 
-                    <SimpleLabelValue label={'Updated On'} value={latestUpdate} />
-                    : (<> </>)
-                }
-                { node?.tree_node?.uri_human !== undefined
-                    ? (<Box className="tab-content-row">
-                            <Links href={node?.tree_node?.uri_human} title="Human URI" />
-                       </Box>)
-                    : (<> </>)
-                }
+                <SimpleLabelValue label={""} value={""} heading={"File Details"} />
 
-                { node?.tree_node?.checksums !== undefined
-                    ? (<>
-                            <SimpleLabelValue label={'Checksum'} value={node?.tree_node?.checksums[0].hex} />
-                            <SimpleLabelValue label={'Checksum Algorithm'} value={node?.tree_node?.checksums[0].cypher} />
-                        </>)
-                    : (<> </>)
-                }
-
-                <Box className="tab-content-row">
-                    <List component="nav" aria-label="main">
-                        {
-                            DETAILS_LIST?.map((item, index) => (
-                                <ListItemText key={`detail_list_${index}`}>
-                                    <Typography component="label">{item?.title}</Typography>
-                                    <Typography>{item?.value}</Typography>
-                                </ListItemText>
-                            ))
+                {filePropertiesModel?.map( property => {
+                    if ( property.visible ){
+                        const propValue = node.graph_node.attributes[property.property];
+                        if ( isValidUrl(propValue) ){
+                            return (<Box className="tab-content-row">
+                                <Typography component="label">{property.label}</Typography>
+                                <Links key={`detail_links_dataset`} href={propValue} title={property.label + " Link"} />
+                            </Box>)
                         }
-                    </List>
-                </Box>
 
-                { node?.graph_node?.attributes?.hasUriHuman !== undefined
-                    ? (<Box className="tab-content-row">
-                            <Typography component="label">Links</Typography>
-                            <Links key={`detail_links_dataset`} href={node?.graph_node?.attributes?.hasUriHuman[0]} title="Dataset" />
-                        </Box>)
-                    : <> </>
-                }
+                        else if ( typeof propValue === "object" ){
+                            return (<Box className="tab-content-row">
+                                        <Typography component="label">{property.label}</Typography>
+                                        <SimpleLinkedChip chips={node.graph_node.attributes[property.property]} />
+                                    </Box>)
+                        }
+
+                        else if ( typeof propValue === "string" ){
+                            return (<SimpleLabelValue label={property.label} value={propValue} />)
+                        }
+
+                        else if ( typeof propValue === "number" ){
+                            return (<SimpleLabelValue label={property.label} value={propValue} />)
+                        }
+
+                        return (<> </>)
+                    }
+                })}
             </Box>
         </Box>
     );
