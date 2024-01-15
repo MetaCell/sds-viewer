@@ -1,6 +1,7 @@
 import React from "react";
 import {
     Box,
+    Divider,
     Typography,
 } from "@material-ui/core";
 import SimpleLabelValue from './Views/SimpleLabelValue';
@@ -29,6 +30,7 @@ const SampleDetails = (props) => {
 
     return (
         <Box id={idDetails}>
+            <Divider />
             <Box className="tab-content">
                 { node.graph_node.attributes?.hasUriHuman && node.graph_node.attributes?.hasUriHuman[0] !== ""
                     ? (<Box className="tab-content-row">

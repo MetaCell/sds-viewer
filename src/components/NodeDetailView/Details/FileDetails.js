@@ -4,9 +4,9 @@ import {
     Typography,
     List,
     ListItemText,
+    Divider,
 } from "@material-ui/core";
 import Links from './Views/Links';
-import SimpleLinkedChip from './Views/SimpleLinkedChip';
 import SimpleLabelValue from './Views/SimpleLabelValue';
 import { detailsLabel } from '../../../constants';
 
@@ -47,6 +47,7 @@ const FileDetails = (props) => {
 
     return (
         <Box className="secondary-sidebar_body" id={idDetails}>
+            <Divider />
             <Box className="tab-content">
                 { node.graph_node?.attributes?.identifier
                     ? (<Box className="tab-content-row">
