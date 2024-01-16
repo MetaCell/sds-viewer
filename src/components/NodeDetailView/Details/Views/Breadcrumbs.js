@@ -9,7 +9,7 @@ const HeaderBreadcrumbs = (props) => {
   const { links } = props;
   const goToLink = id => {
     const divElement = document.getElementById(id + detailsLabel);
-    divElement.scrollIntoView({ behavior: 'smooth' });
+    divElement?.scrollIntoView({ behavior: 'smooth' });
   }
 
   return (

@@ -51,13 +51,15 @@ export const rdfTypes = {
                 "type": "rdfs",
                 "key": "label",
                 "property": "label",
-                "label": "To be filled"
+                "label": "To be filled",
+                "visible" : true
             },
             {
                 "type": "TEMP",
                 "key": "hasUriHuman",
                 "property": "hasUriHuman",
-                "label": "To be filled"
+                "label": "To be filled",
+                "visible" : true
             }
         ]
     },
@@ -66,10 +68,18 @@ export const rdfTypes = {
         "key": "Group",
         "properties": [
             {
-                "type": "rdfs",
-                "key": "label",
-                "property": "label",
-                "label": "To be filled"
+                "type": "TEMP",
+                "key": "name",
+                "property": "name",
+                "label": "Name",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "subjects",
+                "property": "subjects",
+                "label": "Number of Subjects",
+                "visible" : true
             }
         ]
     },
@@ -351,15 +361,38 @@ export const rdfTypes = {
         "properties": [
             {
                 "type": "rdfs",
-                "key": "label",
-                "property": "label",
-                "label": "To be filled"
+                "key": "identifier",
+                "property": "identifier",
+                "label": "Label",
+                "visible" : true
             },
             {
                 "type": "TEMP",
-                "key": "hasUriHuman",
-                "property": "hasUriHuman",
-                "label": "To be filled"
+                "key": "mimetype",
+                "property": "mimetype",
+                "label": "Mimetype",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "size",
+                "property": "size",
+                "label": "Size",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "updated",
+                "property": "updated",
+                "label": "Updated On",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "publishedURI",
+                "property": "publishedURI",
+                "label": "Published URI",
+                "visible" : true
             }
         ]
     },
@@ -368,100 +401,127 @@ export const rdfTypes = {
         "key": "Subject",
         "properties": [
             {
-                "type": "sparc",
-                "key": "animalSubjectIsOfSpecies",
-                "property": "subjectSpecies",
-                "label": "to be filled"
-            },
-            {
-                "type": "TEMP",
-                "key": "hasFolderAboutIt",
-                "property": "hasFolderAboutIt",
-                "label": "Folder that contains collection and files about the sample"
-            },
-            {
-                "type": "sparc",
-                "key": "animalSubjectIsOfStrain",
-                "property": "subjectStrain",
-                "label": "to be filled"
-            },
-            {
-                "type": "TEMP",
-                "key": "hasAge",
-                "property": "age",
-                "label": "to be filled"
-            },
-            {
-                "type": "TEMP",
-                "key": "hasAgeCategory",
-                "property": "hasAgeCategory",
-                "label": "to be filled"
-            },
-            {
-                "type": "TEMP",
-                "key": "hasAgeMin",
-                "property": "hasAgeMin",
-                "label": "to be filled"
-            },
-            {
-                "type": "TEMP",
-                "key": "hasAgeMax",
-                "property": "hasAgeMax",
-                "label": "to be filled"
-            },
-            {
-                "type": "TEMP",
-                "key": "hasAssignedGroup",
-                "property": "hasAssignedGroup",
-                "label": "to be filled"
-            },
-            {
-                "type": "sparc",
-                "key": "hasBiologicalSex",
-                "property": "biologicalSex",
-                "label": "to be filled"
-            },
-            {
                 "type": "TEMP",
                 "key": "localId",
-                "property": "identifier",
-                "label": "to be filled"
-            },
-            {
-                "type": "TEMP",
-                "key": "hasDerivedInformationAsParticipant",
-                "property": "hasDerivedInformationAsParticipant",
-                "label": "to be filled"
-            },
-            {
-                "type": "sparc",
-                "key": "specimenHasIdentifier",
-                "property": "specimenHasIdentifier",
-                "label": "to be filled"
-            },
-            {
-                "type": "TEMP",
-                "key": "participantInPerformanceOf",
-                "property": "participantInPerformanceOf",
-                "label": "to be filled"
-            },
-            {
-                "type": "rdfs",
-                "key": "label",
-                "property": "label",
-                "label": "To be filled"
+                "property": "localId",
+                "label": "Label",
+                "visible" : true
             },
             {
                 "type": "TEMP",
                 "key": "hasUriHuman",
                 "property": "hasUriHuman",
-                "label": "To be filled"
+                "label": "URI Human",
+                "visible" : true
             },
             {
                 "type": "TEMP",
-                "key": "publishedURI",
-                "property": "publishedURI",
-                "label": "to be filled"
+                "key": "hasAgeCategory",
+                "property": "hasAgeCategory",
+                "label": "Age Category",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "hasAge",
+                "property": "hasAge",
+                "label": "Age",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "hasAgeMin",
+                "property": "hasAgeMin",
+                "label": "Age Min",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "hasAgeMax",
+                "property": "hasAgeMax",
+                "label": "Age Max",
+                "visible" : true
+            },
+            {
+                "type": "sparc",
+                "key": "hasBiologicalSex",
+                "property": "hasBiologicalSex",
+                "label": "Biological Sex",
+                "visible" : true,
+                "isGroup" : true
+            },
+            {
+                "type": "sparc",
+                "key": "specimenHasIdentifier",
+                "property": "specimenHasIdentifier",
+                "label": "Specimen has Identifier",
+                "visible" : true,
+                "isGroup" : true
+            },
+            {
+                "type": "sparc",
+                "key": "animalSubjectIsOfSpecies",
+                "property": "animalSubjectIsOfSpecies",
+                "label": "Subject Species",
+                "visible" : true,
+                "isGroup" : true
+            },
+            {
+                "type": "sparc",
+                "key": "animalSubjectIsOfStrain",
+                "property": "animalSubjectIsOfStrain",
+                "label": "Subject Strain",
+                "visible" : true,
+                "isGroup" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "hasAssignedGroup",
+                "property": "hasAssignedGroup",
+                "label": "Assigned Group",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "hasGenotype",
+                "property": "hasGenotype",
+                "label": "Genotype",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "experimental_file",
+                "property": "experimental_file",
+                "label": "Experimental File",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "reference_atlas",
+                "property": "reference_atlas",
+                "label": "Reference Atlas",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "hasFolderAboutIt",
+                "property": "hasFolderAboutIt",
+                "label": "Folder About It",
+                "visible" : true
+            },            
+            {
+                "type": "TEMP",
+                "key": "hasDerivedInformationAsParticipant",
+                "property": "hasDerivedInformationAsParticipant",
+                "label": "Derived Information as Participant",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "participantInPerformanceOf",
+                "property": "participantInPerformanceOf",
+                "label": "Participant In Performance Of",
+                "visible" : true
             },
         ],
         "additional_properties": [
@@ -516,64 +576,88 @@ export const rdfTypes = {
         "key": "Sample",
         "properties": [
             {
-                "type": "TEMP",
-                "key": "hasFolderAboutIt",
-                "property": "hasFolderAboutIt",
-                "label": "Folder that contains collection and files about the sample"
-            },
-            {
-                "type": "TEMP",
-                "key": "wasDerivedFromSubject",
-                "property": "derivedFrom",
-                "label": "Derived from the subject"
-            },
-            {
-                "type": "TEMP",
-                "key": "localId",
-                "property": "identifier",
-                "label": "Unique instance identifier"
-            },
-            {
-                "type": "TEMP",
-                "key": "hasAssignedGroup",
-                "property": "hasAssignedGroup",
-                "label": "to be filled"
-            },
-            {
-                "type": "TEMP",
-                "key": "hasDerivedInformationAsParticipant",
-                "property": "hasDerivedInformationAsParticipant",
-                "label": "to be filled"
-            },
-            {
-                "type": "TEMP",
-                "key": "hasDigitalArtifactThatIsAboutIt",
-                "property": "hasDigitalArtifactThatIsAboutIt",
-                "label": "Unique instance identifier"
-            },
-            {
-                "type": "TEMP",
-                "key": "participantInPerformanceOf",
-                "property": "participantInPerformanceOf",
-                "label": "Unique instance identifier"
-            },
-            {
-                "type": "TEMPRAW",
-                "key": "wasExtractedFromAnatomicalRegion",
-                "property": "wasExtractedFromAnatomicalRegion",
-                "label": "Unique instance identifier"
-            },
-            {
                 "type": "rdfs",
                 "key": "label",
                 "property": "label",
-                "label": "To be filled"
+                "label": "Label",
+                "visible" : true
             },
             {
                 "type": "TEMP",
                 "key": "hasUriHuman",
                 "property": "hasUriHuman",
-                "label": "To be filled"
+                "label": "Human URI",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "hasFolderAboutIt",
+                "property": "hasFolderAboutIt",
+                "label": "Related Folder",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "wasDerivedFromSubject",
+                "property": "derivedFrom",
+                "label": "Derived from Subject",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "localId",
+                "property": "localId",
+                "label": "Local ID",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "hasAssignedGroup",
+                "property": "hasAssignedGroup",
+                "label": "Assigned Group",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "hasDerivedInformationAsParticipant",
+                "property": "hasDerivedInformationAsParticipant",
+                "label": "Derived Information as Participant",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "hasDigitalArtifactThatIsAboutIt",
+                "property": "hasDigitalArtifactThatIsAboutIt",
+                "label": "Digital Artifact",
+                "visible" : true
+            },
+            {
+                "type": "TEMPRAW",
+                "key": "wasExtractedFromAnatomicalRegion",
+                "property": "wasExtractedFromAnatomicalRegion",
+                "label": "Extracted From Anatomical Region",
+                "visible" : true
+            },
+            {
+                "type": "TEMPRAW",
+                "key": "sample_anatomical_location",
+                "property": "sample_anatomical_location",
+                "label": "Sample Anatomical Location",
+                "visible" : true
+            },
+            {
+                "type": "TEMPRAW",
+                "key": "sample_type",
+                "property": "sample_type",
+                "label": "Sample Type",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "participantInPerformanceOf",
+                "property": "participantInPerformanceOf",
+                "label": "Participant in Performance Of",
+                "visible" : true
             }
         ]
     },
@@ -582,29 +666,61 @@ export const rdfTypes = {
         "key": "Person",
         "properties": [
             {
-                "type": "sparc",
-                "key": "firstName",
-                "property": "firstName",
-                "label": "To be filled"
+                "type": "rdfs",
+                "key": "label",
+                "property": "label",
+                "label": "Name",
+                "visible" : true
             },
             {
                 "type": "sparc",
                 "key": "lastName",
                 "property": "lastName",
-                "label": "To be filled"
+                "label": "Last Name",
+                "visible" : false
+            },
+            {
+                "type": "sparc",
+                "key": "firstName",
+                "property": "firstName",
+                "label": "First Name",
+                "visible" : false
             },
             {
                 "type": "TEMP",
                 "key": "middleName",
                 "property": "middleName",
-                "label": "To be filled"
+                "label": "Middle Name",
+                "visible" : false
+            },
+            {
+                "type": "sparc",
+                "key": "hasORCIDId",
+                "property": "hasORCIDId",
+                "label": "ORCID Id",
+                "visible" : false
             },
             {
                 "type": "TEMP",
                 "key": "hasAffiliation",
                 "property": "hasAffiliation",
-                "label": "To be filled"
+                "label": "Affiliation",
+                "visible" : true
             },
+            {
+                "type": "TEMP",
+                "key": "hasDataRemoteUserId",
+                "property": "hasDataRemoteUserId",
+                "label": "Data Remote User ID",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "contributorTo",
+                "property": "contributorTo",
+                "label": "Contributor To",
+                "visible" : true
+            }
         ]
     },
     "Protocol": {
@@ -615,19 +731,29 @@ export const rdfTypes = {
                 "type": "rdfs",
                 "key": "label",
                 "property": "label",
-                "label": "To be filled"
-            },
-            {
-                "type": "TEMP",
-                "key": "hasUriHuman",
-                "property": "hasUriHuman",
-                "label": "To be filled"
+                "label": "Label",
+                "visible" : true
             },
             {
                 "type": "TEMP",
                 "key": "protocolHasNumberOfSteps",
                 "property": "protocolHasNumberOfSteps",
-                "label": "To be filled"
+                "label": "Number of Steps",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "hasUriHuman",
+                "property": "hasUriHuman",
+                "label": "Human URI",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "hasDoi",
+                "property": "hasDoi",
+                "label": "DOI",
+                "visible" : true
             }
         ]
     },

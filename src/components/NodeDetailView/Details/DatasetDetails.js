@@ -6,17 +6,16 @@ import {
 } from "@material-ui/core";
 import Links from './Views/Links';
 import SimpleLinkedChip from './Views/SimpleLinkedChip';
-import USER from "../../../images/user.svg";
 import SimpleLabelValue from './Views/SimpleLabelValue';
 import { detailsLabel } from '../../../constants';
-import { rdfTypes } from "../../../utils/graphModel";
 import { isValidUrl } from './utils';
+import { useSelector } from 'react-redux'
 import {DatasetIcon} from "../../../images/Icons";
 
 const DatasetDetails = (props) => {
     const { node } = props;
 
-    let datasetPropertiesModel = [...rdfTypes["Dataset"].properties];
+    const datasetPropertiesModel = useSelector(state => state.sdsState.metadata_model.dataset);
 
     return (
         

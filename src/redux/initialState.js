@@ -1,5 +1,6 @@
 import * as Actions from './actions';
 import * as LayoutActions from '@metacell/geppetto-meta-client/common/layout/actions';
+import { rdfTypes } from "../utils/graphModel";
 
 export const sdsInitialState = {
     "sdsState": {
@@ -20,7 +21,14 @@ export const sdsInitialState = {
             source: ""
         },
         layout : {},
-        settings_panel_visible : false
+        settings_panel_visible : false,
+        metadata_model : {
+            dataset : [...rdfTypes.Dataset.properties],
+            subject : [...rdfTypes.Subject.properties],
+            sample : [...rdfTypes.Sample.properties],
+            group : [...rdfTypes.Group.properties],
+            file : [...rdfTypes.File.properties]
+        }
     }
 };
 

@@ -211,7 +211,6 @@ class Splinter {
                 }) 
             }
         })
-        console.log("Force edges ", this.forced_edges)
 
         // Assign neighbors, to highlight links
         this.forced_edges.forEach(link => {
@@ -519,7 +518,6 @@ class Splinter {
                 }
                 
                 const groupID = parent.id + "_" + target_node.attributes[key]?.[0].replace(/\s/g, "");
-
                 if ( this.nodes.get(groupID) === undefined ) {
                     let name = target_node.attributes[key]?.[0];
 
@@ -537,7 +535,8 @@ class Splinter {
                         childLinks : [],
                         samples : 0, 
                         subjects : 0,
-                        publishedURI : ""
+                        publishedURI : "",
+                        dataset_id : this.dataset_id
                     };
                     let nodeF = this.factory.createNode(groupNode);
                     const img = new Image();
@@ -720,22 +719,22 @@ class Splinter {
             }
 
             if (node.type === rdfTypes.Subject.key) {
-                if (node.attributes?.specimenHasIdentifier !== undefined) {
-                    let source = this.nodes.get(node.attributes.specimenHasIdentifier[0]);
+                if (node.attributes?.animalSubjectIsOfStrain !== undefined) {
+                    let source = this.nodes.get(node.attributes.animalSubjectIsOfStrain[0]);
                     if ( source !== undefined ) {
-                        node.attributes.specimenHasIdentifier[0] = source.attributes.label[0];
+                        node.attributes.animalSubjectIsOfStrain[0] = source.attributes.label[0];
                     }
                 }
-                if (node.attributes?.subjectSpecies !== undefined) {
-                    let source = this.nodes.get(node.attributes.subjectSpecies[0]);
+                if (node.attributes?.animalSubjectIsOfSpecies !== undefined) {
+                    let source = this.nodes.get(node.attributes.animalSubjectIsOfSpecies[0]);
                     if ( source !== undefined ) {
-                        node.attributes.subjectSpecies[0] = source.attributes.label[0];
+                        node.attributes.animalSubjectIsOfSpecies[0] = source.attributes.label[0];
                     }
                 }
-                if (node.attributes?.biologicalSex !== undefined) {
-                    let source = this.nodes.get(node.attributes.biologicalSex[0]);
+                if (node.attributes?.hasBiologicalSex !== undefined) {
+                    let source = this.nodes.get(node.attributes.hasBiologicalSex[0]);
                     if ( source !== undefined ) {
-                        node.attributes.biologicalSex[0] = source.attributes.label[0];
+                        node.attributes.hasBiologicalSex[0] = source.attributes.label[0];
                     }
                 }
 
