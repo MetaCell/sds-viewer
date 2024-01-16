@@ -1,6 +1,6 @@
 import React from "react";
 import {
-    Box,
+    Box, Divider,
     Typography
 } from "@material-ui/core";
 import Links from './Views/Links';
@@ -28,6 +28,7 @@ const CollectionDetails = (props) => {
 
     return (
         <Box className="secondary-sidebar_body" id={idDetails}>
+            <Divider />
             <Box className="tab-content">
                 <SimpleLabelValue label={'Label'} value={title} heading={'Collection Details'} />
                 { node.graph_node?.attributes?.publishedURI && node.graph_node?.attributes?.publishedURI !== ""

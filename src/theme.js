@@ -49,7 +49,10 @@ const {
   grey400,
   grey50,
   grey25,
-  grey600
+  grey600,
+  gray800,
+  gray400,
+  gray25
 } = vars;
 
 const theme = createTheme({
@@ -101,12 +104,14 @@ const theme = createTheme({
         display: 'inline-flex',
         alignItems: 'center',
         height: '1.375rem',
-        marginTop: '.25rem',
+        marginTop: '.5rem',
         marginRight: '.375rem',
         '& .MuiChip-label': {
-          padding: '0 .375rem',
+          padding: '0.25rem 0.375rem',
           fontSize: '.75rem',
-          color: primaryTextColor,
+          color: gray400,
+          backgroundColor: gray25,
+          borderRadius: '0.3125rem'
         },
       },
     },
@@ -981,13 +986,16 @@ const theme = createTheme({
             '& .MuiBreadcrumbs-li': {
               lineHeight: '1.5',
               '& a': {
-                color: placeHolderColor,
                 cursor: 'pointer',
                 lineHeight: 'normal',
+                color: '#475467',
+                fontSize: '0.75rem',
+                fontWeight: 500,
               },
             },
             '& .MuiBreadcrumbs-separator': {
               margin: '0 .5rem',
+              color: '#9198AB'
             },
           },
           '&_body': {
@@ -1077,12 +1085,22 @@ const theme = createTheme({
             '&+ .tab-content': {
               borderTop: `.0625rem solid ${tabsBorderColor}`,
             },
+            '& .title-container':{
+              display: 'flex',
+              alignItems: 'center',
+              marginBottom: '1.3rem',
+
+              '& h3': {
+                marginBottom: 0,
+                marginLeft: '.25rem'
+              }
+            },
             '& h3': {
               fontSize: '1.125rem',
               fontWeight: '500',
               lineHeight: '1.375rem',
               letterSpacing: '-0.03em',
-              color: primaryTextColor,
+              color: gray800,
               marginBottom: '1.3rem',
             },
             '& .tab-content-row': {
@@ -1095,6 +1113,7 @@ const theme = createTheme({
                 fontSize: '.75rem',
                 lineHeight: '1rem',
                 color: primaryColor,
+                marginTop: '.5rem',
 
                 '&:not(:last-child)': {
                   marginRight: '.75rem',
@@ -1116,6 +1135,10 @@ const theme = createTheme({
                 color: sideBarLabelColor,
                 '&+ p': {
                   marginTop: '.25rem',
+                  color: gray400,
+                  fontSize: '.75rem',
+                  fontWeight: '400',
+                  lineHeight: '1rem',
                 },
               },
               '&> p': {
