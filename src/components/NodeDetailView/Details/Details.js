@@ -1,6 +1,7 @@
 import React from "react";
 import {
     Box,
+    Divider,
 } from "@material-ui/core";
 import SimpleLabelValue from './Views/SimpleLabelValue';
 import { detailsLabel } from '../../../constants';
@@ -26,6 +27,7 @@ const UnknownDetails = (props) => {
 
     return (
         <Box className="secondary-sidebar_body" id={idDetails}>
+            <Divider />
             <Box className="tab-content">
                 <SimpleLabelValue label={'Name'} value={title.toString()} heading={'Details'} />
             </Box>

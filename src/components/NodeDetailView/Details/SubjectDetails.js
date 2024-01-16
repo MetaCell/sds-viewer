@@ -1,13 +1,14 @@
 import React from "react";
 import {
     Box,
+    Divider,
     Typography,
 } from "@material-ui/core";
 import SimpleChip from './Views/SimpleChip';
 import SimpleLinkedChip from './Views/SimpleLinkedChip';
 import SimpleLabelValue from './Views/SimpleLabelValue';
 import Links from './Views/Links';
-import { iterateSimpleValue, simpleValue } from './utils';
+import {  simpleValue } from './utils';
 import { detailsLabel } from '../../../constants';
 
 const SubjectDetails = (props) => {
@@ -47,6 +48,7 @@ const SubjectDetails = (props) => {
 
     return (
         <Box id={node?.graph_node?.id + detailsLabel}>
+            <Divider />
             <Box className="tab-content">
                 <SimpleLabelValue label={""} value={""} heading={title} />
 

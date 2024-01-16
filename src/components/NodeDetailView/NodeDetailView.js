@@ -1,4 +1,4 @@
-import { Box } from "@material-ui/core";
+import {Box} from "@material-ui/core";
 import NodeFooter from "./Footers/Footer";
 import DetailsFactory from './factory';
 import Breadcrumbs from "./Details/Views/Breadcrumbs";
@@ -65,9 +65,16 @@ const NodeDetailView = (props) => {
       <Box className="secondary-sidebar_breadcrumb" sx={{mt : "1rem"}}>
         <Breadcrumbs close={false} links={links} />
       </Box>
-      { otherDetails }
-      { showSettingsContent && nodeDetails.getSettings ? nodeDetails.getSettings() : nodeDetails.getDetail() }
-
+      {
+        showSettingsContent && nodeDetails.getSettings ? nodeDetails.getSettings() : null
+      }
+      {
+        !showSettingsContent ?
+            <>
+          { otherDetails }
+          {nodeDetails.getDetail()}
+        </> : null
+      }
       <NodeFooter />
       { !showSettingsContent && <Box className='overlay-button-container'>
         <IconButton className="overlay-button" onClick={toggleContent}><TuneRounded /></IconButton>

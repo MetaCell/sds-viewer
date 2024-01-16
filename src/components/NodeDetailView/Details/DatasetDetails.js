@@ -2,8 +2,7 @@ import React from "react";
 import {
     Box,
     Typography,
-    List,
-    ListItemText,
+    Divider,
 } from "@material-ui/core";
 import Links from './Views/Links';
 import SimpleLinkedChip from './Views/SimpleLinkedChip';
@@ -12,6 +11,7 @@ import SimpleLabelValue from './Views/SimpleLabelValue';
 import { detailsLabel } from '../../../constants';
 import { rdfTypes } from "../../../utils/graphModel";
 import { isValidUrl } from './utils';
+import {DatasetIcon} from "../../../images/Icons";
 
 const DatasetDetails = (props) => {
     const { node } = props;
@@ -21,7 +21,12 @@ const DatasetDetails = (props) => {
     return (
         
         <Box id={node.graph_node?.id + detailsLabel}>
+            <Divider />
             <Box className="tab-content">
+                <Box className='title-container'>
+                    <DatasetIcon />
+                    <Typography component="h3">Dataset Details</Typography>
+                </Box>
                 {datasetPropertiesModel?.map( property => {
                     if ( property.visible ){
                         const propValue = node.graph_node.attributes[property.property]?.[0];
