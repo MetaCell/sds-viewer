@@ -3,11 +3,10 @@ import {
   Box,
   IconButton,
 } from '@material-ui/core';
-import Search from '../../images/search.svg';
 import Typography from '@material-ui/core/Typography';
 import InstancesTreeView from './TreeView/InstancesTreeView';
 import { useSelector } from 'react-redux'
-
+import SearchRoundedIcon from '@material-ui/icons/SearchRounded';
 const SidebarContent = (props) => {
   const { expand, setExpand, searchTerm } = props;
   const datasets = useSelector(state => state.sdsState.datasets);
@@ -39,8 +38,9 @@ const SidebarContent = (props) => {
         <IconButton
           aria-label='toggle'
           onClick={() => setExpand(!expand)}
+          className='shrink-btn'
         >
-          <img src={Search} alt='Search' />
+          <SearchRoundedIcon />
         </IconButton>
       ) : ( renderContent() )
       }

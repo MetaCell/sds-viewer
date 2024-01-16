@@ -11,7 +11,7 @@ const vars = {
   noInstanceColor: 'rgba(255, 255, 255, 0.6)',
   inputTextColor: 'rgba(255, 255, 255, 0.8)',
   iconButtonHover: 'rgba(255, 255, 255, 0.2)',
-  radius: 8,
+  radius: '.5rem',
   gutter: 16,
   whiteColor: '#FFFFFF',
   sidebarIconColor: 'rgba(221, 221, 221, 0.8)',
@@ -40,7 +40,14 @@ const vars = {
   scrollbarBg: 'rgba(0, 0, 0, 0.24)',
   gray800: '#0F162B',
   gray400: '#586482',
-  gray25: '#F0F1F2'
+  gray25: '#F0F1F2',
+  grey700: '#212B45',
+  grey500: '#435070',
+  grey100: '#C9CDD6',
+  grey400: '#586482',
+  grey50: '#E1E3E8',
+  grey25: '#F0F1F2',
+  grey600: '#2E3A59',
 };
 
 export default vars;

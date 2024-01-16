@@ -43,6 +43,13 @@ const {
   chipBgColor,
   progressErrorBg,
   treeBorderColor,
+  grey700,
+  grey500,
+  grey100,
+  grey400,
+  grey50,
+  grey25,
+  grey600,
   gray800,
   gray400,
   gray25
@@ -311,12 +318,12 @@ const theme = createTheme({
     MuiFilledInput: {
       root: {
         fontFamily,
-        backgroundColor: lightBorderColor,
+        backgroundColor: grey500,
         height: '2.375rem',
-        borderRadius: `${radius}px !important`,
+        borderRadius: `${radius} !important`,
         paddingRight: `0.4375rem !important`,
         '&:hover': {
-          backgroundColor: lightBorderColor,
+          backgroundColor: grey500,
         },
         '& .MuiInputAdornment-positionStart': {
           marginTop: `0 !important`,
@@ -327,9 +334,11 @@ const theme = createTheme({
         paddingBottom: 0,
         fontSize: '0.75rem',
         letterSpacing: '-0.01em',
-        color: inputTextColor,
+        color: grey100,
         '&::placeholder': {
-          color: inputTextColor,
+          color: grey100,
+          fontWeight: '400',
+          fontSize: '.75rem'
         },
       },
       adornedEnd: {
@@ -363,6 +372,7 @@ const theme = createTheme({
       label: {
         textTransform: 'none',
         display: 'flex',
+        fontWeight: 600,
         '& img': {
           marginRight: '.25rem',
         },
@@ -381,6 +391,7 @@ const theme = createTheme({
       outlinedPrimary: {
         borderColor: primaryColor,
         color: primaryColor,
+        padding: '0.75rem',
         '&:hover': {
           backgroundColor: outlinedButtonHover,
         },
@@ -397,6 +408,9 @@ const theme = createTheme({
         '.main-structure': {
           display: 'flex',
           overflow: 'hidden',
+        },
+        '.sidebar-body': {
+          boxShadow: '0px -75px 49px -41px #212B45 inset',
         },
         '.scrollbar': {
           overflow: 'auto',
@@ -471,7 +485,7 @@ const theme = createTheme({
         '.sidebar': {
           width: '18.75rem',
           overflow: 'hidden',
-          backgroundColor: secondaryColor,
+          backgroundColor: grey700,
           height: '100vh',
           flexShrink: 0,
           padding: '1rem 0.75rem',
@@ -506,10 +520,17 @@ const theme = createTheme({
               padding: 0,
               width: '2.25rem',
               minWidth: '0.0625rem',
-              fontSize: 0,
               margin: '0 auto',
               display: 'block',
               height: '2.25rem',
+              '&.shrink-btn': {
+                backgroundColor: grey25,
+                color: grey600,
+
+                '& .MuiSvgIcon-root': {
+                  fontSize: '1rem',
+                }
+              }
             },
           },
           '&:not(.shrink)': {
@@ -648,7 +669,7 @@ const theme = createTheme({
             },
             '& .labelCaption': {
               height: '1rem',
-              backgroundColor: lightBorderColor,
+              backgroundColor: grey400,
               padding: '0 0.25rem',
               display: 'flex',
               alignItems: 'center',
@@ -658,7 +679,7 @@ const theme = createTheme({
               lineHeight: '0.75rem',
               minWidth: '2rem',
               justifyContent: 'center',
-              color: noInstanceColor,
+              color: grey50,
               letterSpacing: '-0.01em',
               '& img': {
                 marginLeft: '0.125rem',
@@ -809,7 +830,7 @@ const theme = createTheme({
               height: '100%',
               fontWeight: '600',
               letterSpacing: '-0.01em',
-              color: noInstanceColor,
+              color: grey100,
               textAlign: 'center',
             },
           },
@@ -1200,6 +1221,7 @@ const theme = createTheme({
           bottom: '0',
           right : '0rem',
           zIndex: '100',
+          padding: '.5rem'
         },
       },
     },
