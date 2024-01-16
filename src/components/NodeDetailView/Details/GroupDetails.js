@@ -1,5 +1,6 @@
 import {
     Box,
+    Divider,
     Typography
 } from "@material-ui/core";
 import Links from './Views/Links';
@@ -15,6 +16,7 @@ const GroupDetails = (props) => {
     
     return (
         <Box className="secondary-sidebar_body" id={node?.graph_node?.name + detailsLabel}>
+            <Divider />
             <Box className="tab-content">
                 <SimpleLabelValue label={""} value={""} heading={"Group Details"} />
 

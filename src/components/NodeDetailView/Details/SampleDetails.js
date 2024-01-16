@@ -1,5 +1,6 @@
 import {
     Box,
+    Divider,
     Typography,
 } from "@material-ui/core";
 import SimpleLabelValue from './Views/SimpleLabelValue';
@@ -17,6 +18,7 @@ const SampleDetails = (props) => {
 
     return (
         <Box id={node?.graph_node?.attributes.localId + detailsLabel}>
+            <Divider />
             <Box className="tab-content">
                 <SimpleLabelValue label={""} value={""} heading={"Sample Details"} />
 

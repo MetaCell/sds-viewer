@@ -1,10 +1,11 @@
 import {
     Box,
-    Typography
+    Typography,
+    Divider,
 } from "@material-ui/core";
 import Links from './Views/Links';
-import SimpleLinkedChip from './Views/SimpleLinkedChip';
 import SimpleLabelValue from './Views/SimpleLabelValue';
+import SimpleLinkedChip from './Views/SimpleLinkedChip';
 import { detailsLabel } from '../../../constants';
 import { useSelector } from 'react-redux'
 import { isValidUrl } from './utils';
@@ -15,6 +16,7 @@ const FileDetails = (props) => {
 
     return (
         <Box className="secondary-sidebar_body" id={node?.graph_node?.attributes.identifier + detailsLabel}>
+            <Divider />
             <Box className="tab-content">
                 <SimpleLabelValue label={""} value={""} heading={"File Details"} />
 

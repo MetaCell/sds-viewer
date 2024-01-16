@@ -1,10 +1,12 @@
 import {
     Box,
+    Divider,
     Typography,
 } from "@material-ui/core";
 import SimpleLinkedChip from './Views/SimpleLinkedChip';
 import SimpleLabelValue from './Views/SimpleLabelValue';
 import Links from './Views/Links';
+import {  simpleValue } from './utils';
 import { detailsLabel } from '../../../constants';
 import { rdfTypes } from "../../../utils/graphModel";
 import { isValidUrl } from './utils';
@@ -31,6 +33,7 @@ const SubjectDetails = (props) => {
 
     return (
         <Box id={node?.graph_node?.attributes.localId + detailsLabel}>
+            <Divider />
             <Box className="tab-content">
                 <SimpleLabelValue label={""} value={""} heading={"Subject Details"} />
 

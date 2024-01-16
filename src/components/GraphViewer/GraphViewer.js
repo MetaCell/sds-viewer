@@ -2,21 +2,21 @@ import * as d3 from 'd3-force-3d'
 import Menu from '@material-ui/core/Menu';
 import { IconButton, Tooltip,Typography, Box, Link, MenuItem, CircularProgress } from '@material-ui/core';
 import React, { useState, useEffect } from 'react';
-import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import LayersIcon from '@material-ui/icons/Layers';
 import HelpIcon from '@material-ui/icons/Help';
-import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import UnfoldMoreIcon from '@material-ui/icons/UnfoldMore';
 import UnfoldLessIcon from '@material-ui/icons/UnfoldLess';
 import BugReportIcon from '@material-ui/icons/BugReport';
 import { selectInstance } from '../../redux/actions';
 import { useSelector, useDispatch } from 'react-redux';
-import FormatAlignCenterIcon from '@material-ui/icons/FormatAlignCenter';
 import GeppettoGraphVisualization from '@metacell/geppetto-meta-ui/graph-visualization/Graph';
 import { GRAPH_SOURCE } from '../../constants';
 import { rdfTypes, typesModel } from '../../utils/graphModel';
 import config from "./../../config/app.json";
+import AddRoundedIcon from '@material-ui/icons/AddRounded';
+import RemoveRoundedIcon from '@material-ui/icons/RemoveRounded';
+import {ViewTypeIcon} from "../../images/Icons";
 
 const NODE_FONT = '500 5px Inter, sans-serif';
 const ONE_SECOND = 1000;
@@ -584,7 +584,7 @@ const GraphViewer = (props) => {
           <div className='graph-view_controls'>
             <IconButton area-label="GraphLayout" aria-controls="layout-menu" aria-haspopup="true" onClick={handleLayoutClick}>
               <Tooltip id="button-report" title="Change Graph Layout">
-                <FormatAlignCenterIcon />
+                <ViewTypeIcon />
               </Tooltip>
             </IconButton>
             <Menu
@@ -599,12 +599,12 @@ const GraphViewer = (props) => {
             </Menu>
             <IconButton area-label="ZoomIn" onClick={(e) => zoomIn()}>
               <Tooltip id="button-report" title="Zoom In">
-                <ZoomInIcon />
+                <AddRoundedIcon />
               </Tooltip>
             </IconButton>
             <IconButton area-label="ZoomOut" onClick={(e) => zoomOut()}>
               <Tooltip id="button-report" title="Zoom Out">
-                <ZoomOutIcon />
+                <RemoveRoundedIcon />
               </Tooltip>
             </IconButton>
             <IconButton area-label="ResetCamera" onClick={(e) => resetCamera()}>
@@ -620,7 +620,7 @@ const GraphViewer = (props) => {
             <LayersIcon />
           </div>
           <div className='user-manual_controls'>
-            <Box display="flex" justifyContent="center">
+            <Box display="flex" justifyContent="center" alignItems='end'>
             <Typography justifyContent="right" variant='subtitle2' color='primary'> Version 1</Typography>
             <IconButton ustifyContent="right" component={Link} area-label="report" onClick={() => window.open(config.issues_url, '_blank')}>
               <Tooltip id="button-report" title="Report Issues">

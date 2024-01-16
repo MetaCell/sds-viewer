@@ -15,8 +15,8 @@ const HeaderBreadcrumbs = (props) => {
   return (
     <Box className="wrap">
       <Breadcrumbs
-        separator={<img src={DIVIDER} alt="DIVIDER" />}
         aria-label="breadcrumb"
+        maxItems={2}
       >
         {
           links && links.pages ? (
@@ -27,7 +27,10 @@ const HeaderBreadcrumbs = (props) => {
             ))
           ) : null
         }
-        <Typography variant="subtitle2" onClick={() => {goToLink(links?.current.id)}} className="breadcrumb_selected">{links?.current.text}</Typography>
+        <Typography
+            variant="subtitle2"
+            onClick={() => {goToLink(links?.current.id)}}
+            className="breadcrumb_selected">{links?.current.text}</Typography>
       </Breadcrumbs>
       {/* <img src={CLOSE} onClick={closeViewer} alt="Close" /> */}
     </Box>
