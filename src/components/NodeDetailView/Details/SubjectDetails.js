@@ -32,7 +32,7 @@ const SubjectDetails = (props) => {
     }
 
     return (
-        <Box id={node?.graph_node?.attributes.localId + detailsLabel}>
+        <Box id={node?.graph_node?.id + detailsLabel}>
             <Divider />
             <Box className="tab-content">
                 <SimpleLabelValue label={""} value={""} heading={"Subject Details"} />

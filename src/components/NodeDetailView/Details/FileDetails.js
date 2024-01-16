@@ -15,7 +15,7 @@ const FileDetails = (props) => {
     const filePropertiesModel = useSelector(state => state.sdsState.metadata_model.file);
 
     return (
-        <Box className="secondary-sidebar_body" id={node?.graph_node?.attributes.identifier + detailsLabel}>
+        <Box className="secondary-sidebar_body" id={node?.graph_node?.id + detailsLabel}>
             <Divider />
             <Box className="tab-content">
                 <SimpleLabelValue label={""} value={""} heading={"File Details"} />

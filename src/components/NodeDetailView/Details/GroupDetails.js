@@ -15,7 +15,7 @@ const GroupDetails = (props) => {
     const groupPropertiesModel = useSelector(state => state.sdsState.metadata_model.group);
     
     return (
-        <Box className="secondary-sidebar_body" id={node?.graph_node?.name + detailsLabel}>
+        <Box className="secondary-sidebar_body" id={node?.graph_node?.id + detailsLabel}>
             <Divider />
             <Box className="tab-content">
                 <SimpleLabelValue label={""} value={""} heading={"Group Details"} />
