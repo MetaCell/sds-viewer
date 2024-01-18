@@ -1,6 +1,7 @@
 import * as Actions from './actions';
 import * as LayoutActions from '@metacell/geppetto-meta-client/common/layout/actions';
 import { rdfTypes } from "../utils/graphModel";
+import {TOGGLE_ITEM_VISIBILITY} from "./actions";
 
 export const sdsInitialState = {
     "sdsState": {
@@ -114,6 +115,21 @@ export default function sdsClientReducer(state = {}, action) {
                 };
             }
             break;
+        case TOGGLE_ITEM_VISIBILITY:
+            const { groupTitle, itemId } = action.data;
+            const updatedMetadataModel = { ...state.metadata_model };
+            const groupIndex = updatedMetadataModel[groupTitle].findIndex(item => item.key === itemId);
+            if (groupIndex !== -1) {
+                updatedMetadataModel[groupTitle][groupIndex].visible = !updatedMetadataModel[groupTitle][groupIndex].visible;
+            }
+
+            return {
+                ...state,
+                sdsState: {
+                    ...state.sdsState,
+                    metadata_model: updatedMetadataModel,
+                },
+            };
         case LayoutActions.layoutActions.SET_LAYOUT:
             return { ...state, layout : action.data.layout};
         case Actions.TOGGLE_METADATA_SETTINGS:

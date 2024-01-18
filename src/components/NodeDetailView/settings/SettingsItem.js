@@ -1,4 +1,7 @@
-import React from "react";
+import React, {useEffect} from "react";
+import { useDispatch } from 'react-redux';
+import { toggleItemVisibility } from '../../../redux/actions';
+
 import {
   Typography,
   ListItemText,
@@ -11,7 +14,9 @@ import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import VisibilityOffRoundedIcon from "@material-ui/icons/VisibilityOffRounded";
 const SettingsItem = props => {
-  const { item, toggleItemDisabled } = props;
+  const { groupTitle, item } = props;
+    const dispatch = useDispatch();
+    const toggleItemDisabled = () => dispatch(toggleItemVisibility(groupTitle, item.key))
 
   return (
     <ListItem
@@ -49,7 +54,7 @@ const SettingsItem = props => {
               fontSize: ".75rem"
             }}
           >
-            {item.primary}
+            {item.label}
           </Typography>
         }
       />
@@ -57,10 +62,10 @@ const SettingsItem = props => {
       <ListItemSecondaryAction style={{ right: "2rem" }}>
         <IconButton
           edge="end"
-          aria-label={item.disabled ? "add" : "delete"}
-          onClick={() => toggleItemDisabled(item.id)}
+          aria-label={!item.visible ? "add" : "delete"}
+          onClick={toggleItemDisabled}
         >
-          {item.disabled ? (
+          {!item.visible ? (
             <AddCircleOutlineIcon
               style={{ color: "#3779E1", fontSize: "1rem" }}
             />
