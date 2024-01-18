@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import {
   Box,
   Typography,
@@ -22,8 +22,7 @@ import VisibilityOffRoundedIcon from "@material-ui/icons/VisibilityOffRounded";
 import { SPARC_DATASETS } from "../../../constants";
 import SettingsItem from "./SettingsItem";
 const SettingsListItems = props => {
-  const { provided, items, toggleItemDisabled } = props;
-
+  const { provided, items, title } = props;
   return (
     <List
       {...provided.droppableProps}
@@ -37,7 +36,7 @@ const SettingsListItems = props => {
             }}
           >
             <Typography variant="h6" style={{ color: "#2E3A59" }}>
-              Title
+              {title.charAt(0).toUpperCase() + title.slice(1)}
             </Typography>
           </Box>
         </ListSubheader>
@@ -45,10 +44,10 @@ const SettingsListItems = props => {
     >
       {items.map((item, index) => (
         <Draggable
-          key={item.id}
-          draggableId={item.id}
+          key={item.key}
+          draggableId={`${index}`}
           index={index}
-          isDragDisabled={item.disabled}
+          isDragDisabled={!item.visible}
         >
           {provided => (
             <Box
@@ -58,7 +57,7 @@ const SettingsListItems = props => {
             >
               <SettingsItem
                 item={item}
-                toggleItemDisabled={toggleItemDisabled}
+                groupTitle={title}
               />
             </Box>
           )}
