@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import { useDispatch } from 'react-redux';
-import { toggleItemVisibility } from '../../../redux/actions';
+import { toggleMetadataItemVisibility } from '../../../redux/actions';
 
 import {
   Typography,
@@ -16,7 +16,7 @@ import VisibilityOffRoundedIcon from "@material-ui/icons/VisibilityOffRounded";
 const SettingsItem = props => {
   const { groupTitle, item } = props;
     const dispatch = useDispatch();
-    const toggleItemDisabled = () => dispatch(toggleItemVisibility(groupTitle, item.key))
+    const toggleItemDisabled = () => dispatch(toggleMetadataItemVisibility(groupTitle, item.key))
 
   return (
     <ListItem
@@ -64,6 +64,7 @@ const SettingsItem = props => {
           edge="end"
           aria-label={!item.visible ? "add" : "delete"}
           onClick={toggleItemDisabled}
+          disableRipple
         >
           {!item.visible ? (
             <AddCircleOutlineIcon

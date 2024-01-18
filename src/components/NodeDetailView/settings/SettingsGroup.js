@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { Box } from "@material-ui/core";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import SettingsListItems from "./SettingsListItems";
 import { useDispatch } from "react-redux";
-import { updateItemsOrder } from "../../../redux/actions";
+import { updateMetaDataItemsOrder } from "../../../redux/actions";
 const SettingsGroup = ({ title, group }) => {
   const [items, setItems] = useState(group);
   const dispatch = useDispatch();
@@ -16,7 +16,7 @@ const SettingsGroup = ({ title, group }) => {
     itemsCopy.splice(result.destination.index, 0, reorderedItem);
 
     setItems(itemsCopy);
-    dispatch(updateItemsOrder({ groupTitle: title, newItemsOrder: itemsCopy }));
+    dispatch(updateMetaDataItemsOrder({ groupTitle: title, newItemsOrder: itemsCopy }));
   };
 
   return (

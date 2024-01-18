@@ -5,8 +5,8 @@ export const SELECT_INSTANCE = 'SELECT_INSTANCE'
 export const TRIGGER_ERROR = 'TRIGGER_ERROR'
 export const SELECT_GROUP = 'SELECT_GROUP'
 export const TOGGLE_METADATA_SETTINGS = 'TOGGLE_METADATA_SETTINGS'
-export const TOGGLE_ITEM_VISIBILITY = 'TOGGLE_ITEM_VISIBILITY'
-export const UPDATE_ITEMS_ORDER = 'UPDATE_ITEMS_ORDER'
+export const TOGGLE_METADATA_ITEM_VISIBILITY = 'TOGGLE_METADATA_ITEM_VISIBILITY'
+export const UPDATE_METADATA_ITEMS_ORDER = 'UPDATE_METADATA_ITEMS_ORDER'
 
 export const addDataset = dataset => ({
     type: ADD_DATASET,
@@ -54,17 +54,17 @@ export const toggleSettingsPanelVisibility = visible => ({
 });
 
 
-export const toggleItemVisibility = (groupTitle, itemId) => ({
-    type: TOGGLE_ITEM_VISIBILITY,
+export const toggleMetadataItemVisibility = (groupTitle, itemId) => ({
+    type: TOGGLE_METADATA_ITEM_VISIBILITY,
     data: {
         groupTitle,
         itemId,
     },
 });
 
-export const updateItemsOrder = ({ groupTitle, newItemsOrder }) => {
+export const updateMetaDataItemsOrder = ({ groupTitle, newItemsOrder }) => {
     return {
-        type: UPDATE_ITEMS_ORDER,
+        type: UPDATE_METADATA_ITEMS_ORDER,
         payload: { title: groupTitle, newItemsOrder },
     };
 };

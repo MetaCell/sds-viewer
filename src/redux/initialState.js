@@ -1,7 +1,7 @@
 import * as Actions from './actions';
 import * as LayoutActions from '@metacell/geppetto-meta-client/common/layout/actions';
 import { rdfTypes } from "../utils/graphModel";
-import {TOGGLE_ITEM_VISIBILITY, UPDATE_ITEMS_ORDER} from "./actions";
+import {TOGGLE_METADATA_ITEM_VISIBILITY, UPDATE_METADATA_ITEMS_ORDER} from "./actions";
 
 export const sdsInitialState = {
     "sdsState": {
@@ -115,7 +115,7 @@ export default function sdsClientReducer(state = {}, action) {
                 };
             }
             break;
-        case TOGGLE_ITEM_VISIBILITY:
+        case TOGGLE_METADATA_ITEM_VISIBILITY:
             const { groupTitle, itemId } = action.data;
             const updatedMetadataModel = { ...state.metadata_model };
             const groupIndex = updatedMetadataModel[groupTitle].findIndex(item => item.key === itemId);
@@ -139,7 +139,7 @@ export default function sdsClientReducer(state = {}, action) {
                 ...state,
                 metadata_model: { ...updatedMetadataModel }
             };
-        case UPDATE_ITEMS_ORDER:
+        case UPDATE_METADATA_ITEMS_ORDER:
             const {  title, newItemsOrder } = action.payload;
 
             return {
