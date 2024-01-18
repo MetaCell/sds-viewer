@@ -1,9 +1,13 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Box } from "@material-ui/core";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import SettingsListItems from "./SettingsListItems";
-const SettingsGroup = ({title, group}) => {
-  const [items, setItems] = useState([]);
+import { useDispatch } from "react-redux";
+import { updateItemsOrder } from "../../../redux/actions";
+const SettingsGroup = ({ title, group }) => {
+  const [items, setItems] = useState(group);
+  const dispatch = useDispatch();
+
   const handleDragEnd = result => {
     if (!result.destination) return;
 
@@ -12,22 +16,23 @@ const SettingsGroup = ({title, group}) => {
     itemsCopy.splice(result.destination.index, 0, reorderedItem);
 
     setItems(itemsCopy);
+    dispatch(updateItemsOrder({ groupTitle: title, newItemsOrder: itemsCopy }));
   };
 
   return (
-    <Box>
-      <DragDropContext>
-        <Droppable droppableId="droppable">
-          {provided => (
-            <SettingsListItems
-              title={title}
-              provided={provided}
-              items={group}
-            />
-          )}
-        </Droppable>
-      </DragDropContext>
-    </Box>
+      <Box>
+        <DragDropContext onDragEnd={handleDragEnd}>
+          <Droppable droppableId="droppable">
+            {provided => (
+                <SettingsListItems
+                    title={title}
+                    provided={provided}
+                    items={items}
+                />
+            )}
+          </Droppable>
+        </DragDropContext>
+      </Box>
   );
 };
 

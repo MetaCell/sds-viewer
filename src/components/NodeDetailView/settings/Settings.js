@@ -12,14 +12,9 @@ const Settings = props => {
   const dispatch = useDispatch();
   const showSettingsContent = useSelector(state => state.sdsState.settings_panel_visible);
   const metaDataPropertiesModel = useSelector(state => state.sdsState.metadata_model);
-  const [data, setData] = useState([])
   const save = () => {
     dispatch(toggleSettingsPanelVisibility(!showSettingsContent));
   };
-
-  useEffect(() => {
-      setData(metaDataPropertiesModel)
-  }, [metaDataPropertiesModel])
   return (
     <Box style={{ position: "relative", maxHeight: "84vh", overflow: "auto" }}>
       {/*<Box*/}
@@ -39,7 +34,7 @@ const Settings = props => {
       {/*  </Typography>*/}
       {/*</Box>*/}
         {
-            Object.keys(data).map(group => <SettingsGroup title={group} group={data[group]} />)
+            Object.keys(metaDataPropertiesModel).map(group => <SettingsGroup title={group} group={metaDataPropertiesModel[group]} />)
         }
       <Box
         style={{

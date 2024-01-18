@@ -6,6 +6,7 @@ export const TRIGGER_ERROR = 'TRIGGER_ERROR'
 export const SELECT_GROUP = 'SELECT_GROUP'
 export const TOGGLE_METADATA_SETTINGS = 'TOGGLE_METADATA_SETTINGS'
 export const TOGGLE_ITEM_VISIBILITY = 'TOGGLE_ITEM_VISIBILITY'
+export const UPDATE_ITEMS_ORDER = 'UPDATE_ITEMS_ORDER'
 
 export const addDataset = dataset => ({
     type: ADD_DATASET,
@@ -60,3 +61,10 @@ export const toggleItemVisibility = (groupTitle, itemId) => ({
         itemId,
     },
 });
+
+export const updateItemsOrder = ({ groupTitle, newItemsOrder }) => {
+    return {
+        type: UPDATE_ITEMS_ORDER,
+        payload: { title: groupTitle, newItemsOrder },
+    };
+};
