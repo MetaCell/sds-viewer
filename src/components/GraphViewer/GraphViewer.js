@@ -11,7 +11,7 @@ import BugReportIcon from '@material-ui/icons/BugReport';
 import { selectInstance } from '../../redux/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import GeppettoGraphVisualization from '@metacell/geppetto-meta-ui/graph-visualization/Graph';
-import { GRAPH_SOURCE } from '../../constants';
+import {detailsLabel, GRAPH_SOURCE} from '../../constants';
 import { rdfTypes, typesModel } from '../../utils/graphModel';
 import config from "./../../config/app.json";
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
@@ -251,6 +251,8 @@ const GraphViewer = (props) => {
         source: GRAPH_SOURCE
       }));  
     }
+    const divElement = document.getElementById(node.id + detailsLabel);
+    divElement?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const handleLinkColor = link => {
