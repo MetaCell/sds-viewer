@@ -39,6 +39,13 @@ const TOP_DOWN = {
     return graph.hierarchyVariant;
   }
 };
+const LEFT_RIGHT = {
+  label : "Vertical Layout",
+  layout : "lr",
+  maxNodesLevel : (graph) => { 
+    return graph.hierarchyVariant;
+  }
+};
 const RADIAL_OUT = {
   label : "Radial View",
   layout : "null",
@@ -78,15 +85,107 @@ const GraphViewer = (props) => {
         }
       }
       matchIndex = nodes.findIndex( n => n.id === conflict.id );
-      let furthestLeft = conflict?.xPos;
-      if ( nodes[i].collapsed ) {
-        furthestLeft =  conflict.xPos - ((((matchIndex - i )/2))  * nodeSpace ); 
-        nodes[i].xPos =furthestLeft;
+      if ( selectedLayout.layout === TOP_DOWN.layout ) {
+        let furthestLeft = conflict?.xPos;
+        if ( nodes[i].collapsed ) {
+          furthestLeft =  conflict.xPos - ((((matchIndex - i )/2))  * nodeSpace ); 
+          nodes[i].xPos =furthestLeft;
+        }
+        positionsMap[level] = furthestLeft + nodeSpace;
+        nodes[i].fx = nodes[i].xPos;
+        nodes[i].fy = 50 * nodes[i].level;
+      } else if ( selectedLayout.layout === LEFT_RIGHT.layout ) {
+        let furthestLeft = conflict?.yPos;
+        if ( nodes[i].collapsed ) {
+          furthestLeft =  conflict.yPos - ((((matchIndex - i )/2))  * nodeSpace ); 
+          nodes[i].yPos =furthestLeft;
+        }
+        positionsMap[level] = furthestLeft + nodeSpace;
+        nodes[i].fy = nodes[i].yPos;
+        nodes[i].fx = 50 * nodes[i].level;
       }
-      positionsMap[level] = furthestLeft + nodeSpace;
-      nodes[i].fx = nodes[i].xPos;
-      nodes[i].fy = 50 * nodes[i].level;
     }
+  }
+
+  const algorithm = (levels, furthestLeft) => {
+    let positionsMap = {};
+    let levelsMapKeys = Object.keys(levels);
+
+    levelsMapKeys.forEach( level => {
+      furthestLeft =  0 - (Math.ceil(levels[level].length)/2  * nodeSpace ); 
+      positionsMap[level] = furthestLeft + nodeSpace;
+      levels[level]?.sort( (a, b) => { 
+        if (a?.id < b?.id) return -1;
+        else return 1;
+      });        
+    });
+
+    // Start assigning the graph from the bottom up
+    let neighbors = 0;
+    levelsMapKeys.reverse().forEach( level => {
+      let collapsedInLevel = levels[level].filter( n => n.collapsed);
+      let notcollapsedInLevel = levels[level].filter( n => !n.collapsed);
+      levels[level].forEach ( (n, index) => {
+            neighbors = n?.neighbors?.filter(neighbor => { return neighbor.level > n.level });
+            if ( !n.collapsed ) {
+              if ( neighbors?.length > 0  ) {
+                  let max = Number.MIN_SAFE_INTEGER, min = Number.MAX_SAFE_INTEGER;
+                  neighbors.forEach( neighbor => {
+                      if ( selectedLayout.layout === TOP_DOWN.layout ) {
+                        if ( neighbor.xPos > max ) { max = neighbor.xPos };
+                        if ( neighbor.xPos <= min ) { min = neighbor.xPos };
+                      } else if ( selectedLayout.layout === LEFT_RIGHT.layout ) {
+                        if ( neighbor.yPos > max ) { max = neighbor.yPos };
+                        if ( neighbor.yPos <= min ) { min = neighbor.yPos };
+                      }
+                  });
+                  if ( selectedLayout.layout === TOP_DOWN.layout ) {
+                    n.xPos = min === max ? min : min + ((max - min) * .5);
+                  } else if ( selectedLayout.layout === LEFT_RIGHT.layout ) {
+                    n.yPos = min === max ? min : min + ((max - min) * .5);
+                  }
+                  positionsMap[n.level] = n.yPos + nodeSpace;
+                  if ( notcollapsedInLevel?.length > 0 && collapsedInLevel.length > 0) {
+                    updateNodes(levels[level], n, positionsMap, level, index);
+                  }
+                  
+                  if ( selectedLayout.layout === TOP_DOWN.layout ) {
+                    positionsMap[n.level] = n.xPos + nodeSpace;
+                    n.fx = n.xPos;
+                    n.fy = 50 * n.level;
+                  } else if ( selectedLayout.layout === LEFT_RIGHT.layout ) {
+                    positionsMap[n.level] = n.yPos + nodeSpace;
+                    n.fy = n.yPos;
+                    n.fx = 50 * n.level;
+                  }
+              } else {
+                if ( selectedLayout.layout === TOP_DOWN.layout ) {
+                  n.xPos = positionsMap[n.level] + nodeSpace;
+                  positionsMap[n.level] = n.xPos;
+                  n.fx = n.xPos;
+                  n.fy = 50 * n.level;
+                } else if ( selectedLayout.layout === LEFT_RIGHT.layout ) {
+                  n.yPos = positionsMap[n.level] + nodeSpace;
+                  positionsMap[n.level] = n.yPos;
+                  n.fy = n.yPos;
+                  n.fx = 50 * n.level;
+                }
+              }
+          }else {
+            if ( selectedLayout.layout === TOP_DOWN.layout ) {
+              n.xPos = positionsMap[n.level] + nodeSpace;
+              positionsMap[n.level] = n.xPos;
+              n.fx = n.xPos;
+              n.fy = 50 * n.level;
+            } else if ( selectedLayout.layout === LEFT_RIGHT.layout ) {
+              n.yPos = positionsMap[n.level] + nodeSpace;
+              positionsMap[n.level] = n.yPos;
+              n.fy = n.yPos;
+              n.fx = 50 * n.level;
+            }
+          }              
+        })
+    });
   }
 
   const getPrunedTree = () => {
@@ -107,7 +206,6 @@ const GraphViewer = (props) => {
 
     let levelsMap = window.datasets[props.graph_id].graph.levelsMap;
     // // Calculate level with max amount of nodes
-    let maxLevel = Object.keys(levelsMap).reduce((a, b) => levelsMap[a].filter( l => !l.collapsed ).length > levelsMap[b].filter( l => !l.collapsed ).length ? a : b);
     
     (function traverseTree(node = nodesById[window.datasets[props.graph_id].graph?.nodes?.[0].id]) {
       visibleNodes.push(node);
@@ -118,80 +216,24 @@ const GraphViewer = (props) => {
       nodes?.forEach(traverseTree);
     })(); // IIFE
 
-    if ( selectedLayout.layout === TOP_DOWN.layout ){
-      let levels = {};
-      visibleNodes.forEach( n => {
-        if ( levels[n.level] ){
-          levels[n.level].push(n);
-        } else {
-          levels[n.level] = [n];
-        }
-      })
+    let levels = {};
+    visibleNodes.forEach( n => {
+      if ( levels[n.level] ){
+        levels[n.level].push(n);
+      } else {
+        levels[n.level] = [n];
+      }
+    })
       
-      // Calculate level with max amount of nodes
-      let highestLevel = Object.keys(levels).length;
-      let maxLevel = Object.keys(levels).reduce((a, b) => levels[a].length > levels[b].length ? a : b);
-      let maxLevelNodes = levels[maxLevel];
+    // Calculate level with max amount of nodes
+    let maxLevel = Object.keys(levels).reduce((a, b) => levels[a].length > levels[b].length ? a : b);
+    let maxLevelNodes = levels[maxLevel];
 
-      // Space between nodes
-      // The furthestLeft a node can be
-      let furthestLeft = 0 - (Math.ceil(maxLevelNodes.length)/2  * nodeSpace );
-      let positionsMap = {};
+    // Space between nodes
+    // The furthestLeft a node can be
+    let furthestLeft = 0 - (Math.ceil(maxLevelNodes.length)/2  * nodeSpace );
 
-      let levelsMapKeys = Object.keys(levels);
-
-      levelsMapKeys.forEach( level => {
-        furthestLeft =  0 - (Math.ceil(levels[level].length)/2  * nodeSpace ); 
-        positionsMap[level] = furthestLeft + nodeSpace;
-        levels[level]?.sort( (a, b) => { 
-          if (a?.id < b?.id) {
-            return -1;
-          }
-          if (a?.id > b?.id) {
-            return 1;
-          }
-          return 1;
-        });        
-      });
-
-      // Start assigning the graph from the bottom up
-      let neighbors = 0;
-      levelsMapKeys.reverse().forEach( level => {
-        let collapsedInLevel = levels[level].filter( n => n.collapsed);
-        let notcollapsedInLevel = levels[level].filter( n => !n.collapsed);
-        levels[level].forEach ( (n, index) => {
-              neighbors = n?.neighbors?.filter(neighbor => { return neighbor.level > n.level });
-              if ( !n.collapsed ) {
-                if ( neighbors?.length > 0  ) {
-                    let max = Number.MIN_SAFE_INTEGER, min = Number.MAX_SAFE_INTEGER;
-                    neighbors.forEach( neighbor => {
-                        if ( neighbor.xPos > max ) { max = neighbor.xPos };
-                        if ( neighbor.xPos <= min ) { min = neighbor.xPos };
-                    });
-                    n.xPos = min === max ? min : min + ((max - min) * .5);
-                    positionsMap[n.level] = n.xPos + nodeSpace;
-                    if ( notcollapsedInLevel?.length > 0 && collapsedInLevel.length > 0) {
-                      updateNodes(levels[level], n, positionsMap, level, index);
-                    }
-                    positionsMap[n.level] = n.xPos + nodeSpace;
-                    n.fx = n.xPos;
-                    n.fy = 50 * n.level;
-                } else {
-                  n.xPos = positionsMap[n.level] + nodeSpace;
-                  positionsMap[n.level] = n.xPos;
-                  n.fx = n.xPos;
-                  n.fy = 50 * n.level;
-                  
-                }
-            }else {
-              n.xPos = positionsMap[n.level] + nodeSpace;
-              positionsMap[n.level] = n.xPos ;
-              n.fx = n.xPos;
-              n.fy = 50 * n.level;
-            }              
-          })
-      });
-    }
+    algorithm(levels, furthestLeft);
 
     const graph = { nodes : visibleNodes, links : visibleLinks, levelsMap : levelsMap, hierarchyVariant : maxLevel * 20 };
     return graph;
@@ -202,7 +244,7 @@ const GraphViewer = (props) => {
   const [selectedNode, setSelectedNode] = useState(null);
   const [highlightNodes, setHighlightNodes] = useState(new Set());
   const [highlightLinks, setHighlightLinks] = useState(new Set());
-  const [selectedLayout, setSelectedLayout] = React.useState(RADIAL_OUT);
+  const [selectedLayout, setSelectedLayout] = React.useState(TOP_DOWN);
   const [layoutAnchorEl, setLayoutAnchorEl] = React.useState(null);
   const [cameraPosition, setCameraPosition] = useState({ x : 0 , y : 0 });
   const open = Boolean(layoutAnchorEl);
@@ -318,7 +360,7 @@ const GraphViewer = (props) => {
   };
 
   const setForce = () => {
-    if ( selectedLayout.layout !== TOP_DOWN.layout ){
+    if ( selectedLayout.layout !== TOP_DOWN.layout || selectedLayout.layout !== LEFT_RIGHT.layout ){
       let force = -100;
       graphRef?.current?.ggv?.current.d3Force('link').distance(0).strength(1);
       graphRef?.current?.ggv?.current.d3Force("charge").strength(force * 2);
@@ -543,14 +585,14 @@ const GraphViewer = (props) => {
         data={data}
         // Create the Graph as 2 Dimensional
         d2={true}
-        cooldownTicks={selectedLayout.layout === TOP_DOWN.layout ? 0 : data?.nodes?.length}
+        cooldownTicks={ ( selectedLayout.layout === TOP_DOWN.layout || selectedLayout.layout === LEFT_RIGHT.layout) ? 0 : data?.nodes?.length }
         onEngineStop={onEngineStop}
         // Links properties
         linkColor = {handleLinkColor}
         linkWidth={2}
-        dagLevelDistance={selectedLayout.layout === TOP_DOWN.layout ? 60 : 0}
+        dagLevelDistance={( selectedLayout.layout !== TOP_DOWN.layout && selectedLayout.layout !== LEFT_RIGHT.layout  ) ? 0 : 60}
         linkDirectionalParticles={1}
-        forceRadial={selectedLayout.layout === TOP_DOWN.layout ? 0 : 15}
+        forceRadial={( selectedLayout.layout !== TOP_DOWN.layout && selectedLayout.layout !== LEFT_RIGHT.layout  ) ? 15 : 0}
         linkDirectionalParticleWidth={link => highlightLinks.has(link) ? 4 : 0}
         linkCanvasObjectMode={'replace'}
         onLinkHover={handleLinkHover}
@@ -561,6 +603,9 @@ const GraphViewer = (props) => {
           if ( selectedLayout.layout === TOP_DOWN.layout ){
             node.fx = node.xPos;
             node.fy = 50 * node.level;
+          } else if ( selectedLayout.layout === LEFT_RIGHT.layout ){
+            node.fx = 50 * node.level;
+            node.fy = node.yPos;
           }
           return 100 / (node.level + 1);
         }}
@@ -596,6 +641,7 @@ const GraphViewer = (props) => {
             >
               <MenuItem selected={RADIAL_OUT.layout === selectedLayout.layout} onClick={() => handleLayoutChange(RADIAL_OUT)}>{RADIAL_OUT.label}</MenuItem>
               <MenuItem selected={TOP_DOWN.layout === selectedLayout.layout} onClick={() => handleLayoutChange(TOP_DOWN)}>{TOP_DOWN.label}</MenuItem>
+              <MenuItem selected={LEFT_RIGHT.layout === selectedLayout.layout} onClick={() => handleLayoutChange(LEFT_RIGHT)}>{LEFT_RIGHT.label}</MenuItem>
             </Menu>
             <IconButton area-label="ZoomIn" onClick={(e) => zoomIn()}>
               <Tooltip id="button-report" title="Zoom In">
