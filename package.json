@@ -27,6 +27,8 @@
     "jest": "26.6.0",
     "jest-image-snapshot": "4.5.1",
     "jest-puppeteer": "6.1.0",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.8.1",
     "material-ui-dropzone": "^3.5.0",
     "n3": "^1.13.0",
     "puppeteer": "13.5.1",
