@@ -8,13 +8,43 @@ import SimpleLinkedChip from './Views/SimpleLinkedChip';
 import Links from './Views/Links';
 import { detailsLabel } from '../../../constants';
 import { isValidUrl } from './utils';
-import { useSelector } from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
+import {useEffect} from "react";
+import {updateMetaDataModelDetails} from "../../../redux/actions";
 
 
 const SampleDetails = (props) => {
     const { node } = props;
+    const dispatch = useDispatch();
 
     const samplePropertiesModel = useSelector(state => state.sdsState.metadata_model.sample);
+
+    useEffect(() => {
+        if (samplePropertiesModel) {
+            const dataArray = samplePropertiesModel
+                ?.filter(property => property.visible)
+                .map(property => {
+                    const propValue = node.graph_node.attributes[property.property]?.[0];
+
+                    let dataObj = { label: property.label, value: null };
+
+                    if (isValidUrl(propValue)) {
+                        dataObj.value = propValue;
+                    } else if (typeof propValue === "object") {
+                        dataObj.value = node.graph_node.attributes[property.property];
+                    } else if (typeof propValue === "string") {
+                        dataObj.value = propValue;
+                    }
+
+                    return dataObj;
+                })
+                .filter(obj => obj.value !== null);
+            dispatch(updateMetaDataModelDetails('sample', dataArray))
+        }
+        return () => {
+            dispatch(updateMetaDataModelDetails('sample', []))
+        }
+    }, [samplePropertiesModel])
 
     return (
         <Box id={node?.graph_node?.attributes.localId + detailsLabel}>

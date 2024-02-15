@@ -10,13 +10,15 @@ import {  simpleValue } from './utils';
 import { detailsLabel } from '../../../constants';
 import { rdfTypes } from "../../../utils/graphModel";
 import { isValidUrl } from './utils';
-import { useSelector } from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
+import {useEffect} from "react";
+import {updateMetaDataModelDetails} from "../../../redux/actions";
 
 const SubjectDetails = (props) => {
     const { node } = props;
+    const dispatch = useDispatch();
 
     const subjectPropertiesModel = useSelector(state => state.sdsState.metadata_model.subject);
-
     const getGroupNode = (groupName, node)=> {
         let n = node.graph_node.parent;
         let match = false;
@@ -30,6 +32,34 @@ const SubjectDetails = (props) => {
 
         return n;
     }
+
+    useEffect(() => {
+        if (subjectPropertiesModel) {
+            const dataArray = subjectPropertiesModel
+                ?.filter(property => property.visible)
+                .map(property => {
+                    const propValue = node.graph_node.attributes[property.property]?.[0];
+
+                    let dataObj = { label: property.label, value: null };
+
+                    if (isValidUrl(propValue)) {
+                        dataObj.value = propValue;
+                    } else if (typeof propValue === "object") {
+                        dataObj.value = node.graph_node.attributes[property.property];
+                    } else if (typeof propValue === "string") {
+                        dataObj.value = propValue;
+                    }
+
+                    return dataObj;
+                })
+                .filter(obj => obj.value !== null);
+            dispatch(updateMetaDataModelDetails('subject', dataArray))
+        }
+        return () => {
+            dispatch(updateMetaDataModelDetails('subject', []))
+        }
+    }, [subjectPropertiesModel])
+
 
     return (
         <Box id={node?.graph_node?.id + detailsLabel}>
