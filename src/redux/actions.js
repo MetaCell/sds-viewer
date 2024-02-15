@@ -7,6 +7,7 @@ export const SELECT_GROUP = 'SELECT_GROUP'
 export const TOGGLE_METADATA_SETTINGS = 'TOGGLE_METADATA_SETTINGS'
 export const TOGGLE_METADATA_ITEM_VISIBILITY = 'TOGGLE_METADATA_ITEM_VISIBILITY'
 export const UPDATE_METADATA_ITEMS_ORDER = 'UPDATE_METADATA_ITEMS_ORDER'
+export const UPDATE_DETAILS = 'UPDATE_DETAILS'
 
 export const addDataset = dataset => ({
     type: ADD_DATASET,
@@ -59,6 +60,14 @@ export const toggleMetadataItemVisibility = (groupTitle, itemId) => ({
     data: {
         groupTitle,
         itemId,
+    },
+});
+export const updateMetaDataModelDetails = (model, data, moreThanOne = false) => ({
+    type: UPDATE_DETAILS,
+    data: {
+        model,
+        data,
+        moreThanOne
     },
 });
 

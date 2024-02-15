@@ -5,10 +5,34 @@ import {
 } from "@material-ui/core";
 import SimpleLabelValue from './Views/SimpleLabelValue';
 import { detailsLabel } from '../../../constants';
+import {useSelector} from "react-redux";
+import {isValidUrl} from "./utils";
 
 const UnknownDetails = (props) => {
     const { node } = props;
+    const subjectPropertiesModel = useSelector(state => state.sdsState.metadata_model.subject);
+    const getPropertyData = (subjectPropertiesModel, node) => {
+        return subjectPropertiesModel
+            ?.filter(property => property.visible) // Filter out invisible properties
+            .map(property => {
+                const propValue = node.graph_node.attributes[property.property]?.[0];
 
+                let value;
+                if (property.isGroup) {
+                    value = node.graph_node.attributes[property.property];
+                } else if (isValidUrl(propValue)) {
+                    value = propValue;
+                } else if (typeof propValue === "object") {
+                    value = node.graph_node.attributes[property.property];
+                } else if (typeof propValue === "string") {
+                    value = propValue;
+                }
+
+                return { label: property.label, value };
+            });
+    };
+
+    console.log(getPropertyData(subjectPropertiesModel, node));
     let title = "";
     let idDetails = "";
     // both tree and graph nodes are present, extract data from both

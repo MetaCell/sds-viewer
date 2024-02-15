@@ -7,12 +7,45 @@ import Links from './Views/Links';
 import SimpleLabelValue from './Views/SimpleLabelValue';
 import SimpleLinkedChip from './Views/SimpleLinkedChip';
 import { detailsLabel } from '../../../constants';
-import { useSelector } from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import { isValidUrl } from './utils';
+import {useEffect} from "react";
+import {updateMetaDataModelDetails} from "../../../redux/actions";
 
 const FileDetails = (props) => {
     const { node } = props;
+    const dispatch = useDispatch();
+
     const filePropertiesModel = useSelector(state => state.sdsState.metadata_model.file);
+
+    useEffect(() => {
+        if (filePropertiesModel) {
+            const dataArray = filePropertiesModel
+                ?.filter(property => property.visible)
+                .map(property => {
+                    const propValue = node.graph_node.attributes[property.property];
+
+                    let dataObj = { label: property.label, value: null };
+
+                    if (isValidUrl(propValue)) {
+                        dataObj.value = propValue;
+                    } else if (typeof propValue === "object") {
+                        dataObj.value = node.graph_node.attributes[property.property];
+                    } else if (typeof propValue === "string") {
+                        dataObj.value = propValue;
+                    } else if (typeof propValue === "number") {
+                        dataObj.value = propValue;
+                    }
+
+                    return dataObj;
+                })
+                .filter(obj => obj.value !== null);
+            dispatch(updateMetaDataModelDetails('file', dataArray))
+        }
+        return () => {
+            dispatch(updateMetaDataModelDetails('file', []))
+        }
+    }, [filePropertiesModel])
 
     return (
         <Box className="secondary-sidebar_body" id={node?.graph_node?.id + detailsLabel}>

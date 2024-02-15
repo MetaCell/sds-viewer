@@ -1,7 +1,7 @@
 import * as Actions from './actions';
 import * as LayoutActions from '@metacell/geppetto-meta-client/common/layout/actions';
 import { rdfTypes } from "../utils/graphModel";
-import {TOGGLE_METADATA_ITEM_VISIBILITY, UPDATE_METADATA_ITEMS_ORDER} from "./actions";
+import {TOGGLE_METADATA_ITEM_VISIBILITY, UPDATE_DETAILS, UPDATE_METADATA_ITEMS_ORDER} from "./actions";
 
 export const sdsInitialState = {
     "sdsState": {
@@ -29,6 +29,13 @@ export const sdsInitialState = {
             sample : [...rdfTypes.Sample.properties],
             group : [...rdfTypes.Group.properties],
             file : [...rdfTypes.File.properties]
+        },
+        metadata_model_details: {
+            dataset : [],
+            subject : [],
+            sample : [],
+            group : [],
+            file : []
         }
     }
 };
@@ -138,6 +145,25 @@ export default function sdsClientReducer(state = {}, action) {
             return {
                 ...state,
                 metadata_model: { ...updatedMetadataModel }
+            };
+        case UPDATE_DETAILS:
+            const { model, data, moreThanOne } = action.data;
+            const metadataModelDetails = { ...state.metadata_model_details };
+            const existingData = metadataModelDetails[model] || [];
+
+            const mergedData = [...existingData, ...data];
+
+            const newData = mergedData.filter((item, index, array) => {
+                return (
+                    index === array.findIndex(obj => {
+                        return obj.label === item.label && obj.value === item.value;
+                    })
+                );
+            });
+            metadataModelDetails[model] = moreThanOne ? newData : data;
+            return {
+                ...state,
+                metadata_model_details: { ...metadataModelDetails }
             };
         case UPDATE_METADATA_ITEMS_ORDER:
             const {  title, newItemsOrder } = action.payload;
