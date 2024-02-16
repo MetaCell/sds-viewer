@@ -30,7 +30,9 @@ const GRAPH_COLORS = {
   textHoverRect: '#3779E1',
   textHover: 'white',
   textColor: '#2E3A59',
-  collapsedFolder : 'red'
+  collapsedFolder : 'red',
+  nodeSeen: '#E1E3E8',
+  textBGSeen: '#6E4795'
 };
 const TOP_DOWN = {
   label : "Tree View",
@@ -253,6 +255,7 @@ const GraphViewer = (props) => {
   const nodeSelected = useSelector(state => state.sdsState.instance_selected.graph_node);
   const groupSelected = useSelector(state => state.sdsState.group_selected.graph_node);
   const [collapsed, setCollapsed] = React.useState(true);
+  const [previouslySelectedNodes, setPreviouslySelectedNodes] = useState(new Set());
 
   const handleLayoutClick = (event) => {
     setLayoutAnchorEl(event.currentTarget);
@@ -548,6 +551,25 @@ const GraphViewer = (props) => {
         );
         // reset canvas fill color
         ctx.fillStyle = GRAPH_COLORS.textHover;
+      } else if (previouslySelectedNodes.has(node.id)) {
+        // Apply different style previously selected nodes
+        roundRect(
+            ctx,
+            ...hoverRectPosition,
+            ...hoverRectDimensions,
+            hoverRectBorderRadius,
+            GRAPH_COLORS.nodeSeen,
+            0.3
+        );
+        roundRect(
+            ctx,
+            ...textHoverPosition,
+            hoverRectDimensions[0],
+            hoverRectDimensions[1] / 4,
+            hoverRectBorderRadius,
+            GRAPH_COLORS.textBGSeen
+        );
+        ctx.fillStyle = GRAPH_COLORS.textHover;
       } else {
         ctx.fillStyle = GRAPH_COLORS.textColor;
       }
@@ -565,6 +587,11 @@ const GraphViewer = (props) => {
     },
     [hoverNode]
   );
+  useEffect(() => {
+    if (selectedNode) {
+      setPreviouslySelectedNodes(prev => new Set([...prev, selectedNode.id]));
+    }
+  }, [selectedNode]);
 
   return (
     <div className={'graph-view'}>
