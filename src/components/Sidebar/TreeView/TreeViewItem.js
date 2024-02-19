@@ -18,6 +18,7 @@ const StyledTreeItem = (props) => {
   return (
     <TreeItem
       data={dataset}
+      id={other.nodeId}
       label={
         <div className={`labelRoot ${iconClass}`}>
           <Box className="labelIcon"></Box>
