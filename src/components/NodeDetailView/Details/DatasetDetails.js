@@ -14,7 +14,11 @@ import {DatasetIcon} from "../../../images/Icons";
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
 import {updateMetaDataModelDetails} from "../../../redux/actions";
+function linkify(text) {
+    const linkRegex = /(http[s]?:\/\/[^\s]+)/gi;
 
+    return text.replace(linkRegex, url => `${url}`);
+}
 const DatasetDetails = (props) => {
     const { node } = props;
     const dispatch = useDispatch();
@@ -32,38 +36,33 @@ const DatasetDetails = (props) => {
 
         Object.entries(propertiesModelDetails).forEach(([groupName, groupData]) => {
             if (groupData.length > 0) {
-                // Add title for the group
-                position.y += 10; // Adjust spacing as needed
-                doc.setFont('helvetica', 'bold'); // Set font weight to bold
-                doc.text(groupName, position.x, position.y);
-                position.y += 15; // Adjust spacing after title
-                doc.setFont('helvetica', 'normal'); // Reset font style to normal
-                // Iterate over each item in the group
-                groupData.forEach(({ label, value }) => {
-                    const text = `${label}: ${Array.isArray(value) ? value.map(item => item.value).join(', ') : value}`;
+                position.y += 10;
+                doc.text(groupName.charAt(0).toUpperCase() + groupName.slice(1) + ' Details', position.x, position.y);
+                position.y += 15;
+                doc.setFontSize(12);
 
-                    // Check if the text will fit on the current page
-                    if (position.y + doc.getTextDimensions(text).h > doc.internal.pageSize.getHeight()) {
+                groupData.forEach(({ label, value }) => {
+                    const text = `${label}:\n${Array.isArray(value) ? value.map(item => item.value).join(', ') : value}`;
+
+                    const textHeight = doc.getTextDimensions(text).h;
+                    if (position.y + textHeight > doc.internal.pageSize.getHeight()) {
                         doc.addPage();
-                        position.y = 10; // Reset position to the top of the new page
+                        position.y = 15;
                     }
 
-                    // Split text if it exceeds the page width
-                    const splittedText = doc.splitTextToSize(text, doc.internal.pageSize.getWidth() - 20); // Adjust margin as needed
-
-                    // Add each line of splitted text to the PDF
+                    const splittedText = doc.splitTextToSize(text, doc.internal.pageSize.getWidth() - 20);
                     splittedText.forEach((line) => {
                         doc.text(line, position.x, position.y);
                         position.y += 10;
                     });
-                    position.y += 2;
+
+                    position.y += 10;
                 });
             }
         });
 
         doc.save('details.pdf');
     };
-
     const setReportHeader = (doc, title, position, assessment, isAssessment) => {
         const xCentered = (doc.internal.pageSize.getWidth() / 2) - (doc.getStringUnitWidth(title) * doc.internal.getFontSize() / 2);
         doc.text(title, xCentered, position.y, { align: 'center' });
