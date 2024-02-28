@@ -14,11 +14,6 @@ import {DatasetIcon} from "../../../images/Icons";
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
 import {updateMetaDataModelDetails} from "../../../redux/actions";
-function linkify(text) {
-    const linkRegex = /(http[s]?:\/\/[^\s]+)/gi;
-
-    return text.replace(linkRegex, url => `${url}`);
-}
 const DatasetDetails = (props) => {
     const { node } = props;
     const dispatch = useDispatch();
@@ -32,40 +27,53 @@ const DatasetDetails = (props) => {
             y: 10
         };
 
-        setReportHeader(doc, 'Details', position, null, false);
 
-        Object.entries(propertiesModelDetails).forEach(([groupName, groupData]) => {
+        Object.entries(propertiesModelDetails).forEach(([groupName, groupData], index, entries) => {
             if (groupData.length > 0) {
-                position.y += 10;
+                doc.setTextColor(12, 22, 43);
                 doc.text(groupName.charAt(0).toUpperCase() + groupName.slice(1) + ' Details', position.x, position.y);
-                position.y += 15;
+                position.y += 20;
                 doc.setFontSize(12);
 
                 groupData.forEach(({ label, value }) => {
-                    const text = `${label}:\n${Array.isArray(value) ? value.map(item => item.value).join(', ') : value}`;
+                   const text = `${label}:\n${Array.isArray(value) ? value.map(item => item.value).join(', ') : value}`;
+                    const splitText = doc.splitTextToSize(text, doc.internal.pageSize.getWidth() - 20);
 
-                    const textHeight = doc.getTextDimensions(text).h;
-                    if (position.y + textHeight > doc.internal.pageSize.getHeight()) {
+                    let remainingTextHeight = doc.internal.pageSize.getHeight() - position.y;
+                    let textHeight = doc.getTextDimensions(splitText[0]).h;
+
+                    if (textHeight > remainingTextHeight) {
                         doc.addPage();
-                        position.y = 15;
+                        position.y = 10;
                     }
+                    doc.setTextColor(46, 58, 89);
 
-                    const splittedText = doc.splitTextToSize(text, doc.internal.pageSize.getWidth() - 20);
-                    splittedText.forEach((line) => {
+                    splitText.forEach((line, i) => {
+                        if (position.y + textHeight > doc.internal.pageSize.getHeight()) {
+                            doc.addPage();
+                            position.y = 10;
+                        }
+
                         doc.text(line, position.x, position.y);
+                        textHeight = doc.getTextDimensions(line).h;
                         position.y += 10;
                     });
-
-                    position.y += 10;
+                    position.y += 5;
                 });
+                if (index < entries.length - 1 && index > 1) {
+                    doc.setLineWidth(0.1);
+                    doc.setDrawColor(0);
+                    doc.line(position.x, position.y, doc.internal.pageSize.getWidth() - 10, position.y);
+                    position.y += 20;
+                }
             }
         });
 
         doc.save('details.pdf');
     };
-    const setReportHeader = (doc, title, position, assessment, isAssessment) => {
-        const xCentered = (doc.internal.pageSize.getWidth() / 2) - (doc.getStringUnitWidth(title) * doc.internal.getFontSize() / 2);
-        doc.text(title, xCentered, position.y, { align: 'center' });
+    const setHeader = (doc, title, position, assessment, isAssessment) => {
+        const xLeft = 10;
+        doc.text(title, xLeft, position.y);
         position.y += 20;
     };
 
