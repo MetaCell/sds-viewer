@@ -48,6 +48,7 @@ const vars = {
   grey50: '#E1E3E8',
   grey25: '#F0F1F2',
   grey600: '#2E3A59',
+  lightblue: 'rgba(55, 121, 225, 0.10)'
 };
 
 export default vars;

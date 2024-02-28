@@ -52,7 +52,8 @@ const {
   grey600,
   gray800,
   gray400,
-  gray25
+  gray25,
+  lightblue
 } = vars;
 
 const theme = createTheme({
@@ -368,6 +369,14 @@ const theme = createTheme({
         height: '2.375rem',
         padding: 0,
         minWidth: '9.875rem',
+
+        '&.containedSecondary': {
+          backgroundColor: lightblue,
+          color: primaryColor,
+          minWidth: 'fit-content',
+          padding: '0.75rem',
+          height: '2.4375rem',
+        },
       },
       label: {
         textTransform: 'none',

@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import {
     Box,
     Typography,
-    Divider,
+    Divider, Button,
 } from "@material-ui/core";
 import Links from './Views/Links';
 import SimpleLinkedChip from './Views/SimpleLinkedChip';
@@ -100,11 +100,20 @@ const DatasetDetails = (props) => {
         
         <Box id={node.graph_node?.id + detailsLabel}>
             <Divider />
-            <button onClick={exportToPDF}>Export PDF</button>
             <Box className="tab-content">
-                <Box className='title-container'>
-                    <DatasetIcon />
-                    <Typography component="h3">Dataset Details</Typography>
+                <Box className='title-container' sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                }}>
+                    <Box sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                    }}>
+                        <DatasetIcon />
+                        <Typography component="h3">Dataset Details</Typography>
+                    </Box>
+                    <Button className="containedSecondary" disableElevation onClick={exportToPDF}>Export PDF</Button>
                 </Box>
                 {datasetPropertiesModel?.map( property => {
                     if ( property.visible ){
