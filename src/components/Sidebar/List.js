@@ -14,7 +14,6 @@ const SidebarContent = (props) => {
   const datasets = useSelector((state) => state.sdsState.datasets);
   const nodeSelected = useSelector((state) => state.sdsState.instance_selected);
   useEffect(() => {
-      console.log('nodeSelected', nodeSelected)
     if (nodeSelected?.tree_node?.id) {
       const selectedNodeElement = document.getElementById(nodeSelected?.tree_node?.id);
 
