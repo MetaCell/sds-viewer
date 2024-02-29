@@ -1,62 +1,61 @@
-import React from 'react';
-import {
-  Box,
-  IconButton,
-} from '@material-ui/core';
+import React, {useEffect} from 'react';
+import {Box, IconButton} from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import InstancesTreeView from './TreeView/InstancesTreeView';
-import { useSelector } from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux';
 import SearchRoundedIcon from '@material-ui/icons/SearchRounded';
+import {selectInstance} from "../../redux/actions";
+import {TREE_SOURCE} from "../../constants";
+
 const SidebarContent = (props) => {
   const { expand, setExpand, searchTerm } = props;
-  const datasets = useSelector(state => state.sdsState.datasets);
+    const dispatch = useDispatch();
+
+  const datasets = useSelector((state) => state.sdsState.datasets);
+  const nodeSelected = useSelector((state) => state.sdsState.instance_selected);
+  useEffect(() => {
+    if (nodeSelected?.tree_node?.id) {
+      const selectedNodeElement = document.getElementById(nodeSelected?.tree_node?.id);
+
+        if (selectedNodeElement) {
+        selectedNodeElement.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+      }
+    }
+  }, [nodeSelected]);
+
 
   const renderContent = () => {
     if (datasets?.length > 0) {
       return (
-        <>
-          <Typography component='h3'>Uploaded Instances</Typography>
-          <Box className='scrollbar'>
-            { datasets.map((id, index) => <InstancesTreeView key={"tree_" + index} searchTerm={searchTerm} dataset_id={id} />) }
-          </Box>
-        </>
+          <>
+            <Typography component='h3'>Uploaded Instances</Typography>
+            <Box className='scrollbar'>
+              {datasets.map((id, index) => (
+                  <InstancesTreeView key={"tree_" + index} searchTerm={searchTerm} dataset_id={id} />
+              ))}
+            </Box>
+          </>
       );
     } else {
       return (
-        <>
-          <Typography className='no-instance'>
-            No instances to display yet.
-          </Typography>
-        </>
+          <>
+            <Typography className='no-instance'>No instances to display yet.</Typography>
+          </>
       );
     }
   };
 
   return (
-    <Box className='sidebar-body'>
-      {!expand ? (
-        <IconButton
-          aria-label='toggle'
-          onClick={() => setExpand(!expand)}
-          className='shrink-btn'
-        >
-          <SearchRoundedIcon />
-        </IconButton>
-      ) : ( renderContent() )
-      }
-    </Box>
-  )
-}
+      <Box className='sidebar-body'>
+        {!expand ? (
+            <IconButton aria-label='toggle' onClick={() => setExpand(!expand)} className='shrink-btn'>
+              <SearchRoundedIcon />
+            </IconButton>
+        ) : (
+            renderContent()
+        )}
+      </Box>
+  );
+};
 
 export default SidebarContent;
-
-
-// (
-//   <>
-//     <Typography component='h3'>Uploaded Instances</Typography>
-//     { datasets.map( id => {
-//       return <InstancesTreeView searchTerm={searchTerm} dataset={window.datasets[id].tree }/>
-//     })
-//     }
-//   </>
-// )

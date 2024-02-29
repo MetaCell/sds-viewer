@@ -985,7 +985,8 @@ class Splinter {
 
         // generate the Graph
         this.forced_nodes = Array.from(this.nodes).map(([key, value]) => {
-            let tree_node = this.tree_map.get(value.id);
+            const id = value?.id?.match(/https?:\/\/[^\s]+/)?.[0] || "";
+            let tree_node = this.tree_map.get(id);
             if (tree_node) {
                 value.tree_reference = tree_node;
                 this.nodes.set(key, value);
