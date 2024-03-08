@@ -1,29 +1,29 @@
 apiVersion: cert-manager.io/v1alpha2
 kind: Issuer 
 metadata:
-  name: 'letsencrypt-sds_viewer'
+  name: 'letsencrypt-sdsviewer'
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
     email: filippo@metacell.us
     privateKeySecretRef:
-      name: letsencrypt-sds_viewer
+      name: letsencrypt-sdsviewer
     solvers:
     - http01:
         ingress:
-          ingressName: sds_viewer
+          ingressName: sds-viewer
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    cert-manager.io/issuer: letsencrypt-sds_viewer
+    cert-manager.io/issuer: letsencrypt-sdsviewer
     kubernetes.io/ingress.class: nginx
     kubernetes.io/tls-acme: 'true'
     nginx.ingress.kubernetes.io/ssl-redirect: 'true'
     nginx.ingress.kubernetes.io/proxy-body-size: 512m
     nginx.ingress.kubernetes.io/from-to-www-redirect: 'true'
-  name: sds_viewer
+  name: sds-viewer
 spec:
   rules:
   - host: "{{DOMAIN}}"
@@ -31,7 +31,7 @@ spec:
       paths:
       - backend:
           service:
-            name: sds_viewer
+            name: sds-viewer
             port:
               number: 80
         path: /
@@ -39,4 +39,4 @@ spec:
   tls:
   - hosts:
     - "{{DOMAIN}}"
-    secretName: sds_viewer-tls
+    secretName: sds-viewer-tls
