@@ -11,7 +11,7 @@ spec:
     solvers:
     - http01:
         ingress:
-          ingressName: sds-viewer
+          class: nginx
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
