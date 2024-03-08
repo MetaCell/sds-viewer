@@ -43,7 +43,7 @@ const SubjectDetails = (props) => {
                         if ( property.isGroup ){
                             return (<Box className="tab-content-row">
                                         <Typography component="label">{property.label}</Typography>
-                                        <SimpleLinkedChip chips={[{ value : node.graph_node.attributes[property.property]}]} node={getGroupNode(node.graph_node.attributes[property.property][0], node)} />
+                                        <SimpleLinkedChip chips={[{ value : node.graph_node.attributes[property.property]}]} node={getGroupNode(node.graph_node.attributes[property.property]?.[0], node)} />
                                     </Box>)
                         }
 
