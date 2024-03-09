@@ -1,43 +1,50 @@
-import React from "react";
 import {
-    Box, Divider,
-    Typography
+    Box,
+    Divider,
+    Typography,
 } from "@material-ui/core";
-import Links from './Views/Links';
 import SimpleLabelValue from './Views/SimpleLabelValue';
+import SimpleLinkedChip from './Views/SimpleLinkedChip';
+import Links from './Views/Links';
 import { detailsLabel } from '../../../constants';
+import { isValidUrl } from './utils';
+import { useSelector } from 'react-redux'
+
 
 const CollectionDetails = (props) => {
     const { node } = props;
 
-    let title = "";
-    let idDetails = "";
-    // both tree and graph nodes are present, extract data from both
-    if (node?.tree_node && node?.graph_node) {
-        title = node.graph_node?.name;
-        idDetails = node.graph_node?.id + detailsLabel;
-    // the below is the case where we have data only from the tree/hierarchy
-    } else if (node?.tree_node) {
-        title = node.tree_node?.basename;
-        idDetails = node.tree_node?.id + detailsLabel;
-    // the below is the case where we have data only from the graph
-    } else {
-        title = node.graph_node?.name;
-        idDetails = node.graph_node?.id + detailsLabel;
-    }
-
+    const collectionPropertiesModel = useSelector(state => state.sdsState.metadata_model.collection);
     return (
-        <Box className="secondary-sidebar_body" id={idDetails}>
+        <Box id={node?.graph_node?.attributes.localId + detailsLabel}>
             <Divider />
             <Box className="tab-content">
-                <SimpleLabelValue label={'Label'} value={title} heading={'Collection Details'} />
-                { node.graph_node?.attributes?.publishedURI && node.graph_node?.attributes?.publishedURI !== ""
-                    ? (<Box className="tab-content-row">
-                            <Typography component="label">SPARC Portal Link</Typography>
-                            <Links key={`label_href_link`} href={node.graph_node?.attributes?.publishedURI} title={node.tree_node.basename} />
-                        </Box>)
-                    : <></>
-                }
+                <SimpleLabelValue label={""} value={""} heading={"Folder Details"} />
+
+                {collectionPropertiesModel?.map( property => {
+                    if ( property.visible ){
+                        const propValue = node.graph_node.attributes[property.property];
+                        if ( isValidUrl(propValue) ){
+                            return (<Box className="tab-content-row">
+                                <Typography component="label">{property.label}</Typography>
+                                <Links key={`detail_links_dataset`} href={propValue} title={property.label + " Link"} />
+                            </Box>)
+                        }
+
+                        else if ( typeof propValue === "object" ){
+                            return (<Box className="tab-content-row">
+                                        <Typography component="label">{property.label}</Typography>
+                                        <SimpleLinkedChip chips={node.graph_node.attributes[property.property]} />
+                                    </Box>)
+                        }
+
+                        else if ( typeof propValue === "string" ){
+                            return (<SimpleLabelValue label={property.label} value={propValue} />)
+                        }
+
+                        return (<> </>)
+                    }
+                })}
             </Box>
         </Box>
     );

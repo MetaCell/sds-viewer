@@ -337,7 +337,7 @@ class Splinter {
         } else {
             this.nodes.set(node.id, {
                 id: node.id,
-                attributes: {},
+                attributes: {publishedURI : ""},
                 types: [],
                 name: node.value,
                 proxies: [],
@@ -710,11 +710,11 @@ class Splinter {
                     }
                 }
 
-                if (node.attributes?.relativePath !== undefined) {
+                if (node.tree_reference?.dataset_relative_path !== undefined) {
                     node.attributes.publishedURI = 
-                        Array.from(this.nodes)[0][1].attributes.hasUriPublished[0]?.replace("datasets", "file") + 
-                        "/1?path=files/" +
-                        node.attributes?.relativePath;
+                        [Array.from(this.nodes)[0][1].attributes.hasUriPublished[0] + 
+                        "?datasetDetailsTab=files&path=files/" +
+                        node.tree_reference?.dataset_relative_path];
                 }
             }
 
@@ -754,9 +754,9 @@ class Splinter {
 
                 if (node.tree_reference?.dataset_relative_path !== undefined) {
                     node.attributes.publishedURI = 
-                        Array.from(this.nodes)[0][1].attributes.hasUriPublished[0]?.replace("datasets", "file") + 
-                        "/1?path=files/" +
-                        node.tree_reference?.dataset_relative_path;
+                        [Array.from(this.nodes)[0][1].attributes.hasUriPublished[0] + 
+                        "?datasetDetailsTab=files&path=files/" +
+                        node.tree_reference?.dataset_relative_path];
                 }
             }
 
@@ -780,9 +780,9 @@ class Splinter {
 
                 if (node.attributes?.relativePath !== undefined) {
                     node.attributes.publishedURI = 
-                        Array.from(this.nodes)[0][1].attributes.hasUriPublished[0]?.replace("datasets", "file") + 
-                        "/1?path=files/" +
-                        node.attributes?.relativePath;
+                        Array.from(this.nodes)[0][1].attributes.hasUriPublished[0] + 
+                        "?datasetDetailsTab=files&path=files/" +
+                        node.attributes?.relativePath;  
                 }
             }
 

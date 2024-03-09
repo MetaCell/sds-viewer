@@ -1,12 +1,9 @@
-import React from "react";
 import {
     Box,
     Divider,
     Typography,
 } from "@material-ui/core";
 import Links from './Views/Links';
-import SimpleLabelValue from './Views/SimpleLabelValue';
-import { detailsLabel } from '../../../constants';
 
 const PersonDetails = (props) => {
     const { node } = props;

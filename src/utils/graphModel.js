@@ -51,14 +51,49 @@ export const rdfTypes = {
                 "type": "rdfs",
                 "key": "label",
                 "property": "label",
-                "label": "To be filled",
+                "label": "Label",
+                "visible" : false
+            },
+            {
+                "type": "rdfs",
+                "key": "identifier",
+                "property": "identifier",
+                "label": "Label",
+                "visible" : true
+            },
+            {
+                "type": "rdfs",
+                "key": "mimetype",
+                "property": "mimetype",
+                "label": "Mimetype",
+                "visible" : false
+            },
+            {
+                "type": "rdfs",
+                "key": "status",
+                "property": "status",
+                "label": "Status",
+                "visible" : true
+            },
+            {
+                "type": "rdfs",
+                "key": "updated",
+                "property": "updated",
+                "label": "Updated On",
                 "visible" : true
             },
             {
                 "type": "TEMP",
                 "key": "hasUriHuman",
                 "property": "hasUriHuman",
-                "label": "To be filled",
+                "label": "URI Link",
+                "visible" : false
+            },
+            {
+                "type": "TEMP",
+                "key": "publishedURI",
+                "property": "publishedURI",
+                "label": "Published URI",
                 "visible" : true
             }
         ]
@@ -456,7 +491,7 @@ export const rdfTypes = {
                 "property": "specimenHasIdentifier",
                 "label": "Specimen has Identifier",
                 "visible" : true,
-                "isGroup" : true
+                "isGroup" : false
             },
             {
                 "type": "sparc",
@@ -523,6 +558,13 @@ export const rdfTypes = {
                 "label": "Participant In Performance Of",
                 "visible" : true
             },
+            {
+                "type": "TEMP",
+                "key": "publishedURI",
+                "property": "publishedURI",
+                "label": "Published URI",
+                "visible" : true
+            }
         ],
         "additional_properties": [
             {
@@ -657,6 +699,13 @@ export const rdfTypes = {
                 "key": "participantInPerformanceOf",
                 "property": "participantInPerformanceOf",
                 "label": "Participant in Performance Of",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "publishedURI",
+                "property": "publishedURI",
+                "label": "Published URI",
                 "visible" : true
             }
         ]
