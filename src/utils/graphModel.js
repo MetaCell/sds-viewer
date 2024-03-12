@@ -49,16 +49,9 @@ export const rdfTypes = {
         "properties": [
             {
                 "type": "rdfs",
-                "key": "label",
-                "property": "label",
-                "label": "Label",
-                "visible" : false
-            },
-            {
-                "type": "rdfs",
-                "key": "identifier",
-                "property": "identifier",
-                "label": "Label",
+                "key": "basename",
+                "property": "basename",
+                "label": "Basename",
                 "visible" : true
             },
             {
@@ -66,7 +59,7 @@ export const rdfTypes = {
                 "key": "mimetype",
                 "property": "mimetype",
                 "label": "Mimetype",
-                "visible" : false
+                "visible" : true
             },
             {
                 "type": "rdfs",
@@ -77,17 +70,24 @@ export const rdfTypes = {
             },
             {
                 "type": "rdfs",
-                "key": "updated",
-                "property": "updated",
+                "key": "timestamp_updated",
+                "property": "timestamp_updated",
                 "label": "Updated On",
                 "visible" : true
             },
             {
                 "type": "TEMP",
-                "key": "hasUriHuman",
-                "property": "hasUriHuman",
+                "key": "uri_human",
+                "property": "uri_human",
                 "label": "URI Link",
                 "visible" : false
+            },
+            {
+                "type": "TEMP",
+                "key": "uri_api",
+                "property": "uri_api",
+                "label": "URI API",
+                "visible" : true
             },
             {
                 "type": "TEMP",
@@ -396,9 +396,16 @@ export const rdfTypes = {
         "properties": [
             {
                 "type": "rdfs",
-                "key": "identifier",
-                "property": "identifier",
-                "label": "Label",
+                "key": "basename",
+                "property": "basename",
+                "label": "Basename",
+                "visible" : true
+            },
+            {
+                "type": "rdfs",
+                "key": "timestamp_updated",
+                "property": "timestamp_updated",
+                "label": "Updated On",
                 "visible" : true
             },
             {
@@ -417,18 +424,32 @@ export const rdfTypes = {
             },
             {
                 "type": "TEMP",
-                "key": "updated",
-                "property": "updated",
-                "label": "Updated On",
-                "visible" : true
-            },
-            {
-                "type": "TEMP",
                 "key": "publishedURI",
                 "property": "publishedURI",
                 "label": "Published URI",
                 "visible" : true
-            }
+            },
+            {
+                "type": "TEMP",
+                "key": "uri_human",
+                "property": "uri_human",
+                "label": "URI Link",
+                "visible" : false
+            },
+            {
+                "type": "TEMP",
+                "key": "uri_api",
+                "property": "uri_api",
+                "label": "URI API",
+                "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "status",
+                "property": "status",
+                "label": "Status",
+                "visible" : true
+            },
         ]
     },
     "Subject": {

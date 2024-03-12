@@ -4,6 +4,7 @@ import {
     Typography,
 } from "@material-ui/core";
 import Links from './Views/Links';
+import { detailsLabel } from '../../../constants';
 
 const PersonDetails = (props) => {
     const { node } = props;

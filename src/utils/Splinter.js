@@ -989,6 +989,10 @@ class Splinter {
             let tree_node = this.tree_map.get(id);
             if (tree_node) {
                 value.tree_reference = tree_node;
+                tree_node.publishedURI = 
+                    Array.from(this.nodes)[0][1].attributes.hasUriPublished[0]?.replace("datasets", "file") + 
+                    "/1?path=files/" +
+                    tree_node?.dataset_relative_path;
                 this.nodes.set(key, value);
                 tree_node.graph_reference = value;
                 this.tree_map.set(value.id, tree_node);
@@ -996,6 +1000,10 @@ class Splinter {
                 value.proxies.every(proxy => {
                     tree_node = this.tree_map.get(proxy);
                     if (tree_node) {
+                        tree_node.publishedURI = 
+                            Array.from(this.nodes)[0][1].attributes.hasUriPublished[0]?.replace("datasets", "file") + 
+                            "/1?path=files/" +
+                            tree_node?.dataset_relative_path;
                         value.tree_reference = tree_node;
                         this.nodes.set(key, value);
                         tree_node.graph_reference = value;
