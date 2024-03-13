@@ -27,7 +27,7 @@ steps:
     tag: latest
     working_directory: ./sds-viewer/deploy/k8s
     commands:
-      - /cf-deploy-kubernetes cde-mapper.yaml
+      - /cf-deploy-kubernetes sds_viewer.yaml
       - /cf-deploy-kubernetes ingress.yaml
     environment:
       - KUBECONTEXT=${{CLUSTER_NAME}}
