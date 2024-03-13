@@ -1,13 +1,13 @@
 apiVersion: cert-manager.io/v1alpha2
 kind: Issuer 
 metadata:
-  name: 'letsencrypt-sdsviewer'
+  name: 'letsencrypt-apinatomy'
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
     email: filippo@metacell.us
     privateKeySecretRef:
-      name: letsencrypt-sdsviewer
+      name: tls-secret
     solvers:
     - http01:
         ingress:
@@ -17,7 +17,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    cert-manager.io/issuer: letsencrypt-sdsviewer
+    cert-manager.io/issuer: letsencrypt-apinatomy
     kubernetes.io/ingress.class: nginx
     kubernetes.io/tls-acme: 'true'
     nginx.ingress.kubernetes.io/ssl-redirect: 'true'
