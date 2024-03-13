@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: sds-viewer
-          image: "us.gcr.io/metacellllc/sds-viewer:{{CF_SHORT_REVISION}}"
+          image: "gcr.io/metacellllc/sds-viewer:{{CF_SHORT_REVISION}}"
           imagePullPolicy: "IfNotPresent"
           ports:
             - containerPort: 80
