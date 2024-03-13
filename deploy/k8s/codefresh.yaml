@@ -27,8 +27,13 @@ steps:
     tag: latest
     working_directory: ./sds-viewer/deploy/k8s
     commands:
-      - /cf-deploy-kubernetes sds_viewer.yaml
-      - /cf-deploy-kubernetes ingress.yaml
+      - export CLUSTER_NAME="${{CLUSTER_NAME}}"
+      - export NAMESPACE="${{NAMESPACE}}"
+      - export CF_BUILD_ID="${{CF_BUILD_ID}}"
+      - export REGISTRY="${{REGISTRY}}/"
+      - export DOMAIN="${{DOMAIN}}"
+      - chmod +x ./deploy.sh
+      - ./deploy.sh
     environment:
       - KUBECONTEXT=${{CLUSTER_NAME}}
       - KUBERNETES_NAMESPACE=${{NAMESPACE}}
