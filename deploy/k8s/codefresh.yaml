@@ -19,7 +19,7 @@ steps:
     dockerfile: Dockerfile
     working_directory: ./sds-viewer
     buildkit: true    
-    registry: "${{REGISTRY}}"
+    registry: "${{CODEFRESH_REGISTRY}}"
   deploy:
     stage: "deploy"
     title: "Deploying SDS Viewer"
