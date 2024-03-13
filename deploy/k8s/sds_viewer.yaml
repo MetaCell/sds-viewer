@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sds-viewer
+spec:
+  selector:
+    matchLabels:
+      app: sds-viewer
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: sds-viewer
+    spec:
+      containers:
+        - name: sds-viewer
+          image: "us.gcr.io/metacellllc/sds-viewer:{{CF_SHORT_REVISION}}"
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 80
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /index.html
+              port: 80
+              scheme: HTTP
+            initialDelaySeconds: 45
+            periodSeconds: 30
+            timeoutSeconds: 2
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /index.html
+              port: 80
+              scheme: HTTP
+            initialDelaySeconds: 15
+            periodSeconds: 30
+            timeoutSeconds: 2
+          resources:
+            limits:
+              cpu: 1500m
+              memory: 768Mi
+            requests:
+              cpu: 500m
+              memory: 768Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sds-viewer
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    app: sds-viewer
