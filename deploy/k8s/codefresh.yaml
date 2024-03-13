@@ -23,16 +23,12 @@ steps:
   deploy:
     stage: "deploy"
     title: "Deploying SDS Viewer"
-    image: codefresh/kubectl
+    image: codefresh/cf-deploy-kubernetes
+    tag: latest
     working_directory: ./sds-viewer/deploy/k8s
     commands:
-      - export CLUSTER_NAME="${{CLUSTER_NAME}}"
-      - export NAMESPACE="${{NAMESPACE}}"
-      - export CF_BUILD_ID="${{CF_BUILD_ID}}"
-      - export REGISTRY="${{REGISTRY}}/"
-      - export DOMAIN="${{DOMAIN}}"
-      - chmod +x ./deploy.sh
-      - ./deploy.sh
+      - /cf-deploy-kubernetes cde-mapper.yaml
+      - /cf-deploy-kubernetes ingress.yaml
     environment:
       - KUBECONTEXT=${{CLUSTER_NAME}}
       - KUBERNETES_NAMESPACE=${{NAMESPACE}}

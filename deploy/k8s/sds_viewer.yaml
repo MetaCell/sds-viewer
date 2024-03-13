@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sds-viewer
+spec:
+  selector:
+    matchLabels:
+      app: sds-viewer
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: sds-viewer
+    spec:
+      containers:
+        - name: sds-viewer
+          image: "{{REGISTRY}}sds-viewer:{{CF_BUILD_ID}}"
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              cpu: 1500m
+              memory: 768Mi
+            requests:
+              cpu: 500m
+              memory: 768Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sds-viewer
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    app: sds-viewer
