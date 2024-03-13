@@ -33,3 +33,6 @@ steps:
       - export DOMAIN="${{DOMAIN}}"
       - chmod +x ./deploy.sh
       - ./deploy.sh
+    environment:
+      - KUBECONTEXT=${{CLUSTER_NAME}}
+      - KUBERNETES_NAMESPACE=${{NAMESPACE}}
