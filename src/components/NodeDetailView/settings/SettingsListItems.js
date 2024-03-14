@@ -1,25 +1,11 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {
   Box,
   Typography,
   List,
-  ListItemText,
-  ListItem,
-  ListItemIcon,
-  ListItemSecondaryAction,
-  IconButton,
   ListSubheader,
-  Button
 } from "@material-ui/core";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import ReorderIcon from "@material-ui/icons/Reorder";
-import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
-import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
-import VisibilityIcon from "@material-ui/icons/Visibility";
-import { TuneRounded } from "@material-ui/icons";
-import FolderIcon from "@material-ui/icons/Folder";
-import VisibilityOffRoundedIcon from "@material-ui/icons/VisibilityOffRounded";
-import { SPARC_DATASETS } from "../../../constants";
+import { Draggable } from "react-beautiful-dnd";
 import SettingsItem from "./SettingsItem";
 const SettingsListItems = props => {
   const { provided, items, title } = props;

@@ -3,6 +3,14 @@ import * as LayoutActions from '@metacell/geppetto-meta-client/common/layout/act
 import { rdfTypes } from "../utils/graphModel";
 import {TOGGLE_METADATA_ITEM_VISIBILITY, UPDATE_METADATA_ITEMS_ORDER} from "./actions";
 
+const savedMetadataModel = localStorage.getItem("metadata_model");
+const initialMetadataModel = savedMetadataModel ? JSON.parse(savedMetadataModel) : {
+    dataset: [...rdfTypes.Dataset.properties],
+    subject: [...rdfTypes.Subject.properties],
+    sample: [...rdfTypes.Sample.properties],
+    group: [...rdfTypes.Group.properties],
+    file: [...rdfTypes.File.properties]
+};
 export const sdsInitialState = {
     "sdsState": {
         datasets: [],
@@ -23,13 +31,7 @@ export const sdsInitialState = {
         },
         layout : {},
         settings_panel_visible : false,
-        metadata_model : {
-            dataset : [...rdfTypes.Dataset.properties],
-            subject : [...rdfTypes.Subject.properties],
-            sample : [...rdfTypes.Sample.properties],
-            group : [...rdfTypes.Group.properties],
-            file : [...rdfTypes.File.properties]
-        }
+        metadata_model : initialMetadataModel
     }
 };
 
@@ -135,19 +137,22 @@ export default function sdsClientReducer(state = {}, action) {
                     }
                 });
             }
+            localStorage.setItem("metadata_model", JSON.stringify(updatedMetadataModel));
+
             return {
                 ...state,
                 metadata_model: { ...updatedMetadataModel }
             };
         case UPDATE_METADATA_ITEMS_ORDER:
             const {  title, newItemsOrder } = action.payload;
-
+            const updatedMetadataModelOrder = {
+                ...state.metadata_model,
+                [title]: newItemsOrder,
+            };
+            localStorage.setItem("metadata_model", JSON.stringify(updatedMetadataModelOrder));
             return {
                 ...state,
-                metadata_model: {
-                    ...state.metadata_model,
-                    [title]: newItemsOrder,
-                },
+                metadata_model: updatedMetadataModelOrder,
             };
         case LayoutActions.layoutActions.SET_LAYOUT:
             return { ...state, layout : action.data.layout};
