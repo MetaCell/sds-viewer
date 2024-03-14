@@ -6,9 +6,7 @@ import {
 import SimpleLinkedChip from './Views/SimpleLinkedChip';
 import SimpleLabelValue from './Views/SimpleLabelValue';
 import Links from './Views/Links';
-import {  simpleValue } from './utils';
 import { detailsLabel } from '../../../constants';
-import { rdfTypes } from "../../../utils/graphModel";
 import { isValidUrl } from './utils';
 import { useSelector } from 'react-redux'
 

@@ -8,6 +8,7 @@ const initialMetadataModel = savedMetadataModel ? JSON.parse(savedMetadataModel)
     dataset: [...rdfTypes.Dataset.properties],
     subject: [...rdfTypes.Subject.properties],
     sample: [...rdfTypes.Sample.properties],
+    collection : [...rdfTypes.Collection.properties],
     group: [...rdfTypes.Group.properties],
     file: [...rdfTypes.File.properties]
 };

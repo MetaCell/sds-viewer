@@ -25,11 +25,11 @@ const NodeDetailView = (props) => {
   };
   var path = []
   var latestNodeVisited = nodeSelected;
-  while ( latestNodeVisited.graph_node.parent !== undefined ) {
-    path.push(latestNodeVisited.graph_node.parent.id);
+  while ( latestNodeVisited?.graph_node?.parent !== undefined ) {
+    path.push(latestNodeVisited?.graph_node?.parent?.id);
     latestNodeVisited = {
       tree_node: undefined,
-      graph_node: latestNodeVisited.graph_node.parent
+      graph_node: latestNodeVisited?.graph_node?.parent
     };
   };
 
@@ -40,9 +40,9 @@ const NodeDetailView = (props) => {
       graph_node: graph_node,
       tree_node: graph_node.tree_reference
     }
-    if (new_node.graph_node.id !== subject_key
-      && new_node.graph_node.id !== contributors_key
-      && new_node.graph_node.id !== protocols_key) {
+    if (new_node?.graph_node?.id !== subject_key
+      && new_node?.graph_node?.id !== contributors_key
+      && new_node?.graph_node?.id !== protocols_key) {
       links.pages.push({
         id: singleNode,
         title: graph_node.name,
@@ -52,10 +52,12 @@ const NodeDetailView = (props) => {
     }
     return <> </>;
   });
-  links.current = {
-    id: nodeSelected.graph_node.id,
-    text: nodeSelected.graph_node.name
-  };
+  if ( nodeSelected?.graph_node ){
+    links.current = {
+      id: nodeSelected?.graph_node?.id,
+      text: nodeSelected?.graph_node?.name
+    };
+  }
   const toggleContent = () => {
     dispatch(toggleSettingsPanelVisibility(!showSettingsContent));
   };
