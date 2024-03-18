@@ -12,7 +12,9 @@ export const GRAPH_COLORS = {
   textHoverRect: '#3779E1',
   textHover: 'white',
   textColor: '#2E3A59',
-  collapsedFolder : 'red'
+  collapsedFolder : 'red',
+  nodeSeen: '#E1E3E8',
+  textBGSeen: '#6E4795'
 };
 export const TOP_DOWN = {
   label : "Tree View",
@@ -64,7 +66,7 @@ const roundRect = (ctx, x, y, width, height, radius, color, alpha) => {
   ctx.fill();
 };
 
-export const paintNode = (node, ctx, hoverNode, selectedNode, nodeSelected) =>  {
+export const paintNode = (node, ctx, hoverNode, selectedNode, nodeSelected, previouslySelectedNodes) =>  {
       const size = 7.5;
       const nodeImageSize = [size * 2.4, size * 2.4];
       const hoverRectDimensions = [size * 4.2, size * 4.2];
@@ -127,6 +129,25 @@ export const paintNode = (node, ctx, hoverNode, selectedNode, nodeSelected) =>  
           GRAPH_COLORS.textHoverRect
         );
         // reset canvas fill color
+        ctx.fillStyle = GRAPH_COLORS.textHover;
+      } else if (previouslySelectedNodes.has(node.id)) {
+        // Apply different style previously selected nodes
+        roundRect(
+            ctx,
+            ...hoverRectPosition,
+            ...hoverRectDimensions,
+            hoverRectBorderRadius,
+            GRAPH_COLORS.nodeSeen,
+            0.3
+        );
+        roundRect(
+            ctx,
+            ...textHoverPosition,
+            hoverRectDimensions[0],
+            hoverRectDimensions[1] / 4,
+            hoverRectBorderRadius,
+            GRAPH_COLORS.textBGSeen
+        );
         ctx.fillStyle = GRAPH_COLORS.textHover;
       } else {
         ctx.fillStyle = GRAPH_COLORS.textColor;

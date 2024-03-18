@@ -47,6 +47,7 @@ const GraphViewer = (props) => {
   const nodeSelected = useSelector(state => state.sdsState.instance_selected.graph_node);
   const groupSelected = useSelector(state => state.sdsState.group_selected.graph_node);
   const [collapsed, setCollapsed] = React.useState(true);
+  const [previouslySelectedNodes, setPreviouslySelectedNodes] = useState(new Set());
 
   const handleLayoutClick = (event) => {
     setLayoutAnchorEl(event.currentTarget);
@@ -208,7 +209,13 @@ const GraphViewer = (props) => {
       graphRef?.current?.ggv?.current.centerAt(groupSelected.x, groupSelected.y, ONE_SECOND);
       graphRef?.current?.ggv?.current.zoom(2, ONE_SECOND);
     }
-  },[groupSelected]) 
+  },[groupSelected])
+  
+  useEffect(() => {
+    if (selectedNode) {
+      setPreviouslySelectedNodes(prev => new Set([...prev, selectedNode.id]));
+    }
+  }, [selectedNode]);
 
   useEffect(() => {
     if ( nodeSelected ) { 
@@ -290,7 +297,7 @@ const GraphViewer = (props) => {
         linkCanvasObjectMode={'replace'}
         onLinkHover={handleLinkHover}
         // Override drawing of canvas objects, draw an image as a node
-        nodeCanvasObject={(node, ctx) => paintNode(node, ctx, hoverNode, selectedNode, nodeSelected)}
+        nodeCanvasObject={(node, ctx) => paintNode(node, ctx, hoverNode, selectedNode, nodeSelected, previouslySelectedNodes)}
         nodeCanvasObjectMode={node => 'replace'}
         nodeVal = { node => {
           if ( selectedLayout.layout === TOP_DOWN.layout ){
