@@ -1,15 +1,27 @@
-# node-sass 4.14.1 requires node version <= 14 for Alpine Linux
-# See: https://github.com/sass/node-sass/releases/tag/v4.14.1
-FROM node:16-alpine as build-deps
-WORKDIR /usr/src/app
-RUN pwd && ls
-COPY yarn.lock ./
+ARG NODE_PARENT=node:16-alpine
+
+FROM  ${NODE_PARENT} as frontend
+
+ENV BUILDDIR=/app
+
+RUN apk add git
+RUN npm i -g @craco/craco
+
+WORKDIR ${BUILDDIR}
+COPY package.json ${BUILDDIR}
+COPY yarn.lock ${BUILDDIR}
+COPY nginx/default.conf ${BUILDDIR}
+
 RUN yarn install
-COPY . ./
+COPY . ${BUILDDIR}
 RUN yarn build
 
-COPY public/ ./public/
-COPY src/ ./src/
+FROM nginx:1.19.3-alpine
 
-EXPOSE 3000
-CMD yarn run start
+RUN cat /etc/nginx/conf.d/default.conf
+
+COPY --from=frontend /app/default.conf  /etc/nginx/conf.d/default.conf
+
+COPY --from=frontend /app/build /usr/share/nginx/html/
+
+EXPOSE 80
