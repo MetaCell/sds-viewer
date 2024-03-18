@@ -55,7 +55,7 @@ const FileDetails = (props) => {
 
                 {filePropertiesModel?.map( property => {
                     if ( property.visible ){
-                        const propValue = node.graph_node.attributes[property.property];
+                        const propValue = node?.tree_node?.[property.property] || node?.graph_node?.attributes?.[property.property];
                         if ( isValidUrl(propValue) ){
                             return (<Box className="tab-content-row">
                                 <Typography component="label">{property.label}</Typography>

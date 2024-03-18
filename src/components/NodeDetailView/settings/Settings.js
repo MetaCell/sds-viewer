@@ -1,14 +1,9 @@
-import { Box, Button, Typography } from "@material-ui/core";
+import React from "react";
+import { Box, Button } from "@material-ui/core";
 import SettingsGroup from "./SettingsGroup";
-import FolderIcon from "@material-ui/icons/Folder";
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleSettingsPanelVisibility } from '../../../redux/actions';
-import React, {useEffect, useState} from "react";
-import {DragDropContext, Droppable} from "react-beautiful-dnd";
-import SettingsListItems from "./SettingsListItems";
-
-
-const Settings = props => {
+const Settings = () => {
   const dispatch = useDispatch();
   const showSettingsContent = useSelector(state => state.sdsState.settings_panel_visible);
   const metaDataPropertiesModel = useSelector(state => state.sdsState.metadata_model);

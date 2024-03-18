@@ -6,9 +6,7 @@ import {
 import SimpleLinkedChip from './Views/SimpleLinkedChip';
 import SimpleLabelValue from './Views/SimpleLabelValue';
 import Links from './Views/Links';
-import {  simpleValue } from './utils';
 import { detailsLabel } from '../../../constants';
-import { rdfTypes } from "../../../utils/graphModel";
 import { isValidUrl } from './utils';
 import {useDispatch, useSelector} from 'react-redux'
 import {useEffect} from "react";
@@ -73,7 +71,7 @@ const SubjectDetails = (props) => {
                         if ( property.isGroup ){
                             return (<Box className="tab-content-row">
                                         <Typography component="label">{property.label}</Typography>
-                                        <SimpleLinkedChip chips={[{ value : node.graph_node.attributes[property.property]}]} node={getGroupNode(node.graph_node.attributes[property.property][0], node)} />
+                                        <SimpleLinkedChip chips={[{ value : node.graph_node.attributes[property.property]}]} node={getGroupNode(node.graph_node.attributes[property.property]?.[0], node)} />
                                     </Box>)
                         }
 

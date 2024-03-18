@@ -132,6 +132,7 @@ const InstancesTreeView = (props) => {
         <StyledTreeItem
           dataset={treeItemData?.dataset_id}
           nodeId={treeItemData?.id}
+          id={treeItemData?.id}
           labelText={treeItemData?.text}
           labelIcon={labelProps?.labelIcon}
           labelInfo={itemLength}
@@ -145,6 +146,19 @@ const InstancesTreeView = (props) => {
   };
 
   const treeRef = React.createRef();
+  const openSpecificTreeItem = (itemId) => {
+    const node = window.datasets[dataset_id].splinter.tree_map.get(itemId);
+    if (node && node.path !== undefined) {
+      setNodes(node.path);
+      // Dispatch onNodeSelect action to select the specific tree item
+      dispatch(selectInstance({
+        dataset_id: dataset_id,
+        graph_node: node?.graph_reference?.id,
+        tree_node: node?.id,
+        source: TREE_SOURCE
+      }));
+    }
+  };
 
   return (
     <>

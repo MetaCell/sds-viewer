@@ -337,7 +337,7 @@ class Splinter {
         } else {
             this.nodes.set(node.id, {
                 id: node.id,
-                attributes: {},
+                attributes: {publishedURI : ""},
                 types: [],
                 name: node.value,
                 proxies: [],
@@ -710,11 +710,11 @@ class Splinter {
                     }
                 }
 
-                if (node.attributes?.relativePath !== undefined) {
+                if (node.tree_reference?.dataset_relative_path !== undefined) {
                     node.attributes.publishedURI = 
-                        Array.from(this.nodes)[0][1].attributes.hasUriPublished[0]?.replace("datasets", "file") + 
-                        "/1?path=files/" +
-                        node.attributes?.relativePath;
+                        [Array.from(this.nodes)[0][1].attributes.hasUriPublished[0] + 
+                        "?datasetDetailsTab=files&path=files/" +
+                        node.tree_reference?.dataset_relative_path];
                 }
             }
 
@@ -754,9 +754,9 @@ class Splinter {
 
                 if (node.tree_reference?.dataset_relative_path !== undefined) {
                     node.attributes.publishedURI = 
-                        Array.from(this.nodes)[0][1].attributes.hasUriPublished[0]?.replace("datasets", "file") + 
-                        "/1?path=files/" +
-                        node.tree_reference?.dataset_relative_path;
+                        [Array.from(this.nodes)[0][1].attributes.hasUriPublished[0] + 
+                        "?datasetDetailsTab=files&path=files/" +
+                        node.tree_reference?.dataset_relative_path];
                 }
             }
 
@@ -780,9 +780,9 @@ class Splinter {
 
                 if (node.attributes?.relativePath !== undefined) {
                     node.attributes.publishedURI = 
-                        Array.from(this.nodes)[0][1].attributes.hasUriPublished[0]?.replace("datasets", "file") + 
-                        "/1?path=files/" +
-                        node.attributes?.relativePath;
+                        Array.from(this.nodes)[0][1].attributes.hasUriPublished[0] + 
+                        "?datasetDetailsTab=files&path=files/" +
+                        node.attributes?.relativePath;  
                 }
             }
 
@@ -985,9 +985,14 @@ class Splinter {
 
         // generate the Graph
         this.forced_nodes = Array.from(this.nodes).map(([key, value]) => {
-            let tree_node = this.tree_map.get(value.id);
+            const id = value?.id?.match(/https?:\/\/[^\s]+/)?.[0] || "";
+            let tree_node = this.tree_map.get(id);
             if (tree_node) {
                 value.tree_reference = tree_node;
+                tree_node.publishedURI = 
+                    Array.from(this.nodes)[0][1].attributes.hasUriPublished[0]?.replace("datasets", "file") + 
+                    "/1?path=files/" +
+                    tree_node?.dataset_relative_path;
                 this.nodes.set(key, value);
                 tree_node.graph_reference = value;
                 this.tree_map.set(value.id, tree_node);
@@ -995,6 +1000,10 @@ class Splinter {
                 value.proxies.every(proxy => {
                     tree_node = this.tree_map.get(proxy);
                     if (tree_node) {
+                        tree_node.publishedURI = 
+                            Array.from(this.nodes)[0][1].attributes.hasUriPublished[0]?.replace("datasets", "file") + 
+                            "/1?path=files/" +
+                            tree_node?.dataset_relative_path;
                         value.tree_reference = tree_node;
                         this.nodes.set(key, value);
                         tree_node.graph_reference = value;
