@@ -127,7 +127,10 @@ export const rdfTypes = {
                 "key": "title",
                 "property": "title",
                 "label": "Title",
-                "visible" : true
+                "visible" : true,
+                "link" : {
+                    "property" : "hasUriPublished"
+                }
             },
             {
                 "type": "rdfs",

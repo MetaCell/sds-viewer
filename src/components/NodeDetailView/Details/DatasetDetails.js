@@ -28,10 +28,19 @@ const DatasetDetails = (props) => {
                 {datasetPropertiesModel?.map( property => {
                     if ( property.visible ){
                         const propValue = node.graph_node.attributes[property.property]?.[0];
+
+                        if ( property.link ){
+                            const value = node.graph_node.attributes[property.link.property]?.[0];
+                            return (<Box className="tab-content-row">
+                                <Typography component="label">{property.label}</Typography>
+                                <Links key={`detail_links_dataset`} href={value} title={propValue} />
+                            </Box>)
+                        }
+
                         if ( isValidUrl(propValue) ){
                             return (<Box className="tab-content-row">
                                 <Typography component="label">{property.label}</Typography>
-                                <Links key={`detail_links_dataset`} href={propValue} title={property.label + " Link"} />
+                                <Links key={`detail_links_dataset`} href={propValue} title={property.label} />
                             </Box>)
                         }
 
