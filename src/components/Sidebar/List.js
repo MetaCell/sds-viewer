@@ -2,14 +2,11 @@ import React, {useEffect} from 'react';
 import {Box, IconButton} from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import InstancesTreeView from './TreeView/InstancesTreeView';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import SearchRoundedIcon from '@material-ui/icons/SearchRounded';
-import {selectInstance} from "../../redux/actions";
-import {TREE_SOURCE} from "../../constants";
 
 const SidebarContent = (props) => {
   const { expand, setExpand, searchTerm } = props;
-    const dispatch = useDispatch();
 
   const datasets = useSelector((state) => state.sdsState.datasets);
   const nodeSelected = useSelector((state) => state.sdsState.instance_selected);

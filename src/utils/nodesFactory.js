@@ -151,6 +151,12 @@ const Protocol = function (node, ttlTypes) {
 const Sample = function (node, ttlTypes) {
     node.img = createImage(node);
     extractProperties(node, ttlTypes);
+    if (node.attributes?.identifier !== undefined) {
+        node.name = node.attributes?.identifier[0];
+    } else {
+        let namesArray = node.name.split("/");
+        node.name = namesArray[namesArray.length - 1];
+    }
     return node;
 };
 

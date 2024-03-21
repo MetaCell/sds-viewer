@@ -13,6 +13,7 @@ import DatasetDetails from './Details/DatasetDetails';
 import SubjectDetails from './Details/SubjectDetails';
 import ProtocolDetails from './Details/ProtocolDetails';
 import GroupDetails from './Details/GroupDetails';
+import CollectionDetails from './Details/CollectionDetails'
 import Settings from "./settings/Settings"
 var DetailsFactory = function () {
     this.createDetails = function (node) {
@@ -63,7 +64,7 @@ const Collection = function (node) {
     nodeDetail.getHeader = () => {
         return (
             <>
-                {/* <CollectionHeader node={node} /> */}
+                <CollectionHeader node={node} />
             </>
         )
     };
@@ -71,7 +72,7 @@ const Collection = function (node) {
     nodeDetail.getDetail = () => {
         return (
             <>
-                {/* <CollectionDetails node={node} /> */}
+                <CollectionDetails node={node} />
             </>
         )
     };
@@ -79,8 +80,8 @@ const Collection = function (node) {
     nodeDetail.getAll = () => {
         return (
             <>
-                {/* <CollectionHeader node={node} />
-                <CollectionDetails node={node} /> */}
+                <CollectionHeader node={node} />
+                <CollectionDetails node={node} />
             </>
         )
     }
