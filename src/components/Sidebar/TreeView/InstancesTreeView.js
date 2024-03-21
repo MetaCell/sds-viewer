@@ -138,7 +138,7 @@ const InstancesTreeView = (props) => {
         : { labelIcon: FILE, iconClass: 'file' };
       return (
         <StyledTreeItem
-          dataset={treeItemData?.dataset_id}
+          dataset={dataset_id}
           nodeId={treeItemData?.id}
           id={treeItemData?.id}
           labelText={treeItemData?.text}

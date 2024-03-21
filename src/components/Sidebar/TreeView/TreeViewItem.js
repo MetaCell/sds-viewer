@@ -31,7 +31,7 @@ const StyledTreeItem = (props) => {
             variant="body2" 
             className="labelText">
             {labelText}
-            {props.iconClass === 'file' ? <IconButton onClick={event => {
+            {window.datasets[dataset].splinter.tree_map.get(props.nodeId)?.graph_reference?.attributes?.publishedURI != undefined ? <IconButton onClick={event => {
                 onNodeSelect(event, props.nodeId, true);
                 event.preventDefault();
             }}><OpenInNewRounded /></IconButton> : null}
