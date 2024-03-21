@@ -19,13 +19,11 @@ const {
   whiteColor,
   outlinedButtonHover,
   primaryBgColor,
-  inputTextColor,
   scrollbarBg,
   iconButtonHover,
   primaryTransition,
   fontFamily,
   barSuccessColor,
-  noInstanceColor,
   gutter,
   errorColor,
   tabsBgColor,
@@ -636,6 +634,16 @@ const theme = createTheme({
                   fontSize: 0,
                   backgroundImage: `url(${FILE})`,
                 },
+                '& .labelText': {
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+
+                  '& .MuiSvgIcon-root': {
+                    fontSize: '.875rem',
+                    color: grey50
+                  }
+                }
               },
               '& .folder': {
                 '& .labelIcon': {

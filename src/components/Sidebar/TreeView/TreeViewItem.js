@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { TreeItem } from "@material-ui/lab";
-import { Typography, Box } from "@material-ui/core";
+import {Typography, Box, IconButton} from "@material-ui/core";
 import DOWN from "../../../images/tree/down.svg";
+import {OpenInNewRounded} from "@material-ui/icons";
 
 const StyledTreeItem = (props) => {
   const {
@@ -30,6 +31,10 @@ const StyledTreeItem = (props) => {
             variant="body2" 
             className="labelText">
             {labelText}
+            {props.iconClass === 'file' ? <IconButton onClick={event => {
+                onNodeSelect(event, props.nodeId, true);
+                event.preventDefault();
+            }}><OpenInNewRounded /></IconButton> : null}
           </Typography>
           {labelInfo > 0 ? (
             <Typography

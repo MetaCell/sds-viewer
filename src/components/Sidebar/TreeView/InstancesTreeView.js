@@ -20,22 +20,31 @@ const InstancesTreeView = (props) => {
   const [items, setItems] = useState(datasets);
   const widgets = useSelector(state => state.widgets);
 
-  const onNodeSelect = (e, nodeId) => {
+  const onNodeSelect = (e, nodeId, isOpenFile = false) => {
     const node = window.datasets[dataset_id].splinter.tree_map.get(nodeId);
-    dispatch(selectInstance({
-      dataset_id: dataset_id,
-      graph_node: node?.graph_reference?.id,
-      tree_node: node?.id,
-      source: TREE_SOURCE
-    }));
-    if (widgets[dataset_id] !== undefined) {
-      widgets[dataset_id].status = WidgetStatus.ACTIVE;
-      dispatch(layoutActions.updateWidget(widgets[dataset_id]));
+
+    if (isOpenFile) {
+      const publishedURI = node.graph_reference?.attributes?.publishedURI;
+      if (publishedURI) {
+        window.open(publishedURI, '_blank');
+      }
+    } else {
+      dispatch(selectInstance({
+        dataset_id: dataset_id,
+        graph_node: node?.graph_reference?.id,
+        tree_node: node?.id,
+        source: TREE_SOURCE
+      }));
+      if (widgets[dataset_id] !== undefined) {
+        widgets[dataset_id].status = WidgetStatus.ACTIVE;
+        dispatch(layoutActions.updateWidget(widgets[dataset_id]));
+      }
+      if (widgets[dataset_id] !== undefined) {
+        widgets[dataset_id].status = WidgetStatus.ACTIVE;
+        dispatch(layoutActions.updateWidget(widgets[dataset_id]));
+      }
     }
-    if (widgets[dataset_id] !== undefined) {
-      widgets[dataset_id].status = WidgetStatus.ACTIVE;
-      dispatch(layoutActions.updateWidget(widgets[dataset_id]));
-    }
+
   };
 
   const onNodeToggle = (e, nodeIds) => {
@@ -127,7 +136,6 @@ const InstancesTreeView = (props) => {
         { labelIcon: DATASET, iconClass: 'dataset' }
         : itemLength > 0 ? { labelIcon: FOLDER, iconClass: 'folder' }
         : { labelIcon: FILE, iconClass: 'file' };
-
       return (
         <StyledTreeItem
           dataset={treeItemData?.dataset_id}
@@ -146,19 +154,6 @@ const InstancesTreeView = (props) => {
   };
 
   const treeRef = React.createRef();
-  const openSpecificTreeItem = (itemId) => {
-    const node = window.datasets[dataset_id].splinter.tree_map.get(itemId);
-    if (node && node.path !== undefined) {
-      setNodes(node.path);
-      // Dispatch onNodeSelect action to select the specific tree item
-      dispatch(selectInstance({
-        dataset_id: dataset_id,
-        graph_node: node?.graph_reference?.id,
-        tree_node: node?.id,
-        source: TREE_SOURCE
-      }));
-    }
-  };
 
   return (
     <>
