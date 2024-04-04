@@ -39,7 +39,7 @@ const GraphViewer = (props) => {
   const [selectedNode, setSelectedNode] = useState(null);
   const [highlightNodes, setHighlightNodes] = useState(new Set());
   const [highlightLinks, setHighlightLinks] = useState(new Set());
-  const [selectedLayout, setSelectedLayout] = React.useState(TOP_DOWN);
+  const [selectedLayout, setSelectedLayout] = React.useState(LEFT_RIGHT);
   const [layoutAnchorEl, setLayoutAnchorEl] = React.useState(null);
   const open = Boolean(layoutAnchorEl);
   const [loading, setLoading] = React.useState(false);
