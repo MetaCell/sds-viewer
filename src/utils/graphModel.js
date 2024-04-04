@@ -123,9 +123,9 @@ export const rdfTypes = {
         "key": "Dataset",
         "properties": [
             {
-                "type": "dc",
-                "key": "title",
-                "property": "title",
+                "type": "rdfs",
+                "key": "label",
+                "property": "label",
                 "label": "Title",
                 "visible" : true,
                 "link" : {
@@ -133,11 +133,11 @@ export const rdfTypes = {
                 }
             },
             {
-                "type": "rdfs",
-                "key": "label",
-                "property": "label",
+                "type": "dc",
+                "key": "title",
+                "property": "title",
                 "label": "Label",
-                "visible" : true
+                "visible" : false
             },
             {
                 "type": "dc",
