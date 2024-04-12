@@ -428,6 +428,13 @@ export const rdfTypes = {
                 "label": "Status",
                 "visible" : true
             },
+            {
+                "type": "TEMP",
+                "key": "publishedURI",
+                "property": "publishedURI",
+                "label": "Find in SPARC Portal",
+                "visible" : true
+            }
         ]
     },
     "Subject": {
