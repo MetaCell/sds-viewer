@@ -7,7 +7,8 @@ import {
   ListItemText,
   ListItem,
   ListItemSecondaryAction,
-  IconButton
+  IconButton,
+  Tooltip
 } from "@material-ui/core";
 import ReorderIcon from "@material-ui/icons/Reorder";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
@@ -66,15 +67,17 @@ const SettingsItem = props => {
           onClick={toggleItemDisabled}
           disableRipple
         >
-          {!item.visible ? (
-            <AddCircleOutlineIcon
-              style={{ color: "#3779E1", fontSize: "1rem" }}
-            />
-          ) : (
-            <RemoveCircleOutlineIcon
-              style={{ color: "#ED745D", fontSize: "1rem" }}
-            />
-          )}
+          <Tooltip id={item.label} title={"Toggle Property Visibility"}>
+            {!item.visible ? (
+              <AddCircleOutlineIcon
+                style={{ color: "#3779E1", fontSize: "1rem" }}
+              />
+            ) : (
+              <RemoveCircleOutlineIcon
+                style={{ color: "#ED745D", fontSize: "1rem" }}
+              />
+            )}
+          </Tooltip>
         </IconButton>
       </ListItemSecondaryAction>
     </ListItem>

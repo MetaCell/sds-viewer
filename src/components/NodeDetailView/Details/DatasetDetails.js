@@ -2,7 +2,9 @@ import {
     Box,
     Typography,
     Divider,
+    IconButton
 } from "@material-ui/core";
+import { useState, useEffect } from "react";
 import Links from './Views/Links';
 import SimpleLinkedChip from './Views/SimpleLinkedChip';
 import SimpleLabelValue from './Views/SimpleLabelValue';
@@ -10,11 +12,23 @@ import { detailsLabel } from '../../../constants';
 import { isValidUrl } from './utils';
 import { useSelector } from 'react-redux'
 import {DatasetIcon} from "../../../images/Icons";
+import FileCopyIcon from '@material-ui/icons/FileCopy';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const DatasetDetails = (props) => {
     const { node } = props;
-
     const datasetPropertiesModel = useSelector(state => state.sdsState.metadata_model.dataset);
+    const [copiedDOI, setCopiedDOI] = useState({});
+
+    useEffect( () => {
+        let properties = {};
+        datasetPropertiesModel?.map( property => {
+            if ( property.link ){
+                properties[property.label] =false;
+            }
+        });
+        setCopiedDOI(properties)
+    }, [] );
 
     return (
         
@@ -33,7 +47,25 @@ const DatasetDetails = (props) => {
                             const value = node.graph_node.attributes[property.link.property]?.[0];
                             return (<Box className="tab-content-row">
                                 <Typography component="label">{property.label}</Typography>
-                                <Links key={`detail_links_dataset`} href={value} title={propValue} />
+                                <Box className='title-container'>
+                                    <Tooltip
+                                        open={copiedDOI[property.label]}
+                                        title="DOI Copy"
+                                    >
+                                        <IconButton
+                                            color="primary"
+                                            size="small"
+                                            aria-label="Copy Content"
+                                            onClick={() => {
+                                                navigator.clipboard.writeText(value);
+                                                const newClipboardState = { ...copiedDOI, [property.label] : true};
+                                                setCopiedDOI(newClipboardState)
+                                            }}>
+                                            <FileCopyIcon size="small"/>
+                                        </IconButton>
+                                    </Tooltip>
+                                    <Links key={`detail_links_dataset`} href={value} title={propValue} />
+                                </Box>
                             </Box>)
                         }
 
