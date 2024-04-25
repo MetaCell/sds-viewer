@@ -1,5 +1,6 @@
 import React, {useCallback} from 'react';
 import { rdfTypes } from './graphModel';
+import { current } from '@reduxjs/toolkit';
 
 export const NODE_FONT = '500 5px Inter, sans-serif';
 export const ONE_SECOND = 1000;
@@ -38,7 +39,7 @@ export const RADIAL_OUT = {
   }
 };
 
-export const nodeSpace = 50;
+export const nodeSpace = 60;
 
 /**
  * Create background for Nodes on Graph Viewer.
@@ -173,6 +174,88 @@ export const collapseSubLevels = (node, collapsed, children) => {
     });
 }
 
+export const determineNodePosition = (positionsMap, levels, n, targetCoord) => {
+  let position = positionsMap[n.level];
+  let found = false;
+  let space = 1;
+  let currentNodeIndex = levels[n.level]?.findIndex(node => node.id === n.id );
+  levels[n.level]?.forEach( (n, index) => {
+    let nodeNeighbors = n?.neighbors?.filter(neighbor => { return neighbor.level > n.level });
+    sortArray(nodeNeighbors)
+    if ( nodeNeighbors?.length > 0 && !found && currentNodeIndex < index && !n.collapsed) {
+      const middleNode = nodeNeighbors[Math.floor(nodeNeighbors.length/2)];
+      position = middleNode?.[targetCoord];
+      found = true;
+      space = index;
+     
+    }
+  })
+
+  let newPosition = position  + ( nodeSpace * space);
+  if ( found) {
+    space = -1 * ((space - currentNodeIndex));
+    newPosition = position  + ( nodeSpace  * space);
+  }
+    let neighbors = n.parent.neighbors;
+    sortArray(neighbors)
+    const parentIndex = neighbors?.findIndex( node => node.id === n.id );
+      let nearestParentNeighbor = null;
+      let nearestParentNeighborIndex = 0;
+      let leftMatch = false;
+      let leftMatchIndex = 0;
+      levels[n.level]?.forEach( ( node, index ) => {
+        if ( leftMatch && nearestParentNeighbor == null && node.type == "Collection") {
+          nearestParentNeighbor = node;
+          nearestParentNeighborIndex = index;
+        }
+
+        if ( !leftMatch && node.id === n.id && node.type == "Collection") {
+          leftMatch = true;
+          leftMatchIndex = index -1;
+          if ( leftMatchIndex < 0 ) {
+            leftMatchIndex = 0;
+          }
+        }
+      })
+      let nodesInBetween  =  Math.floor((( neighbors?.length - 1) + ( nearestParentNeighbor?.neighbors?.length - 1)) /2 );
+      if ( !isNaN(nodesInBetween) ) {
+        newPosition = newPosition + ( (levels[n.level].findIndex(node => node.id == n.id) - leftMatchIndex) * nodeSpace)
+        positionsMap[n.level] = newPosition;
+      }  else {
+        positionsMap[n.level] = newPosition;
+      }
+
+  return newPosition
+}
+
+const sortArray = (arrayToSort) => {
+  arrayToSort?.sort( (a, b) => { 
+    if ( a?.attributes?.relativePath && b?.attributes?.relativePath) {
+      let aParent = a;
+      let aPath= "";
+      while ( aParent?.type != "Subject" ){
+        aParent = aParent.parent;
+        if ( aParent?.attributes?.relativePath ){
+          aPath = aPath + "/" + aParent?.attributes?.relativePath
+        }
+      }
+      let bParent = b;
+      let bPath = ""
+      while ( bParent?.type != "Subject" ){
+        bParent = bParent.parent;
+        if ( bParent?.attributes?.relativePath ){
+          bPath = bPath + "/" +bParent?.attributes?.relativePath
+        }
+      }
+      aPath = (aParent?.id ) + "/" +  aPath
+      bPath = (bParent?.id ) + "/" +  bPath
+      return aPath.localeCompare(bPath);
+    } else {
+      return a?.id.localeCompare(b.id);
+    }
+  });
+}
+
 /**
  * Algorithm used to position nodes in a Tree. Position depends on the layout, 
  * either Tree or Vertical Layout views.
@@ -187,11 +270,8 @@ export const algorithm = (levels, layout, furthestLeft) => {
     levelsMapKeys.forEach( level => {
       furthestLeft =  0 - (Math.ceil(levels[level].length)/2  * nodeSpace ); 
       positionsMap[level] = furthestLeft + nodeSpace;
-      levels[level]?.sort( (a, b) => { 
-        if (a?.id < b?.id) return -1;
-        else return 1;
-      });        
-    });
+      sortArray(levels[level]);    
+    });    
 
     // Start assigning the graph from the bottom up
     let neighbors = 0;
@@ -217,42 +297,42 @@ export const algorithm = (levels, layout, furthestLeft) => {
                   } else if ( layout === LEFT_RIGHT.layout ) {
                     n.yPos = min === max ? min : min + ((max - min) * .5);
                   }
-                  positionsMap[n.level] = n.yPos + nodeSpace;
+                  // positionsMap[n.level] = n.yPos + nodeSpace;
                   if ( notcollapsedInLevel?.length > 0 && collapsedInLevel.length > 0) {
                     updateConflictedNodes(levels[level], n, positionsMap, level, index, layout);
                   }
                   
                   if ( layout === TOP_DOWN.layout ) {
-                    positionsMap[n.level] = n.xPos + nodeSpace;
                     n.fx = n.xPos;
                     n.fy = 50 * n.level;
+                    positionsMap[n.level] = n.xPos + nodeSpace;
                   } else if ( layout === LEFT_RIGHT.layout ) {
-                    positionsMap[n.level] = n.yPos + nodeSpace;
                     n.fy = n.yPos;
                     n.fx = 50 * n.level;
+                    positionsMap[n.level] = n.yPos + nodeSpace;
                   }
               } else {
                 if ( layout === TOP_DOWN.layout ) {
-                  n.xPos = positionsMap[n.level] + nodeSpace;
-                  positionsMap[n.level] = n.xPos;
+                  let position = determineNodePosition(positionsMap, levels, n, "xPos");
+                  n.xPos = position;
                   n.fx = n.xPos;
                   n.fy = 50 * n.level;
                 } else if ( layout === LEFT_RIGHT.layout ) {
-                  n.yPos = positionsMap[n.level] + nodeSpace;
-                  positionsMap[n.level] = n.yPos;
+                  let position = determineNodePosition(positionsMap, levels, n, "yPos");
+                  n.yPos = position;
                   n.fy = n.yPos;
                   n.fx = 50 * n.level;
                 }
               }
           }else {
             if ( layout === TOP_DOWN.layout ) {
-              n.xPos = positionsMap[n.level] + nodeSpace;
-              positionsMap[n.level] = n.xPos;
+              let position = determineNodePosition(positionsMap, levels, n, "xPos");
+              n.xPos = position;
               n.fx = n.xPos;
               n.fy = 50 * n.level;
             } else if ( layout === LEFT_RIGHT.layout ) {
-              n.yPos = positionsMap[n.level] + nodeSpace;
-              positionsMap[n.level] = n.yPos;
+              let position = determineNodePosition(positionsMap, levels, n, "yPos");
+              n.yPos = position;
               n.fy = n.yPos;
               n.fx = 50 * n.level;
             }
