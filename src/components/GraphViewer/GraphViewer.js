@@ -241,7 +241,6 @@ const GraphViewer = (props) => {
         setSelectedNode(nodeSelected);
         handleNodeHover(nodeSelected);
         graphRef?.current?.ggv?.current.centerAt(nodeSelected.x, nodeSelected.y, 10);
-        //graphRef?.current?.ggv?.current.zoom(2, ONE_SECOND);
       } else {
         handleNodeHover(nodeSelected);
       }

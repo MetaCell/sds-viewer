@@ -938,12 +938,6 @@ class Splinter {
         const new_node = this.buildNodeFromJson(node, level);
         new_node.parent = parent;
 
-        // if ( new_node?.type === "File" || new_node?.type === "Collection" ) {
-        //     new_node.id = parent?.id + new_node?.attributes.identifier;
-        //     console.log("new_node.id " , new_node)
-        //     node.remote_id = new_node?.id;
-
-        // }
         this.forced_edges.push({
             source: parent?.id,
             target: new_node?.id
