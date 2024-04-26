@@ -74,27 +74,6 @@ export const rdfTypes = {
                 "property": "timestamp_updated",
                 "label": "Updated On",
                 "visible" : true
-            },
-            {
-                "type": "TEMP",
-                "key": "uri_human",
-                "property": "uri_human",
-                "label": "URI Link",
-                "visible" : false
-            },
-            {
-                "type": "TEMP",
-                "key": "uri_api",
-                "property": "uri_api",
-                "label": "URI API",
-                "visible" : true
-            },
-            {
-                "type": "TEMP",
-                "key": "publishedURI",
-                "property": "publishedURI",
-                "label": "Published URI",
-                "visible" : true
             }
         ]
     },
@@ -207,7 +186,10 @@ export const rdfTypes = {
                 "key": "hasDoi",
                 "property": "hasDoi",
                 "label": "DOI",
-                "visible" : true
+                "visible" : true,
+                "link" : {
+                    "property" : "hasUriPublished"
+                }
             },
             {
                 "type": "TEMP",
@@ -234,7 +216,7 @@ export const rdfTypes = {
                 "type": "TEMP",
                 "key": "hasUriHuman",
                 "property": "hasUriHuman",
-                "label": "URI Human",
+                "label": "Pensieve Link",
                 "visible" : true
             },
             {
@@ -277,7 +259,7 @@ export const rdfTypes = {
                 "key": "hasUriApi",
                 "property": "hasUriApi",
                 "label": "URI API",
-                "visible" : true
+                "visible" : false
             },
             {
                 "type": "TEMP",
@@ -290,7 +272,7 @@ export const rdfTypes = {
                 "type": "TEMP",
                 "key": "hasUriHuman",
                 "property": "hasUriHuman",
-                "label": "URI Human",
+                "label": "Pennsieve Dataset Link",
                 "visible" : true
             },
             {
@@ -340,7 +322,7 @@ export const rdfTypes = {
                 "key": "hasPathErrorReport",
                 "property": "hasPathErrorReport",
                 "label": "Path Error Report",
-                "visible" : true
+                "visible" : false
             },
             {
                 "type": "TEMP",
@@ -427,13 +409,6 @@ export const rdfTypes = {
             },
             {
                 "type": "TEMP",
-                "key": "publishedURI",
-                "property": "publishedURI",
-                "label": "Published URI",
-                "visible" : true
-            },
-            {
-                "type": "TEMP",
                 "key": "uri_human",
                 "property": "uri_human",
                 "label": "URI Link",
@@ -444,7 +419,7 @@ export const rdfTypes = {
                 "key": "uri_api",
                 "property": "uri_api",
                 "label": "URI API",
-                "visible" : true
+                "visible" : false
             },
             {
                 "type": "TEMP",
@@ -453,6 +428,13 @@ export const rdfTypes = {
                 "label": "Status",
                 "visible" : true
             },
+            {
+                "type": "TEMP",
+                "key": "publishedURI",
+                "property": "publishedURI",
+                "label": "Find in SPARC Portal",
+                "visible" : true
+            }
         ]
     },
     "Subject": {
@@ -581,12 +563,71 @@ export const rdfTypes = {
                 "property": "participantInPerformanceOf",
                 "label": "Participant In Performance Of",
                 "visible" : true
+            }
+        ],
+        "additional_properties": [
+            {
+                "label": "Age unit",
+                "property": "ageUnit",
+                "path": [ "TEMP:hasAge", "TEMP:hasUnit", "@id" ],
+                "trimType": "unit:",
+                "type": "string"
+            },
+            {
+                "label": "Age value",
+                "property": "ageValue",
+                "path": [ "TEMP:hasAge", "rdf:value" ],
+                "innerPath": "@value",
+                "trimType": "",
+                "type": "digit"
+            },
+            {
+                "label": "Age base unit",
+                "property": "ageBaseUnit",
+                "path": [ "TEMP:hasAge", "TEMP:asBaseUnits", "TEMP:hasUnit", "@id" ],
+                "trimType": "unit:",
+                "type": "string"
+            },
+            {
+                "label": "Age base value",
+                "property": "ageBaseValue",
+                "path": [ "TEMP:hasAge", "TEMP:asBaseUnits", "rdf:value" ],
+                "innerPath": "@value",
+                "trimType": "",
+                "type": "digit"
+            },
+            {
+                "label": "Weight unit",
+                "property": "weightUnit",
+                "path": [ "sparc:animalSubjectHasWeight", "TEMP:hasUnit", "@id" ],
+                "trimType": "unit:",
+                "type": "string"
+            },
+            {
+                "label": "Weight value",
+                "property": "weightValue",
+                "path": [ "sparc:animalSubjectHasWeight", "rdf:value", "@value" ],
+                "trimType": "",
+                "type": "digit"
+            }
+        ]
+    },
+    "Performance": {
+        "image": "./images/graph/folder.svg",
+        "key": "Performance",
+        "properties": [
+            {
+                "type": "TEMP",
+                "key": "localId",
+                "property": "localId",
+                "label": "Label",
+                "visible" : true
             },
             {
                 "type": "TEMP",
-                "key": "publishedURI",
-                "property": "publishedURI",
-                "label": "Published URI",
+                "key": "participantInPerformanceOf",
+                "property": "participantInPerformanceOf",
+                "label": "Participant In Performance Of",
                 "visible" : true
             }
         ],
@@ -724,13 +765,6 @@ export const rdfTypes = {
                 "property": "participantInPerformanceOf",
                 "label": "Participant in Performance Of",
                 "visible" : true
-            },
-            {
-                "type": "TEMP",
-                "key": "publishedURI",
-                "property": "publishedURI",
-                "label": "Published URI",
-                "visible" : true
             }
         ]
     },
@@ -826,7 +860,10 @@ export const rdfTypes = {
                 "key": "hasDoi",
                 "property": "hasDoi",
                 "label": "DOI",
-                "visible" : true
+                "visible" : true,
+                "link" : {
+                    "property" : "hasUriPublished"
+                }
             }
         ]
     },
@@ -902,6 +939,24 @@ export const rdfTypes = {
             }
         ]
     },
+    "NamedIndividual": {
+        "image": "./images/graph/files/default_file.svg",
+        "key": "UBERON",
+        "properties": [
+            {
+                "type": "rdfs",
+                "key": "label",
+                "property": "label",
+                "label": "To be filled"
+            },
+            {
+                "type": "TEMP",
+                "key": "hasUriHuman",
+                "property": "hasUriHuman",
+                "label": "To be filled"
+            }
+        ]
+    },
     "Unknown": {
         "image": "./images/graph/files/default_file.svg",
         "key": "Unknown",
@@ -938,7 +993,10 @@ export const typesModel = {
         },
         RRID: {
             "type": "RRID",
-        }
+        },
+        Protocol: {
+            "type": "Protocol"
+        },
     },
     "Class": {
         NCBITaxon: {
@@ -949,7 +1007,10 @@ export const typesModel = {
         },
         UBERON: {
             "type": "UBERON",
-        }
+        },
+        Protocol: {
+            "type": "Protocol"
+        },
     },
     "sparc": {
         Protocol: {

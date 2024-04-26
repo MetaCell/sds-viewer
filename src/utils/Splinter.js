@@ -185,7 +185,6 @@ class Splinter {
         if (this.nodes === undefined || this.edges === undefined) {
             await this.processDataset();
         }
-
         let filteredNodes = this.forced_nodes?.filter( n => n.type !== rdfTypes.UBERON.key && n.type !== rdfTypes.Award.key && !(n.type === rdfTypes.Collection.key && n.children_counter === 0));
         let cleanLinks = [];
         let that = this;
@@ -440,7 +439,6 @@ class Splinter {
         // we might need to display some of its properties, so we merge them.
         let dataset_node = undefined;
         let ontology_node = undefined;
-
         // cast each node to the right type, also keep trace of the dataset and ontology nodes.
         this.nodes.forEach((value, key) => {
             value.type = this.get_type(value);
@@ -696,6 +694,15 @@ class Splinter {
         let nodesToRemove = [];
 
         this.forced_nodes.forEach((node, index, array) => {
+            if (node.type === rdfTypes.Dataset.key) {
+                if (node.attributes?.hasProtocol !== undefined) {
+                    let source = this.nodes.get(node.attributes.hasProtocol[0]);
+                    if ( source !== undefined ) {
+                        node.attributes.hasProtocol[0] = source.attributes.hasDoi?.[0];
+                    }
+                }
+            }
+            
             if (node.type === rdfTypes.Sample.key) {
                 if (node.attributes.derivedFrom !== undefined) {
                     let source = this.nodes.get(node.attributes.derivedFrom[0]);
@@ -710,8 +717,8 @@ class Splinter {
                     }
                 }
 
-                if (node.tree_reference?.dataset_relative_path !== undefined) {
-                    node.attributes.publishedURI = 
+                if (node.attributes?.hasFolderAboutIt !== undefined) {
+                    node.attributes.hasFolderAboutIt = 
                         [Array.from(this.nodes)[0][1].attributes.hasUriPublished[0] + 
                         "?datasetDetailsTab=files&path=files/" +
                         node.tree_reference?.dataset_relative_path];
@@ -752,8 +759,8 @@ class Splinter {
                     }
                 }
 
-                if (node.tree_reference?.dataset_relative_path !== undefined) {
-                    node.attributes.publishedURI = 
+                if (node.attributes?.hasFolderAboutIt !== undefined) {
+                    node.attributes.hasFolderAboutIt = 
                         [Array.from(this.nodes)[0][1].attributes.hasUriPublished[0] + 
                         "?datasetDetailsTab=files&path=files/" +
                         node.tree_reference?.dataset_relative_path];
