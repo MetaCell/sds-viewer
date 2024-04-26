@@ -185,29 +185,31 @@ class Splinter {
         if (this.nodes === undefined || this.edges === undefined) {
             await this.processDataset();
         }
-        let filteredNodes = this.forced_nodes?.filter( n => n.type !== rdfTypes.UBERON.key && n.type !== rdfTypes.Award.key && !(n.type === rdfTypes.Collection.key && n.children_counter === 0));
+        let filteredNodes = [...new Set(this.forced_nodes?.filter( n => n.type !== rdfTypes.UBERON.key && n.type !== rdfTypes.Sample.key && n.type !== rdfTypes.Award.key && !(n.type === rdfTypes.Collection.key && n.children_counter === 0)))]
         let cleanLinks = [];
         let that = this;
+
+        // Count how many subjects each Group has
         filteredNodes?.forEach( n => {
             if ( n.type === rdfTypes.Subject.key ) {
                 let keys = Object.keys(that.groups);
                 keys.forEach( key => {
                     if ( n.attributes ) {
                         if ( n?.attributes[key] ) {
-                            that.groups[key][n.attributes[key][0]].subjects += 1; 
+                            let groupKeys = Object.keys(that.groups[key]);
+                            groupKeys.forEach( groupKey => {
+                                if ( n?.attributes[key][0] === groupKey ) {
+                                    const groupNodes = filteredNodes?.filter(n => n.name == groupKey);
+                                    groupNodes?.forEach( groupNode => {
+                                        if ( n?.id?.includes(groupNode.id) ) {
+                                            groupNode.subjects += 1;
+                                        }
+                                    })
+                                }
+                            })
                         }
                     }
                 })
-            }
-            if ( n.type === rdfTypes.Sample.key ) {
-                let keys = Object.keys(that.groups);
-                keys.forEach( key => {
-                    if ( n.attributes ){
-                        if ( n?.attributes[key] ) {
-                            that.groups[key][n.attributes[key][0]].samples += 1; 
-                        }
-                    }
-                }) 
             }
         })
 
@@ -218,7 +220,7 @@ class Splinter {
             if ( !existingLing ) {
                 const a = this.nodes.get( link.source );
                 const b = this.nodes.get( link.target );
-                if ( a && b && ( a?.type !== rdfTypes.Award.key && b?.type !== rdfTypes.Award.key ) && !((a?.type === rdfTypes.Collection.key && a.children_counter < 1 ) || ( b?.type === rdfTypes.Collection.key && b.children_counter < 1))) {
+                if ( a && b && ( a?.type !== rdfTypes.Award.key && b?.type !== rdfTypes.Award.key ) && ( a?.type !== rdfTypes.Sample.key && b?.type !== rdfTypes.Sample.key ) && !((a?.type === rdfTypes.Collection.key && a.children_counter < 1 ) || ( b?.type === rdfTypes.Collection.key && b.children_counter < 1))) {
                     !a.neighbors && (a.neighbors = []);
                     !b.neighbors && (b.neighbors = []);
                     if ( !a.neighbors.find( n => n.id === b.id )){
@@ -243,6 +245,7 @@ class Splinter {
                 }
             }
         });
+        console.log("This levels map ", this.levelsMap)
         return {
             nodes: filteredNodes,
             links: cleanLinks,
@@ -666,10 +669,10 @@ class Splinter {
                 target_node.parent = protocols;
                 this.nodes.set(target_node.id, target_node);
             } else if (link.source === id && target_node.type === rdfTypes.Sample.key) {
-                link.source = target_node.attributes.derivedFrom[0];
-                target_node.level = subjects.level + 2;
-                target_node.parent = this.nodes.get(target_node.attributes.derivedFrom[0]);
-                this.nodes.set(target_node.id, target_node);
+                // link.source = target_node.attributes.derivedFrom[0];
+                // target_node.level = subjects.level + 2;
+                // target_node.parent = this.nodes.get(target_node.attributes.derivedFrom[0]);
+                // this.nodes.set(target_node.id, target_node);
             }
             let source_node = this.nodes.get(link.source);
             if ( source_node?.childLinks ) {
@@ -774,9 +777,9 @@ class Splinter {
 
                 if (node.attributes?.relativePath !== undefined) {
                     node.attributes.publishedURI = 
-                        Array.from(this.nodes)[0][1].attributes.hasUriPublished[0]?.replace("datasets", "file") + 
-                        "/1?path=files/" +
-                        node.attributes?.relativePath;
+                        Array.from(this.nodes)[0][1].attributes.hasUriPublished[0] + 
+                        "?datasetDetailsTab=files&path=files/" +
+                        node.attributes?.relativePath.substr(0, node.attributes?.relativePath.lastIndexOf("/"));
                 }
             }
 
@@ -793,7 +796,7 @@ class Splinter {
                 }
             }
 
-            if (node.type === rdfTypes.RRID.key || node.type === rdfTypes.NCBITaxon?.key || node.type === rdfTypes.PATO?.key) {
+            if (node.type === rdfTypes.RRID.key || node.type === rdfTypes.Sample.key || node.type === rdfTypes.NCBITaxon?.key || node.type === rdfTypes.PATO?.key) {
                 nodesToRemove.unshift(index);
             }
 
@@ -913,9 +916,9 @@ class Splinter {
 
     buildFolder(item) {
         let copiedItem = {...item};
-        let newName = copiedItem.dataset_relative_path.split('/')[0];
+        const splitName = copiedItem.dataset_relative_path.split('/');
+        let newName = splitName[0];
         copiedItem.parent_id = copiedItem.remote_id;
-        copiedItem.remote_id = copiedItem.basename + '_' + newName;
         copiedItem.uri_api = copiedItem.remote_id;
         copiedItem.basename = newName;
         // copiedItem.basename = copiedItem.remote_id;
@@ -924,20 +927,20 @@ class Splinter {
 
 
     linkToNode(node, parent) {
-        let level = parent.level;
-        if (parent.type === rdfTypes.Sample.key) {
+        let level = parent?.level;
+        if (parent?.type === rdfTypes.Sample.key) {
             if (parent.attributes.derivedFrom !== undefined) {
                 level = this.nodes.get(parent.attributes.derivedFrom[0])?.level + 1;
             }
         }
+        if ( parent ) {
         parent.children_counter++;
         const new_node = this.buildNodeFromJson(node, level);
         new_node.parent = parent;
-        new_node.id = parent.id + new_node.id;
-        node.remote_id = new_node.id;
+
         this.forced_edges.push({
-            source: parent.id,
-            target: new_node.id
+            source: parent?.id,
+            target: new_node?.id
         });
         new_node.childLinks = [];
         new_node.collapsed = new_node.type === typesModel.NamedIndividual.subject.type 
@@ -947,6 +950,7 @@ class Splinter {
             children.forEach(child => {
                 !this.filterNode(child) && this.linkToNode(child, new_node);
             });
+        }
         }
     }
 
@@ -997,9 +1001,9 @@ class Splinter {
             if (tree_node) {
                 value.tree_reference = tree_node;
                 tree_node.publishedURI = 
-                    Array.from(this.nodes)[0][1].attributes.hasUriPublished[0]?.replace("datasets", "file") + 
-                    "/1?path=files/" +
-                    tree_node?.dataset_relative_path;
+                    Array.from(this.nodes)[0][1].attributes.hasUriPublished[0] + 
+                    "?datasetDetailsTab=files&path=files/" +
+                    tree_node?.dataset_relative_path.substr(0, tree_node?.dataset_relative_path.lastIndexOf("/"));
                 this.nodes.set(key, value);
                 tree_node.graph_reference = value;
                 this.tree_map.set(value.id, tree_node);
@@ -1008,9 +1012,9 @@ class Splinter {
                     tree_node = this.tree_map.get(proxy);
                     if (tree_node) {
                         tree_node.publishedURI = 
-                            Array.from(this.nodes)[0][1].attributes.hasUriPublished[0]?.replace("datasets", "file") + 
-                            "/1?path=files/" +
-                            tree_node?.dataset_relative_path;
+                            Array.from(this.nodes)[0][1].attributes.hasUriPublished[0] + 
+                            "?datasetDetailsTab=files&path=files/" +
+                            tree_node?.dataset_relative_path.substr(0, tree_node?.dataset_relative_path.lastIndexOf("/"));
                         value.tree_reference = tree_node;
                         this.nodes.set(key, value);
                         tree_node.graph_reference = value;

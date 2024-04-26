@@ -74,6 +74,13 @@ export const rdfTypes = {
                 "property": "timestamp_updated",
                 "label": "Updated On",
                 "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "publishedURI",
+                "property": "publishedURI",
+                "label": "Find in SPARC Portal",
+                "visible" : true
             }
         ]
     },
@@ -555,7 +562,7 @@ export const rdfTypes = {
                 "key": "hasDerivedInformationAsParticipant",
                 "property": "hasDerivedInformationAsParticipant",
                 "label": "Derived Information as Participant",
-                "visible" : true
+                "visible" : false
             },
             {
                 "type": "TEMP",

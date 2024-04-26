@@ -61,6 +61,9 @@ const GraphViewer = (props) => {
     handleLayoutClose()
     setSelectedLayout(target);
     setForce();
+    setTimeout( () => {
+      resetCamera();
+    },100)
   };
 
   const handleNodeLeftClick = (node, event) => {
@@ -110,6 +113,9 @@ const GraphViewer = (props) => {
     let updatedData = getPrunedTree(props.graph_id, selectedLayout.layout);
     setData(updatedData);
     setCollapsed(!collapsed)
+    setTimeout( () => {
+      resetCamera();
+    },100)
   }
 
   /**
@@ -234,8 +240,7 @@ const GraphViewer = (props) => {
         }
         setSelectedNode(nodeSelected);
         handleNodeHover(nodeSelected);
-        graphRef?.current?.ggv?.current.centerAt(nodeSelected.x, nodeSelected.y, ONE_SECOND);
-        graphRef?.current?.ggv?.current.zoom(2, ONE_SECOND);
+        graphRef?.current?.ggv?.current.centerAt(nodeSelected.x, nodeSelected.y, 10);
       } else {
         handleNodeHover(nodeSelected);
       }
