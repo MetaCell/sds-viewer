@@ -175,57 +175,85 @@ export const collapseSubLevels = (node, collapsed, children) => {
 }
 
 export const determineNodePosition = (positionsMap, levels, n, targetCoord) => {
-  let position = positionsMap[n.level];
-  let found = false;
-  let space = 1;
-  let currentNodeIndex = levels[n.level]?.findIndex(node => node.id === n.id );
-  levels[n.level]?.forEach( (n, index) => {
-    let nodeNeighbors = n?.neighbors?.filter(neighbor => { return neighbor.level > n.level });
-    sortArray(nodeNeighbors)
-    if ( nodeNeighbors?.length > 0 && !found && currentNodeIndex < index && !n.collapsed) {
-      const middleNode = nodeNeighbors[Math.floor(nodeNeighbors.length/2)];
-      position = middleNode?.[targetCoord];
-      found = true;
-      space = index;
-     
+  let nearestParentNeighbor = null;
+  let nearestParentNeighborIndex = 0;
+  let leftParentMatch = false;
+  let firstParentCollection = null;
+  let firstParentCollectionIndex = 0;
+  sortArray(levels[n.level - 1])
+  levels[n.level-1]?.forEach( ( node, index ) => {
+    if ( !leftParentMatch && node.type == "Collection" && node.id !== n.parent.id && !node.collapsed ) {
+      firstParentCollection = node;
+      firstParentCollectionIndex = index;
+    }
+
+    if ( !leftParentMatch && node.id === n.parent.id) {
+      leftParentMatch = true;
+      nearestParentNeighbor = node;
+      nearestParentNeighborIndex = index;
     }
   })
 
-  let newPosition = position  + ( nodeSpace * space);
-  if ( found) {
-    space = -1 * ((space - currentNodeIndex));
-    newPosition = position  + ( nodeSpace  * space);
+  let nodesInBetween  =  Math.floor((( firstParentCollection?.neighbors?.length - 1) + ( nearestParentNeighbor?.neighbors?.length - 1)) /2 ) - 1;
+  if ( firstParentCollection === nearestParentNeighbor ) {
+    nodesInBetween = Math.floor((( nearestParentNeighbor?.neighbors?.length - 1)) /2 );
+  } else if ( firstParentCollection == null ) {
+    nodesInBetween = Math.floor((( nearestParentNeighbor?.neighbors?.length - 1)) /2 );
   }
-    let neighbors = n.parent.neighbors;
-    sortArray(neighbors)
-    const parentIndex = neighbors?.findIndex( node => node.id === n.id );
-      let nearestParentNeighbor = null;
-      let nearestParentNeighborIndex = 0;
-      let leftMatch = false;
-      let leftMatchIndex = 0;
-      levels[n.level]?.forEach( ( node, index ) => {
-        if ( leftMatch && nearestParentNeighbor == null && node.type == "Collection") {
-          nearestParentNeighbor = node;
-          nearestParentNeighborIndex = index;
-        }
+  
+  let spacesNeeded  =  nearestParentNeighborIndex - firstParentCollectionIndex;
 
-        if ( !leftMatch && node.id === n.id && node.type == "Collection") {
-          leftMatch = true;
-          leftMatchIndex = index -1;
-          if ( leftMatchIndex < 0 ) {
-            leftMatchIndex = 0;
-          }
-        }
-      })
-      let nodesInBetween  =  Math.floor((( neighbors?.length - 1) + ( nearestParentNeighbor?.neighbors?.length - 1)) /2 );
-      if ( !isNaN(nodesInBetween) ) {
-        newPosition = newPosition + ( (levels[n.level].findIndex(node => node.id == n.id) - leftMatchIndex) * nodeSpace)
-        positionsMap[n.level] = newPosition;
-      }  else {
-        positionsMap[n.level] = newPosition;
-      }
+  let nearestNeighbor = null;
+  let nearestNeighborIndex = 0;
+  let leftMatch = false;
+  let leftMatchIndex = 0;
+  let firstCollection = null;
+  levels[n.level]?.forEach( ( node, index ) => {
+    if ( leftMatch && nearestNeighbor == null && node.type == "Collection" && !node.collapsed) {
+      nearestNeighbor = node;
+      nearestNeighborIndex = index;
+    }
 
-  return newPosition
+    if ( !leftMatch ) {
+      firstCollection = n;
+    }
+
+    if ( !leftMatch && node.id === n.id ) {
+      leftMatch = true;
+      leftMatchIndex = index - 1;
+    }
+  })
+
+  let position = positionsMap[n.level];
+  if ( !isNaN(nodesInBetween) && spacesNeeded - 1 > nodesInBetween) {
+    let neighbors = n?.parent?.neighbors;
+    let matchNeighbor = neighbors.findIndex( (node) => node.id === n.id ) ;;
+    if ( matchNeighbor === 1 && n.level === Object.keys(levels)?.length ) {
+      position = position + (Math.abs( spacesNeeded - nodesInBetween) * nodeSpace)
+    } else {
+      position = position + nodeSpace
+    }
+  } else if ( nearestNeighborIndex > 0 ) {
+    if ( nearestNeighbor !=  null && !n.collapsed ){
+      let middleNode = nearestNeighbor.neighbors?.[Math.floor(nearestNeighbor.neighbors?.length / 2)]?.[targetCoord];
+      if ( middleNode ) {
+        position = middleNode
+      } 
+      position = position - ( (nearestNeighborIndex - leftMatchIndex - 1) * nodeSpace)
+    } else if ( n.collapsed ) { 
+      position = nearestNeighborIndex?.[targetCoord] ? nearestNeighborIndex?.[targetCoord] + nodeSpace : position + nodeSpace
+    } else if ( nearestNeighborIndex - leftMatchIndex > 0 ) { 
+      position = position - ( nodeSpace)
+    } else {
+      position = (position + nodeSpace)
+    }
+  }  else if ( n.collapsed) {
+    position = nearestNeighborIndex?.[targetCoord] ? nearestNeighborIndex?.[targetCoord] + nodeSpace : position + nodeSpace
+  } else {
+    position = position + nodeSpace
+  }
+  positionsMap[n.level] = position;
+  return position
 }
 
 const sortArray = (arrayToSort) => {
@@ -297,9 +325,10 @@ export const algorithm = (levels, layout, furthestLeft) => {
                   } else if ( layout === LEFT_RIGHT.layout ) {
                     n.yPos = min === max ? min : min + ((max - min) * .5);
                   }
-                  // positionsMap[n.level] = n.yPos + nodeSpace;
                   if ( notcollapsedInLevel?.length > 0 && collapsedInLevel.length > 0) {
-                    updateConflictedNodes(levels[level], n, positionsMap, level, index, layout);
+                    if ( n.type ===  "Subject" || n.parent?.type === "Subject" ) {
+                      updateConflictedNodes(levels[level], n, positionsMap, level, index, layout);
+                    }
                   }
                   
                   if ( layout === TOP_DOWN.layout ) {
@@ -419,11 +448,11 @@ export const getPrunedTree = (graph_id, layout) => {
       matchIndex = nodes.findIndex( n => n.id === conflict.id );
       if ( layout === TOP_DOWN.layout ) {
         let furthestLeft = conflict?.xPos;
-        if ( nodes[i].collapsed ) {
-          furthestLeft =  conflict.xPos - ((((matchIndex - i )/2))  * nodeSpace ); 
+        if ( nodes?.[i]?.collapsed ) {
+          furthestLeft =  conflict.xPos - ((((matchIndex - i )/2)) * nodeSpace ); 
           nodes[i].xPos =furthestLeft;
+          positionsMap[level] = furthestLeft + nodeSpace;
         }
-        positionsMap[level] = furthestLeft + nodeSpace;
         nodes[i].fx = nodes[i].xPos;
         nodes[i].fy = 50 * nodes[i].level;
       } else if ( layout === LEFT_RIGHT.layout ) {
@@ -434,6 +463,7 @@ export const getPrunedTree = (graph_id, layout) => {
         }
         positionsMap[level] = furthestLeft + nodeSpace;
         nodes[i].fy = nodes[i].yPos;
+        positionsMap[level] = nodes[i].fy + nodeSpace;
         nodes[i].fx = 50 * nodes[i].level;
       }
     }
