@@ -49,9 +49,9 @@ export const rdfTypes = {
         "properties": [
             {
                 "type": "rdfs",
-                "key": "basename",
-                "property": "basename",
-                "label": "Basename",
+                "key": "relativePath",
+                "property": "relativePath",
+                "label": "Name",
                 "visible" : true
             },
             {
