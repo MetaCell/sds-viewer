@@ -56,6 +56,13 @@ export const rdfTypes = {
             },
             {
                 "type": "rdfs",
+                "key": "name",
+                "property": "name",
+                "label": "Name",
+                "visible" : true
+            },
+            {
+                "type": "rdfs",
                 "key": "mimetype",
                 "property": "mimetype",
                 "label": "Mimetype",
