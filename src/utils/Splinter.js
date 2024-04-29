@@ -185,7 +185,18 @@ class Splinter {
         if (this.nodes === undefined || this.edges === undefined) {
             await this.processDataset();
         }
-        let filteredNodes = [...new Set(this.forced_nodes?.filter( n => n.type !== rdfTypes.UBERON.key && n.type !== rdfTypes.Sample.key && n.type !== rdfTypes.Award.key && !(n.type === rdfTypes.Collection.key && n.children_counter === 0)))]
+        let filteredNodes = [...new Set(this.forced_nodes?.filter( n => n.type !== rdfTypes.UBERON.key && n.type !== rdfTypes.Award.key && !(n.type === rdfTypes.Collection.key && n.children_counter === 0)))]
+        filteredNodes = filteredNodes.filter( node => {
+            if ( node.type === rdfTypes.Sample.key ) {
+                if ( node.attributes.hasFolderAboutIt !== undefined ){
+                    return true;
+                } else {
+                    return true;
+                }
+            } else {
+                return true;
+            }
+        })
         let cleanLinks = [];
         let that = this;
 
@@ -220,7 +231,7 @@ class Splinter {
             if ( !existingLing ) {
                 const a = this.nodes.get( link.source );
                 const b = this.nodes.get( link.target );
-                if ( a && b && ( a?.type !== rdfTypes.Award.key && b?.type !== rdfTypes.Award.key ) && ( a?.type !== rdfTypes.Sample.key && b?.type !== rdfTypes.Sample.key ) && !((a?.type === rdfTypes.Collection.key && a.children_counter < 1 ) || ( b?.type === rdfTypes.Collection.key && b.children_counter < 1))) {
+                if ( a && b && ( a?.type !== rdfTypes.Award.key && b?.type !== rdfTypes.Award.key ) &&!((a?.type === rdfTypes.Collection.key && a.children_counter < 1 ) || ( b?.type === rdfTypes.Collection.key && b.children_counter < 1))) {
                     !a.neighbors && (a.neighbors = []);
                     !b.neighbors && (b.neighbors = []);
                     if ( !a.neighbors.find( n => n.id === b.id )){
@@ -705,28 +716,6 @@ class Splinter {
                     }
                 }
             }
-            
-            if (node.type === rdfTypes.Sample.key) {
-                if (node.attributes.derivedFrom !== undefined) {
-                    let source = this.nodes.get(node.attributes.derivedFrom[0]);
-                    if ( source !== undefined ) {
-                        source.children_counter++
-                        //this.nodes.set(node.attributes.derivedFrom[0], source);
-                        array[index].level = source.level + 1;
-                        this.forced_edges.push({
-                            source: node.attributes.derivedFrom[0],
-                            target: node.id
-                        });
-                    }
-                }
-
-                if (node.attributes?.hasFolderAboutIt !== undefined) {
-                    node.attributes.hasFolderAboutIt = 
-                        [Array.from(this.nodes)[0][1].attributes.hasUriPublished[0] + 
-                        "?datasetDetailsTab=files&path=files/" +
-                        node.tree_reference?.dataset_relative_path];
-                }
-            }
 
             if (node.type === rdfTypes.Subject.key) {
                 if (node.attributes?.animalSubjectIsOfStrain !== undefined) {
@@ -796,7 +785,7 @@ class Splinter {
                 }
             }
 
-            if (node.type === rdfTypes.RRID.key || node.type === rdfTypes.Sample.key || node.type === rdfTypes.NCBITaxon?.key || node.type === rdfTypes.PATO?.key) {
+            if (node.type === rdfTypes.RRID.key || node.type === rdfTypes.NCBITaxon?.key || node.type === rdfTypes.PATO?.key) {
                 nodesToRemove.unshift(index);
             }
 
@@ -874,54 +863,69 @@ class Splinter {
     }
 
 
-    mergeData() {
+    mergeData() {        
         this.nodes.forEach((value, key) => {
             if (value.attributes !== undefined && value.attributes.hasFolderAboutIt !== undefined) {
                 value.attributes.hasFolderAboutIt.forEach(folder => {
                     let jsonNode = this.tree_map.get(folder);
-                    let newNode = this.buildFolder(jsonNode, value);
-                    let folderChildren = this.tree_parents_map2.get(newNode.parent_id)?.map(child => {
-                        child.parent_id = newNode.uri_api
-                        return child;
-                    });
+                    const splitName = jsonNode.dataset_relative_path.split('/');
+                    let newName = jsonNode.basename;
+                    if ( value.type == "Subject" && value.attributes?.localId?.[0] == splitName[splitName.length - 1] ) {
+                        newName = splitName[0]
+                    }
+                    let parentNode = value;
+                    if ( value.type == "Sample" && value.attributes?.localId?.[0] == splitName[splitName.length - 1] ) {
+                        newName = splitName[0] + "/" + newName
+                        parentNode = this.nodes.get(value.attributes.derivedFrom[0])
+                        if (parentNode?.attributes !== undefined && parentNode?.attributes?.hasFolderAboutIt !== undefined) {
+                            parentNode?.attributes?.hasFolderAboutIt.forEach(folder => {
+                                let jNode = this.tree_map.get(folder);
+                                this.tree_parents_map2.delete(jNode.remote_id);
+                            })
+                        }
 
-                    if (!this.filterNode(newNode) && (this.nodes.get(newNode.remote_id)) === undefined) {
-                        this.linkToNode(newNode, value);
                     }
 
-                    if (this.tree_parents_map2.get(newNode.uri_api) === undefined) {
-                        this.tree_parents_map2.set(newNode.uri_api, folderChildren);
-                        this.tree_parents_map2.delete(newNode.parent_id);
-                        folderChildren?.forEach(child => {
-                            const child_node = this.nodes.get(this.proxies_map.get(child.uri_api));
-                            if (!this.filterNode(child) && child_node?.type !== rdfTypes.Sample.key) {
-                                this.linkToNode(child, this.nodes.get(newNode.remote_id));
-                            }
+                    let newNode = this.buildFolder(jsonNode, newName, parentNode);
+
+                        let folderChildren = this.tree_parents_map2.get(newNode.parent_id)?.map(child => {
+                            child.parent_id = newNode.uri_api
+                            return child;
                         });
-                    } else {
-                        let tempChildren = folderChildren === undefined ? [...this.tree_parents_map2.get(newNode.uri_api)] : [...this.tree_parents_map2.get(newNode.uri_api), ...folderChildren];;
-                        this.tree_parents_map2.set(newNode.uri_api, tempChildren);
-                        this.tree_parents_map2.delete(newNode.parent_id);
-                        tempChildren?.forEach(child => {
-                            const child_node = this.nodes.get(this.proxies_map.get(child.uri_api));
-                            if (!this.filterNode(child) && child_node?.type !== rdfTypes.Sample.key) {
-                                this.linkToNode(child, this.nodes.get(newNode.remote_id));
-                            }
-                        });
-                    }
+
+                        if (!this.filterNode(newNode) && (this.nodes.get(newNode.remote_id)) === undefined) {
+                            this.linkToNode(newNode, parentNode);
+                        }
+
+                        if (this.tree_parents_map2.get(newNode.uri_api) === undefined) {
+                            this.tree_parents_map2.set(newNode.uri_api, folderChildren);
+                            this.tree_parents_map2.delete(newNode.parent_id);
+                            folderChildren?.forEach(child => {
+                                if (!this.filterNode(child) ) {
+                                    this.linkToNode(child, this.nodes.get(newNode.remote_id));
+                                }
+                            });
+                        } else {
+                            let tempChildren = folderChildren === undefined ? [...this.tree_parents_map2.get(newNode.uri_api)] : [...this.tree_parents_map2.get(newNode.uri_api), ...folderChildren];;
+                            this.tree_parents_map2.set(newNode.uri_api, tempChildren);
+                            this.tree_parents_map2.delete(newNode.parent_id);
+                            tempChildren?.forEach(child => {
+                                if (!this.filterNode(child) ) {
+                                    this.linkToNode(child, this.nodes.get(newNode.remote_id));
+                                }
+                            });
+                        }
+                    //}
                 })
             }
         });
     }
 
-    buildFolder(item) {
+    buildFolder(item, newName) {
         let copiedItem = {...item};
-        const splitName = copiedItem.dataset_relative_path.split('/');
-        let newName = splitName[0];
         copiedItem.parent_id = copiedItem.remote_id;
         copiedItem.uri_api = copiedItem.remote_id;
         copiedItem.basename = newName;
-        // copiedItem.basename = copiedItem.remote_id;
         return copiedItem;
     }
 
@@ -944,12 +948,14 @@ class Splinter {
         });
         new_node.childLinks = [];
         new_node.collapsed = new_node.type === typesModel.NamedIndividual.subject.type 
-        this.nodes.set(new_node.id, this.factory.createNode(new_node));
-        var children = this.tree_parents_map2.get(node.remote_id);
-        if (children?.length > 0) {
-            children.forEach(child => {
-                !this.filterNode(child) && this.linkToNode(child, new_node);
-            });
+        if ( !this.nodes.get(new_node.id) ) {
+            this.nodes.set(new_node.id, this.factory.createNode(new_node));
+            var children = this.tree_parents_map2.get(node.remote_id);
+            if (children?.length > 0) {
+                children.forEach(child => {
+                    !this.filterNode(child) && this.linkToNode(child, new_node);
+                });
+            }
         }
         }
     }

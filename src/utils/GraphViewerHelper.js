@@ -182,12 +182,12 @@ export const determineNodePosition = (positionsMap, levels, n, targetCoord) => {
   let firstParentCollectionIndex = 0;
   sortArray(levels[n.level - 1])
   levels[n.level-1]?.forEach( ( node, index ) => {
-    if ( !leftParentMatch && node.type == "Collection" && node.id !== n.parent.id && !node.collapsed ) {
+    if ( !leftParentMatch && (node.type == "Collection" || node.type == "Sample") && node.id !== n.parent.id && !node.collapsed ) {
       firstParentCollection = node;
       firstParentCollectionIndex = index;
     }
 
-    if ( !leftParentMatch && node.id === n.parent.id) {
+    if ( !leftParentMatch && node.id === n.parent?.id) {
       leftParentMatch = true;
       nearestParentNeighbor = node;
       nearestParentNeighborIndex = index;
@@ -209,7 +209,7 @@ export const determineNodePosition = (positionsMap, levels, n, targetCoord) => {
   let leftMatchIndex = 0;
   let firstCollection = null;
   levels[n.level]?.forEach( ( node, index ) => {
-    if ( leftMatch && nearestNeighbor == null && node.type == "Collection" && !node.collapsed) {
+    if ( leftMatch && nearestNeighbor == null && ( node.type == "Collection" || node.type == "Sample" )&& !node.collapsed) {
       nearestNeighbor = node;
       nearestNeighborIndex = index;
     }
@@ -241,14 +241,14 @@ export const determineNodePosition = (positionsMap, levels, n, targetCoord) => {
       } 
       position = position - ( (nearestNeighborIndex - leftMatchIndex - 1) * nodeSpace)
     } else if ( n.collapsed ) { 
-      position = nearestNeighborIndex?.[targetCoord] ? nearestNeighborIndex?.[targetCoord] + nodeSpace : position + nodeSpace
+      position = nearestNeighborIndex?.[targetCoord] ? nearestNeighborIndex?.[targetCoord] - ( -1 * nodeSpace) : position - ( -1 * nodeSpace)
     } else if ( nearestNeighborIndex - leftMatchIndex > 0 ) { 
       position = position - ( nodeSpace)
     } else {
       position = (position + nodeSpace)
     }
   }  else if ( n.collapsed) {
-    position = nearestNeighborIndex?.[targetCoord] ? nearestNeighborIndex?.[targetCoord] + nodeSpace : position + nodeSpace
+    position = nearestNeighborIndex?.[targetCoord] ? nearestNeighborIndex?.[targetCoord] - ( -1 * nodeSpace): position - ( -1 * nodeSpace)
   } else {
     position = position + nodeSpace
   }
@@ -262,15 +262,15 @@ const sortArray = (arrayToSort) => {
       let aParent = a;
       let aPath= "";
       while ( aParent?.type != "Subject" ){
-        aParent = aParent.parent;
+        aParent = aParent?.parent;
         if ( aParent?.attributes?.relativePath ){
           aPath = aPath + "/" + aParent?.attributes?.relativePath
         }
       }
       let bParent = b;
       let bPath = ""
-      while ( bParent?.type != "Subject" ){
-        bParent = bParent.parent;
+      while ( bParent?.type != "Subject"){
+        bParent = bParent?.parent;
         if ( bParent?.attributes?.relativePath ){
           bPath = bPath + "/" +bParent?.attributes?.relativePath
         }
@@ -326,7 +326,7 @@ export const algorithm = (levels, layout, furthestLeft) => {
                     n.yPos = min === max ? min : min + ((max - min) * .5);
                   }
                   if ( notcollapsedInLevel?.length > 0 && collapsedInLevel.length > 0) {
-                    if ( n.type ===  "Subject" || n.parent?.type === "Subject" ) {
+                    if ( n.type ===  "Subject" || n.parent?.type === "Subject" || n.parent?.parent?.type === "Subject" ) {
                       updateConflictedNodes(levels[level], n, positionsMap, level, index, layout);
                     }
                   }
