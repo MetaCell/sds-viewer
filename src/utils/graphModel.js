@@ -122,7 +122,8 @@ export const rdfTypes = {
                 "label": "Title",
                 "visible" : true,
                 "link" : {
-                    "property" : "hasUriPublished"
+                    "property" : "hasUriPublished",
+                    "asText" : true
                 }
             },
             {
@@ -202,7 +203,8 @@ export const rdfTypes = {
                 "label": "DOI",
                 "visible" : true,
                 "link" : {
-                    "property" : "hasUriPublished"
+                    "property" : "hasUriPublished",
+                    "asText" : true
                 }
             },
             {
