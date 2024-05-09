@@ -156,7 +156,7 @@ export const paintNode = (node, ctx, hoverNode, selectedNode, nodeSelected, prev
       ctx.fillText(...textProps);
       if ( node.childLinks?.length && node.collapsed ) {
         let children = { links : 0 };
-        collapseSubLevels(node, undefined, children)
+        collapseSubLevels(node, true, children)
         const collapsedNodes = [children.links, node.x, textHoverPosition[1]];
         ctx.fillStyle = GRAPH_COLORS.collapsedFolder;
         ctx.textAlign = 'center';
@@ -175,14 +175,16 @@ export const collapseSubLevels = (node, collapsed, children) => {
 }
 
 export const determineNodePosition = (positionsMap, levels, n, targetCoord) => {
+  // Keeps track for nearest collection after Target Node on same level
   let nearestParentNeighbor = null;
   let nearestParentNeighborIndex = 0;
   let leftParentMatch = false;
+  // Keeps track of first Collection noticed towards left of target Node
   let firstParentCollection = null;
   let firstParentCollectionIndex = 0;
-  sortArray(levels[n.level - 1])
+  //sortArray(levels[n.level - 1])
   levels[n.level-1]?.forEach( ( node, index ) => {
-    if ( !leftParentMatch && (node.type == "Collection" || node.type == "Sample") && node.id !== n.parent.id && !node.collapsed ) {
+    if ( !leftParentMatch && node.id !== n.parent.id ) {
       firstParentCollection = node;
       firstParentCollectionIndex = index;
     }
@@ -194,64 +196,75 @@ export const determineNodePosition = (positionsMap, levels, n, targetCoord) => {
     }
   })
 
-  let nodesInBetween  =  Math.floor((( firstParentCollection?.neighbors?.length - 1) + ( nearestParentNeighbor?.neighbors?.length - 1)) /2 ) - 1;
-  if ( firstParentCollection === nearestParentNeighbor ) {
-    nodesInBetween = Math.floor((( nearestParentNeighbor?.neighbors?.length - 1)) /2 );
-  } else if ( firstParentCollection == null ) {
-    nodesInBetween = Math.floor((( nearestParentNeighbor?.neighbors?.length - 1)) /2 );
-  }
-  
-  let spacesNeeded  =  nearestParentNeighborIndex - firstParentCollectionIndex;
+  let nodesInBetween  =  1;
+  if ( firstParentCollection == null ) {
+    if ( !nearestParentNeighbor.collapsed && nearestParentNeighbor?.neighbors?.length > 1) { 
+      nodesInBetween = Math.floor((( nearestParentNeighbor?.neighbors?.length - 1)) /2 );
+    }
+  } else if ( firstParentCollection != null && nearestParentNeighbor != null ) {
+    let leftNodes = 1;
+    if ( !firstParentCollection.collapsed && firstParentCollection?.neighbors?.length > 1) {
+      leftNodes = firstParentCollection?.neighbors?.length - 1;
+    }
+    let rightNodes = 1;  
+    if ( !nearestParentNeighbor.collapsed && nearestParentNeighbor?.neighbors?.length > 1) {
+      rightNodes = nearestParentNeighbor?.neighbors?.length - 1;
+    }
+    nodesInBetween  =  Math.floor((leftNodes + rightNodes ) /2 );
+  } 
+  nodesInBetween = Math.abs(nodesInBetween)
 
+  let spacesNeeded  =  nearestParentNeighborIndex - firstParentCollectionIndex ;
+  spacesNeeded = Math.abs(spacesNeeded)
+
+  // Nearest neighbor to the right
   let nearestNeighbor = null;
   let nearestNeighborIndex = 0;
-  let leftMatch = false;
-  let leftMatchIndex = 0;
+  let nodeMatch = false;
+  let nodeMatchIndex = 0;
   let firstCollection = null;
+  //sortArray(levels[n.level])
   levels[n.level]?.forEach( ( node, index ) => {
-    if ( leftMatch && nearestNeighbor == null && ( node.type == "Collection" || node.type == "Sample" )&& !node.collapsed) {
+    // Keeps track of node right after target node
+    if ( nodeMatch && nearestNeighbor == null ) {
       nearestNeighbor = node;
       nearestNeighborIndex = index;
     }
 
-    if ( !leftMatch ) {
+    // Last visited node in this level before target node
+    if ( !nodeMatch  ) {
       firstCollection = n;
     }
 
-    if ( !leftMatch && node.id === n.id ) {
-      leftMatch = true;
-      leftMatchIndex = index - 1;
+    // Target Node
+    if ( node.id === n.id ) {
+      nodeMatch = true;
+      nodeMatchIndex = index;
     }
   })
 
   let position = positionsMap[n.level];
-  if ( !isNaN(nodesInBetween) && spacesNeeded - 1 > nodesInBetween) {
+  if ( !isNaN(nodesInBetween) && spacesNeeded > nodesInBetween) {
     let neighbors = n?.parent?.neighbors;
-    let matchNeighbor = neighbors.findIndex( (node) => node.id === n.id ) ;;
-    if ( matchNeighbor === 1 && n.level === Object.keys(levels)?.length ) {
-      position = position + (Math.abs( spacesNeeded - nodesInBetween) * nodeSpace)
-    } else {
-      position = position + nodeSpace
-    }
-  } else if ( nearestNeighborIndex > 0 ) {
-    if ( nearestNeighbor !=  null && !n.collapsed ){
+    // If first child of parent, we move the position map based on how much space we need
+    position = position + (Math.abs( spacesNeeded - nodesInBetween) * nodeSpace)
+  }
+  else if ( nearestNeighbor != null ) {
+    if ( !n.collapsed && nearestNeighbor.neighbors.length > 1 ){
       let middleNode = nearestNeighbor.neighbors?.[Math.floor(nearestNeighbor.neighbors?.length / 2)]?.[targetCoord];
       if ( middleNode ) {
         position = middleNode
       } 
-      position = position - ( (nearestNeighborIndex - leftMatchIndex - 1) * nodeSpace)
-    } else if ( n.collapsed ) { 
-      position = nearestNeighborIndex?.[targetCoord] ? nearestNeighborIndex?.[targetCoord] - ( -1 * nodeSpace) : position - ( -1 * nodeSpace)
-    } else if ( nearestNeighborIndex - leftMatchIndex > 0 ) { 
-      position = position - ( nodeSpace)
+      position = position + ( (nearestNeighborIndex - nodeMatchIndex - 1) * nodeSpace)
     } else {
       position = (position + nodeSpace)
     }
-  }  else if ( n.collapsed) {
-    position = nearestNeighborIndex?.[targetCoord] ? nearestNeighborIndex?.[targetCoord] - ( -1 * nodeSpace): position - ( -1 * nodeSpace)
+  } else if ( n.collapsed ) {
+    position = position + nodeSpace
   } else {
     position = position + nodeSpace
   }
+  
   positionsMap[n.level] = position;
   return position
 }
@@ -326,7 +339,7 @@ export const algorithm = (levels, layout, furthestLeft) => {
                     n.yPos = min === max ? min : min + ((max - min) * .5);
                   }
                   if ( notcollapsedInLevel?.length > 0 && collapsedInLevel.length > 0) {
-                    if ( n.type ===  "Subject" || n.parent?.type === "Subject" || n.parent?.parent?.type === "Subject" ) {
+                    if ( n.type ===  "Subject" || n.type ===  "Collection" ) {
                       updateConflictedNodes(levels[level], n, positionsMap, level, index, layout);
                     }
                   }

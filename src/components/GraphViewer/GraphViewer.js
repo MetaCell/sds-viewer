@@ -69,7 +69,7 @@ const GraphViewer = (props) => {
   const handleNodeLeftClick = (node, event) => {
     if ( node.type === rdfTypes.Subject.key || node.type === rdfTypes.Sample.key || node.type === rdfTypes.Collection.key ) {
       node.collapsed = !node.collapsed;
-      collapseSubLevels(node, node.collapsed, { links : 0 });
+      collapseSubLevels(node, true, { links : 0 });
       const updatedData = getPrunedTree(props.graph_id, selectedLayout.layout);
       setData(updatedData);
     } 
@@ -115,7 +115,7 @@ const GraphViewer = (props) => {
     setCollapsed(!collapsed)
     setTimeout( () => {
       resetCamera();
-    },100)
+    },200)
   }
 
   /**
@@ -226,23 +226,11 @@ const GraphViewer = (props) => {
   useEffect(() => {
     if ( nodeSelected ) { 
       if ( nodeSelected?.id !== selectedNode?.id ){
-        let node = nodeSelected;
-        let collapsed = nodeSelected.collapsed
-        while ( node?.parent && !collapsed ) {
-          node = node.parent;
-          collapsed = node.collapsed
-        }
-        if ( collapsed ) {
-          node.collapsed = !node.collapsed;
-          collapseSubLevels(node, node.collapsed, { links : 0 });
-          const updatedData = getPrunedTree(props.graph_id, selectedLayout.layout);
-          setData(updatedData);
-        }
         setSelectedNode(nodeSelected);
         handleNodeHover(nodeSelected);
-        graphRef?.current?.ggv?.current.centerAt(nodeSelected.x, nodeSelected.y, 10);
       } else {
         handleNodeHover(nodeSelected);
+        handleNodeRightClick(nodeSelected)
       }
     }
   },[nodeSelected]) 
