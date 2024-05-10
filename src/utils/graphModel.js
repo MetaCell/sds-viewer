@@ -22,6 +22,12 @@ export const rdfTypes = {
                 "key": "hasUriHuman",
                 "property": "hasUriHuman",
                 "label": "To be filled"
+            },
+            {
+                "type" : "owl",
+                "key" : "versionInfo",
+                "property" : "versionInfo",
+                "label" : "Version"
             }
         ]
     },
@@ -122,7 +128,8 @@ export const rdfTypes = {
                 "label": "Title",
                 "visible" : true,
                 "link" : {
-                    "property" : "hasUriPublished"
+                    "property" : "hasUriPublished",
+                    "asText" : true
                 }
             },
             {
@@ -202,7 +209,8 @@ export const rdfTypes = {
                 "label": "DOI",
                 "visible" : true,
                 "link" : {
-                    "property" : "hasUriPublished"
+                    "property" : "hasUriPublished",
+                    "asText" : true
                 }
             },
             {

@@ -146,7 +146,7 @@ const App = () => {
     if ( version !== undefined && localStorage.getItem(config.datasetsStorage)?.version !== version[0] ) {
       let parsedDatasets = []
       datasets.forEach( node =>  {
-        parsedDatasets.push({name : node.name , doi : node.attributes?.hasDoi?.[0]}); 
+        parsedDatasets.push({ name : node.name , doi : node.attributes?.hasDoi?.[0], label : node.attributes ? node.attributes?.label?.[0]?.toLowerCase() : null}); 
       });
       datasetStorage = {
         version : version[0],

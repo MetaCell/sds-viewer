@@ -437,7 +437,7 @@ export const getPrunedTree = (graph_id, layout) => {
    */
   const updateConflictedNodes = (nodes, conflictNode, positionsMap, level, index, layout) => {
     let matchIndex = index;
-    for ( let i = 0; i < index ; i++ ) {
+    for ( let i = 0; i <= index ; i++ ) {
       let conflict = nodes.find ( n => !n.collapsed && n?.parent?.id === nodes[i]?.parent?.id)
       if ( conflict === undefined ){
         conflict = nodes.find ( n => !n.collapsed )
