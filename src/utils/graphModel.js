@@ -22,6 +22,12 @@ export const rdfTypes = {
                 "key": "hasUriHuman",
                 "property": "hasUriHuman",
                 "label": "To be filled"
+            },
+            {
+                "type" : "owl",
+                "key" : "versionInfo",
+                "property" : "versionInfo",
+                "label" : "Version"
             }
         ]
     },

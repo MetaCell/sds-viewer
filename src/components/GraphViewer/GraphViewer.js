@@ -226,11 +226,24 @@ const GraphViewer = (props) => {
   useEffect(() => {
     if ( nodeSelected ) { 
       if ( nodeSelected?.id !== selectedNode?.id ){
+        let node = nodeSelected;
+        let collapsed = nodeSelected.collapsed
+        while ( node?.parent && !collapsed ) {
+          node = node.parent;
+          collapsed = node.collapsed
+        }
+        if ( collapsed ) {
+          node.collapsed = !node.collapsed;
+          collapseSubLevels(node, node.collapsed, { links : 0 });
+          const updatedData = getPrunedTree(props.graph_id, selectedLayout.layout);
+          setData(updatedData);
+        }
         setSelectedNode(nodeSelected);
         handleNodeHover(nodeSelected);
+        //handleNodeRightClick(nodeSelected)
       } else {
         handleNodeHover(nodeSelected);
-        handleNodeRightClick(nodeSelected)
+        //handleNodeRightClick(nodeSelected)
       }
     }
   },[nodeSelected]) 

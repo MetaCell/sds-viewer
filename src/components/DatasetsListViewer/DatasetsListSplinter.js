@@ -254,7 +254,7 @@ class Splinter {
         dataset_node.proxies = dataset_node.proxies.concat(ontology_node.proxies);
         dataset_node.level = 1;
         this.nodes.set(dataset_node.id, dataset_node);
-        this.nodes.delete(ontology_node.id);
+        // this.nodes.delete(ontology_node.id);
         // fix links that were pointing to the ontology
         let temp_edges = this.edges.map(link => {
             if (link.source === ontology_node.id) {

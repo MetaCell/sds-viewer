@@ -39,7 +39,7 @@ export const RADIAL_OUT = {
   }
 };
 
-export const nodeSpace = 60;
+export const nodeSpace = 70;
 
 /**
  * Create background for Nodes on Graph Viewer.
@@ -156,7 +156,7 @@ export const paintNode = (node, ctx, hoverNode, selectedNode, nodeSelected, prev
       ctx.fillText(...textProps);
       if ( node.childLinks?.length && node.collapsed ) {
         let children = { links : 0 };
-        collapseSubLevels(node, true, children)
+        collapseSubLevels(node, undefined, children)
         const collapsedNodes = [children.links, node.x, textHoverPosition[1]];
         ctx.fillStyle = GRAPH_COLORS.collapsedFolder;
         ctx.textAlign = 'center';
@@ -182,7 +182,6 @@ export const determineNodePosition = (positionsMap, levels, n, targetCoord) => {
   // Keeps track of first Collection noticed towards left of target Node
   let firstParentCollection = null;
   let firstParentCollectionIndex = 0;
-  //sortArray(levels[n.level - 1])
   levels[n.level-1]?.forEach( ( node, index ) => {
     if ( !leftParentMatch && node.id !== n.parent.id ) {
       firstParentCollection = node;
@@ -198,16 +197,16 @@ export const determineNodePosition = (positionsMap, levels, n, targetCoord) => {
 
   let nodesInBetween  =  1;
   if ( firstParentCollection == null ) {
-    if ( !nearestParentNeighbor.collapsed && nearestParentNeighbor?.neighbors?.length > 1) { 
+    if ( !nearestParentNeighbor?.collapsed && nearestParentNeighbor?.neighbors?.length > 1) { 
       nodesInBetween = Math.floor((( nearestParentNeighbor?.neighbors?.length - 1)) /2 );
     }
   } else if ( firstParentCollection != null && nearestParentNeighbor != null ) {
     let leftNodes = 1;
-    if ( !firstParentCollection.collapsed && firstParentCollection?.neighbors?.length > 1) {
+    if ( !firstParentCollection?.collapsed && firstParentCollection?.neighbors?.length > 1) {
       leftNodes = firstParentCollection?.neighbors?.length - 1;
     }
     let rightNodes = 1;  
-    if ( !nearestParentNeighbor.collapsed && nearestParentNeighbor?.neighbors?.length > 1) {
+    if ( !nearestParentNeighbor?.collapsed && nearestParentNeighbor?.neighbors?.length > 1) {
       rightNodes = nearestParentNeighbor?.neighbors?.length - 1;
     }
     nodesInBetween  =  Math.floor((leftNodes + rightNodes ) /2 );
@@ -223,17 +222,19 @@ export const determineNodePosition = (positionsMap, levels, n, targetCoord) => {
   let nodeMatch = false;
   let nodeMatchIndex = 0;
   let firstCollection = null;
-  //sortArray(levels[n.level])
+  let firstCollectionIndex = 0;
+
   levels[n.level]?.forEach( ( node, index ) => {
     // Keeps track of node right after target node
-    if ( nodeMatch && nearestNeighbor == null ) {
+    if ( nodeMatch && nearestNeighbor == null && !node.collapsed) {
       nearestNeighbor = node;
       nearestNeighborIndex = index;
     }
 
     // Last visited node in this level before target node
-    if ( !nodeMatch  ) {
+    if ( !nodeMatch  && !nodeMatch.collapsed ) {
       firstCollection = n;
+      firstCollectionIndex = index;
     }
 
     // Target Node
@@ -243,28 +244,8 @@ export const determineNodePosition = (positionsMap, levels, n, targetCoord) => {
     }
   })
 
-  let position = positionsMap[n.level];
-  if ( !isNaN(nodesInBetween) && spacesNeeded > nodesInBetween) {
-    let neighbors = n?.parent?.neighbors;
-    // If first child of parent, we move the position map based on how much space we need
-    position = position + (Math.abs( spacesNeeded - nodesInBetween) * nodeSpace)
-  }
-  else if ( nearestNeighbor != null ) {
-    if ( !n.collapsed && nearestNeighbor.neighbors.length > 1 ){
-      let middleNode = nearestNeighbor.neighbors?.[Math.floor(nearestNeighbor.neighbors?.length / 2)]?.[targetCoord];
-      if ( middleNode ) {
-        position = middleNode
-      } 
-      position = position + ( (nearestNeighborIndex - nodeMatchIndex - 1) * nodeSpace)
-    } else {
-      position = (position + nodeSpace)
-    }
-  } else if ( n.collapsed ) {
-    position = position + nodeSpace
-  } else {
-    position = position + nodeSpace
-  }
-  
+  let position = positionsMap[n.level] + nodeSpace;
+
   positionsMap[n.level] = position;
   return position
 }
@@ -314,6 +295,7 @@ export const algorithm = (levels, layout, furthestLeft) => {
       sortArray(levels[level]);    
     });    
 
+    console.log("Sorted map ", levels)
     // Start assigning the graph from the bottom up
     let neighbors = 0;
     levelsMapKeys.reverse().forEach( level => {
@@ -337,11 +319,6 @@ export const algorithm = (levels, layout, furthestLeft) => {
                     n.xPos = min === max ? min : min + ((max - min) * .5);
                   } else if ( layout === LEFT_RIGHT.layout ) {
                     n.yPos = min === max ? min : min + ((max - min) * .5);
-                  }
-                  if ( notcollapsedInLevel?.length > 0 && collapsedInLevel.length > 0) {
-                    if ( n.type ===  "Subject" || n.type ===  "Collection" ) {
-                      updateConflictedNodes(levels[level], n, positionsMap, level, index, layout);
-                    }
                   }
                   
                   if ( layout === TOP_DOWN.layout ) {
@@ -378,7 +355,11 @@ export const algorithm = (levels, layout, furthestLeft) => {
               n.fy = n.yPos;
               n.fx = 50 * n.level;
             }
-          }              
+          }
+          
+          if ( notcollapsedInLevel?.length > 0 && collapsedInLevel.length > 0) {
+            updateConflictedNodes(levels[level], n, positionsMap, level, index, layout);
+          }
         })
     });
   }
@@ -450,7 +431,7 @@ export const getPrunedTree = (graph_id, layout) => {
    */
   const updateConflictedNodes = (nodes, conflictNode, positionsMap, level, index, layout) => {
     let matchIndex = index;
-    for ( let i = 0; i < index ; i++ ) {
+    for ( let i = 0; i <= index ; i++ ) {
       let conflict = nodes.find ( n => !n.collapsed && n?.parent?.id === nodes[i]?.parent?.id)
       if ( conflict === undefined ){
         conflict = nodes.find ( n => !n.collapsed )
@@ -464,9 +445,9 @@ export const getPrunedTree = (graph_id, layout) => {
         if ( nodes?.[i]?.collapsed ) {
           furthestLeft =  conflict.xPos - ((((matchIndex - i )/2)) * nodeSpace ); 
           nodes[i].xPos =furthestLeft;
-          positionsMap[level] = furthestLeft + nodeSpace;
         }
         nodes[i].fx = nodes[i].xPos;
+        positionsMap[level] = nodes[i].fx + nodeSpace;
         nodes[i].fy = 50 * nodes[i].level;
       } else if ( layout === LEFT_RIGHT.layout ) {
         let furthestLeft = conflict?.yPos;
@@ -474,7 +455,6 @@ export const getPrunedTree = (graph_id, layout) => {
           furthestLeft =  conflict.yPos - ((((matchIndex - i )/2))  * nodeSpace ); 
           nodes[i].yPos =furthestLeft;
         }
-        positionsMap[level] = furthestLeft + nodeSpace;
         nodes[i].fy = nodes[i].yPos;
         positionsMap[level] = nodes[i].fy + nodeSpace;
         nodes[i].fx = 50 * nodes[i].level;
