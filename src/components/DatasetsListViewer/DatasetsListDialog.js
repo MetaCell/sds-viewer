@@ -132,7 +132,7 @@ const DatasetsListDialog = (props) => {
   const handleChange = (event) => {
     const lowerCaseSearch = event.target.value.toLowerCase();
     let filtered = datasets.filter((dataset) =>
-      dataset.attributes.lowerCaseLabel.includes(lowerCaseSearch) || dataset.name.includes(lowerCaseSearch)
+      dataset.label?.includes(lowerCaseSearch) || dataset.name?.includes(lowerCaseSearch)
     );
     setSearchField(lowerCaseSearch);
     setFilteredDatasets(filtered);
