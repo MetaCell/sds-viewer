@@ -48,6 +48,7 @@ const GraphViewer = (props) => {
   const groupSelected = useSelector(state => state.sdsState.group_selected.graph_node);
   const [collapsed, setCollapsed] = React.useState(true);
   const [previouslySelectedNodes, setPreviouslySelectedNodes] = useState(new Set());
+  let triggerCenter = false;
 
   const handleLayoutClick = (event) => {
     setLayoutAnchorEl(event.currentTarget);
@@ -172,6 +173,10 @@ const GraphViewer = (props) => {
 
   const onEngineStop = () => {
     setForce();
+    if ( triggerCenter ) {
+      graphRef?.current?.ggv?.current.centerAt(selectedNode.x, selectedNode.y, ONE_SECOND);
+      triggerCenter = false;
+    }
   }
 
   useEffect(() => {
@@ -244,9 +249,11 @@ const GraphViewer = (props) => {
         }
         setSelectedNode(nodeSelected);
         handleNodeHover(nodeSelected);
+        triggerCenter = true;
         //handleNodeRightClick(nodeSelected)
       } else {
         handleNodeHover(nodeSelected);
+        triggerCenter = true;
         //handleNodeRightClick(nodeSelected)
       }
     }
