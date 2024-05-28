@@ -219,7 +219,7 @@ const GraphViewer = (props) => {
   });
 
   useEffect(() => {
-    if ( groupSelected ) { 
+    if ( groupSelected && groupSelected?.dataset_id?.includes(props.graph_id)) { 
       setSelectedNode(groupSelected);
       handleNodeHover(groupSelected);
       graphRef?.current?.ggv?.current.centerAt(groupSelected.x, groupSelected.y, ONE_SECOND);
@@ -234,7 +234,8 @@ const GraphViewer = (props) => {
   }, [selectedNode]);
 
   useEffect(() => {
-    if ( nodeSelected && nodeSelected?.tree_reference?.dataset_id?.includes(props.graph_id)) { 
+    if ( nodeSelected && ( nodeSelected?.tree_reference?.dataset_id?.includes(props.graph_id) || 
+        nodeSelected?.dataset_id?.includes(props.graph_id) )) { 
       if ( nodeSelected?.id !== selectedNode?.id ){
         let node = nodeSelected;
         let collapsed = node.collapsed

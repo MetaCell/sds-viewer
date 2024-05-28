@@ -270,7 +270,6 @@ class Splinter {
             }
             return true;
         });
-        console.log("This levels map ", this.levelsMap)
         return {
             nodes: filteredNodes,
             links: newCleanLinks,
