@@ -45,6 +45,7 @@ const GraphViewer = (props) => {
   const [loading, setLoading] = React.useState(false);
   const [data, setData] = React.useState({ nodes : [], links : []});
   const nodeSelected = useSelector(state => state.sdsState.instance_selected.graph_node);
+  const nodeClickSource = useSelector(state => state.sdsState.instance_selected.source);
   const groupSelected = useSelector(state => state.sdsState.group_selected.graph_node);
   const [collapsed, setCollapsed] = React.useState(true);
   const [previouslySelectedNodes, setPreviouslySelectedNodes] = useState(new Set());
@@ -236,25 +237,28 @@ const GraphViewer = (props) => {
     if ( nodeSelected ) { 
       if ( nodeSelected?.id !== selectedNode?.id ){
         let node = nodeSelected;
-        let collapsed = nodeSelected.collapsed
-        while ( node?.parent && !collapsed ) {
-          node = node.parent;
-          collapsed = node.collapsed
+        let collapsed = node.collapsed
+        let parent = node.parent;
+        while ( parent && !parent?.collapsed) {
+          parent = parent.parent;
         }
-        if ( collapsed ) {
-          node.collapsed = !node.collapsed;
-          collapseSubLevels(node, node.collapsed, { links : 0 });
-          const updatedData = getPrunedTree(props.graph_id, selectedLayout.layout);
+
+        if ( nodeSelected.collapsed && nodeClickSource === "TREE") {
+          collapseSubLevels(parent, false, { links : 0 });
+          let updatedData = getPrunedTree(props.graph_id, selectedLayout.layout);
+          setData(updatedData);
+  
+          node.collapsed = true;
+          collapseSubLevels(nodeSelected, true, { links : 0 });
+          updatedData = getPrunedTree(props.graph_id, selectedLayout.layout);
           setData(updatedData);
         }
         setSelectedNode(nodeSelected);
         handleNodeHover(nodeSelected);
-        triggerCenter = true;
-        //handleNodeRightClick(nodeSelected)
+        graphRef?.current?.ggv?.current.centerAt(nodeSelected.x, nodeSelected.y, ONE_SECOND);
       } else {
         handleNodeHover(nodeSelected);
-        triggerCenter = true;
-        //handleNodeRightClick(nodeSelected)
+        graphRef?.current?.ggv?.current.centerAt(nodeSelected.x, nodeSelected.y, ONE_SECOND);
       }
     }
   },[nodeSelected]) 

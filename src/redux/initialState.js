@@ -132,9 +132,6 @@ export default function sdsClientReducer(state = {}, action) {
                     if (a.visible === b.visible) {
                         // Preserve the original order for items with the same visibility
                         return updatedMetadataModel[groupTitle].indexOf(a) - updatedMetadataModel[groupTitle].indexOf(b);
-                    } else {
-                        // Move visible items to the top
-                        return a.visible ? -1 : 1;
                     }
                 });
             }

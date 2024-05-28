@@ -18,7 +18,6 @@ import { NodeViewWidget } from './app/widgets';
 import {  addWidget } from '@metacell/geppetto-meta-client/common/layout/actions';
 import { WidgetStatus } from "@metacell/geppetto-meta-client/common/layout/model";
 import DatasetsListSplinter from "./components/DatasetsListViewer/DatasetsListSplinter";
-
 import config from './config/app.json';
 
 const App = () => {

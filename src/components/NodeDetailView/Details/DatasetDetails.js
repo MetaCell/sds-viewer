@@ -64,7 +64,9 @@ const DatasetDetails = (props) => {
                                             <FileCopyIcon size="small"/>
                                         </IconButton>
                                     </Tooltip>
-                                    <Links key={`detail_links_dataset`} href={value} title={propValue} />
+                                    <Box className="tab-content-row">
+                                        { property.link?.asText ? <Typography>{value}</Typography> : <Links key={`detail_links_dataset`} href={value} title={propValue} /> }
+                                    </Box>
                                 </Box>
                             </Box>)
                         }

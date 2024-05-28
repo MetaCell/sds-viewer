@@ -14,6 +14,7 @@ import {
     protocols_key,
     contributors_key, SUBJECTS_LEVEL, PROTOCOLS_LEVEL, CRONTRIBUTORS_LEVEL
 } from '../constants';
+import * as d3 from 'd3';
 
 const N3 = require('n3');
 const ttl2jsonld = require('@frogcat/ttl2jsonld').parse;
@@ -231,7 +232,11 @@ class Splinter {
             if ( !existingLing ) {
                 const a = this.nodes.get( link.source );
                 const b = this.nodes.get( link.target );
-                if ( a && b && ( a?.type !== rdfTypes.Award.key && b?.type !== rdfTypes.Award.key ) && !((a?.type === rdfTypes.Collection.key && a.children_counter < 1 ) || ( b?.type === rdfTypes.Collection.key && b.children_counter < 1)) && !((a?.type === rdfTypes.Sample.key && a.children_counter < 1 ) || ( b?.type === rdfTypes.Sample.key && b.children_counter < 1)) ) {
+                const awardEmpty = ( a?.type !== rdfTypes.Award.key && b?.type !== rdfTypes.Award.key );
+                const collectionEmpty = ((a?.type === rdfTypes.Collection.key && a.children_counter < 1 ) || ( b?.type === rdfTypes.Collection.key && b.children_counter < 1));
+                const sampleEmpty = ((a?.type === rdfTypes.Sample.key && a.children_counter < 1 ) || ( b?.type === rdfTypes.Sample.key && b.children_counter < 1))
+                const sameLevels = a?.level === b?.level;
+                if ( a && b && awardEmpty && !collectionEmpty && !sampleEmpty && !sameLevels) {
                     !a.neighbors && (a.neighbors = []);
                     !b.neighbors && (b.neighbors = []);
                     if ( !a.neighbors.find( n => n.id === b.id )){
@@ -256,10 +261,19 @@ class Splinter {
                 }
             }
         });
+
+        let newCleanLinks = cleanLinks.filter(link => {
+
+            const collectionEmpty = ((link?.target?.type === rdfTypes.Collection.key && link?.target?.neighbors?.length <= 1 ) || ( link?.source?.type === rdfTypes.Collection.key && link?.source?.neighbors?.length <= 1));
+            if ( collectionEmpty ) {
+                return false;
+            }
+            return true;
+        });
         console.log("This levels map ", this.levelsMap)
         return {
             nodes: filteredNodes,
-            links: cleanLinks,
+            links: newCleanLinks,
             levelsMap : this.levelsMap
         };
     }
@@ -891,15 +905,21 @@ class Splinter {
                     let jsonNode = this.tree_map.get(folder);
                     const splitName = jsonNode.dataset_relative_path.split('/');
                     let newName = jsonNode.basename;
-                    if ( value.type == "Subject" && value.attributes?.localId?.[0] == splitName[splitName.length - 1] ) {
+                    if ( value.type === rdfTypes.Subject.key && value.attributes?.localId?.[0] == splitName[splitName.length - 1] ) {
                         newName = splitName[0]
                     }
+
+                    if ( value.type === rdfTypes.Sample.key && value.attributes?.localId?.[0] == splitName[splitName.length - 1] ) {
+                        newName = splitName[0] + "/" + newName
+                    }
+
                     let parentNode = value;
                     let newNode = this.buildFolder(jsonNode, newName, parentNode);
 
                     if ( value.type === rdfTypes.Sample.key) {
                         newNode.remote_id = jsonNode.basename + '_' + newName;
                         newNode.uri_api = newNode.remote_id
+                        // this.tree_parents_map2.delete(jsonNode.remote_id);
                     }
 
 
