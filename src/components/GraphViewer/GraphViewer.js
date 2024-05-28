@@ -240,7 +240,7 @@ const GraphViewer = (props) => {
         let collapsed = node.collapsed
         let parent = node.parent;
         let prevNode = node;
-        while ( parent && parent?.collapsed && node.type ) {
+        while ( parent && parent?.collapsed ) {
           prevNode = parent;
           parent = parent.parent;
         }

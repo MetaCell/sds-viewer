@@ -915,7 +915,6 @@ class Splinter {
 
                     let parentNode = value;
                     let newNode = this.buildFolder(jsonNode, newName, parentNode);
-                    newNode.id = parentNode.id + newNode.id;
 
                     if ( value.type === rdfTypes.Sample.key) {
                         newNode.remote_id = jsonNode.basename + '_' + newName;
@@ -974,10 +973,10 @@ class Splinter {
             }
         }
         const new_node = this.buildNodeFromJson(node, level);
-        new_node.collapsed = new_node.type === typesModel.NamedIndividual.subject.type 
         if ( parent ) {
         parent.children_counter++;
         new_node.parent = parent;
+        new_node.id = parent.id + new_node.id;
         this.forced_edges.push({
             source: parent?.id,
             target: new_node?.id
