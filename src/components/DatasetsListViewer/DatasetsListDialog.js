@@ -106,8 +106,24 @@ const DatasetsListDialog = (props) => {
       let datasets = graph.nodes.filter((node) => node?.attributes?.hasUriApi);
       datasets.forEach( node => node.attributes ? node.attributes.lowerCaseLabel = node.attributes?.label?.[0]?.toLowerCase() : null );
       datasets = datasets.filter( node => node?.attributes?.statusOnPlatform?.[0]?.includes(PUBLISHED) );
-      dispatch(setDatasetsList(datasets));
-      setFilteredDatasets(datasets);
+
+
+      let version = graph.nodes.find( node => node?.attributes?.versionInfo)?.attributes?.versionInfo
+      let datasetStorage = {};
+      if ( version !== undefined && localStorage.getItem(config.datasetsStorage)?.version !== version[0] ) {
+        let parsedDatasets = []
+        datasets.forEach( node =>  {
+          parsedDatasets.push({ name : node.name , doi : node.attributes?.hasDoi?.[0], label : node.attributes ? node.attributes.lowerCaseLabel : null}); 
+        });
+        datasetStorage = {
+          version : version[0],
+          datasets : parsedDatasets
+        }
+
+        localStorage.setItem(config.datasetsStorage, JSON.stringify(datasetStorage));
+        dispatch(setDatasetsList(datasetStorage.datasets));
+        setFilteredDatasets(datasetStorage.datasets);
+      }
     };
     const summaryURL = config.repository_url + config.available_datasets;
     fileHandler.get_remote_file(summaryURL, callback);
@@ -116,7 +132,7 @@ const DatasetsListDialog = (props) => {
   const handleChange = (event) => {
     const lowerCaseSearch = event.target.value.toLowerCase();
     let filtered = datasets.filter((dataset) =>
-      dataset.attributes.lowerCaseLabel.includes(lowerCaseSearch) || dataset.name.includes(lowerCaseSearch)
+      dataset.label?.includes(lowerCaseSearch) || dataset.name?.includes(lowerCaseSearch)
     );
     setSearchField(lowerCaseSearch);
     setFilteredDatasets(filtered);
@@ -139,7 +155,15 @@ const DatasetsListDialog = (props) => {
   }
 
   useEffect(() => {
-    open && datasets.length === 0 && loadDatasets();
+    if ( open && datasets.length === 0 ) {
+      if ( localStorage.getItem(config.datasetsStorage) ) {
+        let storedDatasetsInfo = JSON.parse(localStorage.getItem(config.datasetsStorage));
+        dispatch(setDatasetsList(storedDatasetsInfo.datasets));
+        setFilteredDatasets(storedDatasetsInfo.datasets);
+      } else {
+        loadDatasets();
+      }
+    }
   });
 
   return (
@@ -202,7 +226,7 @@ const DatasetsListDialog = (props) => {
                             className="dataset_list_text"
                             dangerouslySetInnerHTML={{
                               __html:
-                                getFormattedListTex(dataset.attributes?.label[0])
+                                getFormattedListTex(dataset.label)
                             }}
                           />
                         }

@@ -22,6 +22,12 @@ export const rdfTypes = {
                 "key": "hasUriHuman",
                 "property": "hasUriHuman",
                 "label": "To be filled"
+            },
+            {
+                "type" : "owl",
+                "key" : "versionInfo",
+                "property" : "versionInfo",
+                "label" : "Version"
             }
         ]
     },
@@ -122,7 +128,8 @@ export const rdfTypes = {
                 "label": "Title",
                 "visible" : true,
                 "link" : {
-                    "property" : "hasUriPublished"
+                    "property" : "hasUriPublished",
+                    "asText" : true
                 }
             },
             {
@@ -202,7 +209,8 @@ export const rdfTypes = {
                 "label": "DOI",
                 "visible" : true,
                 "link" : {
-                    "property" : "hasUriPublished"
+                    "property" : "hasUriPublished",
+                    "asText" : true
                 }
             },
             {
@@ -714,7 +722,7 @@ export const rdfTypes = {
                 "type": "TEMP",
                 "key": "hasFolderAboutIt",
                 "property": "hasFolderAboutIt",
-                "label": "Related Folder",
+                "label": "Find in SPARC Portal",
                 "visible" : true
             },
             {
@@ -722,7 +730,7 @@ export const rdfTypes = {
                 "key": "wasDerivedFromSubject",
                 "property": "derivedFrom",
                 "label": "Derived from Subject",
-                "visible" : true
+                "visible" : false
             },
             {
                 "type": "TEMP",
@@ -743,7 +751,7 @@ export const rdfTypes = {
                 "key": "hasDerivedInformationAsParticipant",
                 "property": "hasDerivedInformationAsParticipant",
                 "label": "Derived Information as Participant",
-                "visible" : true
+                "visible" : false
             },
             {
                 "type": "TEMP",

@@ -31,7 +31,7 @@ const InstancesTreeView = (props) => {
     } else {
       dispatch(selectInstance({
         dataset_id: dataset_id,
-        graph_node: node?.graph_reference?.id,
+        graph_node: node?.graph_reference?.id || node?.id,
         tree_node: node?.id,
         source: TREE_SOURCE
       }));

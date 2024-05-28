@@ -45,9 +45,11 @@ const GraphViewer = (props) => {
   const [loading, setLoading] = React.useState(false);
   const [data, setData] = React.useState({ nodes : [], links : []});
   const nodeSelected = useSelector(state => state.sdsState.instance_selected.graph_node);
+  const nodeClickSource = useSelector(state => state.sdsState.instance_selected.source);
   const groupSelected = useSelector(state => state.sdsState.group_selected.graph_node);
   const [collapsed, setCollapsed] = React.useState(true);
   const [previouslySelectedNodes, setPreviouslySelectedNodes] = useState(new Set());
+  let triggerCenter = false;
 
   const handleLayoutClick = (event) => {
     setLayoutAnchorEl(event.currentTarget);
@@ -70,7 +72,11 @@ const GraphViewer = (props) => {
     if ( node.type === rdfTypes.Subject.key || node.type === rdfTypes.Sample.key || node.type === rdfTypes.Collection.key ) {
       node.collapsed = !node.collapsed;
       collapseSubLevels(node, node.collapsed, { links : 0 });
-      const updatedData = getPrunedTree(props.graph_id, selectedLayout.layout);
+      let updatedData = getPrunedTree(props.graph_id, selectedLayout.layout);
+      setData(updatedData);
+
+      collapseSubLevels(node, true, { links : 0 });
+      updatedData = getPrunedTree(props.graph_id, selectedLayout.layout);
       setData(updatedData);
     } 
     handleNodeHover(node);
@@ -115,7 +121,7 @@ const GraphViewer = (props) => {
     setCollapsed(!collapsed)
     setTimeout( () => {
       resetCamera();
-    },100)
+    },200)
   }
 
   /**
@@ -168,6 +174,10 @@ const GraphViewer = (props) => {
 
   const onEngineStop = () => {
     setForce();
+    if ( triggerCenter ) {
+      graphRef?.current?.ggv?.current.centerAt(selectedNode.x, selectedNode.y, ONE_SECOND);
+      triggerCenter = false;
+    }
   }
 
   useEffect(() => {
@@ -209,7 +219,7 @@ const GraphViewer = (props) => {
   });
 
   useEffect(() => {
-    if ( groupSelected ) { 
+    if ( groupSelected && groupSelected?.dataset_id?.includes(props.graph_id)) { 
       setSelectedNode(groupSelected);
       handleNodeHover(groupSelected);
       graphRef?.current?.ggv?.current.centerAt(groupSelected.x, groupSelected.y, ONE_SECOND);
@@ -224,26 +234,46 @@ const GraphViewer = (props) => {
   }, [selectedNode]);
 
   useEffect(() => {
-    if ( nodeSelected ) { 
+    if ( nodeSelected && ( nodeSelected?.tree_reference?.dataset_id?.includes(props.graph_id) || 
+        nodeSelected?.dataset_id?.includes(props.graph_id) )) { 
       if ( nodeSelected?.id !== selectedNode?.id ){
         let node = nodeSelected;
-        let collapsed = nodeSelected.collapsed
-        while ( node?.parent && !collapsed ) {
-          node = node.parent;
-          collapsed = node.collapsed
+        let collapsed = node.collapsed
+        let parent = node.parent;
+        let prevNode = node;
+        while ( parent && parent?.collapsed ) {
+          prevNode = parent;
+          parent = parent.parent;
         }
-        if ( collapsed ) {
-          node.collapsed = !node.collapsed;
-          collapseSubLevels(node, node.collapsed, { links : 0 });
-          const updatedData = getPrunedTree(props.graph_id, selectedLayout.layout);
-          setData(updatedData);
+
+        if ( prevNode && nodeSelected.collapsed && nodeClickSource === "TREE") {
+          if ( prevNode.type == rdfTypes.Subject.key ||  prevNode.type == rdfTypes.Sample.key ||
+            prevNode.type == rdfTypes.Collection.key ) {
+            prevNode.collapsed = false;
+            collapseSubLevels(prevNode, false, { links : 0 });
+            let updatedData = getPrunedTree(props.graph_id, selectedLayout.layout);
+            setData(updatedData);
+          }
+          if ( node.parent?.type == rdfTypes.Subject.key ||  node.parent?.type == rdfTypes.Sample.key ||
+            node.parent?.type == rdfTypes.Collection.key ) {
+            collapseSubLevels(node.parent, true, { links : 0 });
+            let updatedData = getPrunedTree(props.graph_id, selectedLayout.layout);
+            setData(updatedData);
+          } else {
+            collapseSubLevels(node, true, { links : 0 });
+            let updatedData = getPrunedTree(props.graph_id, selectedLayout.layout);
+            setData(updatedData);
+          }
         }
         setSelectedNode(nodeSelected);
         handleNodeHover(nodeSelected);
-        graphRef?.current?.ggv?.current.centerAt(nodeSelected.x, nodeSelected.y, 10);
+        graphRef?.current?.ggv?.current.centerAt(nodeSelected.x, nodeSelected.y, ONE_SECOND);
       } else {
         handleNodeHover(nodeSelected);
+        graphRef?.current?.ggv?.current.centerAt(nodeSelected.x, nodeSelected.y, ONE_SECOND);
       }
+      const divElement = document.getElementById(nodeSelected.id + detailsLabel);
+      divElement?.scrollIntoView({ behavior: 'smooth' });
     }
   },[nodeSelected]) 
 

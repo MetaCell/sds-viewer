@@ -17,5 +17,6 @@
         "datasetsButtonText" : "Import a new dataset",
         "datasetsDialogSearchText" : "Search datasets by label or id",
         "datasetsButtonSubtitleText" : "Select a dataset to load"
-    }
+    },
+    "datasetsStorage" : "publishedDatasets"
 }
