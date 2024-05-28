@@ -234,7 +234,7 @@ const GraphViewer = (props) => {
   }, [selectedNode]);
 
   useEffect(() => {
-    if ( nodeSelected ) { 
+    if ( nodeSelected && nodeSelected?.tree_reference?.dataset_id?.includes(props.graph_id)) { 
       if ( nodeSelected?.id !== selectedNode?.id ){
         let node = nodeSelected;
         let collapsed = node.collapsed
