@@ -925,6 +925,7 @@ class Splinter {
 
                     let folderChildren = this.tree_parents_map2.get(newNode.parent_id)?.map(child => {
                         child.parent_id = newNode.uri_api
+                        child.collapsed = true;
                         return child;
                     });
 
@@ -971,9 +972,10 @@ class Splinter {
                 level = this.nodes.get(parent.attributes.derivedFrom[0])?.level + 1;
             }
         }
+        const new_node = this.buildNodeFromJson(node, level);
+        new_node.collapsed = new_node.type === typesModel.NamedIndividual.subject.type 
         if ( parent ) {
         parent.children_counter++;
-        const new_node = this.buildNodeFromJson(node, level);
         new_node.parent = parent;
         new_node.id = parent.id + new_node.id;
         this.forced_edges.push({
@@ -981,7 +983,6 @@ class Splinter {
             target: new_node?.id
         });
         new_node.childLinks = [];
-        new_node.collapsed = new_node.type === typesModel.NamedIndividual.subject.type 
         if ( !this.nodes.get(new_node.id) ) {
             this.nodes.set(new_node.id, this.factory.createNode(new_node));
             var children = this.tree_parents_map2.get(node.remote_id);

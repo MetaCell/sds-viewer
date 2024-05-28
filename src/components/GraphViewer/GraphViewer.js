@@ -239,19 +239,30 @@ const GraphViewer = (props) => {
         let node = nodeSelected;
         let collapsed = node.collapsed
         let parent = node.parent;
-        while ( parent && !parent?.collapsed) {
+        let prevNode = node;
+        while ( parent && parent?.collapsed && node.type ) {
+          prevNode = parent;
           parent = parent.parent;
         }
 
-        if ( nodeSelected.collapsed && nodeClickSource === "TREE") {
-          collapseSubLevels(parent, false, { links : 0 });
-          let updatedData = getPrunedTree(props.graph_id, selectedLayout.layout);
-          setData(updatedData);
-  
-          node.collapsed = true;
-          collapseSubLevels(nodeSelected, true, { links : 0 });
-          updatedData = getPrunedTree(props.graph_id, selectedLayout.layout);
-          setData(updatedData);
+        if ( prevNode && nodeSelected.collapsed && nodeClickSource === "TREE") {
+          if ( prevNode.type == rdfTypes.Subject.key ||  prevNode.type == rdfTypes.Sample.key ||
+            prevNode.type == rdfTypes.Collection.key ) {
+            prevNode.collapsed = false;
+            collapseSubLevels(prevNode, false, { links : 0 });
+            let updatedData = getPrunedTree(props.graph_id, selectedLayout.layout);
+            setData(updatedData);
+          }
+          if ( node.parent?.type == rdfTypes.Subject.key ||  node.parent?.type == rdfTypes.Sample.key ||
+            node.parent?.type == rdfTypes.Collection.key ) {
+            collapseSubLevels(node.parent, true, { links : 0 });
+            let updatedData = getPrunedTree(props.graph_id, selectedLayout.layout);
+            setData(updatedData);
+          } else {
+            collapseSubLevels(node, true, { links : 0 });
+            let updatedData = getPrunedTree(props.graph_id, selectedLayout.layout);
+            setData(updatedData);
+          }
         }
         setSelectedNode(nodeSelected);
         handleNodeHover(nodeSelected);
@@ -260,6 +271,8 @@ const GraphViewer = (props) => {
         handleNodeHover(nodeSelected);
         graphRef?.current?.ggv?.current.centerAt(nodeSelected.x, nodeSelected.y, ONE_SECOND);
       }
+      const divElement = document.getElementById(nodeSelected.id + detailsLabel);
+      divElement?.scrollIntoView({ behavior: 'smooth' });
     }
   },[nodeSelected]) 
 
