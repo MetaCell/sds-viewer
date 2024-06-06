@@ -799,6 +799,7 @@ class Splinter {
                 }
 
                 if (node.attributes?.relativePath !== undefined) {
+                    node.attributes.dataset_id = this.dataset_id;
                     node.attributes.publishedURI = 
                         Array.from(this.nodes)[0][1].attributes.hasUriPublished[0] + 
                         "?datasetDetailsTab=files&path=files/" +
@@ -1096,6 +1097,14 @@ class Splinter {
             node.graph_reference = this.findReference(node.remote_id);
             if ( node.graph_reference === undefined ) {
                 node.graph_reference = this.findReference(node.uri_api);
+            }
+            if ( node.graph_reference === undefined ) {
+                const fn = (hashMap, str) => [...hashMap.keys()].find(k => k.includes(str))
+                const graph_reference = fn(this.nodes, node.id)
+
+                if ( graph_reference ) {
+                    node.graph_reference = this.findReference(graph_reference);
+                }
             }
             this.tree_map.set(node.id, node);
             const newNode = {

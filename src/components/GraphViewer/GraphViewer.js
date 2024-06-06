@@ -70,13 +70,9 @@ const GraphViewer = (props) => {
 
   const handleNodeLeftClick = (node, event) => {
     if ( node.type === rdfTypes.Subject.key || node.type === rdfTypes.Sample.key || node.type === rdfTypes.Collection.key ) {
-      node.collapsed = !node.collapsed;
       collapseSubLevels(node, node.collapsed, { links : 0 });
+      node.collapsed = !node.collapsed;
       let updatedData = getPrunedTree(props.graph_id, selectedLayout.layout);
-      setData(updatedData);
-
-      collapseSubLevels(node, true, { links : 0 });
-      updatedData = getPrunedTree(props.graph_id, selectedLayout.layout);
       setData(updatedData);
     } 
     handleNodeHover(node);
@@ -121,7 +117,7 @@ const GraphViewer = (props) => {
     setCollapsed(!collapsed)
     setTimeout( () => {
       resetCamera();
-    },200)
+    },10)
   }
 
   /**
@@ -174,10 +170,7 @@ const GraphViewer = (props) => {
 
   const onEngineStop = () => {
     setForce();
-    if ( triggerCenter ) {
-      graphRef?.current?.ggv?.current.centerAt(selectedNode.x, selectedNode.y, ONE_SECOND);
-      triggerCenter = false;
-    }
+    graphRef?.current?.ggv?.current.centerAt(selectedNode.x, selectedNode.y, ONE_SECOND);
   }
 
   useEffect(() => {
@@ -234,8 +227,10 @@ const GraphViewer = (props) => {
   }, [selectedNode]);
 
   useEffect(() => {
-    if ( nodeSelected && ( nodeSelected?.tree_reference?.dataset_id?.includes(props.graph_id) || 
-        nodeSelected?.dataset_id?.includes(props.graph_id) )) { 
+    let sameDataset = nodeSelected?.tree_reference?.dataset_id?.includes(props.graph_id) || 
+                        nodeSelected?.dataset_id?.includes(props.graph_id) 
+                        || nodeSelected?.attributes?.dataset_id?.includes(props.graph_id);
+    if ( nodeSelected && sameDataset) { 
       if ( nodeSelected?.id !== selectedNode?.id ){
         let node = nodeSelected;
         let collapsed = node.collapsed
