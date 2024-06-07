@@ -70,13 +70,9 @@ const GraphViewer = (props) => {
 
   const handleNodeLeftClick = (node, event) => {
     if ( node.type === rdfTypes.Subject.key || node.type === rdfTypes.Sample.key || node.type === rdfTypes.Collection.key ) {
-      node.collapsed = !node.collapsed;
       collapseSubLevels(node, node.collapsed, { links : 0 });
+      node.collapsed = !node.collapsed;
       let updatedData = getPrunedTree(props.graph_id, selectedLayout.layout);
-      setData(updatedData);
-
-      collapseSubLevels(node, true, { links : 0 });
-      updatedData = getPrunedTree(props.graph_id, selectedLayout.layout);
       setData(updatedData);
     } 
     handleNodeHover(node);
@@ -121,7 +117,7 @@ const GraphViewer = (props) => {
     setCollapsed(!collapsed)
     setTimeout( () => {
       resetCamera();
-    },200)
+    },10)
   }
 
   /**
@@ -174,10 +170,7 @@ const GraphViewer = (props) => {
 
   const onEngineStop = () => {
     setForce();
-    if ( triggerCenter ) {
-      graphRef?.current?.ggv?.current.centerAt(selectedNode.x, selectedNode.y, ONE_SECOND);
-      triggerCenter = false;
-    }
+    selectedNode && handleNodeRightClick(nodeSelected)
   }
 
   useEffect(() => {
@@ -234,8 +227,10 @@ const GraphViewer = (props) => {
   }, [selectedNode]);
 
   useEffect(() => {
-    if ( nodeSelected && ( nodeSelected?.tree_reference?.dataset_id?.includes(props.graph_id) || 
-        nodeSelected?.dataset_id?.includes(props.graph_id) )) { 
+    let sameDataset = nodeSelected?.tree_reference?.dataset_id?.includes(props.graph_id) || 
+                        nodeSelected?.dataset_id?.includes(props.graph_id) 
+                        || nodeSelected?.attributes?.dataset_id?.includes(props.graph_id);
+    if ( nodeSelected && sameDataset) { 
       if ( nodeSelected?.id !== selectedNode?.id ){
         let node = nodeSelected;
         let collapsed = node.collapsed
@@ -264,10 +259,10 @@ const GraphViewer = (props) => {
             let updatedData = getPrunedTree(props.graph_id, selectedLayout.layout);
             setData(updatedData);
           }
+          setSelectedNode(nodeSelected);
+          handleNodeHover(nodeSelected);
+          graphRef?.current?.ggv?.current.centerAt(nodeSelected.x, nodeSelected.y, ONE_SECOND);  
         }
-        setSelectedNode(nodeSelected);
-        handleNodeHover(nodeSelected);
-        graphRef?.current?.ggv?.current.centerAt(nodeSelected.x, nodeSelected.y, ONE_SECOND);
       } else {
         handleNodeHover(nodeSelected);
         graphRef?.current?.ggv?.current.centerAt(nodeSelected.x, nodeSelected.y, ONE_SECOND);
@@ -362,11 +357,6 @@ const GraphViewer = (props) => {
         controls={
           <div>
           <div className='graph-view_controls'>
-            <IconButton area-label="GraphLayout" aria-controls="layout-menu" aria-haspopup="true" onClick={handleLayoutClick}>
-              <Tooltip id="button-report" title="Change Graph Layout">
-                <ViewTypeIcon />
-              </Tooltip>
-            </IconButton>
             <Menu
               id="layout-menu"
               anchorEl={layoutAnchorEl}
@@ -378,6 +368,11 @@ const GraphViewer = (props) => {
               <MenuItem selected={TOP_DOWN.layout === selectedLayout.layout} onClick={() => handleLayoutChange(TOP_DOWN)}>{TOP_DOWN.label}</MenuItem>
               <MenuItem selected={LEFT_RIGHT.layout === selectedLayout.layout} onClick={() => handleLayoutChange(LEFT_RIGHT)}>{LEFT_RIGHT.label}</MenuItem>
             </Menu>
+            <IconButton area-label="GraphLayout" aria-controls="layout-menu" aria-haspopup="true" onClick={handleLayoutClick}>
+              <Tooltip id="button-report" title="Change Graph Layout">
+                <ViewTypeIcon />
+              </Tooltip>
+            </IconButton>
             <IconButton area-label="ZoomIn" onClick={(e) => zoomIn()}>
               <Tooltip id="button-report" title="Zoom In">
                 <AddRoundedIcon />

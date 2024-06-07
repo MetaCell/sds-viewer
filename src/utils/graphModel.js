@@ -137,7 +137,7 @@ export const rdfTypes = {
                 "key": "title",
                 "property": "title",
                 "label": "Label",
-                "visible" : false
+                "visible" : true
             },
             {
                 "type": "dc",
