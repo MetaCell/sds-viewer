@@ -368,11 +368,11 @@ const GraphViewer = (props) => {
               <MenuItem selected={TOP_DOWN.layout === selectedLayout.layout} onClick={() => handleLayoutChange(TOP_DOWN)}>{TOP_DOWN.label}</MenuItem>
               <MenuItem selected={LEFT_RIGHT.layout === selectedLayout.layout} onClick={() => handleLayoutChange(LEFT_RIGHT)}>{LEFT_RIGHT.label}</MenuItem>
             </Menu>
+            <Tooltip id="button-report" title="Change Graph Layout">
             <IconButton area-label="GraphLayout" aria-controls="layout-menu" aria-haspopup="true" onClick={handleLayoutClick}>
-              <Tooltip id="button-report" title="Change Graph Layout">
                 <ViewTypeIcon />
-              </Tooltip>
             </IconButton>
+            </Tooltip>
             <IconButton area-label="ZoomIn" onClick={(e) => zoomIn()}>
               <Tooltip id="button-report" title="Zoom In">
                 <AddRoundedIcon />

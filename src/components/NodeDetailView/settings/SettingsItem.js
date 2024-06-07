@@ -67,17 +67,18 @@ const SettingsItem = props => {
           onClick={toggleItemDisabled}
           disableRipple
         >
-          <Tooltip id={item.label} title={"Toggle Property Visibility"}>
-            {!item.visible ? (
-              <AddCircleOutlineIcon
-                style={{ color: "#3779E1", fontSize: "1rem" }}
-              />
-            ) : (
-              <RemoveCircleOutlineIcon
-                style={{ color: "#ED745D", fontSize: "1rem" }}
-              />
-            )}
-          </Tooltip>
+          
+        {!item.visible ? (
+          <Tooltip id={item.label} title={"Show Property"}>
+          <AddCircleOutlineIcon
+            style={{ color: "#3779E1", fontSize: "1rem" }}
+          /></Tooltip>
+        ) : (
+          <Tooltip id={item.label} title={"Hide Property"}>
+          <RemoveCircleOutlineIcon
+            style={{ color: "#ED745D", fontSize: "1rem" }}
+          /></Tooltip>
+        )}
         </IconButton>
       </ListItemSecondaryAction>
     </ListItem>

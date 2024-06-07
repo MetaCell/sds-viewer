@@ -2,7 +2,7 @@ import {Box} from "@material-ui/core";
 import NodeFooter from "./Footers/Footer";
 import DetailsFactory from './factory';
 import Breadcrumbs from "./Details/Views/Breadcrumbs";
-import { IconButton } from '@material-ui/core';
+import { IconButton, Tooltip } from '@material-ui/core';
 import { subject_key, protocols_key, contributors_key } from '../../constants';
 import {TuneRounded} from "@material-ui/icons";
 import { useSelector, useDispatch } from 'react-redux'
@@ -79,7 +79,9 @@ const NodeDetailView = (props) => {
       }
       <NodeFooter />
       { !showSettingsContent && <Box className='overlay-button-container'>
+      <Tooltip id="button-report" title="Open Metadata Settings">
         <IconButton className="overlay-button" onClick={toggleContent}><TuneRounded /></IconButton>
+      </Tooltip>
       </Box> }
     </Box>
   );
