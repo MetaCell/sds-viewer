@@ -170,7 +170,7 @@ const GraphViewer = (props) => {
 
   const onEngineStop = () => {
     setForce();
-    graphRef?.current?.ggv?.current.centerAt(selectedNode.x, selectedNode.y, ONE_SECOND);
+    selectedNode && handleNodeRightClick(nodeSelected)
   }
 
   useEffect(() => {
@@ -259,10 +259,10 @@ const GraphViewer = (props) => {
             let updatedData = getPrunedTree(props.graph_id, selectedLayout.layout);
             setData(updatedData);
           }
+          setSelectedNode(nodeSelected);
+          handleNodeHover(nodeSelected);
+          graphRef?.current?.ggv?.current.centerAt(nodeSelected.x, nodeSelected.y, ONE_SECOND);  
         }
-        setSelectedNode(nodeSelected);
-        handleNodeHover(nodeSelected);
-        graphRef?.current?.ggv?.current.centerAt(nodeSelected.x, nodeSelected.y, ONE_SECOND);
       } else {
         handleNodeHover(nodeSelected);
         graphRef?.current?.ggv?.current.centerAt(nodeSelected.x, nodeSelected.y, ONE_SECOND);
@@ -357,11 +357,6 @@ const GraphViewer = (props) => {
         controls={
           <div>
           <div className='graph-view_controls'>
-            <IconButton area-label="GraphLayout" aria-controls="layout-menu" aria-haspopup="true" onClick={handleLayoutClick}>
-              <Tooltip id="button-report" title="Change Graph Layout">
-                <ViewTypeIcon />
-              </Tooltip>
-            </IconButton>
             <Menu
               id="layout-menu"
               anchorEl={layoutAnchorEl}
@@ -373,6 +368,11 @@ const GraphViewer = (props) => {
               <MenuItem selected={TOP_DOWN.layout === selectedLayout.layout} onClick={() => handleLayoutChange(TOP_DOWN)}>{TOP_DOWN.label}</MenuItem>
               <MenuItem selected={LEFT_RIGHT.layout === selectedLayout.layout} onClick={() => handleLayoutChange(LEFT_RIGHT)}>{LEFT_RIGHT.label}</MenuItem>
             </Menu>
+            <IconButton area-label="GraphLayout" aria-controls="layout-menu" aria-haspopup="true" onClick={handleLayoutClick}>
+              <Tooltip id="button-report" title="Change Graph Layout">
+                <ViewTypeIcon />
+              </Tooltip>
+            </IconButton>
             <IconButton area-label="ZoomIn" onClick={(e) => zoomIn()}>
               <Tooltip id="button-report" title="Zoom In">
                 <AddRoundedIcon />
