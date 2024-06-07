@@ -108,15 +108,15 @@ const DatasetsListDialog = (props) => {
       datasets = datasets.filter( node => node?.attributes?.statusOnPlatform?.[0]?.includes(PUBLISHED) );
 
 
-      let version = graph.nodes.find( node => node?.attributes?.versionInfo)?.attributes?.versionInfo
+      let version = config.version;
       let datasetStorage = {};
-      if ( version !== undefined && localStorage.getItem(config.datasetsStorage)?.version !== version[0] ) {
+      if ( version !== undefined && JSON.parse(localStorage.getItem(config.datasetsStorage))?.version !== version ) {
         let parsedDatasets = []
         datasets.forEach( node =>  {
           parsedDatasets.push({ name : node.name , doi : node.attributes?.hasDoi?.[0], label : node.attributes ? node.attributes.lowerCaseLabel : null}); 
         });
         datasetStorage = {
-          version : version[0],
+          version : version,
           datasets : parsedDatasets
         }
 

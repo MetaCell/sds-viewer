@@ -18,5 +18,6 @@
         "datasetsDialogSearchText" : "Search datasets by label or id",
         "datasetsButtonSubtitleText" : "Select a dataset to load"
     },
-    "datasetsStorage" : "publishedDatasets"
+    "datasetsStorage" : "publishedDatasets",
+    "version" : "1.1"
 }
