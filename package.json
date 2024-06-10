@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "license": "MIT",
   "private": true,
-  "homepage": "http://metacell.github.io/sds-viewer",
+  "homepage": "./",
   "dependencies": {
     "@craco/craco": "^6.1.2",
     "@frogcat/ttl2jsonld": "^0.0.7",
@@ -31,6 +31,7 @@
     "n3": "^1.13.0",
     "puppeteer": "13.5.1",
     "react": "^17.0.2",
+    "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^17.0.2",
     "react-hot-loader": "^4.13.0",
     "react-redux": "^7.2.4",

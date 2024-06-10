@@ -1,151 +1,97 @@
-import React from "react";
 import {
     Box,
     Typography,
-    List,
-    ListItemText,
+    Divider,
+    IconButton
 } from "@material-ui/core";
+import { useState, useEffect } from "react";
 import Links from './Views/Links';
 import SimpleLinkedChip from './Views/SimpleLinkedChip';
-import USER from "../../../images/user.svg";
 import SimpleLabelValue from './Views/SimpleLabelValue';
 import { detailsLabel } from '../../../constants';
+import { isValidUrl } from './utils';
+import { useSelector } from 'react-redux'
+import {DatasetIcon} from "../../../images/Icons";
+import FileCopyIcon from '@material-ui/icons/FileCopy';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const DatasetDetails = (props) => {
     const { node } = props;
-    const nodes = window.datasets[node.dataset_id].splinter.nodes;
+    const datasetPropertiesModel = useSelector(state => state.sdsState.metadata_model.dataset);
+    const [copiedDOI, setCopiedDOI] = useState({});
 
-    let title = "";
-    let label = "";
-    let idDetails = "";
-    let description = "";
-    // both tree and graph nodes are present, extract data from both
-    if (node?.tree_node && node?.graph_node) {
-        idDetails = node.graph_node?.id + detailsLabel;
-        label = node?.graph_node.attributes?.label?.[0];
-        title = node?.graph_node.attributes?.title?.[0];
-        description = node?.graph_node.attributes?.description?.[0];
-    // the below is the case where we have data only from the tree/hierarchy
-    } else if (node?.tree_node) {
-        label = node?.tree_node?.basename;
-        idDetails = node?.tree_node?.id + detailsLabel;
-    // the below is the case where we have data only from the graph
-    } else {
-        idDetails = node.graph_node?.id + detailsLabel;
-        label = node.graph_node?.attributes?.label?.[0];
-    }
-
-    let latestUpdate = "Not defined."
-    if (node?.graph_node?.attributes?.latestUpdate !== undefined) {
-        latestUpdate = new Date(node.graph_node.attributes?.latestUpdate?.[0])
-    }
-
-    let contactPerson = [];
-    if (node.graph_node.attributes?.hasResponsiblePrincipalInvestigator !== undefined) {
-        node.graph_node.attributes?.hasResponsiblePrincipalInvestigator.map(user => {
-            const contributor = nodes.get(user);
-            contactPerson.push({
-                name: contributor?.name,
-                designation: 'Principal Investigator',
-                img: USER
-            });
-            return user;
+    useEffect( () => {
+        let properties = {};
+        datasetPropertiesModel?.map( property => {
+            if ( property.link ){
+                properties[property.label] =false;
+            }
         });
-    }
-
-    if (node.graph_node.attributes?.hasContactPerson !== undefined) {
-        node.graph_node.attributes?.hasContactPerson.map(user => {
-            const contributor = nodes.get(user);
-            contactPerson.push({
-                name: contributor?.name,
-                designation: 'Contributor',
-                img: USER
-            });
-            return user;
-        });
-    }
-
-    const DETAILS_LIST = [
-        {
-            title: 'Error Index',
-            value: node.graph_node.attributes?.errorIndex
-        },
-        {
-            title: 'Template Schema Version',
-            value: node.graph_node.attributes?.hasDatasetTemplateSchemaVersion
-        },
-        {
-            title: 'Experiment Modality',
-            value: node.graph_node.attributes?.hasExperimentalModality
-        }
-    ];
+        setCopiedDOI(properties)
+    }, [] );
 
     return (
-        <Box id={idDetails}>
+        
+        <Box id={node.graph_node?.id + detailsLabel}>
+            <Divider />
             <Box className="tab-content">
-                <SimpleLabelValue label={'Title'} value={title} heading={'Dataset Details'} />
-                { node.graph_node.attributes?.hasDoi && node.graph_node.attributes?.hasDoi?.[0] !== ""
-                    ? (<Box className="tab-content-row">
-                            <Typography component="label">Label</Typography>
-                            <Links key={`label_href_link`} href={node.graph_node.attributes?.hasDoi?.[0]} title={label} />
-                        </Box>)
-                    : (<SimpleLabelValue label={'Label'} value={label} />)
-                }
-                <SimpleLabelValue label={'Description'} value={description} />
-
-                <SimpleLabelValue label={'Updated On'} value={latestUpdate.toString()} />
-
-                <Box className="tab-content-row">
-                    <Typography component="label">About</Typography>
-                    <SimpleLinkedChip chips={node.graph_node.attributes?.isAbout} />
+                <Box className='title-container'>
+                    <DatasetIcon />
+                    <Typography component="h3">Dataset Details</Typography>
                 </Box>
+                {datasetPropertiesModel?.map( property => {
+                    if ( property.visible ){
+                        const propValue = node.graph_node.attributes[property.property]?.[0];
 
-                <Box className="tab-content-row">
-                    <Typography component="label">Protocol Techniques</Typography>
-                    <SimpleLinkedChip chips={node.graph_node.attributes?.protocolEmploysTechnique} />
-                </Box>
-
-                <Box className="tab-content-row">
-                    <List component="nav" aria-label="main">
-                        {
-                            DETAILS_LIST?.map((item, index) => (
-                                <ListItemText key={`detail_list_${index}`}>
-                                    <Typography component="label">{item?.title}</Typography>
-                                    <Typography>{item?.value}</Typography>
-                                </ListItemText>
-                            ))
+                        if ( property.link ){
+                            const value = node.graph_node.attributes[property.link.property]?.[0];
+                            return (<Box className="tab-content-row">
+                                <Typography component="label">{property.label}</Typography>
+                                <Box className='title-container'>
+                                    <Tooltip
+                                        open={copiedDOI[property.label]}
+                                        title="DOI Copy"
+                                    >
+                                        <IconButton
+                                            color="primary"
+                                            size="small"
+                                            aria-label="Copy Content"
+                                            onClick={() => {
+                                                navigator.clipboard.writeText(value);
+                                                const newClipboardState = { ...copiedDOI, [property.label] : true};
+                                                setCopiedDOI(newClipboardState)
+                                            }}>
+                                            <FileCopyIcon size="small"/>
+                                        </IconButton>
+                                    </Tooltip>
+                                    <Box className="tab-content-row">
+                                        { property.link?.asText ? <Typography>{value}</Typography> : <Links key={`detail_links_dataset`} href={value} title={propValue} /> }
+                                    </Box>
+                                </Box>
+                            </Box>)
                         }
-                    </List>
-                </Box>
 
-                { node.graph_node.attributes?.hasExperimentalApproach !== undefined
-                    ? (<SimpleLabelValue label={'Experimental Approach'} value={node.graph_node.attributes?.hasExperimentalApproach?.toString()} />
-                    )
-                    : <> </>
-                }
+                        if ( isValidUrl(propValue) ){
+                            return (<Box className="tab-content-row">
+                                <Typography component="label">{property.label}</Typography>
+                                <Links key={`detail_links_dataset`} href={propValue} title={property.label} />
+                            </Box>)
+                        }
 
-                { node.graph_node.attributes?.hasDoi !== undefined
-                    ? (<Box className="tab-content-row">
-                            <Typography component="label">Links</Typography>
-                            <Links key={`detail_links_dataset`} href={node.graph_node.attributes?.hasDoi?.[0]} title="Dataset" />
-                        </Box>)
-                    : <> </>
-                }
-                { node.graph_node.attributes?.hasAdditionalFundingInformation !== undefined
-                    ? (<SimpleLabelValue label={'Additional Funding Information'} value={node.graph_node.attributes?.hasAdditionalFundingInformation} />
-                    )
-                    : <> </>
-                }
-                { node.graph_node.attributes?.statusOnPlatform !== undefined
-                    ? (<SimpleLabelValue label={'Status on Platform'} value={node.graph_node.attributes?.statusOnPlatform} />
-                    )
-                    : <> </>
-                }
-                { node.graph_node.attributes?.hasLicense !== undefined
-                    ? (<SimpleLabelValue label={'License'} value={node.graph_node.attributes?.hasLicense} />
-                    )
-                    : <> </>
-                }
+                        if ( typeof propValue === "object" ){
+                            return (<Box className="tab-content-row">
+                                        <Typography component="label">{property.label}</Typography>
+                                        <SimpleLinkedChip chips={node.graph_node.attributes[property.property]} />
+                                    </Box>)
+                        }
+
+                        if ( typeof propValue === "string" ){
+                            return (<SimpleLabelValue label={property.label} value={propValue} />)
+                        }
+
+                        return (<> </>)
+                    }
+                })}
             </Box>
         </Box>
     );

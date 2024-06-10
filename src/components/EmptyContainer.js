@@ -18,7 +18,7 @@ const EmptyContainer = (props) => {
               color='primary'
               onClick={() => props.setOpenDatasetsListDialog(true)}
             >
-              + { SPARC_DATASETS }
+              + { IMPORT_TEXT }
             </Button>
         </>
       }

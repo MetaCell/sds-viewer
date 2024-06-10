@@ -18,7 +18,6 @@ import { NodeViewWidget } from './app/widgets';
 import {  addWidget } from '@metacell/geppetto-meta-client/common/layout/actions';
 import { WidgetStatus } from "@metacell/geppetto-meta-client/common/layout/model";
 import DatasetsListSplinter from "./components/DatasetsListViewer/DatasetsListSplinter";
-
 import config from './config/app.json';
 
 const App = () => {
@@ -59,7 +58,6 @@ const App = () => {
       tree: await splinter.getTree(),
       splinter: splinter
     };
-    console.log("Graph ", _dataset.graph);
 
     dispatch(addDataset(_dataset));
     dispatch(addWidget({
@@ -132,8 +130,8 @@ const App = () => {
     };
     const splinter = new DatasetsListSplinter(undefined, file.data);
     let graph = await splinter.getGraph();
-    console.log("Graph ", graph);
     let datasets = graph.nodes.filter((node) => node?.attributes?.hasDoi);
+    let version = config.version
     const match = datasets.find( node => node.attributes?.hasDoi?.[0]?.includes(doi));
     if ( match ) {
       const datasetID = match.name;
@@ -141,6 +139,20 @@ const App = () => {
     } else {
       setLoading(false);
       setInitialised(false);
+    }
+
+    let datasetStorage = {};
+    if ( version !== undefined && JSON.parse(localStorage.getItem(config.datasetsStorage))?.version !== version ) {
+      let parsedDatasets = []
+      datasets.forEach( node =>  {
+        parsedDatasets.push({ name : node.name , doi : node.attributes?.hasDoi?.[0], label : node.attributes ? node.attributes?.label?.[0]?.toLowerCase() : null}); 
+      });
+      datasetStorage = {
+        version : version,
+        datasets : parsedDatasets
+      }
+
+      localStorage.setItem(config.datasetsStorage, JSON.stringify(datasetStorage));
     }
   };
 
@@ -151,9 +163,24 @@ const App = () => {
 
     if (doi && doi !== "" ) {
       if ( doiMatch ){
-        const fileHandler = new FileHandler();
-        const summaryURL = config.repository_url + config.available_datasets;
-        fileHandler.get_remote_file(summaryURL, loadDatsetFromDOI);
+        let version = config.version;
+        const storage = JSON.parse(localStorage.getItem(config.datasetsStorage));
+        const storageVersion = storage?.version
+        if ( storageVersion === version  ) {
+          let storedDatasetsInfo = JSON.parse(localStorage.getItem(config.datasetsStorage));
+          const match = storedDatasetsInfo.datasets.find( node => node?.doi.includes(doi));
+          if ( match ) {
+            const datasetID = match.name;
+            loadFiles(datasetID);
+          } else {
+            setLoading(false);
+            setInitialised(false);
+          }
+        } else {
+          const fileHandler = new FileHandler();
+          const summaryURL = config.repository_url + config.available_datasets;
+          fileHandler.get_remote_file(summaryURL, loadDatsetFromDOI);
+        }
       }
     }
   }, []);

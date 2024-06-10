@@ -7,11 +7,10 @@ import {
   InputAdornment,
   Button,
 } from '@material-ui/core';
-import ToggleRight from '../../images/toggle-right.svg';
 import Logo from '../../images/logo.svg';
 import ToggleLeft from '../../images/toggle-left.svg';
 import Search from '../../images/search.svg';
-
+import KeyboardTabIcon from '@material-ui/icons/KeyboardTab';
 const SidebarHeader = (props) => {
   const { expand, setExpand, setSearchTerm, searchTerm } = props;
   const handleChange = ( e ) => {
@@ -21,8 +20,8 @@ const SidebarHeader = (props) => {
   return (
     <Box className='sidebar-header'>
         <img src={Logo} alt='Logo' />
-        <IconButton aria-label='toggle' onClick={() => setExpand(!expand)}>
-          <img src={!expand ? ToggleRight : ToggleLeft} alt='Toggle' />
+        <IconButton aria-label='toggle' onClick={() => setExpand(!expand)} className='shrink-btn'>
+            {!expand ? <KeyboardTabIcon/> : <img src={ToggleLeft} alt='Toggle'/>}
         </IconButton>
 
         {expand && (

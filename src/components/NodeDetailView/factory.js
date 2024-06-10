@@ -12,9 +12,9 @@ import SampleDetails from './Details/SampleDetails';
 import DatasetDetails from './Details/DatasetDetails';
 import SubjectDetails from './Details/SubjectDetails';
 import ProtocolDetails from './Details/ProtocolDetails';
-import CollectionDetails from './Details/CollectionDetails';
 import GroupDetails from './Details/GroupDetails';
-
+import CollectionDetails from './Details/CollectionDetails'
+import Settings from "./settings/Settings"
 var DetailsFactory = function () {
     this.createDetails = function (node) {
         let details = null;
@@ -64,7 +64,7 @@ const Collection = function (node) {
     nodeDetail.getHeader = () => {
         return (
             <>
-                {/* <CollectionHeader node={node} /> */}
+                <CollectionHeader node={node} />
             </>
         )
     };
@@ -72,7 +72,7 @@ const Collection = function (node) {
     nodeDetail.getDetail = () => {
         return (
             <>
-                {/* <CollectionDetails node={node} /> */}
+                <CollectionDetails node={node} />
             </>
         )
     };
@@ -80,8 +80,16 @@ const Collection = function (node) {
     nodeDetail.getAll = () => {
         return (
             <>
-                {/* <CollectionHeader node={node} />
-                <CollectionDetails node={node} /> */}
+                <CollectionHeader node={node} />
+                <CollectionDetails node={node} />
+            </>
+        )
+    }
+
+    nodeDetail.getSettings = () => {
+        return (
+            <>
+                <Settings node={node} />
             </>
         )
     }
@@ -116,6 +124,14 @@ const Group = function (node) {
             </>
         )
     }
+    
+    nodeDetail.getSettings = () => {
+        return (
+            <>
+                <Settings node={node} />
+            </>
+        )
+    }
     return nodeDetail;
 };
 
@@ -144,6 +160,14 @@ const Dataset = function (node) {
             <>
                 <DatasetHeader node={node} />
                 <DatasetDetails node={node} />
+            </>
+        )
+    }
+
+    nodeDetail.getSettings = () => {
+        return (
+            <>
+                <Settings node={node} />
             </>
         )
     }
@@ -209,6 +233,14 @@ const Sample = function (node) {
             </>
         )
     }
+
+    nodeDetail.getSettings = () => {
+        return (
+            <>
+                <Settings node={node} />
+            </>
+        )
+    }
     return nodeDetail;
 };
 
@@ -240,6 +272,14 @@ const Subject = function (node) {
             </>
         )
     }
+
+    nodeDetail.getSettings = () => {
+        return (
+            <>
+                <Settings node={node} />
+            </>
+        )
+    }
     return nodeDetail;
 };
 
@@ -268,6 +308,14 @@ const File = function (node) {
             <>
                 <FileHeader node={node} />
                 <FileDetails node={node} />
+            </>
+        )
+    }
+
+    nodeDetail.getSettings = () => {
+        return (
+            <>
+                <Settings node={node} />
             </>
         )
     }

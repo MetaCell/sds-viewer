@@ -1,10 +1,9 @@
-import React from "react";
 import {
     Box,
+    Divider,
     Typography,
 } from "@material-ui/core";
 import Links from './Views/Links';
-import SimpleLabelValue from './Views/SimpleLabelValue';
 import { detailsLabel } from '../../../constants';
 
 const PersonDetails = (props) => {
@@ -28,6 +27,7 @@ const PersonDetails = (props) => {
 
     return (
         <Box id={idDetails}>
+            <Divider />
             <Box className="tab-content">
                 <Typography component="h3">Person Details</Typography>
                 <Box className="tab-content-row">

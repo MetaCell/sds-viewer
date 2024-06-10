@@ -1,6 +1,17 @@
 import * as Actions from './actions';
 import * as LayoutActions from '@metacell/geppetto-meta-client/common/layout/actions';
+import { rdfTypes } from "../utils/graphModel";
+import {TOGGLE_METADATA_ITEM_VISIBILITY, UPDATE_METADATA_ITEMS_ORDER} from "./actions";
 
+const savedMetadataModel = localStorage.getItem("metadata_model");
+const initialMetadataModel = savedMetadataModel ? JSON.parse(savedMetadataModel) : {
+    dataset: [...rdfTypes.Dataset.properties],
+    subject: [...rdfTypes.Subject.properties],
+    sample: [...rdfTypes.Sample.properties],
+    collection : [...rdfTypes.Collection.properties],
+    group: [...rdfTypes.Group.properties],
+    file: [...rdfTypes.File.properties]
+};
 export const sdsInitialState = {
     "sdsState": {
         datasets: [],
@@ -19,7 +30,9 @@ export const sdsInitialState = {
             tree_node: null,
             source: ""
         },
-        layout : {}
+        layout : {},
+        settings_panel_visible : false,
+        metadata_model : initialMetadataModel
     }
 };
 
@@ -105,8 +118,44 @@ export default function sdsClientReducer(state = {}, action) {
                 };
             }
             break;
+        case TOGGLE_METADATA_ITEM_VISIBILITY:
+            const { groupTitle, itemId } = action.data;
+            const updatedMetadataModel = { ...state.metadata_model };
+            const groupIndex = updatedMetadataModel[groupTitle].findIndex(item => item.key === itemId);
+
+            if (groupIndex !== -1) {
+                const itemToToggle = updatedMetadataModel[groupTitle][groupIndex];
+                itemToToggle.visible = !itemToToggle.visible;
+
+                // Toggle visibility first, then reorder items
+                updatedMetadataModel[groupTitle].sort((a, b) => {
+                    if (a.visible === b.visible) {
+                        // Preserve the original order for items with the same visibility
+                        return updatedMetadataModel[groupTitle].indexOf(a) - updatedMetadataModel[groupTitle].indexOf(b);
+                    }
+                });
+            }
+            localStorage.setItem("metadata_model", JSON.stringify(updatedMetadataModel));
+
+            return {
+                ...state,
+                metadata_model: { ...updatedMetadataModel }
+            };
+        case UPDATE_METADATA_ITEMS_ORDER:
+            const {  title, newItemsOrder } = action.payload;
+            const updatedMetadataModelOrder = {
+                ...state.metadata_model,
+                [title]: newItemsOrder,
+            };
+            localStorage.setItem("metadata_model", JSON.stringify(updatedMetadataModelOrder));
+            return {
+                ...state,
+                metadata_model: updatedMetadataModelOrder,
+            };
         case LayoutActions.layoutActions.SET_LAYOUT:
             return { ...state, layout : action.data.layout};
+        case Actions.TOGGLE_METADATA_SETTINGS:
+            return { ...state, settings_panel_visible : action.data.visible};
         default:
             return state;
     }

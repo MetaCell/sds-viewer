@@ -1,33 +1,53 @@
-import React from "react";
 import {
     Box,
+    Divider,
+    Typography
 } from "@material-ui/core";
+import Links from './Views/Links';
+import SimpleLinkedChip from './Views/SimpleLinkedChip';
 import SimpleLabelValue from './Views/SimpleLabelValue';
 import { detailsLabel } from '../../../constants';
+import { useSelector } from 'react-redux'
+import { isValidUrl } from './utils';
 
 const GroupDetails = (props) => {
     const { node } = props;
-
-    let title = "";
-    let idDetails = "";
-    // both tree and graph nodes are present, extract data from both
-    if (node?.tree_node && node?.graph_node) {
-        title = node.graph_node?.name;
-        idDetails = node.graph_node?.id + detailsLabel;
-    // the below is the case where we have data only from the tree/hierarchy
-    } else if (node?.tree_node) {
-        title = node.tree_node?.basename;
-        idDetails = node.tree_node?.id + detailsLabel;
-    // the below is the case where we have data only from the graph
-    } else {
-        title = node.graph_node?.name;
-        idDetails = node.graph_node?.id + detailsLabel;
-    }
+    const groupPropertiesModel = useSelector(state => state.sdsState.metadata_model.group);
     
     return (
-        <Box className="secondary-sidebar_body" id={idDetails}>
+        <Box className="secondary-sidebar_body" id={node?.graph_node?.id + detailsLabel}>
+            <Divider />
             <Box className="tab-content">
-                <SimpleLabelValue label={'# of Subjects '} value={node?.graph_node?.subjects} heading={node?.graph_node?.name + ' group details'} />
+                <SimpleLabelValue label={""} value={""} heading={"Group Details"} />
+
+                {groupPropertiesModel?.map( property => {
+                    if ( property.visible ){
+                        const propValue = node.graph_node[property.property];
+                        if ( isValidUrl(propValue) ){
+                            return (<Box className="tab-content-row">
+                                <Typography component="label">{property.label}</Typography>
+                                <Links key={`detail_links_dataset`} href={propValue} title={property.label + " Link"} />
+                            </Box>)
+                        }
+
+                        else if ( typeof propValue === "object" ){
+                            return (<Box className="tab-content-row">
+                                        <Typography component="label">{property.label}</Typography>
+                                        <SimpleLinkedChip chips={node.graph_node[property.property]} />
+                                    </Box>)
+                        }
+
+                        else if ( typeof propValue === "string" ){
+                            return (<SimpleLabelValue label={property.label} value={propValue} />)
+                        }
+
+                        else if ( typeof propValue === "number" ){
+                            return (<SimpleLabelValue label={property.label} value={propValue} />)
+                        }
+
+                        return (<> </>)
+                    }
+                })}
             </Box>
         </Box>
     );
