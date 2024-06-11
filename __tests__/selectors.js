@@ -2,7 +2,7 @@
 
 export const EMPTY_DATASET_VIEWER_SELECTOR = '.MuiBox-empty';
 export const EMPTY_DATASET_LIST_SELECTOR = '.no-instance';
-export const LOAD_BUTTONS_SELECTOR = 'button[class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-disableElevation"]';
+export const LOAD_BUTTONS_SELECTOR = 'button[class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-disableElevation MuiButton-fullWidth"]';
 export const DATASET_LIST_SELECTOR = '.datasets_list';
 export const DATASET_ITEM_SELECTOR = '.dataset_item';
 export const DONE_BUTTON_SELECTOR = 'button[class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-disableElevation Mui-disabled MuiButton-fullWidth Mui-disabled"]';

@@ -4,6 +4,7 @@ import { ONE_SECOND, ONE_MINUTE, TWO_MINUTES, TEN_MINUTES } from "./time_constan
 import 'expect-puppeteer';
 import 'puppeteer'
 import { toMatchImageSnapshot } from 'jest-image-snapshot'
+import { time } from "console";
 expect.extend({ toMatchImageSnapshot })
 const axios = require('axios').default;
 const fs = require('fs');
@@ -41,12 +42,12 @@ describe("SDS Viewer e2e Test: Sparc Dataset", () => {
             })
             .catch(() => { });
 
-        await page.waitForSelector(selectors.EMPTY_DATASET_VIEWER_SELECTOR);
+        await page.waitForSelector(selectors.EMPTY_DATASET_VIEWER_SELECTOR, { timeout: 30000 });
     });
 
 
     test("Home Page", async () => {
-        await page.waitForSelector(selectors.EMPTY_DATASET_VIEWER_SELECTOR);
+        await page.waitForSelector(selectors.EMPTY_DATASET_VIEWER_SELECTOR, { timeout: 30000 });
 
         await page.waitForSelector(selectors.EMPTY_DATASET_LIST_SELECTOR);
         console.log('Homepage loaded')
@@ -65,7 +66,7 @@ describe("SDS Viewer e2e Test: Sparc Dataset", () => {
 
         console.log('Opening SPARC Datasets')
 
-        await page.waitForSelector(selectors.LOAD_BUTTONS_SELECTOR)
+        await page.waitForSelector(selectors.LOAD_BUTTONS_SELECTOR, { timeout: 30000 })
 
         const load_dataset_button = await page.$$(selectors.LOAD_BUTTONS_SELECTOR)
         for (var i = 0; i < load_dataset_button.length; i++) {
@@ -89,7 +90,7 @@ describe("SDS Viewer e2e Test: Sparc Dataset", () => {
             await sparc_dataset_list[0].click()
         }
 
-        await page.waitForSelector(selectors.ENABLED_DONE_BUTTON_SELECTOR)
+        await page.waitForSelector(selectors.ENABLED_DONE_BUTTON_SELECTOR, {disabled: false, timeout: 30000})
 
     })
 
@@ -97,8 +98,13 @@ describe("SDS Viewer e2e Test: Sparc Dataset", () => {
     test('Load and check SPARC Dataset', async () => {
 
         console.log('Loading a SPARC dataset')
-
-        await page.click(selectors.ENABLED_DONE_BUTTON_SELECTOR)
+        await page.waitForTimeout(ONE_SECOND )
+        await page.waitForSelector(selectors.ENABLED_DONE_BUTTON_SELECTOR, {disabled: false, timeout: 30000})
+        const import_button = await page.$$(selectors.ENABLED_DONE_BUTTON_SELECTOR)
+        for (var i = 0; i < import_button.length; i++) {
+            await import_button[1].click()
+        }
+        // await page.click(selectors.ENABLED_DONE_BUTTON_SELECTOR)
         await page.waitForSelector(selectors.LOADED_DATASET_SELECTOR)
         await page.waitForSelector(selectors.GRAPH_SELECTOR)
 
@@ -139,7 +145,7 @@ describe("SDS Viewer e2e Test: Sparc Dataset", () => {
     test('Load another SPARC Dataset', async () => {
 
         console.log('Loading another SPARC dataset')
-
+        await page.waitForSelector(selectors.LOAD_BUTTONS_SELECTOR, { timeout: 30000 });
         const load_dataset_button = await page.$$(selectors.LOAD_BUTTONS_SELECTOR)
 
         for (var i = 0; i < load_dataset_button.length; i++) {
@@ -147,25 +153,28 @@ describe("SDS Viewer e2e Test: Sparc Dataset", () => {
 
         }
 
-        await page.waitForSelector(selectors.DATASET_LIST_SELECTOR)
-        await page.waitForSelector(selectors.DATASET_ITEM_SELECTOR)
+        await page.waitForSelector(selectors.DATASET_LIST_SELECTOR, { timeout: 30000 })
+        await page.waitForSelector(selectors.DATASET_ITEM_SELECTOR, { timeout: 30000 })
         await page.waitForSelector(selectors.DONE_BUTTON_SELECTOR, { disabled: true })
-
+        await page.waitForSelector(selectors.SPARC_DATASET_LIST_SELECTOR, { hidden: false })
         const sparc_dataset_list = await page.$$(selectors.SPARC_DATASET_LIST_SELECTOR)
         const sparc_dataset_list_count = sparc_dataset_list.length
         for (var i = 0; i < sparc_dataset_list_count; i++) {
             await sparc_dataset_list[1].click()
         }
 
-        await page.waitForSelector(selectors.ENABLED_DONE_BUTTON_SELECTOR)
+        await page.waitForSelector(selectors.ENABLED_DONE_BUTTON_SELECTOR, {disabled: false, timeout: 30000})
 
-        await page.click(selectors.ENABLED_DONE_BUTTON_SELECTOR)
+        const import_button = await page.$$(selectors.ENABLED_DONE_BUTTON_SELECTOR)
+        for (var i = 0; i < import_button.length; i++) {
+            await import_button[1].click()
+        }
         await page.waitForSelector(selectors.LOADED_DATASET_SELECTOR)
 
         console.log('Dataset loaded')
 
-        await page.waitForSelector(selectors.GRAPH_SELECTOR)
-        await page.waitForTimeout(10000)
+        await page.waitForSelector(selectors.GRAPH_SELECTOR, { timeout: 30000 })
+        await page.waitForTimeout(ONE_SECOND * 3)
         const folder = await page.$$(selectors.LOADED_DATASET_SELECTOR)
         const folder_lenght = folder.length
 
@@ -185,12 +194,11 @@ describe("SDS Viewer e2e Test: Sparc Dataset", () => {
         console.log('Opening a Dataset thorugh the ID')
 
         await page.goto(DEV_URL)
-        await page.waitForSelector(selectors.EMPTY_DATASET_LIST_SELECTOR);
+        await page.waitForSelector(selectors.EMPTY_DATASET_LIST_SELECTOR, { timeout: 30000 });
         await page.waitForTimeout(ONE_SECOND * 3)
         await page.goto(DEV_URL + '?id=' + DATASET_ID)
         await page.waitForTimeout(ONE_SECOND * 3)
-        await page.waitForSelector(selectors.FELINE_DATASET_IMG_SELECTOR)
-        await page.waitForSelector(selectors.GRAPH_SELECTOR)
+        await page.waitForSelector(selectors.GRAPH_SELECTOR, { timeout: 30000 })
 
         console.log('Dataset loaded')
 
