@@ -107,23 +107,20 @@ const DatasetsListDialog = (props) => {
       datasets.forEach( node => node.attributes ? node.attributes.lowerCaseLabel = node.attributes?.label?.[0]?.toLowerCase() : null );
       datasets = datasets.filter( node => node?.attributes?.statusOnPlatform?.[0]?.includes(PUBLISHED) );
 
-
       let version = config.version;
       let datasetStorage = {};
-      if ( version !== undefined && JSON.parse(localStorage.getItem(config.datasetsStorage))?.version !== version ) {
-        let parsedDatasets = []
-        datasets.forEach( node =>  {
-          parsedDatasets.push({ name : node.name , doi : node.attributes?.hasDoi?.[0], label : node.attributes ? node.attributes.lowerCaseLabel : null}); 
-        });
-        datasetStorage = {
-          version : version,
-          datasets : parsedDatasets
-        }
-
-        localStorage.setItem(config.datasetsStorage, JSON.stringify(datasetStorage));
-        dispatch(setDatasetsList(datasetStorage.datasets));
-        setFilteredDatasets(datasetStorage.datasets);
+      let parsedDatasets = []
+      datasets?.forEach( node =>  {
+        parsedDatasets.push({ name : node.name , doi : node.attributes?.hasDoi?.[0], label : node.attributes ? node.attributes?.lowerCaseLabel : null}); 
+      });
+      datasetStorage = {
+        version : version,
+        datasets : parsedDatasets
       }
+
+      localStorage.setItem(config.datasetsStorage, JSON.stringify(datasetStorage));
+      dispatch(setDatasetsList(datasetStorage.datasets));
+      setFilteredDatasets(datasetStorage.datasets);
     };
     const summaryURL = config.repository_url + config.available_datasets;
     fileHandler.get_remote_file(summaryURL, callback);
@@ -156,7 +153,10 @@ const DatasetsListDialog = (props) => {
 
   useEffect(() => {
     if ( open && datasets.length === 0 ) {
-      if ( localStorage.getItem(config.datasetsStorage) ) {
+      let version = config.version;
+      const storage = JSON.parse(localStorage.getItem(config.datasetsStorage));
+      const storageVersion = storage?.version
+      if ( localStorage.getItem(config.datasetsStorage) && version === storageVersion ) {
         let storedDatasetsInfo = JSON.parse(localStorage.getItem(config.datasetsStorage));
         dispatch(setDatasetsList(storedDatasetsInfo.datasets));
         setFilteredDatasets(storedDatasetsInfo.datasets);
