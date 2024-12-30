@@ -142,6 +142,48 @@ describe("SDS Viewer e2e Test: Sparc Dataset", () => {
 
     })
 
+    test('Change Graph Layout', async () => {
+        console.log('Changing Graph Layout...')
+
+        await page.waitForSelector('button[area-label="GraphLayout"]')
+        await page.click('button[area-label="GraphLayout"]')
+        await page.waitForSelector('ul[class="MuiList-root MuiMenu-list MuiList-padding"]')
+        await page.click('ul[class="MuiList-root MuiMenu-list MuiList-padding"] > li:nth-child(1)');
+        await page.waitForTimeout(3000)
+        await console.log('... taking snapshot ...')
+        expect(await page.screenshot())
+            .toMatchImageSnapshot({
+                ...SNAPSHOT_OPTIONS,
+                customSnapshotIdentifier: 'Radial View'
+        });
+
+        await page.waitForSelector('button[area-label="GraphLayout"]')
+        await page.click('button[area-label="GraphLayout"]')
+        await page.waitForSelector('ul[class="MuiList-root MuiMenu-list MuiList-padding"]')
+        await page.click('ul[class="MuiList-root MuiMenu-list MuiList-padding"] > li:nth-child(2)');
+        await page.waitForTimeout(3000)
+        await console.log('... taking snapshot ...')
+        expect(await page.screenshot())
+            .toMatchImageSnapshot({
+                    ...SNAPSHOT_OPTIONS,
+                    customSnapshotIdentifier: 'Tree View'
+        });
+        
+
+        await page.waitForSelector('button[area-label="GraphLayout"]')
+        await page.click('button[area-label="GraphLayout"]')
+        await page.waitForSelector('ul[class="MuiList-root MuiMenu-list MuiList-padding"]')
+        await page.click('ul[class="MuiList-root MuiMenu-list MuiList-padding"] > li:nth-child(3)');
+        await page.waitForTimeout(3000)
+        await console.log('... taking snapshot ...')
+        expect(await page.screenshot())
+            .toMatchImageSnapshot({
+                    ...SNAPSHOT_OPTIONS,
+                    customSnapshotIdentifier: 'Dataset Loaded'
+        });
+        console.log('Graph Layout Changed')
+    })
+
     test('Load another SPARC Dataset', async () => {
 
         console.log('Loading another SPARC dataset')
@@ -215,6 +257,37 @@ describe("SDS Viewer e2e Test: Sparc Dataset", () => {
                 customSnapshotIdentifier: 'Dataset Loaded'
             });
 
+    })
+
+    test('Change Metadata Settings', async () => {
+        await page.waitForSelector('button[title="DOI Copy"]');
+        let doiCopyButtons = await page.$$('button[title="DOI Copy"]');
+        expect(doiCopyButtons.length).toBeGreaterThan(1);
+
+        await page.waitForSelector('button[title="Open Metadata Settings"]')
+        await page.click('button[title="Open Metadata Settings"]')
+        await page.waitForSelector('.MuiListItem-root.MuiListItem-secondaryAction')
+        await page.waitForSelector('button[aria-label="delete"]');
+        const deleteButtons = await page.$$('button[aria-label="delete"]');
+        await deleteButtons[0].click();
+        await page.waitForSelector('.secondary-sidebar .MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-disableElevation.MuiButton-fullWidth')
+        await page.click('.secondary-sidebar .MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-disableElevation.MuiButton-fullWidth')
+        
+        await page.waitForSelector('button[title="DOI Copy"]')
+        doiCopyButtons = await page.$$('button[title="DOI Copy"]');
+        expect(doiCopyButtons.length).toBe(1);
+
+    })
+
+    test('Check Help widgets', async () => {
+        await page.waitForSelector('a[area-label="manual"]')
+        await page.click('a[area-label="manual"]')
+
+        const newPageTarget = await browser.waitForTarget(target => target.url() === 'https://github.com/MetaCell/sds-viewer/blob/development/README.md');
+        const newPage = await newPageTarget.page();
+
+        const url = newPage.url();
+        expect(url).toBe('https://github.com/MetaCell/sds-viewer/blob/development/README.md');
     })
 
     // No Longer applicable
