@@ -264,8 +264,9 @@ describe("SDS Viewer e2e Test: Sparc Dataset", () => {
         let doiCopyButtons = await page.$$('button[title="DOI Copy"]');
         expect(doiCopyButtons.length).toBeGreaterThan(1);
 
-        await page.waitForSelector('button[title="Open Metadata Settings"]')
-        await page.click('button[title="Open Metadata Settings"]')
+        await page.waitForSelector('button[class="MuiButtonBase-root MuiIconButton-root overlay-button"]', {hidden: false})
+        await page.waitForTimeout(1000)
+        await page.click('button[class="MuiButtonBase-root MuiIconButton-root overlay-button"]')
         await page.waitForSelector('.MuiListItem-root.MuiListItem-secondaryAction')
         await page.waitForSelector('button[aria-label="delete"]');
         const deleteButtons = await page.$$('button[aria-label="delete"]');
