@@ -591,14 +591,14 @@ export const rdfTypes = {
             {
                 "label": "Age unit",
                 "property": "ageUnit",
-                "path": [ "TEMP:hasAge", "TEMP:hasUnit", "@id" ],
+                "path": [ "TEMP:hasAge",  "TEMP:hasAgeMax", "TEMP:hasAgeMin", "TEMP:hasUnit", "@id" ],
                 "trimType": "unit:",
                 "type": "string"
             },
             {
                 "label": "Age value",
                 "property": "ageValue",
-                "path": [ "TEMP:hasAge", "rdf:value" ],
+                "path": [ "TEMP:hasAge", "TEMP:hasAgeMax", "TEMP:hasAgeMin", "rdf:value" ],
                 "innerPath": "@value",
                 "trimType": "",
                 "type": "digit"
@@ -606,14 +606,14 @@ export const rdfTypes = {
             {
                 "label": "Age base unit",
                 "property": "ageBaseUnit",
-                "path": [ "TEMP:hasAge", "TEMP:asBaseUnits", "TEMP:hasUnit", "@id" ],
+                "path": [ "TEMP:hasAge", "TEMP:hasAgeMax", "TEMP:hasAgeMin", "TEMP:asBaseUnits", "TEMP:hasUnit", "@id" ],
                 "trimType": "unit:",
                 "type": "string"
             },
             {
                 "label": "Age base value",
                 "property": "ageBaseValue",
-                "path": [ "TEMP:hasAge", "TEMP:asBaseUnits", "rdf:value" ],
+                "path": [ "TEMP:hasAge", "TEMP:hasAgeMax", "TEMP:hasAgeMin", "TEMP:asBaseUnits", "rdf:value" ],
                 "innerPath": "@value",
                 "trimType": "",
                 "type": "digit"
@@ -657,14 +657,14 @@ export const rdfTypes = {
             {
                 "label": "Age unit",
                 "property": "ageUnit",
-                "path": [ "TEMP:hasAge", "TEMP:hasUnit", "@id" ],
+                "path": [ "TEMP:hasAge",  "TEMP:hasAgeMax", "TEMP:hasAgeMin","TEMP:hasUnit", "@id" ],
                 "trimType": "unit:",
                 "type": "string"
             },
             {
                 "label": "Age value",
                 "property": "ageValue",
-                "path": [ "TEMP:hasAge", "rdf:value" ],
+                "path": [ "TEMP:hasAge",  "TEMP:hasAgeMax", "TEMP:hasAgeMin","rdf:value" ],
                 "innerPath": "@value",
                 "trimType": "",
                 "type": "digit"
