@@ -2,7 +2,8 @@ export const type_key = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type";
 
 
 export const RDF_TO_JSON_TYPES = [
-    {key: 'sparc:Subject', toTrim: 'subject'}
+    {key: 'sparc:Subject', toTrim: 'subject'},
+    {key: 'sparc:sparcPerformance', toTrim: 'performance'}
 ];
 
 
@@ -122,21 +123,10 @@ export const rdfTypes = {
         "key": "Dataset",
         "properties": [
             {
-                "type": "rdfs",
-                "key": "label",
-                "property": "label",
-                "label": "Title",
-                "visible" : true,
-                "link" : {
-                    "property" : "hasUriPublished",
-                    "asText" : true
-                }
-            },
-            {
                 "type": "dc",
                 "key": "title",
                 "property": "title",
-                "label": "Label",
+                "label": "Title",
                 "visible" : true
             },
             {
@@ -209,7 +199,7 @@ export const rdfTypes = {
                 "label": "DOI",
                 "visible" : true,
                 "link" : {
-                    "property" : "hasUriPublished",
+                    "property" : "hasDoi",
                     "asText" : true
                 }
             },
@@ -651,52 +641,134 @@ export const rdfTypes = {
                 "property": "participantInPerformanceOf",
                 "label": "Participant In Performance Of",
                 "visible" : true
+            },
+            {
+                "type": "TEMP",
+                "key": "hasDerivedInformation",
+                "property": "hasDerivedInformation",
+                "label": "Derived Information",
+                "visible" : false
+            },
+            {
+                "type": "TEMP",
+                "key": "localId",
+                "property": "localId",
+                "label": "Local ID",
+                "visible" : true
+            },
+            {
+                "type": "TEMPRAW",
+                "key": "amplitude_ua",
+                "property": "amplitude_ua",
+                "label": "Amplitude UA",
+                "visible" : true
+            },
+            {
+                "type": "TEMPRAW",
+                "key": "anode_distance_cm_from_life",
+                "property": "anode_distance_cm_from_life",
+                "label": "Anode Distance cm from Life",
+                "visible" : true
+            },
+            {
+                "type": "TEMPRAW",
+                "key": "cathode_distance_cm_from_life",
+                "property": "cathode_distance_cm_from_life",
+                "label": "Cathode Distance cm from Life",
+                "visible" : true
+            },
+            {
+                "type": "TEMPRAW",
+                "key": "conditions",
+                "property": "conditions",
+                "label": "Conditions",
+                "visible" : true
+            },
+            {
+                "type": "TEMPRAW",
+                "key": "electrode_type",
+                "property": "electrode_type",
+                "label": "Electrode Type",
+                "visible" : true
+            },
+            {
+                "type": "TEMPRAW",
+                "key": "recording_number",
+                "property": "recording_number",
+                "label": "Recording Number",
+                "visible" : true
+            },
+            {
+                "type": "TEMPRAW",
+                "key": "rotational_alignment",
+                "property": "rotational_alignment",
+                "label": "Rotational Alignment",
+                "visible" : true
             }
         ],
         "additional_properties": [
             {
-                "label": "Age unit",
-                "property": "ageUnit",
-                "path": [ "TEMP:hasAge",  "TEMP:hasAgeMax", "TEMP:hasAgeMin","TEMP:hasUnit", "@id" ],
-                "trimType": "unit:",
-                "type": "string"
+                "type": "TEMP",
+                "key": "hasDerivedInformation",
+                "property": "hasDerivedInformation",
+                "label": "Derived Information",
+                "visible" : false
             },
             {
-                "label": "Age value",
-                "property": "ageValue",
-                "path": [ "TEMP:hasAge",  "TEMP:hasAgeMax", "TEMP:hasAgeMin","rdf:value" ],
-                "innerPath": "@value",
-                "trimType": "",
-                "type": "digit"
+                "type": "TEMP",
+                "key": "localId",
+                "property": "localId",
+                "label": "Local ID",
+                "visible" : true
             },
             {
-                "label": "Age base unit",
-                "property": "ageBaseUnit",
-                "path": [ "TEMP:hasAge", "TEMP:asBaseUnits", "TEMP:hasUnit", "@id" ],
-                "trimType": "unit:",
-                "type": "string"
+                "type": "TEMPRAW",
+                "key": "amplitude_ua",
+                "property": "amplitude_ua",
+                "label": "Amplitude UA",
+                "visible" : true
             },
             {
-                "label": "Age base value",
-                "property": "ageBaseValue",
-                "path": [ "TEMP:hasAge", "TEMP:asBaseUnits", "rdf:value" ],
-                "innerPath": "@value",
-                "trimType": "",
-                "type": "digit"
+                "type": "TEMPRAW",
+                "key": "anode_distance_cm_from_life",
+                "property": "anode_distance_cm_from_life",
+                "label": "Anode Distance cm from Life",
+                "visible" : true
             },
             {
-                "label": "Weight unit",
-                "property": "weightUnit",
-                "path": [ "sparc:animalSubjectHasWeight", "TEMP:hasUnit", "@id" ],
-                "trimType": "unit:",
-                "type": "string"
+                "type": "TEMPRAW",
+                "key": "cathode_distance_cm_from_life",
+                "property": "cathode_distance_cm_from_life",
+                "label": "Cathode Distance cm from Life",
+                "visible" : true
             },
             {
-                "label": "Weight value",
-                "property": "weightValue",
-                "path": [ "sparc:animalSubjectHasWeight", "rdf:value", "@value" ],
-                "trimType": "",
-                "type": "digit"
+                "type": "TEMPRAW",
+                "key": "conditions",
+                "property": "conditions",
+                "label": "Conditions",
+                "visible" : true
+            },
+            {
+                "type": "TEMPRAW",
+                "key": "electrode_type",
+                "property": "electrode_type",
+                "label": "Electrode Type",
+                "visible" : true
+            },
+            {
+                "type": "TEMPRAW",
+                "key": "recording_number",
+                "property": "recording_number",
+                "label": "Recording Number",
+                "visible" : true
+            },
+            {
+                "type": "TEMPRAW",
+                "key": "rotational_alignment",
+                "property": "rotational_alignment",
+                "label": "Rotational Alignment",
+                "visible" : true
             }
         ]
     },
@@ -1012,6 +1084,9 @@ export const typesModel = {
         },
         subject: {
             "type": "Subject",
+        },
+        performance: {
+            "type": "Performance",
         },
         RRID: {
             "type": "RRID",

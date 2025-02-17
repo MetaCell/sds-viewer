@@ -3,7 +3,7 @@ import NodeFooter from "./Footers/Footer";
 import DetailsFactory from './factory';
 import Breadcrumbs from "./Details/Views/Breadcrumbs";
 import { IconButton, Tooltip } from '@material-ui/core';
-import { subject_key, protocols_key, contributors_key } from '../../constants';
+import { subject_key, protocols_key, contributors_key, performances_key } from '../../constants';
 import {TuneRounded} from "@material-ui/icons";
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleSettingsPanelVisibility } from '../../redux/actions';
@@ -41,6 +41,7 @@ const NodeDetailView = (props) => {
       tree_node: graph_node.tree_reference
     }
     if (new_node?.graph_node?.id !== subject_key
+      && new_node?.graph_node?.id !== performances_key
       && new_node?.graph_node?.id !== contributors_key
       && new_node?.graph_node?.id !== protocols_key) {
       links.pages.push({

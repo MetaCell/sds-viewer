@@ -69,7 +69,7 @@ const GraphViewer = (props) => {
   };
 
   const handleNodeLeftClick = (node, event) => {
-    if ( node.type === rdfTypes.Subject.key || node.type === rdfTypes.Sample.key || node.type === rdfTypes.Collection.key ) {
+    if ( node.type === rdfTypes.Subject.key || node.type === rdfTypes.Performance.key || node.type === rdfTypes.Sample.key || node.type === rdfTypes.Collection.key ) {
       collapseSubLevels(node, node.collapsed, { links : 0 });
       node.collapsed = !node.collapsed;
       let updatedData = getPrunedTree(props.graph_id, selectedLayout.layout);
@@ -242,14 +242,14 @@ const GraphViewer = (props) => {
         }
 
         if ( prevNode && nodeSelected.collapsed && nodeClickSource === "TREE") {
-          if ( prevNode.type == rdfTypes.Subject.key ||  prevNode.type == rdfTypes.Sample.key ||
+          if ( prevNode.type == rdfTypes.Subject.key ||  prevNode.type == rdfTypes.Sample.key || prevNode.type == rdfTypes.Performance.key ||
             prevNode.type == rdfTypes.Collection.key ) {
             prevNode.collapsed = false;
             collapseSubLevels(prevNode, false, { links : 0 });
             let updatedData = getPrunedTree(props.graph_id, selectedLayout.layout);
             setData(updatedData);
           }
-          if ( node.parent?.type == rdfTypes.Subject.key ||  node.parent?.type == rdfTypes.Sample.key ||
+          if ( node.parent?.type == rdfTypes.Subject.key ||  node.parent?.type == rdfTypes.Sample.key || node.parent?.type == rdfTypes.Performance.key ||
             node.parent?.type == rdfTypes.Collection.key ) {
             collapseSubLevels(node.parent, true, { links : 0 });
             let updatedData = getPrunedTree(props.graph_id, selectedLayout.layout);

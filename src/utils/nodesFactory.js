@@ -109,6 +109,9 @@ var NodesFactory = function () {
             case "Subject":
                 typed_node = new Subject(node, ttlTypes);
                 break;
+            case "Performance":
+                typed_node = new Performance(node, ttlTypes);
+                break;
             case "File":
                 typed_node = new File(node, ttlTypes);
                 break;
@@ -183,6 +186,18 @@ const Sample = function (node, ttlTypes) {
 };
 
 const Subject = function (node, ttlTypes) {
+    node.img = createImage(node);
+    extractProperties(node, ttlTypes);
+    if (node.attributes?.identifier !== undefined) {
+        node.name = node.attributes?.identifier[0];
+    } else {
+        var namesArray = node.name.split("/");
+        node.name = namesArray[namesArray.length - 1];
+    }
+    return node;
+};
+
+const Performance = function (node, ttlTypes) {
     node.img = createImage(node);
     extractProperties(node, ttlTypes);
     if (node.attributes?.identifier !== undefined) {

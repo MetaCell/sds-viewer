@@ -121,6 +121,13 @@ class Splinter {
                 let sparcType = type.type.split(this.types.sparc.iri.id).pop();
                 typeFound.type = typesModel.sparc[sparcType].type;
                 typeFound.length = typesModel.sparc[sparcType].length;
+            } else if ( type.type === this.types.owl.iri.id + "Performance") {
+                for (const rdfType in this.types) {
+                    if ((node.id.includes(this.types[rdfType].iri.id)) && (this.types[rdfType].iri.id.length > typeFound.length) && (typesModel.NamedIndividual[String(this.types[rdfType].type)] !== undefined)) {
+                        typeFound.type = typesModel.NamedIndividual[String(this.types[rdfType].type)].type;
+                        typeFound.length = this.types[rdfType].iri.id.length;
+                    }
+                }
             }
         }
         return typeFound.type;
@@ -300,7 +307,7 @@ class Splinter {
 
     identify_childless_parents() {
         this.forced_nodes.forEach((node, index, array) => {
-            if ((node.type === rdfTypes.Sample.key || node.type === rdfTypes.Subject.key) && (node.children_counter === 0)) {
+            if ((node.type === rdfTypes.Sample.key || node.type === rdfTypes.Subject.key || node.type === rdfTypes.Performance.key) && (node.children_counter === 0)) {
                 node.img.src = "./images/graph/question_mark.svg"
             }
         });
