@@ -28,6 +28,7 @@ function extractProperties(node, ttlTypes) {
                 }
             }
         }
+        
     }
 
     if (node.additional_properties) {
@@ -52,6 +53,27 @@ function extractProperties(node, ttlTypes) {
                 } else {
                     node.attributes[json_prop.property].push(parseFloat(new_attribute));
                 }
+            }
+
+            if (node.additional_properties["TEMP:hasAgeMax"]) {
+                let ageMaxObj = node.additional_properties["TEMP:hasAgeMax"];
+                let ageValue = ageMaxObj["rdf:value"] || "";
+                let ageUnit = ageMaxObj["TEMP:hasUnit"]?.["@id"]?.replace("unit:", "") || "";
+                node.attributes.hasAgeMax =  [`${ageValue} ${ageUnit}`];
+            }
+
+            if (node.additional_properties["TEMP:hasAge"]) {
+                let ageMaxObj = node.additional_properties["TEMP:hasAge"];
+                let ageValue = ageMaxObj["rdf:value"] || "";
+                let ageUnit = ageMaxObj["TEMP:hasUnit"]?.["@id"]?.replace("unit:", "") || "";
+                node.attributes.hasAge = [`${ageValue} ${ageUnit}`];
+            }
+        
+            if (node.additional_properties["TEMP:hasAgeMin"]) {
+                let ageMinObj = node.additional_properties["TEMP:hasAgeMin"];
+                let ageValue = ageMinObj["rdf:value"] || "";
+                let ageUnit = ageMinObj["TEMP:hasUnit"]?.["@id"]?.replace("unit:", "") || "";
+                node.attributes.hasAgeMin = [`${ageValue} ${ageUnit}`];
             }
         }
     }

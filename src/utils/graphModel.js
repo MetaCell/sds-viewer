@@ -646,14 +646,14 @@ export const rdfTypes = {
             {
                 "label": "Age unit",
                 "property": "ageUnit",
-                "path": [ "TEMP:hasAge", "TEMP:hasUnit", "@id" ],
+                "path": [ "TEMP:hasAge",  "TEMP:hasAgeMax", "TEMP:hasAgeMin","TEMP:hasUnit", "@id" ],
                 "trimType": "unit:",
                 "type": "string"
             },
             {
                 "label": "Age value",
                 "property": "ageValue",
-                "path": [ "TEMP:hasAge", "rdf:value" ],
+                "path": [ "TEMP:hasAge",  "TEMP:hasAgeMax", "TEMP:hasAgeMin","rdf:value" ],
                 "innerPath": "@value",
                 "trimType": "",
                 "type": "digit"

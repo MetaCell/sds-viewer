@@ -771,6 +771,28 @@ class Splinter {
                     }
                 }
 
+                if (node.additional_properties["TEMP:hasAgeMax"]) {
+                    let ageMaxObj = node.additional_properties["TEMP:hasAgeMax"];
+                    let ageValue = ageMaxObj["rdf:value"] || "";
+                    let ageUnit = ageMaxObj["TEMP:hasUnit"]?.["@id"]?.replace("unit:", "") || "";
+                    node.attributes.hasAgeMax = [`${ageValue} ${ageUnit}`];
+                }
+
+                if (node.additional_properties["TEMP:hasAge"]) {
+                    let ageMaxObj = node.additional_properties["TEMP:hasAge"];
+                    let ageValue = ageMaxObj["rdf:value"] || "";
+                    let ageUnit = ageMaxObj["TEMP:hasUnit"]?.["@id"]?.replace("unit:", "") || "";
+                    node.attributes.hasAge =[`${ageValue} ${ageUnit}`];
+                }
+        
+                // Extract Age Min
+                if (node.additional_properties["TEMP:hasAgeMin"]) {
+                    let ageMinObj = node.additional_properties["TEMP:hasAgeMin"];
+                    let ageValue = ageMinObj["rdf:value"] || "";
+                    let ageUnit = ageMinObj["TEMP:hasUnit"]?.["@id"]?.replace("unit:", "") || "";
+                    node.attributes.hasAgeMin = [`${ageValue} ${ageUnit}`];
+                }                             
+
                 if (node.attributes?.hasDerivedInformationAsParticipant !== undefined && node.attributes?.participantInPerformanceOf !== undefined) {
                     let source = this.nodes.get(node.attributes.participantInPerformanceOf[0]);
                     if ( source !== undefined ) {

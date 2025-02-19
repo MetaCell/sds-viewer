@@ -22,8 +22,8 @@ import DatasetsListSplinter from "./DatasetsListSplinter";
 import { WidgetStatus } from "@metacell/geppetto-meta-client/common/layout/model";
 import FileHandler from "../../utils/filesHandler";
 import UploadSubmit from "./../FileUploader/UploadSubmit";
+import { fetchHeaders } from "../../utils/versionHandler";
 import CLOSE from '../../images/close.svg';
-
 import config from "./../../config/app.json";
 
 const DatasetsListDialog = (props) => {
@@ -33,6 +33,7 @@ const DatasetsListDialog = (props) => {
   const [selectedIndex, setSelectedIndex] = React.useState(undefined);
   const datasets = useSelector((state) => state.sdsState.available_datasets);
   const [filteredDatasets, setFilteredDatasets] = React.useState(datasets);
+  const [versionID, setVersionID] = React.useState("")
   const PUBLISHED = "PUBLISHED";
 
   let turtle_url = "";
@@ -92,7 +93,7 @@ const DatasetsListDialog = (props) => {
     });
   };
 
-  const loadDatasets = () => {
+  const loadDatasets = async (versionID) => {
     const fileHandler = new FileHandler();
     const callback = async (url, fileData) => {
       let file = {
@@ -106,25 +107,24 @@ const DatasetsListDialog = (props) => {
       let datasets = graph.nodes.filter((node) => node?.attributes?.hasUriApi);
       datasets.forEach( node => node.attributes ? node.attributes.lowerCaseLabel = node.attributes?.label?.[0]?.toLowerCase() : null );
       datasets = datasets.filter( node => node?.attributes?.statusOnPlatform?.[0]?.includes(PUBLISHED) );
-
-      let version = config.version;
+  
       let datasetStorage = {};
       let parsedDatasets = []
       datasets?.forEach( node =>  {
         parsedDatasets.push({ name : node.name , doi : node.attributes?.hasDoi?.[0], label : node.attributes ? node.attributes?.lowerCaseLabel : null}); 
       });
       datasetStorage = {
-        version : version,
+        version : versionID,
         datasets : parsedDatasets
       }
-
+  
       localStorage.setItem(config.datasetsStorage, JSON.stringify(datasetStorage));
       dispatch(setDatasetsList(datasetStorage.datasets));
       setFilteredDatasets(datasetStorage.datasets);
     };
     const summaryURL = config.repository_url + config.available_datasets;
     fileHandler.get_remote_file(summaryURL, callback);
-  };
+  };  
 
   const handleChange = (event) => {
     const lowerCaseSearch = event.target.value.toLowerCase();
@@ -152,19 +152,26 @@ const DatasetsListDialog = (props) => {
   }
 
   useEffect(() => {
-    if ( open && datasets.length === 0 ) {
-      let version = config.version;
-      const storage = JSON.parse(localStorage.getItem(config.datasetsStorage));
-      const storageVersion = storage?.version
-      if ( localStorage.getItem(config.datasetsStorage) && version === storageVersion ) {
-        let storedDatasetsInfo = JSON.parse(localStorage.getItem(config.datasetsStorage));
-        dispatch(setDatasetsList(storedDatasetsInfo.datasets));
-        setFilteredDatasets(storedDatasetsInfo.datasets);
-      } else {
-        loadDatasets();
+    const fetchData = async () => {
+      if (open && datasets.length === 0) {
+        try {
+          const versionID = await fetchHeaders(config.repository_url + config.available_datasets);
+          const storage = JSON.parse(localStorage.getItem(config.datasetsStorage));
+          const storageVersion = storage?.version;
+  
+          if (storage && versionID === storageVersion) {
+            dispatch(setDatasetsList(storage.datasets));
+            setFilteredDatasets(storage.datasets);
+          } else {
+            await loadDatasets(versionID);
+          }
+        } catch (error) {
+          console.error("Error in useEffect:", error);
+        }
       }
-    }
-  });
+    };
+    fetchData();
+  }, [open]); 
 
   return (
     <Dialog 
