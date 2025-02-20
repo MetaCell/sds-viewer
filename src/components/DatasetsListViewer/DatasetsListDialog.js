@@ -111,7 +111,7 @@ const DatasetsListDialog = (props) => {
       let datasetStorage = {};
       let parsedDatasets = []
       datasets?.forEach( node =>  {
-        parsedDatasets.push({ name : node.name , doi : node.attributes?.hasDoi?.[0], label : node.attributes ? node.attributes?.lowerCaseLabel : null}); 
+        parsedDatasets.push({ name : node.name , doi : node.attributes?.hasDoi?.[0], label : node.attributes ? node.attributes?.title[0] : null}); 
       });
       datasetStorage = {
         version : versionID,
