@@ -1,5 +1,6 @@
 import { ADD_DATASET } from '../../constants';
-import {Box, Button, Divider, Typography} from '@material-ui/core';
+import {Box, Button, Divider, Typography, IconButton} from '@material-ui/core';
+import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 import config from "./../../config/app.json";
 
 
@@ -31,9 +32,19 @@ const SidebarFooter = (props) => {
         <Divider style={{margin: '1rem 0', background: 'rgba(255, 255, 255, 0.10)'}} />
 
         {
-            props.expand && <Box display="flex" justifyContent="center">
-                <Typography variant='subtitle2' style={{color: '#fff'}}> Powered by MetaCell</Typography>
-            </Box>
+            props.expand && (
+                <Box display="flex" justifyContent="space-between" alignItems="center">
+                    <Typography variant="subtitle2" style={{ color: "#fff" }}>
+                        Powered by MetaCell
+                    </Typography>
+                    <IconButton
+                        onClick={() => window.open("https://docs.sparc.science/docs/sparc-dataset-sds-viewer", "_blank")}
+                        style={{ color: "#fff" }}
+                    >
+                        <HelpOutlineIcon />
+                    </IconButton>
+                </Box>
+            )
         }
 
     </Box>
