@@ -11,6 +11,7 @@ import config from './../config/app.json';
 
 import {
     subject_key,
+    performances_key,
     protocols_key,
     contributors_key, SUBJECTS_LEVEL, PROTOCOLS_LEVEL, CRONTRIBUTORS_LEVEL
 } from '../constants';
@@ -348,6 +349,8 @@ class Splinter {
                 let sparcType = type.type.split(this.types.sparc.iri.id).pop();
                 typeFound.type = typesModel.sparc[sparcType].type;
                 typeFound.length = typesModel.sparc[sparcType].length;
+            } else if ( type.type.includes("/sparc/Performance")) {
+                typeFound.type = typesModel.NamedIndividual.performance.type;
             }
         }
         return typeFound.type;
@@ -531,8 +534,8 @@ class Splinter {
         return dataset_node;
     }
 
-    organise_subjects(target_node, link, groups){
-        let parent = this.nodes.get(subject_key);
+    organise_subjects(target_node, link, groups, k, type){
+        let parent = this.nodes.get(k);
         let keys = Object.keys(config.groups.order);
         keys.forEach( key => {
             let group = config.groups.order[key];
@@ -587,7 +590,7 @@ class Splinter {
         target_node.id = parent.id + target_node.name;
         target_node.parent = parent;
         target_node.childLinks = [];
-        target_node.collapsed = target_node.type === typesModel.NamedIndividual.subject.type;
+        target_node.collapsed = target_node.type === type;
         this.nodes.set(target_node.id, target_node);
     }
 
@@ -608,7 +611,7 @@ class Splinter {
             childLinks : []
         };
         if (this.nodes.get(subject_key) === undefined) {
-            this.nodes.set(subject_key, this.factory.createNode(subjects));
+            this.nodes.set(subject_key, this.factory.createNode(subjects, this.types));
             const img = new Image();
             img.src =  "./images/graph/group.svg";
             subjects.img = img; 
@@ -618,6 +621,32 @@ class Splinter {
             })
         } else {
             console.error("The subjects node already exists!");
+        }
+
+        const performances = {
+            id: performances_key,
+            name: "Performances",
+            type: rdfTypes.Performance.key,
+            properties: [],
+            parent : parent,
+            proxies: [],
+            level: SUBJECTS_LEVEL,
+            tree_reference: null,
+            children_counter: 0,
+            collapsed : false,
+            childLinks : []
+        };
+        if (this.nodes.get(performances_key) === undefined) {
+            this.nodes.set(performances_key, this.factory.createNode(performances, this.types));
+            const img = new Image();
+            img.src =  "./images/graph/group.svg";
+            performances.img = img; 
+            this.edges.push({
+                source: id,
+                target: performances.id
+            })
+        } else {
+            console.error("The performances node already exists!");
         }
 
         const protocols = {
@@ -681,7 +710,9 @@ class Splinter {
             }
             let target_node = this.nodes.get(link.target);
             if (link.source === id && link.target !== subject_key && target_node.type === rdfTypes.Subject.key) {
-                this.organise_subjects(target_node, link, groups);
+                this.organise_subjects(target_node, link, groups, subject_key, typesModel.NamedIndividual.subject.type);
+            } else if (link.source === id && link.target !== performances_key && target_node.type === rdfTypes.Performance.key) {
+                this.organise_subjects(target_node, link, groups, performances_key, typesModel.NamedIndividual.performance.type);
             } else if (link.source === id && link.target !== contributors_key && target_node.type === rdfTypes.Person.key) {
                 link.source = contributors_key;
                 target_node.level = contributors.level + 1;
@@ -707,7 +738,7 @@ class Splinter {
             return link;
         }).filter(link => {
             let target_node = this.nodes.get(link.target);
-            if ((link.source === id && (target_node.type !== rdfTypes.Award.key) && (link.target !== contributors_key && link.target !== subject_key && link.target !== protocols_key))) {
+            if ((link.source === id && (target_node.type !== rdfTypes.Award.key) && (link.target !== contributors_key && link.target !== subject_key && link.target !== performances_key && link.target !== protocols_key))) {
                 return false;
             }
             return true;
@@ -932,6 +963,10 @@ class Splinter {
                     }
 
                     if ( value.type === rdfTypes.Sample.key && value.attributes?.localId?.[0] == splitName[splitName.length - 1] ) {
+                        newName = splitName[0] + "/" + newName
+                    }
+
+                    if ( value.type === rdfTypes.Performance.key && value.attributes?.localId?.[0] == splitName[splitName.length - 1] ) {
                         newName = splitName[0] + "/" + newName
                     }
 

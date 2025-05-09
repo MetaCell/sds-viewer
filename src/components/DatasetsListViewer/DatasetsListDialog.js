@@ -111,7 +111,7 @@ const DatasetsListDialog = (props) => {
       let datasetStorage = {};
       let parsedDatasets = []
       datasets?.forEach( node =>  {
-        parsedDatasets.push({ name : node.name , doi : node.attributes?.hasDoi?.[0], label : node.attributes ? node.attributes?.title[0] : null}); 
+        parsedDatasets.push({ name : node.name , doi : node.attributes?.hasDoi?.[0], label : node.attributes ? node.attributes?.title?.[0] : null}); 
       });
       datasetStorage = {
         version : versionID,
@@ -233,7 +233,7 @@ const DatasetsListDialog = (props) => {
                             className="dataset_list_text"
                             dangerouslySetInnerHTML={{
                               __html:
-                                getFormattedListTex(dataset.label)
+                                getFormattedListTex(dataset.label ? dataset.label : dataset.name)
                             }}
                           />
                         }

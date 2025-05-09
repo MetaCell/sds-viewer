@@ -7,6 +7,7 @@ const savedMetadataModel = localStorage.getItem("metadata_model");
 const initialMetadataModel = savedMetadataModel ? JSON.parse(savedMetadataModel) : {
     dataset: [...rdfTypes.Dataset.properties],
     subject: [...rdfTypes.Subject.properties],
+    performance: [...rdfTypes.Performance.properties],
     sample: [...rdfTypes.Sample.properties],
     collection : [...rdfTypes.Collection.properties],
     group: [...rdfTypes.Group.properties],
