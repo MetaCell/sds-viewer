@@ -6,6 +6,7 @@ import Box from '@material-ui/core/Box';
 import Splinter from './utils/Splinter';
 import MainLayout from './app/mainLayout';
 import FileHandler from './utils/filesHandler';
+import { fetchHeaders } from './utils/versionHandler';
 import { useSelector, useDispatch } from 'react-redux';
 import Sidebar from './components/Sidebar/Sidebar';
 import EmptyContainer from './components/EmptyContainer';
@@ -131,7 +132,7 @@ const App = () => {
     const splinter = new DatasetsListSplinter(undefined, file.data);
     let graph = await splinter.getGraph();
     let datasets = graph.nodes.filter((node) => node?.attributes?.hasDoi);
-    let version = config.version
+    let version = await fetchHeaders(config.repository_url + config.available_datasets);
     const match = datasets.find( node => node.attributes?.hasDoi?.[0]?.includes(doi));
     if ( match ) {
       const datasetID = match.name;
@@ -145,7 +146,7 @@ const App = () => {
     if ( version !== undefined && JSON.parse(localStorage.getItem(config.datasetsStorage))?.version !== version ) {
       let parsedDatasets = []
       datasets.forEach( node =>  {
-        parsedDatasets.push({ name : node.name , doi : node.attributes?.hasDoi?.[0], label : node.attributes ? node.attributes?.label?.[0]?.toLowerCase() : null}); 
+        parsedDatasets.push({ name : node.name , doi : node.attributes?.hasDoi?.[0], label : node.attributes ? node.attributes?.title?.[0]?.toLowerCase() : null}); 
       });
       datasetStorage = {
         version : version,
@@ -156,14 +157,14 @@ const App = () => {
     }
   };
 
-  useEffect(() => {
+  useEffect(async () => {
     if (datasetID && datasetID !== "" ) {
       loadFiles(datasetID);
     }
 
     if (doi && doi !== "" ) {
       if ( doiMatch ){
-        let version = config.version;
+        let version = await fetchHeaders(config.repository_url + config.available_datasets);
         const storage = JSON.parse(localStorage.getItem(config.datasetsStorage));
         const storageVersion = storage?.version
         if ( storageVersion === version  ) {
@@ -179,7 +180,7 @@ const App = () => {
         } else {
           const fileHandler = new FileHandler();
           const summaryURL = config.repository_url + config.available_datasets;
-          fileHandler.get_remote_file(summaryURL, loadDatsetFromDOI);
+          await fileHandler.get_remote_file(summaryURL, loadDatsetFromDOI);
         }
       }
     }

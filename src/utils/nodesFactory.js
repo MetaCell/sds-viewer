@@ -28,6 +28,7 @@ function extractProperties(node, ttlTypes) {
                 }
             }
         }
+        
     }
 
     if (node.additional_properties) {
@@ -52,6 +53,27 @@ function extractProperties(node, ttlTypes) {
                 } else {
                     node.attributes[json_prop.property].push(parseFloat(new_attribute));
                 }
+            }
+
+            if (node.additional_properties["TEMP:hasAgeMax"]) {
+                let ageMaxObj = node.additional_properties["TEMP:hasAgeMax"];
+                let ageValue = ageMaxObj["rdf:value"] || "";
+                let ageUnit = ageMaxObj["TEMP:hasUnit"]?.["@id"]?.replace("unit:", "") || "";
+                node.attributes.hasAgeMax =  [`${ageValue} ${ageUnit}`];
+            }
+
+            if (node.additional_properties["TEMP:hasAge"]) {
+                let ageMaxObj = node.additional_properties["TEMP:hasAge"];
+                let ageValue = ageMaxObj["rdf:value"] || "";
+                let ageUnit = ageMaxObj["TEMP:hasUnit"]?.["@id"]?.replace("unit:", "") || "";
+                node.attributes.hasAge = [`${ageValue} ${ageUnit}`];
+            }
+        
+            if (node.additional_properties["TEMP:hasAgeMin"]) {
+                let ageMinObj = node.additional_properties["TEMP:hasAgeMin"];
+                let ageValue = ageMinObj["rdf:value"] || "";
+                let ageUnit = ageMinObj["TEMP:hasUnit"]?.["@id"]?.replace("unit:", "") || "";
+                node.attributes.hasAgeMin = [`${ageValue} ${ageUnit}`];
             }
         }
     }
@@ -86,6 +108,9 @@ var NodesFactory = function () {
                 break;
             case "Subject":
                 typed_node = new Subject(node, ttlTypes);
+                break;
+            case "Performance":
+                typed_node = new Performance(node, ttlTypes);
                 break;
             case "File":
                 typed_node = new File(node, ttlTypes);
@@ -161,6 +186,18 @@ const Sample = function (node, ttlTypes) {
 };
 
 const Subject = function (node, ttlTypes) {
+    node.img = createImage(node);
+    extractProperties(node, ttlTypes);
+    if (node.attributes?.identifier !== undefined) {
+        node.name = node.attributes?.identifier[0];
+    } else {
+        var namesArray = node.name.split("/");
+        node.name = namesArray[namesArray.length - 1];
+    }
+    return node;
+};
+
+const Performance = function (node, ttlTypes) {
     node.img = createImage(node);
     extractProperties(node, ttlTypes);
     if (node.attributes?.identifier !== undefined) {

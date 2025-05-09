@@ -12,6 +12,7 @@ import SampleDetails from './Details/SampleDetails';
 import DatasetDetails from './Details/DatasetDetails';
 import SubjectDetails from './Details/SubjectDetails';
 import ProtocolDetails from './Details/ProtocolDetails';
+import PerformanceDetails from './Details/PerformanceDetails';
 import GroupDetails from './Details/GroupDetails';
 import CollectionDetails from './Details/CollectionDetails'
 import Settings from "./settings/Settings"
@@ -42,6 +43,9 @@ var DetailsFactory = function () {
                 break;
             case rdfTypes.Subject.key:
                 details = new Subject(node);
+                break;
+            case rdfTypes.Performance.key:
+                details = new Performance(node);
                 break;
             case rdfTypes.File.key:
                 details = new File(node);
@@ -269,6 +273,45 @@ const Subject = function (node) {
             <>
                 <CollectionHeader node={node} />
                 <SubjectDetails node={node} />
+            </>
+        )
+    }
+
+    nodeDetail.getSettings = () => {
+        return (
+            <>
+                <Settings node={node} />
+            </>
+        )
+    }
+    return nodeDetail;
+};
+
+const Performance = function (node) {
+    const nodeDetail = {
+        node: node
+    };
+    nodeDetail.getHeader = () => {
+        return (
+            <>
+                <CollectionHeader node={node} />
+            </>
+        )
+    };
+
+    nodeDetail.getDetail = () => {
+        return (
+            <>
+                <PerformanceDetails node={node} />
+            </>
+        )
+    };
+
+    nodeDetail.getAll = () => {
+        return (
+            <>
+                <CollectionHeader node={node} />
+                <PerformanceDetails node={node} />
             </>
         )
     }
