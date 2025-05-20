@@ -1146,7 +1146,7 @@ class Splinter {
             if (tree_node) {
                 value.tree_reference = tree_node;
                 tree_node.publishedURI = 
-                    Array.from(this.nodes)[0][1].attributes.hasUriPublished[0] + 
+                    Array.from(this.nodes)[0][1].attributes?.hasUriPublished?.[0] + 
                     "?datasetDetailsTab=files&path=files/" +
                     tree_node?.dataset_relative_path.substr(0, tree_node?.dataset_relative_path.lastIndexOf("/"));
                 this.nodes.set(key, value);
