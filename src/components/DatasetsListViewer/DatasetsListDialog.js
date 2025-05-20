@@ -106,7 +106,7 @@ const DatasetsListDialog = (props) => {
       let graph = await splinter.getGraph();
       let datasets = graph.nodes.filter((node) => node?.attributes?.hasUriApi);
       datasets.forEach( node => node.attributes ? node.attributes.lowerCaseLabel = node.attributes?.label?.[0]?.toLowerCase() : null );
-      datasets = datasets.filter( node => node?.attributes?.statusOnPlatform?.[0]?.includes(PUBLISHED) );
+      //datasets = datasets.filter( node => node?.attributes?.statusOnPlatform?.[0]?.includes(PUBLISHED) );
   
       let datasetStorage = {};
       let parsedDatasets = []
