@@ -749,6 +749,8 @@ class Splinter {
 
 
     fix_links() {
+        const basePublishedURI = Array.from(this.nodes)[0]?.[1]?.attributes?.hasUriPublished?.[0] || "";
+        const baseHumanURI = Array.from(this.nodes)[0]?.[1]?.attributes?.hasUriHuman?.[0] || "";
         let nodesToRemove = [];
 
         this.forced_nodes.forEach((node, index, array) => {
