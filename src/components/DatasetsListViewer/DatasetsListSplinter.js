@@ -352,7 +352,7 @@ class Splinter {
 
     mergeData() {
         const datasetNode = this.nodes.get(this.root_id) || Array.from(this.nodes.values())[0];
-        this.basePublishedURI = datasetNode?.attributes?.hasUriPublished?.[0] || "";
+        this.basePublishedURI = datasetNode?.attributes?.hasUriPublished?.[0] || datasetNode?.attributes?.hasUriHuman?.[0] || "";
         this.baseHumanURI = datasetNode?.attributes?.hasUriHuman?.[0] || "";
         this.nodes.forEach((value, key) => {
             if (value.attributes !== undefined && value.attributes.hasFolderAboutIt !== undefined) {

@@ -750,7 +750,7 @@ class Splinter {
 
     fix_links() {
         const datasetNode = this.nodes.get(this.root_id) || Array.from(this.nodes.values())[0];
-        const basePublishedURI = datasetNode?.attributes?.hasUriPublished?.[0] || "";
+        const basePublishedURI = datasetNode?.attributes?.hasUriPublished?.[0] || datasetNode?.attributes?.hasUriHuman?.[0] || "";
         const baseHumanURI = datasetNode?.attributes?.hasUriHuman?.[0] || "";
         let nodesToRemove = [];
 
@@ -1096,7 +1096,7 @@ class Splinter {
 
         // generate the Graph
         const datasetNode = this.nodes.get(this.root_id) || Array.from(this.nodes.values())[0];
-        const basePublishedURI = datasetNode?.attributes?.hasUriPublished?.[0] || "";
+        const basePublishedURI = datasetNode?.attributes?.hasUriPublished?.[0] || datasetNode?.attributes?.hasUriHuman?.[0] || "";
         const baseHumanURI = datasetNode?.attributes?.hasUriHuman?.[0] || "";
         this.forced_nodes = Array.from(this.nodes).map(([key, value]) => {
             const id = value?.id?.match(/https?:\/\/[^\s]+/)?.[0] || "";
