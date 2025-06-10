@@ -24,7 +24,7 @@ const UploadDialogHeader = (props) => {
         aria-label='simple tabs example'
       >
         <Tab className='rounded' label='Local System' {...a11yProps(0)} />
-        <Tab className='rounded' label='From a URL' {...a11yProps(1)} />
+        {/* <Tab className='rounded' label='From a URL' {...a11yProps(1)} /> */}
       </Tabs>
     </>
   );

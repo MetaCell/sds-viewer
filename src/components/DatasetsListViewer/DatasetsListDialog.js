@@ -25,7 +25,6 @@ import { WidgetStatus } from "@metacell/geppetto-meta-client/common/layout/model
 import FileHandler from "../../utils/filesHandler";
 import UploadSubmit from "./../FileUploader/UploadSubmit";
 import Uploader from "../FileUploader/Uploader";
-import UrlUploader from "../FileUploader/UrlUploader";
 import UploadTabPanel from "../FileUploader/UploadTabPanel";
 import { fetchHeaders } from "../../utils/versionHandler";
 import CLOSE from '../../images/close.svg';
@@ -327,15 +326,17 @@ const DatasetsListDialog = (props) => {
         <UploadTabPanel value={tabValue} index={1}>
           <Tabs className="rounded" value={uploadTab} onChange={handleUploadTabChange} aria-label="upload tabs">
             <Tab className="rounded" label="Local System" />
-            <Tab className="rounded" label="From a URL" />
+            {/** <Tab className="rounded" label="From a URL" /> **/}
           </Tabs>
           <Box className="dialog_body">
             <UploadTabPanel value={uploadTab} index={0}>
               <Uploader handleClose={handleClose} handleDone={handleUploadDone} />
             </UploadTabPanel>
+            {/**
             <UploadTabPanel value={uploadTab} index={1}>
               <UrlUploader handleClose={handleClose} handleDone={handleUploadDone} />
             </UploadTabPanel>
+            **/}
           </Box>
         </UploadTabPanel>
       ) : null}

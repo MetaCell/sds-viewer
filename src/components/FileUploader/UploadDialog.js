@@ -1,6 +1,6 @@
 import React from 'react';
 import Uploader from './Uploader';
-import UrlUploader from './UrlUploader';
+// import UrlUploader from './UrlUploader';
 import { useDispatch } from 'react-redux';
 import UploadTabPanel from './UploadTabPanel';
 import { Dialog, Box } from '@material-ui/core';
@@ -79,9 +79,11 @@ const UploadDialog = (props) => {
         <UploadTabPanel value={value} index={0}>
           <Uploader handleClose={handleClose} handleDone={handleDone}/>
         </UploadTabPanel>
+        {/**
         <UploadTabPanel value={value} index={1}>
           <UrlUploader handleClose={handleClose} handleDone={handleDone}/>
         </UploadTabPanel>
+        **/}
       </Box>
     </Dialog>
   );
