@@ -32,7 +32,7 @@ import config from "./../../config/app.json";
 
 const DatasetsListDialog = (props) => {
   const dispatch = useDispatch();
-  const { open, handleClose, enableUpload } = props;
+  const { open, handleClose, enableUpload, debug } = props;
   const [searchField, setSearchField] = React.useState("");
   const [selectedIndex, setSelectedIndex] = React.useState(undefined);
   const [tabValue, setTabValue] = React.useState(0);
@@ -166,7 +166,11 @@ const DatasetsListDialog = (props) => {
       let graph = await splinter.getGraph();
       let datasets = graph.nodes.filter((node) => node?.attributes?.hasUriApi);
       datasets.forEach( node => node.attributes ? node.attributes.lowerCaseLabel = node.attributes?.label?.[0]?.toLowerCase() : null );
-      datasets = datasets.filter( node => node?.attributes?.statusOnPlatform?.[0]?.includes(PUBLISHED) );
+      if (!debug) {
+        datasets = datasets.filter(
+          node => node?.attributes?.statusOnPlatform?.[0]?.includes(PUBLISHED)
+        );
+      }
   
       let datasetStorage = {};
       let parsedDatasets = []

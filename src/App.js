@@ -24,8 +24,11 @@ const App = () => {
   const queryParams = new URLSearchParams(window.location.search);
   const datasetID = queryParams.get('id');
   const doi = queryParams.get('doi');
-  const debug = queryParams.get('debug');
-  const enableUpload = debug === 'true' || config.enableUploadDialog === true;
+  const debugFlag = queryParams.get('debug');
+  const enableUpload = debugFlag !== null ?
+    debugFlag === 'true' :
+    config.enableUploadDialog === true;
+  const debug = debugFlag === 'true';
 
   const dispatch = useDispatch();
   const [openDatasetsListDialog, setOpenDatasetsListDialog] = useState(false);
@@ -207,6 +210,7 @@ const App = () => {
         open={openDatasetsListDialog}
         handleClose={() => setOpenDatasetsListDialog(false)}
         enableUpload={enableUpload}
+        debug={debug}
       />
 
       <ErrorDialog
