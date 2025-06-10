@@ -20,5 +20,5 @@
     },
     "datasetsStorage" : "publishedDatasets",
     "version" : "13-Aug-2024",
-    "enableUploadDialog" : false
+    "enableUploadDialog" : true
 }

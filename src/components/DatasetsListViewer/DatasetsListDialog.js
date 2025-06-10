@@ -238,7 +238,7 @@ const DatasetsListDialog = (props) => {
     <Dialog
       className="datasets_dialog"
       open={open}
-      handleClose={closeDialog}
+      onClose={closeDialog}
       PaperProps={{
         style: {
           width : '50rem'
@@ -252,8 +252,8 @@ const DatasetsListDialog = (props) => {
           onClick={handleClose}
           alt="Close"
         />
-        <Typography variant="h3">{config.text.datasetsButtonText}</Typography>
-        <Typography variant="subtitle1">{config.text.datasetsButtonSubtitleText}</Typography>
+        <Typography component="div" variant="h3">{config.text.datasetsButtonText}</Typography>
+        <Typography component="div" variant="subtitle1">{config.text.datasetsButtonSubtitleText}</Typography>
         <Tabs value={tabValue} onChange={handleTabChange} aria-label="import tabs" centered>
           <Tab label="Repository" />
           {enableUpload ? <Tab label="Upload" /> : null}
@@ -281,10 +281,9 @@ const DatasetsListDialog = (props) => {
               <Paper className="datasets_dialog_list">
                 <List className="datasets_list">
                   {filteredDatasets.map((dataset) => (
-                    <>
+                    <React.Fragment key={`item-${dataset.name}`}>
                       <ListItem
                         className="dataset_item"
-                        key={`item-${dataset.name}`}
                         selected={selectedIndex === dataset.name}
                         onClick={(event) =>
                           handleListItemClick(event, dataset.name)
@@ -305,7 +304,7 @@ const DatasetsListDialog = (props) => {
                         />
                       </ListItem>
                       <Divider />
-                    </>
+                    </React.Fragment>
                   ))}
                 </List>
               </Paper>
