@@ -19,5 +19,6 @@
         "datasetsButtonSubtitleText" : "Select a dataset to load"
     },
     "datasetsStorage" : "publishedDatasets",
-    "version" : "13-Aug-2024"
+    "version" : "13-Aug-2024",
+    "enableUploadDialog" : false
 }
