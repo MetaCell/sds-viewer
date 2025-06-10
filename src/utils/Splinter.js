@@ -749,6 +749,9 @@ class Splinter {
 
 
     fix_links() {
+        const datasetNode = this.nodes.get(this.root_id) || Array.from(this.nodes.values())[0];
+        const basePublishedURI = datasetNode?.attributes?.hasUriPublished?.[0] || datasetNode?.attributes?.hasUriHuman?.[0] || "";
+        const baseHumanURI = datasetNode?.attributes?.hasUriHuman?.[0] || "";
         let nodesToRemove = [];
 
         this.forced_nodes.forEach((node, index, array) => {
@@ -776,7 +779,7 @@ class Splinter {
 
                 if (node.attributes?.hasFolderAboutIt !== undefined) {
                     node.attributes.hasFolderAboutIt = 
-                        [Array.from(this.nodes)[0][1].attributes.hasUriPublished[0] + 
+                        [basePublishedURI + 
                         "?datasetDetailsTab=files&path=files/" +
                         node.tree_reference?.dataset_relative_path];
                 }
@@ -840,7 +843,7 @@ class Splinter {
 
                 if (node.attributes?.hasFolderAboutIt !== undefined) {
                     node.attributes.hasFolderAboutIt = 
-                        [Array.from(this.nodes)[0][1].attributes.hasUriPublished[0] + 
+                        [basePublishedURI + 
                         "?datasetDetailsTab=files&path=files/" +
                         node.tree_reference?.dataset_relative_path];
                 }
@@ -848,13 +851,13 @@ class Splinter {
 
             if (node.type === rdfTypes.File.key) {
                 if (node?.tree_reference?.uri_human  !== undefined) {
-                    node.tree_reference.uri_human = Array.from(this.nodes)[0][1].attributes.hasUriHuman[0];
+                    node.tree_reference.uri_human = baseHumanURI;
                 }
 
                 if (node.attributes?.relativePath !== undefined) {
                     node.attributes.dataset_id = this.dataset_id;
                     node.attributes.publishedURI = 
-                        Array.from(this.nodes)[0][1].attributes.hasUriPublished[0] + 
+                        basePublishedURI + 
                         "?datasetDetailsTab=files&path=files/" +
                         node.attributes?.relativePath.substr(0, node.attributes?.relativePath.lastIndexOf("/"));
                 }
@@ -862,12 +865,12 @@ class Splinter {
 
             if (node.type === rdfTypes.Collection.key) {
                 if (node?.tree_reference?.uri_human  !== undefined) {
-                    node.tree_reference.uri_human = Array.from(this.nodes)[0][1].attributes.hasUriHuman[0];
+                    node.tree_reference.uri_human = baseHumanURI;
                 }
 
                 if (node.attributes?.relativePath !== undefined) {
                     node.attributes.publishedURI = 
-                        Array.from(this.nodes)[0][1].attributes.hasUriPublished[0] + 
+                        basePublishedURI + 
                         "?datasetDetailsTab=files&path=files/" +
                         node.attributes?.relativePath;  
                 }
@@ -1092,13 +1095,16 @@ class Splinter {
         });
 
         // generate the Graph
+        const datasetNode = this.nodes.get(this.root_id) || Array.from(this.nodes.values())[0];
+        const basePublishedURI = datasetNode?.attributes?.hasUriPublished?.[0] || datasetNode?.attributes?.hasUriHuman?.[0] || "";
+        const baseHumanURI = datasetNode?.attributes?.hasUriHuman?.[0] || "";
         this.forced_nodes = Array.from(this.nodes).map(([key, value]) => {
             const id = value?.id?.match(/https?:\/\/[^\s]+/)?.[0] || "";
             let tree_node = this.tree_map.get(id);
             if (tree_node) {
                 value.tree_reference = tree_node;
                 tree_node.publishedURI = 
-                    Array.from(this.nodes)[0][1].attributes.hasUriPublished[0] + 
+                    basePublishedURI + 
                     "?datasetDetailsTab=files&path=files/" +
                     tree_node?.dataset_relative_path.substr(0, tree_node?.dataset_relative_path.lastIndexOf("/"));
                 this.nodes.set(key, value);
@@ -1109,7 +1115,7 @@ class Splinter {
                     tree_node = this.tree_map.get(proxy);
                     if (tree_node) {
                         tree_node.publishedURI = 
-                            Array.from(this.nodes)[0][1].attributes.hasUriPublished[0] + 
+                            basePublishedURI + 
                             "?datasetDetailsTab=files&path=files/" +
                             tree_node?.dataset_relative_path.substr(0, tree_node?.dataset_relative_path.lastIndexOf("/"));
                         value.tree_reference = tree_node;

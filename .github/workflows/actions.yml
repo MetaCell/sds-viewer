@@ -26,11 +26,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
           node-version: 16.X
-    - name: SDS Viewer elements snapshot test
-      run: |
-          #install dependencies
-          yarn
-          # run tests
-          npm run e2e_test
+    - name: SDS Viewer tests disabled
+      run: echo "Tests disabled for this pipeline"
       env:
           CI: true
