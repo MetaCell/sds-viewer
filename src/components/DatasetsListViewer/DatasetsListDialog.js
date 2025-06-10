@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   Dialog,
-  DialogActions,
   Box,
   Typography,
   Paper,
@@ -36,7 +35,6 @@ const DatasetsListDialog = (props) => {
   const [searchField, setSearchField] = React.useState("");
   const [selectedIndex, setSelectedIndex] = React.useState(undefined);
   const [tabValue, setTabValue] = React.useState(0);
-  const [uploadTab, setUploadTab] = React.useState(0);
   const datasets = useSelector((state) => state.sdsState.available_datasets);
   const [filteredDatasets, setFilteredDatasets] = React.useState(datasets);
   const [versionID, setVersionID] = React.useState("")
@@ -53,9 +51,6 @@ const DatasetsListDialog = (props) => {
     setTabValue(newValue);
   };
 
-  const handleUploadTabChange = (event, newValue) => {
-    setUploadTab(newValue);
-  };
 
   const handleUploadDone = async (files) => {
     if ((files.length === 2) && (files[0].data !== undefined && files[1].data !== undefined)) {
@@ -328,19 +323,8 @@ const DatasetsListDialog = (props) => {
 
       {enableUpload ? (
         <UploadTabPanel value={tabValue} index={1}>
-          <Tabs className="rounded" value={uploadTab} onChange={handleUploadTabChange} aria-label="upload tabs">
-            <Tab className="rounded" label="Local System" />
-            {/** <Tab className="rounded" label="From a URL" /> **/}
-          </Tabs>
           <Box className="dialog_body">
-            <UploadTabPanel value={uploadTab} index={0}>
-              <Uploader handleClose={handleClose} handleDone={handleUploadDone} />
-            </UploadTabPanel>
-            {/**
-            <UploadTabPanel value={uploadTab} index={1}>
-              <UrlUploader handleClose={handleClose} handleDone={handleUploadDone} />
-            </UploadTabPanel>
-            **/}
+            <Uploader handleClose={handleClose} handleDone={handleUploadDone} />
           </Box>
         </UploadTabPanel>
       ) : null}
