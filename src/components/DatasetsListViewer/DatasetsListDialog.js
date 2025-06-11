@@ -218,12 +218,12 @@ const DatasetsListDialog = (props) => {
           const versionID = await fetchHeaders(config.repository_url + config.available_datasets);
           const storage = JSON.parse(localStorage.getItem(config.datasetsStorage));
           const storageVersion = storage?.version;
-          const debugStored = storage?.debug;
   
-          if (storage && versionID === storageVersion && debug === debugStored) {
+          if (storage && versionID === storageVersion) {
             dispatch(setDatasetsList(storage.datasets));
+            let filteredDatasets = storage.datasets
             if (!debug) {
-              datasets = storage.datasets.filter(
+              filteredDatasets = storage.datasets.filter(
                 node => node?.attributes?.statusOnPlatform?.[0]?.includes(PUBLISHED)
               );
             }
