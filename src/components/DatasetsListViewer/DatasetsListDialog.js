@@ -174,7 +174,8 @@ const DatasetsListDialog = (props) => {
       });
       datasetStorage = {
         version : versionID,
-        datasets : parsedDatasets
+        datasets : parsedDatasets,
+        debug : debug
       }
   
       localStorage.setItem(config.datasetsStorage, JSON.stringify(datasetStorage));
@@ -220,6 +221,12 @@ const DatasetsListDialog = (props) => {
   
           if (storage && versionID === storageVersion) {
             dispatch(setDatasetsList(storage.datasets));
+            let filteredDatasets = storage.datasets
+            if (!debug) {
+              filteredDatasets = storage.datasets.filter(
+                node => node?.attributes?.statusOnPlatform?.[0]?.includes(PUBLISHED)
+              );
+            }
             setFilteredDatasets(storage.datasets);
           } else {
             await loadDatasets(versionID);

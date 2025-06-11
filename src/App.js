@@ -28,7 +28,7 @@ const App = () => {
   const enableUpload = debugFlag !== null ?
     debugFlag === 'true' :
     config.enableUploadDialog === true;
-  const debug = enableUpload === 'true';
+  const debug = enableUpload === true;
 
   const dispatch = useDispatch();
   const [openDatasetsListDialog, setOpenDatasetsListDialog] = useState(false);
