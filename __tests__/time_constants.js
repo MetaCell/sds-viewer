@@ -1,4 +1,11 @@
-export const TWO_MINUTES = 60000 * 2;
-export const ONE_SECOND = 1000
-export const ONE_MINUTE = 60000;
-export const TEN_MINUTES = 600000
+const TWO_MINUTES = 60000 * 2;
+const ONE_SECOND = 1000;
+const ONE_MINUTE = 60000;
+const TEN_MINUTES = 600000;
+
+module.exports = {
+  TWO_MINUTES,
+  ONE_SECOND,
+  ONE_MINUTE,
+  TEN_MINUTES
+};
