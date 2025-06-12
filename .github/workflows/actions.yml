@@ -13,20 +13,21 @@ on:
      - "development"
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
-jobs: 
+jobs:
   sds_viewer_test:
     # The type of runner that the job will run on
-    runs-on: ubuntu-20.04
-    container: lironavon/docker-puppeteer-container:14.16.0
+    runs-on: ubuntu-22.04
     env:
       CI: true
     steps:
-    - uses: actions/checkout@v1
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-          node-version: 16.X
-    - name: SDS Viewer tests disabled
-      run: echo "Tests disabled for this pipeline"
-      env:
+      - uses: actions/checkout@v4
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.x
+      - name: SDS Viewer elements snapshot test
+        run: |
+          yarn
+          npm run e2e_test
+        env:
           CI: true
