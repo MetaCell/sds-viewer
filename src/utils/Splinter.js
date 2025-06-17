@@ -235,7 +235,7 @@ class Splinter {
                 const b = this.nodes.get( link.target );
                 const awardEmpty = ( a?.type !== rdfTypes.Award.key && b?.type !== rdfTypes.Award.key );
                 const collectionEmpty = ((a?.type === rdfTypes.Collection.key && a.children_counter < 1 ) || ( b?.type === rdfTypes.Collection.key && b.children_counter < 1));
-                const sampleEmpty = ((a?.type === rdfTypes.Sample.key && a.children_counter < 0 ) || ( b?.type === rdfTypes.Sample.key && b.children_counter < 0))
+                const sampleEmpty = ((a?.type === rdfTypes.Sample.key && a.children_counter < 1 ) || ( b?.type === rdfTypes.Sample.key && b.children_counter < 1))
                 const sameLevels = a?.level === b?.level;
                 if ( a && b && awardEmpty && !collectionEmpty && !sampleEmpty && !sameLevels) {
                     !a.neighbors && (a.neighbors = []);
