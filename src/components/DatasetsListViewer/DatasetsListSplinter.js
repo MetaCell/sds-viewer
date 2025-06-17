@@ -370,7 +370,7 @@ class Splinter {
         if (parent.type === rdfTypes.Sample.key) {
             if (parent.attributes.derivedFrom !== undefined) {
                 level = this.nodes.get(parent.attributes.derivedFrom[0]).level + 1;
-            } else if (node.attributes.wasDerivedFromSubject !== undefined) {
+            } else if (parent.attributes.wasDerivedFromSubject !== undefined) {
                 level = this.nodes.get(parent.attributes.wasDerivedFromSubject[0]).level + 1;
             }
         }
