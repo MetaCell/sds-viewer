@@ -243,7 +243,7 @@ const GraphViewer = (props) => {
 
         if ( prevNode && nodeSelected.collapsed && nodeClickSource === "TREE") {
           if ( prevNode.type == rdfTypes.Subject.key ||  prevNode.type == rdfTypes.Sample.key || prevNode.type == rdfTypes.Performance.key || 
-            prevNode.type == rdfTypes.Collection.key || node.type === rdfTypes.Site.key ) {
+            prevNode.type == rdfTypes.Collection.key || prevNode.type === rdfTypes.Site.key ) {
             prevNode.collapsed = false;
             collapseSubLevels(prevNode, false, { links : 0 });
             let updatedData = getPrunedTree(props.graph_id, selectedLayout.layout);
