@@ -309,7 +309,7 @@ class Splinter {
 
     identify_childless_parents() {
         this.forced_nodes.forEach((node, index, array) => {
-            if ((node.type === rdfTypes.Sample.key || node.type === rdfTypes.Subject.key || node.type === rdfTypes.Performance.key) && (node.children_counter === 0)) {
+            if ((node.type === rdfTypes.Sample.key || node.type === rdfTypes.Subject.key || node.type === rdfTypes.Performance.key || node.type === rdfTypes.Site.key) && (node.children_counter === 0)) {
                 node.img.src = "./images/graph/question_mark.svg"
             }
         });
@@ -370,6 +370,8 @@ class Splinter {
         if (parent.type === rdfTypes.Sample.key) {
             if (parent.attributes.derivedFrom !== undefined) {
                 level = this.nodes.get(parent.attributes.derivedFrom[0]).level + 1;
+            } else if (parent.attributes.wasDerivedFromSubject !== undefined) {
+                level = this.nodes.get(parent.attributes.wasDerivedFromSubject[0]).level + 1;
             }
         }
         parent.children_counter++;

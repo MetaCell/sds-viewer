@@ -23,7 +23,7 @@ const SampleDetails = (props) => {
                 <SimpleLabelValue label={""} value={""} heading={"Sample Details"} />
 
                 {samplePropertiesModel?.map( property => {
-                    if ( property.visible ){
+                    if ( property.visible || property.visible == undefined ){
                         const propValue = node.graph_node.attributes[property.property]?.[0];
                         if ( isValidUrl(propValue) ){
                             return (<Box className="tab-content-row">

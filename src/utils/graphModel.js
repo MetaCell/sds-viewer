@@ -3,6 +3,7 @@ export const type_key = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type";
 
 export const RDF_TO_JSON_TYPES = [
     {key: 'sparc:Subject', toTrim: 'subject'},
+    {key: 'sparc:Site', toTrim: 'site'}, 
     {key: 'sparc:sparcPerformance', toTrim: 'performance'}
 ];
 
@@ -772,6 +773,31 @@ export const rdfTypes = {
             }
         ]
     },
+    "Site": {
+        "image": "./images/graph/folder.svg",
+        "key": "Site",
+        "properties": [
+            {
+                "type": "TEMP",
+                "key": "localId",
+                "property": "localId",
+                "label": "Local ID"
+            },
+            {
+                "type": "TEMP",
+                "key": "onSample",
+                "property": "onSample",
+                "label": "On Sample"
+            },
+            {
+                "type": "TEMPRAW",
+                "key": "site_type",
+                "property": "site_type",
+                "label": "Site Type"
+            }
+        ],
+        "additional_properties" : []
+    },
     "Sample": {
         "image": "./images/graph/folder.svg",
         "key": "Sample",
@@ -1084,6 +1110,9 @@ export const typesModel = {
         },
         subject: {
             "type": "Subject",
+        },
+        site: {
+            "type": "Site",
         },
         performance: {
             "type": "Performance",
