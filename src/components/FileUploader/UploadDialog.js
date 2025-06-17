@@ -1,8 +1,7 @@
 import React from 'react';
 import Uploader from './Uploader';
-import UrlUploader from './UrlUploader';
+// import UrlUploader from './UrlUploader';
 import { useDispatch } from 'react-redux';
-import UploadTabPanel from './UploadTabPanel';
 import { Dialog, Box } from '@material-ui/core';
 import UploadDialogHeader from './UploadDialogHeader';
 import { addDataset, triggerError } from '../../redux/actions';
@@ -14,11 +13,6 @@ import { WidgetStatus } from "@metacell/geppetto-meta-client/common/layout/model
 const UploadDialog = (props) => {
   const dispatch = useDispatch();
   const { open, handleClose } = props;
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
 
   // TODO:
   // The below is just an hack waiting for the design to be clarified, I need an entrypoint for the datasets
@@ -72,16 +66,11 @@ const UploadDialog = (props) => {
   return (
     <Dialog open={open} onClose={handleClose}>
       <Box className='dialog_header'>
-        <UploadDialogHeader handleChange={handleChange} value={value} handleClose={handleClose} />
+        <UploadDialogHeader handleClose={handleClose} />
       </Box>
 
       <Box className='dialog_body'>
-        <UploadTabPanel value={value} index={0}>
-          <Uploader handleClose={handleClose} handleDone={handleDone}/>
-        </UploadTabPanel>
-        <UploadTabPanel value={value} index={1}>
-          <UrlUploader handleClose={handleClose} handleDone={handleDone}/>
-        </UploadTabPanel>
+        <Uploader handleClose={handleClose} handleDone={handleDone} />
       </Box>
     </Dialog>
   );
