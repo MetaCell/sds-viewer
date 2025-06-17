@@ -911,15 +911,6 @@ class Splinter {
         })
     }
 
-    // identify_childless_parents() {
-    //     this.forced_nodes.forEach((node, index, array) => {
-    //         if ((node.type === rdfTypes.Sample.key) && (node.children_counter === 0)) {
-    //             node.img.src = "./images/graph/question_mark.svg"
-    //         }
-    //     });
-    // }
-
-
     create_graph() {
         // build nodes out of the subjects
         for (const node of this.store.getSubjects()) {
