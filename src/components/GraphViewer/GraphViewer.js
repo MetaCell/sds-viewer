@@ -250,7 +250,7 @@ const GraphViewer = (props) => {
             setData(updatedData);
           }
           if ( node.parent?.type == rdfTypes.Subject.key ||  node.parent?.type == rdfTypes.Sample.key || node.parent?.type == rdfTypes.Performance.key ||
-            node.parent?.type == rdfTypes.Collection.key || node.type === rdfTypes.Site.key) {
+            node.parent?.type == rdfTypes.Collection.key || node.parent?.type === rdfTypes.Site.key) {
             collapseSubLevels(node.parent, true, { links : 0 });
             let updatedData = getPrunedTree(props.graph_id, selectedLayout.layout);
             setData(updatedData);
