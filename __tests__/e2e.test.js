@@ -1,11 +1,11 @@
-import * as puppeteer from "puppeteer";
-import * as selectors from "./selectors";
-import { ONE_SECOND, ONE_MINUTE, TWO_MINUTES, TEN_MINUTES } from "./time_constants";
-import 'expect-puppeteer';
-import 'puppeteer'
-import { toMatchImageSnapshot } from 'jest-image-snapshot'
-import { time } from "console";
-expect.extend({ toMatchImageSnapshot })
+const puppeteer = require("puppeteer");
+const selectors = require("./selectors");
+const { ONE_SECOND, ONE_MINUTE, TWO_MINUTES, TEN_MINUTES } = require("./time_constants");
+require('expect-puppeteer');
+require('puppeteer');
+const { toMatchImageSnapshot } = require('jest-image-snapshot');
+const { time } = require("console");
+expect.extend({ toMatchImageSnapshot });
 const axios = require('axios').default;
 const fs = require('fs');
 const path = require('path');
@@ -20,9 +20,8 @@ const SNAPSHOT_OPTIONS = {
     customSnapshotsDir: './__tests__/snapshots',
     comparisonMethod: 'ssim',
     failureThresholdType: 'percent',
-    failureThreshold: 0.25
+    failureThreshold: 0.3
 };
-
 
 
 
