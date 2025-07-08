@@ -993,7 +993,7 @@ class Splinter {
                     const splitName = jsonNode.dataset_relative_path.split('/');
                     const lastPath = splitName[splitName.length - 1];
                     const localId = value.attributes?.localId?.[0];
-                    const proxyTarget = this.proxies_map.get(jsonNode.uri_api);
+                    const proxyTarget = this.proxies_map.get(jsonNode.remote_id);
 
                     // Skip if this folder represents the same Subject/Sample node
                     if ((proxyTarget && proxyTarget === value.id) ||
@@ -1003,7 +1003,10 @@ class Splinter {
                         let treeEntry = this.tree_map.get(jsonNode.uri_api);
                         if (treeEntry) {
                             treeEntry.graph_reference = value;
+                            value.tree_reference = treeEntry;
                             this.tree_map.set(jsonNode.uri_api, treeEntry);
+                            this.tree_map.set(jsonNode.remote_id, treeEntry);
+                            this.tree_map.set(value.id, treeEntry);
                         }
                         const dupChildren = this.tree_parents_map2.get(jsonNode.remote_id);
                         dupChildren?.forEach(child => {
@@ -1099,7 +1102,7 @@ class Splinter {
             return;
         }
         if (!new_node) {
-            const existingId = this.proxies_map.get(node.uri_api);
+            const existingId = this.proxies_map.get(node.remote_id);
             const existingNode = this.nodes.get(existingId);
             if (existingNode) {
                 parent.children_counter++;
@@ -1137,7 +1140,7 @@ class Splinter {
 
 
     buildNodeFromJson(item, level) {
-        const node_id = this.proxies_map.get(item.uri_api);
+        const node_id = this.proxies_map.get(item.remote_id);
         if (node_id) {
             return undefined;
         }
