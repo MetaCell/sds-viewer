@@ -187,7 +187,7 @@ const dendrogram = (data) => {
     .separation(function(a,b){
       const aIsLeaf = !a.children || a.children.length === 0;
       const bIsLeaf = !b.children || b.children.length === 0;
-      const base = 15;
+      const base = 30;
       const extra = (aIsLeaf && bIsLeaf) ? base : base * 2;
       return 1 + extra;
     });
@@ -288,14 +288,14 @@ export const getPrunedTree = (graph_id, layout) => {
     visibleNodes.forEach( n => {
       if ( layout === TOP_DOWN.layout ) {
         if ( mapNodes[n.id] ) {
-          n.xPos = mapNodes[n.id].x * nodeSpace
+          n.xPos = mapNodes[n.id].x
           n.fx = n.xPos;
           n.fy = 50 * n.level;
         }
       }
       if ( layout === LEFT_RIGHT.layout ) {
         if ( mapNodes[n.id] ) {
-          n.yPos = mapNodes[n.id].x * nodeSpace
+          n.yPos = mapNodes[n.id].x
           n.fy = n.yPos;
           n.fx = 50 * n.level;
         }
