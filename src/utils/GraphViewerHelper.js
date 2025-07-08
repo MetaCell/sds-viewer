@@ -286,14 +286,14 @@ export const getPrunedTree = (graph_id, layout) => {
     visibleNodes.forEach( n => {
       if ( layout === TOP_DOWN.layout ) {
         if ( mapNodes[n.id] ) {
-          n.xPos = mapNodes[n.id].x
+          n.xPos = mapNodes[n.id].x * nodeSpace
           n.fx = n.xPos;
           n.fy = 50 * n.level;
         }
       }
       if ( layout === LEFT_RIGHT.layout ) {
         if ( mapNodes[n.id] ) {
-          n.yPos = mapNodes[n.id].x
+          n.yPos = mapNodes[n.id].x * nodeSpace
           n.fy = n.yPos;
           n.fx = 50 * n.level;
         }
