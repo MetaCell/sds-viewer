@@ -991,20 +991,37 @@ class Splinter {
                 value.attributes.hasFolderAboutIt.forEach(folder => {
                     let jsonNode = this.tree_map.get(folder);
                     const splitName = jsonNode.dataset_relative_path.split('/');
+                    const lastPath = splitName[splitName.length - 1];
+                    const localId = value.attributes?.localId?.[0];
+                    const proxyTarget = this.proxies_map.get(jsonNode.uri_api);
+
+                    // Skip if this folder represents the same Subject/Sample node
+                    if ((proxyTarget && proxyTarget === value.id) ||
+                        (localId && lastPath === localId) ||
+                        (localId && jsonNode.basename === localId)) {
+                        // Make sure the tree node references the existing graph node
+                        let treeEntry = this.tree_map.get(jsonNode.uri_api);
+                        if (treeEntry) {
+                            treeEntry.graph_reference = value;
+                            this.tree_map.set(jsonNode.uri_api, treeEntry);
+                        }
+                        return;
+                    }
+
                     let newName = jsonNode.basename;
-                    if ( value.type === rdfTypes.Subject.key && value.attributes?.localId?.[0] == splitName[splitName.length - 1] ) {
+                    if ( value.type === rdfTypes.Subject.key && localId == lastPath ) {
                         newName = splitName[0]
                     }
 
-                    if ( value.type === rdfTypes.Sample.key && value.attributes?.localId?.[0] == splitName[splitName.length - 1] ) {
+                    if ( value.type === rdfTypes.Sample.key && localId == lastPath ) {
                         newName = splitName[0] + "/" + newName
                     }
 
-                    if ( value.type === rdfTypes.Performance.key && value.attributes?.localId?.[0] == splitName[splitName.length - 1] ) {
+                    if ( value.type === rdfTypes.Performance.key && localId == lastPath ) {
                         newName = splitName[0] + "/" + newName
                     }
 
-                    if ( value.type === rdfTypes.Site.key && value.attributes?.localId?.[0] ) {
+                    if ( value.type === rdfTypes.Site.key && localId ) {
                         newName = splitName[0] + "/" + newName
                     }
 
@@ -1072,7 +1089,9 @@ class Splinter {
             }
         }
         const new_node = this.buildNodeFromJson(node, level);
-        if ( parent ) {
+        if (!new_node || !parent) {
+            return;
+        }
         parent.children_counter++;
         new_node.parent = parent;
         new_node.id = parent.id + new_node.id;
@@ -1081,7 +1100,7 @@ class Splinter {
             target: new_node?.id
         });
         new_node.childLinks = [];
-        if ( !this.nodes.get(new_node.id) ) {
+        if (!this.nodes.get(new_node.id)) {
             this.nodes.set(new_node.id, this.factory.createNode(new_node));
             var children = this.tree_parents_map2.get(node.remote_id);
             if (children?.length > 0) {
@@ -1090,14 +1109,13 @@ class Splinter {
                 });
             }
         }
-        }
     }
 
 
     buildNodeFromJson(item, level) {
         const node_id = this.proxies_map.get(item.uri_api);
         if (node_id) {
-            return this.nodes.get(node_id);
+            return undefined;
         }
         const new_node = {
             id: item.uri_api,
