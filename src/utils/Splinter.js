@@ -1095,7 +1095,25 @@ class Splinter {
             }
         }
         const new_node = this.buildNodeFromJson(node, level);
-        if (!new_node || !parent) {
+        if (!parent) {
+            return;
+        }
+        if (!new_node) {
+            const existingId = this.proxies_map.get(node.uri_api);
+            const existingNode = this.nodes.get(existingId);
+            if (existingNode) {
+                parent.children_counter++;
+                this.forced_edges.push({
+                    source: parent?.id,
+                    target: existingNode?.id
+                });
+                var children = this.tree_parents_map2.get(node.remote_id);
+                if (children?.length > 0) {
+                    children.forEach(child => {
+                        !this.filterNode(child) && this.linkToNode(child, existingNode);
+                    });
+                }
+            }
             return;
         }
         parent.children_counter++;
