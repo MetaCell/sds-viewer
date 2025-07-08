@@ -1,8 +1,10 @@
 module.exports = {
   rootDir: "__tests__",
   verbose: true,
-  bail : false,
+  bail: false,
   preset: "jest-puppeteer",
+  testEnvironment: "jest-environment-puppeteer",
+  testEnvironmentOptions: {},
   globals: {
     "ts-jest": {
       tsConfig: {
@@ -11,4 +13,4 @@ module.exports = {
       },
     },
   }
-  };
+};
