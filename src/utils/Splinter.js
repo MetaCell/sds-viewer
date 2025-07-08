@@ -1005,6 +1005,12 @@ class Splinter {
                             treeEntry.graph_reference = value;
                             this.tree_map.set(jsonNode.uri_api, treeEntry);
                         }
+                        const dupChildren = this.tree_parents_map2.get(jsonNode.remote_id);
+                        dupChildren?.forEach(child => {
+                            if (!this.filterNode(child)) {
+                                this.linkToNode(child, value);
+                            }
+                        });
                         return;
                     }
 
