@@ -27,9 +27,6 @@ jobs:
       - name: Install dependencies
         run: yarn
 
-      - name: Build the application (optional if required before dev)
-        run: yarn build
-
       - name: Start development server in background
         run: |
           yarn run dev &
