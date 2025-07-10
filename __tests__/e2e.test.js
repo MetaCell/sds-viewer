@@ -12,7 +12,7 @@ const path = require('path');
 var scriptName = path.basename(__filename, '.js');
 
 
-const DEV_URL = 'https://metacell.github.io/sds-viewer/'
+const DEV_URL = process.env.DEV_URL || 'http://localhost:3000/'
 const DATASET_ID = '0a5a2827-2b39-4085-87ea-2b7fbbe27cc8'
 
 //SNAPSHOT

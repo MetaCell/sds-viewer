@@ -1,28 +1,40 @@
 name: SDS Viewer Workflow
 
-# Controls when the workflow will run
 on:
-  workflow_run:
-    workflows: ["pages build and deployment"]
-    types:
-      - completed
+  push:
+    branches:
+      - "master"
+      - "development"
+  pull_request:
+    branches:
+      - "master"
+      - "development"
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   sds_viewer_test:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-22.04
+    container: lironavon/docker-puppeteer-container:14.16.0
     env:
       CI: true
     steps:
       - uses: actions/checkout@v4
+
       - name: Use Node.js 18.x
         uses: actions/setup-node@v4
         with:
           node-version: 18.x
-      - name: SDS Viewer elements snapshot test
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Start development server in background
         run: |
-          yarn
-          npm run e2e_test
+          yarn start &
+          npx wait-on http://localhost:3000
+        env:
+          CI: true
+
+      - name: Run E2E snapshot tests
+        run: npm run e2e_test
         env:
           CI: true
