@@ -185,9 +185,11 @@ const hierarchy = (data) =>{
 const dendrogram = (data) => {
     const dendrogramGenerator = d3.cluster().nodeSize([1, 100])
     .separation(function(a,b){
-      return 1 + d3.sum([a,b].map(function(d){
-        return 15
-      }))
+      const aIsLeaf = !a.children || a.children.length === 0;
+      const bIsLeaf = !b.children || b.children.length === 0;
+      const base = 30;
+      const extra = (aIsLeaf && bIsLeaf) ? base : base * 2;
+      return 1 + extra;
     });
     return dendrogramGenerator(hierarchy(data));
 }
