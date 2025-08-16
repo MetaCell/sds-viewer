@@ -327,7 +327,16 @@ const GraphViewer = (props) => {
         linkCanvasObjectMode={'replace'}
         onLinkHover={handleLinkHover}
         // Override drawing of canvas objects, draw an image as a node
-        nodeCanvasObject={(node, ctx) => paintNode(node, ctx, hoverNode, selectedNode, nodeSelected, previouslySelectedNodes)}
+        nodeCanvasObject={(node, ctx) =>
+          paintNode(
+            node,
+            ctx,
+            hoverNode,
+            selectedNode,
+            nodeSelected,
+            previouslySelectedNodes,
+            selectedLayout.layout === LEFT_RIGHT.layout
+          )}
         nodeCanvasObjectMode={node => 'replace'}
         nodeVal = { node => {
           if ( selectedLayout.layout === TOP_DOWN.layout ){

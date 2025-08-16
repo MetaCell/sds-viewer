@@ -68,7 +68,15 @@ const roundRect = (ctx, x, y, width, height, radius, color, alpha) => {
   ctx.fill();
 };
 
-export const paintNode = (node, ctx, hoverNode, selectedNode, nodeSelected, previouslySelectedNodes) =>  {
+export const paintNode = (
+  node,
+  ctx,
+  hoverNode,
+  selectedNode,
+  nodeSelected,
+  previouslySelectedNodes,
+  showFullName = false
+) =>  {
       const size = 7.5;
       const nodeImageSize = [size * 2.4, size * 2.4];
       const hoverRectDimensions = [size * 4.2, size * 4.2];
@@ -105,10 +113,11 @@ export const paintNode = (node, ctx, hoverNode, selectedNode, nodeSelected, prev
       ctx.textAlign = 'center';
       ctx.textBaseline = 'top';
       let nodeName = node.name;
-      if (nodeName.length > 10) {
+      if (Array.isArray(nodeName)) {
+        nodeName = nodeName[0];
+      }
+      if (!showFullName && nodeName?.length > 10) {
         nodeName = nodeName.substr(0, 9).concat('...');
-      } else if ( Array.isArray(nodeName) ){
-        nodeName = nodeName[0]?.substr(0, 9).concat('...');
       }
       const textProps = [nodeName, node.x, textHoverPosition[1]];
       if (node === hoverNode || node?.id === selectedNode?.id || node?.id === nodeSelected?.id ) {
