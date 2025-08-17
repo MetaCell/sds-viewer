@@ -455,14 +455,15 @@ class Splinter {
     }
 
     replaceNode(a) {
-        let newNode = {"value": a};
-        if( a?.includes(rdfTypes.NCBITaxon.key) || a?.includes(rdfTypes.PATO.key) || a?.includes(rdfTypes.UBERON.key) || a?.includes(rdfTypes.RRID.key) ) {
-            let node = this.nodes.get(a);
+        let newNode = { "value": a };
+        if (typeof a === 'string') {
+            const node = this.nodes.get(a);
             if (node) {
-                newNode = {"value": node?.attributes.label[0], "link": node?.id};
+                newNode = { "value": node?.attributes.label[0], "link": node?.id };
+            } else if (a.startsWith('http')) {
+                newNode = { "value": a, "link": a };
             }
         }
-
         return newNode;
     }
 
@@ -533,17 +534,18 @@ class Splinter {
             return link;
         })
         this.edges = temp_edges;
-        // update "isAbout" references for subject and sample nodes to include links
+        // update all attribute references for subject and sample nodes to include links
         this.nodes.forEach((n, k) => {
             if (n.type === rdfTypes.Subject.key || n.type === rdfTypes.Sample.key) {
-                if (n?.attributes?.isAbout) {
-                    const about = [];
-                    n.attributes.isAbout.forEach(a => {
-                        about.push(that.replaceNode(a));
-                    });
-                    n.attributes.isAbout = about;
-                    this.nodes.set(k, n);
-                }
+                Object.keys(n?.attributes || {}).forEach(attr => {
+                    const value = n.attributes[attr];
+                    if (Array.isArray(value)) {
+                        n.attributes[attr] = value.map(a =>
+                            typeof a === 'string' ? that.replaceNode(a) : a
+                        );
+                    }
+                });
+                this.nodes.set(k, n);
             }
         });
         return dataset_node;
