@@ -977,14 +977,15 @@ class Splinter {
             }
         });
 
-        // update attribute references for subject and sample nodes after organizing groups
+        // update group attribute references for subject and sample nodes after organizing groups
         let that = this;
+        const groupKeys = Object.keys(config.groups.order);
         this.nodes.forEach((n, k) => {
             if (n.type === rdfTypes.Subject.key || n.type === rdfTypes.Sample.key) {
-                Object.keys(n?.attributes || {}).forEach((attr) => {
-                    const value = n.attributes[attr];
+                groupKeys.forEach((attr) => {
+                    const value = n.attributes?.[attr];
                     if (Array.isArray(value)) {
-                        const hasLink = value.some((a) =>
+                        n.attributes[attr] = value.map((a) =>
                             typeof a === "string" && (
                                 a.startsWith("http") ||
                                 a.includes(rdfTypes.NCBITaxon.key) ||
@@ -992,20 +993,9 @@ class Splinter {
                                 a.includes(rdfTypes.UBERON.key) ||
                                 a.includes(rdfTypes.RRID.key)
                             )
+                                ? that.replaceNode(a)
+                                : { value: a }
                         );
-                        if (hasLink) {
-                            n.attributes[attr] = value.map((a) =>
-                                typeof a === "string" && (
-                                    a.startsWith("http") ||
-                                    a.includes(rdfTypes.NCBITaxon.key) ||
-                                    a.includes(rdfTypes.PATO.key) ||
-                                    a.includes(rdfTypes.UBERON.key) ||
-                                    a.includes(rdfTypes.RRID.key)
-                                )
-                                    ? that.replaceNode(a)
-                                    : { value: a }
-                            );
-                        }
                     }
                 });
                 this.nodes.set(k, n);
