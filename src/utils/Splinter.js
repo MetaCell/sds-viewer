@@ -502,22 +502,36 @@ class Splinter {
         let updatedAbout = [];
         dataset_node.level = 1;
         let that = this;
-        dataset_node?.attributes?.isAbout?.forEach( (a) => {
-            updatedAbout.push(that.replaceNode(a));
+        dataset_node?.attributes?.isAbout?.forEach((a) => {
+            if (
+                a?.includes(rdfTypes.NCBITaxon.key) ||
+                a?.includes(rdfTypes.PATO.key) ||
+                a?.includes(rdfTypes.UBERON.key) ||
+                a?.includes(rdfTypes.RRID.key)
+            ) {
+                updatedAbout.push(that.replaceNode(a));
+            } else {
+                updatedAbout.push({ value: a });
+            }
         });
         dataset_node.attributes.isAbout = updatedAbout;
 
         let updateTechniques = [];
-        dataset_node.attributes.protocolEmploysTechnique?.forEach( (a) => {
-            if( a.includes(rdfTypes.NCBITaxon.key) || a.includes(rdfTypes.PATO.key) || a.includes(rdfTypes.UBERON.key) ) {
+        dataset_node.attributes.protocolEmploysTechnique?.forEach((a) => {
+            if (
+                a?.includes(rdfTypes.NCBITaxon.key) ||
+                a?.includes(rdfTypes.PATO.key) ||
+                a?.includes(rdfTypes.UBERON.key) ||
+                a?.includes(rdfTypes.RRID.key)
+            ) {
                 let node = this.nodes.get(a);
                 if (node) {
-                    updateTechniques.push({"value": node?.attributes.label[0], "link": node?.id});
+                    updateTechniques.push({ value: node?.attributes.label[0], link: node?.id });
                 } else {
-                    updateTechniques.push({"value": a});
+                    updateTechniques.push({ value: a });
                 }
             } else {
-                updateTechniques.push({"value": a});
+                updateTechniques.push({ value: a });
             }
         });
         dataset_node.attributes.protocolEmploysTechnique = updateTechniques;
@@ -537,12 +551,23 @@ class Splinter {
         // update all attribute references for subject and sample nodes to include links
         this.nodes.forEach((n, k) => {
             if (n.type === rdfTypes.Subject.key || n.type === rdfTypes.Sample.key) {
-                Object.keys(n?.attributes || {}).forEach(attr => {
+                Object.keys(n?.attributes || {}).forEach((attr) => {
                     const value = n.attributes[attr];
                     if (Array.isArray(value)) {
-                        n.attributes[attr] = value.map(a =>
-                            typeof a === 'string' ? that.replaceNode(a) : a
-                        );
+                        n.attributes[attr] = value.map((a) => {
+                            if (
+                                typeof a === "string" &&
+                                (
+                                    a?.includes(rdfTypes.NCBITaxon.key) ||
+                                    a?.includes(rdfTypes.PATO.key) ||
+                                    a?.includes(rdfTypes.UBERON.key) ||
+                                    a?.includes(rdfTypes.RRID.key)
+                                )
+                            ) {
+                                return that.replaceNode(a);
+                            }
+                            return typeof a === "string" ? { value: a } : a;
+                        });
                     }
                 });
                 this.nodes.set(k, n);
