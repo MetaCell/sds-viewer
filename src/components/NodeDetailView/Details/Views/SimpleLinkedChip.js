@@ -57,14 +57,15 @@ const SimpleChip = ({ chips, node }) => {
   };
 
   const handleCopyId = () => {
-    if (selectedItem?.value) {
-      navigator.clipboard.writeText(selectedItem.value);
+    const copyValue = selectedItem?.id || selectedItem?.link || selectedItem?.value;
+    if (copyValue) {
+      navigator.clipboard.writeText(copyValue);
     }
     handleMenuClose();
   };
 
   const handleOpenNewTab = () => {
-    const url = selectedItem?.link || selectedItem?.value;
+    const url = selectedItem?.link || selectedItem?.id || selectedItem?.value;
     if (url) {
       window.open(url, '_blank');
     }
@@ -97,7 +98,7 @@ const SimpleChip = ({ chips, node }) => {
       )}
       <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleMenuClose}>
         <MenuItem onClick={handleCopyId}>Copy ID</MenuItem>
-        {(selectedItem?.link || isUrl(selectedItem?.value)) && (
+        {(selectedItem?.link || isUrl(selectedItem?.id) || isUrl(selectedItem?.value)) && (
           <MenuItem onClick={handleOpenNewTab}>Open in new tab</MenuItem>
         )}
       </Menu>
