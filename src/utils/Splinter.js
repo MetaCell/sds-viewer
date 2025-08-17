@@ -533,6 +533,19 @@ class Splinter {
             return link;
         })
         this.edges = temp_edges;
+        // update "isAbout" references for subject and sample nodes to include links
+        this.nodes.forEach((n, k) => {
+            if (n.type === rdfTypes.Subject.key || n.type === rdfTypes.Sample.key) {
+                if (n?.attributes?.isAbout) {
+                    const about = [];
+                    n.attributes.isAbout.forEach(a => {
+                        about.push(that.replaceNode(a));
+                    });
+                    n.attributes.isAbout = about;
+                    this.nodes.set(k, n);
+                }
+            }
+        });
         return dataset_node;
     }
 
