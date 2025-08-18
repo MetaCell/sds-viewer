@@ -97,7 +97,6 @@ const SimpleChip = ({ chips, node }) => {
         )
       )}
       <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleMenuClose}>
-        <MenuItem onClick={handleCopyId}>Copy ID</MenuItem>
         {(selectedItem?.link || isUrl(selectedItem?.id) || isUrl(selectedItem?.value)) && (
           <MenuItem onClick={handleOpenNewTab}>Open in new tab</MenuItem>
         )}

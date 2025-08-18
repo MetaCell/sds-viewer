@@ -560,34 +560,37 @@ class Splinter {
     organise_subjects(target_node, link, groups, k, type){
         let parent = this.nodes.get(k);
         let keys = Object.keys(config.groups.order);
-        keys.forEach( key => {
+        keys.forEach(key => {
             let group = config.groups.order[key];
-            if ( target_node.attributes[key]?.[0] ) {
-                let source = this.nodes.get(target_node.attributes[key]?.[0]);
-                if ( source !== undefined ) {
-                    target_node.attributes[key][0] = source.attributes.label[0];
-                }
-                
-                const groupID = parent.id + "_" + target_node.attributes[key]?.[0].replace(/\s/g, "");
-                if ( this.nodes.get(groupID) === undefined ) {
-                    let name = target_node.attributes[key]?.[0];
+            if (target_node.attributes[key]?.[0]) {
+                // attributes may already be objects from previous passes
+                const raw = target_node.attributes[key][0];
+                const originalValue = typeof raw === "object" ? raw.value : raw;
 
+                let source = this.nodes.get(originalValue);
+                let label = originalValue;
+                if (source !== undefined) {
+                    label = source.attributes.label[0];
+                }
+
+                const groupID = parent.id + "_" + ("" + label).replace(/\s/g, "");
+                if (this.nodes.get(groupID) === undefined) {
                     const groupNode = {
                         id: groupID,
-                        name: name,
+                        name: label,
                         type: typesModel.NamedIndividual.group.type,
                         properties: key,
-                        parent : parent,
+                        parent: parent,
                         proxies: [],
                         level: parent.level + 1,
                         tree_reference: null,
                         children_counter: 0,
-                        collapsed : false,
-                        childLinks : [],
-                        samples : 0, 
-                        subjects : 0,
-                        publishedURI : "",
-                        dataset_id : this.dataset_id
+                        collapsed: false,
+                        childLinks: [],
+                        samples: 0,
+                        subjects: 0,
+                        publishedURI: "",
+                        dataset_id: this.dataset_id
                     };
                     let nodeF = this.factory.createNode(groupNode);
                     const img = new Image();
@@ -598,11 +601,14 @@ class Splinter {
                         source: parent.id,
                         target: nodeF.id
                     });
-                    this.groups[key] ? this.groups[key][nodeF.name] = nodeF :  this.groups[key] = {[nodeF.name] : nodeF};
+                    this.groups[key] ? this.groups[key][nodeF.name] = nodeF : this.groups[key] = {[nodeF.name]: nodeF};
                     parent = groupNode;
                 } else {
                     parent = this.nodes.get(groupID);
                 }
+
+                // preserve original identifier for chips
+                target_node.attributes[key] = this.replaceNode(target_node.attributes[key][0]);
             } else {
                 console.error("The group node already exists!", group.tag);
             }
@@ -977,30 +983,6 @@ class Splinter {
             }
         });
 
-        // update group attribute references for subject and sample nodes after organizing groups
-        let that = this;
-        const groupKeys = Object.keys(config.groups.order);
-        this.nodes.forEach((n, k) => {
-            if (n.type === rdfTypes.Subject.key || n.type === rdfTypes.Sample.key) {
-                groupKeys.forEach((attr) => {
-                    const value = n.attributes?.[attr];
-                    if (Array.isArray(value)) {
-                        n.attributes[attr] = value.map((a) =>
-                            typeof a === "string" && (
-                                a.startsWith("http") ||
-                                a.includes(rdfTypes.NCBITaxon.key) ||
-                                a.includes(rdfTypes.PATO.key) ||
-                                a.includes(rdfTypes.UBERON.key) ||
-                                a.includes(rdfTypes.RRID.key)
-                            )
-                                ? that.replaceNode(a)
-                                : { value: a }
-                        );
-                    }
-                });
-                this.nodes.set(k, n);
-            }
-        });
     }
 
 
