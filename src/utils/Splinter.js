@@ -472,13 +472,16 @@ class Splinter {
     }
 
     replaceNode(a) {
-        let newNode = { "value": a };
+        if (a && typeof a === 'object') {
+            return a;
+        }
+        let newNode = { value: a };
         if (typeof a === 'string') {
             const node = this.nodes.get(a);
             if (node) {
-                newNode = { "value": node?.attributes.label[0], "link": node?.id };
+                newNode = { value: node?.attributes.label[0], link: node?.id };
             } else if (a.startsWith('http')) {
-                newNode = { "value": a, "link": a };
+                newNode = { value: a, link: a };
             }
         }
         return newNode;
