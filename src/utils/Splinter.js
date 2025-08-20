@@ -479,7 +479,7 @@ class Splinter {
         if (typeof a === 'string') {
             const node = this.nodes.get(a);
             if (node) {
-                newNode = { value: node?.attributes.label[0], link: node?.id };
+                newNode = { value: a, link: node?.id };
             } else if (a.startsWith('http')) {
                 newNode = { value: a, link: a };
             }
@@ -552,7 +552,7 @@ class Splinter {
             ) {
                 let node = this.nodes.get(a);
                 if (node) {
-                    updateTechniques.push({ value: node?.attributes.label[0], link: node?.id });
+                    updateTechniques.push({ value: node?.attributes?.label?.[0], link: node?.id });
                 } else {
                     updateTechniques.push({ value: a, link: a });
                 }

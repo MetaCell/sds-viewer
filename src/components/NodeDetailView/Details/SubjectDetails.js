@@ -28,7 +28,7 @@ const SubjectDetails = (props) => {
 
         return n;
     }
-
+    
     return (
         <Box id={node?.graph_node?.id + detailsLabel}>
             <Divider />
@@ -39,10 +39,19 @@ const SubjectDetails = (props) => {
                     if ( property.visible ){
                         const propValue = node.graph_node.attributes[property.property]?.[0];
                         if ( property.isGroup ){
-                            return (<Box className="tab-content-row">
-                                        <Typography component="label">{property.label}</Typography>
-                                        <SimpleLinkedChip chips={[{ value : node.graph_node.attributes[property.property]}]} node={getGroupNode(node.graph_node.attributes[property.property]?.[0], node)} />
-                                    </Box>)
+                            const rawValue = node.graph_node.attributes[property.property];
+                            const propValue = Array.isArray(rawValue) ? rawValue[0] : rawValue;
+                            const normalizedArray = Array.isArray(rawValue) ? rawValue : [rawValue];
+  
+                            return (
+                                <Box className="tab-content-row">
+                                <Typography component="label">{property.label}</Typography>
+                                <SimpleLinkedChip
+                                    chips={[{ value: normalizedArray[0] }]}
+                                    node={getGroupNode(normalizedArray[0], node)}
+                                />
+                                </Box>
+                            );
                         }
 
                         else if ( isValidUrl(propValue) ){

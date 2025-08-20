@@ -35,12 +35,12 @@ const SimpleChip = ({ chips, node }) => {
   return (
     <Box className="chip-overflow noscrollbar">
       {chips?.map((chip, index) => {
-        const item = typeof chip === 'object' ? chip : { value: chip };
+        const item = typeof chip === 'object' ? chip : { value: chip.value };
         const key = `${item.value}_${index}`;
         return (
           <Chip
             key={key}
-            label={item.value}
+            label={item.value?.value ? item.value.value : item.value}
             onClick={() => handleClick(item, node)}
             onContextMenu={(e) => handleContextMenu(e, item)}
           />
