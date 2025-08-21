@@ -1,23 +1,27 @@
 @prefix : <file:///ERROR/EMPTY/PREFIX/BANNED/> .
+@prefix awards: <http://uri.interlex.org/temp/uris/awards/> .
 @prefix collection: <https://api.pennsieve.io/collections/N:collection:> .
-@prefix contributor: <https://api.pennsieve.io/datasets/N:dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f/contributors/> .
+@prefix contributor: <https://api.pennsieve.io/datasets/N:dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a/contributors/> .
 @prefix dataset: <https://api.pennsieve.io/datasets/N:dataset:> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix ilxtr: <http://uri.interlex.org/tgbugs/uris/readable/> .
 @prefix isAbout: <http://purl.obolibrary.org/obo/IAO_0000136> .
-@prefix local: <https://api.pennsieve.io/datasets/N:dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f/> .
+@prefix local: <https://api.pennsieve.io/datasets/N:dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a/> .
 @prefix NCBITaxon: <http://purl.obolibrary.org/obo/NCBITaxon_> .
 @prefix NIFRID: <http://uri.neuinfo.org/nif/nifstd/readable/> .
 @prefix ORCID: <https://orcid.org/> .
 @prefix organization: <https://api.pennsieve.io/organizations/N:organization:> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix PATO: <http://purl.obolibrary.org/obo/PATO_> .
+@prefix pio.api: <https://www.protocols.io/api/v4/protocols/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix sample: <https://api.pennsieve.io/datasets/N:dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f/samples/> .
-@prefix site: <https://api.pennsieve.io/datasets/N:dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f/sites/> .
+@prefix ror: <https://ror.org/> .
+@prefix RRID: <https://scicrunch.org/resolver/RRID:> .
+@prefix sample: <https://api.pennsieve.io/datasets/N:dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a/samples/> .
+@prefix site: <https://api.pennsieve.io/datasets/N:dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a/sites/> .
 @prefix sparc: <http://uri.interlex.org/tgbugs/uris/readable/sparc/> .
-@prefix subject: <https://api.pennsieve.io/datasets/N:dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f/subjects/> .
+@prefix subject: <https://api.pennsieve.io/datasets/N:dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a/subjects/> .
 @prefix TEMP: <http://uri.interlex.org/temp/uris/> .
 @prefix TEMPRAW: <http://uri.interlex.org/temp/uris/raw/> .
 @prefix UBERON: <http://purl.obolibrary.org/obo/UBERON_> .
@@ -25,2189 +29,1830 @@
 @prefix user: <https://api.pennsieve.io/users/N:user:> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://cassava.ucsd.edu/sparc/ontologies/N:dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f> a owl:Ontology ;
-    owl:versionIRI <https://cassava.ucsd.edu/sparc/ontologies/N:dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f/version/1749583225/N:dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f> ;
+<https://cassava.ucsd.edu/sparc/ontologies/N:dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a> a owl:Ontology ;
+    owl:versionIRI <https://cassava.ucsd.edu/sparc/ontologies/N:dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a/version/1748483923/N:dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a> ;
     owl:imports <https://raw.githubusercontent.com/SciCrunch/NIF-Ontology/sparc/ttl/sparc-methods.ttl>,
         <https://raw.githubusercontent.com/SciCrunch/NIF-Ontology/sparc/ttl/sparc-mis-helper.ttl> ;
-    rdfs:label "Human vagus nerve anatomical reconstruction using microCT immunohistochemistry and ultrasound - f006 curation export graph" ;
-    rdfs:comment "SPARC single dataset graph for N:dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f" ;
-    owl:versionInfo "2025-06-10T19:20:25,287281Z" ;
-    isAbout: dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasUriHuman <https://app.pennsieve.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f> ;
-    TEMP:TimestampExportStart "2025-06-10T19:15:37,040629Z" .
+    rdfs:label "Quantification of thickness of the gastric muscle in the rat stomach curation export graph" ;
+    rdfs:comment "SPARC single dataset graph for N:dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a" ;
+    owl:versionInfo "2025-05-29T01:58:43,091580Z" ;
+    isAbout: dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:hasUriHuman <https://app.pennsieve.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a> ;
+    TEMP:TimestampExportStart "2025-05-29T01:57:42,472372Z" .
 
 ### Classes
 
-NCBITaxon:9606 a owl:Class ;
-    rdfs:label "Homo sapiens" ;
-    NIFRID:synonym "h",
-        "human",
-        "man" .
+NCBITaxon:10116 a owl:Class ;
+    rdfs:label "Rattus norvegicus" ;
+    NIFRID:synonym "brown rat",
+        "Mus norvegicus",
+        "Norway rat",
+        "rat",
+        "rats" .
 
 PATO:0000383 a owl:Class ;
     rdfs:label "female" .
 
-UBERON:0001759 a owl:Class ;
-    rdfs:label "vagus nerve" ;
-    NIFRID:synonym "10n",
-        "CN-X",
-        "cranial nerve X",
-        "nerve X",
-        "nervus vagus",
-        "nervus vagus [x]",
-        "pneuomgastric nerve",
-        "tenth cranial nerve",
-        "vagal nerve",
-        "vagus",
-        "vagus nerve [X]",
-        "vagus nerve or its root",
-        "vagus nerve tree",
-        "vagus X nerve" .
+PATO:0000384 a owl:Class ;
+    rdfs:label "male" .
+
+UBERON:0000945 a owl:Class ;
+    rdfs:label "stomach" ;
+    NIFRID:synonym "anterior intestine",
+        "gaster",
+        "mesenteron",
+        "stomach chamber",
+        "ventriculus" .
 
 ### Individuals
 
-contributor:Frank-Chen a owl:NamedIndividual,
-        sparc:Person ;
-    sparc:firstName "Frank" ;
-    sparc:lastName "Chen" ;
-    TEMP:contributorTo dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasAffiliation "Temple University of the Commonwealth System of" ;
-    TEMP:middleName "Lui" .
+awards:OT2OD030538 a owl:NamedIndividual,
+        TEMP:FundedResearchProject .
 
-contributor:Kevin-Coppa a owl:NamedIndividual,
+contributor:Lauren-Patten a owl:NamedIndividual,
         sparc:Person ;
-    sparc:firstName "Kevin" ;
-    sparc:lastName "Coppa" ;
-    TEMP:contributorTo dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasAffiliation "Feinstein Institutes for Medical Research" .
+    sparc:firstName "Lauren" ;
+    sparc:lastName "Patten" ;
+    TEMP:contributorTo dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:hasAffiliation "Department of Anatomy & Physiology, University of Melbourne, Parkville, VIC",
+        ror:01ej9dk98 .
 
-contributor:Netanel-Ben-Shalom a owl:NamedIndividual,
-        sparc:Person ;
-    sparc:firstName "Netanel" ;
-    sparc:lastName "Ben-Shalom" ;
-    TEMP:contributorTo dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasAffiliation "Lenox Hill Hospital" .
-
-contributor:Weiguo-Song a owl:NamedIndividual,
-        sparc:Person ;
-    sparc:firstName "Weiguo" ;
-    sparc:lastName "Song" ;
-    TEMP:contributorTo dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasAffiliation "Feinstein Institutes for Medical Research" .
-
-dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f a owl:NamedIndividual,
+dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a a owl:NamedIndividual,
         sparc:Dataset ;
-    rdfs:label "Human vagus nerve anatomical reconstruction using microCT immunohistochemistry and ultrasound - f006" ;
-    dc:title "Human vagus nerve anatomical reconstruction using microCT immunohistochemistry and ultrasound - f006" ;
-    dc:description "Data created as part of the SPARC REVA award. The dataset includes anatomical images and videos, Ultrasound images and videos of the vagus nerve, microCT scans across the length of the nerve and IHC image across multiple levels." ;
-    isAbout: "dissection",
-        "human",
-        "IHC",
-        "microCT",
-        "US",
-        "vagus nerve",
-        NCBITaxon:9606,
-        UBERON:0001759 ;
-    TEMP:contentsWereUpdatedAtTime "2025-06-09T17:19:23.726499+00:00"^^xsd:dateTime ;
-    TEMP:curationIndex 4 ;
-    TEMP:errorIndex 9 ;
-    TEMP:hasAdditionalFundingInformation "75N98022C00019" ;
-    TEMP:hasDatasetTemplateSchemaVersion "3.0.2" ;
-    TEMP:hasDoi <https://doi.org/10.26275/ugoe-ccnw> ;
-    TEMP:hasExpectedNumberOfPerformances 0 ;
-    TEMP:hasExpectedNumberOfSamples 91 ;
-    TEMP:hasExpectedNumberOfSites 59 ;
-    TEMP:hasExpectedNumberOfSubjects 1 ;
+    rdfs:label "Quantification of thickness of the gastric muscle in the rat stomach" ;
+    dc:title "Quantification of thickness of the gastric muscle in the rat stomach" ;
+    dc:description "To measure the dimensions of the mucosal and muscle layers of the rat stomach and to determine relationships between the layers, in order to understand how these orientations influence the stomach function. Stomachs from adult Sprague-Dawley rats were collected, fixed and 15 fiducial points were located, these were distributed in all three regions (fundus, corpus and antrum) along the lesser and greater curvature. Full thickness preparations were collected from all points, sectioned at 5μm and stained with either haematoxylin and eosin (H&E) or Masson’s trichrome staining. At each site three measurements of each muscle layer were taken and averaged to provide the sample mean for that site for the individual rat. The average was taken for all equivalent fiducial points from at least 4 animals (2 males and 2 females). Stomachs were also collected to determine the directions and relationships of the muscle coats (at least 4 animals; 2 males and 2 females). These data show that the muscle layers in the stomach vary in thickness depending on their location and thus assumed roles in gastric function. These data are the first of its kind providing a detailed quantitative dataset concerning the organisation of the musculature of the rat stomach, which is expected to enhance modelling of gastric function and will be an important resource for future studies." ;
+    isAbout: "antrum",
+        "corpus",
+        "fiducial points",
+        "fundus",
+        "mucosa",
+        "muscle",
+        "rat",
+        "smooth muscle",
+        "submucosa",
+        NCBITaxon:10116,
+        UBERON:0000945 ;
+    TEMP:contentsWereUpdatedAtTime "2024-12-20T14:15:03.567042+00:00"^^xsd:dateTime ;
+    TEMP:curationIndex 2 ;
+    TEMP:errorIndex 8 ;
+    TEMP:hasAdditionalFundingInformation "OT2OD030538" ;
+    TEMP:hasAwardNumber awards:OT2OD030538 ;
+    TEMP:hasDatasetTemplateSchemaVersion "2.1.0" ;
+    TEMP:hasDoi <https://doi.org/10.26275/tlgo-dfke> ;
+    TEMP:hasExpectedNumberOfSamples 35 ;
+    TEMP:hasExpectedNumberOfSubjects 11 ;
     TEMP:hasExperimentalApproach "anatomy",
-        "microscopy",
-        "radiology" ;
+        "histology",
+        "microscopy" ;
     TEMP:hasLicense "Creative Commons Attribution" ;
-    TEMP:hasNumberOfContributors 15 ;
-    TEMP:hasNumberOfDirectories 602 ;
-    TEMP:hasNumberOfFiles 5223 ;
-    TEMP:hasNumberOfSamples 90 ;
-    TEMP:hasNumberOfSites 60 ;
-    TEMP:hasNumberOfSubjects 1 ;
+    TEMP:hasNumberOfContributors 4 ;
+    TEMP:hasNumberOfDirectories 47 ;
+    TEMP:hasNumberOfFiles 640 ;
+    TEMP:hasNumberOfSamples 35 ;
+    TEMP:hasNumberOfSites 113 ;
+    TEMP:hasNumberOfSubjects 11 ;
     TEMP:hasOrganization organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0 ;
     TEMP:hasPathErrorReport local:path-error-report ;
-    TEMP:hasResponsiblePrincipalInvestigator ORCID:0000-0002-3967-8164 ;
-    TEMP:hasSizeInBytes 2224895751918 ;
-    TEMP:hasUriApi dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasUriHuman <https://app.pennsieve.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f> ;
-    TEMP:hasUriPublished <https://sparc.science/datasets/438> ;
-    TEMP:isAboutParticipant sample:sam-l,
-        sample:sam-l-seg-c1,
-        sample:sam-l-seg-c1-A,
-        sample:sam-l-seg-c1-A-L3,
-        sample:sam-l-seg-c1-B,
-        sample:sam-l-seg-c1-B-L3,
-        sample:sam-l-seg-c2,
-        sample:sam-l-seg-c2-A,
-        sample:sam-l-seg-c2-A-L3,
-        sample:sam-l-seg-c3,
-        sample:sam-l-seg-c4,
-        sample:sam-l-seg-c4-A,
-        sample:sam-l-seg-c4-A-L3,
-        sample:sam-l-seg-c5,
-        sample:sam-l-seg-c6,
-        sample:sam-l-seg-c7,
-        sample:sam-l-seg-c8,
-        sample:sam-l-seg-c9,
-        sample:sam-l-seg-c9-A,
-        sample:sam-l-seg-c9-A-L3,
-        sample:sam-l-seg-c10,
-        sample:sam-l-seg-t1,
-        sample:sam-l-seg-t2,
-        sample:sam-l-seg-t2-A,
-        sample:sam-l-seg-t2-A-L3,
-        sample:sam-l-seg-t3,
-        sample:sam-l-seg-t4,
-        sample:sam-l-seg-t4-A,
-        sample:sam-l-seg-t4-A-L3,
-        sample:sam-l-seg-t5,
-        sample:sam-l-seg-t5-A,
-        sample:sam-l-seg-t5-A-L3,
-        sample:sam-l-seg-t5-B,
-        sample:sam-l-seg-t5-B-L3,
-        sample:sam-l-seg-t5-C,
-        sample:sam-l-seg-t5-C-L3,
-        sample:sam-l-seg-t5-D,
-        sample:sam-l-seg-t5-D-L3,
-        sample:sam-l-seg-t6,
-        sample:sam-l-seg-t7,
-        sample:sam-l-seg-t7-A,
-        sample:sam-l-seg-t7-A-L3,
-        sample:sam-l-seg-t7-C,
-        sample:sam-l-seg-t7-C-L3,
-        sample:sam-r,
-        sample:sam-r-seg-c1,
-        sample:sam-r-seg-c1-A,
-        sample:sam-r-seg-c1-A-L3,
-        sample:sam-r-seg-c1-B,
-        sample:sam-r-seg-c1-B-L3,
-        sample:sam-r-seg-c1-C,
-        sample:sam-r-seg-c1-C-L3,
-        sample:sam-r-seg-c2,
-        sample:sam-r-seg-c2-A,
-        sample:sam-r-seg-c2-A-L3,
-        sample:sam-r-seg-c3,
-        sample:sam-r-seg-c4,
-        sample:sam-r-seg-c5,
-        sample:sam-r-seg-c6,
-        sample:sam-r-seg-c6-A,
-        sample:sam-r-seg-c6-A-L3,
-        sample:sam-r-seg-c7,
-        sample:sam-r-seg-c8,
-        sample:sam-r-seg-c9,
-        sample:sam-r-seg-c10,
-        sample:sam-r-seg-c10-A,
-        sample:sam-r-seg-c10-A-L3,
-        sample:sam-r-seg-c11,
-        sample:sam-r-seg-t1,
-        sample:sam-r-seg-t1-A,
-        sample:sam-r-seg-t1-A-L3,
-        sample:sam-r-seg-t1-B,
-        sample:sam-r-seg-t1-B-L3,
-        sample:sam-r-seg-t2,
-        sample:sam-r-seg-t3,
-        sample:sam-r-seg-t3-A,
-        sample:sam-r-seg-t3-A-L3,
-        sample:sam-r-seg-t3-B,
-        sample:sam-r-seg-t3-B-L3,
-        sample:sam-r-seg-t4,
-        sample:sam-r-seg-t4-A,
-        sample:sam-r-seg-t4-A-L3,
-        sample:sam-r-seg-t4-B,
-        sample:sam-r-seg-t4-B-L3,
-        sample:sam-r-seg-t4-C,
-        sample:sam-r-seg-t4-C-L3,
-        sample:sam-r-seg-t5,
-        sample:sam-r-seg-t6,
-        sample:sam-r-seg-t6-C,
-        sample:sam-r-seg-t6-C-L3,
-        subject:sub-f006 ;
-    TEMP:isAboutSite site:site-l-seg-c1-A-L3,
-        site:site-l-seg-c1-A-L3-th,
-        site:site-l-seg-c1-B-L3-1,
-        site:site-l-seg-c1-B-L3-1-th,
-        site:site-l-seg-c1-B-L3-2,
-        site:site-l-seg-c1-B-L3-2-th,
-        site:site-l-seg-c1-B-L3-3-th,
-        site:site-l-seg-c1-B-L3-4-th,
-        site:site-l-seg-c2-A-L3,
-        site:site-l-seg-c2-A-L3-th,
-        site:site-l-seg-c4-A-L3,
-        site:site-l-seg-c4-A-L3-th,
-        site:site-l-seg-c9-A-L3,
-        site:site-l-seg-c9-A-L3-th,
-        site:site-l-seg-t2-A-L3,
-        site:site-l-seg-t2-A-L3-th,
-        site:site-l-seg-t4-A-L3,
-        site:site-l-seg-t4-A-L3-th,
-        site:site-l-seg-t5-A-L3,
-        site:site-l-seg-t5-A-L3-th,
-        site:site-l-seg-t5-B-L3,
-        site:site-l-seg-t5-B-L3-th,
-        site:site-l-seg-t5-C-L3,
-        site:site-l-seg-t5-C-L3-th,
-        site:site-l-seg-t5-D-L3,
-        site:site-l-seg-t5-D-L3-th,
-        site:site-l-seg-t7-A-L3-th,
-        site:site-l-seg-t7-C-L3,
-        site:site-r-seg-c1-A-L3-1,
-        site:site-r-seg-c1-A-L3-1-th,
-        site:site-r-seg-c1-A-L3-2,
-        site:site-r-seg-c1-A-L3-2-th,
-        site:site-r-seg-c1-B-L3-1,
-        site:site-r-seg-c1-B-L3-1-th,
-        site:site-r-seg-c1-B-L3-2,
-        site:site-r-seg-c1-B-L3-2-th,
-        site:site-r-seg-c1-B-L3-3,
-        site:site-r-seg-c1-B-L3-3-th,
-        site:site-r-seg-c1-B-L3-4-th,
-        site:site-r-seg-c1-C-L3,
-        site:site-r-seg-c2-A-L3-th,
-        site:site-r-seg-c6-A-L3,
-        site:site-r-seg-c6-A-L3-th,
-        site:site-r-seg-c10-A-L3,
-        site:site-r-seg-c10-A-L3-th,
-        site:site-r-seg-t1-A-L3,
-        site:site-r-seg-t1-A-L3-th,
-        site:site-r-seg-t1-B-L3,
-        site:site-r-seg-t1-B-L3-th,
-        site:site-r-seg-t3-A-L3,
-        site:site-r-seg-t3-B-L3,
-        site:site-r-seg-t3-B-L3-th,
-        site:site-r-seg-t4-A-L3,
-        site:site-r-seg-t4-A-L3-th,
-        site:site-r-seg-t4-B-L3,
-        site:site-r-seg-t4-B-L3-th,
-        site:site-r-seg-t4-C-L3,
-        site:site-r-seg-t4-C-L3-th,
-        site:site-r-seg-t6-C-L3,
-        site:site-r-seg-t6-C-L3-th ;
-    TEMP:protocolEmploysTechnique "dissection",
-        "histology",
-        "immunohistochemistry",
-        "micro computed tomography",
-        "microscopy",
-        "ultrasound" ;
+    TEMP:hasProtocol pio.api:53331 ;
+    TEMP:hasResponsiblePrincipalInvestigator ORCID:0000-0002-0219-3438 ;
+    TEMP:hasSizeInBytes 12518077111 ;
+    TEMP:hasUriApi dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:hasUriHuman <https://app.pennsieve.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a> ;
+    TEMP:hasUriPublished <https://sparc.science/datasets/367> ;
+    TEMP:isAboutParticipant sample:sam-01,
+        sample:sam-01-sec-2,
+        sample:sam-01-sec-3,
+        sample:sam-01-sec-3-2,
+        sample:sam-01-sec-4,
+        sample:sam-01-sec-5,
+        sample:sam-02,
+        sample:sam-02-sec-3,
+        sample:sam-03,
+        sample:sam-03-sec-1,
+        sample:sam-03-sec-1-2,
+        sample:sam-03-sec-2,
+        sample:sam-03-sec-2-2,
+        sample:sam-04,
+        sample:sam-04-sec-1-1,
+        sample:sam-04-sec-1-2,
+        sample:sam-04-sec-1-3,
+        sample:sam-04-sec-1-6,
+        sample:sam-04-sec-1-7,
+        sample:sam-04-sec-2-1,
+        sample:sam-04-sec-2-3,
+        sample:sam-04-sec-2-3-1,
+        sample:sam-04-sec-2-3-2,
+        sample:sam-04-sec-3-1,
+        sample:sam-04-sec-4-1,
+        sample:sam-04-sec-S-2,
+        sample:sam-04-sec-S-3,
+        sample:sam-04-sec-S-4,
+        sample:sam-05,
+        sample:sam-06,
+        sample:sam-07,
+        sample:sam-08,
+        sample:sam-09,
+        sample:sam-10,
+        sample:sam-11,
+        subject:sub-rat01,
+        subject:sub-rat02,
+        subject:sub-rat03,
+        subject:sub-rat04,
+        subject:sub-rat05,
+        subject:sub-rat06,
+        subject:sub-rat07,
+        subject:sub-rat08,
+        subject:sub-rat09,
+        subject:sub-rat10,
+        subject:sub-rat11 ;
+    TEMP:isAboutSite site:site-01-B,
+        site:site-01-C,
+        site:site-01-EF,
+        site:site-01-G,
+        site:site-01-H,
+        site:site-01-Q,
+        site:site-01-R,
+        site:site-02-B,
+        site:site-02-C,
+        site:site-02-D,
+        site:site-02-EF,
+        site:site-02-G,
+        site:site-02-H,
+        site:site-02-IJ,
+        site:site-02-Q,
+        site:site-02-R,
+        site:site-03-B,
+        site:site-03-C,
+        site:site-03-D,
+        site:site-03-EF,
+        site:site-03-Q,
+        site:site-03-R,
+        site:site-05-EF,
+        site:site-05-IJ,
+        site:site-06-C,
+        site:site-06-D,
+        site:site-06-EF,
+        site:site-06-IJ,
+        site:site-06-M,
+        site:site-06-N,
+        site:site-06-O,
+        site:site-06-P,
+        site:site-07-C,
+        site:site-07-D,
+        site:site-07-EF,
+        site:site-07-IJ,
+        site:site-07-M,
+        site:site-07-N,
+        site:site-07-O,
+        site:site-07-P,
+        site:site-08-A,
+        site:site-08-B,
+        site:site-08-C,
+        site:site-08-D,
+        site:site-08-E,
+        site:site-08-EF,
+        site:site-08-F,
+        site:site-08-G,
+        site:site-08-H,
+        site:site-08-I,
+        site:site-08-J,
+        site:site-08-K,
+        site:site-08-L,
+        site:site-08-M,
+        site:site-08-N,
+        site:site-08-O,
+        site:site-08-P,
+        site:site-08-Q,
+        site:site-08-R,
+        site:site-08-S,
+        site:site-09-A,
+        site:site-09-B,
+        site:site-09-C,
+        site:site-09-D,
+        site:site-09-E,
+        site:site-09-EF,
+        site:site-09-F,
+        site:site-09-G,
+        site:site-09-H,
+        site:site-09-J,
+        site:site-09-K,
+        site:site-09-L,
+        site:site-09-M,
+        site:site-09-N,
+        site:site-09-O,
+        site:site-09-P,
+        site:site-09-Q,
+        site:site-09-R,
+        site:site-09-S,
+        site:site-10-A,
+        site:site-10-B,
+        site:site-10-C,
+        site:site-10-D,
+        site:site-10-G,
+        site:site-10-H,
+        site:site-10-K,
+        site:site-10-L,
+        site:site-10-M,
+        site:site-10-N,
+        site:site-10-O,
+        site:site-10-P,
+        site:site-10-Q,
+        site:site-10-R,
+        site:site-10-S,
+        site:site-11-A,
+        site:site-11-B,
+        site:site-11-C,
+        site:site-11-D,
+        site:site-11-E,
+        site:site-11-EF,
+        site:site-11-F,
+        site:site-11-G,
+        site:site-11-H,
+        site:site-11-I,
+        site:site-11-K,
+        site:site-11-L,
+        site:site-11-M,
+        site:site-11-N,
+        site:site-11-O,
+        site:site-11-P,
+        site:site-11-Q,
+        site:site-11-R,
+        site:site-11-S ;
+    TEMP:milestoneCompletionDate "2021-09-15"^^xsd:date ;
     TEMP:publishedRevision "None" ;
     TEMP:publishedVersion 1 ;
-    TEMP:speciesCollectedFrom NCBITaxon:9606 ;
+    TEMP:speciesCollectedFrom NCBITaxon:10116 ;
     TEMP:statusOnPlatform "12_PUBLISHED_INVESTIGATOR" ;
-    TEMP:submissionIndex 5 ;
+    TEMP:submissionIndex 6 ;
     TEMP:unclassifiedIndex 0 ;
-    TEMP:wasCreatedAtTime "2024-06-26T21:45:18.030811+00:00"^^xsd:dateTime ;
-    TEMP:wasPublishedAtTime "2025-06-09T18:07:53.626551+00:00"^^xsd:dateTime ;
-    TEMP:wasUpdatedAtTime "2025-06-10T16:38:49.179774+00:00"^^xsd:dateTime .
+    TEMP:wasCreatedAtTime "2021-09-16T13:34:48.915980+00:00"^^xsd:dateTime ;
+    TEMP:wasPublishedAtTime "2024-01-11T01:09:03.684022+00:00"^^xsd:dateTime ;
+    TEMP:wasUpdatedAtTime "2025-02-18T20:06:43.106000+00:00"^^xsd:dateTime .
 
-<https://doi.org/10.26275/ugoe-ccnw> a owl:NamedIndividual,
+<https://doi.org/10.26275/tlgo-dfke> a owl:NamedIndividual,
         TEMP:Dataset ;
-    rdfs:label "Human vagus nerve anatomical reconstruction using microCT immunohistochemistry and ultrasound - f006" .
+    rdfs:label "Quantification of thickness of the gastric muscle in the rat stomach" .
 
-ORCID:0000-0001-7507-8126 a owl:NamedIndividual,
+ORCID:0000-0001-9967-7457 a owl:NamedIndividual,
         sparc:Person ;
-    rdfs:label "Zeinab Nassrallah" ;
-    sparc:firstName "Zeinab" ;
-    sparc:lastName "Nasrallah" ;
-    sparc:hasORCIDId ORCID:0000-0001-7507-8126 ;
-    TEMP:contributorTo dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasAffiliation "Donald and Barbara Zucker School of Medicine" .
+    rdfs:label "Martin Stebbing" ;
+    sparc:firstName "Martin" ;
+    sparc:lastName "Stebbing" ;
+    sparc:hasORCIDId ORCID:0000-0001-9967-7457 ;
+    TEMP:contributorTo dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:hasAffiliation "Department of Anatomy & Physiology, University of Melbourne, Parkville, VIC",
+        ror:01ej9dk98 ;
+    TEMP:hasDataRemoteUserId user:e3b5be54-bd5b-454c-ba21-87e2c6bfe32c ;
+    TEMP:middleName "J" .
 
-ORCID:0000-0002-3725-8852 a owl:NamedIndividual,
+ORCID:0000-0002-0219-3438 a owl:NamedIndividual,
         sparc:Person ;
-    rdfs:label "Avantika Vardhan" ;
-    sparc:firstName "Avantika" ;
-    sparc:lastName "Vardhan" ;
-    sparc:hasORCIDId ORCID:0000-0002-3725-8852 ;
-    TEMP:contributorTo dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasAffiliation "Feinstein Institutes for Medical Research" ;
-    TEMP:hasDataRemoteUserId user:c6ea1b1c-549f-485b-a9e4-062fbafe601a .
+    rdfs:label "John B Furness" ;
+    sparc:firstName "John" ;
+    sparc:lastName "Furness" ;
+    sparc:hasORCIDId ORCID:0000-0002-0219-3438 ;
+    TEMP:contributorTo dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:hasAffiliation "Department of Anatomy & Physiology, University of Melbourne, Parkville, VIC",
+        ror:01ej9dk98 ;
+    TEMP:hasDataRemoteUserId user:43c4ed23-7221-49a1-a83b-673fc440af29 ;
+    TEMP:middleName "B" .
 
-ORCID:0000-0002-3730-1400 a owl:NamedIndividual,
+ORCID:0000-0002-7949-5725 a owl:NamedIndividual,
         sparc:Person ;
-    rdfs:label "Viktor Tóth" ;
-    sparc:firstName "Viktor" ;
-    sparc:lastName "Toth" ;
-    sparc:hasORCIDId ORCID:0000-0002-3730-1400 ;
-    TEMP:contributorTo dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasAffiliation "Feinstein Institutes for Medical Research" .
-
-ORCID:0000-0002-3967-8164 a owl:NamedIndividual,
-        sparc:Person ;
-    rdfs:label "Stavros Zanos" ;
-    sparc:firstName "Stavros" ;
-    sparc:lastName "Zanos" ;
-    sparc:hasORCIDId ORCID:0000-0002-3967-8164 ;
-    TEMP:contributorTo dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasAffiliation "Feinstein Institutes for Medical Research" .
-
-ORCID:0000-0002-5235-9803 a owl:NamedIndividual,
-        sparc:Person ;
-    rdfs:label "Mary Barbe" ;
-    NIFRID:synonym "Barbe M" ;
-    sparc:firstName "Mary" ;
-    sparc:lastName "Barbe" ;
-    sparc:hasORCIDId ORCID:0000-0002-5235-9803 ;
-    TEMP:contributorTo dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasAffiliation "Temple University of the Commonwealth System of" .
-
-ORCID:0000-0002-9204-9551 a owl:NamedIndividual,
-        sparc:Person ;
-    rdfs:label "Theodoros Zanos" ;
-    sparc:firstName "Theodoros" ;
-    sparc:lastName "Zanos" ;
-    sparc:hasORCIDId ORCID:0000-0002-9204-9551 ;
-    TEMP:contributorTo dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasAffiliation "Feinstein Institutes for Medical Research" .
-
-ORCID:0000-0002-9466-5745 a owl:NamedIndividual,
-        sparc:Person ;
-    rdfs:label "Naveen  Jayaprakash " ;
-    sparc:firstName "Naveen" ;
-    sparc:lastName "Jayaprakash" ;
-    sparc:hasORCIDId ORCID:0000-0002-9466-5745 ;
-    TEMP:contributorTo dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasAffiliation "Feinstein Institutes for Medical Research" .
-
-ORCID:0000-0003-0440-7791 a owl:NamedIndividual,
-        sparc:Person ;
-    rdfs:label "Todd Levy" ;
-    sparc:firstName "Todd" ;
-    sparc:lastName "Levy" ;
-    sparc:hasORCIDId ORCID:0000-0003-0440-7791 ;
-    TEMP:contributorTo dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasAffiliation "Feinstein Institutes for Medical Research" ;
-    TEMP:hasDataRemoteUserId user:9f3790bc-289a-4c6c-b0f9-0aa0490c523f .
-
-ORCID:0000-0003-2943-1245 a owl:NamedIndividual,
-        sparc:Person ;
-    rdfs:label "Khaled Qanud" ;
-    sparc:firstName "Qanud" ;
-    sparc:lastName "Khaled" ;
-    sparc:hasORCIDId ORCID:0000-0003-2943-1245 ;
-    TEMP:contributorTo dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasAffiliation "Feinstein Institutes for Medical Research" .
-
-sample:sam-l a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:58a5996d-7408-4dab-8d96-c922022f27e0,
-        collection:88ab1baf-6596-4deb-8208-e9a96b102c43,
-        collection:844c754a-d6aa-4d4f-a224-dcd2c146e48a ;
-    TEMP:localId "sam-l" ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:sample_type "nerve" .
-
-sample:sam-l-seg-c1 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:0512dd76-d45b-42e5-bc27-d0ac85057432,
-        collection:b37e64d9-1d3f-4bf2-b9ab-85e71d832d4d ;
-    TEMP:localId "sam-l-seg-c1" ;
-    TEMP:wasDerivedFromSample sample:sam-l ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_C1L_9um_1.jpx, B824_C1L_9um_2.jpx, B824_C1L_9um_3.jpx, B824_C1L_9um_4.jpx" ;
-    TEMPRAW:sample_experimental_group "microct" ;
-    TEMPRAW:sample_type "segment" .
-
-sample:sam-l-seg-c1-A a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "sam-l-seg-c1-A" ;
-    TEMP:wasDerivedFromSample sample:sam-l-seg-c1 ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:metadata_only "Yes" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "subsegment" .
-
-sample:sam-l-seg-c1-A-L3 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:5d4e1b31-3573-44a1-a901-3c3ed3c5c1cf,
-        collection:551a605e-4faa-4e29-bded-b1a7b0eb1bd5 ;
-    TEMP:localId "sam-l-seg-c1-A-L3" ;
-    TEMP:wasDerivedFromSample sample:sam-l-seg-c1-A ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_C1L_A_Level_3.tar, B824_C1L_A_Level_3_th.tar" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "section" .
-
-sample:sam-l-seg-c1-B a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "sam-l-seg-c1-B" ;
-    TEMP:wasDerivedFromSample sample:sam-l-seg-c1 ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:metadata_only "Yes" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "subsegment" .
-
-sample:sam-l-seg-c1-B-L3 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:21083b4f-8f82-455e-b0c7-710c972335b5,
-        collection:f1be1475-3a2e-45eb-b9da-5d6f01b44ed9 ;
-    TEMP:localId "sam-l-seg-c1-B-L3" ;
-    TEMP:wasDerivedFromSample sample:sam-l-seg-c1-B ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_C1L_B_Level_3_part1.tar, B824_C1L_B_Level_3_part1_th.tar, B824_C1L_B_Level_3_part2.tar, B824_C1L_B_Level_3_part2_th.tar, B824_C1L_B_Level_3_part3_th.tar, B824_C1L_B_Level_3_part4_th.tar" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "section" .
-
-sample:sam-l-seg-c2 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:c83b268f-709a-4872-93d6-468a0a908bd1,
-        collection:e674aa2c-4ae6-4872-b698-5105405b992d ;
-    TEMP:localId "sam-l-seg-c2" ;
-    TEMP:wasDerivedFromSample sample:sam-l ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_C2L_9um_1272_rec.jpx" ;
-    TEMPRAW:sample_experimental_group "microct" ;
-    TEMPRAW:sample_type "segment" .
-
-sample:sam-l-seg-c2-A a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "sam-l-seg-c2-A" ;
-    TEMP:wasDerivedFromSample sample:sam-l-seg-c2 ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:metadata_only "Yes" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "subsegment" .
-
-sample:sam-l-seg-c2-A-L3 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:9cffc939-9081-4381-9969-0ae2a4257357,
-        collection:4938ffe3-f345-4431-886d-9fc8fb793787 ;
-    TEMP:localId "sam-l-seg-c2-A-L3" ;
-    TEMP:wasDerivedFromSample sample:sam-l-seg-c2-A ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_C2L_A_Level_3.tar, B824_C2L_A_Level_3_th.tar" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "section" .
-
-sample:sam-l-seg-c3 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:33d5d26a-cfeb-4e8d-8b02-6b2a154ba37a,
-        collection:c70bdf44-59d1-4979-924e-1e73213e5b74 ;
-    TEMP:localId "sam-l-seg-c3" ;
-    TEMP:wasDerivedFromSample sample:sam-l ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_C3L_9um_1176_rec.jpx" ;
-    TEMPRAW:sample_experimental_group "microct" ;
-    TEMPRAW:sample_type "segment" .
-
-sample:sam-l-seg-c4 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:739a8bdf-1a0a-4977-a344-40bde31c7860,
-        collection:74251073-a818-45fc-b855-91f17b0d799c ;
-    TEMP:localId "sam-l-seg-c4" ;
-    TEMP:wasDerivedFromSample sample:sam-l ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_C4L_9um_1172_rec.jpx" ;
-    TEMPRAW:sample_experimental_group "microct" ;
-    TEMPRAW:sample_type "segment" .
-
-sample:sam-l-seg-c4-A a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "sam-l-seg-c4-A" ;
-    TEMP:wasDerivedFromSample sample:sam-l-seg-c4 ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:metadata_only "Yes" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "subsegment" .
-
-sample:sam-l-seg-c4-A-L3 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:8172becf-c443-4952-8047-408eb37efcdd,
-        collection:ab8c7abe-1b0b-4ac4-a95e-25c265518f71 ;
-    TEMP:localId "sam-l-seg-c4-A-L3" ;
-    TEMP:wasDerivedFromSample sample:sam-l-seg-c4-A ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_C4L_A_Level_3.tar, B824_C4L_A_Level_3_th.tar" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "section" .
-
-sample:sam-l-seg-c5 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:7ef372fa-b068-4316-9416-e59649edda70,
-        collection:60c6ed1b-ce46-4f5c-8b57-e2f68fa9cca2 ;
-    TEMP:localId "sam-l-seg-c5" ;
-    TEMP:wasDerivedFromSample sample:sam-l ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_C5L_9um_1272_rec.jpx" ;
-    TEMPRAW:sample_experimental_group "microct" ;
-    TEMPRAW:sample_type "segment" .
-
-sample:sam-l-seg-c6 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:5021b6dc-901e-497d-8571-128e9d92a71f,
-        collection:e7b58692-648e-4b0f-9769-bd53b22eed7d ;
-    TEMP:localId "sam-l-seg-c6" ;
-    TEMP:wasDerivedFromSample sample:sam-l ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_C6L_9um_1272_rec.jpx" ;
-    TEMPRAW:sample_experimental_group "microct" ;
-    TEMPRAW:sample_type "segment" .
-
-sample:sam-l-seg-c7 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:1926ed09-5424-47f2-a2f8-941d0fe441d0,
-        collection:c79cdab0-9e6c-4fbb-bf28-f16322c622cb ;
-    TEMP:localId "sam-l-seg-c7" ;
-    TEMP:wasDerivedFromSample sample:sam-l ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_C7L_9um_1272_rec.jpx" ;
-    TEMPRAW:sample_experimental_group "microct" ;
-    TEMPRAW:sample_type "segment" .
-
-sample:sam-l-seg-c8 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:2b46c0ea-49d8-4fe7-807e-138125bd3bf8,
-        collection:f3949817-ed5f-4442-9857-5d2a0c612162 ;
-    TEMP:localId "sam-l-seg-c8" ;
-    TEMP:wasDerivedFromSample sample:sam-l ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_C8L_9um_1172_rec.jpx" ;
-    TEMPRAW:sample_experimental_group "microct" ;
-    TEMPRAW:sample_type "segment" .
-
-sample:sam-l-seg-c9 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:4a58f944-3b7a-4e2d-92e6-c75f7e09c1ab,
-        collection:190ae400-ee52-4fbd-81ca-9751d602f3d2 ;
-    TEMP:localId "sam-l-seg-c9" ;
-    TEMP:wasDerivedFromSample sample:sam-l ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_C9L_9um_1272_rec.jpx" ;
-    TEMPRAW:sample_experimental_group "microct" ;
-    TEMPRAW:sample_type "segment" .
-
-sample:sam-l-seg-c9-A a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "sam-l-seg-c9-A" ;
-    TEMP:wasDerivedFromSample sample:sam-l-seg-c9 ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:metadata_only "Yes" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "subsegment" .
-
-sample:sam-l-seg-c9-A-L3 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:77c6566d-7e7c-4e99-a0b2-da4d0a2a811b,
-        collection:972e2fa8-2491-4155-9c49-28cbcdd8aee8 ;
-    TEMP:localId "sam-l-seg-c9-A-L3" ;
-    TEMP:wasDerivedFromSample sample:sam-l-seg-c9-A ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_C9L_A_Level_3.tar, B824_C9L_A_Level_3_th.tar" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "section" .
-
-sample:sam-l-seg-c10 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:60cef632-b854-4280-b4e5-44304457ade4,
-        collection:c0b881f2-c87b-459c-bc92-6f20d65c3ebe ;
-    TEMP:localId "sam-l-seg-c10" ;
-    TEMP:wasDerivedFromSample sample:sam-l ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_C10L_9um_1272_rec.jpx" ;
-    TEMPRAW:sample_experimental_group "microct" ;
-    TEMPRAW:sample_type "segment" .
-
-sample:sam-l-seg-t1 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:38e7ad9e-b395-49d1-b99e-aecfe2729478,
-        collection:cc8f61ed-a455-4e8a-a7bd-77bdb7ab3790 ;
-    TEMP:localId "sam-l-seg-t1" ;
-    TEMP:wasDerivedFromSample sample:sam-l ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_T1L_9um_1172_rec.jpx" ;
-    TEMPRAW:sample_experimental_group "microct" ;
-    TEMPRAW:sample_type "segment" .
-
-sample:sam-l-seg-t2 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:0ab66676-b6ad-4b97-8b0e-fcd608e1270e,
-        collection:e3b4db94-e704-49b1-b040-bf0b87beeec7 ;
-    TEMP:localId "sam-l-seg-t2" ;
-    TEMP:wasDerivedFromSample sample:sam-l ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_T2L_9um_1272_rec.jpx" ;
-    TEMPRAW:sample_experimental_group "microct" ;
-    TEMPRAW:sample_type "segment" .
-
-sample:sam-l-seg-t2-A a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "sam-l-seg-t2-A" ;
-    TEMP:wasDerivedFromSample sample:sam-l-seg-t2 ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:metadata_only "Yes" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "subsegment" .
-
-sample:sam-l-seg-t2-A-L3 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:42e193ad-9b94-48bc-8d40-0027550f0520,
-        collection:a61e504d-de38-4aad-8678-a9f1d8b51559 ;
-    TEMP:localId "sam-l-seg-t2-A-L3" ;
-    TEMP:wasDerivedFromSample sample:sam-l-seg-t2-A ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_T2L_A_Level_3.tar, B824_T2L_A_Level_3_th.tar" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "section" .
-
-sample:sam-l-seg-t3 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:78fbc236-2a60-4652-9e1a-5aa158a3f38c,
-        collection:c00f2c0d-00a6-43b9-b71b-a0ad0f934064 ;
-    TEMP:localId "sam-l-seg-t3" ;
-    TEMP:wasDerivedFromSample sample:sam-l ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_T3L_9um_1272_rec.jpx" ;
-    TEMPRAW:sample_experimental_group "microct" ;
-    TEMPRAW:sample_type "segment" .
-
-sample:sam-l-seg-t4 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:5caa2857-5c78-4658-b665-fcc728022fc2,
-        collection:7a283019-7a94-42cb-8693-55fdbf9c5be8 ;
-    TEMP:localId "sam-l-seg-t4" ;
-    TEMP:wasDerivedFromSample sample:sam-l ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_T4L_9um_1172_rec.jpx" ;
-    TEMPRAW:sample_experimental_group "microct" ;
-    TEMPRAW:sample_type "segment" .
-
-sample:sam-l-seg-t4-A a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "sam-l-seg-t4-A" ;
-    TEMP:wasDerivedFromSample sample:sam-l-seg-t4 ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:metadata_only "Yes" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "subsegment" .
-
-sample:sam-l-seg-t4-A-L3 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:31e2e23d-d867-47c1-b608-cf060f85d02a,
-        collection:1594d3bd-d0f1-4f8e-9005-ede3151a9401 ;
-    TEMP:localId "sam-l-seg-t4-A-L3" ;
-    TEMP:wasDerivedFromSample sample:sam-l-seg-t4-A ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_T4L_A_Level_3.tar, B824_T4L_A_Level_3_th.tar" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "section" .
-
-sample:sam-l-seg-t5 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:16b1a98f-767f-4ddd-968b-259dc400a6bc,
-        collection:49448adb-3346-4428-9fdc-5f31ab6151d0 ;
-    TEMP:localId "sam-l-seg-t5" ;
-    TEMP:wasDerivedFromSample sample:sam-l ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_T5L_9um_1.jpx, B824_T5L_9um_2.jpx, B824_T5L_9um_3.jpx" ;
-    TEMPRAW:sample_experimental_group "microct" ;
-    TEMPRAW:sample_type "segment" .
-
-sample:sam-l-seg-t5-A a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "sam-l-seg-t5-A" ;
-    TEMP:wasDerivedFromSample sample:sam-l-seg-t5 ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:metadata_only "Yes" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "subsegment" .
-
-sample:sam-l-seg-t5-A-L3 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:31cabd90-5757-4ed1-a125-8f195ade3355,
-        collection:cbc61485-6bcf-49eb-8c22-270a6c03bb8a ;
-    TEMP:localId "sam-l-seg-t5-A-L3" ;
-    TEMP:wasDerivedFromSample sample:sam-l-seg-t5-A ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_T5L_A_Level_3.tar, B824_T5L_A_Level_3_th.tar" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "section" .
-
-sample:sam-l-seg-t5-B a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "sam-l-seg-t5-B" ;
-    TEMP:wasDerivedFromSample sample:sam-l-seg-t5 ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:metadata_only "Yes" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "subsegment" .
-
-sample:sam-l-seg-t5-B-L3 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:10df8fe7-cf52-479e-96c9-ac043749536e,
-        collection:dc7ac310-fb8c-4892-95ca-117a166444fc ;
-    TEMP:localId "sam-l-seg-t5-B-L3" ;
-    TEMP:wasDerivedFromSample sample:sam-l-seg-t5-B ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_T5L_B_Level_3.tar, B824_T5L_B_Level_3_th.tar" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "section" .
-
-sample:sam-l-seg-t5-C a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "sam-l-seg-t5-C" ;
-    TEMP:wasDerivedFromSample sample:sam-l-seg-t5 ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:metadata_only "Yes" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "subsegment" .
-
-sample:sam-l-seg-t5-C-L3 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:00f51632-8710-4963-ad72-67269c0adbd0,
-        collection:485e0d2b-9912-449f-8674-eb71a82a9ead ;
-    TEMP:localId "sam-l-seg-t5-C-L3" ;
-    TEMP:wasDerivedFromSample sample:sam-l-seg-t5-C ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_T5L_C_Level_3.tar, B824_T5L_C_Level_3_th.tar" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "section" .
-
-sample:sam-l-seg-t5-D a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "sam-l-seg-t5-D" ;
-    TEMP:wasDerivedFromSample sample:sam-l-seg-t5 ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:metadata_only "Yes" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "subsegment" .
-
-sample:sam-l-seg-t5-D-L3 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:54d279b8-342d-4852-981b-cd16422efe16,
-        collection:758d716d-0987-40b3-b289-22d27edb6f5a ;
-    TEMP:localId "sam-l-seg-t5-D-L3" ;
-    TEMP:wasDerivedFromSample sample:sam-l-seg-t5-D ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_T5L_D_Level_3.tar, B824_T5L_D_Level_3_th.tar" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "section" .
-
-sample:sam-l-seg-t6 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:519f3508-25b1-42f0-9359-95357453c67e,
-        collection:c112c295-f214-4ba7-a1ef-73f90240f822 ;
-    TEMP:localId "sam-l-seg-t6" ;
-    TEMP:wasDerivedFromSample sample:sam-l ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_T6L_9um_1.jpx, B824_T6L_9um_2.jpx, B824_T6L_9um_3.jpx" ;
-    TEMPRAW:sample_experimental_group "microct" ;
-    TEMPRAW:sample_type "segment" .
-
-sample:sam-l-seg-t7 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:5ee4e68d-c595-4e67-b81f-9adf1258f6ad,
-        collection:eb174e19-5397-4a0f-b98d-c18e6b8a8799 ;
-    TEMP:localId "sam-l-seg-t7" ;
-    TEMP:wasDerivedFromSample sample:sam-l ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_T7L_9um_1.jpx, B824_T7L_9um_2.jpx" ;
-    TEMPRAW:sample_experimental_group "microct" ;
-    TEMPRAW:sample_type "segment" .
-
-sample:sam-l-seg-t7-A a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "sam-l-seg-t7-A" ;
-    TEMP:wasDerivedFromSample sample:sam-l-seg-t7 ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:metadata_only "Yes" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "subsegment" .
-
-sample:sam-l-seg-t7-A-L3 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:0b6d8fcc-004c-4e2f-bc8f-3daa802fc4a0,
-        collection:bf0d8bca-256e-4a82-8ffe-725fcf2a0262 ;
-    TEMP:localId "sam-l-seg-t7-A-L3" ;
-    TEMP:wasDerivedFromSample sample:sam-l-seg-t7-A ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_T7L_A_Level_3_th.tar" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "section" .
-
-sample:sam-l-seg-t7-C a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "sam-l-seg-t7-C" ;
-    TEMP:wasDerivedFromSample sample:sam-l-seg-t7 ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:metadata_only "Yes" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "subsegment" .
-
-sample:sam-l-seg-t7-C-L3 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:493330da-c6f0-46c7-ab51-48c17189e787,
-        collection:e9eefcbe-17b1-45f2-810c-4a1b0a8c8334 ;
-    TEMP:localId "sam-l-seg-t7-C-L3" ;
-    TEMP:wasDerivedFromSample sample:sam-l-seg-t7-C ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_T7L_C_Level_3.tar" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "section" .
-
-sample:sam-r a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:b2e22040-6b29-48ed-aba6-c739456887ff,
-        collection:b464863e-73a8-4561-a201-dda471a9f5c4,
-        collection:f698f42b-39f1-4f58-81a6-674762c97f36 ;
-    TEMP:localId "sam-r" ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:sample_type "nerve" .
-
-sample:sam-r-seg-c1 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:1eea0687-eb14-4488-aa49-d7830fc503e4,
-        collection:1150e69c-7a95-43bd-aa04-b00b28811aa7 ;
-    TEMP:localId "sam-r-seg-c1" ;
-    TEMP:wasDerivedFromSample sample:sam-r ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:distance_from_nodose_cm 0 ;
-    TEMPRAW:laboratory_internal_id "B824_C1R_9um_1.jpx, B824_C1R_9um_2.jpx" ;
-    TEMPRAW:sample_experimental_group "microct" ;
-    TEMPRAW:sample_type "segment" .
-
-sample:sam-r-seg-c1-A a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "sam-r-seg-c1-A" ;
-    TEMP:wasDerivedFromSample sample:sam-r-seg-c1 ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:metadata_only "Yes" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "subsegment" .
-
-sample:sam-r-seg-c1-A-L3 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:0f020c9b-58fe-489a-9e99-6ff084b1b63d,
-        collection:4a51b231-3eea-42b0-8a03-07ff92f52260 ;
-    TEMP:localId "sam-r-seg-c1-A-L3" ;
-    TEMP:wasDerivedFromSample sample:sam-r-seg-c1-A ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_C1R_A_Level_3_part1.tar, B824_C1R_A_Level_3_part1_th.tar, B824_C1R_A_Level_3_part2.tar, B824_C1R_A_Level_3_part2_th.tar" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "section" .
-
-sample:sam-r-seg-c1-B a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "sam-r-seg-c1-B" ;
-    TEMP:wasDerivedFromSample sample:sam-r-seg-c1 ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:metadata_only "Yes" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "subsegment" .
-
-sample:sam-r-seg-c1-B-L3 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:507200e2-97ff-4155-89ad-6c2c2646f60e,
-        collection:b0003eb6-92c8-4713-8371-15bc55618fa5 ;
-    TEMP:localId "sam-r-seg-c1-B-L3" ;
-    TEMP:wasDerivedFromSample sample:sam-r-seg-c1-B ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_C1R_B_Level_3_part1.tar, B824_C1R_B_Level_3_part1_th.tar, B824_C1R_B_Level_3_part2.tar, B824_C1R_B_Level_3_part2_th.tar, B824_C1R_B_Level_3_part3_th.tar, B824_C1R_B_Level_3_part4_th.tar" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "section" .
-
-sample:sam-r-seg-c1-C a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "sam-r-seg-c1-C" ;
-    TEMP:wasDerivedFromSample sample:sam-r-seg-c1 ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:metadata_only "Yes" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "subsegment" .
-
-sample:sam-r-seg-c1-C-L3 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:4f6f9c1f-f0c1-43d9-a180-7898fcbe6241,
-        collection:dc417eb2-713f-42a1-8ec4-897ba0d9f065 ;
-    TEMP:localId "sam-r-seg-c1-C-L3" ;
-    TEMP:wasDerivedFromSample sample:sam-r-seg-c1-C ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_C1R_C_Level_3.tar" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "section" .
-
-sample:sam-r-seg-c2 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:3d4e553a-4d23-4091-80ee-079ee58cfacd,
-        collection:f12a27a0-4169-4cf8-9627-f3b8724b112a ;
-    TEMP:localId "sam-r-seg-c2" ;
-    TEMP:wasDerivedFromSample sample:sam-r ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_C2R_9um_1272_rec.jpx" ;
-    TEMPRAW:sample_experimental_group "microct" ;
-    TEMPRAW:sample_type "segment" .
-
-sample:sam-r-seg-c2-A a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "sam-r-seg-c2-A" ;
-    TEMP:wasDerivedFromSample sample:sam-r-seg-c2 ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:metadata_only "Yes" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "subsegment" .
-
-sample:sam-r-seg-c2-A-L3 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:793fa152-3dcb-42f5-9245-dbd3fdfe3115,
-        collection:5626b7ab-c144-413b-ba31-0ae1eb8b250d ;
-    TEMP:localId "sam-r-seg-c2-A-L3" ;
-    TEMP:wasDerivedFromSample sample:sam-r-seg-c2-A ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_C2R_A_Level_3_th.tar" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "section" .
-
-sample:sam-r-seg-c3 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:a13757ce-fc12-4f30-9f82-1318da028854,
-        collection:c47e5471-8df8-4b4f-9dac-923ed620a3c7 ;
-    TEMP:localId "sam-r-seg-c3" ;
-    TEMP:wasDerivedFromSample sample:sam-r ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_C3R_9um_1272_rec.jpx" ;
-    TEMPRAW:sample_experimental_group "microct" ;
-    TEMPRAW:sample_type "segment" .
-
-sample:sam-r-seg-c4 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:663f6840-5bb1-49f3-aafa-3ba353e4d1bf,
-        collection:2278cf1d-3cd8-45b8-a420-8fdae11deb15 ;
-    TEMP:localId "sam-r-seg-c4" ;
-    TEMP:wasDerivedFromSample sample:sam-r ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_C4R_9um_1172_rec.jpx" ;
-    TEMPRAW:sample_experimental_group "microct" ;
-    TEMPRAW:sample_type "segment" .
-
-sample:sam-r-seg-c5 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:a1a23665-2e3a-4736-8fc4-fb8d32342e67,
-        collection:d8fb498f-4191-4231-8d35-b34373a17627 ;
-    TEMP:localId "sam-r-seg-c5" ;
-    TEMP:wasDerivedFromSample sample:sam-r ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_C5R_9um_1272_rec.jpx" ;
-    TEMPRAW:sample_experimental_group "microct" ;
-    TEMPRAW:sample_type "segment" .
-
-sample:sam-r-seg-c6 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:1a614e7c-9a0c-4f4b-aa5d-8812293e2deb,
-        collection:9ec218ef-df15-425b-84c8-d03838af33d4 ;
-    TEMP:localId "sam-r-seg-c6" ;
-    TEMP:wasDerivedFromSample sample:sam-r ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_C6R_9um_1172_rec.jpx" ;
-    TEMPRAW:sample_experimental_group "microct" ;
-    TEMPRAW:sample_type "segment" .
-
-sample:sam-r-seg-c6-A a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "sam-r-seg-c6-A" ;
-    TEMP:wasDerivedFromSample sample:sam-r-seg-c6 ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:metadata_only "Yes" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "subsegment" .
-
-sample:sam-r-seg-c6-A-L3 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:1d27739a-cda6-4353-afae-bf9ac7b034a1,
-        collection:a16fe03f-10d5-48bf-ab9a-2cba8b94c41c ;
-    TEMP:localId "sam-r-seg-c6-A-L3" ;
-    TEMP:wasDerivedFromSample sample:sam-r-seg-c6-A ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_C6R_A_Level_3.tar, B824_C6R_A_Level_3_th.tar" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "section" .
-
-sample:sam-r-seg-c7 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:357d0b50-49c1-44b4-97f2-93d9d176cf16,
-        collection:02809b1d-452d-4349-8f1b-f5c1938d794f ;
-    TEMP:localId "sam-r-seg-c7" ;
-    TEMP:wasDerivedFromSample sample:sam-r ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_C7R_9um_1272_rec.jpx" ;
-    TEMPRAW:sample_experimental_group "microct" ;
-    TEMPRAW:sample_type "segment" .
-
-sample:sam-r-seg-c8 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:c9be05cf-80d4-485d-8c79-e9097dafe365,
-        collection:e190bb9b-b92b-4560-9c6c-60a231ec3d4d ;
-    TEMP:localId "sam-r-seg-c8" ;
-    TEMP:wasDerivedFromSample sample:sam-r ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_C8R_9um_1272_rec.jpx" ;
-    TEMPRAW:sample_experimental_group "microct" ;
-    TEMPRAW:sample_type "segment" .
-
-sample:sam-r-seg-c9 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:63eae624-4f9b-45d6-960d-81a79f14ba4c,
-        collection:f8f571d2-dfe2-4de3-8666-05ce259a06bc ;
-    TEMP:localId "sam-r-seg-c9" ;
-    TEMP:wasDerivedFromSample sample:sam-r ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_C9R_9um_1172_rec.jpx" ;
-    TEMPRAW:sample_experimental_group "microct" ;
-    TEMPRAW:sample_type "segment" .
-
-sample:sam-r-seg-c10 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:b3a0a199-8271-4572-bbf7-4008d2007330,
-        collection:bd1fe90e-1456-46bf-b75a-e11e04ee7ef1 ;
-    TEMP:localId "sam-r-seg-c10" ;
-    TEMP:wasDerivedFromSample sample:sam-r ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_C10R_9um_1272_rec.jpx" ;
-    TEMPRAW:sample_experimental_group "microct" ;
-    TEMPRAW:sample_type "segment" .
-
-sample:sam-r-seg-c10-A a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "sam-r-seg-c10-A" ;
-    TEMP:wasDerivedFromSample sample:sam-r-seg-c10 ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:metadata_only "Yes" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "subsegment" .
-
-sample:sam-r-seg-c10-A-L3 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:1d8e83a8-2b12-4d5c-9635-5b3dbde4cdd8,
-        collection:2effd890-7e8a-4e31-9a9d-4432e3fbc9ca ;
-    TEMP:localId "sam-r-seg-c10-A-L3" ;
-    TEMP:wasDerivedFromSample sample:sam-r-seg-c10-A ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_C10R_A_Level_3.tar, B824_C10R_A_Level_3_th.tar" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "section" .
-
-sample:sam-r-seg-c11 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:3aef8b57-a0c1-4c1d-a163-86d6122ab75b,
-        collection:a3c6422c-3293-4cf5-b0a8-1196ce582e4b ;
-    TEMP:localId "sam-r-seg-c11" ;
-    TEMP:wasDerivedFromSample sample:sam-r ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_C11R_9um_1172_rec.jpx" ;
-    TEMPRAW:sample_experimental_group "microct" ;
-    TEMPRAW:sample_type "segment" .
-
-sample:sam-r-seg-t1 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:758dd0fb-329b-4e64-b405-6b0301b5e72b,
-        collection:44356524-a883-4241-aac3-c6abe1e2e2f0 ;
-    TEMP:localId "sam-r-seg-t1" ;
-    TEMP:wasDerivedFromSample sample:sam-r ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_T1R_9um_1.jpx" ;
-    TEMPRAW:sample_experimental_group "microct" ;
-    TEMPRAW:sample_type "segment" .
-
-sample:sam-r-seg-t1-A a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "sam-r-seg-t1-A" ;
-    TEMP:wasDerivedFromSample sample:sam-r-seg-t1 ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:metadata_only "Yes" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "subsegment" .
-
-sample:sam-r-seg-t1-A-L3 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:879f7a5f-da96-4af5-80bb-df5b1a5e5ca2,
-        collection:ee07a87a-44ca-4844-ab32-bc692d94fb91 ;
-    TEMP:localId "sam-r-seg-t1-A-L3" ;
-    TEMP:wasDerivedFromSample sample:sam-r-seg-t1-A ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_T1R_A_Level_3.tar, B824_T1R_A_Level_3_th.tar" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "section" .
-
-sample:sam-r-seg-t1-B a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "sam-r-seg-t1-B" ;
-    TEMP:wasDerivedFromSample sample:sam-r-seg-t1 ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:metadata_only "Yes" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "subsegment" .
-
-sample:sam-r-seg-t1-B-L3 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:8ab7ac41-c2fe-4892-89f0-77148c053721,
-        collection:c9da5491-0592-4df0-9482-e940c5940e35 ;
-    TEMP:localId "sam-r-seg-t1-B-L3" ;
-    TEMP:wasDerivedFromSample sample:sam-r-seg-t1-B ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_T1R_B_Level_3.tar, B824_T1R_B_Level_3_th.tar" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "section" .
-
-sample:sam-r-seg-t2 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:960d9c11-235e-40dc-9d3d-ddfbb765ecf1,
-        collection:44343844-b3cf-4189-bd2a-8b02b802967b ;
-    TEMP:localId "sam-r-seg-t2" ;
-    TEMP:wasDerivedFromSample sample:sam-r ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_C9R_9um_1172_rec.jpx" ;
-    TEMPRAW:sample_experimental_group "microct" ;
-    TEMPRAW:sample_type "segment" .
-
-sample:sam-r-seg-t3 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:2e315fd4-efaf-490c-ab9d-a4cd52ce4fe9,
-        collection:c7d0572a-a43b-4c64-afa4-a5f07686c6bb ;
-    TEMP:localId "sam-r-seg-t3" ;
-    TEMP:wasDerivedFromSample sample:sam-r ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_T3R_9um_1272_rec.jpx" ;
-    TEMPRAW:sample_experimental_group "microct" ;
-    TEMPRAW:sample_type "segment" .
-
-sample:sam-r-seg-t3-A a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "sam-r-seg-t3-A" ;
-    TEMP:wasDerivedFromSample sample:sam-r-seg-t3 ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:metadata_only "Yes" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "subsegment" .
-
-sample:sam-r-seg-t3-A-L3 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:67d9990b-c59c-40d3-8717-0feebb994f15,
-        collection:ebc8b7dd-adb4-4521-86e8-0c8ab5719544 ;
-    TEMP:localId "sam-r-seg-t3-A-L3" ;
-    TEMP:wasDerivedFromSample sample:sam-r-seg-t3-A ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_T3R_A_Level_3.tar, B824_T3R_B_Level_3_th.tar" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "section" .
-
-sample:sam-r-seg-t3-B a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "sam-r-seg-t3-B" ;
-    TEMP:wasDerivedFromSample sample:sam-r-seg-t3 ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:metadata_only "Yes" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "subsegment" .
-
-sample:sam-r-seg-t3-B-L3 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:d9af3c10-66b7-4d0c-ae12-10b9dd190ca4,
-        collection:d776f257-e6ef-4e77-8f0c-7031b6f311b2 ;
-    TEMP:localId "sam-r-seg-t3-B-L3" ;
-    TEMP:wasDerivedFromSample sample:sam-r-seg-t3-B ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_T3R_B_Level_3_th.tar" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "section" .
-
-sample:sam-r-seg-t4 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:9995909e-024c-47ed-bdf1-9e7bd950689c,
-        collection:f9d66141-290e-41ee-ab46-dbfaf36498a0 ;
-    TEMP:localId "sam-r-seg-t4" ;
-    TEMP:wasDerivedFromSample sample:sam-r ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_T4R_9um_1.jpx" ;
-    TEMPRAW:sample_experimental_group "microct" ;
-    TEMPRAW:sample_type "segment" .
-
-sample:sam-r-seg-t4-A a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "sam-r-seg-t4-A" ;
-    TEMP:wasDerivedFromSample sample:sam-r-seg-t4 ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:metadata_only "Yes" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "subsegment" .
-
-sample:sam-r-seg-t4-A-L3 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:1faa2e74-83c3-4967-85df-dd8ed6072604,
-        collection:91bb0b06-0b30-4883-9902-12c906d0d6e4 ;
-    TEMP:localId "sam-r-seg-t4-A-L3" ;
-    TEMP:wasDerivedFromSample sample:sam-r-seg-t4-A ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_T4R_A_Level_3.tar, B824_T4R_A_Level_3_th.tar" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "section" .
-
-sample:sam-r-seg-t4-B a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "sam-r-seg-t4-B" ;
-    TEMP:wasDerivedFromSample sample:sam-r-seg-t4 ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:metadata_only "Yes" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "subsegment" .
-
-sample:sam-r-seg-t4-B-L3 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:8ac71cf0-cdb1-4066-9bb1-a802c3aebeb5,
-        collection:a7f102f9-9a33-47a6-a56c-f87fd26f1251 ;
-    TEMP:localId "sam-r-seg-t4-B-L3" ;
-    TEMP:wasDerivedFromSample sample:sam-r-seg-t4-B ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_T4R_B_Level_3.tar, B824_T4R_B_Level_3_th.tar" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "section" .
-
-sample:sam-r-seg-t4-C a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "sam-r-seg-t4-C" ;
-    TEMP:wasDerivedFromSample sample:sam-r-seg-t4 ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:metadata_only "Yes" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "subsegment" .
-
-sample:sam-r-seg-t4-C-L3 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:bae0814c-1d35-4e23-a134-f3364326561a,
-        collection:c1ca832b-fc02-48d7-b5f2-d16ea1e9cab3 ;
-    TEMP:localId "sam-r-seg-t4-C-L3" ;
-    TEMP:wasDerivedFromSample sample:sam-r-seg-t4-C ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_T4R_C_Level_3.tar, B824_T4R_C_LEVEL_3_th.tar" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "section" .
-
-sample:sam-r-seg-t5 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:5a266406-83fa-40b2-998e-3b27b37f2d02,
-        collection:607314ec-d2af-4560-8879-93b700810fc5 ;
-    TEMP:localId "sam-r-seg-t5" ;
-    TEMP:wasDerivedFromSample sample:sam-r ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_T5R_9um_1.jpx, B824_T5R_9um_2.jpx, B824_T5R_9um_3.jpx, B824_T5R_9um_4.jpx" ;
-    TEMPRAW:sample_experimental_group "microct" ;
-    TEMPRAW:sample_type "segment" .
-
-sample:sam-r-seg-t6 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:3e28bc31-5643-41d0-a8ff-d5a5c1de583f,
-        collection:5d86c5d8-a0c1-4da4-8f30-95419a1e3a88 ;
-    TEMP:localId "sam-r-seg-t6" ;
-    TEMP:wasDerivedFromSample sample:sam-r ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_T6R_9um_1.jpx, B824_T6R_9um_2.jpx, B824_T6R_9um_3.jpx" ;
-    TEMPRAW:sample_experimental_group "microct" ;
-    TEMPRAW:sample_type "segment" .
-
-sample:sam-r-seg-t6-C a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "sam-r-seg-t6-C" ;
-    TEMP:wasDerivedFromSample sample:sam-r-seg-t6 ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:metadata_only "Yes" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "subsegment" .
-
-sample:sam-r-seg-t6-C-L3 a owl:NamedIndividual,
-        sparc:Sample ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:04cc2540-123f-4daf-a05f-22b3b1fc311e,
-        collection:f306db45-a156-4ec5-aca1-e6cf287c31bf ;
-    TEMP:localId "sam-r-seg-t6-C-L3" ;
-    TEMP:wasDerivedFromSample sample:sam-r-seg-t6-C ;
-    TEMP:wasDerivedFromSubject subject:sub-f006 ;
-    TEMPRAW:laboratory_internal_id "B824_T6R_C_Level_3.tar, B824_T6R_C_LEVEL_3_th.tar" ;
-    TEMPRAW:sample_experimental_group "histology" ;
-    TEMPRAW:sample_type "section" .
-
-site:site-l-seg-c1-A-L3 a owl:NamedIndividual,
+    rdfs:label "Madeleine Rose Di Natale" ;
+    NIFRID:synonym "Madeleine Di Natale",
+        "Madeleine R Di Natale" ;
+    sparc:firstName "Madeleine" ;
+    sparc:lastName "Di Natale" ;
+    sparc:hasORCIDId ORCID:0000-0002-7949-5725 ;
+    TEMP:contributorTo dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:hasAffiliation "Department of Anatomy & Physiology, University of Melbourne, Parkville, VIC",
+        ror:01ej9dk98 ;
+    TEMP:middleName "R" .
+
+pio.api:53331 a owl:NamedIndividual,
+        sparc:Protocol ;
+    rdfs:label "Histological quantification of thickness of the mucosal and muscle layers of the rat stomach" ;
+    TEMP:hasDoi <https://doi.org/10.17504/protocols.io.bybtpsnn> ;
+    TEMP:hasUriHuman <https://www.protocols.io/view/histological-quantification-of-thickness-of-the-mu-bybtpsnn> ;
+    TEMP:protocolHasNumberOfSteps 12 .
+
+ror:01ej9dk98 a owl:NamedIndividual,
+        TEMP:Institution ;
+    rdfs:label "University of Melbourne" ;
+    NIFRID:synonym "Melbourne University" .
+
+RRID:RGD_8553001 a owl:NamedIndividual ;
+    rdfs:label "ArcCrl:CD(SD)" ;
+    NIFRID:synonym "ArcCrl:CD(SD)" .
+
+sample:sam-01 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "sam-01" ;
+    TEMP:wasDerivedFromSubject subject:sub-rat01 ;
+    TEMPRAW:histological_stain "masson's trichrome" ;
+    TEMPRAW:sample_experimental_group "control" ;
+    TEMPRAW:sample_type "tissue" ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "fundus, corpus and antrum samples- fixed, embedded, sectioned" .
+
+sample:sam-01-sec-2 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "sam-01-sec-2" ;
+    TEMP:wasDerivedFromSubject subject:sub-rat01 ;
+    TEMPRAW:sample_experimental_group "control" ;
+    TEMPRAW:sample_type "tissue" .
+
+sample:sam-01-sec-3 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "sam-01-sec-3" ;
+    TEMP:wasDerivedFromSubject subject:sub-rat01 ;
+    TEMPRAW:sample_experimental_group "control" ;
+    TEMPRAW:sample_type "tissue" .
+
+sample:sam-01-sec-3-2 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "sam-01-sec-3-2" ;
+    TEMP:wasDerivedFromSubject subject:sub-rat01 ;
+    TEMPRAW:sample_experimental_group "control" ;
+    TEMPRAW:sample_type "tissue" .
+
+sample:sam-01-sec-4 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "sam-01-sec-4" ;
+    TEMP:wasDerivedFromSubject subject:sub-rat01 ;
+    TEMPRAW:sample_experimental_group "control" ;
+    TEMPRAW:sample_type "tissue" .
+
+sample:sam-01-sec-5 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "sam-01-sec-5" ;
+    TEMP:wasDerivedFromSubject subject:sub-rat01 ;
+    TEMPRAW:sample_experimental_group "control" ;
+    TEMPRAW:sample_type "tissue" .
+
+sample:sam-02 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "sam-02" ;
+    TEMP:wasDerivedFromSubject subject:sub-rat02 ;
+    TEMPRAW:histological_stain "masson's trichrome" ;
+    TEMPRAW:sample_experimental_group "control" ;
+    TEMPRAW:sample_type "tissue" ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "fundus, corpus and antrum samples- fixed, embedded, sectioned" .
+
+sample:sam-02-sec-3 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "sam-02-sec-3" ;
+    TEMP:wasDerivedFromSubject subject:sub-rat02 ;
+    TEMPRAW:sample_experimental_group "control" ;
+    TEMPRAW:sample_type "tissue" .
+
+sample:sam-03 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "sam-03" ;
+    TEMP:wasDerivedFromSubject subject:sub-rat03 ;
+    TEMPRAW:histological_stain "masson's trichrome" ;
+    TEMPRAW:sample_experimental_group "control" ;
+    TEMPRAW:sample_type "tissue" ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "fundus, corpus and antrum samples- fixed, embedded, sectioned" .
+
+sample:sam-03-sec-1 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "sam-03-sec-1" ;
+    TEMP:wasDerivedFromSubject subject:sub-rat03 ;
+    TEMPRAW:sample_experimental_group "control" ;
+    TEMPRAW:sample_type "tissue" .
+
+sample:sam-03-sec-1-2 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "sam-03-sec-1-2" ;
+    TEMP:wasDerivedFromSubject subject:sub-rat03 ;
+    TEMPRAW:sample_experimental_group "control" ;
+    TEMPRAW:sample_type "tissue" .
+
+sample:sam-03-sec-2 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "sam-03-sec-2" ;
+    TEMP:wasDerivedFromSubject subject:sub-rat03 ;
+    TEMPRAW:sample_experimental_group "control" ;
+    TEMPRAW:sample_type "tissue" .
+
+sample:sam-03-sec-2-2 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "sam-03-sec-2-2" ;
+    TEMP:wasDerivedFromSubject subject:sub-rat03 ;
+    TEMPRAW:sample_experimental_group "control" ;
+    TEMPRAW:sample_type "tissue" .
+
+sample:sam-04 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "sam-04" ;
+    TEMP:wasDerivedFromSubject subject:sub-rat04 ;
+    TEMPRAW:histological_stain "masson's trichrome" ;
+    TEMPRAW:sample_experimental_group "control" ;
+    TEMPRAW:sample_type "tissue" ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "fundus, corpus and antrum samples- fixed, embedded, sectioned" .
+
+sample:sam-04-sec-1-1 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "sam-04-sec-1-1" ;
+    TEMP:wasDerivedFromSubject subject:sub-rat04 ;
+    TEMPRAW:sample_experimental_group "control" ;
+    TEMPRAW:sample_type "tissue" .
+
+sample:sam-04-sec-1-2 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "sam-04-sec-1-2" ;
+    TEMP:wasDerivedFromSubject subject:sub-rat04 ;
+    TEMPRAW:sample_experimental_group "control" ;
+    TEMPRAW:sample_type "tissue" .
+
+sample:sam-04-sec-1-3 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "sam-04-sec-1-3" ;
+    TEMP:wasDerivedFromSubject subject:sub-rat04 ;
+    TEMPRAW:sample_experimental_group "control" ;
+    TEMPRAW:sample_type "tissue" .
+
+sample:sam-04-sec-1-6 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "sam-04-sec-1-6" ;
+    TEMP:wasDerivedFromSubject subject:sub-rat04 ;
+    TEMPRAW:sample_experimental_group "control" ;
+    TEMPRAW:sample_type "tissue" .
+
+sample:sam-04-sec-1-7 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "sam-04-sec-1-7" ;
+    TEMP:wasDerivedFromSubject subject:sub-rat04 ;
+    TEMPRAW:sample_experimental_group "control" ;
+    TEMPRAW:sample_type "tissue" .
+
+sample:sam-04-sec-2-1 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "sam-04-sec-2-1" ;
+    TEMP:wasDerivedFromSubject subject:sub-rat04 ;
+    TEMPRAW:sample_experimental_group "control" ;
+    TEMPRAW:sample_type "tissue" .
+
+sample:sam-04-sec-2-3 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "sam-04-sec-2-3" ;
+    TEMP:wasDerivedFromSubject subject:sub-rat04 ;
+    TEMPRAW:sample_experimental_group "control" ;
+    TEMPRAW:sample_type "tissue" .
+
+sample:sam-04-sec-2-3-1 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "sam-04-sec-2-3-1" ;
+    TEMP:wasDerivedFromSubject subject:sub-rat04 ;
+    TEMPRAW:sample_experimental_group "control" ;
+    TEMPRAW:sample_type "tissue" .
+
+sample:sam-04-sec-2-3-2 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "sam-04-sec-2-3-2" ;
+    TEMP:wasDerivedFromSubject subject:sub-rat04 ;
+    TEMPRAW:sample_experimental_group "control" ;
+    TEMPRAW:sample_type "tissue" .
+
+sample:sam-04-sec-3-1 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "sam-04-sec-3-1" ;
+    TEMP:wasDerivedFromSubject subject:sub-rat04 ;
+    TEMPRAW:sample_experimental_group "control" ;
+    TEMPRAW:sample_type "tissue" .
+
+sample:sam-04-sec-4-1 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "sam-04-sec-4-1" ;
+    TEMP:wasDerivedFromSubject subject:sub-rat04 ;
+    TEMPRAW:sample_experimental_group "control" ;
+    TEMPRAW:sample_type "tissue" .
+
+sample:sam-04-sec-S-2 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "sam-04-sec-S-2" ;
+    TEMP:wasDerivedFromSubject subject:sub-rat04 ;
+    TEMPRAW:sample_experimental_group "control" ;
+    TEMPRAW:sample_type "tissue" .
+
+sample:sam-04-sec-S-3 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "sam-04-sec-S-3" ;
+    TEMP:wasDerivedFromSubject subject:sub-rat04 ;
+    TEMPRAW:sample_experimental_group "control" ;
+    TEMPRAW:sample_type "tissue" .
+
+sample:sam-04-sec-S-4 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "sam-04-sec-S-4" ;
+    TEMP:wasDerivedFromSubject subject:sub-rat04 ;
+    TEMPRAW:sample_experimental_group "control" ;
+    TEMPRAW:sample_type "tissue" .
+
+sample:sam-05 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "sam-05" ;
+    TEMP:wasDerivedFromSubject subject:sub-rat05 ;
+    TEMPRAW:histological_stain "haematoxylin and eosin and masson's trichrome" ;
+    TEMPRAW:sample_experimental_group "control" ;
+    TEMPRAW:sample_type "tissue" ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "fundus, corpus and antrum samples- fixed, embedded, sectioned" .
+
+sample:sam-06 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "sam-06" ;
+    TEMP:wasDerivedFromSubject subject:sub-rat06 ;
+    TEMPRAW:histological_stain "masson's trichrome" ;
+    TEMPRAW:sample_experimental_group "control" ;
+    TEMPRAW:sample_type "tissue" ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "fundus, corpus and antrum samples- fixed, embedded, sectioned" .
+
+sample:sam-07 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "sam-07" ;
+    TEMP:wasDerivedFromSubject subject:sub-rat07 ;
+    TEMPRAW:histological_stain "masson's trichrome" ;
+    TEMPRAW:sample_experimental_group "control" ;
+    TEMPRAW:sample_type "tissue" ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "fundus, corpus and antrum samples- fixed, embedded, sectioned" .
+
+sample:sam-08 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "sam-08" ;
+    TEMP:wasDerivedFromSubject subject:sub-rat08 ;
+    TEMPRAW:histological_stain "masson's trichrome" ;
+    TEMPRAW:sample_experimental_group "control" ;
+    TEMPRAW:sample_type "tissue" ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "fundus, corpus and antrum samples- fixed, embedded, sectioned" .
+
+sample:sam-09 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "sam-09" ;
+    TEMP:wasDerivedFromSubject subject:sub-rat09 ;
+    TEMPRAW:histological_stain "masson's trichrome" ;
+    TEMPRAW:sample_experimental_group "control" ;
+    TEMPRAW:sample_type "tissue" ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "fundus, corpus and antrum samples- fixed, embedded, sectioned" .
+
+sample:sam-10 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "sam-10" ;
+    TEMP:wasDerivedFromSubject subject:sub-rat10 ;
+    TEMPRAW:histological_stain "masson's trichrome" ;
+    TEMPRAW:sample_experimental_group "control" ;
+    TEMPRAW:sample_type "tissue" ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "fundus, corpus and antrum samples- fixed, embedded, sectioned" .
+
+sample:sam-11 a owl:NamedIndividual,
+        sparc:Sample ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "sam-11" ;
+    TEMP:wasDerivedFromSubject subject:sub-rat11 ;
+    TEMPRAW:histological_stain "masson's trichrome" ;
+    TEMPRAW:sample_experimental_group "control" ;
+    TEMPRAW:sample_type "tissue" ;
+    TEMPRAW:wasExtractedFromAnatomicalRegion "fundus, corpus and antrum samples- fixed, embedded, sectioned" .
+
+site:site-01-B a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "site-l-seg-c1-A-L3" ;
-    TEMP:onSample sample:sam-l-seg-c1-A-L3 ;
-    TEMPRAW:derivative_status "Not found" ;
-    TEMPRAW:laboratory_internal_id "B824_C1L_A_Level_3.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-01-B" ;
+    TEMP:onSample sample:sam-01 ;
+    TEMPRAW:site_anatomical_location "Fundus" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-l-seg-c1-A-L3-th a owl:NamedIndividual,
+site:site-01-C a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "site-l-seg-c1-A-L3-th" ;
-    TEMP:onSample sample:sam-l-seg-c1-A-L3 ;
-    TEMPRAW:derivative_status "Not found" ;
-    TEMPRAW:laboratory_internal_id "B824_C1L_A_Level_3_th.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-01-C" ;
+    TEMP:onSample sample:sam-01 ;
+    TEMPRAW:site_anatomical_location "Fundus" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-l-seg-c1-B-L3-1 a owl:NamedIndividual,
+site:site-01-EF a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "site-l-seg-c1-B-L3-1" ;
-    TEMP:onSample sample:sam-l-seg-c1-B-L3 ;
-    TEMPRAW:derivative_status "Not found" ;
-    TEMPRAW:laboratory_internal_id "B824_C1L_B_Level_3_part1.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-01-EF" ;
+    TEMP:onSample sample:sam-01 ;
+    TEMPRAW:site_anatomical_location "Esophageal Junction" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-l-seg-c1-B-L3-1-th a owl:NamedIndividual,
+site:site-01-G a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "site-l-seg-c1-B-L3-1-th" ;
-    TEMP:onSample sample:sam-l-seg-c1-B-L3 ;
-    TEMPRAW:derivative_status "Not found" ;
-    TEMPRAW:laboratory_internal_id "B824_C1L_B_Level_3_part1_th.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-01-G" ;
+    TEMP:onSample sample:sam-01 ;
+    TEMPRAW:site_anatomical_location "Corpus" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-l-seg-c1-B-L3-2 a owl:NamedIndividual,
+site:site-01-H a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "site-l-seg-c1-B-L3-2" ;
-    TEMP:onSample sample:sam-l-seg-c1-B-L3 ;
-    TEMPRAW:derivative_status "Not found" ;
-    TEMPRAW:laboratory_internal_id "B824_C1L_B_Level_3_part2.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-01-H" ;
+    TEMP:onSample sample:sam-01 ;
+    TEMPRAW:site_anatomical_location "Corpus" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-l-seg-c1-B-L3-2-th a owl:NamedIndividual,
+site:site-01-Q a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "site-l-seg-c1-B-L3-2-th" ;
-    TEMP:onSample sample:sam-l-seg-c1-B-L3 ;
-    TEMPRAW:derivative_status "Not found" ;
-    TEMPRAW:laboratory_internal_id "B824_C1L_B_Level_3_part2_th.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-01-Q" ;
+    TEMP:onSample sample:sam-01 ;
+    TEMPRAW:site_anatomical_location "Corpus/Antrum" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-l-seg-c1-B-L3-3-th a owl:NamedIndividual,
+site:site-01-R a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:d3abe374-1544-479b-89eb-0d42d8f8eba6 ;
-    TEMP:localId "site-l-seg-c1-B-L3-3-th" ;
-    TEMP:onSample sample:sam-l-seg-c1-B-L3 ;
-    TEMPRAW:derivative_status "Found" ;
-    TEMPRAW:laboratory_internal_id "B824_C1L_B_Level_3_part3_th.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-01-R" ;
+    TEMP:onSample sample:sam-01 ;
+    TEMPRAW:site_anatomical_location "Corpus/Antrum" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-l-seg-c1-B-L3-4-th a owl:NamedIndividual,
+site:site-02-B a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:2edc552c-b875-4cb1-9c14-1593542ba3b5 ;
-    TEMP:localId "site-l-seg-c1-B-L3-4-th" ;
-    TEMP:onSample sample:sam-l-seg-c1-B-L3 ;
-    TEMPRAW:derivative_status "Found" ;
-    TEMPRAW:laboratory_internal_id "B824_C1L_B_Level_3_part4_th.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-02-B" ;
+    TEMP:onSample sample:sam-02 ;
+    TEMPRAW:site_anatomical_location "Fundus" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-l-seg-c2-A-L3 a owl:NamedIndividual,
+site:site-02-C a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:957fc31a-66fa-42e4-a1f4-daff7e5da89a ;
-    TEMP:localId "site-l-seg-c2-A-L3" ;
-    TEMP:onSample sample:sam-l-seg-c2-A-L3 ;
-    TEMPRAW:derivative_status "Found" ;
-    TEMPRAW:laboratory_internal_id "B824_C2L_A_Level_3.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-02-C" ;
+    TEMP:onSample sample:sam-02 ;
+    TEMPRAW:site_anatomical_location "Fundus" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-l-seg-c2-A-L3-th a owl:NamedIndividual,
+site:site-02-D a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:46daef30-ecbf-47cc-95b0-6f97615f22b9 ;
-    TEMP:localId "site-l-seg-c2-A-L3-th" ;
-    TEMP:onSample sample:sam-l-seg-c2-A-L3 ;
-    TEMPRAW:derivative_status "Found" ;
-    TEMPRAW:laboratory_internal_id "B824_C2L_A_Level_3_th.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-02-D" ;
+    TEMP:onSample sample:sam-02 ;
+    TEMPRAW:site_anatomical_location "Fundus" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-l-seg-c4-A-L3 a owl:NamedIndividual,
+site:site-02-EF a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:2b5d2cca-f6a0-4f43-87bf-0017674debcb ;
-    TEMP:localId "site-l-seg-c4-A-L3" ;
-    TEMP:onSample sample:sam-l-seg-c4-A-L3 ;
-    TEMPRAW:derivative_status "Found" ;
-    TEMPRAW:laboratory_internal_id "B824_C4L_A_Level_3.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-02-EF" ;
+    TEMP:onSample sample:sam-02 ;
+    TEMPRAW:site_anatomical_location "Esophageal Junction" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-l-seg-c4-A-L3-th a owl:NamedIndividual,
+site:site-02-G a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:75b76ecf-8ba2-4b58-aee9-9a2a56b5efe0 ;
-    TEMP:localId "site-l-seg-c4-A-L3-th" ;
-    TEMP:onSample sample:sam-l-seg-c4-A-L3 ;
-    TEMPRAW:derivative_status "Found" ;
-    TEMPRAW:laboratory_internal_id "B824_C4L_A_Level_3_th.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-02-G" ;
+    TEMP:onSample sample:sam-02 ;
+    TEMPRAW:site_anatomical_location "Corpus" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-l-seg-c9-A-L3 a owl:NamedIndividual,
+site:site-02-H a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:e4298951-7dff-4e4c-9e02-22efc86c7070 ;
-    TEMP:localId "site-l-seg-c9-A-L3" ;
-    TEMP:onSample sample:sam-l-seg-c9-A-L3 ;
-    TEMPRAW:derivative_status "Found" ;
-    TEMPRAW:laboratory_internal_id "B824_C9L_A_Level_3.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-02-H" ;
+    TEMP:onSample sample:sam-02 ;
+    TEMPRAW:site_anatomical_location "Corpus" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-l-seg-c9-A-L3-th a owl:NamedIndividual,
+site:site-02-IJ a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:b2f1eac2-04b9-449a-9eb9-2a9b0e4eb700 ;
-    TEMP:localId "site-l-seg-c9-A-L3-th" ;
-    TEMP:onSample sample:sam-l-seg-c9-A-L3 ;
-    TEMPRAW:derivative_status "Found" ;
-    TEMPRAW:laboratory_internal_id "B824_C9L_A_Level_3_th.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-02-IJ" ;
+    TEMP:onSample sample:sam-02 ;
+    TEMPRAW:site_anatomical_location "Esophageal Junction" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-l-seg-t2-A-L3 a owl:NamedIndividual,
+site:site-02-Q a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:869b4a19-0e10-45ee-bf9f-c26b43ebd629 ;
-    TEMP:localId "site-l-seg-t2-A-L3" ;
-    TEMP:onSample sample:sam-l-seg-t2-A-L3 ;
-    TEMPRAW:derivative_status "Found" ;
-    TEMPRAW:laboratory_internal_id "B824_T2L_A_Level_3.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-02-Q" ;
+    TEMP:onSample sample:sam-02 ;
+    TEMPRAW:site_anatomical_location "Corpus/Antrum" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-l-seg-t2-A-L3-th a owl:NamedIndividual,
+site:site-02-R a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:6dd79277-b20a-41fc-848d-282dedd017ef ;
-    TEMP:localId "site-l-seg-t2-A-L3-th" ;
-    TEMP:onSample sample:sam-l-seg-t2-A-L3 ;
-    TEMPRAW:derivative_status "Found" ;
-    TEMPRAW:laboratory_internal_id "B824_T2L_A_Level_3_th.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-02-R" ;
+    TEMP:onSample sample:sam-02 ;
+    TEMPRAW:site_anatomical_location "Corpus/Antrum" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-l-seg-t4-A-L3 a owl:NamedIndividual,
+site:site-03-B a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:1df0c08c-8f11-44bc-873b-f98e1e27cc7c ;
-    TEMP:localId "site-l-seg-t4-A-L3" ;
-    TEMP:onSample sample:sam-l-seg-t4-A-L3 ;
-    TEMPRAW:derivative_status "Found" ;
-    TEMPRAW:laboratory_internal_id "B824_T4L_A_Level_3.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-03-B" ;
+    TEMP:onSample sample:sam-03 ;
+    TEMPRAW:site_anatomical_location "Fundus" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-l-seg-t4-A-L3-th a owl:NamedIndividual,
+site:site-03-C a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "site-l-seg-t4-A-L3-th" ;
-    TEMP:onSample sample:sam-l-seg-t4-A-L3 ;
-    TEMPRAW:derivative_status "Not found" ;
-    TEMPRAW:laboratory_internal_id "B824_T4L_A_Level_3_th.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-03-C" ;
+    TEMP:onSample sample:sam-03 ;
+    TEMPRAW:site_anatomical_location "Fundus" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-l-seg-t5-A-L3 a owl:NamedIndividual,
+site:site-03-D a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "site-l-seg-t5-A-L3" ;
-    TEMP:onSample sample:sam-l-seg-t5-A-L3 ;
-    TEMPRAW:derivative_status "Not found" ;
-    TEMPRAW:laboratory_internal_id "B824_T5L_A_Level_3.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-03-D" ;
+    TEMP:onSample sample:sam-03 ;
+    TEMPRAW:site_anatomical_location "Fundus" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-l-seg-t5-A-L3-th a owl:NamedIndividual,
+site:site-03-EF a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "site-l-seg-t5-A-L3-th" ;
-    TEMP:onSample sample:sam-l-seg-t5-A-L3 ;
-    TEMPRAW:derivative_status "Not found" ;
-    TEMPRAW:laboratory_internal_id "B824_T5L_A_Level_3_th.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-03-EF" ;
+    TEMP:onSample sample:sam-03 ;
+    TEMPRAW:site_anatomical_location "Esophageal Junction" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-l-seg-t5-B-L3 a owl:NamedIndividual,
+site:site-03-Q a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:3f4da140-46c5-4733-9d28-221bb1d2ec72 ;
-    TEMP:localId "site-l-seg-t5-B-L3" ;
-    TEMP:onSample sample:sam-l-seg-t5-B-L3 ;
-    TEMPRAW:derivative_status "Found" ;
-    TEMPRAW:laboratory_internal_id "B824_T5L_B_Level_3.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-03-Q" ;
+    TEMP:onSample sample:sam-03 ;
+    TEMPRAW:site_anatomical_location "Corpus/Antrum" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-l-seg-t5-B-L3-th a owl:NamedIndividual,
+site:site-03-R a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:9e9cb9d6-0552-40bc-a2c5-0bde7d8dfc25 ;
-    TEMP:localId "site-l-seg-t5-B-L3-th" ;
-    TEMP:onSample sample:sam-l-seg-t5-B-L3 ;
-    TEMPRAW:derivative_status "Found" ;
-    TEMPRAW:laboratory_internal_id "B824_T5L_B_Level_3_th.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-03-R" ;
+    TEMP:onSample sample:sam-03 ;
+    TEMPRAW:site_anatomical_location "Corpus/Antrum" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-l-seg-t5-C-L3 a owl:NamedIndividual,
+site:site-05-EF a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:676e3c35-276f-43ec-8ba1-2c85a90ce6d2 ;
-    TEMP:localId "site-l-seg-t5-C-L3" ;
-    TEMP:onSample sample:sam-l-seg-t5-C-L3 ;
-    TEMPRAW:derivative_status "Found" ;
-    TEMPRAW:laboratory_internal_id "B824_T5L_C_Level_3.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-05-EF" ;
+    TEMP:onSample sample:sam-05 ;
+    TEMPRAW:site_anatomical_location "Esophageal Junction" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-l-seg-t5-C-L3-th a owl:NamedIndividual,
+site:site-05-IJ a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:0c7f0ed3-1a5d-45e0-b06e-7b67ff155d3f ;
-    TEMP:localId "site-l-seg-t5-C-L3-th" ;
-    TEMP:onSample sample:sam-l-seg-t5-C-L3 ;
-    TEMPRAW:derivative_status "Found" ;
-    TEMPRAW:laboratory_internal_id "B824_T5L_C_Level_3_th.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-05-IJ" ;
+    TEMP:onSample sample:sam-05 ;
+    TEMPRAW:site_anatomical_location "Esophageal Junction" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-l-seg-t5-D-L3 a owl:NamedIndividual,
+site:site-06-C a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "site-l-seg-t5-D-L3" ;
-    TEMP:onSample sample:sam-l-seg-t5-D-L3 ;
-    TEMPRAW:derivative_status "Not found" ;
-    TEMPRAW:laboratory_internal_id "B824_T5L_D_Level_3.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-06-C" ;
+    TEMP:onSample sample:sam-06 ;
+    TEMPRAW:site_anatomical_location "Fundus" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-l-seg-t5-D-L3-th a owl:NamedIndividual,
+site:site-06-D a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "site-l-seg-t5-D-L3-th" ;
-    TEMP:onSample sample:sam-l-seg-t5-D-L3 ;
-    TEMPRAW:derivative_status "Not found" ;
-    TEMPRAW:laboratory_internal_id "B824_T5L_D_Level_3_th.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-06-D" ;
+    TEMP:onSample sample:sam-06 ;
+    TEMPRAW:site_anatomical_location "Fundus" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-l-seg-t7-A-L3-th a owl:NamedIndividual,
+site:site-06-EF a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "site-l-seg-t7-A-L3-th" ;
-    TEMP:onSample sample:sam-l-seg-t7-A-L3 ;
-    TEMPRAW:derivative_status "Not found" ;
-    TEMPRAW:laboratory_internal_id "B824_T7L_A_Level_3_th.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-06-EF" ;
+    TEMP:onSample sample:sam-06 ;
+    TEMPRAW:site_anatomical_location "Esophageal Junction" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-l-seg-t7-C-L3 a owl:NamedIndividual,
+site:site-06-IJ a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "site-l-seg-t7-C-L3" ;
-    TEMP:onSample sample:sam-l-seg-t7-C-L3 ;
-    TEMPRAW:derivative_status "Not found" ;
-    TEMPRAW:laboratory_internal_id "B824_T7L_C_Level_3.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-06-IJ" ;
+    TEMP:onSample sample:sam-06 ;
+    TEMPRAW:site_anatomical_location "Esophageal Junction" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-r-seg-c1-A-L3-1 a owl:NamedIndividual,
+site:site-06-M a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "site-r-seg-c1-A-L3-1" ;
-    TEMP:onSample sample:sam-r-seg-c1-A-L3 ;
-    TEMPRAW:derivative_status "Not found" ;
-    TEMPRAW:laboratory_internal_id "B824_C1R_A_Level_3_part1.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-06-M" ;
+    TEMP:onSample sample:sam-06 ;
+    TEMPRAW:site_anatomical_location "Antrum" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-r-seg-c1-A-L3-1-th a owl:NamedIndividual,
+site:site-06-N a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "site-r-seg-c1-A-L3-1-th" ;
-    TEMP:onSample sample:sam-r-seg-c1-A-L3 ;
-    TEMPRAW:derivative_status "Not found" ;
-    TEMPRAW:laboratory_internal_id "B824_C1R_A_Level_3_part1_th.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-06-N" ;
+    TEMP:onSample sample:sam-06 ;
+    TEMPRAW:site_anatomical_location "Antrum" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-r-seg-c1-A-L3-2 a owl:NamedIndividual,
+site:site-06-O a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "site-r-seg-c1-A-L3-2" ;
-    TEMP:onSample sample:sam-r-seg-c1-A-L3 ;
-    TEMPRAW:derivative_status "Not found" ;
-    TEMPRAW:laboratory_internal_id "B824_C1R_A_Level_3_part2.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-06-O" ;
+    TEMP:onSample sample:sam-06 ;
+    TEMPRAW:site_anatomical_location "Corpus" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-r-seg-c1-A-L3-2-th a owl:NamedIndividual,
+site:site-06-P a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:1905a106-f467-4a51-a17d-18453501607b ;
-    TEMP:localId "site-r-seg-c1-A-L3-2-th" ;
-    TEMP:onSample sample:sam-r-seg-c1-A-L3 ;
-    TEMPRAW:derivative_status "Found" ;
-    TEMPRAW:laboratory_internal_id "B824_C1R_A_Level_3_part2_th.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-06-P" ;
+    TEMP:onSample sample:sam-06 ;
+    TEMPRAW:site_anatomical_location "Corpus" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-r-seg-c1-B-L3-1 a owl:NamedIndividual,
+site:site-07-C a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:021dbd54-d770-4643-9a97-288b959e7be1 ;
-    TEMP:localId "site-r-seg-c1-B-L3-1" ;
-    TEMP:onSample sample:sam-r-seg-c1-B-L3 ;
-    TEMPRAW:derivative_status "Found" ;
-    TEMPRAW:laboratory_internal_id "B824_C1R_B_Level_3_part1.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-07-C" ;
+    TEMP:onSample sample:sam-07 ;
+    TEMPRAW:site_anatomical_location "Fundus" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-r-seg-c1-B-L3-1-th a owl:NamedIndividual,
+site:site-07-D a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:159711ee-e933-46b5-a6d8-47059da721f6 ;
-    TEMP:localId "site-r-seg-c1-B-L3-1-th" ;
-    TEMP:onSample sample:sam-r-seg-c1-B-L3 ;
-    TEMPRAW:derivative_status "Found" ;
-    TEMPRAW:laboratory_internal_id "B824_C1R_B_Level_3_part1_th.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-07-D" ;
+    TEMP:onSample sample:sam-07 ;
+    TEMPRAW:site_anatomical_location "Fundus" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-r-seg-c1-B-L3-2 a owl:NamedIndividual,
+site:site-07-EF a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "site-r-seg-c1-B-L3-2" ;
-    TEMP:onSample sample:sam-r-seg-c1-B-L3 ;
-    TEMPRAW:derivative_status "Not found" ;
-    TEMPRAW:laboratory_internal_id "B824_C1R_B_Level_3_part2.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-07-EF" ;
+    TEMP:onSample sample:sam-07 ;
+    TEMPRAW:site_anatomical_location "Esophageal Junction" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-r-seg-c1-B-L3-2-th a owl:NamedIndividual,
+site:site-07-IJ a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:65092ba5-2e16-4ae1-bb78-5a74a9b91755 ;
-    TEMP:localId "site-r-seg-c1-B-L3-2-th" ;
-    TEMP:onSample sample:sam-r-seg-c1-B-L3 ;
-    TEMPRAW:derivative_status "Found" ;
-    TEMPRAW:laboratory_internal_id "B824_C1R_B_Level_3_part2_th.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-07-IJ" ;
+    TEMP:onSample sample:sam-07 ;
+    TEMPRAW:site_anatomical_location "Esophageal Junction" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-r-seg-c1-B-L3-3 a owl:NamedIndividual,
+site:site-07-M a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:ded7771b-60d2-4b5f-b6fd-d3117cc895b0 ;
-    TEMP:localId "site-r-seg-c1-B-L3-3" ;
-    TEMP:onSample sample:sam-r-seg-c1-B-L3 ;
-    TEMPRAW:derivative_status "Found" ;
-    TEMPRAW:laboratory_internal_id "B824_C1R_B_Level_3_part3_th.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-07-M" ;
+    TEMP:onSample sample:sam-07 ;
+    TEMPRAW:site_anatomical_location "Antrum" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-r-seg-c1-B-L3-3-th a owl:NamedIndividual,
+site:site-07-N a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "site-r-seg-c1-B-L3-3-th" ;
-    TEMP:onSample sample:sam-r-seg-c1-B-L3 ;
-    TEMPRAW:derivative_status "Not found" ;
-    TEMPRAW:laboratory_internal_id "B824_C1R_B_Level_3_part3_th.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-07-N" ;
+    TEMP:onSample sample:sam-07 ;
+    TEMPRAW:site_anatomical_location "Antrum" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-r-seg-c1-B-L3-4-th a owl:NamedIndividual,
+site:site-07-O a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "site-r-seg-c1-B-L3-4-th" ;
-    TEMP:onSample sample:sam-r-seg-c1-B-L3 ;
-    TEMPRAW:derivative_status "Not found" ;
-    TEMPRAW:laboratory_internal_id "B824_C1R_B_Level_3_part4_th.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-07-O" ;
+    TEMP:onSample sample:sam-07 ;
+    TEMPRAW:site_anatomical_location "Corpus" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-r-seg-c1-C-L3 a owl:NamedIndividual,
+site:site-07-P a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:0fac1f85-9104-4ec0-bc47-6fc2ae258570 ;
-    TEMP:localId "site-r-seg-c1-C-L3" ;
-    TEMP:onSample sample:sam-r-seg-c1-C-L3 ;
-    TEMPRAW:derivative_status "Found" ;
-    TEMPRAW:laboratory_internal_id "B824_C1R_C_Level_3.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-07-P" ;
+    TEMP:onSample sample:sam-07 ;
+    TEMPRAW:site_anatomical_location "Corpus" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-r-seg-c2-A-L3-th a owl:NamedIndividual,
+site:site-08-A a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:d06bec12-acb2-4eff-a510-e12a5e23f217 ;
-    TEMP:localId "site-r-seg-c2-A-L3-th" ;
-    TEMP:onSample sample:sam-r-seg-c2-A-L3 ;
-    TEMPRAW:derivative_status "Found" ;
-    TEMPRAW:laboratory_internal_id "B824_C2R_A_Level_3_th.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-08-A" ;
+    TEMP:onSample sample:sam-08 ;
+    TEMPRAW:site_anatomical_location "Fundus" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-r-seg-c6-A-L3 a owl:NamedIndividual,
+site:site-08-B a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:ed7d6767-badd-4494-a8ec-e1d3e7238346 ;
-    TEMP:localId "site-r-seg-c6-A-L3" ;
-    TEMP:onSample sample:sam-r-seg-c6-A-L3 ;
-    TEMPRAW:derivative_status "Found" ;
-    TEMPRAW:laboratory_internal_id "B824_C6R_A_Level_3.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-08-B" ;
+    TEMP:onSample sample:sam-08 ;
+    TEMPRAW:site_anatomical_location "Fundus" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-r-seg-c6-A-L3-th a owl:NamedIndividual,
+site:site-08-C a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:d0158c27-e990-41a3-873e-648045650670 ;
-    TEMP:localId "site-r-seg-c6-A-L3-th" ;
-    TEMP:onSample sample:sam-r-seg-c6-A-L3 ;
-    TEMPRAW:derivative_status "Found" ;
-    TEMPRAW:laboratory_internal_id "B824_C6R_A_Level_3_th.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-08-C" ;
+    TEMP:onSample sample:sam-08 ;
+    TEMPRAW:site_anatomical_location "Fundus" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-r-seg-c10-A-L3 a owl:NamedIndividual,
+site:site-08-D a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:145bc402-d7d5-4926-85fd-dc121ad08a58 ;
-    TEMP:localId "site-r-seg-c10-A-L3" ;
-    TEMP:onSample sample:sam-r-seg-c10-A-L3 ;
-    TEMPRAW:derivative_status "Found" ;
-    TEMPRAW:laboratory_internal_id "B824_C10R_A_Level_3.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-08-D" ;
+    TEMP:onSample sample:sam-08 ;
+    TEMPRAW:site_anatomical_location "Fundus" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-r-seg-c10-A-L3-th a owl:NamedIndividual,
+site:site-08-E a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:0556cbc6-41c9-4d13-8349-8686c2f733c8 ;
-    TEMP:localId "site-r-seg-c10-A-L3-th" ;
-    TEMP:onSample sample:sam-r-seg-c10-A-L3 ;
-    TEMPRAW:derivative_status "Found" ;
-    TEMPRAW:laboratory_internal_id "B824_C10R_A_Level_3_th.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-08-E" ;
+    TEMP:onSample sample:sam-08 ;
+    TEMPRAW:site_anatomical_location "Esophageal Junction" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-r-seg-t1-A-L3 a owl:NamedIndividual,
+site:site-08-EF a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "site-r-seg-t1-A-L3" ;
-    TEMP:onSample sample:sam-r-seg-t1-A-L3 ;
-    TEMPRAW:derivative_status "Not found" ;
-    TEMPRAW:laboratory_internal_id "B824_T1R_A_Level_3.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-08-EF" ;
+    TEMP:onSample sample:sam-08 ;
+    TEMPRAW:site_anatomical_location "Esophageal Junction" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-r-seg-t1-A-L3-th a owl:NamedIndividual,
+site:site-08-F a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "site-r-seg-t1-A-L3-th" ;
-    TEMP:onSample sample:sam-r-seg-t1-A-L3 ;
-    TEMPRAW:derivative_status "Not found" ;
-    TEMPRAW:laboratory_internal_id "B824_T1R_A_Level_3_th.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-08-F" ;
+    TEMP:onSample sample:sam-08 ;
+    TEMPRAW:site_anatomical_location "Esophageal Junction" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-r-seg-t1-B-L3 a owl:NamedIndividual,
+site:site-08-G a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:f6ece7f6-75c9-42c9-971b-5a3a0e8e4786 ;
-    TEMP:localId "site-r-seg-t1-B-L3" ;
-    TEMP:onSample sample:sam-r-seg-t1-B-L3 ;
-    TEMPRAW:derivative_status "Found" ;
-    TEMPRAW:laboratory_internal_id "B824_T1R_B_Level_3.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-08-G" ;
+    TEMP:onSample sample:sam-08 ;
+    TEMPRAW:site_anatomical_location "Corpus" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-r-seg-t1-B-L3-th a owl:NamedIndividual,
+site:site-08-H a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:c8fa5f4f-6ca0-4e24-849c-980557f1fdbd ;
-    TEMP:localId "site-r-seg-t1-B-L3-th" ;
-    TEMP:onSample sample:sam-r-seg-t1-B-L3 ;
-    TEMPRAW:derivative_status "Found" ;
-    TEMPRAW:laboratory_internal_id "B824_T1R_B_Level_3_th.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-08-H" ;
+    TEMP:onSample sample:sam-08 ;
+    TEMPRAW:site_anatomical_location "Corpus" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-r-seg-t3-A-L3 a owl:NamedIndividual,
+site:site-08-I a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:ca4b2c3e-d7bf-461c-9393-a7b816e02e82 ;
-    TEMP:localId "site-r-seg-t3-A-L3" ;
-    TEMP:onSample sample:sam-r-seg-t3-A-L3 ;
-    TEMPRAW:derivative_status "Found" ;
-    TEMPRAW:laboratory_internal_id "B824_T3R_A_Level_3.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-08-I" ;
+    TEMP:onSample sample:sam-08 ;
+    TEMPRAW:site_anatomical_location "Esophageal Junction" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-r-seg-t3-B-L3 a owl:NamedIndividual,
+site:site-08-J a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "site-r-seg-t3-B-L3" ;
-    TEMP:onSample sample:sam-r-seg-t3-B-L3 ;
-    TEMPRAW:derivative_status "Not found" ;
-    TEMPRAW:laboratory_internal_id "B824_T3R_B_Level_3.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-08-J" ;
+    TEMP:onSample sample:sam-08 ;
+    TEMPRAW:site_anatomical_location "Esophageal Junction" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-r-seg-t3-B-L3-th a owl:NamedIndividual,
+site:site-08-K a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "site-r-seg-t3-B-L3-th" ;
-    TEMP:onSample sample:sam-r-seg-t3-B-L3 ;
-    TEMPRAW:derivative_status "Not found" ;
-    TEMPRAW:laboratory_internal_id "B824_T3R_B_Level_3_th.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-08-K" ;
+    TEMP:onSample sample:sam-08 ;
+    TEMPRAW:site_anatomical_location "Corpus" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-r-seg-t4-A-L3 a owl:NamedIndividual,
+site:site-08-L a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:0ab8087c-bae7-47f7-8903-a716b13a8c23 ;
-    TEMP:localId "site-r-seg-t4-A-L3" ;
-    TEMP:onSample sample:sam-r-seg-t4-A-L3 ;
-    TEMPRAW:derivative_status "Found" ;
-    TEMPRAW:laboratory_internal_id "B824_T4R_A_Level_3.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-08-L" ;
+    TEMP:onSample sample:sam-08 ;
+    TEMPRAW:site_anatomical_location "Corpus" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-r-seg-t4-A-L3-th a owl:NamedIndividual,
+site:site-08-M a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:70592aa6-6674-4080-a1d4-c559b8aa6f7c ;
-    TEMP:localId "site-r-seg-t4-A-L3-th" ;
-    TEMP:onSample sample:sam-r-seg-t4-A-L3 ;
-    TEMPRAW:derivative_status "Found" ;
-    TEMPRAW:laboratory_internal_id "B824_T4R_A_Level_3_th.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-08-M" ;
+    TEMP:onSample sample:sam-08 ;
+    TEMPRAW:site_anatomical_location "Antrum" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-r-seg-t4-B-L3 a owl:NamedIndividual,
+site:site-08-N a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:0a84f2cd-065d-4db3-b784-fbd83b91266b ;
-    TEMP:localId "site-r-seg-t4-B-L3" ;
-    TEMP:onSample sample:sam-r-seg-t4-B-L3 ;
-    TEMPRAW:derivative_status "Found" ;
-    TEMPRAW:laboratory_internal_id "B824_T4R_B_Level_3.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-08-N" ;
+    TEMP:onSample sample:sam-08 ;
+    TEMPRAW:site_anatomical_location "Antrum" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-r-seg-t4-B-L3-th a owl:NamedIndividual,
+site:site-08-O a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:4e1bcfec-82d7-4a56-a8b5-117ffb99ce1c ;
-    TEMP:localId "site-r-seg-t4-B-L3-th" ;
-    TEMP:onSample sample:sam-r-seg-t4-B-L3 ;
-    TEMPRAW:derivative_status "Found" ;
-    TEMPRAW:laboratory_internal_id "B824_T4R_B_Level_3_th.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-08-O" ;
+    TEMP:onSample sample:sam-08 ;
+    TEMPRAW:site_anatomical_location "Corpus" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-r-seg-t4-C-L3 a owl:NamedIndividual,
+site:site-08-P a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:072533d2-b4a2-4396-b4be-b16cd307979a ;
-    TEMP:localId "site-r-seg-t4-C-L3" ;
-    TEMP:onSample sample:sam-r-seg-t4-C-L3 ;
-    TEMPRAW:derivative_status "Found" ;
-    TEMPRAW:laboratory_internal_id "B824_T4R_C_Level_3.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-08-P" ;
+    TEMP:onSample sample:sam-08 ;
+    TEMPRAW:site_anatomical_location "Corpus" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-r-seg-t4-C-L3-th a owl:NamedIndividual,
+site:site-08-Q a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "site-r-seg-t4-C-L3-th" ;
-    TEMP:onSample sample:sam-r-seg-t4-C-L3 ;
-    TEMPRAW:derivative_status "Not found" ;
-    TEMPRAW:laboratory_internal_id "B824_T4R_C_LEVEL_3_th.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-08-Q" ;
+    TEMP:onSample sample:sam-08 ;
+    TEMPRAW:site_anatomical_location "Corpus/Antrum" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-r-seg-t6-C-L3 a owl:NamedIndividual,
+site:site-08-R a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:f97de71c-05cf-4353-b88f-1b6b870183aa ;
-    TEMP:localId "site-r-seg-t6-C-L3" ;
-    TEMP:onSample sample:sam-r-seg-t6-C-L3 ;
-    TEMPRAW:derivative_status "Found" ;
-    TEMPRAW:laboratory_internal_id "B824_T6R_C_Level_3.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-08-R" ;
+    TEMP:onSample sample:sam-08 ;
+    TEMPRAW:site_anatomical_location "Corpus/Antrum" ;
+    TEMPRAW:site_type "fiducial point" .
 
-site:site-r-seg-t6-C-L3-th a owl:NamedIndividual,
+site:site-08-S a owl:NamedIndividual,
         sparc:Site ;
-    TEMP:hasDerivedInformation dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:localId "site-r-seg-t6-C-L3-th" ;
-    TEMP:onSample sample:sam-r-seg-t6-C-L3 ;
-    TEMPRAW:derivative_status "Not found" ;
-    TEMPRAW:laboratory_internal_id "B824_T6R_C_LEVEL_3_th.tar" ;
-    TEMPRAW:plane_width_microns 5 ;
-    TEMPRAW:site_type "extruded plane" .
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-08-S" ;
+    TEMP:onSample sample:sam-08 ;
+    TEMPRAW:site_anatomical_location "Antrum" ;
+    TEMPRAW:site_type "fiducial point" .
 
-subject:sub-f006 a owl:NamedIndividual,
+site:site-09-A a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-09-A" ;
+    TEMP:onSample sample:sam-09 ;
+    TEMPRAW:site_anatomical_location "Fundus" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-09-B a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-09-B" ;
+    TEMP:onSample sample:sam-09 ;
+    TEMPRAW:site_anatomical_location "Fundus" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-09-C a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-09-C" ;
+    TEMP:onSample sample:sam-09 ;
+    TEMPRAW:site_anatomical_location "Fundus" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-09-D a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-09-D" ;
+    TEMP:onSample sample:sam-09 ;
+    TEMPRAW:site_anatomical_location "Fundus" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-09-E a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-09-E" ;
+    TEMP:onSample sample:sam-09 ;
+    TEMPRAW:site_anatomical_location "Esophageal Junction" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-09-EF a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-09-EF" ;
+    TEMP:onSample sample:sam-09 ;
+    TEMPRAW:site_anatomical_location "Esophageal Junction" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-09-F a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-09-F" ;
+    TEMP:onSample sample:sam-09 ;
+    TEMPRAW:site_anatomical_location "Esophageal Junction" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-09-G a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-09-G" ;
+    TEMP:onSample sample:sam-09 ;
+    TEMPRAW:site_anatomical_location "Corpus" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-09-H a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-09-H" ;
+    TEMP:onSample sample:sam-09 ;
+    TEMPRAW:site_anatomical_location "Corpus" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-09-J a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-09-J" ;
+    TEMP:onSample sample:sam-09 ;
+    TEMPRAW:site_anatomical_location "Esophageal Junction" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-09-K a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-09-K" ;
+    TEMP:onSample sample:sam-09 ;
+    TEMPRAW:site_anatomical_location "Corpus" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-09-L a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-09-L" ;
+    TEMP:onSample sample:sam-09 ;
+    TEMPRAW:site_anatomical_location "Corpus" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-09-M a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-09-M" ;
+    TEMP:onSample sample:sam-09 ;
+    TEMPRAW:site_anatomical_location "Antrum" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-09-N a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-09-N" ;
+    TEMP:onSample sample:sam-09 ;
+    TEMPRAW:site_anatomical_location "Antrum" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-09-O a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-09-O" ;
+    TEMP:onSample sample:sam-09 ;
+    TEMPRAW:site_anatomical_location "Corpus" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-09-P a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-09-P" ;
+    TEMP:onSample sample:sam-09 ;
+    TEMPRAW:site_anatomical_location "Corpus" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-09-Q a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-09-Q" ;
+    TEMP:onSample sample:sam-09 ;
+    TEMPRAW:site_anatomical_location "Corpus/Antrum" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-09-R a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-09-R" ;
+    TEMP:onSample sample:sam-09 ;
+    TEMPRAW:site_anatomical_location "Corpus/Antrum" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-09-S a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-09-S" ;
+    TEMP:onSample sample:sam-09 ;
+    TEMPRAW:site_anatomical_location "Antrum" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-10-A a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-10-A" ;
+    TEMP:onSample sample:sam-10 ;
+    TEMPRAW:site_anatomical_location "Fundus" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-10-B a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-10-B" ;
+    TEMP:onSample sample:sam-10 ;
+    TEMPRAW:site_anatomical_location "Fundus" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-10-C a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-10-C" ;
+    TEMP:onSample sample:sam-10 ;
+    TEMPRAW:site_anatomical_location "Fundus" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-10-D a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-10-D" ;
+    TEMP:onSample sample:sam-10 ;
+    TEMPRAW:site_anatomical_location "Fundus" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-10-G a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-10-G" ;
+    TEMP:onSample sample:sam-10 ;
+    TEMPRAW:site_anatomical_location "Corpus" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-10-H a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-10-H" ;
+    TEMP:onSample sample:sam-10 ;
+    TEMPRAW:site_anatomical_location "Corpus" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-10-K a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-10-K" ;
+    TEMP:onSample sample:sam-10 ;
+    TEMPRAW:site_anatomical_location "Corpus" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-10-L a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-10-L" ;
+    TEMP:onSample sample:sam-10 ;
+    TEMPRAW:site_anatomical_location "Corpus" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-10-M a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-10-M" ;
+    TEMP:onSample sample:sam-10 ;
+    TEMPRAW:site_anatomical_location "Antrum" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-10-N a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-10-N" ;
+    TEMP:onSample sample:sam-10 ;
+    TEMPRAW:site_anatomical_location "Antrum" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-10-O a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-10-O" ;
+    TEMP:onSample sample:sam-10 ;
+    TEMPRAW:site_anatomical_location "Corpus" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-10-P a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-10-P" ;
+    TEMP:onSample sample:sam-10 ;
+    TEMPRAW:site_anatomical_location "Corpus" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-10-Q a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-10-Q" ;
+    TEMP:onSample sample:sam-10 ;
+    TEMPRAW:site_anatomical_location "Corpus/Antrum" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-10-R a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-10-R" ;
+    TEMP:onSample sample:sam-10 ;
+    TEMPRAW:site_anatomical_location "Corpus/Antrum" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-10-S a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-10-S" ;
+    TEMP:onSample sample:sam-10 ;
+    TEMPRAW:site_anatomical_location "Antrum" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-11-A a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-11-A" ;
+    TEMP:onSample sample:sam-11 ;
+    TEMPRAW:site_anatomical_location "Fundus" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-11-B a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-11-B" ;
+    TEMP:onSample sample:sam-11 ;
+    TEMPRAW:site_anatomical_location "Fundus" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-11-C a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-11-C" ;
+    TEMP:onSample sample:sam-11 ;
+    TEMPRAW:site_anatomical_location "Fundus" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-11-D a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-11-D" ;
+    TEMP:onSample sample:sam-11 ;
+    TEMPRAW:site_anatomical_location "Fundus" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-11-E a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-11-E" ;
+    TEMP:onSample sample:sam-11 ;
+    TEMPRAW:site_anatomical_location "Esophageal Junction" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-11-EF a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-11-EF" ;
+    TEMP:onSample sample:sam-11 ;
+    TEMPRAW:site_anatomical_location "Esophageal Junction" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-11-F a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-11-F" ;
+    TEMP:onSample sample:sam-11 ;
+    TEMPRAW:site_anatomical_location "Esophageal Junction" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-11-G a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-11-G" ;
+    TEMP:onSample sample:sam-11 ;
+    TEMPRAW:site_anatomical_location "Corpus" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-11-H a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-11-H" ;
+    TEMP:onSample sample:sam-11 ;
+    TEMPRAW:site_anatomical_location "Corpus" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-11-I a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-11-I" ;
+    TEMP:onSample sample:sam-11 ;
+    TEMPRAW:site_anatomical_location "Esophageal Junction" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-11-K a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-11-K" ;
+    TEMP:onSample sample:sam-11 ;
+    TEMPRAW:site_anatomical_location "Corpus" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-11-L a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-11-L" ;
+    TEMP:onSample sample:sam-11 ;
+    TEMPRAW:site_anatomical_location "Corpus" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-11-M a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-11-M" ;
+    TEMP:onSample sample:sam-11 ;
+    TEMPRAW:site_anatomical_location "Antrum" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-11-N a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-11-N" ;
+    TEMP:onSample sample:sam-11 ;
+    TEMPRAW:site_anatomical_location "Antrum" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-11-O a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-11-O" ;
+    TEMP:onSample sample:sam-11 ;
+    TEMPRAW:site_anatomical_location "Corpus" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-11-P a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-11-P" ;
+    TEMP:onSample sample:sam-11 ;
+    TEMPRAW:site_anatomical_location "Corpus" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-11-Q a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-11-Q" ;
+    TEMP:onSample sample:sam-11 ;
+    TEMPRAW:site_anatomical_location "Corpus/Antrum" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-11-R a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-11-R" ;
+    TEMP:onSample sample:sam-11 ;
+    TEMPRAW:site_anatomical_location "Corpus/Antrum" ;
+    TEMPRAW:site_type "fiducial point" .
+
+site:site-11-S a owl:NamedIndividual,
+        sparc:Site ;
+    TEMP:hasDerivedInformation dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:localId "site-11-S" ;
+    TEMP:onSample sample:sam-11 ;
+    TEMPRAW:site_anatomical_location "Antrum" ;
+    TEMPRAW:site_type "fiducial point" .
+
+subject:sub-rat01 a owl:NamedIndividual,
         sparc:Subject ;
-    sparc:animalSubjectHasWeight [ a sparc:Measurement ;
-            TEMP:hasUnit unit:kilogram ;
-            rdf:value 58 ;
-            TEMP:asBaseUnits [ a ilxtr:Quantity ;
-                    TEMP:hasUnit unit:gram ;
-                    rdf:value 5.8e+04 ] ] ;
-    sparc:animalSubjectIsOfSpecies NCBITaxon:9606 ;
+    sparc:animalSubjectHasWeight 213 ;
+    sparc:animalSubjectIsOfSpecies NCBITaxon:10116 ;
+    sparc:animalSubjectIsOfStrain "Sprague Dawley" ;
     sparc:hasBiologicalSex PATO:0000383 ;
-    TEMP:hasAge [ a TEMP:greater-than ;
-            TEMP:right [ a ilxtr:Quantity ;
-                    TEMP:hasUnit unit:year ;
-                    rdf:value 89 ] ] ;
-    TEMP:hasAgeCategory "late adult stage" ;
-    TEMP:hasDerivedInformationAsParticipant dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasFolderAboutIt collection:5cc00409-f872-4ef7-a72b-d1aaa4b0730d,
-        collection:309583fd-77ca-474d-a74f-b3211a2a1d2d,
-        collection:daac11c5-1286-452c-afcd-374a7746a0ef ;
-    TEMP:localId "sub-f006" ;
-    TEMPRAW:disease_or_disorder "Atrial fibrillation, hypertension, dementia" ;
-    TEMPRAW:experimental_log_file_path "primary/sub-f006/logfiles/B824 Vagus Branches and Measurements.xlsx" ;
-    TEMPRAW:laboratory_internal_id "B824" .
+    sparc:specimenHasIdentifier RRID:RGD_8553001 ;
+    TEMP:hasAge [ a sparc:Measurement ;
+            TEMP:hasUnit unit:week ;
+            rdf:value 8 ;
+            TEMP:asBaseUnits [ a ilxtr:Quantity ;
+                    TEMP:hasUnit unit:second ;
+                    rdf:value 4838400 ] ] ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:hasFolderAboutIt collection:b26b5e37-aaa7-4e54-b180-72b642958c95,
+        collection:e5df5b29-377e-4f46-b885-d8eb91263429 ;
+    TEMP:localId "sub-rat01" ;
+    TEMP:localPerformanceNumber "lp035" ;
+    TEMP:TODO "perfused cold fixative (10% NBF)" ;
+    TEMPRAW:body_mass_units "g" ;
+    TEMPRAW:laboratory_internal_id "sub-rat02" ;
+    TEMPRAW:subject_experimental_group "control" .
 
-user:0bde93b0-7c34-4b06-9bb4-76a8ee761d53 a owl:NamedIndividual,
-        sparc:Person ;
-    sparc:firstName "Jinxuan" ;
-    sparc:lastName "Cang" ;
-    TEMP:contributorTo dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasAffiliation "Feinstein Institutes for Medical Research" ;
-    TEMP:hasDataRemoteUserId user:0bde93b0-7c34-4b06-9bb4-76a8ee761d53 .
+subject:sub-rat02 a owl:NamedIndividual,
+        sparc:Subject ;
+    sparc:animalSubjectHasWeight 258 ;
+    sparc:animalSubjectIsOfSpecies NCBITaxon:10116 ;
+    sparc:animalSubjectIsOfStrain "Sprague Dawley" ;
+    sparc:hasBiologicalSex PATO:0000384 ;
+    sparc:specimenHasIdentifier RRID:RGD_8553001 ;
+    TEMP:hasAge [ a sparc:Measurement ;
+            TEMP:hasUnit unit:week ;
+            rdf:value 8 ;
+            TEMP:asBaseUnits [ a ilxtr:Quantity ;
+                    TEMP:hasUnit unit:second ;
+                    rdf:value 4838400 ] ] ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:hasFolderAboutIt collection:780eea2a-0170-4d22-adf5-122786f9b9de,
+        collection:ebb13454-086b-4c08-b568-4e85f4397d12 ;
+    TEMP:localId "sub-rat02" ;
+    TEMP:localPerformanceNumber "lp035" ;
+    TEMP:TODO "perfused cold fixative (10% NBF)" ;
+    TEMPRAW:body_mass_units "g" ;
+    TEMPRAW:laboratory_internal_id "sub-rat03" ;
+    TEMPRAW:subject_experimental_group "control" .
 
-user:d07131c1-6ba7-4278-a863-ee827d856e93 a owl:NamedIndividual,
-        sparc:Person ;
-    sparc:firstName "Larry" ;
-    sparc:lastName "Miller" ;
-    TEMP:contributorTo dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:hasAffiliation "Feinstein Institutes for Medical Research" ;
-    TEMP:hasDataRemoteUserId user:d07131c1-6ba7-4278-a863-ee827d856e93 .
+subject:sub-rat03 a owl:NamedIndividual,
+        sparc:Subject ;
+    sparc:animalSubjectHasWeight 206 ;
+    sparc:animalSubjectIsOfSpecies NCBITaxon:10116 ;
+    sparc:animalSubjectIsOfStrain "Sprague Dawley" ;
+    sparc:hasBiologicalSex PATO:0000383 ;
+    sparc:specimenHasIdentifier RRID:RGD_8553001 ;
+    TEMP:hasAge [ a sparc:Measurement ;
+            TEMP:hasUnit unit:week ;
+            rdf:value 7 ;
+            TEMP:asBaseUnits [ a ilxtr:Quantity ;
+                    TEMP:hasUnit unit:second ;
+                    rdf:value 4233600 ] ] ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:hasFolderAboutIt collection:3709d310-5693-47f9-9b35-450103d249fd,
+        collection:61023934-7283-450a-8eef-ff92abfc41c5 ;
+    TEMP:localId "sub-rat03" ;
+    TEMP:localPerformanceNumber "lp035" ;
+    TEMP:TODO "perfused cold fixative (4 % paraformaldehyde in 0.1M phosphate buffer, pH7.0)" ;
+    TEMPRAW:body_mass_units "g" ;
+    TEMPRAW:laboratory_internal_id "sub-rat04" ;
+    TEMPRAW:subject_experimental_group "control" .
+
+subject:sub-rat04 a owl:NamedIndividual,
+        sparc:Subject ;
+    sparc:animalSubjectHasWeight 217 ;
+    sparc:animalSubjectIsOfSpecies NCBITaxon:10116 ;
+    sparc:animalSubjectIsOfStrain "Sprague Dawley" ;
+    sparc:hasBiologicalSex PATO:0000384 ;
+    sparc:specimenHasIdentifier RRID:RGD_8553001 ;
+    TEMP:hasAge [ a sparc:Measurement ;
+            TEMP:hasUnit unit:week ;
+            rdf:value 8 ;
+            TEMP:asBaseUnits [ a ilxtr:Quantity ;
+                    TEMP:hasUnit unit:second ;
+                    rdf:value 4838400 ] ] ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:hasFolderAboutIt collection:18c8b92e-07c2-44a2-ae2a-7cf3442dece5,
+        collection:84145fbb-4a5d-4602-8b8f-691a44b4a515 ;
+    TEMP:localId "sub-rat04" ;
+    TEMP:localPerformanceNumber "lp036" ;
+    TEMP:TODO "stretched in PBS-nicardapine (10^-6),  post-fix cold fixative (10% NBF)" ;
+    TEMPRAW:body_mass_units "g" ;
+    TEMPRAW:laboratory_internal_id "sub-rat06" ;
+    TEMPRAW:subject_experimental_group "control" .
+
+subject:sub-rat05 a owl:NamedIndividual,
+        sparc:Subject ;
+    sparc:animalSubjectHasWeight 187 ;
+    sparc:animalSubjectIsOfSpecies NCBITaxon:10116 ;
+    sparc:animalSubjectIsOfStrain "Sprague Dawley" ;
+    sparc:hasBiologicalSex PATO:0000383 ;
+    sparc:specimenHasIdentifier RRID:RGD_8553001 ;
+    TEMP:hasAge [ a sparc:Measurement ;
+            TEMP:hasUnit unit:week ;
+            rdf:value 8 ;
+            TEMP:asBaseUnits [ a ilxtr:Quantity ;
+                    TEMP:hasUnit unit:second ;
+                    rdf:value 4838400 ] ] ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:hasFolderAboutIt collection:9c9e824e-2e79-4486-b730-b00df610e11d,
+        collection:e3d4057a-82d1-4439-bd23-73765e103d57 ;
+    TEMP:localId "sub-rat05" ;
+    TEMP:localPerformanceNumber "lp036" ;
+    TEMP:TODO "perfused cold fixative (10% NBF)" ;
+    TEMPRAW:body_mass_units "g" ;
+    TEMPRAW:laboratory_internal_id "sub-rat07" ;
+    TEMPRAW:subject_experimental_group "control" .
+
+subject:sub-rat06 a owl:NamedIndividual,
+        sparc:Subject ;
+    sparc:animalSubjectHasWeight 206 ;
+    sparc:animalSubjectIsOfSpecies NCBITaxon:10116 ;
+    sparc:animalSubjectIsOfStrain "Sprague Dawley" ;
+    sparc:hasBiologicalSex PATO:0000383 ;
+    sparc:specimenHasIdentifier RRID:RGD_8553001 ;
+    TEMP:hasAge [ a sparc:Measurement ;
+            TEMP:hasUnit unit:week ;
+            rdf:value 7 ;
+            TEMP:asBaseUnits [ a ilxtr:Quantity ;
+                    TEMP:hasUnit unit:second ;
+                    rdf:value 4233600 ] ] ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:hasFolderAboutIt collection:69f4fce8-1105-4c9b-97b5-0578cd6f9e2f,
+        collection:89baae25-f658-468f-ae64-c4552c2a68dd ;
+    TEMP:localId "sub-rat06" ;
+    TEMP:localPerformanceNumber "lp043" ;
+    TEMP:TODO "perfused cold fixative (10% NBF)" ;
+    TEMPRAW:body_mass_units "g" ;
+    TEMPRAW:laboratory_internal_id "sub-rat12" ;
+    TEMPRAW:subject_experimental_group "control" .
+
+subject:sub-rat07 a owl:NamedIndividual,
+        sparc:Subject ;
+    sparc:animalSubjectHasWeight 300 ;
+    sparc:animalSubjectIsOfSpecies NCBITaxon:10116 ;
+    sparc:animalSubjectIsOfStrain "Sprague Dawley" ;
+    sparc:hasBiologicalSex PATO:0000384 ;
+    sparc:specimenHasIdentifier RRID:RGD_8553001 ;
+    TEMP:hasAge [ a sparc:Measurement ;
+            TEMP:hasUnit unit:week ;
+            rdf:value 7 ;
+            TEMP:asBaseUnits [ a ilxtr:Quantity ;
+                    TEMP:hasUnit unit:second ;
+                    rdf:value 4233600 ] ] ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:hasFolderAboutIt collection:372f730d-36cf-4d30-bf57-a16aeb74d89a,
+        collection:78233b34-369d-4314-a94e-eb50ce62eadb ;
+    TEMP:localId "sub-rat07" ;
+    TEMP:localPerformanceNumber "lp043" ;
+    TEMP:TODO "perfused cold fixative (10% NBF)" ;
+    TEMPRAW:body_mass_units "g" ;
+    TEMPRAW:laboratory_internal_id "sub-rat13" ;
+    TEMPRAW:subject_experimental_group "control" .
+
+subject:sub-rat08 a owl:NamedIndividual,
+        sparc:Subject ;
+    sparc:animalSubjectHasWeight 220 ;
+    sparc:animalSubjectIsOfSpecies NCBITaxon:10116 ;
+    sparc:animalSubjectIsOfStrain "Sprague Dawley" ;
+    sparc:hasBiologicalSex PATO:0000384 ;
+    sparc:specimenHasIdentifier RRID:RGD_8553001 ;
+    TEMP:hasAge [ a sparc:Measurement ;
+            TEMP:hasUnit unit:week ;
+            rdf:value 6.5e+00 ;
+            TEMP:asBaseUnits [ a ilxtr:Quantity ;
+                    TEMP:hasUnit unit:second ;
+                    rdf:value 3.9312e+06 ] ] ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:hasFolderAboutIt collection:21a2dd23-2d3f-45ed-abe4-754fb525ede7,
+        collection:98eca3df-98ac-420e-9e5f-ab1a858cb8bc ;
+    TEMP:localId "sub-rat08" ;
+    TEMP:localPerformanceNumber "sp064" ;
+    TEMP:TODO "perfused (0.3% heparinized-PBS), post-fixed in cold fixative (2 % formaldehyde plus 0.2 % picric acid in 0.1 M sodium phosphate buffer, pH 7.0)" ;
+    TEMPRAW:body_mass_units "g" ;
+    TEMPRAW:laboratory_internal_id "sub-rat55" ;
+    TEMPRAW:subject_experimental_group "control" .
+
+subject:sub-rat09 a owl:NamedIndividual,
+        sparc:Subject ;
+    sparc:animalSubjectHasWeight 240 ;
+    sparc:animalSubjectIsOfSpecies NCBITaxon:10116 ;
+    sparc:animalSubjectIsOfStrain "Sprague Dawley" ;
+    sparc:hasBiologicalSex PATO:0000384 ;
+    sparc:specimenHasIdentifier RRID:RGD_8553001 ;
+    TEMP:hasAge [ a sparc:Measurement ;
+            TEMP:hasUnit unit:week ;
+            rdf:value 6.5e+00 ;
+            TEMP:asBaseUnits [ a ilxtr:Quantity ;
+                    TEMP:hasUnit unit:second ;
+                    rdf:value 3.9312e+06 ] ] ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:hasFolderAboutIt collection:6695ae70-159c-4b98-b35e-e0544325450a,
+        collection:d0b04dfb-cc1d-477e-b001-b8e95e13cbb1 ;
+    TEMP:localId "sub-rat09" ;
+    TEMP:localPerformanceNumber "sp064" ;
+    TEMP:TODO "perfused (0.3% heparinized-PBS), post-fixed in cold fixative (2 % formaldehyde plus 0.2 % picric acid in 0.1 M sodium phosphate buffer, pH 7.0)" ;
+    TEMPRAW:body_mass_units "g" ;
+    TEMPRAW:laboratory_internal_id "sub-rat56" ;
+    TEMPRAW:subject_experimental_group "control" .
+
+subject:sub-rat10 a owl:NamedIndividual,
+        sparc:Subject ;
+    sparc:animalSubjectHasWeight 185 ;
+    sparc:animalSubjectIsOfSpecies NCBITaxon:10116 ;
+    sparc:animalSubjectIsOfStrain "Sprague Dawley" ;
+    sparc:hasBiologicalSex PATO:0000383 ;
+    sparc:specimenHasIdentifier RRID:RGD_8553001 ;
+    TEMP:hasAge [ a sparc:Measurement ;
+            TEMP:hasUnit unit:week ;
+            rdf:value 6.5e+00 ;
+            TEMP:asBaseUnits [ a ilxtr:Quantity ;
+                    TEMP:hasUnit unit:second ;
+                    rdf:value 3.9312e+06 ] ] ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:hasFolderAboutIt collection:6dfb72cd-c75c-434b-91ea-240b6a13a078,
+        collection:808635f4-6cd6-4862-afda-1977583f9666 ;
+    TEMP:localId "sub-rat10" ;
+    TEMP:localPerformanceNumber "sp064" ;
+    TEMP:TODO "perfused (0.3% heparinized-PBS), post-fixed in cold fixative (2 % formaldehyde plus 0.2 % picric acid in 0.1 M sodium phosphate buffer, pH 7.0)" ;
+    TEMPRAW:body_mass_units "g" ;
+    TEMPRAW:laboratory_internal_id "sub-rat57" ;
+    TEMPRAW:subject_experimental_group "control" .
+
+subject:sub-rat11 a owl:NamedIndividual,
+        sparc:Subject ;
+    sparc:animalSubjectHasWeight 199 ;
+    sparc:animalSubjectIsOfSpecies NCBITaxon:10116 ;
+    sparc:animalSubjectIsOfStrain "Sprague Dawley" ;
+    sparc:hasBiologicalSex PATO:0000383 ;
+    sparc:specimenHasIdentifier RRID:RGD_8553001 ;
+    TEMP:hasAge [ a sparc:Measurement ;
+            TEMP:hasUnit unit:week ;
+            rdf:value 6.5e+00 ;
+            TEMP:asBaseUnits [ a ilxtr:Quantity ;
+                    TEMP:hasUnit unit:second ;
+                    rdf:value 3.9312e+06 ] ] ;
+    TEMP:hasDerivedInformationAsParticipant dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:hasFolderAboutIt collection:3948a84f-f294-4e94-88b2-11288639c840,
+        collection:6390d166-e303-44d5-a575-de2be066b0ac ;
+    TEMP:localId "sub-rat11" ;
+    TEMP:localPerformanceNumber "sp064" ;
+    TEMP:TODO "perfused (0.3% heparinized-PBS), post-fixed in cold fixative (2 % formaldehyde plus 0.2 % picric acid in 0.1 M sodium phosphate buffer, pH 7.0)" ;
+    TEMPRAW:body_mass_units "g" ;
+    TEMPRAW:laboratory_internal_id "sub-rat58" ;
+    TEMPRAW:subject_experimental_group "control" .
 
 [] a owl:NamedIndividual,
         sparc:DatasetContribution ;
-    TEMP:aboutContributor contributor:Frank-Chen ;
-    TEMP:aboutDataset dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:contributorOrderIndex 5 ;
-    TEMP:hasRole TEMP:Researcher .
+    TEMP:aboutContributor contributor:Lauren-Patten ;
+    TEMP:aboutDataset dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:contributorOrderIndex 1 ;
+    TEMP:hasRole TEMP:DataCollector,
+        TEMP:Researcher .
 
 [] a owl:NamedIndividual,
         sparc:DatasetContribution ;
-    TEMP:aboutContributor contributor:Kevin-Coppa ;
-    TEMP:aboutDataset dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:contributorOrderIndex 12 ;
-    TEMP:hasRole TEMP:DataManager .
-
-[] a owl:NamedIndividual,
-        sparc:DatasetContribution ;
-    TEMP:aboutContributor contributor:Netanel-Ben-Shalom ;
-    TEMP:aboutDataset dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:contributorOrderIndex 13 ;
-    TEMP:hasRole TEMP:Researcher .
-
-[] a owl:NamedIndividual,
-        sparc:DatasetContribution ;
-    TEMP:aboutContributor contributor:Weiguo-Song ;
-    TEMP:aboutDataset dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:contributorOrderIndex 14 ;
-    TEMP:hasRole TEMP:Researcher .
-
-[] a owl:NamedIndividual,
-        sparc:DatasetContribution ;
-    TEMP:aboutContributor ORCID:0000-0001-7507-8126 ;
-    TEMP:aboutDataset dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
+    TEMP:aboutContributor ORCID:0000-0001-9967-7457 ;
+    TEMP:aboutDataset dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
     TEMP:contributorOrderIndex 3 ;
-    TEMP:hasRole TEMP:CoInvestigator .
+    TEMP:hasRole TEMP:DataManager,
+        TEMP:Researcher .
 
 [] a owl:NamedIndividual,
         sparc:DatasetContribution ;
-    TEMP:aboutContributor ORCID:0000-0002-3725-8852 ;
-    TEMP:aboutDataset dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:contributorOrderIndex 9 ;
-    TEMP:hasRole TEMP:DataManager .
-
-[] a owl:NamedIndividual,
-        sparc:DatasetContribution ;
-    TEMP:aboutContributor ORCID:0000-0002-3730-1400 ;
-    TEMP:aboutDataset dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:contributorOrderIndex 11 ;
-    TEMP:hasRole TEMP:ProjectMember .
-
-[] a owl:NamedIndividual,
-        sparc:DatasetContribution ;
-    TEMP:aboutContributor ORCID:0000-0002-3967-8164 ;
-    TEMP:aboutDataset dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:contributorOrderIndex 0 ;
+    TEMP:aboutContributor ORCID:0000-0002-0219-3438 ;
+    TEMP:aboutDataset dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:contributorOrderIndex 2 ;
     TEMP:hasRole TEMP:CorrespondingAuthor,
         TEMP:PrincipalInvestigator .
 
 [] a owl:NamedIndividual,
         sparc:DatasetContribution ;
-    TEMP:aboutContributor ORCID:0000-0002-5235-9803 ;
-    TEMP:aboutDataset dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:contributorOrderIndex 4 ;
-    TEMP:hasRole TEMP:CoInvestigator .
-
-[] a owl:NamedIndividual,
-        sparc:DatasetContribution ;
-    TEMP:aboutContributor ORCID:0000-0002-9204-9551 ;
-    TEMP:aboutDataset dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:contributorOrderIndex 7 ;
-    TEMP:hasRole TEMP:CoInvestigator .
-
-[] a owl:NamedIndividual,
-        sparc:DatasetContribution ;
-    TEMP:aboutContributor ORCID:0000-0002-9466-5745 ;
-    TEMP:aboutDataset dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:contributorOrderIndex 1 ;
-    TEMP:hasRole TEMP:Researcher .
-
-[] a owl:NamedIndividual,
-        sparc:DatasetContribution ;
-    TEMP:aboutContributor ORCID:0000-0003-0440-7791 ;
-    TEMP:aboutDataset dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:contributorOrderIndex 8 ;
-    TEMP:hasRole TEMP:DataManager .
-
-[] a owl:NamedIndividual,
-        sparc:DatasetContribution ;
-    TEMP:aboutContributor ORCID:0000-0003-2943-1245 ;
-    TEMP:aboutDataset dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:contributorOrderIndex 2 ;
-    TEMP:hasRole TEMP:Researcher .
-
-[] a owl:NamedIndividual,
-        sparc:DatasetContribution ;
-    TEMP:aboutContributor user:0bde93b0-7c34-4b06-9bb4-76a8ee761d53 ;
-    TEMP:aboutDataset dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:contributorOrderIndex 10 ;
-    TEMP:hasRole TEMP:DataManager .
-
-[] a owl:NamedIndividual,
-        sparc:DatasetContribution ;
-    TEMP:aboutContributor user:d07131c1-6ba7-4278-a863-ee827d856e93 ;
-    TEMP:aboutDataset dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
-    TEMP:contributorOrderIndex 6 ;
-    TEMP:hasRole TEMP:CoInvestigator .
+    TEMP:aboutContributor ORCID:0000-0002-7949-5725 ;
+    TEMP:aboutDataset dataset:05f8193f-eeb4-475f-b7c3-a0e67e1b897a ;
+    TEMP:contributorOrderIndex 0 ;
+    TEMP:hasRole TEMP:DataCollector,
+        TEMP:Researcher .
 
 ### Annotations
 
 local:path-error-report a TEMP:PathErrorReport ;
     TEMP:hasPath [ TEMP:jsonPointer "#/entity_dirs" ;
-            TEMP:message "There are directories that have no corresponding metadata record! ... truncated 12 lines",
-                "There are entities with double mapping via directory name and manifest! ... truncated 1 lines" ],
-        [ TEMP:jsonPointer "#/inputs/dataset_description_file/related_identifiers/-1" ;
-            TEMP:message "'related_identifier' is a required property",
-                "'related_identifier_type' is a required property" ],
-        [ TEMP:jsonPointer "#/inputs/manifest_file/-1/checksums/-1" ;
-            TEMP:message "{'type': 'checksum', ... 44 bytes later ... 415341590a690a2c6'} is not valid under any of the given schemas" ],
+            TEMP:message "There are directories that have no corresponding metadata record! ... truncated 540 lines",
+                "There are sites that have no corresponding directory! ... truncated 1 lines",
+                "There are specimens that have no corresponding directory! ... truncated 1 lines" ],
+        [ TEMP:jsonPointer "#/inputs/dataset_description_file" ;
+            TEMP:message "'description' is a required property",
+                """NULL detected in header row at R1C8 in /var/lib/sparc/files/sparc-datasets-test/05f8193f-eeb4-475f-b7c3-a0e67e1b897a/SPARC/Quantification of thickness of the gastric muscle in the rat stomach/dataset_description.xlsx; Original header is not unique.
+dupes of None at R1C8 R1C9 R1C10 R1C11 R1C12
+There may be multiple records without a primary key.""" ],
+        [ TEMP:jsonPointer "#/inputs/manifest_file/-1/contents" ;
+            TEMP:message "NULL detected in header row at R1C6 in /var/lib/sparc/files/sparc-datasets-test/05f8193f-eeb4-475f-b7c3-a0e67e1b897a/SPARC/Quantification of thickness of the gastric muscle in the rat stomach/derivative/manifest.xlsx" ],
         [ TEMP:jsonPointer "#/meta" ;
-            TEMP:message "'award_number' is a required property" ],
-        [ TEMP:jsonPointer "#/meta/related_identifiers/-1" ;
-            TEMP:message "Filtered due to schema failure: ({'relation_type': 'HasProtocol', 'related_identifier_description': 'Protocol for dataset'},)" ] .
+            TEMP:message "'techniques' is a required property" ] .
 
 ### Serialized using the ttlser deterministic serializer v1.2.3
