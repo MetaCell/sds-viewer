@@ -832,6 +832,13 @@ export const rdfTypes = {
             },
             {
                 "type": "TEMP",
+                "key": "wasDerivedFromSample",
+                "property": "derivedFrom",
+                "label": "Derived from Sample",
+                "visible" : false
+            },
+            {
+                "type": "TEMP",
                 "key": "localId",
                 "property": "localId",
                 "label": "Local ID",

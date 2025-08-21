@@ -775,8 +775,14 @@ class Splinter {
                 this.nodes.set(target_node.id, target_node);
             } else if (link.source === id && target_node.type === rdfTypes.Sample.key ) {
                 link.source = target_node.attributes.derivedFrom[0];
-                target_node.level = subjects.level + 2;
-                target_node.parent = this.nodes.get(target_node.attributes.derivedFrom[0]);
+                const parentSample = this.nodes.get(target_node.attributes.derivedFrom[0]);
+                if (parentSample) {
+                    target_node.level = parentSample.level + 1;
+                    target_node.parent = parentSample;
+                } else {
+                    target_node.level = subjects.level + 2;
+                    target_node.parent = this.nodes.get(subject_key);
+                }
                 this.nodes.set(target_node.id, target_node);
             } else if (link.source === id && target_node.type === rdfTypes.Site.key ) {
                 link.source = target_node.attributes.onSample[0];
@@ -827,16 +833,6 @@ class Splinter {
                         array[index].level = source.level + 1;
                         this.forced_edges.push({
                             source: node.attributes.derivedFrom[0],
-                            target: node.id
-                        });
-                    }
-                } else if (node.attributes.wasDerivedFromSubject !== undefined) {
-                    let source = this.nodes.get(node.attributes.wasDerivedFromSubject[0]);
-                    if ( source !== undefined ) {
-                        source.children_counter++
-                        array[index].level = source.level + 1;
-                        this.forced_edges.push({
-                            source: node.attributes.wasDerivedFromSubject[0],
                             target: node.id
                         });
                     }
@@ -1043,10 +1039,8 @@ class Splinter {
                     const localId = value.attributes?.localId?.[0];
                     const proxyTarget = this.proxies_map.get(jsonNode.remote_id);
 
-                    // Skip if this folder represents the same Subject/Sample node
-                    if ((proxyTarget && proxyTarget === value.id) ||
-                        (localId && lastPath === localId) ||
-                        (localId && jsonNode.basename === localId)) {
+                    // Skip if this folder already proxies to the current node
+                    if (proxyTarget && proxyTarget === value.id) {
                         // Make sure the tree node references the existing graph node
                         let treeEntry = this.tree_map.get(jsonNode.uri_api);
                         if (treeEntry) {
@@ -1065,13 +1059,24 @@ class Splinter {
                         return;
                     }
 
+                    if (localId && (lastPath === localId || jsonNode.basename === localId)) {
+                        let treeEntry = this.tree_map.get(jsonNode.uri_api);
+                        if (treeEntry) {
+                            treeEntry.graph_reference = value;
+                            value.tree_reference = treeEntry;
+                            this.tree_map.set(jsonNode.uri_api, treeEntry);
+                            this.tree_map.set(jsonNode.remote_id, treeEntry);
+                            this.tree_map.set(value.id, treeEntry);
+                        }
+                    }
+
                     let newName = jsonNode.basename;
                     if ( value.type === rdfTypes.Subject.key && localId == lastPath ) {
                         newName = splitName[0]
                     }
 
                     if ( value.type === rdfTypes.Sample.key && localId == lastPath ) {
-                        newName = splitName[0] + "/" + newName
+                        newName = splitName[0]
                     }
 
                     if ( value.type === rdfTypes.Performance.key && localId == lastPath ) {
