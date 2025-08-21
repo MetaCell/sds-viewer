@@ -490,6 +490,7 @@ const theme = createTheme({
           display: 'flex',
           flexDirection: 'column',
           transition: primaryTransition,
+          position: 'relative',
           '&.shrink': {
             width: '4.125rem',
             transition: primaryTransition,
@@ -664,14 +665,14 @@ const theme = createTheme({
               marginRight: '0.625rem',
               flexShrink: 0,
             },
-            '& .labelText': {
+          '& .labelText': {
               fontWeight: 'normal',
               flexGrow: 1,
               fontSize: '0.8125rem',
               lineHeight: '1rem',
               color: whiteColor,
-            },
-            '& .MuiTreeItem-group': {
+          },
+          '& .MuiTreeItem-group': {
               paddingLeft: '1.4375rem',
               margin: 0,
             },
@@ -830,7 +831,7 @@ const theme = createTheme({
               },
             },
 
-            '& .no-instance': {
+          '& .no-instance': {
               fontSize: '0.75rem',
               display: 'flex',
               alignItems: 'center',
@@ -841,6 +842,14 @@ const theme = createTheme({
               color: grey100,
               textAlign: 'center',
             },
+          },
+          '&-resizer': {
+            width: '0.3125rem',
+            cursor: 'col-resize',
+            position: 'absolute',
+            right: 0,
+            top: 0,
+            bottom: 0,
           },
           '&-footer': {
             boxShadow: `0 -4.75rem 3.0625rem -2.5625rem ${secondaryColor}`,
