@@ -480,7 +480,7 @@ class Splinter {
             const node = this.nodes.get(a);
             if (node) {
                 newNode = { value: a, link: node?.id };
-            } else if (a.startsWith('http')) {
+            } else if (a.startsWith('http') || (!a.includes(' ') && a.includes(':'))) {
                 newNode = { value: a, link: a };
             }
         }

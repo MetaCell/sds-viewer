@@ -73,10 +73,18 @@ export const paintNode = (node, ctx, hoverNode, selectedNode, nodeSelected, prev
       const nodeImageSize = [size * 2.4, size * 2.4];
       const hoverRectDimensions = [size * 4.2, size * 4.2];
       const hoverRectPosition = [node.x - hoverRectDimensions[0]/2, node.y - hoverRectDimensions[1]/2];
+
+      ctx.font = NODE_FONT;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'top';
+      let nodeName = Array.isArray(node.name) ? node.name[0] : node.name;
+      const textWidth = ctx.measureText(nodeName).width + 4;
+      const textHoverWidth = Math.max(textWidth, hoverRectDimensions[0]);
       const textHoverPosition = [
-        hoverRectPosition[0],
+        node.x - textHoverWidth / 2,
         hoverRectPosition[1] + hoverRectDimensions[1],
       ];
+      const textProps = [nodeName, node.x, textHoverPosition[1]];
       const hoverRectBorderRadius = 1;
       ctx.beginPath();
 
@@ -101,11 +109,6 @@ export const paintNode = (node, ctx, hoverNode, selectedNode, nodeSelected, prev
         );
       }
 
-      ctx.font = NODE_FONT;
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'top';
-      let nodeName = Array.isArray(node.name) ? node.name[0] : node.name;
-      const textProps = [nodeName, node.x, textHoverPosition[1]];
       if (node === hoverNode || node?.id === selectedNode?.id || node?.id === nodeSelected?.id ) {
         // image hover
         roundRect(
@@ -120,7 +123,7 @@ export const paintNode = (node, ctx, hoverNode, selectedNode, nodeSelected, prev
         roundRect(
           ctx,
           ...textHoverPosition,
-          hoverRectDimensions[0],
+          textHoverWidth,
           hoverRectDimensions[1] / 4,
           hoverRectBorderRadius,
           GRAPH_COLORS.textHoverRect
@@ -140,7 +143,7 @@ export const paintNode = (node, ctx, hoverNode, selectedNode, nodeSelected, prev
         roundRect(
             ctx,
             ...textHoverPosition,
-            hoverRectDimensions[0],
+            textHoverWidth,
             hoverRectDimensions[1] / 4,
             hoverRectBorderRadius,
             GRAPH_COLORS.textBGSeen
