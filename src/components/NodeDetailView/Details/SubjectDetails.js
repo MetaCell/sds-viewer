@@ -63,9 +63,8 @@ const SubjectDetails = (props) => {
 
                         else if ( typeof propValue === "object" ){
                             return (<Box className="tab-content-row">
-                                        <Typography component="label">{property.label}</Typography>
-                                        <SimpleLinkedChip chips={node.graph_node.attributes[property.property]} />
-                                    </Box>)
+                                    <SimpleLabelValue label={node.graph_node.attributes[property.property]?.[0]?.value} value={propValue.value} />
+                                </Box>)
                         }
 
                         else if ( typeof propValue === "string" ){
