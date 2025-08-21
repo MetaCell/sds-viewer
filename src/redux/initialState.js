@@ -3,8 +3,7 @@ import * as LayoutActions from '@metacell/geppetto-meta-client/common/layout/act
 import { rdfTypes } from "../utils/graphModel";
 import {TOGGLE_METADATA_ITEM_VISIBILITY, UPDATE_METADATA_ITEMS_ORDER} from "./actions";
 
-const savedMetadataModel = localStorage.getItem("metadata_model");
-const initialMetadataModel = savedMetadataModel ? JSON.parse(savedMetadataModel) : {
+const buildInitialMetadataModel = () => ({
     dataset: [...rdfTypes.Dataset.properties],
     subject: [...rdfTypes.Subject.properties],
     performance: [...rdfTypes.Performance.properties],
@@ -13,7 +12,30 @@ const initialMetadataModel = savedMetadataModel ? JSON.parse(savedMetadataModel)
     collection : [...rdfTypes.Collection.properties],
     group: [...rdfTypes.Group.properties],
     file: [...rdfTypes.File.properties]
+});
+
+const mergeMetadataModel = (base, saved) => {
+    const merged = { ...base };
+    Object.keys(saved || {}).forEach(key => {
+        const baseProps = base[key] ? [...base[key]] : [];
+        const savedProps = saved[key] ? [...saved[key]] : [];
+        savedProps.forEach(prop => {
+            const index = baseProps.findIndex(p => p.key === prop.key);
+            if (index !== -1) {
+                baseProps[index] = prop;
+            } else {
+                baseProps.push(prop);
+            }
+        });
+        merged[key] = baseProps;
+    });
+    return merged;
 };
+
+const savedMetadataModel = localStorage.getItem("metadata_model");
+const initialMetadataModel = savedMetadataModel
+    ? mergeMetadataModel(buildInitialMetadataModel(), JSON.parse(savedMetadataModel))
+    : buildInitialMetadataModel();
 export const sdsInitialState = {
     "sdsState": {
         datasets: [],
@@ -83,7 +105,9 @@ export default function sdsClientReducer(state = {}, action) {
                     tree: action.data.dataset.tree,
                     splinter: action.data.dataset.splinter
                 };
-                const ids = [...state.datasets, action.data.dataset.id]
+                const ids = [...state.datasets, action.data.dataset.id];
+                const refreshedModel = mergeMetadataModel(buildInitialMetadataModel(), state.metadata_model);
+                localStorage.setItem("metadata_model", JSON.stringify(refreshedModel));
                 return {
                     ...state,
                     datasets: ids,
@@ -91,7 +115,8 @@ export default function sdsClientReducer(state = {}, action) {
                         dataset_id: action.data.dataset.id,
                         graph_node: action.data.dataset.graph.nodes[0],
                         tree_node: action.data.dataset.graph.nodes[0].tree_reference,
-                    }
+                    },
+                    metadata_model: refreshedModel
                 };
             } else {
                 return state;
