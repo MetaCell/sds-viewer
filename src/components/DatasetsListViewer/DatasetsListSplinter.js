@@ -354,11 +354,31 @@ class Splinter {
         const datasetNode = this.nodes.get(this.root_id) || Array.from(this.nodes.values())[0];
         this.basePublishedURI = datasetNode?.attributes?.hasUriPublished?.[0] || datasetNode?.attributes?.hasUriHuman?.[0] || "";
         this.baseHumanURI = datasetNode?.attributes?.hasUriHuman?.[0] || "";
+
+        const sampleFolderMap = new Map();
+        this.nodes.forEach(n => {
+            if (n.type === rdfTypes.Sample.key && n.attributes?.hasFolderAboutIt !== undefined) {
+                n.attributes.hasFolderAboutIt.forEach(fid => sampleFolderMap.set(fid, n));
+            }
+        });
+
         this.nodes.forEach((value, key) => {
             if (value.attributes !== undefined && value.attributes.hasFolderAboutIt !== undefined) {
                 const children = this.tree_parents_map.get(this.tree_map.get(value.attributes.hasFolderAboutIt[0])?.remote_id);
                 children?.forEach(child => {
-                    !this.filterNode(child) && this.linkToNode(child, value);
+                    const sampleNode = sampleFolderMap.get(child.remote_id);
+                    if (sampleNode) {
+                        sampleNode.level = value.level + 1;
+                        sampleNode.parent = value;
+                        this.nodes.set(sampleNode.id, sampleNode);
+                        this.forced_edges.push({ source: value.id, target: sampleNode.id });
+                        const sampleChildren = this.tree_parents_map.get(child.remote_id);
+                        sampleChildren?.forEach(grandChild => {
+                            !this.filterNode(grandChild) && this.linkToNode(grandChild, sampleNode);
+                        });
+                    } else {
+                        !this.filterNode(child) && this.linkToNode(child, value);
+                    }
                 });
             }
         });

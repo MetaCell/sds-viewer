@@ -1115,34 +1115,42 @@ class Splinter {
                     }
 
 
-                    let folderChildren = this.tree_parents_map2.get(newNode.parent_id)?.map(child => {
-                        child.parent_id = newNode.uri_api
-                        child.collapsed = true;
-                        return child;
+                    const children = this.tree_parents_map2.get(newNode.parent_id) || [];
+                    let sampleChildren = [];
+                    let folderChildren = [];
+                    children.forEach(child => {
+                        const childIsSample = [...this.nodes.values()].some(n =>
+                            n.type === rdfTypes.Sample.key &&
+                            n.attributes?.hasFolderAboutIt?.includes(child.remote_id)
+                        );
+                        if (childIsSample) {
+                            child.parent_id = value.id;
+                            sampleChildren.push(child);
+                        } else {
+                            child.parent_id = newNode.uri_api;
+                            child.collapsed = true;
+                            folderChildren.push(child);
+                        }
                     });
+
+                    if (sampleChildren.length > 0) {
+                        const existing = this.tree_parents_map2.get(value.id) || [];
+                        this.tree_parents_map2.set(value.id, [...existing, ...sampleChildren]);
+                    }
 
                     if (!this.filterNode(newNode) && (this.nodes.get(newNode.remote_id)) === undefined) {
                         this.linkToNode(newNode, parentNode);
                     }
 
-                    if (this.tree_parents_map2.get(newNode.uri_api) === undefined) {
-                        this.tree_parents_map2.set(newNode.uri_api, folderChildren);
-                        this.tree_parents_map2.delete(newNode.parent_id);
-                        folderChildren?.forEach(child => {
-                            if (!this.filterNode(child) ) {
-                                this.linkToNode(child, this.nodes.get(newNode.remote_id));
-                            }
-                        });
-                    } else {
-                        let tempChildren = folderChildren === undefined ? [...this.tree_parents_map2.get(newNode.uri_api)] : [...this.tree_parents_map2.get(newNode.uri_api), ...folderChildren];;
-                        this.tree_parents_map2.set(newNode.uri_api, tempChildren);
-                        this.tree_parents_map2.delete(newNode.parent_id);
-                        tempChildren?.forEach(child => {
-                            if (!this.filterNode(child) ) {
-                                this.linkToNode(child, this.nodes.get(newNode.remote_id));
-                            }
-                        });
-                    }
+                    const existingFolderChildren = this.tree_parents_map2.get(newNode.uri_api) || [];
+                    const updatedChildren = folderChildren === undefined ? existingFolderChildren : [...existingFolderChildren, ...folderChildren];
+                    this.tree_parents_map2.set(newNode.uri_api, updatedChildren);
+                    this.tree_parents_map2.delete(newNode.parent_id);
+                    folderChildren.forEach(child => {
+                        if (!this.filterNode(child)) {
+                            this.linkToNode(child, this.nodes.get(newNode.remote_id));
+                        }
+                    });
                 })
             }
         });
