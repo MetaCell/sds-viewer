@@ -1059,26 +1059,6 @@ class Splinter {
                     const localId = value.attributes?.localId?.[0];
                     const proxyTarget = this.proxies_map.get(jsonNode.remote_id);
 
-                    if (value.type === rdfTypes.Subject.key && localId && (lastPath === localId || jsonNode.basename === localId)) {
-                        const children = this.tree_parents_map2.get(jsonNode.remote_id) || [];
-                        children.forEach(child => {
-                            const childIsSample = [...this.nodes.values()].some(n =>
-                                n.type === rdfTypes.Sample.key &&
-                                n.attributes?.hasFolderAboutIt?.includes(child.remote_id)
-                            );
-                            child.parent_id = value.id;
-                            if (childIsSample) {
-                                const existing = this.tree_parents_map2.get(value.id) || [];
-                                this.tree_parents_map2.set(value.id, [...existing, child]);
-                            } else if (!this.filterNode(child)) {
-                                this.linkToNode(child, value);
-                            }
-                        });
-                        this.tree_parents_map2.delete(jsonNode.remote_id);
-                        this.tree_parents_map.delete(jsonNode.remote_id);
-                        return;
-                    }
-
                     // Skip if this folder already proxies to the current node
                     if (proxyTarget && proxyTarget === value.id) {
                         // Make sure the tree node references the existing graph node
@@ -1111,27 +1091,12 @@ class Splinter {
                     }
 
                     let newName = jsonNode.dataset_relative_path;
-                    if ( value.type === rdfTypes.Subject.key && localId == lastPath ) {
-                        newName = splitName
-                    }
-
-                    if ( value.type === rdfTypes.Sample.key && localId == lastPath ) {
-                        newName = splitName
-                    }
-
-                    if ( value.type === rdfTypes.Performance.key && localId == lastPath ) {
-                        newName = splitName + "/" + newName
-                    }
-
-                    if ( value.type === rdfTypes.Site.key && localId ) {
-                        newName = splitName + "/" + newName
-                    }
 
                     let parentNode = value;
                     let newNode = this.buildFolder(jsonNode, newName, parentNode);
 
                     if ( value.type === rdfTypes.Sample.key) {
-                        newNode.remote_id = jsonNode.basename + '_' + newName;
+                        newNode.remote_id = jsonNode.basename + '_' + newName.replace(/\//g, '_');
                         newNode.uri_api = newNode.remote_id
                         // this.tree_parents_map2.delete(jsonNode.remote_id);
                     }
