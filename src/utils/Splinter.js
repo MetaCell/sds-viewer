@@ -1171,6 +1171,22 @@ class Splinter {
                             this.linkToNode(child, this.nodes.get(newNode.remote_id));
                         }
                     });
+                    const existingFolderChildrenMain = this.tree_parents_map.get(newNode.uri_api) || [];
+                    const updatedChildrenMain = folderChildren === undefined ? existingFolderChildrenMain : [...existingFolderChildrenMain, ...folderChildren];
+                    this.tree_parents_map.set(newNode.uri_api, updatedChildrenMain);
+                    this.tree_parents_map.delete(newNode.parent_id);
+
+                    this.tree_map.set(newNode.uri_api, newNode);
+
+                    const parentChildren = this.tree_parents_map.get(parentNode.id) || [];
+                    this.tree_parents_map.set(parentNode.id, [...parentChildren, newNode]);
+                    const parentChildren2 = this.tree_parents_map2.get(parentNode.id) || [];
+                    this.tree_parents_map2.set(parentNode.id, [...parentChildren2, newNode]);
+
+                    const prevChildren = this.tree_parents_map.get(jsonNode.parent_id) || [];
+                    this.tree_parents_map.set(jsonNode.parent_id, prevChildren.filter(c => c.remote_id !== jsonNode.remote_id));
+                    const prevChildren2 = this.tree_parents_map2.get(jsonNode.parent_id) || [];
+                    this.tree_parents_map2.set(jsonNode.parent_id, prevChildren2.filter(c => c.remote_id !== jsonNode.remote_id));
                 })
             }
         });
