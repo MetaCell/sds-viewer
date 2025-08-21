@@ -774,8 +774,9 @@ class Splinter {
                 target_node.parent = protocols;
                 this.nodes.set(target_node.id, target_node);
             } else if (link.source === id && target_node.type === rdfTypes.Sample.key ) {
-                const sourceId = target_node.attributes.derivedFromSample?.[0] ||
-                                 target_node.attributes.derivedFromSubject?.[0];
+                const sourceId = target_node.attributes.derivedFromSample?.length ?
+                    target_node.attributes.derivedFromSample[0] :
+                    target_node.attributes.derivedFromSubject?.[0];
                 if (sourceId) {
                     link.source = sourceId;
                 }
@@ -831,8 +832,15 @@ class Splinter {
             }
             
             if (node.type === rdfTypes.Sample.key) {
-                const sourceId = node.attributes.derivedFromSample?.[0] ||
-                                 node.attributes.derivedFromSubject?.[0];
+                const subjectParent = node.attributes.derivedFromSubject?.[0];
+                const sampleParent = node.attributes.derivedFromSample?.[0];
+
+                if (sampleParent && subjectParent) {
+                    this.edges = this.edges.filter(link => !(link.source === node.id && link.target === subjectParent));
+                    delete node.attributes.derivedFromSubject;
+                }
+
+                const sourceId = sampleParent || subjectParent;
                 if (sourceId !== undefined) {
                     let source = this.nodes.get(sourceId);
                     if ( source !== undefined ) {
@@ -848,8 +856,8 @@ class Splinter {
                 }
 
                 if (node.attributes?.hasFolderAboutIt !== undefined) {
-                    node.attributes.hasFolderAboutIt = 
-                        [basePublishedURI + 
+                    node.attributes.hasFolderAboutIt =
+                        [basePublishedURI +
                         "?datasetDetailsTab=files&path=files/" +
                         node.tree_reference?.dataset_relative_path];
                 }
@@ -1151,14 +1159,16 @@ class Splinter {
     linkToNode(node, parent) {
         let level = parent?.level;
         if (parent?.type === rdfTypes.Sample.key) {
-            const parentSource = parent.attributes.derivedFromSample?.[0] ||
-                                 parent.attributes.derivedFromSubject?.[0];
+            const parentSource = parent.attributes.derivedFromSample?.length ?
+                parent.attributes.derivedFromSample[0] :
+                parent.attributes.derivedFromSubject?.[0];
             if (parentSource !== undefined) {
                 level = this.nodes.get(parentSource)?.level + 1;
             }
         } else if (parent?.type === rdfTypes.Site.key) {
-            const parentSource = parent.attributes.derivedFromSample?.[0] ||
-                                 parent.attributes.derivedFromSubject?.[0];
+            const parentSource = parent.attributes.derivedFromSample?.length ?
+                parent.attributes.derivedFromSample[0] :
+                parent.attributes.derivedFromSubject?.[0];
             if (parentSource !== undefined) {
                 level = this.nodes.get(parentSource)?.level + 1;
             }
