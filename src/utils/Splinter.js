@@ -831,6 +831,8 @@ class Splinter {
                     if ( source !== undefined ) {
                         source.children_counter++
                         array[index].level = source.level + 1;
+                        array[index].parent = source;
+                        this.nodes.set(node.id, array[index]);
                         this.forced_edges.push({
                             source: node.attributes.derivedFrom[0],
                             target: node.id
