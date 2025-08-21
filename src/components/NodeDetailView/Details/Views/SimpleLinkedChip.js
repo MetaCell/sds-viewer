@@ -27,21 +27,21 @@ const SimpleChip = ({ chips, node }) => {
   };
 
   const handleClick = (item, node) => {
-    if (item.link) {
+    if (node) {
+      dispatch(
+        selectGroup({
+          dataset_id: node.dataset_id,
+          graph_node: node?.id,
+          tree_node: node?.tree_reference?.id,
+          source: GRAPH_SOURCE,
+        })
+      );
+    } else if (item.link) {
       window.open(item.link, '_blank');
     } else if (item.value) {
       if (isUrl(item.value)) {
         window.open(item.value, '_blank');
-      } else if (node) {
-        dispatch(
-          selectGroup({
-            dataset_id: node.dataset_id,
-            graph_node: node?.id,
-            tree_node: node?.tree_reference?.id,
-            source: GRAPH_SOURCE,
-          })
-        );
-      }
+      } 
     }
   };
 
@@ -86,6 +86,7 @@ const SimpleChip = ({ chips, node }) => {
             <Chip
              label={item?.value?.value ? item.value.value : item?.value}
               onContextMenu={(e) => handleContextMenu(e, item)}
+              onClick={() => handleClick(item, null)}
             />
           )
         ) : (

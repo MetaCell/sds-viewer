@@ -612,7 +612,8 @@ class Splinter {
                         samples: 0,
                         subjects: 0,
                         publishedURI: "",
-                        dataset_id: this.dataset_id
+                        dataset_id: this.dataset_id,
+                        link : source?.id || parent?.link
                     };
                     let nodeF = this.factory.createNode(groupNode);
                     const img = new Image();

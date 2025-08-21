@@ -15,11 +15,11 @@ const SubjectDetails = (props) => {
 
     const subjectPropertiesModel = useSelector(state => state.sdsState.metadata_model.subject);
 
-    const getGroupNode = (groupName, node)=> {
+    const getGroupNode = (group, node)=> {
         let n = node.graph_node.parent;
         let match = false;
         while ( n && !match ) {
-            if ( n.name === groupName ) {
+            if ( n.name === group.value ) {
               match = true;
             } else {
               n = n.parent;
@@ -42,13 +42,14 @@ const SubjectDetails = (props) => {
                             const rawValue = node.graph_node.attributes[property.property];
                             const propValue = Array.isArray(rawValue) ? rawValue[0] : rawValue;
                             const normalizedArray = Array.isArray(rawValue) ? rawValue : [rawValue];
-  
+                            let chipNode = getGroupNode(normalizedArray[0], node)
+                            normalizedArray[0].link = chipNode?.link
                             return (
                                 <Box className="tab-content-row">
                                 <Typography component="label">{property.label}</Typography>
                                 <SimpleLinkedChip
-                                    chips={[{ value: normalizedArray[0] }]}
-                                    node={getGroupNode(normalizedArray[0], node)}
+                                    chips={[normalizedArray[0]]}
+                                    node={chipNode}
                                 />
                                 </Box>
                             );
@@ -62,9 +63,13 @@ const SubjectDetails = (props) => {
                         }
 
                         else if ( typeof propValue === "object" ){
-                            return (<Box className="tab-content-row">
-                                    <SimpleLabelValue label={node.graph_node.attributes[property.property]?.[0]?.value} value={propValue.value} />
+                            if ( isValidUrl(node.graph_node.attributes[property.property]?.[0]?.value) ){
+                                return (<Box className="tab-content-row">
+                                    <Typography component="label">{property.label}</Typography>
+                                    <Links key={`detail_links_dataset`} href={node.graph_node.attributes[property.property]?.[0]?.value} title={property.label + " Link"} />
                                 </Box>)
+                            }
+                            else return (<SimpleLabelValue label={property.label} value={node.graph_node.attributes[property.property]?.[0]?.value} />)
                         }
 
                         else if ( typeof propValue === "string" ){
