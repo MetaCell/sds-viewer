@@ -1043,13 +1043,15 @@ class Splinter {
             if (value.attributes !== undefined && value.attributes.hasFolderAboutIt !== undefined) {
                 value.attributes.hasFolderAboutIt.forEach(folder => {
                     let jsonNode = this.tree_map.get(folder);
-                    const splitName = jsonNode.dataset_relative_path;
-                    const lastPath = splitName;
+                    const splitName = jsonNode.dataset_relative_path.split('/');
+                    const lastPath = jsonNode.dataset_relative_path
                     const localId = value.attributes?.localId?.[0];
                     const proxyTarget = this.proxies_map.get(jsonNode.remote_id);
 
-                    // Skip if this folder already proxies to the current node
-                    if (proxyTarget && proxyTarget === value.id) {
+                    // Skip if this folder represents the same Subject/Sample node
+                    if ((proxyTarget && proxyTarget === value.id) ||
+                        (localId && lastPath === localId) ||
+                        (localId && jsonNode.basename === localId)) {
                         // Make sure the tree node references the existing graph node
                         let treeEntry = this.tree_map.get(jsonNode.uri_api);
                         if (treeEntry) {
@@ -1068,81 +1070,61 @@ class Splinter {
                         return;
                     }
 
-                    if (localId && (lastPath === localId || jsonNode.basename === localId)) {
-                        let treeEntry = this.tree_map.get(jsonNode.uri_api);
-                        if (treeEntry) {
-                            treeEntry.graph_reference = value;
-                            value.tree_reference = treeEntry;
-                            this.tree_map.set(jsonNode.uri_api, treeEntry);
-                            this.tree_map.set(jsonNode.remote_id, treeEntry);
-                            this.tree_map.set(value.id, treeEntry);
-                        }
+                    let newName = jsonNode.dataset_relative_path;
+                    if ( value.type === rdfTypes.Subject.key && localId == lastPath ) {
+                        newName = splitName[0]
                     }
 
-                    let newName = jsonNode.dataset_relative_path;
+                    if ( value.type === rdfTypes.Sample.key && localId == lastPath ) {
+                        newName = splitName[0] + "/" + newName
+                    }
+
+                    if ( value.type === rdfTypes.Performance.key && localId == lastPath ) {
+                        newName = splitName[0] + "/" + newName
+                    }
+
+                    if ( value.type === rdfTypes.Site.key && localId ) {
+                        newName = splitName[0] + "/" + newName
+                    }
 
                     let parentNode = value;
                     let newNode = this.buildFolder(jsonNode, newName, parentNode);
 
                     if ( value.type === rdfTypes.Sample.key) {
-                        newNode.remote_id = jsonNode.basename + '_' + newName.replace(/\//g, '_');
+                        newNode.remote_id = jsonNode.basename + '_' + newName;
                         newNode.uri_api = newNode.remote_id
                         // this.tree_parents_map2.delete(jsonNode.remote_id);
                     }
 
 
-                    const children = this.tree_parents_map2.get(newNode.parent_id) || [];
-                    let sampleChildren = [];
-                    let folderChildren = [];
-                    children.forEach(child => {
-                        const childIsSample = [...this.nodes.values()].some(n =>
-                            n.type === rdfTypes.Sample.key &&
-                            n.attributes?.hasFolderAboutIt?.includes(child.remote_id)
-                        );
-                        if (childIsSample) {
-                            child.parent_id = value.id;
-                            sampleChildren.push(child);
-                        } else {
-                            child.parent_id = newNode.uri_api;
-                            child.collapsed = true;
-                            folderChildren.push(child);
-                        }
+                    let folderChildren = this.tree_parents_map2.get(newNode.parent_id)?.map(child => {
+                        child.parent_id = newNode.uri_api
+                        child.collapsed = true;
+                        return child;
                     });
-
-                    if (sampleChildren.length > 0) {
-                        const existing = this.tree_parents_map2.get(value.id) || [];
-                        this.tree_parents_map2.set(value.id, [...existing, ...sampleChildren]);
-                    }
 
                     if (!this.filterNode(newNode) && (this.nodes.get(newNode.remote_id)) === undefined) {
                         this.linkToNode(newNode, parentNode);
                     }
 
-                    const existingFolderChildren = this.tree_parents_map2.get(newNode.uri_api) || [];
-                    const updatedChildren = folderChildren === undefined ? existingFolderChildren : [...existingFolderChildren, ...folderChildren];
-                    this.tree_parents_map2.set(newNode.uri_api, updatedChildren);
-                    this.tree_parents_map2.delete(newNode.parent_id);
-                    folderChildren.forEach(child => {
-                        if (!this.filterNode(child)) {
-                            this.linkToNode(child, this.nodes.get(newNode.remote_id));
-                        }
-                    });
-                    const existingFolderChildrenMain = this.tree_parents_map.get(newNode.uri_api) || [];
-                    const updatedChildrenMain = folderChildren === undefined ? existingFolderChildrenMain : [...existingFolderChildrenMain, ...folderChildren];
-                    this.tree_parents_map.set(newNode.uri_api, updatedChildrenMain);
-                    this.tree_parents_map.delete(newNode.parent_id);
-
-                    this.tree_map.set(newNode.uri_api, newNode);
-
-                    const parentChildren = this.tree_parents_map.get(parentNode.id) || [];
-                    this.tree_parents_map.set(parentNode.id, [...parentChildren, newNode]);
-                    const parentChildren2 = this.tree_parents_map2.get(parentNode.id) || [];
-                    this.tree_parents_map2.set(parentNode.id, [...parentChildren2, newNode]);
-
-                    const prevChildren = this.tree_parents_map.get(jsonNode.parent_id) || [];
-                    this.tree_parents_map.set(jsonNode.parent_id, prevChildren.filter(c => c.remote_id !== jsonNode.remote_id));
-                    const prevChildren2 = this.tree_parents_map2.get(jsonNode.parent_id) || [];
-                    this.tree_parents_map2.set(jsonNode.parent_id, prevChildren2.filter(c => c.remote_id !== jsonNode.remote_id));
+                    if (this.tree_parents_map2.get(newNode.uri_api) === undefined) {
+                        this.tree_parents_map2.set(newNode.uri_api, folderChildren);
+                        this.tree_parents_map2.delete(newNode.parent_id);
+                        folderChildren?.forEach(child => {
+                            if (!this.filterNode(child) ) {
+                                this.linkToNode(child, this.nodes.get(newNode.remote_id));
+                            }
+                        });
+                    } else {
+                        let tempChildren = folderChildren === undefined ? [...this.tree_parents_map2.get(newNode.uri_api)] : [...this.tree_parents_map2.get(newNode.uri_api), ...folderChildren];;
+                        this.tree_parents_map2.set(newNode.uri_api, tempChildren);
+                        this.tree_parents_map2.delete(newNode.parent_id);
+                        tempChildren?.forEach(child => {
+                            if (!this.filterNode(child) ) {
+                                this.linkToNode(child, this.nodes.get(newNode.remote_id));
+                            }
+                        });
+                    }
                 })
             }
         });
@@ -1225,7 +1207,7 @@ class Splinter {
             id: item.uri_api,
             level: level + 1,
             attributes: {
-                identifier: item.basename,
+                identifier: item.mimetype === "inode/directory" ? item.dataset_relative_path : item.basename,
                 relativePath: item.dataset_relative_path,
                 size: item.size_bytes,
                 mimetype: item.mimetype,
