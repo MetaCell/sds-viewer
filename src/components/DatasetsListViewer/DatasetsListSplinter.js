@@ -362,28 +362,67 @@ class Splinter {
             }
         });
 
-        this.nodes.forEach((value, key) => {
-            if (value.attributes !== undefined && value.attributes.hasFolderAboutIt !== undefined) {
-                const children = this.tree_parents_map.get(this.tree_map.get(value.attributes.hasFolderAboutIt[0])?.remote_id);
-                children?.forEach(child => {
-                    const sampleNode = sampleFolderMap.get(child.remote_id);
-                    if (sampleNode) {
-                        sampleNode.level = value.level + 1;
-                        sampleNode.parent = value;
-                        this.nodes.set(sampleNode.id, sampleNode);
-                        this.forced_edges.push({ source: value.id, target: sampleNode.id });
-                        const sampleChildren = this.tree_parents_map.get(child.remote_id);
-                        sampleChildren?.forEach(grandChild => {
-                            !this.filterNode(grandChild) && this.linkToNode(grandChild, sampleNode);
+        this.nodes.forEach(value => {
+            if (value.attributes?.hasFolderAboutIt) {
+                value.attributes.hasFolderAboutIt.forEach(fid => {
+                    const jsonNode = this.tree_map.get(fid);
+                    const splitName = jsonNode?.dataset_relative_path?.split('/') || [];
+                    const lastPath = splitName[splitName.length - 1];
+                    const localId = value.attributes?.localId?.[0];
+
+                    if (value.type === rdfTypes.Sample.key && localId && (lastPath === localId || jsonNode.basename === localId)) {
+                        const newFolder = this.buildFolder(jsonNode, splitName[0]);
+                        newFolder.remote_id = jsonNode.basename + '_' + splitName[0];
+                        newFolder.uri_api = newFolder.remote_id;
+                        this.linkToNode(newFolder, value);
+
+                        const children = this.tree_parents_map.get(jsonNode.remote_id);
+                        children?.forEach(child => {
+                            const sampleNode = sampleFolderMap.get(child.remote_id);
+                            if (sampleNode) {
+                                sampleNode.level = value.level + 1;
+                                sampleNode.parent = value;
+                                this.nodes.set(sampleNode.id, sampleNode);
+                                this.forced_edges.push({ source: value.id, target: sampleNode.id });
+                                const sampleChildren = this.tree_parents_map.get(child.remote_id);
+                                sampleChildren?.forEach(grandChild => {
+                                    !this.filterNode(grandChild) && this.linkToNode(grandChild, sampleNode);
+                                });
+                            } else {
+                                !this.filterNode(child) && this.linkToNode(child, this.nodes.get(newFolder.remote_id));
+                            }
                         });
                     } else {
-                        !this.filterNode(child) && this.linkToNode(child, value);
+                        const children = this.tree_parents_map.get(jsonNode.remote_id);
+                        children?.forEach(child => {
+                            const sampleNode = sampleFolderMap.get(child.remote_id);
+                            if (sampleNode) {
+                                sampleNode.level = value.level + 1;
+                                sampleNode.parent = value;
+                                this.nodes.set(sampleNode.id, sampleNode);
+                                this.forced_edges.push({ source: value.id, target: sampleNode.id });
+                                const sampleChildren = this.tree_parents_map.get(child.remote_id);
+                                sampleChildren?.forEach(grandChild => {
+                                    !this.filterNode(grandChild) && this.linkToNode(grandChild, sampleNode);
+                                });
+                            } else {
+                                !this.filterNode(child) && this.linkToNode(child, value);
+                            }
+                        });
                     }
                 });
             }
         });
     }
 
+
+    buildFolder(item, newName) {
+        const copied = { ...item };
+        copied.parent_id = copied.remote_id;
+        copied.uri_api = copied.remote_id;
+        copied.basename = newName;
+        return copied;
+    }
 
     linkToNode(node, parent) {
         let level = parent.level;
