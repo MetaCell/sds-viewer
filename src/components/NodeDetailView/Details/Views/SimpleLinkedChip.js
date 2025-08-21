@@ -78,19 +78,19 @@ const SimpleChip = ({ chips, node }) => {
         node === undefined ? (
           item.link ? (
             <Chip
-              label={item?.value}
+             label={item?.value?.value ? item.value.value : item?.value}
               onClick={() => handleClick(item, null)}
               onContextMenu={(e) => handleContextMenu(e, item)}
             />
           ) : (
             <Chip
-              label={item?.value}
+             label={item?.value?.value ? item.value.value : item?.value}
               onContextMenu={(e) => handleContextMenu(e, item)}
             />
           )
         ) : (
           <Chip
-            label={item?.value}
+            label={item?.value?.value ? item.value.value : item?.value}
             onClick={() => handleClick(item, node)}
             onContextMenu={(e) => handleContextMenu(e, item)}
           />
