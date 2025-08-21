@@ -274,20 +274,6 @@ class Splinter {
             return true;
         });
 
-        // After computing links, add link information to subject and sample attributes
-        this.nodes.forEach((n, k) => {
-            if (n.type === rdfTypes.Subject.key || n.type === rdfTypes.Sample.key) {
-                const attrs = n.attributes || {};
-                Object.keys(attrs).forEach(attr => {
-                    const arr = attrs[attr];
-                    if (Array.isArray(arr)) {
-                        attrs[attr] = arr.map(a => typeof a === 'object' ? a : that.replaceNode(a));
-                    }
-                });
-                this.nodes.set(k, n);
-            }
-        });
-
         return {
             nodes: filteredNodes,
             links: newCleanLinks,
