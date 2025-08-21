@@ -837,6 +837,7 @@ class Splinter {
 
                 if (sampleParent && subjectParent) {
                     this.edges = this.edges.filter(link => !(link.source === node.id && link.target === subjectParent));
+                    this.forced_edges = this.forced_edges.filter(link => !(link.source === subjectParent && link.target === node.id));
                     delete node.attributes.derivedFromSubject;
                 }
 
@@ -848,6 +849,7 @@ class Splinter {
                         array[index].level = source.level + 1;
                         array[index].parent = source;
                         this.nodes.set(node.id, array[index]);
+                        this.forced_edges = this.forced_edges.filter(link => !(link.source === sourceId && link.target === node.id));
                         this.forced_edges.push({
                             source: sourceId,
                             target: node.id
@@ -1052,8 +1054,8 @@ class Splinter {
             if (value.attributes !== undefined && value.attributes.hasFolderAboutIt !== undefined) {
                 value.attributes.hasFolderAboutIt.forEach(folder => {
                     let jsonNode = this.tree_map.get(folder);
-                    const splitName = jsonNode.dataset_relative_path.split('/');
-                    const lastPath = splitName[splitName.length - 1];
+                    const splitName = jsonNode.dataset_relative_path;
+                    const lastPath = splitName;
                     const localId = value.attributes?.localId?.[0];
                     const proxyTarget = this.proxies_map.get(jsonNode.remote_id);
 
@@ -1108,21 +1110,21 @@ class Splinter {
                         }
                     }
 
-                    let newName = jsonNode.basename;
+                    let newName = jsonNode.dataset_relative_path;
                     if ( value.type === rdfTypes.Subject.key && localId == lastPath ) {
-                        newName = splitName[0]
+                        newName = splitName
                     }
 
                     if ( value.type === rdfTypes.Sample.key && localId == lastPath ) {
-                        newName = splitName[0]
+                        newName = splitName
                     }
 
                     if ( value.type === rdfTypes.Performance.key && localId == lastPath ) {
-                        newName = splitName[0] + "/" + newName
+                        newName = splitName + "/" + newName
                     }
 
                     if ( value.type === rdfTypes.Site.key && localId ) {
-                        newName = splitName[0] + "/" + newName
+                        newName = splitName + "/" + newName
                     }
 
                     let parentNode = value;
