@@ -1104,13 +1104,14 @@ class Splinter {
                     const children = this.tree_parents_map2.get(newNode.parent_id) || [];
                     let sampleChildren = [];
                     let folderChildren = [];
+                    const parentTreeId = value.tree_reference?.uri_api || value.id;
                     children.forEach(child => {
                         const childIsSample = [...this.nodes.values()].some(n =>
                             n.type === rdfTypes.Sample.key &&
                             n.attributes?.hasFolderAboutIt?.includes(child.remote_id)
                         );
                         if (childIsSample) {
-                            child.parent_id = value.id;
+                            child.parent_id = parentTreeId;
                             sampleChildren.push(child);
                         } else {
                             child.parent_id = newNode.uri_api;
@@ -1120,8 +1121,8 @@ class Splinter {
                     });
 
                     if (sampleChildren.length > 0) {
-                        const existing = this.tree_parents_map2.get(value.id) || [];
-                        this.tree_parents_map2.set(value.id, [...existing, ...sampleChildren]);
+                        const existing = this.tree_parents_map2.get(parentTreeId) || [];
+                        this.tree_parents_map2.set(parentTreeId, [...existing, ...sampleChildren]);
                     }
 
                     if (!this.filterNode(newNode) && (this.nodes.get(newNode.remote_id)) === undefined) {
@@ -1144,10 +1145,10 @@ class Splinter {
 
                     this.tree_map.set(newNode.uri_api, newNode);
 
-                    const parentChildren = this.tree_parents_map.get(parentNode.id) || [];
-                    this.tree_parents_map.set(parentNode.id, [...parentChildren, newNode]);
-                    const parentChildren2 = this.tree_parents_map2.get(parentNode.id) || [];
-                    this.tree_parents_map2.set(parentNode.id, [...parentChildren2, newNode]);
+                    const parentChildren = this.tree_parents_map.get(parentTreeId) || [];
+                    this.tree_parents_map.set(parentTreeId, [...parentChildren, newNode]);
+                    const parentChildren2 = this.tree_parents_map2.get(parentTreeId) || [];
+                    this.tree_parents_map2.set(parentTreeId, [...parentChildren2, newNode]);
 
                     const prevChildren = this.tree_parents_map.get(jsonNode.parent_id) || [];
                     this.tree_parents_map.set(jsonNode.parent_id, prevChildren.filter(c => c.remote_id !== jsonNode.remote_id));
