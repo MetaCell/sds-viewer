@@ -774,9 +774,21 @@ class Splinter {
                 target_node.parent = protocols;
                 this.nodes.set(target_node.id, target_node);
             } else if (link.source === id && target_node.type === rdfTypes.Sample.key ) {
-                link.source = target_node.attributes.derivedFrom[0];
-                target_node.level = subjects.level + 2;
-                target_node.parent = this.nodes.get(target_node.attributes.derivedFrom[0]);
+                const sourceId = target_node.attributes.derivedFromSample?.length ?
+                    target_node.attributes.derivedFromSample[0] :
+                    target_node.attributes.derivedFromSubject?.[0];
+                if (sourceId) {
+                    link.source = sourceId;
+                }
+                const parentSample = target_node.attributes.derivedFromSample?.[0] ?
+                    this.nodes.get(target_node.attributes.derivedFromSample[0]) : undefined;
+                if (parentSample) {
+                    target_node.level = parentSample.level + 1;
+                    target_node.parent = parentSample;
+                } else {
+                    target_node.level = subjects.level + 2;
+                    target_node.parent = this.nodes.get(subject_key);
+                }
                 this.nodes.set(target_node.id, target_node);
             } else if (link.source === id && target_node.type === rdfTypes.Site.key ) {
                 link.source = target_node.attributes.onSample[0];
@@ -820,31 +832,32 @@ class Splinter {
             }
             
             if (node.type === rdfTypes.Sample.key) {
-                if (node.attributes.derivedFrom !== undefined) {
-                    let source = this.nodes.get(node.attributes.derivedFrom[0]);
+                const subjectParent = node.attributes.derivedFromSubject?.[0];
+                const sampleParent = node.attributes.derivedFromSample?.[0];
+
+                if (sampleParent && subjectParent) {
+                    this.edges = this.edges.filter(link => !(link.source === node.id && link.target === subjectParent));
+                    delete node.attributes.derivedFromSubject;
+                }
+
+                const sourceId = sampleParent || subjectParent;
+                if (sourceId !== undefined) {
+                    let source = this.nodes.get(sourceId);
                     if ( source !== undefined ) {
                         source.children_counter++
                         array[index].level = source.level + 1;
+                        array[index].parent = source;
+                        this.nodes.set(node.id, array[index]);
                         this.forced_edges.push({
-                            source: node.attributes.derivedFrom[0],
-                            target: node.id
-                        });
-                    }
-                } else if (node.attributes.wasDerivedFromSubject !== undefined) {
-                    let source = this.nodes.get(node.attributes.wasDerivedFromSubject[0]);
-                    if ( source !== undefined ) {
-                        source.children_counter++
-                        array[index].level = source.level + 1;
-                        this.forced_edges.push({
-                            source: node.attributes.wasDerivedFromSubject[0],
+                            source: sourceId,
                             target: node.id
                         });
                     }
                 }
 
                 if (node.attributes?.hasFolderAboutIt !== undefined) {
-                    node.attributes.hasFolderAboutIt = 
-                        [basePublishedURI + 
+                    node.attributes.hasFolderAboutIt =
+                        [basePublishedURI +
                         "?datasetDetailsTab=files&path=files/" +
                         node.tree_reference?.dataset_relative_path];
                 }
@@ -1043,10 +1056,28 @@ class Splinter {
                     const localId = value.attributes?.localId?.[0];
                     const proxyTarget = this.proxies_map.get(jsonNode.remote_id);
 
-                    // Skip if this folder represents the same Subject/Sample node
-                    if ((proxyTarget && proxyTarget === value.id) ||
-                        (localId && lastPath === localId) ||
-                        (localId && jsonNode.basename === localId)) {
+                    if (value.type === rdfTypes.Subject.key && localId && (lastPath === localId || jsonNode.basename === localId)) {
+                        const children = this.tree_parents_map2.get(jsonNode.remote_id) || [];
+                        children.forEach(child => {
+                            const childIsSample = [...this.nodes.values()].some(n =>
+                                n.type === rdfTypes.Sample.key &&
+                                n.attributes?.hasFolderAboutIt?.includes(child.remote_id)
+                            );
+                            child.parent_id = value.id;
+                            if (childIsSample) {
+                                const existing = this.tree_parents_map2.get(value.id) || [];
+                                this.tree_parents_map2.set(value.id, [...existing, child]);
+                            } else if (!this.filterNode(child)) {
+                                this.linkToNode(child, value);
+                            }
+                        });
+                        this.tree_parents_map2.delete(jsonNode.remote_id);
+                        this.tree_parents_map.delete(jsonNode.remote_id);
+                        return;
+                    }
+
+                    // Skip if this folder already proxies to the current node
+                    if (proxyTarget && proxyTarget === value.id) {
                         // Make sure the tree node references the existing graph node
                         let treeEntry = this.tree_map.get(jsonNode.uri_api);
                         if (treeEntry) {
@@ -1065,13 +1096,24 @@ class Splinter {
                         return;
                     }
 
+                    if (localId && (lastPath === localId || jsonNode.basename === localId)) {
+                        let treeEntry = this.tree_map.get(jsonNode.uri_api);
+                        if (treeEntry) {
+                            treeEntry.graph_reference = value;
+                            value.tree_reference = treeEntry;
+                            this.tree_map.set(jsonNode.uri_api, treeEntry);
+                            this.tree_map.set(jsonNode.remote_id, treeEntry);
+                            this.tree_map.set(value.id, treeEntry);
+                        }
+                    }
+
                     let newName = jsonNode.basename;
                     if ( value.type === rdfTypes.Subject.key && localId == lastPath ) {
                         newName = splitName[0]
                     }
 
                     if ( value.type === rdfTypes.Sample.key && localId == lastPath ) {
-                        newName = splitName[0] + "/" + newName
+                        newName = splitName[0]
                     }
 
                     if ( value.type === rdfTypes.Performance.key && localId == lastPath ) {
@@ -1092,34 +1134,42 @@ class Splinter {
                     }
 
 
-                    let folderChildren = this.tree_parents_map2.get(newNode.parent_id)?.map(child => {
-                        child.parent_id = newNode.uri_api
-                        child.collapsed = true;
-                        return child;
+                    const children = this.tree_parents_map2.get(newNode.parent_id) || [];
+                    let sampleChildren = [];
+                    let folderChildren = [];
+                    children.forEach(child => {
+                        const childIsSample = [...this.nodes.values()].some(n =>
+                            n.type === rdfTypes.Sample.key &&
+                            n.attributes?.hasFolderAboutIt?.includes(child.remote_id)
+                        );
+                        if (childIsSample) {
+                            child.parent_id = value.id;
+                            sampleChildren.push(child);
+                        } else {
+                            child.parent_id = newNode.uri_api;
+                            child.collapsed = true;
+                            folderChildren.push(child);
+                        }
                     });
+
+                    if (sampleChildren.length > 0) {
+                        const existing = this.tree_parents_map2.get(value.id) || [];
+                        this.tree_parents_map2.set(value.id, [...existing, ...sampleChildren]);
+                    }
 
                     if (!this.filterNode(newNode) && (this.nodes.get(newNode.remote_id)) === undefined) {
                         this.linkToNode(newNode, parentNode);
                     }
 
-                    if (this.tree_parents_map2.get(newNode.uri_api) === undefined) {
-                        this.tree_parents_map2.set(newNode.uri_api, folderChildren);
-                        this.tree_parents_map2.delete(newNode.parent_id);
-                        folderChildren?.forEach(child => {
-                            if (!this.filterNode(child) ) {
-                                this.linkToNode(child, this.nodes.get(newNode.remote_id));
-                            }
-                        });
-                    } else {
-                        let tempChildren = folderChildren === undefined ? [...this.tree_parents_map2.get(newNode.uri_api)] : [...this.tree_parents_map2.get(newNode.uri_api), ...folderChildren];;
-                        this.tree_parents_map2.set(newNode.uri_api, tempChildren);
-                        this.tree_parents_map2.delete(newNode.parent_id);
-                        tempChildren?.forEach(child => {
-                            if (!this.filterNode(child) ) {
-                                this.linkToNode(child, this.nodes.get(newNode.remote_id));
-                            }
-                        });
-                    }
+                    const existingFolderChildren = this.tree_parents_map2.get(newNode.uri_api) || [];
+                    const updatedChildren = folderChildren === undefined ? existingFolderChildren : [...existingFolderChildren, ...folderChildren];
+                    this.tree_parents_map2.set(newNode.uri_api, updatedChildren);
+                    this.tree_parents_map2.delete(newNode.parent_id);
+                    folderChildren.forEach(child => {
+                        if (!this.filterNode(child)) {
+                            this.linkToNode(child, this.nodes.get(newNode.remote_id));
+                        }
+                    });
                 })
             }
         });
@@ -1137,12 +1187,18 @@ class Splinter {
     linkToNode(node, parent) {
         let level = parent?.level;
         if (parent?.type === rdfTypes.Sample.key) {
-            if (parent.attributes.derivedFrom !== undefined) {
-                level = this.nodes.get(parent.attributes.derivedFrom[0])?.level + 1;
+            const parentSource = parent.attributes.derivedFromSample?.length ?
+                parent.attributes.derivedFromSample[0] :
+                parent.attributes.derivedFromSubject?.[0];
+            if (parentSource !== undefined) {
+                level = this.nodes.get(parentSource)?.level + 1;
             }
         } else if (parent?.type === rdfTypes.Site.key) {
-            if (parent.attributes.derivedFrom !== undefined) {
-                level = this.nodes.get(parent.attributes.derivedFrom[0])?.level + 1;
+            const parentSource = parent.attributes.derivedFromSample?.length ?
+                parent.attributes.derivedFromSample[0] :
+                parent.attributes.derivedFromSubject?.[0];
+            if (parentSource !== undefined) {
+                level = this.nodes.get(parentSource)?.level + 1;
             }
         }
         const new_node = this.buildNodeFromJson(node, level);
