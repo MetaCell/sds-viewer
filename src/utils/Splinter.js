@@ -471,17 +471,19 @@ class Splinter {
         }
     }
 
-    replaceNode(a) {
+    replaceNode(a, originalValue = a) {
         if (a && typeof a === 'object') {
             return a;
         }
-        let newNode = { value: a };
+        let newNode = { value: a, link : originalValue };
         if (typeof a === 'string') {
-            const node = this.nodes.get(a);
-            if (node) {
-                newNode = { value: a, link: node?.id };
-            } else if (a.startsWith('http')) {
-                newNode = { value: a, link: a };
+            if( a?.includes(rdfTypes.NCBITaxon.key) || a?.includes(rdfTypes.PATO.key) || a?.includes(rdfTypes.UBERON.key) || a?.includes(rdfTypes.RRID.key) ) {
+                const node = this.nodes.get(a);
+                if (node) {
+                    newNode = { value: a, link: node?.id };
+                } else if (a.startsWith('http') || (!a.includes(' ') && a.includes(':'))) {
+                    newNode = { value: a, link: originalValue };
+                }
             }
         }
         return newNode;
@@ -628,7 +630,7 @@ class Splinter {
                 }
 
                 // preserve the original identifier so chips can expose links
-                target_node.attributes[key][0] = this.replaceNode(originalValue);
+                target_node.attributes[key][0] = this.replaceNode(label, originalValue);
 
             } else {
                 console.error("The group node already exists!", group.tag);
