@@ -837,6 +837,7 @@ class Splinter {
 
                 if (sampleParent && subjectParent) {
                     this.edges = this.edges.filter(link => !(link.source === node.id && link.target === subjectParent));
+                    this.forced_edges = this.forced_edges.filter(link => !(link.source === subjectParent && link.target === node.id));
                     delete node.attributes.derivedFromSubject;
                 }
 
@@ -848,6 +849,7 @@ class Splinter {
                         array[index].level = source.level + 1;
                         array[index].parent = source;
                         this.nodes.set(node.id, array[index]);
+                        this.forced_edges = this.forced_edges.filter(link => !(link.source === sourceId && link.target === node.id));
                         this.forced_edges.push({
                             source: sourceId,
                             target: node.id

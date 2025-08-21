@@ -496,6 +496,33 @@ class Splinter {
 
             return value;
         })
+
+        this.fix_links();
+    }
+
+    fix_links() {
+        this.forced_nodes.forEach(node => {
+            if (node.type === rdfTypes.Sample.key) {
+                const subjectParent = node.attributes.derivedFromSubject?.[0];
+                const sampleParent = node.attributes.derivedFromSample?.[0];
+
+                if (sampleParent && subjectParent) {
+                    this.forced_edges = this.forced_edges.filter(link => !(link.source === subjectParent && link.target === node.id));
+                    delete node.attributes.derivedFromSubject;
+                }
+
+                const sourceId = sampleParent || subjectParent;
+                if (sourceId) {
+                    const source = this.nodes.get(sourceId);
+                    if (source) {
+                        node.level = source.level + 1;
+                        node.parent = source;
+                        this.forced_edges = this.forced_edges.filter(link => !(link.source === sourceId && link.target === node.id));
+                        this.forced_edges.push({ source: sourceId, target: node.id });
+                    }
+                }
+            }
+        });
     }
 
     build_leaf(node, parent) {
