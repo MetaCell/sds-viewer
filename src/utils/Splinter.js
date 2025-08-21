@@ -471,17 +471,24 @@ class Splinter {
         }
     }
 
-    replaceNode(a) {
+    replaceNode(a, originalValue = a) {
         if (a && typeof a === 'object') {
             return a;
         }
-        let newNode = { value: a };
+        let newNode = { value: a, link: originalValue };
         if (typeof a === 'string') {
-            const node = this.nodes.get(a);
-            if (node) {
-                newNode = { value: a, link: node?.id };
-            } else if (a.startsWith('http') || (!a.includes(' ') && a.includes(':'))) {
-                newNode = { value: a, link: a };
+            if (
+                a?.includes(rdfTypes.NCBITaxon.key) ||
+                a?.includes(rdfTypes.PATO.key) ||
+                a?.includes(rdfTypes.UBERON.key) ||
+                a?.includes(rdfTypes.RRID.key)
+            ) {
+                const node = this.nodes.get(a);
+                if (node) {
+                    newNode = { value: a, link: node?.id };
+                } else if (a.startsWith('http') || (!a.includes(' ') && a.includes(':'))) {
+                    newNode = { value: a, link: originalValue };
+                }
             }
         }
         return newNode;
@@ -610,7 +617,8 @@ class Splinter {
                         samples: 0,
                         subjects: 0,
                         publishedURI: "",
-                        dataset_id: this.dataset_id
+                        dataset_id: this.dataset_id,
+                        link : source?.id || parent?.link
                     };
                     let nodeF = this.factory.createNode(groupNode);
                     const img = new Image();
@@ -628,7 +636,7 @@ class Splinter {
                 }
 
                 // preserve the original identifier so chips can expose links
-                target_node.attributes[key][0] = this.replaceNode(originalValue);
+                target_node.attributes[key][0] = this.replaceNode(label, originalValue);
 
             } else {
                 console.error("The group node already exists!", group.tag);
@@ -1078,6 +1086,7 @@ class Splinter {
                         return;
                     }
 
+                    let newName = jsonNode.dataset_relative_path;
                     if (localId && (lastPath === localId || jsonNode.basename === localId)) {
                         let treeEntry = this.tree_map.get(jsonNode.uri_api);
                         if (treeEntry) {
@@ -1087,9 +1096,8 @@ class Splinter {
                             this.tree_map.set(jsonNode.remote_id, treeEntry);
                             this.tree_map.set(value.id, treeEntry);
                         }
+                        newName = splitName[0];
                     }
-
-                    let newName = jsonNode.dataset_relative_path;
 
                     let parentNode = value;
                     let newNode = this.buildFolder(jsonNode, newName, parentNode);
@@ -1101,29 +1109,20 @@ class Splinter {
                     }
 
 
-                    const children = this.tree_parents_map2.get(newNode.parent_id) || [];
-                    let sampleChildren = [];
+                    const children = this.tree_parents_map2.get(jsonNode.remote_id) || [];
                     let folderChildren = [];
-                    const parentTreeId = value.tree_reference?.uri_api || value.id;
+                    const parentTreeId = value.id;
                     children.forEach(child => {
                         const childIsSample = [...this.nodes.values()].some(n =>
                             n.type === rdfTypes.Sample.key &&
                             n.attributes?.hasFolderAboutIt?.includes(child.remote_id)
                         );
-                        if (childIsSample) {
-                            child.parent_id = parentTreeId;
-                            sampleChildren.push(child);
-                        } else {
+                        if (!childIsSample) {
                             child.parent_id = newNode.uri_api;
                             child.collapsed = true;
                             folderChildren.push(child);
                         }
                     });
-
-                    if (sampleChildren.length > 0) {
-                        const existing = this.tree_parents_map2.get(parentTreeId) || [];
-                        this.tree_parents_map2.set(parentTreeId, [...existing, ...sampleChildren]);
-                    }
 
                     if (!this.filterNode(newNode) && (this.nodes.get(newNode.remote_id)) === undefined) {
                         this.linkToNode(newNode, parentNode);
@@ -1132,7 +1131,7 @@ class Splinter {
                     const existingFolderChildren = this.tree_parents_map2.get(newNode.uri_api) || [];
                     const updatedChildren = folderChildren === undefined ? existingFolderChildren : [...existingFolderChildren, ...folderChildren];
                     this.tree_parents_map2.set(newNode.uri_api, updatedChildren);
-                    this.tree_parents_map2.delete(newNode.parent_id);
+                    this.tree_parents_map2.delete(jsonNode.remote_id);
                     folderChildren.forEach(child => {
                         if (!this.filterNode(child)) {
                             this.linkToNode(child, this.nodes.get(newNode.remote_id));
@@ -1141,7 +1140,7 @@ class Splinter {
                     const existingFolderChildrenMain = this.tree_parents_map.get(newNode.uri_api) || [];
                     const updatedChildrenMain = folderChildren === undefined ? existingFolderChildrenMain : [...existingFolderChildrenMain, ...folderChildren];
                     this.tree_parents_map.set(newNode.uri_api, updatedChildrenMain);
-                    this.tree_parents_map.delete(newNode.parent_id);
+                    this.tree_parents_map.delete(jsonNode.remote_id);
 
                     this.tree_map.set(newNode.uri_api, newNode);
 
