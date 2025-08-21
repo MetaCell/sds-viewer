@@ -368,8 +368,10 @@ class Splinter {
     linkToNode(node, parent) {
         let level = parent.level;
         if (parent.type === rdfTypes.Sample.key) {
-            if (parent.attributes.derivedFrom !== undefined) {
-                level = this.nodes.get(parent.attributes.derivedFrom[0]).level + 1;
+            const parentSource = parent.attributes.derivedFromSample?.[0] ||
+                                 parent.attributes.derivedFromSubject?.[0];
+            if (parentSource !== undefined) {
+                level = this.nodes.get(parentSource).level + 1;
             }
         }
         parent.children_counter++;

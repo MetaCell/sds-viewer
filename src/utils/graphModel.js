@@ -826,14 +826,14 @@ export const rdfTypes = {
             {
                 "type": "TEMP",
                 "key": "wasDerivedFromSubject",
-                "property": "derivedFrom",
+                "property": "derivedFromSubject",
                 "label": "Derived from Subject",
                 "visible" : false
             },
             {
                 "type": "TEMP",
                 "key": "wasDerivedFromSample",
-                "property": "derivedFrom",
+                "property": "derivedFromSample",
                 "label": "Derived from Sample",
                 "visible" : false
             },

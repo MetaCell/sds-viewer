@@ -774,8 +774,13 @@ class Splinter {
                 target_node.parent = protocols;
                 this.nodes.set(target_node.id, target_node);
             } else if (link.source === id && target_node.type === rdfTypes.Sample.key ) {
-                link.source = target_node.attributes.derivedFrom[0];
-                const parentSample = this.nodes.get(target_node.attributes.derivedFrom[0]);
+                const sourceId = target_node.attributes.derivedFromSample?.[0] ||
+                                 target_node.attributes.derivedFromSubject?.[0];
+                if (sourceId) {
+                    link.source = sourceId;
+                }
+                const parentSample = target_node.attributes.derivedFromSample?.[0] ?
+                    this.nodes.get(target_node.attributes.derivedFromSample[0]) : undefined;
                 if (parentSample) {
                     target_node.level = parentSample.level + 1;
                     target_node.parent = parentSample;
@@ -826,15 +831,17 @@ class Splinter {
             }
             
             if (node.type === rdfTypes.Sample.key) {
-                if (node.attributes.derivedFrom !== undefined) {
-                    let source = this.nodes.get(node.attributes.derivedFrom[0]);
+                const sourceId = node.attributes.derivedFromSample?.[0] ||
+                                 node.attributes.derivedFromSubject?.[0];
+                if (sourceId !== undefined) {
+                    let source = this.nodes.get(sourceId);
                     if ( source !== undefined ) {
                         source.children_counter++
                         array[index].level = source.level + 1;
                         array[index].parent = source;
                         this.nodes.set(node.id, array[index]);
                         this.forced_edges.push({
-                            source: node.attributes.derivedFrom[0],
+                            source: sourceId,
                             target: node.id
                         });
                     }
@@ -1144,12 +1151,16 @@ class Splinter {
     linkToNode(node, parent) {
         let level = parent?.level;
         if (parent?.type === rdfTypes.Sample.key) {
-            if (parent.attributes.derivedFrom !== undefined) {
-                level = this.nodes.get(parent.attributes.derivedFrom[0])?.level + 1;
+            const parentSource = parent.attributes.derivedFromSample?.[0] ||
+                                 parent.attributes.derivedFromSubject?.[0];
+            if (parentSource !== undefined) {
+                level = this.nodes.get(parentSource)?.level + 1;
             }
         } else if (parent?.type === rdfTypes.Site.key) {
-            if (parent.attributes.derivedFrom !== undefined) {
-                level = this.nodes.get(parent.attributes.derivedFrom[0])?.level + 1;
+            const parentSource = parent.attributes.derivedFromSample?.[0] ||
+                                 parent.attributes.derivedFromSubject?.[0];
+            if (parentSource !== undefined) {
+                level = this.nodes.get(parentSource)?.level + 1;
             }
         }
         const new_node = this.buildNodeFromJson(node, level);
