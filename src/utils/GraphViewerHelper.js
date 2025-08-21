@@ -104,12 +104,7 @@ export const paintNode = (node, ctx, hoverNode, selectedNode, nodeSelected, prev
       ctx.font = NODE_FONT;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'top';
-      let nodeName = node.name;
-      if (nodeName.length > 10) {
-        nodeName = nodeName.substr(0, 9).concat('...');
-      } else if ( Array.isArray(nodeName) ){
-        nodeName = nodeName[0]?.substr(0, 9).concat('...');
-      }
+      let nodeName = Array.isArray(node.name) ? node.name[0] : node.name;
       const textProps = [nodeName, node.x, textHoverPosition[1]];
       if (node === hoverNode || node?.id === selectedNode?.id || node?.id === nodeSelected?.id ) {
         // image hover
