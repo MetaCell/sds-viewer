@@ -1111,7 +1111,6 @@ class Splinter {
         copiedItem.parent_id = copiedItem.remote_id;
         copiedItem.uri_api = copiedItem.remote_id;
         copiedItem.basename = newName;
-        copiedItem.dataset_relative_path = newName;
         return copiedItem;
     }
 
