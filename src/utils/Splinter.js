@@ -1043,62 +1043,38 @@ class Splinter {
             if (value.attributes !== undefined && value.attributes.hasFolderAboutIt !== undefined) {
                 value.attributes.hasFolderAboutIt.forEach(folder => {
                     let jsonNode = this.tree_map.get(folder);
-                    const splitName = jsonNode.dataset_relative_path.split('/');
-                    const lastPath = jsonNode.dataset_relative_path
-                    const localId = value.attributes?.localId?.[0];
-                    const proxyTarget = this.proxies_map.get(jsonNode.remote_id);
-
-                    // Skip if this folder represents the same Subject/Sample node
-                    if ((proxyTarget && proxyTarget === value.id) ||
-                        (localId && lastPath === localId) ||
-                        (localId && jsonNode.basename === localId)) {
-                        // Make sure the tree node references the existing graph node
-                        let treeEntry = this.tree_map.get(jsonNode.uri_api);
-                        if (treeEntry) {
-                            treeEntry.graph_reference = value;
-                            value.tree_reference = treeEntry;
-                            this.tree_map.set(jsonNode.uri_api, treeEntry);
-                            this.tree_map.set(jsonNode.remote_id, treeEntry);
-                            this.tree_map.set(value.id, treeEntry);
-                        }
-                        const dupChildren = this.tree_parents_map2.get(jsonNode.remote_id);
-                        dupChildren?.forEach(child => {
-                            if (!this.filterNode(child)) {
-                                this.linkToNode(child, value);
-                            }
-                        });
+                    if (!jsonNode) {
                         return;
+                    }
+                    const splitName = jsonNode.dataset_relative_path.split('/');
+                    const lastPath = splitName[splitName.length - 1];
+                    const localId = value.attributes?.localId?.[0];
+
+                    // make sure the tree node references the existing graph node
+                    let treeEntry = this.tree_map.get(jsonNode.uri_api);
+                    if (treeEntry) {
+                        treeEntry.graph_reference = value;
+                        value.tree_reference = treeEntry;
+                        this.tree_map.set(jsonNode.uri_api, treeEntry);
+                        this.tree_map.set(jsonNode.remote_id, treeEntry);
+                        this.tree_map.set(value.id, treeEntry);
                     }
 
                     let newName = jsonNode.dataset_relative_path;
-                    if ( value.type === rdfTypes.Subject.key && localId == lastPath ) {
-                        newName = splitName[0]
-                    }
-
-                    if ( value.type === rdfTypes.Sample.key && localId == lastPath ) {
-                        newName = splitName[0] + "/" + newName
-                    }
-
-                    if ( value.type === rdfTypes.Performance.key && localId == lastPath ) {
-                        newName = splitName[0] + "/" + newName
-                    }
-
-                    if ( value.type === rdfTypes.Site.key && localId ) {
-                        newName = splitName[0] + "/" + newName
+                    if (localId && lastPath === localId) {
+                        newName = splitName[0];
                     }
 
                     let parentNode = value;
-                    let newNode = this.buildFolder(jsonNode, newName, parentNode);
+                    let newNode = this.buildFolder(jsonNode, newName);
 
-                    if ( value.type === rdfTypes.Sample.key) {
-                        newNode.remote_id = jsonNode.basename + '_' + newName;
-                        newNode.uri_api = newNode.remote_id
-                        // this.tree_parents_map2.delete(jsonNode.remote_id);
+                    if (localId && lastPath === localId) {
+                        newNode.remote_id = jsonNode.remote_id + '_' + newName;
+                        newNode.uri_api = newNode.remote_id;
                     }
 
-
                     let folderChildren = this.tree_parents_map2.get(newNode.parent_id)?.map(child => {
-                        child.parent_id = newNode.uri_api
+                        child.parent_id = newNode.uri_api;
                         child.collapsed = true;
                         return child;
                     });
@@ -1111,16 +1087,16 @@ class Splinter {
                         this.tree_parents_map2.set(newNode.uri_api, folderChildren);
                         this.tree_parents_map2.delete(newNode.parent_id);
                         folderChildren?.forEach(child => {
-                            if (!this.filterNode(child) ) {
+                            if (!this.filterNode(child)) {
                                 this.linkToNode(child, this.nodes.get(newNode.remote_id));
                             }
                         });
                     } else {
-                        let tempChildren = folderChildren === undefined ? [...this.tree_parents_map2.get(newNode.uri_api)] : [...this.tree_parents_map2.get(newNode.uri_api), ...folderChildren];;
+                        let tempChildren = folderChildren === undefined ? [...this.tree_parents_map2.get(newNode.uri_api)] : [...this.tree_parents_map2.get(newNode.uri_api), ...folderChildren];
                         this.tree_parents_map2.set(newNode.uri_api, tempChildren);
                         this.tree_parents_map2.delete(newNode.parent_id);
                         tempChildren?.forEach(child => {
-                            if (!this.filterNode(child) ) {
+                            if (!this.filterNode(child)) {
                                 this.linkToNode(child, this.nodes.get(newNode.remote_id));
                             }
                         });
@@ -1131,10 +1107,11 @@ class Splinter {
     }
 
     buildFolder(item, newName) {
-        let copiedItem = {...item};
+        let copiedItem = { ...item };
         copiedItem.parent_id = copiedItem.remote_id;
         copiedItem.uri_api = copiedItem.remote_id;
         copiedItem.basename = newName;
+        copiedItem.dataset_relative_path = newName;
         return copiedItem;
     }
 
