@@ -76,7 +76,7 @@ const SimpleChip = ({ chips, node }) => {
     <Box className="chip-overflow noscrollbar">
       {chips?.map((item, index) =>
         node === undefined ? (
-          item.link ? (
+          item?.link ? (
             <Chip
              label={item?.value?.value ? item.value.value : item?.value}
               onClick={() => handleClick(item, null)}

@@ -19,7 +19,7 @@ const SubjectDetails = (props) => {
         let n = node.graph_node.parent;
         let match = false;
         while ( n && !match ) {
-            if ( n.name === group.value ) {
+            if ( n.name === group?.value ) {
               match = true;
             } else {
               n = n.parent;
@@ -43,7 +43,11 @@ const SubjectDetails = (props) => {
                             const propValue = Array.isArray(rawValue) ? rawValue[0] : rawValue;
                             const normalizedArray = Array.isArray(rawValue) ? rawValue : [rawValue];
                             let chipNode = getGroupNode(normalizedArray[0], node)
-                            normalizedArray[0].link = chipNode?.link
+                            if ( normalizedArray?.length > 0 ) {
+                                if ( normalizedArray?.[0]?.link  ) {
+                                    normalizedArray[0].link = chipNode?.link
+                                }
+                            }
                             return (
                                 <Box className="tab-content-row">
                                 <Typography component="label">{property.label}</Typography>
