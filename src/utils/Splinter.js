@@ -1037,109 +1037,97 @@ class Splinter {
         return node.basename.includes(TMP_FILE)
     }
 
+    collectAncestorLocalIds(node) {
+        const ids = [];
+        let current = node;
+        while (current) {
+            const id = current?.attributes?.localId?.[0];
+            if (id) ids.push(id);
+            let parentId;
+            if (current.type === rdfTypes.Site.key) {
+                parentId = current.attributes.onSample?.[0];
+            } else if (current.type === rdfTypes.Sample.key) {
+                parentId = current.attributes.derivedFromSample?.[0] || current.attributes.derivedFromSubject?.[0];
+            } else if (current.type === rdfTypes.Subject.key) {
+                parentId = null;
+            } else {
+                parentId = current.parent?.id;
+            }
+            current = parentId ? this.nodes.get(parentId) : null;
+        }
+        return ids;
+    }
+
+    computeRelativePath(path, root) {
+        if (!path) {
+            return path;
+        }
+        const parts = path.split('/');
+        const ids = this.collectAncestorLocalIds(root);
+        return parts.filter((seg, idx) => idx === 0 || !ids.includes(seg)).join('/');
+    }
+
 
     mergeData() {
         this.nodes.forEach((value, key) => {
             if (value.attributes !== undefined && value.attributes.hasFolderAboutIt !== undefined) {
                 value.attributes.hasFolderAboutIt.forEach(folder => {
                     let jsonNode = this.tree_map.get(folder);
-                    const splitName = jsonNode.dataset_relative_path.split('/');
-                    const lastPath = jsonNode.dataset_relative_path
-                    const localId = value.attributes?.localId?.[0];
-                    const proxyTarget = this.proxies_map.get(jsonNode.remote_id);
-
-                    // Skip if this folder represents the same Subject/Sample node
-                    if ((proxyTarget && proxyTarget === value.id) ||
-                        (localId && lastPath === localId) ||
-                        (localId && jsonNode.basename === localId)) {
-                        // Make sure the tree node references the existing graph node
-                        let treeEntry = this.tree_map.get(jsonNode.uri_api);
-                        if (treeEntry) {
-                            treeEntry.graph_reference = value;
-                            value.tree_reference = treeEntry;
-                            this.tree_map.set(jsonNode.uri_api, treeEntry);
-                            this.tree_map.set(jsonNode.remote_id, treeEntry);
-                            this.tree_map.set(value.id, treeEntry);
-                        }
-                        const dupChildren = this.tree_parents_map2.get(jsonNode.remote_id);
-                        dupChildren?.forEach(child => {
-                            if (!this.filterNode(child)) {
-                                this.linkToNode(child, value);
-                            }
-                        });
+                    if (!jsonNode) {
                         return;
                     }
+                    const relativePath = this.computeRelativePath(jsonNode.dataset_relative_path, value);
 
-                    let newName = jsonNode.dataset_relative_path;
-                    if ( value.type === rdfTypes.Subject.key && localId == lastPath ) {
-                        newName = splitName[0]
-                    }
-
-                    if ( value.type === rdfTypes.Sample.key && localId == lastPath ) {
-                        newName = splitName[0] + "/" + newName
-                    }
-
-                    if ( value.type === rdfTypes.Performance.key && localId == lastPath ) {
-                        newName = splitName[0] + "/" + newName
-                    }
-
-                    if ( value.type === rdfTypes.Site.key && localId ) {
-                        newName = splitName[0] + "/" + newName
+                    // make sure the tree node references the existing graph node
+                    let treeEntry = this.tree_map.get(jsonNode.uri_api);
+                    if (treeEntry) {
+                        treeEntry.graph_reference = value;
+                        value.tree_reference = treeEntry;
+                        this.tree_map.set(jsonNode.uri_api, treeEntry);
+                        this.tree_map.set(jsonNode.remote_id, treeEntry);
+                        this.tree_map.set(value.id, treeEntry);
                     }
 
                     let parentNode = value;
-                    let newNode = this.buildFolder(jsonNode, newName, parentNode);
+                    let newNode = this.buildFolder(jsonNode, relativePath);
+                    newNode.remote_id = jsonNode.remote_id + '_' + relativePath.replace(/\//g, '_');
+                    newNode.uri_api = newNode.remote_id;
 
-                    if ( value.type === rdfTypes.Sample.key) {
-                        newNode.remote_id = jsonNode.basename + '_' + newName;
-                        newNode.uri_api = newNode.remote_id
-                        // this.tree_parents_map2.delete(jsonNode.remote_id);
-                    }
-
-
-                    let folderChildren = this.tree_parents_map2.get(newNode.parent_id)?.map(child => {
-                        child.parent_id = newNode.uri_api
+                    let folderChildren = this.tree_parents_map2.get(jsonNode.remote_id)?.map(child => {
+                        child.parent_id = newNode.uri_api;
                         child.collapsed = true;
                         return child;
                     });
 
                     if (!this.filterNode(newNode) && (this.nodes.get(newNode.remote_id)) === undefined) {
-                        this.linkToNode(newNode, parentNode);
+                        this.linkToNode(newNode, parentNode, value);
                     }
 
-                    if (this.tree_parents_map2.get(newNode.uri_api) === undefined) {
-                        this.tree_parents_map2.set(newNode.uri_api, folderChildren);
-                        this.tree_parents_map2.delete(newNode.parent_id);
-                        folderChildren?.forEach(child => {
-                            if (!this.filterNode(child) ) {
-                                this.linkToNode(child, this.nodes.get(newNode.remote_id));
-                            }
-                        });
-                    } else {
-                        let tempChildren = folderChildren === undefined ? [...this.tree_parents_map2.get(newNode.uri_api)] : [...this.tree_parents_map2.get(newNode.uri_api), ...folderChildren];;
-                        this.tree_parents_map2.set(newNode.uri_api, tempChildren);
-                        this.tree_parents_map2.delete(newNode.parent_id);
-                        tempChildren?.forEach(child => {
-                            if (!this.filterNode(child) ) {
-                                this.linkToNode(child, this.nodes.get(newNode.remote_id));
-                            }
-                        });
-                    }
+                    const existingChildren = this.tree_parents_map2.get(newNode.uri_api);
+                    let tempChildren = folderChildren === undefined ? existingChildren : existingChildren ? [...existingChildren, ...folderChildren] : folderChildren;
+                    this.tree_parents_map2.set(newNode.uri_api, tempChildren);
+                    this.tree_parents_map2.delete(jsonNode.remote_id);
+                    tempChildren?.forEach(child => {
+                        if (!this.filterNode(child)) {
+                            this.linkToNode(child, this.nodes.get(newNode.remote_id), value);
+                        }
+                    });
                 })
             }
         });
     }
 
     buildFolder(item, newName) {
-        let copiedItem = {...item};
+        let copiedItem = { ...item };
         copiedItem.parent_id = copiedItem.remote_id;
         copiedItem.uri_api = copiedItem.remote_id;
         copiedItem.basename = newName;
+        copiedItem.dataset_relative_path = newName;
         return copiedItem;
     }
 
 
-    linkToNode(node, parent) {
+    linkToNode(node, parent, root) {
         let level = parent?.level;
         if (parent?.type === rdfTypes.Sample.key) {
             const parentSource = parent.attributes.derivedFromSample?.length ?
@@ -1156,6 +1144,7 @@ class Splinter {
                 level = this.nodes.get(parentSource)?.level + 1;
             }
         }
+        node.dataset_relative_path = this.computeRelativePath(node.dataset_relative_path, root);
         const new_node = this.buildNodeFromJson(node, level);
         if (!parent) {
             return;
@@ -1172,7 +1161,7 @@ class Splinter {
                 var children = this.tree_parents_map2.get(node.remote_id);
                 if (children?.length > 0) {
                     children.forEach(child => {
-                        !this.filterNode(child) && this.linkToNode(child, existingNode);
+                        !this.filterNode(child) && this.linkToNode(child, existingNode, root);
                     });
                 }
             }
@@ -1191,12 +1180,11 @@ class Splinter {
             var children = this.tree_parents_map2.get(node.remote_id);
             if (children?.length > 0) {
                 children.forEach(child => {
-                    !this.filterNode(child) && this.linkToNode(child, new_node);
+                    !this.filterNode(child) && this.linkToNode(child, new_node, root);
                 });
             }
         }
     }
-
 
     buildNodeFromJson(item, level) {
         const node_id = this.proxies_map.get(item.remote_id);
