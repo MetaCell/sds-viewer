@@ -1184,7 +1184,7 @@ class Splinter {
             id: item.uri_api,
             level: level + 1,
             attributes: {
-                identifier: item.mimetype === "inode/directory" ? item.dataset_relative_path : item.basename,
+                identifier: item.basename,
                 relativePath: item.dataset_relative_path,
                 size: item.size_bytes,
                 mimetype: item.mimetype,
