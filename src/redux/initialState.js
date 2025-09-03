@@ -24,6 +24,13 @@ const mergeMetadataModel = (base, saved) => {
             if (index !== -1) {
                 baseProps[index] = prop;
             } else {
+                const raw = (prop.label ?? "").toString();
+                const slash = raw.indexOf("/");
+                let picked = slash >= 0 ? raw.slice(slash + 1).trim() : raw.trim();
+                // if nothing after "/", fall back to the part before "/"
+                if (!picked && slash >= 0) picked = raw.slice(0, slash).trim();
+                // Capitalize first letter
+                prop.label = picked ? picked.charAt(0).toUpperCase() + picked.slice(1) : raw;
                 baseProps.push(prop);
             }
         });
