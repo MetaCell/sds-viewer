@@ -354,84 +354,24 @@ class Splinter {
         const datasetNode = this.nodes.get(this.root_id) || Array.from(this.nodes.values())[0];
         this.basePublishedURI = datasetNode?.attributes?.hasUriPublished?.[0] || datasetNode?.attributes?.hasUriHuman?.[0] || "";
         this.baseHumanURI = datasetNode?.attributes?.hasUriHuman?.[0] || "";
-
-        const sampleFolderMap = new Map();
-        this.nodes.forEach(n => {
-            if (n.type === rdfTypes.Sample.key && n.attributes?.hasFolderAboutIt !== undefined) {
-                n.attributes.hasFolderAboutIt.forEach(fid => sampleFolderMap.set(fid, n));
-            }
-        });
-
-        this.nodes.forEach(value => {
-            if (value.attributes?.hasFolderAboutIt) {
-                value.attributes.hasFolderAboutIt.forEach(fid => {
-                    const jsonNode = this.tree_map.get(fid);
-                    const splitName = jsonNode?.dataset_relative_path?.split('/') || [];
-                    const lastPath = splitName[splitName.length - 1];
-                    const localId = value.attributes?.localId?.[0];
-
-                    if (value.type === rdfTypes.Sample.key && localId && (lastPath === localId || jsonNode.basename === localId)) {
-                        const newFolder = this.buildFolder(jsonNode, splitName[0]);
-                        newFolder.remote_id = jsonNode.basename + '_' + splitName[0];
-                        newFolder.uri_api = newFolder.remote_id;
-                        this.linkToNode(newFolder, value);
-
-                        const children = this.tree_parents_map.get(jsonNode.remote_id);
-                        children?.forEach(child => {
-                            const sampleNode = sampleFolderMap.get(child.remote_id);
-                            if (sampleNode) {
-                                sampleNode.level = value.level + 1;
-                                sampleNode.parent = value;
-                                this.nodes.set(sampleNode.id, sampleNode);
-                                this.forced_edges.push({ source: value.id, target: sampleNode.id });
-                                const sampleChildren = this.tree_parents_map.get(child.remote_id);
-                                sampleChildren?.forEach(grandChild => {
-                                    !this.filterNode(grandChild) && this.linkToNode(grandChild, sampleNode);
-                                });
-                            } else {
-                                !this.filterNode(child) && this.linkToNode(child, this.nodes.get(newFolder.remote_id));
-                            }
-                        });
-                    } else {
-                        const children = this.tree_parents_map.get(jsonNode.remote_id);
-                        children?.forEach(child => {
-                            const sampleNode = sampleFolderMap.get(child.remote_id);
-                            if (sampleNode) {
-                                sampleNode.level = value.level + 1;
-                                sampleNode.parent = value;
-                                this.nodes.set(sampleNode.id, sampleNode);
-                                this.forced_edges.push({ source: value.id, target: sampleNode.id });
-                                const sampleChildren = this.tree_parents_map.get(child.remote_id);
-                                sampleChildren?.forEach(grandChild => {
-                                    !this.filterNode(grandChild) && this.linkToNode(grandChild, sampleNode);
-                                });
-                            } else {
-                                !this.filterNode(child) && this.linkToNode(child, value);
-                            }
-                        });
-                    }
+        this.nodes.forEach((value, key) => {
+            if (value.attributes !== undefined && value.attributes.hasFolderAboutIt !== undefined) {
+                const children = this.tree_parents_map?.get(this.tree_map?.get(value.attributes.hasFolderAboutIt[0])?.remote_id);
+                children?.forEach(child => {
+                    !this.filterNode(child) && this.linkToNode(child, value);
                 });
             }
         });
     }
 
 
-    buildFolder(item, newName) {
-        const copied = { ...item };
-        copied.parent_id = copied.remote_id;
-        copied.uri_api = copied.remote_id;
-        copied.basename = newName;
-        return copied;
-    }
-
     linkToNode(node, parent) {
         let level = parent.level;
         if (parent.type === rdfTypes.Sample.key) {
-            const parentSource = parent.attributes.derivedFromSample?.length ?
-                parent.attributes.derivedFromSample[0] :
-                parent.attributes.derivedFromSubject?.[0];
-            if (parentSource !== undefined) {
-                level = this.nodes.get(parentSource).level + 1;
+            if (parent.attributes.derivedFrom !== undefined) {
+                level = this.nodes.get(parent.attributes.derivedFrom[0]).level + 1;
+            } else if (parent.attributes.wasDerivedFromSubject !== undefined) {
+                level = this.nodes.get(parent.attributes.wasDerivedFromSubject[0]).level + 1;
             }
         }
         parent.children_counter++;
@@ -496,33 +436,6 @@ class Splinter {
 
             return value;
         })
-
-        this.fix_links();
-    }
-
-    fix_links() {
-        this.forced_nodes.forEach(node => {
-            if (node.type === rdfTypes.Sample.key) {
-                const subjectParent = node.attributes.derivedFromSubject?.[0];
-                const sampleParent = node.attributes.derivedFromSample?.[0];
-
-                if (sampleParent && subjectParent) {
-                    this.forced_edges = this.forced_edges.filter(link => !(link.source === subjectParent && link.target === node.id));
-                    delete node.attributes.derivedFromSubject;
-                }
-
-                const sourceId = sampleParent || subjectParent;
-                if (sourceId) {
-                    const source = this.nodes.get(sourceId);
-                    if (source) {
-                        node.level = source.level + 1;
-                        node.parent = source;
-                        this.forced_edges = this.forced_edges.filter(link => !(link.source === sourceId && link.target === node.id));
-                        this.forced_edges.push({ source: sourceId, target: node.id });
-                    }
-                }
-            }
-        });
     }
 
     build_leaf(node, parent) {
