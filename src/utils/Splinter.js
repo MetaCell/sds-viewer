@@ -775,13 +775,13 @@ class Splinter {
                     target_node.level = parentSample.level + 1;
                     target_node.parent = parentSample;
                 } else {
-                    target_node.level = subjects.level + 2;
+                    target_node.level = parent.level + 1;
                     target_node.parent = this.nodes.get(subject_key);
                 }
                 this.nodes.set(target_node.id, target_node);
             } else if (link.source === id && target_node.type === rdfTypes.Site.key ) {
                 link.source = target_node.attributes.onSample[0];
-                target_node.level = subjects.level + 3;
+                target_node.level = parent.level + 1;
                 target_node.parent = this.nodes.get(target_node.attributes.onSample[0]);
                 this.nodes.set(target_node.id, target_node);
             }
