@@ -1191,7 +1191,7 @@ class Splinter {
                 publishedURI : ""
             },
             types: [],
-            name: parent.tree_reference?.mimetype === "inode/directory" ?name[0] : name[name.length - 1],
+            name: parent.tree_reference?.mimetype === "inode/directory" && name?.length > 0 ? name[0] : name[name.length - 1],
             proxies: [],
             properties: [],
             type: item.mimetype === "inode/directory" ? "Collection" : "File",
