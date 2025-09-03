@@ -34,8 +34,8 @@ function extractProperties(node, ttlTypes) {
 
         if (!mapped) {
             const prefixEntry = Object.entries(ttlTypes).find(([, value]) => property.predicate.startsWith(value?.iri?.id));
-            const prefix = prefixEntry ? prefixEntry[0] : undefined;
-            const key = prefixEntry ? property.predicate.replace(prefixEntry[1].iri.id, '') : property.predicate;
+            const [prefix, prefixValue] = prefixEntry ? prefixEntry : [undefined, undefined];
+            const key = prefixValue ? property.predicate.replace(prefixValue.iri.id, '') : property.predicate;
             const label = key.replace(/_/g, ' ');
             if (node.attributes[key] !== undefined) {
                 node.attributes[key].push(property.value);
