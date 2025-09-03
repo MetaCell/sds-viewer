@@ -101,9 +101,9 @@ function extractProperties(node, ttlTypes) {
         }
     }
 
-    if (node?.attributes?.identifier !== undefined) {
-        node.name = node.attributes.identifier;
-    }
+    // if (node?.attributes?.identifier !== undefined) {
+    //     node.name = node.attributes.identifier;
+    // }
 }
 
 var NodesFactory = function () {
