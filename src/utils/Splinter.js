@@ -1073,13 +1073,17 @@ class Splinter {
                         newNode.uri_api = newNode.remote_id;
                     }
 
+                    // collect children before changing the map
                     let folderChildren = this.tree_parents_map2.get(newNode.parent_id)?.map(child => {
                         child.parent_id = newNode.uri_api;
                         child.collapsed = true;
                         return child;
                     });
 
-                    if (!this.filterNode(newNode) && (this.nodes.get(newNode.remote_id)) === undefined) {
+                    // id of the folder node within the graph
+                    const folderGraphId = parentNode.id + newNode.remote_id;
+
+                    if (!this.filterNode(newNode) && (this.nodes.get(folderGraphId)) === undefined) {
                         this.linkToNode(newNode, parentNode);
                     }
 
@@ -1088,7 +1092,7 @@ class Splinter {
                         this.tree_parents_map2.delete(newNode.parent_id);
                         folderChildren?.forEach(child => {
                             if (!this.filterNode(child)) {
-                                this.linkToNode(child, this.nodes.get(newNode.remote_id));
+                                this.linkToNode(child, this.nodes.get(folderGraphId));
                             }
                         });
                     } else {
@@ -1097,7 +1101,7 @@ class Splinter {
                         this.tree_parents_map2.delete(newNode.parent_id);
                         tempChildren?.forEach(child => {
                             if (!this.filterNode(child)) {
-                                this.linkToNode(child, this.nodes.get(newNode.remote_id));
+                                this.linkToNode(child, this.nodes.get(folderGraphId));
                             }
                         });
                     }
@@ -1183,7 +1187,7 @@ class Splinter {
             id: item.uri_api,
             level: level + 1,
             attributes: {
-                identifier: item.basename,
+                identifier: item.mimetype === "inode/directory" ? item.dataset_relative_path : item.basename,
                 relativePath: item.dataset_relative_path,
                 size: item.size_bytes,
                 mimetype: item.mimetype,
