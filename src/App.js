@@ -55,9 +55,11 @@ const App = () => {
 
   const fillDataset = async (turtle, json) => {
     splinter = new Splinter(json, turtle);
+    const graph = await splinter.getGraph()
+    console.log("Loaded graph: ", graph);
     const _dataset = {
       id: splinter.getDatasetId(),
-      graph: await splinter.getGraph(),
+      graph: graph,
       tree: await splinter.getTree(),
       splinter: splinter
     };

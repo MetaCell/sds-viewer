@@ -775,13 +775,13 @@ class Splinter {
                     target_node.level = parentSample.level + 1;
                     target_node.parent = parentSample;
                 } else {
-                    target_node.level = subjects.level + 2;
+                    target_node.level = parent.level + 1;
                     target_node.parent = this.nodes.get(subject_key);
                 }
                 this.nodes.set(target_node.id, target_node);
             } else if (link.source === id && target_node.type === rdfTypes.Site.key ) {
                 link.source = target_node.attributes.onSample[0];
-                target_node.level = subjects.level + 3;
+                target_node.level = parent.level + 1;
                 target_node.parent = this.nodes.get(target_node.attributes.onSample[0]);
                 this.nodes.set(target_node.id, target_node);
             }
@@ -948,14 +948,6 @@ class Splinter {
             if (node.type === rdfTypes.RRID.key || node.type === rdfTypes.NCBITaxon?.key || node.type === rdfTypes.PATO?.key) {
                 nodesToRemove.unshift(index);
             }
-
-            if ( node.level !== undefined ) {
-                if ( this.levelsMap[node.level] ) {
-                    this.levelsMap[node.level] = [...this.levelsMap[node.level], node];
-                } else {
-                    this.levelsMap[node.level] = [node];
-                }
-            }
         });
 
         nodesToRemove.forEach(element => {
@@ -1047,9 +1039,12 @@ class Splinter {
                         return;
                     }
                     const splitName = jsonNode.dataset_relative_path.split('/');
-                    const lastPath = splitName[splitName.length - 1];
-                    const localId = value.attributes?.localId?.[0];
+                    let newName = splitName[0];
 
+                    // Children folders/files will keep their own basenames (i.e., the last path
+                    // segment) via the existing logic in buildNodeFromJson / tree JSON.
+                    const localId = value.attributes?.localId?.[0]; // (kept if used below)
+                    const lastPath = splitName[splitName.length - 1]; // (kept if used below)
                     // make sure the tree node references the existing graph node
                     let treeEntry = this.tree_map.get(jsonNode.uri_api);
                     if (treeEntry) {
@@ -1060,7 +1055,6 @@ class Splinter {
                         this.tree_map.set(value.id, treeEntry);
                     }
 
-                    let newName = jsonNode.dataset_relative_path;
                     if (localId && lastPath === localId) {
                         newName = splitName[0];
                     }
@@ -1073,13 +1067,17 @@ class Splinter {
                         newNode.uri_api = newNode.remote_id;
                     }
 
+                    // collect children before changing the map
                     let folderChildren = this.tree_parents_map2.get(newNode.parent_id)?.map(child => {
                         child.parent_id = newNode.uri_api;
                         child.collapsed = true;
                         return child;
                     });
 
-                    if (!this.filterNode(newNode) && (this.nodes.get(newNode.remote_id)) === undefined) {
+                    // id of the folder node within the graph
+                    const folderGraphId = parentNode.id + newNode.remote_id;
+
+                    if (!this.filterNode(newNode) && (this.nodes.get(folderGraphId)) === undefined) {
                         this.linkToNode(newNode, parentNode);
                     }
 
@@ -1088,7 +1086,7 @@ class Splinter {
                         this.tree_parents_map2.delete(newNode.parent_id);
                         folderChildren?.forEach(child => {
                             if (!this.filterNode(child)) {
-                                this.linkToNode(child, this.nodes.get(newNode.remote_id));
+                                this.linkToNode(child, this.nodes.get(folderGraphId));
                             }
                         });
                     } else {
@@ -1097,7 +1095,7 @@ class Splinter {
                         this.tree_parents_map2.delete(newNode.parent_id);
                         tempChildren?.forEach(child => {
                             if (!this.filterNode(child)) {
-                                this.linkToNode(child, this.nodes.get(newNode.remote_id));
+                                this.linkToNode(child, this.nodes.get(folderGraphId));
                             }
                         });
                     }
@@ -1111,7 +1109,6 @@ class Splinter {
         copiedItem.parent_id = copiedItem.remote_id;
         copiedItem.uri_api = copiedItem.remote_id;
         copiedItem.basename = newName;
-        copiedItem.dataset_relative_path = newName;
         return copiedItem;
     }
 
@@ -1133,7 +1130,7 @@ class Splinter {
                 level = this.nodes.get(parentSource)?.level + 1;
             }
         }
-        const new_node = this.buildNodeFromJson(node, level);
+        const new_node = this.buildNodeFromJson(node, parent, level);
         if (!parent) {
             return;
         }
@@ -1175,11 +1172,12 @@ class Splinter {
     }
 
 
-    buildNodeFromJson(item, level) {
+    buildNodeFromJson(item, parent, level) {
         const node_id = this.proxies_map.get(item.remote_id);
         if (node_id) {
             return undefined;
         }
+        const name = item.dataset_relative_path?.split('/')
         const new_node = {
             id: item.uri_api,
             level: level + 1,
@@ -1193,7 +1191,7 @@ class Splinter {
                 publishedURI : ""
             },
             types: [],
-            name: item.basename,
+            name: parent.tree_reference?.mimetype === "inode/directory" ?name[0] : name[name.length - 1],
             proxies: [],
             properties: [],
             type: item.mimetype === "inode/directory" ? "Collection" : "File",
@@ -1251,6 +1249,7 @@ class Splinter {
         })
 
         this.fix_links();
+        this.computeLevels();
         //this.identify_childless_parents();
     }
 
@@ -1314,6 +1313,74 @@ class Splinter {
         }
         return reference;
     }
+
+    /**
+     * Recompute all node levels AFTER parents/edges are finalized.
+     * BFS from dataset root; also rebuilds levelsMap.
+     */
+    computeLevels() {
+        // Reset levels + levelsMap
+        this.nodes.forEach(n => { if (n) n.level = undefined; });
+        this.levelsMap = {};
+    
+        const root = this.nodes.get(this.root_id) || Array.from(this.nodes.values())[0];
+        if (!root) return;
+    
+        // Root is level 1
+        root.level = 1;
+    
+        // Build adjacency: parent -> children
+        const childrenByParentId = new Map();
+    
+        // 1) via explicit parent pointers
+        this.nodes.forEach(node => {
+        if (!node || !node.parent) return;
+        const pid = node.parent.id || node.parent; // tolerate either object or id
+        if (!pid) return;
+        const list = childrenByParentId.get(pid) || [];
+        list.push(node.id);
+        childrenByParentId.set(pid, list);
+        });
+    
+        // 2) via forced_edges (source -> target)
+        (this.forced_edges || []).forEach(e => {
+        const sid = typeof e.source === 'object' ? e.source.id : e.source;
+        const tid = typeof e.target === 'object' ? e.target.id : e.target;
+        if (!sid || !tid) return;
+        const list = childrenByParentId.get(sid) || [];
+        list.push(tid);
+        childrenByParentId.set(sid, list);
+        });
+    
+        // BFS
+        const q = [root.id];
+        while (q.length) {
+        const pid = q.shift();
+        const parentNode = this.nodes.get(pid);
+        const kids = childrenByParentId.get(pid) || [];
+        kids.forEach(cid => {
+            const child = this.nodes.get(cid);
+            if (!child) return;
+            const nextLevel = (parentNode.level || 1) + 1;
+            if (child.level === undefined || child.level > nextLevel) {
+            child.level = nextLevel;
+            q.push(child.id);
+            }
+        });
+        }
+    
+        // Rebuild levelsMap
+        this.nodes.forEach(node => {
+        if (node?.level !== undefined) {
+            if (this.levelsMap[node.level]) {
+            this.levelsMap[node.level].push(node);
+            } else {
+            this.levelsMap[node.level] = [node];
+            }
+        }
+        });
+    }
+  
 }
 
 export default Splinter;
