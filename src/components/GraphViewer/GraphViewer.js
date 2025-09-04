@@ -190,25 +190,30 @@ const GraphViewer = (props) => {
   },[selectedLayout]);
 
   useEffect(() => {
-    document.addEventListener("nodeVisible", (e) => {
-      let visibleNodes = e.detail;
-      let match = visibleNodes?.find( v => v?._attributes?.id === props.graph_id );
-      if ( match ) {
-        const updatedData = getPrunedTree(props.graph_id, selectedLayout.layout);
-        setData(updatedData);
-        setTimeout( timeout => {
-          setForce()
+    const handleVisible = (e) => {
+      const nodes = Array.isArray(e.detail) ? e.detail : [e.detail];
+      const match = nodes?.some(v => v?._attributes?.id === props.graph_id);
+      if (match) {
+        setTimeout(() => {
+          graphRef?.current?.ggv?.current?.refresh?.();
+          setForce();
           resetCamera();
-        },100)
+        }, 100);
       }
-    });
-    document.addEventListener("nodeResized", (e) => {
+    };
+    const handleResize = (e) => {
       let visibleNodes = e.detail;
-      let match = visibleNodes?.find( v => v?._attributes?.id === props.graph_id );
-      if ( match ) {
+      let match = visibleNodes?.find(v => v?._attributes?.id === props.graph_id);
+      if (match) {
         resetCamera();
       }
-    });
+    };
+    document.addEventListener("nodeVisible", handleVisible);
+    document.addEventListener("nodeResized", handleResize);
+    return () => {
+      document.removeEventListener("nodeVisible", handleVisible);
+      document.removeEventListener("nodeResized", handleResize);
+    };
   });
 
   useEffect(() => {
