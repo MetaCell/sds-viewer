@@ -484,6 +484,9 @@ class Splinter {
         this.nodes.forEach((value, key) => {
             value.type = this.get_type(value);
             const typedNode = this.factory.createNode(value, this.types);
+            if (typedNode.type === rdfTypes.Collection.key) {
+                typedNode.img.src = this.getFolderIcon(typedNode);
+            }
             if (typedNode.type !== rdfTypes.Unknown.key) {
                 this.nodes.set(key, typedNode);
             } else {
@@ -874,27 +877,42 @@ class Splinter {
                     }
                 }
 
+                // Extract weight value and unit
+                if (node.additional_properties["sparc:animalSubjectHasWeight"]) {
+                    let weightObj = node.additional_properties["sparc:animalSubjectHasWeight"];
+                    let weightValue = weightObj["rdf:value"] || "";
+                    let weightUnit = weightObj["TEMP:hasUnit"]?.["@id"]?.replace("unit:", "") || "";
+                    node.attributes.animalSubjectHasWeight = [`${weightValue} ${weightUnit}`];
+                }
+
+                // Extract age values (supports nested structures)
                 if (node.additional_properties["TEMP:hasAgeMax"]) {
                     let ageMaxObj = node.additional_properties["TEMP:hasAgeMax"];
-                    let ageValue = ageMaxObj["rdf:value"] || "";
-                    let ageUnit = ageMaxObj["TEMP:hasUnit"]?.["@id"]?.replace("unit:", "") || "";
+                    let ageValue = ageMaxObj["rdf:value"] || ageMaxObj["TEMP:right"]?.["rdf:value"] || "";
+                    let ageUnit =
+                        ageMaxObj["TEMP:hasUnit"]?.["@id"]?.replace("unit:", "") ||
+                        ageMaxObj["TEMP:right"]?.["TEMP:hasUnit"]?.["@id"]?.replace("unit:", "") || "";
                     node.attributes.hasAgeMax = [`${ageValue} ${ageUnit}`];
                 }
 
                 if (node.additional_properties["TEMP:hasAge"]) {
-                    let ageMaxObj = node.additional_properties["TEMP:hasAge"];
-                    let ageValue = ageMaxObj["rdf:value"] || "";
-                    let ageUnit = ageMaxObj["TEMP:hasUnit"]?.["@id"]?.replace("unit:", "") || "";
-                    node.attributes.hasAge =[`${ageValue} ${ageUnit}`];
+                    let ageObj = node.additional_properties["TEMP:hasAge"];
+                    let ageValue = ageObj["rdf:value"] || ageObj["TEMP:right"]?.["rdf:value"] || "";
+                    let ageUnit =
+                        ageObj["TEMP:hasUnit"]?.["@id"]?.replace("unit:", "") ||
+                        ageObj["TEMP:right"]?.["TEMP:hasUnit"]?.["@id"]?.replace("unit:", "") || "";
+                    node.attributes.hasAge = [`${ageValue} ${ageUnit}`];
                 }
-        
+
                 // Extract Age Min
                 if (node.additional_properties["TEMP:hasAgeMin"]) {
                     let ageMinObj = node.additional_properties["TEMP:hasAgeMin"];
-                    let ageValue = ageMinObj["rdf:value"] || "";
-                    let ageUnit = ageMinObj["TEMP:hasUnit"]?.["@id"]?.replace("unit:", "") || "";
+                    let ageValue = ageMinObj["rdf:value"] || ageMinObj["TEMP:right"]?.["rdf:value"] || "";
+                    let ageUnit =
+                        ageMinObj["TEMP:hasUnit"]?.["@id"]?.replace("unit:", "") ||
+                        ageMinObj["TEMP:right"]?.["TEMP:hasUnit"]?.["@id"]?.replace("unit:", "") || "";
                     node.attributes.hasAgeMin = [`${ageValue} ${ageUnit}`];
-                }                             
+                }
 
                 if (node.attributes?.hasDerivedInformationAsParticipant !== undefined && node.attributes?.participantInPerformanceOf !== undefined) {
                     let source = this.nodes.get(node.attributes.participantInPerformanceOf[0]);
@@ -1029,6 +1047,22 @@ class Splinter {
         return node.basename.includes(TMP_FILE)
     }
 
+    getFolderIcon(node) {
+        const defaultIcon = config.graph.folderIcons.default;
+        const topLevelIcon = config.graph.folderIcons.topLevel || defaultIcon;
+
+        const treePath = node.tree_reference?.dataset_relative_path;
+        const firstFromTree = treePath?.split('/')?.[0];
+        const isTopFromTree = firstFromTree && node.name === firstFromTree;
+        if (isTopFromTree) {
+            return topLevelIcon;
+        }
+
+        const relParts = node.attributes?.relativePath?.split('/') || [];
+        const firstAttr = relParts[0];
+        const fallbackTop = relParts.length === 1 && ["primary", "source", "derivative"].includes(firstAttr);
+        return fallbackTop ? topLevelIcon : defaultIcon;
+    }
 
     mergeData() {
         this.nodes.forEach((value, key) => {
@@ -1161,11 +1195,15 @@ class Splinter {
         });
         new_node.childLinks = [];
         if (!this.nodes.get(new_node.id)) {
-            this.nodes.set(new_node.id, this.factory.createNode(new_node));
+            let nodeF = this.factory.createNode(new_node);
+            if (nodeF.type === rdfTypes.Collection.key) {
+                nodeF.img.src = this.getFolderIcon(nodeF);
+            }
+            this.nodes.set(new_node.id, nodeF);
             var children = this.tree_parents_map2.get(node.remote_id);
             if (children?.length > 0) {
                 children.forEach(child => {
-                    !this.filterNode(child) && this.linkToNode(child, new_node);
+                    !this.filterNode(child) && this.linkToNode(child, nodeF);
                 });
             }
         }
@@ -1177,7 +1215,7 @@ class Splinter {
         if (node_id) {
             return undefined;
         }
-        const name = item.dataset_relative_path?.split('/')
+        const name = item.dataset_relative_path?.split('/');
         const new_node = {
             id: item.uri_api,
             level: level + 1,
@@ -1198,7 +1236,7 @@ class Splinter {
             tree_reference: null,
             children_counter: 0
         };
-        return this.factory.createNode(new_node, []);
+        return new_node;
     }
 
 
