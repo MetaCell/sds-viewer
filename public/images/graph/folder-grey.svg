@@ -11,31 +11,31 @@
 </g>
 <defs>
 <linearGradient id="paint0_linear" x1="24" y1="11.47" x2="24" y2="4.97001" gradientUnits="userSpaceOnUse">
-<stop stop-color="#D9D9D9"/>
-<stop offset="1" stop-color="#F0F0F0"/>
+<stop stop-color="#7A7A7A"/>
+<stop offset="1" stop-color="#8F8F8F"/>
 </linearGradient>
 <radialGradient id="paint1_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(23.5464 4.9048) rotate(94.0856) scale(21.0535 87.5427)">
-<stop stop-color="#C8C8C8" stop-opacity="0.69"/>
-<stop offset="0.22" stop-color="#D9D9D9"/>
-<stop offset="1" stop-color="#F0F0F0"/>
+<stop stop-color="#5E5E5E" stop-opacity="0.69"/>
+<stop offset="0.22" stop-color="#7A7A7A"/>
+<stop offset="1" stop-color="#8F8F8F"/>
 </radialGradient>
 <linearGradient id="paint2_linear" x1="24" y1="10.7498" x2="24" y2="45.0398" gradientUnits="userSpaceOnUse">
-<stop stop-color="#F7F7F7"/>
-<stop offset="0.42" stop-color="#F0F0F0"/>
-<stop offset="1" stop-color="#D9D9D9"/>
+<stop stop-color="#9F9F9F"/>
+<stop offset="0.42" stop-color="#8F8F8F"/>
+<stop offset="1" stop-color="#7A7A7A"/>
 </linearGradient>
 <linearGradient id="paint3_linear" x1="24" y1="10.7498" x2="24" y2="44.1798" gradientUnits="userSpaceOnUse">
 <stop stop-color="white" stop-opacity="0.3"/>
-<stop offset="0.02" stop-color="#DADADA" stop-opacity="0.29"/>
-<stop offset="1" stop-color="#BEBEBE" stop-opacity="0"/>
+<stop offset="0.02" stop-color="#707070" stop-opacity="0.29"/>
+<stop offset="1" stop-color="#585858" stop-opacity="0"/>
 </linearGradient>
 <linearGradient id="paint4_linear" x1="24" y1="39.1304" x2="24" y2="40.2604" gradientUnits="userSpaceOnUse">
-<stop stop-color="#F0F0F0"/>
-<stop offset="1" stop-color="#D9D9D9"/>
+<stop stop-color="#8F8F8F"/>
+<stop offset="1" stop-color="#7A7A7A"/>
 </linearGradient>
 <linearGradient id="paint5_linear" x1="-8640" y1="-177.743" x2="-8640" y2="-179.066" gradientUnits="userSpaceOnUse">
-<stop stop-color="#F0F0F0"/>
-<stop offset="1" stop-color="#D9D9D9"/>
+<stop stop-color="#8F8F8F"/>
+<stop offset="1" stop-color="#7A7A7A"/>
 </linearGradient>
 </defs>
 </svg>
