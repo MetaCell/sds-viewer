@@ -4,10 +4,17 @@
     "issues_url":"https://github.com/MetaCell/sds-viewer/issues/new",
     "docs_url": "https://github.com/MetaCell/sds-viewer/blob/development/README.md",
     "available_datasets": "curation-export-published.ttl",
-    "groups" : { 
-        "order" : 
+    "graph": {
+        "folderIcons": {
+            "default": "./images/graph/folder-grey.svg",
+            "topLevel": "./images/graph/folder-dark.svg",
+            "special": "./images/graph/folder.svg"
+        }
+    },
+    "groups" : {
+        "order" :
         {
-            "animalSubjectIsOfSpecies" : { "tag" : "Subject Species", "icon" : "./images/graph/species.svg"}, 
+            "animalSubjectIsOfSpecies" : { "tag" : "Subject Species", "icon" : "./images/graph/species.svg"},
             "animalSubjectIsOfStrain" : { "tag" : "Subject Strain", "icon" : "./images/graph/strains.svg"},
             "hasBiologicalSex" : { "tag" : "Subject Sex", "icon" : "./images/graph/sex.svg"}, 
             "hasAgeCategory" : { "tag" : "Subject Age", "icon" : "./images/graph/age.svg"}
