@@ -48,15 +48,17 @@ const SubjectDetails = (props) => {
                                     normalizedArray[0].link = chipNode?.link
                                 }
                             }
-                            return (
-                                <Box className="tab-content-row">
-                                <Typography component="label">{property.label}</Typography>
-                                <SimpleLinkedChip
-                                    chips={[normalizedArray[0]]}
-                                    node={chipNode}
-                                />
-                                </Box>
-                            );
+                            if ( chipNode !== undefined ){
+                                return (
+                                    <Box className="tab-content-row">
+                                    <Typography component="label">{property.label}</Typography>
+                                    <SimpleLinkedChip
+                                        chips={[normalizedArray[0]]}
+                                        node={chipNode}
+                                    />
+                                    </Box>
+                                );
+                            }
                         }
 
                         else if ( isValidUrl(propValue) ){
