@@ -211,7 +211,9 @@ class Splinter {
                         if ( n?.attributes[key] ) {
                             let groupKeys = Object.keys(that.groups[key]);
                             groupKeys.forEach( groupKey => {
-                                if ( n?.attributes[key][0] === groupKey ) {
+                                const attrVal = n?.attributes[key][0];
+                                const attrName = typeof attrVal === 'object' ? attrVal.value : attrVal;
+                                if ( attrName === groupKey ) {
                                     const groupNodes = filteredNodes?.filter(n => n.name == groupKey);
                                     groupNodes?.forEach( groupNode => {
                                         if ( n?.id?.includes(groupNode.id) ) {
@@ -271,6 +273,7 @@ class Splinter {
             }
             return true;
         });
+
         return {
             nodes: filteredNodes,
             links: newCleanLinks,
@@ -454,15 +457,21 @@ class Splinter {
         }
     }
 
-    replaceNode(a) {
-        let newNode = {"value": a};
-        if( a?.includes(rdfTypes.NCBITaxon.key) || a?.includes(rdfTypes.PATO.key) || a?.includes(rdfTypes.UBERON.key) || a?.includes(rdfTypes.RRID.key) ) {
-            let node = this.nodes.get(a);
-            if (node) {
-                newNode = {"value": node?.attributes.label[0], "link": node?.id};
+    replaceNode(a, originalValue = a) {
+        if (a && typeof a === 'object') {
+            return a;
+        }
+        let newNode = { value: a, link : originalValue };
+        if (typeof a === 'string') {
+            if( a?.includes(rdfTypes.NCBITaxon.key) || a?.includes(rdfTypes.PATO.key) || a?.includes(rdfTypes.UBERON.key) || a?.includes(rdfTypes.RRID.key) ) {
+                const node = this.nodes.get(a);
+                if (node) {
+                    newNode = { value: a, link: node?.id };
+                } else if (a.startsWith('http') || (!a.includes(' ') && a.includes(':'))) {
+                    newNode = { value: a, link: originalValue };
+                }
             }
         }
-
         return newNode;
     }
 
@@ -475,6 +484,9 @@ class Splinter {
         this.nodes.forEach((value, key) => {
             value.type = this.get_type(value);
             const typedNode = this.factory.createNode(value, this.types);
+            if (typedNode.type === rdfTypes.Collection.key) {
+                typedNode.img.src = this.getFolderIcon(typedNode);
+            }
             if (typedNode.type !== rdfTypes.Unknown.key) {
                 this.nodes.set(key, typedNode);
             } else {
@@ -501,22 +513,42 @@ class Splinter {
         let updatedAbout = [];
         dataset_node.level = 1;
         let that = this;
-        dataset_node?.attributes?.isAbout?.forEach( (a) => {
-            updatedAbout.push(that.replaceNode(a));
+        dataset_node?.attributes?.isAbout?.forEach((a) => {
+            if (
+                typeof a === 'string' && (
+                    a.startsWith('http') ||
+                    a.includes(rdfTypes.NCBITaxon.key) ||
+                    a.includes(rdfTypes.PATO.key) ||
+                    a.includes(rdfTypes.UBERON.key) ||
+                    a.includes(rdfTypes.RRID.key)
+                )
+            ) {
+                updatedAbout.push(that.replaceNode(a));
+            } else {
+                updatedAbout.push({ value: a });
+            }
         });
         dataset_node.attributes.isAbout = updatedAbout;
 
         let updateTechniques = [];
-        dataset_node.attributes.protocolEmploysTechnique?.forEach( (a) => {
-            if( a.includes(rdfTypes.NCBITaxon.key) || a.includes(rdfTypes.PATO.key) || a.includes(rdfTypes.UBERON.key) ) {
+        dataset_node.attributes.protocolEmploysTechnique?.forEach((a) => {
+            if (
+                typeof a === 'string' && (
+                    a.startsWith('http') ||
+                    a.includes(rdfTypes.NCBITaxon.key) ||
+                    a.includes(rdfTypes.PATO.key) ||
+                    a.includes(rdfTypes.UBERON.key) ||
+                    a.includes(rdfTypes.RRID.key)
+                )
+            ) {
                 let node = this.nodes.get(a);
                 if (node) {
-                    updateTechniques.push({"value": node?.attributes.label[0], "link": node?.id});
+                    updateTechniques.push({ value: node?.attributes?.label?.[0], link: node?.id });
                 } else {
-                    updateTechniques.push({"value": a});
+                    updateTechniques.push({ value: a, link: a });
                 }
             } else {
-                updateTechniques.push({"value": a});
+                updateTechniques.push({ value: a });
             }
         });
         dataset_node.attributes.protocolEmploysTechnique = updateTechniques;
@@ -539,34 +571,38 @@ class Splinter {
     organise_subjects(target_node, link, groups, k, type){
         let parent = this.nodes.get(k);
         let keys = Object.keys(config.groups.order);
-        keys.forEach( key => {
+        keys.forEach(key => {
             let group = config.groups.order[key];
-            if ( target_node.attributes[key]?.[0] ) {
-                let source = this.nodes.get(target_node.attributes[key]?.[0]);
-                if ( source !== undefined ) {
-                    target_node.attributes[key][0] = source.attributes.label[0];
-                }
-                
-                const groupID = parent.id + "_" + target_node.attributes[key]?.[0].replace(/\s/g, "");
-                if ( this.nodes.get(groupID) === undefined ) {
-                    let name = target_node.attributes[key]?.[0];
+            if (target_node.attributes[key]?.[0]) {
+                // attributes may already be objects from previous passes
+                const raw = target_node.attributes[key][0];
+                const originalValue = typeof raw === "object" ? raw.value : raw;
 
+                let source = this.nodes.get(originalValue);
+                let label = originalValue;
+                if (source !== undefined) {
+                    label = source.attributes.label[0];
+                }
+
+                const groupID = parent.id + "_" + ("" + label).replace(/\s/g, "");
+                if (this.nodes.get(groupID) === undefined) {
                     const groupNode = {
                         id: groupID,
-                        name: name,
+                        name: label,
                         type: typesModel.NamedIndividual.group.type,
                         properties: key,
-                        parent : parent,
+                        parent: parent,
                         proxies: [],
                         level: parent.level + 1,
                         tree_reference: null,
                         children_counter: 0,
-                        collapsed : false,
-                        childLinks : [],
-                        samples : 0, 
-                        subjects : 0,
-                        publishedURI : "",
-                        dataset_id : this.dataset_id
+                        collapsed: false,
+                        childLinks: [],
+                        samples: 0,
+                        subjects: 0,
+                        publishedURI: "",
+                        dataset_id: this.dataset_id,
+                        link : source?.id || parent?.link
                     };
                     let nodeF = this.factory.createNode(groupNode);
                     const img = new Image();
@@ -577,11 +613,15 @@ class Splinter {
                         source: parent.id,
                         target: nodeF.id
                     });
-                    this.groups[key] ? this.groups[key][nodeF.name] = nodeF :  this.groups[key] = {[nodeF.name] : nodeF};
+                    this.groups[key] ? this.groups[key][nodeF.name] = nodeF : this.groups[key] = {[nodeF.name]: nodeF};
                     parent = groupNode;
                 } else {
                     parent = this.nodes.get(groupID);
                 }
+
+                // preserve the original identifier so chips can expose links
+                target_node.attributes[key][0] = this.replaceNode(label, originalValue);
+
             } else {
                 console.error("The group node already exists!", group.tag);
             }
@@ -726,13 +766,25 @@ class Splinter {
                 target_node.parent = protocols;
                 this.nodes.set(target_node.id, target_node);
             } else if (link.source === id && target_node.type === rdfTypes.Sample.key ) {
-                link.source = target_node.attributes.derivedFrom[0];
-                target_node.level = subjects.level + 2;
-                target_node.parent = this.nodes.get(target_node.attributes.derivedFrom[0]);
+                const sourceId = target_node.attributes.derivedFromSample?.length ?
+                    target_node.attributes.derivedFromSample[0] :
+                    target_node.attributes.derivedFromSubject?.[0];
+                if (sourceId) {
+                    link.source = sourceId;
+                }
+                const parentSample = target_node.attributes.derivedFromSample?.[0] ?
+                    this.nodes.get(target_node.attributes.derivedFromSample[0]) : undefined;
+                if (parentSample) {
+                    target_node.level = parentSample.level + 1;
+                    target_node.parent = parentSample;
+                } else {
+                    target_node.level = parent.level + 1;
+                    target_node.parent = this.nodes.get(subject_key);
+                }
                 this.nodes.set(target_node.id, target_node);
             } else if (link.source === id && target_node.type === rdfTypes.Site.key ) {
                 link.source = target_node.attributes.onSample[0];
-                target_node.level = subjects.level + 3;
+                target_node.level = parent.level + 1;
                 target_node.parent = this.nodes.get(target_node.attributes.onSample[0]);
                 this.nodes.set(target_node.id, target_node);
             }
@@ -772,31 +824,34 @@ class Splinter {
             }
             
             if (node.type === rdfTypes.Sample.key) {
-                if (node.attributes.derivedFrom !== undefined) {
-                    let source = this.nodes.get(node.attributes.derivedFrom[0]);
+                const subjectParent = node.attributes.derivedFromSubject?.[0];
+                const sampleParent = node.attributes.derivedFromSample?.[0];
+
+                if (sampleParent && subjectParent) {
+                    this.edges = this.edges.filter(link => !(link.source === node.id && link.target === subjectParent));
+                    this.forced_edges = this.forced_edges.filter(link => !(link.source === subjectParent && link.target === node.id));
+                    delete node.attributes.derivedFromSubject;
+                }
+
+                const sourceId = sampleParent || subjectParent;
+                if (sourceId !== undefined) {
+                    let source = this.nodes.get(sourceId);
                     if ( source !== undefined ) {
                         source.children_counter++
                         array[index].level = source.level + 1;
+                        array[index].parent = source;
+                        this.nodes.set(node.id, array[index]);
+                        this.forced_edges = this.forced_edges.filter(link => !(link.source === sourceId && link.target === node.id));
                         this.forced_edges.push({
-                            source: node.attributes.derivedFrom[0],
-                            target: node.id
-                        });
-                    }
-                } else if (node.attributes.wasDerivedFromSubject !== undefined) {
-                    let source = this.nodes.get(node.attributes.wasDerivedFromSubject[0]);
-                    if ( source !== undefined ) {
-                        source.children_counter++
-                        array[index].level = source.level + 1;
-                        this.forced_edges.push({
-                            source: node.attributes.wasDerivedFromSubject[0],
+                            source: sourceId,
                             target: node.id
                         });
                     }
                 }
 
                 if (node.attributes?.hasFolderAboutIt !== undefined) {
-                    node.attributes.hasFolderAboutIt = 
-                        [basePublishedURI + 
+                    node.attributes.hasFolderAboutIt =
+                        [basePublishedURI +
                         "?datasetDetailsTab=files&path=files/" +
                         node.tree_reference?.dataset_relative_path];
                 }
@@ -822,27 +877,48 @@ class Splinter {
                     }
                 }
 
+                const resolveNode = (obj) => {
+                    let current = obj;
+                    while (current && current["@id"] && node.additional_properties[current["@id"]]) {
+                        current = node.additional_properties[current["@id"]];
+                    }
+                    return current;
+                };
+
+                // Extract weight value and unit
+                if (node.additional_properties["sparc:animalSubjectHasWeight"]) {
+                    let weightObj = resolveNode(node.additional_properties["sparc:animalSubjectHasWeight"]);
+                    let weightValue = weightObj["rdf:value"]?.["@value"] || "";
+                    let unitObj = resolveNode(weightObj["TEMP:hasUnit"]);
+                    let weightUnit = unitObj?.["@id"]?.replace("unit:", "") || "";
+                    node.attributes.animalSubjectHasWeight = [`${weightValue} ${weightUnit}`];
+                }
+
+                // Helper to extract age values (supports nested structures)
+                const extractAge = (prop, attr) => {
+                    let ageObj = resolveNode(node.additional_properties[prop]);
+                    let rightObj = resolveNode(ageObj?.["TEMP:right"]);
+                    let ageValue =
+                        ageObj?.["rdf:value"]?.["@value"] ||
+                        rightObj?.["rdf:value"]?.["@value"] || "";
+                    let unitObj =
+                        resolveNode(ageObj?.["TEMP:hasUnit"]) ||
+                        resolveNode(rightObj?.["TEMP:hasUnit"]);
+                    let ageUnit = unitObj?.["@id"]?.replace("unit:", "") || "";
+                    node.attributes[attr] = [`${ageValue} ${ageUnit}`];
+                };
+
                 if (node.additional_properties["TEMP:hasAgeMax"]) {
-                    let ageMaxObj = node.additional_properties["TEMP:hasAgeMax"];
-                    let ageValue = ageMaxObj["rdf:value"] || "";
-                    let ageUnit = ageMaxObj["TEMP:hasUnit"]?.["@id"]?.replace("unit:", "") || "";
-                    node.attributes.hasAgeMax = [`${ageValue} ${ageUnit}`];
+                    extractAge("TEMP:hasAgeMax", "hasAgeMax");
                 }
 
                 if (node.additional_properties["TEMP:hasAge"]) {
-                    let ageMaxObj = node.additional_properties["TEMP:hasAge"];
-                    let ageValue = ageMaxObj["rdf:value"] || "";
-                    let ageUnit = ageMaxObj["TEMP:hasUnit"]?.["@id"]?.replace("unit:", "") || "";
-                    node.attributes.hasAge =[`${ageValue} ${ageUnit}`];
+                    extractAge("TEMP:hasAge", "hasAge");
                 }
-        
-                // Extract Age Min
+
                 if (node.additional_properties["TEMP:hasAgeMin"]) {
-                    let ageMinObj = node.additional_properties["TEMP:hasAgeMin"];
-                    let ageValue = ageMinObj["rdf:value"] || "";
-                    let ageUnit = ageMinObj["TEMP:hasUnit"]?.["@id"]?.replace("unit:", "") || "";
-                    node.attributes.hasAgeMin = [`${ageValue} ${ageUnit}`];
-                }                             
+                    extractAge("TEMP:hasAgeMin", "hasAgeMin");
+                }
 
                 if (node.attributes?.hasDerivedInformationAsParticipant !== undefined && node.attributes?.participantInPerformanceOf !== undefined) {
                     let source = this.nodes.get(node.attributes.participantInPerformanceOf[0]);
@@ -896,14 +972,6 @@ class Splinter {
             if (node.type === rdfTypes.RRID.key || node.type === rdfTypes.NCBITaxon?.key || node.type === rdfTypes.PATO?.key) {
                 nodesToRemove.unshift(index);
             }
-
-            if ( node.level !== undefined ) {
-                if ( this.levelsMap[node.level] ) {
-                    this.levelsMap[node.level] = [...this.levelsMap[node.level], node];
-                } else {
-                    this.levelsMap[node.level] = [node];
-                }
-            }
         });
 
         nodesToRemove.forEach(element => {
@@ -955,6 +1023,7 @@ class Splinter {
                 }
             }
         });
+
     }
 
 
@@ -984,73 +1053,71 @@ class Splinter {
         return node.basename.includes(TMP_FILE)
     }
 
+    getFolderIcon(node) {
+        const defaultIcon = config.graph.folderIcons.default;
+        const topLevelIcon = config.graph.folderIcons.topLevel || defaultIcon;
+
+        const treePath = node.tree_reference?.dataset_relative_path;
+        const firstFromTree = treePath?.split('/')?.[0];
+        const isTopFromTree = firstFromTree && node.name === firstFromTree;
+        if (isTopFromTree) {
+            return topLevelIcon;
+        }
+
+        const relParts = node.attributes?.relativePath?.split('/') || [];
+        const firstAttr = relParts[0];
+        const fallbackTop = node?.parent?.tree_reference?.mimetype != "inode/directory" && ["primary", "source", "derivative"].includes(firstAttr);
+        return fallbackTop ?  defaultIcon : topLevelIcon;
+    }
 
     mergeData() {
         this.nodes.forEach((value, key) => {
             if (value.attributes !== undefined && value.attributes.hasFolderAboutIt !== undefined) {
                 value.attributes.hasFolderAboutIt.forEach(folder => {
                     let jsonNode = this.tree_map.get(folder);
-                    const splitName = jsonNode.dataset_relative_path.split('/');
-                    const lastPath = splitName[splitName.length - 1];
-                    const localId = value.attributes?.localId?.[0];
-                    const proxyTarget = this.proxies_map.get(jsonNode.remote_id);
-
-                    // Skip if this folder represents the same Subject/Sample node
-                    if ((proxyTarget && proxyTarget === value.id) ||
-                        (localId && lastPath === localId) ||
-                        (localId && jsonNode.basename === localId)) {
-                        // Make sure the tree node references the existing graph node
-                        let treeEntry = this.tree_map.get(jsonNode.uri_api);
-                        if (treeEntry) {
-                            treeEntry.graph_reference = value;
-                            value.tree_reference = treeEntry;
-                            this.tree_map.set(jsonNode.uri_api, treeEntry);
-                            this.tree_map.set(jsonNode.remote_id, treeEntry);
-                            this.tree_map.set(value.id, treeEntry);
-                        }
-                        const dupChildren = this.tree_parents_map2.get(jsonNode.remote_id);
-                        dupChildren?.forEach(child => {
-                            if (!this.filterNode(child)) {
-                                this.linkToNode(child, value);
-                            }
-                        });
+                    if (!jsonNode) {
                         return;
                     }
+                    const splitName = jsonNode.dataset_relative_path.split('/');
+                    let newName = splitName[0];
 
-                    let newName = jsonNode.basename;
-                    if ( value.type === rdfTypes.Subject.key && localId == lastPath ) {
-                        newName = splitName[0]
+                    // Children folders/files will keep their own basenames (i.e., the last path
+                    // segment) via the existing logic in buildNodeFromJson / tree JSON.
+                    const localId = value.attributes?.localId?.[0]; // (kept if used below)
+                    const lastPath = splitName[splitName.length - 1]; // (kept if used below)
+                    // make sure the tree node references the existing graph node
+                    let treeEntry = this.tree_map.get(jsonNode.uri_api);
+                    if (treeEntry) {
+                        treeEntry.graph_reference = value;
+                        value.tree_reference = treeEntry;
+                        this.tree_map.set(jsonNode.uri_api, treeEntry);
+                        this.tree_map.set(jsonNode.remote_id, treeEntry);
+                        this.tree_map.set(value.id, treeEntry);
                     }
 
-                    if ( value.type === rdfTypes.Sample.key && localId == lastPath ) {
-                        newName = splitName[0] + "/" + newName
-                    }
-
-                    if ( value.type === rdfTypes.Performance.key && localId == lastPath ) {
-                        newName = splitName[0] + "/" + newName
-                    }
-
-                    if ( value.type === rdfTypes.Site.key && localId ) {
-                        newName = splitName[0] + "/" + newName
+                    if (localId && lastPath === localId) {
+                        newName = splitName[0];
                     }
 
                     let parentNode = value;
-                    let newNode = this.buildFolder(jsonNode, newName, parentNode);
+                    let newNode = this.buildFolder(jsonNode, newName);
 
-                    if ( value.type === rdfTypes.Sample.key) {
-                        newNode.remote_id = jsonNode.basename + '_' + newName;
-                        newNode.uri_api = newNode.remote_id
-                        // this.tree_parents_map2.delete(jsonNode.remote_id);
+                    if (localId && lastPath === localId) {
+                        newNode.remote_id = jsonNode.remote_id + '_' + newName;
+                        newNode.uri_api = newNode.remote_id;
                     }
 
-
+                    // collect children before changing the map
                     let folderChildren = this.tree_parents_map2.get(newNode.parent_id)?.map(child => {
-                        child.parent_id = newNode.uri_api
+                        child.parent_id = newNode.uri_api;
                         child.collapsed = true;
                         return child;
                     });
 
-                    if (!this.filterNode(newNode) && (this.nodes.get(newNode.remote_id)) === undefined) {
+                    // id of the folder node within the graph
+                    const folderGraphId = parentNode.id + newNode.remote_id;
+
+                    if (!this.filterNode(newNode) && (this.nodes.get(folderGraphId)) === undefined) {
                         this.linkToNode(newNode, parentNode);
                     }
 
@@ -1058,17 +1125,17 @@ class Splinter {
                         this.tree_parents_map2.set(newNode.uri_api, folderChildren);
                         this.tree_parents_map2.delete(newNode.parent_id);
                         folderChildren?.forEach(child => {
-                            if (!this.filterNode(child) ) {
-                                this.linkToNode(child, this.nodes.get(newNode.remote_id));
+                            if (!this.filterNode(child)) {
+                                this.linkToNode(child, this.nodes.get(folderGraphId));
                             }
                         });
                     } else {
-                        let tempChildren = folderChildren === undefined ? [...this.tree_parents_map2.get(newNode.uri_api)] : [...this.tree_parents_map2.get(newNode.uri_api), ...folderChildren];;
+                        let tempChildren = folderChildren === undefined ? [...this.tree_parents_map2.get(newNode.uri_api)] : [...this.tree_parents_map2.get(newNode.uri_api), ...folderChildren];
                         this.tree_parents_map2.set(newNode.uri_api, tempChildren);
                         this.tree_parents_map2.delete(newNode.parent_id);
                         tempChildren?.forEach(child => {
-                            if (!this.filterNode(child) ) {
-                                this.linkToNode(child, this.nodes.get(newNode.remote_id));
+                            if (!this.filterNode(child)) {
+                                this.linkToNode(child, this.nodes.get(folderGraphId));
                             }
                         });
                     }
@@ -1078,7 +1145,7 @@ class Splinter {
     }
 
     buildFolder(item, newName) {
-        let copiedItem = {...item};
+        let copiedItem = { ...item };
         copiedItem.parent_id = copiedItem.remote_id;
         copiedItem.uri_api = copiedItem.remote_id;
         copiedItem.basename = newName;
@@ -1089,15 +1156,21 @@ class Splinter {
     linkToNode(node, parent) {
         let level = parent?.level;
         if (parent?.type === rdfTypes.Sample.key) {
-            if (parent.attributes.derivedFrom !== undefined) {
-                level = this.nodes.get(parent.attributes.derivedFrom[0])?.level + 1;
+            const parentSource = parent.attributes.derivedFromSample?.length ?
+                parent.attributes.derivedFromSample[0] :
+                parent.attributes.derivedFromSubject?.[0];
+            if (parentSource !== undefined) {
+                level = this.nodes.get(parentSource)?.level + 1;
             }
         } else if (parent?.type === rdfTypes.Site.key) {
-            if (parent.attributes.derivedFrom !== undefined) {
-                level = this.nodes.get(parent.attributes.derivedFrom[0])?.level + 1;
+            const parentSource = parent.attributes.derivedFromSample?.length ?
+                parent.attributes.derivedFromSample[0] :
+                parent.attributes.derivedFromSubject?.[0];
+            if (parentSource !== undefined) {
+                level = this.nodes.get(parentSource)?.level + 1;
             }
         }
-        const new_node = this.buildNodeFromJson(node, level);
+        const new_node = this.buildNodeFromJson(node, parent, level);
         if (!parent) {
             return;
         }
@@ -1128,27 +1201,32 @@ class Splinter {
         });
         new_node.childLinks = [];
         if (!this.nodes.get(new_node.id)) {
-            this.nodes.set(new_node.id, this.factory.createNode(new_node));
+            let nodeF = this.factory.createNode(new_node);
+            if (nodeF.type === rdfTypes.Collection.key) {
+                nodeF.img.src = this.getFolderIcon(nodeF);
+            }
+            this.nodes.set(new_node.id, nodeF);
             var children = this.tree_parents_map2.get(node.remote_id);
             if (children?.length > 0) {
                 children.forEach(child => {
-                    !this.filterNode(child) && this.linkToNode(child, new_node);
+                    !this.filterNode(child) && this.linkToNode(child, nodeF);
                 });
             }
         }
     }
 
 
-    buildNodeFromJson(item, level) {
+    buildNodeFromJson(item, parent, level) {
         const node_id = this.proxies_map.get(item.remote_id);
         if (node_id) {
             return undefined;
         }
+        const name = item.dataset_relative_path?.split('/');
         const new_node = {
             id: item.uri_api,
             level: level + 1,
             attributes: {
-                identifier: item.basename,
+                identifier: item.mimetype === "inode/directory" ? item.dataset_relative_path : item.basename,
                 relativePath: item.dataset_relative_path,
                 size: item.size_bytes,
                 mimetype: item.mimetype,
@@ -1157,14 +1235,14 @@ class Splinter {
                 publishedURI : ""
             },
             types: [],
-            name: item.basename,
+            name: parent.tree_reference?.mimetype === "inode/directory" && name?.length > 0 ? name[0] : name[name.length - 1],
             proxies: [],
             properties: [],
             type: item.mimetype === "inode/directory" ? "Collection" : "File",
             tree_reference: null,
             children_counter: 0
         };
-        return this.factory.createNode(new_node, []);
+        return new_node;
     }
 
 
@@ -1215,6 +1293,7 @@ class Splinter {
         })
 
         this.fix_links();
+        this.computeLevels();
         //this.identify_childless_parents();
     }
 
@@ -1278,6 +1357,74 @@ class Splinter {
         }
         return reference;
     }
+
+    /**
+     * Recompute all node levels AFTER parents/edges are finalized.
+     * BFS from dataset root; also rebuilds levelsMap.
+     */
+    computeLevels() {
+        // Reset levels + levelsMap
+        this.nodes.forEach(n => { if (n) n.level = undefined; });
+        this.levelsMap = {};
+    
+        const root = this.nodes.get(this.root_id) || Array.from(this.nodes.values())[0];
+        if (!root) return;
+    
+        // Root is level 1
+        root.level = 1;
+    
+        // Build adjacency: parent -> children
+        const childrenByParentId = new Map();
+    
+        // 1) via explicit parent pointers
+        this.nodes.forEach(node => {
+        if (!node || !node.parent) return;
+        const pid = node.parent.id || node.parent; // tolerate either object or id
+        if (!pid) return;
+        const list = childrenByParentId.get(pid) || [];
+        list.push(node.id);
+        childrenByParentId.set(pid, list);
+        });
+    
+        // 2) via forced_edges (source -> target)
+        (this.forced_edges || []).forEach(e => {
+        const sid = typeof e.source === 'object' ? e.source.id : e.source;
+        const tid = typeof e.target === 'object' ? e.target.id : e.target;
+        if (!sid || !tid) return;
+        const list = childrenByParentId.get(sid) || [];
+        list.push(tid);
+        childrenByParentId.set(sid, list);
+        });
+    
+        // BFS
+        const q = [root.id];
+        while (q.length) {
+        const pid = q.shift();
+        const parentNode = this.nodes.get(pid);
+        const kids = childrenByParentId.get(pid) || [];
+        kids.forEach(cid => {
+            const child = this.nodes.get(cid);
+            if (!child) return;
+            const nextLevel = (parentNode.level || 1) + 1;
+            if (child.level === undefined || child.level > nextLevel) {
+            child.level = nextLevel;
+            q.push(child.id);
+            }
+        });
+        }
+    
+        // Rebuild levelsMap
+        this.nodes.forEach(node => {
+        if (node?.level !== undefined) {
+            if (this.levelsMap[node.level]) {
+            this.levelsMap[node.level].push(node);
+            } else {
+            this.levelsMap[node.level] = [node];
+            }
+        }
+        });
+    }
+  
 }
 
 export default Splinter;

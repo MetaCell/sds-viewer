@@ -39,8 +39,8 @@ const MainLayout = () => {
 
                 });
                 node.setEventListener("visibility", (node, data) => {
-                    let visibleChild = myManager.model._activeTabSet._children.filter(element => 
-                        !element._visible
+                    let visibleChild = myManager.model._activeTabSet._children.filter(element =>
+                        element._visible
                     );
                     const event = new CustomEvent('nodeVisible', {
                         detail: visibleChild

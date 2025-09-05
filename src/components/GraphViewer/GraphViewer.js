@@ -190,26 +190,33 @@ const GraphViewer = (props) => {
   },[selectedLayout]);
 
   useEffect(() => {
-    document.addEventListener("nodeVisible", (e) => {
+    const handleNodeVisible = (e) => {
       let visibleNodes = e.detail;
       let match = visibleNodes?.find( v => v?._attributes?.id === props.graph_id );
       if ( match ) {
         const updatedData = getPrunedTree(props.graph_id, selectedLayout.layout);
         setData(updatedData);
-        setTimeout( timeout => {
-          setForce()
+        setTimeout( () => {
+          setForce();
+          graphRef.current?.ggv?.current?.refresh?.();
           resetCamera();
         },100)
       }
-    });
-    document.addEventListener("nodeResized", (e) => {
+    };
+    const handleNodeResized = (e) => {
       let visibleNodes = e.detail;
       let match = visibleNodes?.find( v => v?._attributes?.id === props.graph_id );
       if ( match ) {
         resetCamera();
       }
-    });
-  });
+    };
+    document.addEventListener("nodeVisible", handleNodeVisible);
+    document.addEventListener("nodeResized", handleNodeResized);
+    return () => {
+      document.removeEventListener("nodeVisible", handleNodeVisible);
+      document.removeEventListener("nodeResized", handleNodeResized);
+    };
+  }, [props.graph_id, selectedLayout]);
 
   useEffect(() => {
     if ( groupSelected && groupSelected?.dataset_id?.includes(props.graph_id)) { 
@@ -327,7 +334,16 @@ const GraphViewer = (props) => {
         linkCanvasObjectMode={'replace'}
         onLinkHover={handleLinkHover}
         // Override drawing of canvas objects, draw an image as a node
-        nodeCanvasObject={(node, ctx) => paintNode(node, ctx, hoverNode, selectedNode, nodeSelected, previouslySelectedNodes)}
+        nodeCanvasObject={(node, ctx) =>
+          paintNode(
+            node,
+            ctx,
+            hoverNode,
+            selectedNode,
+            nodeSelected,
+            previouslySelectedNodes,
+            selectedLayout.layout === LEFT_RIGHT.layout
+          )}
         nodeCanvasObjectMode={node => 'replace'}
         nodeVal = { node => {
           if ( selectedLayout.layout === TOP_DOWN.layout ){

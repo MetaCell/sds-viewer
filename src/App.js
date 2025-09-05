@@ -25,10 +25,8 @@ const App = () => {
   const datasetID = queryParams.get('id');
   const doi = queryParams.get('doi');
   const debugFlag = queryParams.get('debug');
-  const enableUpload = debugFlag !== null ?
-    debugFlag === 'true' :
-    config.enableUploadDialog === true;
-  const debug = enableUpload === true;
+  const enableUpload = false;
+  const debug = false;
 
   const dispatch = useDispatch();
   const [openDatasetsListDialog, setOpenDatasetsListDialog] = useState(false);
@@ -55,9 +53,10 @@ const App = () => {
 
   const fillDataset = async (turtle, json) => {
     splinter = new Splinter(json, turtle);
+    const graph = await splinter.getGraph()
     const _dataset = {
       id: splinter.getDatasetId(),
-      graph: await splinter.getGraph(),
+      graph: graph,
       tree: await splinter.getTree(),
       splinter: splinter
     };
@@ -171,7 +170,7 @@ const App = () => {
         const storageVersion = storage?.version
         if ( storageVersion === version  ) {
           let storedDatasetsInfo = JSON.parse(localStorage.getItem(config.datasetsStorage));
-          const match = storedDatasetsInfo.datasets.find( node => node?.doi.includes(doi));
+          const match = storedDatasetsInfo.datasets.find( node => node?.doi?.includes(doi));
           if ( match ) {
             const datasetID = match.name;
             loadFiles(datasetID);

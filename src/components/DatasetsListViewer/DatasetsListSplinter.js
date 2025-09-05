@@ -356,7 +356,7 @@ class Splinter {
         this.baseHumanURI = datasetNode?.attributes?.hasUriHuman?.[0] || "";
         this.nodes.forEach((value, key) => {
             if (value.attributes !== undefined && value.attributes.hasFolderAboutIt !== undefined) {
-                const children = this.tree_parents_map.get(this.tree_map.get(value.attributes.hasFolderAboutIt[0])?.remote_id);
+                const children = this.tree_parents_map?.get(this.tree_map?.get(value.attributes.hasFolderAboutIt[0])?.remote_id);
                 children?.forEach(child => {
                     !this.filterNode(child) && this.linkToNode(child, value);
                 });

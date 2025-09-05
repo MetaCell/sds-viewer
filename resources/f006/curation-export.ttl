@@ -26,15 +26,15 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <https://cassava.ucsd.edu/sparc/ontologies/N:dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f> a owl:Ontology ;
-    owl:versionIRI <https://cassava.ucsd.edu/sparc/ontologies/N:dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f/version/1749583225/N:dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f> ;
+    owl:versionIRI <https://cassava.ucsd.edu/sparc/ontologies/N:dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f/version/1756152513/N:dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f> ;
     owl:imports <https://raw.githubusercontent.com/SciCrunch/NIF-Ontology/sparc/ttl/sparc-methods.ttl>,
         <https://raw.githubusercontent.com/SciCrunch/NIF-Ontology/sparc/ttl/sparc-mis-helper.ttl> ;
     rdfs:label "Human vagus nerve anatomical reconstruction using microCT immunohistochemistry and ultrasound - f006 curation export graph" ;
     rdfs:comment "SPARC single dataset graph for N:dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f" ;
-    owl:versionInfo "2025-06-10T19:20:25,287281Z" ;
+    owl:versionInfo "2025-08-25T20:08:33,191661Z" ;
     isAbout: dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f ;
     TEMP:hasUriHuman <https://app.pennsieve.io/N:organization:618e8dd9-f8d2-4dc4-9abb-c6aaab2e78a0/datasets/N:dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f> ;
-    TEMP:TimestampExportStart "2025-06-10T19:15:37,040629Z" .
+    TEMP:TimestampExportStart "2025-08-25T20:03:49,315958Z" .
 
 ### Classes
 
@@ -300,7 +300,7 @@ dataset:2a3d01c0-39d3-464a-8746-54c9d67ebe0f a owl:NamedIndividual,
     TEMP:unclassifiedIndex 0 ;
     TEMP:wasCreatedAtTime "2024-06-26T21:45:18.030811+00:00"^^xsd:dateTime ;
     TEMP:wasPublishedAtTime "2025-06-09T18:07:53.626551+00:00"^^xsd:dateTime ;
-    TEMP:wasUpdatedAtTime "2025-06-10T16:38:49.179774+00:00"^^xsd:dateTime .
+    TEMP:wasUpdatedAtTime "2025-08-25T20:00:18.308000+00:00"^^xsd:dateTime .
 
 <https://doi.org/10.26275/ugoe-ccnw> a owl:NamedIndividual,
         TEMP:Dataset ;
@@ -2198,8 +2198,8 @@ user:d07131c1-6ba7-4278-a863-ee827d856e93 a owl:NamedIndividual,
 
 local:path-error-report a TEMP:PathErrorReport ;
     TEMP:hasPath [ TEMP:jsonPointer "#/entity_dirs" ;
-            TEMP:message "There are directories that have no corresponding metadata record! ... truncated 12 lines",
-                "There are entities with double mapping via directory name and manifest! ... truncated 1 lines" ],
+            TEMP:message "There are directories that have no corresponding metadata record! ... truncated 9 lines",
+                "There are paths with double mapped entities via directory name and manifest! ... truncated 5352 lines" ],
         [ TEMP:jsonPointer "#/inputs/dataset_description_file/related_identifiers/-1" ;
             TEMP:message "'related_identifier' is a required property",
                 "'related_identifier_type' is a required property" ],

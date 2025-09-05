@@ -18,6 +18,7 @@ function extractProperties(node, ttlTypes) {
         return;
     }
     for (const property of node.properties) {
+        let mapped = false;
         for (const type_property of rdfTypes[node.type].properties) {
             if (property.predicate === (ttlTypes[type_property.type]?.iri?.id + type_property.key)) {
                 if (node.attributes[type_property.property] !== undefined) {
@@ -26,9 +27,31 @@ function extractProperties(node, ttlTypes) {
                     node.attributes[type_property.property] = [];
                     node.attributes[type_property.property].push(property.value);
                 }
+                mapped = true;
+                break;
             }
         }
-        
+
+        if (!mapped) {
+            const prefixEntry = Object.entries(ttlTypes).find(([, value]) => property.predicate.startsWith(value?.iri?.id));
+            const [prefix, prefixValue] = prefixEntry ? prefixEntry : [undefined, undefined];
+            const key = prefixValue ? property.predicate.replace(prefixValue.iri.id, '') : property.predicate;
+            const label = key.replace(/_/g, ' ');
+            if (node.attributes[key] !== undefined) {
+                node.attributes[key].push(property.value);
+            } else {
+                node.attributes[key] = [property.value];
+            }
+            if (!rdfTypes[node.type].properties.find(p => p.property === key)) {
+                rdfTypes[node.type].properties.push({
+                    type: prefix,
+                    key: key,
+                    property: key,
+                    label: label.charAt(0).toUpperCase() + label.slice(1),
+                    visible: true,
+                });
+            }
+        }
     }
 
     if (node.additional_properties) {
@@ -78,9 +101,9 @@ function extractProperties(node, ttlTypes) {
         }
     }
 
-    if (node?.attributes?.identifier !== undefined) {
-        node.name = node.attributes.identifier;
-    }
+    // if (node?.attributes?.identifier !== undefined) {
+    //     node.name = node.attributes.identifier;
+    // }
 }
 
 var NodesFactory = function () {
