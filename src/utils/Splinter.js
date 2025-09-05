@@ -1066,8 +1066,8 @@ class Splinter {
 
         const relParts = node.attributes?.relativePath?.split('/') || [];
         const firstAttr = relParts[0];
-        const fallbackTop = relParts.length === 1 && ["primary", "source", "derivative"].includes(firstAttr);
-        return fallbackTop ? topLevelIcon : defaultIcon;
+        const fallbackTop = node?.parent?.tree_reference?.mimetype != "inode/directory" && ["primary", "source", "derivative"].includes(firstAttr);
+        return fallbackTop ?  defaultIcon : topLevelIcon;
     }
 
     mergeData() {
