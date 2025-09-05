@@ -374,6 +374,16 @@ class Splinter {
                 level = this.nodes.get(parent.attributes.wasDerivedFromSubject[0]).level + 1;
             }
         }
+        if (node.mimetype === "inode/directory") {
+            const entityTypes = [rdfTypes.Sample.key, rdfTypes.Subject.key, rdfTypes.Site.key];
+            const isEntityFolder = Array.from(this.nodes.values()).some(existing =>
+                entityTypes.includes(existing.type) && existing.name === node.basename
+            );
+            if (isEntityFolder) {
+                return;
+            }
+        }
+
         parent.children_counter++;
         const new_node = this.buildNodeFromJson(node, level);
         new_node.parent = parent;

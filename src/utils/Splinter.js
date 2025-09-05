@@ -885,12 +885,15 @@ class Splinter {
                     return current;
                 };
 
-                // Extract weight value and unit
+                // Extract weight value and unit (prefer base units when available)
                 if (node.additional_properties["sparc:animalSubjectHasWeight"]) {
                     let weightObj = resolveNode(node.additional_properties["sparc:animalSubjectHasWeight"]);
+                    // Base units live under TEMP:asBaseUnits; fall back to declared unit
+                    let baseObj = resolveNode(weightObj?.["TEMP:asBaseUnits"]);
                     let weightValue = weightObj["rdf:value"]?.["@value"] || "";
-                    let unitObj = resolveNode(weightObj["TEMP:hasUnit"]);
-                    let weightUnit = unitObj?.["@id"]?.replace("unit:", "") || "";
+                    let unitFromBase = baseObj?.["TEMP:hasUnit"]?.["@id"];
+                    let unitFromObj = resolveNode(weightObj?.["TEMP:hasUnit"])?.["@id"];
+                    let weightUnit = (unitFromBase || unitFromObj || "").replace("unit:", "");
                     node.attributes.animalSubjectHasWeight = [`${weightValue} ${weightUnit}`];
                 }
 
@@ -1170,10 +1173,20 @@ class Splinter {
                 level = this.nodes.get(parentSource)?.level + 1;
             }
         }
-        const new_node = this.buildNodeFromJson(node, parent, level);
         if (!parent) {
             return;
         }
+        if (node.mimetype === "inode/directory") {
+            const entityTypes = [rdfTypes.Sample.key, rdfTypes.Subject.key, rdfTypes.Site.key];
+            const isEntityFolder = Array.from(this.nodes.values()).some(existing =>
+                entityTypes.includes(existing.type) && existing.name === node.basename
+            );
+            if (isEntityFolder) {
+                return;
+            }
+        }
+
+        const new_node = this.buildNodeFromJson(node, parent, level);
         if (!new_node) {
             const existingId = this.proxies_map.get(node.remote_id);
             const existingNode = this.nodes.get(existingId);

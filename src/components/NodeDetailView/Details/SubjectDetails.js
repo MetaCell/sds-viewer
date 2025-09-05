@@ -37,7 +37,30 @@ const SubjectDetails = (props) => {
 
                 {subjectPropertiesModel?.map( property => {
                     if ( property.visible ){
-                        const propValue = node.graph_node.attributes[property.property]?.[0];
+                        // Skip raw value/unit fields for age and weight
+                        if (["ageUnit", "ageValue", "ageBaseUnit", "ageBaseValue", "weightUnit", "weightValue"].includes(property.property)) {
+                            return <></>;
+                        }
+
+                        let propValue = node.graph_node.attributes[property.property]?.[0];
+
+                        // Combine age or weight values/units when split across attributes
+                        if (property.property === "hasAge" && !propValue) {
+                            const ageVal = node.graph_node.attributes?.ageValue?.[0];
+                            const ageUnit = node.graph_node.attributes?.ageUnit?.[0];
+                            if (ageVal !== undefined || ageUnit !== undefined) {
+                                propValue = `${ageVal ?? ""} ${ageUnit ?? ""}`.trim();
+                            }
+                        }
+
+                        if (property.property === "animalSubjectHasWeight" && !propValue) {
+                            const weightVal = node.graph_node.attributes?.weightValue?.[0];
+                            const weightUnit = node.graph_node.attributes?.weightUnit?.[0];
+                            if (weightVal !== undefined || weightUnit !== undefined) {
+                                propValue = `${weightVal ?? ""} ${weightUnit ?? ""}`.trim();
+                            }
+                        }
+
                         if ( property.isGroup ){
                             const rawValue = node.graph_node.attributes[property.property];
                             const propValue = Array.isArray(rawValue) ? rawValue[0] : rawValue;
