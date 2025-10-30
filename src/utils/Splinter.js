@@ -1153,6 +1153,29 @@ class Splinter {
     }
 
 
+    /**
+     * Check if a folder path is already represented by a sparc node (Sample, Subject, Site, etc.)
+     * Returns the existing sparc node if found, undefined otherwise
+     */
+    findSparcNodeByPath(folderPath) {
+        // Iterate through all nodes to find one with matching hasFolderAboutIt path
+        for (const [nodeId, nodeValue] of this.nodes) {
+            // Skip if not a sparc node type (Sample, Subject, Site, Performance)
+            if (nodeValue.type !== rdfTypes.Sample.key && 
+                nodeValue.type !== rdfTypes.Subject.key && 
+                nodeValue.type !== rdfTypes.Site.key && 
+                nodeValue.type !== rdfTypes.Performance.key) {
+                continue;
+            }
+            
+            // Check if this node has tree_reference pointing to the folder
+            if (nodeValue.tree_reference?.dataset_relative_path === folderPath) {
+                return nodeValue;
+            }
+        }
+        return undefined;
+    }
+
     linkToNode(node, parent) {
         let level = parent?.level;
         if (parent?.type === rdfTypes.Sample.key) {
@@ -1170,6 +1193,22 @@ class Splinter {
                 level = this.nodes.get(parentSource)?.level + 1;
             }
         }
+        
+        // Check if this folder is already represented by a sparc node
+        const folderPath = node.dataset_relative_path;
+        const existingSparcNode = this.findSparcNodeByPath(folderPath);
+        if (existingSparcNode) {
+            // This folder is already represented as a sparc node, skip creating duplicate
+            // Instead, link children to the existing sparc node
+            var children = this.tree_parents_map2.get(node.remote_id);
+            if (children?.length > 0) {
+                children.forEach(child => {
+                    !this.filterNode(child) && this.linkToNode(child, existingSparcNode);
+                });
+            }
+            return;
+        }
+        
         const new_node = this.buildNodeFromJson(node, parent, level);
         if (!parent) {
             return;
