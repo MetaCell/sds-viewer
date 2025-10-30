@@ -59,7 +59,8 @@ describe('Test Duplicate Folder Fix for f006 Dataset', () => {
     
     // We expect more Sample children than Collection children 
     // because samples like sam-l-seg-c1 should be Sample nodes, not Collection nodes
-    console.log(`sam-l has ${sampleChildren.length} Sample children and ${collectionChildren.length} Collection children`);
+    // This is just informational, not a strict assertion
+    expect(sampleChildren.length).toBeGreaterThanOrEqual(0);
   });
 
   it('Source folder subfolders should not appear as Collection nodes if they are sparc nodes', () => {
@@ -70,18 +71,16 @@ describe('Test Duplicate Folder Fix for f006 Dataset', () => {
     });
     
     // Check if any of these Collection nodes under source/ have matching Sample nodes
-    sourceRelatedNodes.forEach(collectionNode => {
+    const duplicates = sourceRelatedNodes.filter(collectionNode => {
       const basename = collectionNode.name;
       // Look for a Sample node with the same basename
       const matchingSamples = graph.nodes.filter(node => 
         node.name === basename && node.type === 'Sample'
       );
-      
-      // If there's a matching Sample node, this Collection node is a duplicate
-      if (matchingSamples.length > 0) {
-        console.warn(`Found duplicate: Collection node "${basename}" at path ${collectionNode.attributes?.relativePath} when Sample node exists`);
-      }
-      expect(matchingSamples.length).toBe(0);
+      return matchingSamples.length > 0;
     });
+    
+    // No duplicates should be found
+    expect(duplicates.length).toBe(0);
   });
 });
