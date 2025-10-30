@@ -1172,6 +1172,16 @@ class Splinter {
             if (nodeValue.tree_reference?.dataset_relative_path === folderPath) {
                 return nodeValue;
             }
+            
+            // Also check hasFolderAboutIt attribute - look up the tree_map to get the path
+            if (nodeValue.attributes?.hasFolderAboutIt) {
+                for (const folderUri of nodeValue.attributes.hasFolderAboutIt) {
+                    const treeNode = this.tree_map.get(folderUri);
+                    if (treeNode?.dataset_relative_path === folderPath) {
+                        return nodeValue;
+                    }
+                }
+            }
         }
         return undefined;
     }
