@@ -1205,9 +1205,11 @@ class Splinter {
         }
         
         // Check if this folder is already represented by a sparc node
+        // BUT only skip it if the parent is NOT the sparc node itself
+        // (we want to show primary/derivative folders under the sparc node)
         const folderPath = node.dataset_relative_path;
         const existingSparcNode = this.findSparcNodeByPath(folderPath);
-        if (existingSparcNode) {
+        if (existingSparcNode && parent?.id !== existingSparcNode.id) {
             // This folder is already represented as a sparc node, skip creating duplicate
             // Instead, link children to the existing sparc node
             var children = this.tree_parents_map2.get(node.remote_id);
