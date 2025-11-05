@@ -1057,7 +1057,7 @@ class Splinter {
         const defaultIcon = config.graph.folderIcons.default;
         const topLevelIcon = config.graph.folderIcons.topLevel || defaultIcon;
 
-        const treePath = node.tree_reference?.dataset_relative_path;
+        const treePath = node?.tree_reference?.dataset_relative_path;
         const firstFromTree = treePath?.split('/')?.[0];
         const isTopFromTree = firstFromTree && node.name === firstFromTree;
         if (isTopFromTree) {
@@ -1169,7 +1169,7 @@ class Splinter {
             }
             
             // Check if this node has tree_reference pointing to the folder
-            if (nodeValue.tree_reference?.dataset_relative_path === folderPath) {
+            if (nodeValue?.tree_reference?.dataset_relative_path === folderPath) {
                 return nodeValue;
             }
             
@@ -1204,18 +1204,16 @@ class Splinter {
             }
         }
         
-        // Check if this folder is already represented by a sparc node
-        // BUT only skip it if the parent is NOT the sparc node itself
-        // (we want to show primary/derivative folders under the sparc node)
         const folderPath = node.dataset_relative_path;
         const existingSparcNode = this.findSparcNodeByPath(folderPath);
         if (existingSparcNode && parent?.id !== existingSparcNode.id) {
             // This folder is already represented as a sparc node, skip creating duplicate
-            // Instead, link children to the existing sparc node
             var children = this.tree_parents_map2.get(node.remote_id);
             if (children?.length > 0) {
                 children.forEach(child => {
-                    !this.filterNode(child) && this.linkToNode(child, existingSparcNode);
+                    if (!this.filterNode(child)) {
+                        return;
+                    }
                 });
             }
             return;
@@ -1286,7 +1284,7 @@ class Splinter {
                 publishedURI : ""
             },
             types: [],
-            name: parent.tree_reference?.mimetype === "inode/directory" && name?.length > 0 ? name[0] : name[name.length - 1],
+            name: parent?.tree_reference?.mimetype === "inode/directory" && name?.length > 0 ? name[0] : name[name.length - 1],
             proxies: [],
             properties: [],
             type: item.mimetype === "inode/directory" ? "Collection" : "File",
