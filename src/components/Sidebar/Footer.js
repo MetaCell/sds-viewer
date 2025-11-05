@@ -1,4 +1,3 @@
-import { ADD_DATASET } from '../../constants';
 import {Box, Button, Divider, Typography, IconButton} from '@material-ui/core';
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 import config from "./../../config/app.json";
@@ -9,16 +8,7 @@ const SidebarFooter = (props) => {
   return (
     <Box>
         <Divider style={{marginBottom: '1rem', background: 'rgba(255, 255, 255, 0.10)'}} />
-      <Box display="flex" justifyContent= { props.local ? "space-around" : "center"}>
-        { props.local ? <Button
-          variant='contained'
-          disableElevation
-          color='primary'
-          fullWidth
-          onClick={() => props.setOpenUploadDialog(true)}
-        >
-            + {ADD_DATASET}
-        </Button> : null }
+      <Box display="flex" justifyContent="center">
         <Button
           variant='contained'
           disableElevation

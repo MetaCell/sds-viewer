@@ -24,6 +24,8 @@ class Splinter {
         this.proxies_map = undefined;
         this.forced_nodes = undefined;
         this.store = new N3.Store();
+        this.basePublishedURI = "";
+        this.baseHumanURI = "";
     }
 
     /* Initialise global maps before to start data manipulation */
@@ -147,7 +149,7 @@ class Splinter {
                 name: node.value,
                 proxies: [],
                 properties: [],
-                tree_reference: null,
+                tree_reference: { uri_human: this.baseHumanURI },
                 children_counter: 0
             });
         }
@@ -307,7 +309,7 @@ class Splinter {
 
     identify_childless_parents() {
         this.forced_nodes.forEach((node, index, array) => {
-            if ((node.type === rdfTypes.Sample.key || node.type === rdfTypes.Subject.key || node.type === rdfTypes.Performance.key) && (node.children_counter === 0)) {
+            if ((node.type === rdfTypes.Sample.key || node.type === rdfTypes.Subject.key || node.type === rdfTypes.Performance.key || node.type === rdfTypes.Site.key) && (node.children_counter === 0)) {
                 node.img.src = "./images/graph/question_mark.svg"
             }
         });
@@ -349,9 +351,12 @@ class Splinter {
 
 
     mergeData() {
+        const datasetNode = this.nodes.get(this.root_id) || Array.from(this.nodes.values())[0];
+        this.basePublishedURI = datasetNode?.attributes?.hasUriPublished?.[0] || datasetNode?.attributes?.hasUriHuman?.[0] || "";
+        this.baseHumanURI = datasetNode?.attributes?.hasUriHuman?.[0] || "";
         this.nodes.forEach((value, key) => {
             if (value.attributes !== undefined && value.attributes.hasFolderAboutIt !== undefined) {
-                const children = this.tree_parents_map.get(this.tree_map.get(value.attributes.hasFolderAboutIt[0])?.remote_id);
+                const children = this.tree_parents_map?.get(this.tree_map?.get(value.attributes.hasFolderAboutIt[0])?.remote_id);
                 children?.forEach(child => {
                     !this.filterNode(child) && this.linkToNode(child, value);
                 });
@@ -365,6 +370,8 @@ class Splinter {
         if (parent.type === rdfTypes.Sample.key) {
             if (parent.attributes.derivedFrom !== undefined) {
                 level = this.nodes.get(parent.attributes.derivedFrom[0]).level + 1;
+            } else if (parent.attributes.wasDerivedFromSubject !== undefined) {
+                level = this.nodes.get(parent.attributes.wasDerivedFromSubject[0]).level + 1;
             }
         }
         parent.children_counter++;
@@ -399,13 +406,22 @@ class Splinter {
                 mimetype: item.mimetype,
                 updated: item.timestamp_updated,
                 status: item.status,
+                publishedURI: item.dataset_relative_path !== undefined ?
+                    (item.mimetype === "inode/directory" ?
+                        this.basePublishedURI +
+                        "?datasetDetailsTab=files&path=files/" +
+                        item.dataset_relative_path :
+                        this.basePublishedURI +
+                        "?datasetDetailsTab=files&path=files/" +
+                        item.dataset_relative_path.substr(0, item.dataset_relative_path.lastIndexOf("/"))) :
+                    undefined
             },
             types: [],
             name: item.basename,
             proxies: [],
             properties: [],
             type: item.mimetype === "inode/directory" ? "Collection" : "File",
-            tree_reference: null,
+            tree_reference: { uri_human: this.baseHumanURI },
             children_counter: 0
         };
         return this.factory.createNode(new_node, []);
@@ -414,10 +430,10 @@ class Splinter {
 
     generateData() {
         this.forced_nodes = Array.from(this.nodes).map(([key, value]) => {
-                value.proxies.every(proxy => {
-                    return true;
-                })
-            
+            value.proxies.every(proxy => {
+                return true;
+            })
+
             return value;
         })
     }

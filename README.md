@@ -60,3 +60,14 @@ The SPARC SDS Viewer uses SPARC Portal datasets.
 ### Error Handling
 - In the case of encountering an error, take a screenshot and report it with us please by opening an [issue](https://github.com/MetaCell/sds-viewer/issues/new)-clicking the Bug icon will take you to this page. If you don't have a GitHub account, please feel free to use the [SPARC Contact form](https://sparc.science/contact-us?source_url=%2F) to provide your feedback.
 - To go back , click on the 'x' to go back to the previous screen.
+
+### Debug Mode
+
+* Upload from Local Disk
+1) Launch the SDS Viewer development version , https://sds-viewer.dev.metacell.us/, and click Import a new dataset in the sidebar footer.
+2) In the dialog, select the Upload tab (visible only when enabled).
+3) Drag and drop your dataset’s .ttl file and .json file into the drop zone. Only these file types are accepted, each up to about 5 MB.
+4) After both files are uploaded, click Done to load the dataset. The viewer processes the files exactly as if you selected a repository dataset.
+
+Using Debug Mode
+- Open the SDS Viewer with ?debug=true in the URL to force the upload tab on and show all datasets regardless of status. This takes precedence over the enableUploadDialog value in app.json.

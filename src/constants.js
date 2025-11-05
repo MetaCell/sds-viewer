@@ -4,7 +4,7 @@ export const LIST_DATASETS = 'List Datasets';
 export const SPARC_DATASETS = 'SPARC Datasets';
 export const FILE_UPLOAD_PARAMS = {
   acceptedFileExtensions: ['json', 'ttl'],
-  maxFileSize: 5242880,
+  maxFileSize: 202428800000,
   maxFiles: 6,
 };
 export const NODES = ["dataset", "nifti", "volume", "matlab"];

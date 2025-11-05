@@ -10,10 +10,10 @@ import { detailsLabel } from '../../../constants';
 import { isValidUrl } from './utils';
 import { useSelector } from 'react-redux'
 
-const PerformanceDetails = (props) => {
+const SiteDetails = (props) => {
     const { node } = props;
 
-    const performancePropertiesModel = useSelector(state => state.sdsState.metadata_model.performance);
+    const sitePropertiesModel = useSelector(state => state.sdsState.metadata_model.site);
 
     const getGroupNode = (groupName, node)=> {
         let n = node.graph_node.parent;
@@ -33,9 +33,9 @@ const PerformanceDetails = (props) => {
         <Box id={node?.graph_node?.id + detailsLabel}>
             <Divider />
             <Box className="tab-content">
-                <SimpleLabelValue label={""} value={""} heading={"Performance Details"} />
+                <SimpleLabelValue label={""} value={""} heading={"Site Details"} />
 
-                {performancePropertiesModel?.map( property => {
+                {sitePropertiesModel?.map( property => {
                     if ( property.visible || property.visible == undefined ){
                         const propValue = node.graph_node.attributes?.[property.property]?.[0];
                         if ( property.isGroup ){
@@ -71,4 +71,4 @@ const PerformanceDetails = (props) => {
     );
 };
 
-export default PerformanceDetails;
+export default SiteDetails;

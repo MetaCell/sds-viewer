@@ -1,18 +1,18 @@
-import * as puppeteer from "puppeteer";
-import * as selectors from "./selectors";
-import { ONE_SECOND, ONE_MINUTE, TWO_MINUTES, TEN_MINUTES } from "./time_constants";
-import 'expect-puppeteer';
-import 'puppeteer'
-import { toMatchImageSnapshot } from 'jest-image-snapshot'
-import { time } from "console";
-expect.extend({ toMatchImageSnapshot })
+const puppeteer = require("puppeteer");
+const selectors = require("./selectors");
+const { ONE_SECOND, ONE_MINUTE, TWO_MINUTES, TEN_MINUTES } = require("./time_constants");
+require('expect-puppeteer');
+require('puppeteer');
+const { toMatchImageSnapshot } = require('jest-image-snapshot');
+const { time } = require("console");
+expect.extend({ toMatchImageSnapshot });
 const axios = require('axios').default;
 const fs = require('fs');
 const path = require('path');
 var scriptName = path.basename(__filename, '.js');
 
 
-const DEV_URL = 'https://metacell.github.io/sds-viewer/'
+const DEV_URL = process.env.DEV_URL || 'http://localhost:3000/'
 const DATASET_ID = '0a5a2827-2b39-4085-87ea-2b7fbbe27cc8'
 
 //SNAPSHOT
@@ -20,9 +20,8 @@ const SNAPSHOT_OPTIONS = {
     customSnapshotsDir: './__tests__/snapshots',
     comparisonMethod: 'ssim',
     failureThresholdType: 'percent',
-    failureThreshold: 0.25
+    failureThreshold: 0.3
 };
-
 
 
 

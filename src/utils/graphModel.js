@@ -1,8 +1,11 @@
+import config from '../config/app.json';
+
 export const type_key = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type";
 
 
 export const RDF_TO_JSON_TYPES = [
     {key: 'sparc:Subject', toTrim: 'subject'},
+    {key: 'sparc:Site', toTrim: 'site'}, 
     {key: 'sparc:sparcPerformance', toTrim: 'performance'}
 ];
 
@@ -51,7 +54,7 @@ export const rdfTypes = {
         ]
     },
     "Collection": {
-        "image": "./images/graph/folder.svg",
+        "image": config.graph.folderIcons.default,
         "key": "Collection",
         "properties": [
             {
@@ -450,7 +453,7 @@ export const rdfTypes = {
         ]
     },
     "Subject": {
-        "image": "./images/graph/folder.svg",
+        "image": config.graph.folderIcons.special,
         "key": "Subject",
         "properties": [
             {
@@ -493,6 +496,13 @@ export const rdfTypes = {
                 "key": "hasAgeMax",
                 "property": "hasAgeMax",
                 "label": "Age Max",
+                "visible" : true
+            },
+            {
+                "type": "sparc",
+                "key": "animalSubjectHasWeight",
+                "property": "animalSubjectHasWeight",
+                "label": "AnimalSubjectHasWeight",
                 "visible" : true
             },
             {
@@ -625,7 +635,7 @@ export const rdfTypes = {
         ]
     },
     "Performance": {
-        "image": "./images/graph/folder.svg",
+        "image": config.graph.folderIcons.default,
         "key": "Performance",
         "properties": [
             {
@@ -772,8 +782,33 @@ export const rdfTypes = {
             }
         ]
     },
+    "Site": {
+        "image": config.graph.folderIcons.special,
+        "key": "Site",
+        "properties": [
+            {
+                "type": "TEMP",
+                "key": "localId",
+                "property": "localId",
+                "label": "Local ID"
+            },
+            {
+                "type": "TEMP",
+                "key": "onSample",
+                "property": "onSample",
+                "label": "On Sample"
+            },
+            {
+                "type": "TEMPRAW",
+                "key": "site_type",
+                "property": "site_type",
+                "label": "Site Type"
+            }
+        ],
+        "additional_properties" : []
+    },
     "Sample": {
-        "image": "./images/graph/folder.svg",
+        "image": config.graph.folderIcons.special,
         "key": "Sample",
         "properties": [
             {
@@ -800,8 +835,15 @@ export const rdfTypes = {
             {
                 "type": "TEMP",
                 "key": "wasDerivedFromSubject",
-                "property": "derivedFrom",
+                "property": "derivedFromSubject",
                 "label": "Derived from Subject",
+                "visible" : false
+            },
+            {
+                "type": "TEMP",
+                "key": "wasDerivedFromSample",
+                "property": "derivedFromSample",
+                "label": "Derived from Sample",
                 "visible" : false
             },
             {
@@ -1084,6 +1126,9 @@ export const typesModel = {
         },
         subject: {
             "type": "Subject",
+        },
+        site: {
+            "type": "Site",
         },
         performance: {
             "type": "Performance",

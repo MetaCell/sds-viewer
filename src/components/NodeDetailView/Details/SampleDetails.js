@@ -23,7 +23,7 @@ const SampleDetails = (props) => {
                 <SimpleLabelValue label={""} value={""} heading={"Sample Details"} />
 
                 {samplePropertiesModel?.map( property => {
-                    if ( property.visible ){
+                    if ( property.visible || property.visible == undefined ){
                         const propValue = node.graph_node.attributes[property.property]?.[0];
                         if ( isValidUrl(propValue) ){
                             return (<Box className="tab-content-row">
@@ -33,10 +33,13 @@ const SampleDetails = (props) => {
                         }
 
                         else if ( typeof propValue === "object" ){
-                            return (<Box className="tab-content-row">
-                                        <Typography component="label">{property.label}</Typography>
-                                        <SimpleLinkedChip chips={node.graph_node.attributes[property.property]} />
-                                    </Box>)
+                            if ( isValidUrl(node.graph_node.attributes[property.property]?.[0]?.value) ){
+                                return (<Box className="tab-content-row">
+                                    <Typography component="label">{property.label}</Typography>
+                                    <Links key={`detail_links_dataset`} href={node.graph_node.attributes[property.property]?.[0]?.value} title={property.label + " Link"} />
+                                </Box>)
+                            }
+                            else return (<SimpleLabelValue label={property.label} value={node.graph_node.attributes[property.property]?.[0]?.value} />)
                         }
 
                         else if ( typeof propValue === "string" ){
