@@ -1057,7 +1057,7 @@ class Splinter {
         const defaultIcon = config.graph.folderIcons.default;
         const topLevelIcon = config.graph.folderIcons.topLevel || defaultIcon;
 
-        const treePath = node.tree_reference?.dataset_relative_path;
+        const treePath = node?.tree_reference?.dataset_relative_path;
         const firstFromTree = treePath?.split('/')?.[0];
         const isTopFromTree = firstFromTree && node.name === firstFromTree;
         if (isTopFromTree) {
@@ -1153,6 +1153,39 @@ class Splinter {
     }
 
 
+    /**
+     * Check if a folder path is already represented by a sparc node (Sample, Subject, Site, etc.)
+     * Returns the existing sparc node if found, undefined otherwise
+     */
+    findSparcNodeByPath(folderPath) {
+        // Iterate through all nodes to find one with matching hasFolderAboutIt path
+        for (const [nodeId, nodeValue] of this.nodes) {
+            // Skip if not a sparc node type (Sample, Subject, Site, Performance)
+            if (nodeValue.type !== rdfTypes.Sample.key && 
+                nodeValue.type !== rdfTypes.Subject.key && 
+                nodeValue.type !== rdfTypes.Site.key && 
+                nodeValue.type !== rdfTypes.Performance.key) {
+                continue;
+            }
+            
+            // Check if this node has tree_reference pointing to the folder
+            if (nodeValue?.tree_reference?.dataset_relative_path === folderPath) {
+                return nodeValue;
+            }
+            
+            // Also check hasFolderAboutIt attribute - look up the tree_map to get the path
+            if (nodeValue.attributes?.hasFolderAboutIt) {
+                for (const folderUri of nodeValue.attributes.hasFolderAboutIt) {
+                    const treeNode = this.tree_map.get(folderUri);
+                    if (treeNode?.dataset_relative_path === folderPath) {
+                        return nodeValue;
+                    }
+                }
+            }
+        }
+        return undefined;
+    }
+
     linkToNode(node, parent) {
         let level = parent?.level;
         if (parent?.type === rdfTypes.Sample.key) {
@@ -1170,6 +1203,22 @@ class Splinter {
                 level = this.nodes.get(parentSource)?.level + 1;
             }
         }
+        
+        const folderPath = node.dataset_relative_path;
+        const existingSparcNode = this.findSparcNodeByPath(folderPath);
+        if (existingSparcNode && parent?.id !== existingSparcNode.id) {
+            // This folder is already represented as a sparc node, skip creating duplicate
+            var children = this.tree_parents_map2.get(node.remote_id);
+            if (children?.length > 0) {
+                children.forEach(child => {
+                    if (!this.filterNode(child)) {
+                        return;
+                    }
+                });
+            }
+            return;
+        }
+        
         const new_node = this.buildNodeFromJson(node, parent, level);
         if (!parent) {
             return;
@@ -1235,7 +1284,7 @@ class Splinter {
                 publishedURI : ""
             },
             types: [],
-            name: parent.tree_reference?.mimetype === "inode/directory" && name?.length > 0 ? name[0] : name[name.length - 1],
+            name: parent?.tree_reference?.mimetype === "inode/directory" && name?.length > 0 ? name[0] : name[name.length - 1],
             proxies: [],
             properties: [],
             type: item.mimetype === "inode/directory" ? "Collection" : "File",

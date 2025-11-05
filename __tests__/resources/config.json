@@ -20,6 +20,13 @@
             "jsonFile" : "/../resources/dataset3/path-metadata.json",
             "expectedNodes" : 19,
             "expectedLinks" : 18
+        },
+        "Dataset_f006" : {
+            "name" : "dataset_2a3d01c0-39d3-464a-8746-54c9d67ebe0f",
+            "turtleFile" : "/../resources/f006/curation-export.ttl",
+            "jsonFile" : "/../resources/f006/path-metadata-f06.json",
+            "expectedNodes" : null,
+            "expectedLinks" : null
         }
     },
     "externalDatasets" : {
